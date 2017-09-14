@@ -1,0 +1,8 @@
+wagtail==1.12.1
+django-cors-headers==2.0.0
+psycopg2==2.7.1
+uwsgi==2.0.15
+pika==0.10.0
+pyro4==4.43
+setproctitle==1.1.10
+oauth2==1.9.0.post1 # Not actively maintained.
