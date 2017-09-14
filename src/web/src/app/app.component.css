@@ -1,0 +1,21 @@
+header {
+  display: flex;
+  align-items: center;
+  background-color: #ddd;
+  padding: 1.25em;
+}
+h1 {
+  margin: 0;
+  padding: 0;
+}
+h1 a {
+  text-decoration: none;
+}
+nav {
+  margin-left: auto;
+}
+nav a {
+  display: inline-block;
+  margin-left: 20px;
+  text-decoration: none;
+}
