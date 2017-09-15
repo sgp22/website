@@ -19,7 +19,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
-      let id = params['id'];
+      const id = params['id'];
       this.postsService.getPost(id)
         .subscribe(
           post => {
@@ -28,8 +28,8 @@ export class PostComponent implements OnInit {
           err => {
             console.log(err);
           }
-        )
-    })
+        );
+    });
   }
 
 }

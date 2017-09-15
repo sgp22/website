@@ -20,13 +20,13 @@ export class HomeComponent implements OnInit {
     this.pagesService.getHomePage()
       .subscribe(
         page => {
-          this.page = page
+          this.page = page;
           console.log(this.page);
         },
         err => {
           console.log(err);
         }
-      )
+      );
   }
 
 }
