@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PagesService {
 
-  root = 'http://docs-site-staging.us-east-1.elasticbeanstalk.com/api/v1/pages';
-  format = '?format=json'
+  apiUrl = environment.apiUrl;
 
   constructor(private http: Http) {
     console.log('PagesService initialized...');
   }
 
   getAll() {
-    return this.http.get(`${this.root}/${this.format}`)
+    return this.http.get(`${this.apiUrl}pages/?format=json`)
       .map(res => res.json());
   }
 
   getHomePage() {
-    return this.http.get(`${this.root}/3/${this.format}`)
+    return this.http.get(`${this.apiUrl}pages/?format=json`)
       .map(res => res.json());
   }
 

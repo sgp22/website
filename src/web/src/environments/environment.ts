@@ -4,5 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: "http://docs-site-staging.us-east-1.elasticbeanstalk.com/api/v1/",
+  dummyApi: "https://jsonplaceholder.typicode.com/posts"
 };
