@@ -37,6 +37,7 @@ src/web/e2e/*.map
 # SASS
 *.sass-cache
 
+Thumbs.db
 
 # Node
 lib-cov
