@@ -9,8 +9,8 @@ import { PagesService } from '../../services/pages.service';
   providers: [PagesService]
 })
 export class HomeComponent implements OnInit {
-  page: Object;
-  
+  public page: any;
+
   constructor(
     private route: ActivatedRoute,
     private pagesService: PagesService
@@ -28,5 +28,5 @@ export class HomeComponent implements OnInit {
         }
       )
   }
-  
+
 }
