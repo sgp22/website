@@ -54,12 +54,13 @@ restart_vm :
 
 # Web.
 run_dev :
-	cd web && npm install && node scripts/start.js
+	cd src/web && npm install && npm run start
 
 build_prod :
-	cd web && npm install && node scripts/build.js
+	cd src/web && npm install && npm run build
 
 
+# ElasticBeanstalk
 eb_setup :
 	. scripts/eb_env_vars.sh
 
