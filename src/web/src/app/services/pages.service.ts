@@ -10,7 +10,7 @@ export class PagesService {
   apiUrl = environment.apiUrl;
 
   constructor(private http: Http) {
-    console.log('PagesService initialized...');  
+    console.log('PagesService initialized...');
   }
 
   getAll() {
