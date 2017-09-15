@@ -11,21 +11,22 @@ import { PagesService } from '../../services/pages.service';
 export class HomeComponent implements OnInit {
   page: Object;
   
-    constructor(
-      private route: ActivatedRoute,
-      private pagesService: PagesService
-    ) { }
-  
-    ngOnInit() {
-      this.pagesService.getHomePage()
-        .subscribe(
-          page => {
-            this.page = page
-          },
-          err => {
-            console.log(err);
-          }
-        )
-    }
-  
+  constructor(
+    private route: ActivatedRoute,
+    private pagesService: PagesService
+  ) { }
+
+  ngOnInit() {
+    this.pagesService.getHomePage()
+      .subscribe(
+        page => {
+          this.page = page
+          console.log(this.page);
+        },
+        err => {
+          console.log(err);
+        }
+      )
   }
+  
+}

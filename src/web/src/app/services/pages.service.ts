@@ -18,6 +18,11 @@ export class PagesService {
       .map(res => res.json());
   }
 
+  getPage(id) {
+    return this.http.get(`${this.apiUrl}pages/${id}/?format=json`)
+      .map(res => res.json());
+  }
+
   getHomePage() {
     return this.http.get(`${this.apiUrl}pages/3/?format=json`)
       .map(res => res.json());
