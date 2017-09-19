@@ -28,9 +28,4 @@ export class PagesService {
       .map(res => res.json());
   }
 
-  getCustom() {
-    return this.http.get(`${this.apiUrl}/pages/?fields=slug`)
-      .map(res => res.json());
-  }
-
 }
