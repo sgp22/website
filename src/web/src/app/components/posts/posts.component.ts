@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from '../../app.interface';
 import { PostsService } from '../../services/posts.service';
 
 @Component({
@@ -31,3 +30,10 @@ export class PostsComponent implements OnInit {
   }
 
 }
+
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+};

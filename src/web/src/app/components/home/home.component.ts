@@ -17,16 +17,17 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.pagesService.getHomePage()
       .subscribe(
         page => {
           this.page = page
-          console.log(this.page);
         },
         err => {
           console.log(err);
         }
       )
+  
   }
   
 }

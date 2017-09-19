@@ -5,6 +5,8 @@ import {HomeComponent} from './components/home/home.component';
 import {GettingStartedComponent} from './components/getting-started/getting-started.component';
 import {PostsComponent} from './components/posts/posts.component';
 import {PostComponent} from './components/post/post.component';
+import {PageComponent} from './components/page/page.component';
+
 
 const appRoutes: Routes = [
   {
@@ -22,6 +24,10 @@ const appRoutes: Routes = [
   {
     path: 'posts/:id',
     component: PostComponent
+  },
+  {
+    path: 'pages/:slug',
+    component: PageComponent
   }
 ];
 

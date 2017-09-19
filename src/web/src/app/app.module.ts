@@ -9,6 +9,7 @@ import { routing } from './app.routing';
 import { GettingStartedComponent } from './components/getting-started/getting-started.component';
 import { PostComponent } from './components/post/post.component';
 import { HomeComponent } from './components/home/home.component';
+import { PageComponent } from './components/page/page.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
     GettingStartedComponent,
     PostComponent,
     HomeComponent,
+    PageComponent,
   ],
   imports: [
     BrowserModule,

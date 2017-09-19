@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Post } from '../../app.interface';
 import { PostsService } from '../../services/posts.service';
 
 @Component({
@@ -33,3 +32,10 @@ export class PostComponent implements OnInit {
   }
 
 }
+
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+};
