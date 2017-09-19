@@ -9,8 +9,8 @@ import { PostsService } from '../../services/posts.service';
   providers: [PostsService]
 })
 export class PostComponent implements OnInit {
-  post: Post[];
-  
+  public post: Post;
+
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService
@@ -18,7 +18,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.forEach((params: Params) => {
-      let id = params['id'];
+      const id = params['id'];
       this.postsService.getPost(id)
         .subscribe(
           post => {
@@ -27,8 +27,8 @@ export class PostComponent implements OnInit {
           err => {
             console.log(err);
           }
-        )
-    })
+        );
+    });
   }
 
 }

@@ -11,6 +11,7 @@ volumes:
 services:
   postgres:
     image: postgres:9.6.1
+    container_name: 'docssite_postgres'
     ports:
       - "5432:5432"
     environment:
@@ -21,14 +22,17 @@ services:
   backend:
     build: ./docker/docs-backend
     image: hookandloop/docs-backend:1.0.0
+    container_name: 'docssite_backend'
     depends_on:
       - postgres
     links:
       - postgres
     volumes:
       - ./src/app:/home/app
+
       - ./src/config:/home/config
       - ./src/config/supervisor/backend.conf:/etc/supervisor/conf.d/backend.conf
+
       - static-data:/home/app/static/
       - media-data:/home/app/media/
     ports:
@@ -38,16 +42,19 @@ services:
   nginx:
     build: ./docker/docs-nginx
     image: hookandloop/docs-nginx:1.0.0
+    container_name: 'docssite_nginx'
     depends_on:
       - backend
     links:
       - backend
     volumes:
+      - ./src/web:/home/web
+
       - ./src/config:/home/config
       - ./src/config/supervisor/webserver.conf:/etc/supervisor/conf.d/webserver.conf
       - ./src/config/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./src/config/nginx/localhost.conf:/etc/nginx/sites-available/default
-      - ./src/web:/home/web
+
       - static-data:/home/app/static/
       - media-data:/home/app/media/
     ports:

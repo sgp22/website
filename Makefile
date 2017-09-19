@@ -1,6 +1,6 @@
-NGINX_CONTAINER = docssite_nginx_1
-BACKEND_CONTAINER = docssite_backend_1
-POSTGRES_CONTAINER = docssite_postgres_1
+NGINX_CONTAINER = docssite_nginx
+BACKEND_CONTAINER = docssite_backend
+POSTGRES_CONTAINER = docssite_postgres
 
 .PHONY: up
 
@@ -54,16 +54,18 @@ restart_vm :
 
 # Web.
 run_dev :
-	cd web && npm install && node scripts/start.js
+	cd src/web && npm install && npm run start
 
 build_prod :
-	cd web && npm install && node scripts/build.js
+	cd src/web && npm install && npm run build
 
 
+# ElasticBeanstalk
 eb_setup :
 	. scripts/eb_env_vars.sh
 
-eb_deploy :
+eb_deploy : build_prod
+	eb use docs-site-staging && \
 	. scripts/eb_deploy.sh
 
 

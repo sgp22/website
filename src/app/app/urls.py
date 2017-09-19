@@ -7,12 +7,13 @@ from django.contrib import admin
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
-from wagtail.contrib.wagtailapi import urls as wagtailapi_urls
+
+from .api import api_router
 
 from search import views as search_views
 
 urlpatterns = [
-    url(r'^api/', include(wagtailapi_urls)),
+    url(r'^api/v2/', api_router.urls),
 
     url(r'^django-admin/', include(admin.site.urls)),
 

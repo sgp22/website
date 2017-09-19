@@ -1,7 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-src/web/dist
+src/web/dist/*
+!src/web/dist/.gitkeep
 src/web/tmp
 src/web/out-tsc
 
@@ -73,7 +74,7 @@ static/
 env/
 build/
 develop-eggs/
-dist/
+#dist/
 eggs/
 lib/
 lib64/
