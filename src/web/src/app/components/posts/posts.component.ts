@@ -27,7 +27,7 @@ export class PostsComponent implements OnInit {
         err => {
           console.log(err);
         }
-    )
+    );
   }
 
 }
