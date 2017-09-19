@@ -1,0 +1,11 @@
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  width: 60%;
+  text-align: center;
+}

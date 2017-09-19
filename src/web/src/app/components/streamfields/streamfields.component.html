@@ -1,0 +1,21 @@
+<div *ngFor="let streamfield of streamfields">
+    
+  <app-content-banner 
+    *ngIf="streamfield.type === 'ContentBanner'"
+    [image]="streamfield.value.image != null ? streamfield.value.image : 'http://via.placeholder.com/350x350'"
+    [header]="streamfield.value.header"
+    [copy]="streamfield.value.copy"
+    [link]='streamfield.value.button.link'
+    [label]='streamfield.value.button.label'
+    >
+  </app-content-banner>
+
+  <app-one-column-banner
+    *ngIf="streamfield.type === 'OneColumnBanner'"
+    [header]="streamfield.value.header"
+    [intro]="streamfield.value.intro"
+    [image]="streamfield.value.image != null ? streamfield.value.image : 'http://via.placeholder.com/850x850'"    
+  >
+  </app-one-column-banner>
+  
+</div>
