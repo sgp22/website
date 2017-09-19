@@ -1,6 +1,6 @@
-NGINX_CONTAINER = docssite_nginx_1
-BACKEND_CONTAINER = docssite_backend_1
-POSTGRES_CONTAINER = docssite_postgres_1
+NGINX_CONTAINER = docssite_nginx
+BACKEND_CONTAINER = docssite_backend
+POSTGRES_CONTAINER = docssite_postgres
 
 .PHONY: up
 
@@ -64,7 +64,8 @@ build_prod :
 eb_setup :
 	. scripts/eb_env_vars.sh
 
-eb_deploy :
+eb_deploy : build_prod
+	eb use docs-site-staging && \
 	. scripts/eb_deploy.sh
 
 

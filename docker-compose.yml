@@ -11,6 +11,7 @@ volumes:
 services:
   postgres:
     image: postgres:9.6.1
+    container_name: 'docssite_postgres'
     ports:
       - "5432:5432"
     environment:
@@ -21,6 +22,7 @@ services:
   backend:
     build: ./docker/docs-backend
     image: hookandloop/docs-backend:1.0.0
+    container_name: 'docssite_backend'
     depends_on:
       - postgres
     links:
@@ -40,6 +42,7 @@ services:
   nginx:
     build: ./docker/docs-nginx
     image: hookandloop/docs-nginx:1.0.0
+    container_name: 'docssite_nginx'
     depends_on:
       - backend
     links:
