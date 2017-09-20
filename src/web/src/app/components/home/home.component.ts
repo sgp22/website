@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,6 +10,8 @@ import { PagesService } from '../../services/pages.service';
   providers: [PagesService]
 })
 export class HomeComponent implements OnInit {
+  
+  public slugs: any;
   public page: any;
   public streamfields: any;
 
@@ -23,7 +26,6 @@ export class HomeComponent implements OnInit {
         page => {
           this.page = page;
           this.streamfields = page.body;
-          console.log(this.page);
         },
         err => {
           console.log(err);

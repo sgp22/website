@@ -23,30 +23,20 @@ export class PageComponent implements OnInit {
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
     })
-    
-    this.pagesService.getAll()
+  
+    this.pagesService.getPage(slug)
       .subscribe(
-        pages => {
-          const items = pages.items;
-          items.filter((item) => {
-            if(item.meta.slug === slug) {
-              this.pagesService.getPage(item.id)
-                .subscribe(
-                  page => {
-                    this.page = page;
-                  },
-                  err => {
-                    console.log(err);
-                  }
-                )
-            }
+        page => {
+          const items = page.items;
+          items.map((item) => {
+            this.page = item;
           })
         },
         err => {
           console.log(err);
         }
-    )
-
+      )
+      
   }
 
 }
