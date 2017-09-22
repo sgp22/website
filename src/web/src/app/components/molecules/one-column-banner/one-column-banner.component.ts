@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-one-column-banner',
+  selector: 'one-column-banner',
   templateUrl: './one-column-banner.component.html',
   styleUrls: ['./one-column-banner.component.css']
 })

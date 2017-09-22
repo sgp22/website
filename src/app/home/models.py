@@ -8,8 +8,9 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 from wagtail.api import APIField
-
 
 class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
@@ -33,8 +34,18 @@ class HomePage(Page):
         ('OneColumnBanner', blocks.StructBlock([
             ('header', blocks.CharBlock()),
             ('intro', blocks.TextBlock()),
-            ('image', ImageChooserBlock(required=False))
-        ], label="One Column Banner"))
+            ('image', ImageChooserBlock(required=False)),
+        ], label="One Column Banner")),
+        ('carousel', blocks.StreamBlock(
+            [
+                ('item', blocks.StructBlock([
+                    ('image', ImageChooserBlock(required=False)),
+                    ('text', blocks.TextBlock()),
+                    ('author', blocks.CharBlock()),
+                ]))
+            ],
+            label="Carousel"
+        )),
     ], null=True, blank=True)
 
     # Export fields over the API

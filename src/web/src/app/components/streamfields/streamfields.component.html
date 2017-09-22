@@ -1,6 +1,6 @@
 <div *ngFor="let streamfield of streamfields">
     
-  <app-content-banner 
+  <content-banner 
     *ngIf="streamfield.type === 'ContentBanner'"
     [image]="streamfield.value.image != null ? streamfield.value.image : 'http://via.placeholder.com/350x350'"
     [header]="streamfield.value.header"
@@ -8,14 +8,14 @@
     [link]='streamfield.value.button.link'
     [label]='streamfield.value.button.label'
     >
-  </app-content-banner>
+  </content-banner>
 
-  <app-one-column-banner
+  <one-column-banner
     *ngIf="streamfield.type === 'OneColumnBanner'"
     [header]="streamfield.value.header"
     [intro]="streamfield.value.intro"
     [image]="streamfield.value.image != null ? streamfield.value.image : 'http://via.placeholder.com/850x850'"    
   >
-  </app-one-column-banner>
+  </one-column-banner>
   
 </div>

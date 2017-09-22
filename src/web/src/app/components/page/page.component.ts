@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'app-page',
@@ -11,8 +16,10 @@ import { PagesService } from '../../services/pages.service';
 export class PageComponent implements OnInit {
 
   public page: any;
+  public children: any;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService
   ) { }
@@ -22,21 +29,25 @@ export class PageComponent implements OnInit {
     let slug;
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
-    })
-  
-    this.pagesService.getPage(slug)
-      .subscribe(
-        page => {
-          const items = page.items;
-          items.map((item) => {
-            this.page = item;
-          })
-        },
-        err => {
-          console.log(err);
-        }
-      )
+    });
+    
+    this.pagesService.getPageWithNav(slug)
+      .subscribe((res) => { 
+        this.getPage(res);
+      });
+
+    this.router.events
+      .filter((e) => e instanceof NavigationEnd)
+      .switchMap(e => this.pagesService.getPageWithNav(slug))
+        .subscribe((res) => { 
+          this.getPage(res);
+        });
       
+  }
+
+  getPage(res) {
+    this.page = res[0];
+    this.children = this.page.children.items;
   }
 
 }

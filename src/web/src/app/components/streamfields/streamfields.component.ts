@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-streamfields',
+  selector: 'streamfields',
   templateUrl: './streamfields.component.html',
   styleUrls: ['./streamfields.component.css']
 })
