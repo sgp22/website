@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostComponent } from './post.component';
+import { OneColumnBannerComponent } from './one-column-banner.component';
 
-describe('PostComponent', () => {
-  let component: PostComponent;
-  let fixture: ComponentFixture<PostComponent>;
+describe('OneColumnBannerComponent', () => {
+  let component: OneColumnBannerComponent;
+  let fixture: ComponentFixture<OneColumnBannerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostComponent ]
+      declarations: [ OneColumnBannerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostComponent);
+    fixture = TestBed.createComponent(OneColumnBannerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

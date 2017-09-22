@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://docs-site-staging.us-east-1.elasticbeanstalk.com/api/v2/',
+  apiUrl: 'http://localhost/api/v2/',
   dummyApi: 'https://jsonplaceholder.typicode.com/posts'
 };

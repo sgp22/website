@@ -11,6 +11,10 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.api import APIField
 
 
+class ButtonBlock(blocks.StructBlock):
+    label = blocks.CharBlock(required=True)
+    link = blocks.CharBlock(required=True)
+
 class HomePage(Page):
     content = RichTextField(blank=True)
 
@@ -20,9 +24,17 @@ class HomePage(Page):
     ]
 
     body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('ContentBanner', blocks.StructBlock([
+            ('image', ImageChooserBlock(required=False)),
+            ('header', blocks.CharBlock()),
+            ('copy', blocks.TextBlock()),
+            ('button', ButtonBlock())
+        ], label="Content Banner")),
+        ('OneColumnBanner', blocks.StructBlock([
+            ('header', blocks.CharBlock()),
+            ('intro', blocks.TextBlock()),
+            ('image', ImageChooserBlock(required=False))
+        ], label="One Column Banner"))
     ], null=True, blank=True)
 
     # Export fields over the API

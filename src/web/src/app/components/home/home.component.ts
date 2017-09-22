@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
+
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,10 @@ import { PagesService } from '../../services/pages.service';
   providers: [PagesService]
 })
 export class HomeComponent implements OnInit {
+  
+  public slugs: any;
   public page: any;
+  public streamfields: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +25,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         page => {
           this.page = page;
-          console.log(this.page);
+          this.streamfields = page.body;
         },
         err => {
           console.log(err);

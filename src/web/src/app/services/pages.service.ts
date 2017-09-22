@@ -10,7 +10,7 @@ export class PagesService {
   apiUrl = environment.apiUrl;
 
   constructor(private http: Http) {
-    console.log('PagesService initialized...');
+    console.log('PagesService initialized...');  
   }
 
   getAll() {
@@ -18,8 +18,8 @@ export class PagesService {
       .map(res => res.json());
   }
 
-  getPage(id) {
-    return this.http.get(`${this.apiUrl}pages/${id}/?format=json`)
+  getPage(slug) {
+    return this.http.get(`${this.apiUrl}pages/?format=json&type=home.HomePage&fields=*&slug=${slug}`)
       .map(res => res.json());
   }
 
