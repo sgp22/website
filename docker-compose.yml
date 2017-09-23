@@ -36,8 +36,13 @@ services:
       - static-data:/home/app/static/
       - media-data:/home/app/media/
     ports:
-      - "9003:9000"
-      - "9002:9001"
+      - "9003"
+      - "9002:9002"
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_STORAGE_BUCKET_NAME: ${AWS_STORAGE_BUCKET_NAME}
+      AWS_QUERYSTRING_AUTH: ${AWS_QUERYSTRING_AUTH}
 
   nginx:
     build: ./docker/docs-nginx

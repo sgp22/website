@@ -86,6 +86,9 @@ shell_backend :
 tail_backend :
 	docker logs -f $(BACKEND_CONTAINER)
 
+dev_backend :
+	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/manage.py runserver 0.0.0.0:9002
+
 build_backend :
 	cd docker/docs-backend && \
 		make build

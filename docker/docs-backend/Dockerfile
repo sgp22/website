@@ -82,6 +82,6 @@ RUN chown -R root /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 # Expose ports
-EXPOSE 9000 9001
+EXPOSE 9002 9003
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
