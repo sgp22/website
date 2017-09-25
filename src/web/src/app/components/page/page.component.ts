@@ -15,6 +15,7 @@ export class PageComponent implements OnInit {
   public page: any;
   public children: any;
   public loading: boolean;
+  public streamfields: any;  
 
   constructor(
     private router: Router,
@@ -56,6 +57,8 @@ export class PageComponent implements OnInit {
   getPage(res) {
     this.page = res[0];
     this.children = this.page.children.items;
+    this.streamfields = this.page.body;
+    console.log(this.streamfields)
   }
 
 }
