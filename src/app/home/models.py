@@ -15,6 +15,13 @@ class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
     link = blocks.CharBlock(required=True)
 
+class DemoStreamBlock(blocks.StreamBlock):
+    h2 = blocks.CharBlock(icon="title", classname="title")
+    h3 = blocks.CharBlock(icon="title", classname="title")
+    h4 = blocks.CharBlock(icon="title", classname="title")
+    intro = blocks.RichTextBlock(icon="pilcrow")
+    paragraph = blocks.RichTextBlock(icon="pilcrow")
+
 class HomePage(Page):
     content = RichTextField(blank=True)
 
@@ -28,7 +35,8 @@ class HomePage(Page):
             ('image', ImageChooserBlock(required=False)),
             ('header', blocks.CharBlock()),
             ('copy', blocks.TextBlock()),
-            ('button', ButtonBlock())
+            ('button', ButtonBlock()),
+            ('stream', DemoStreamBlock())
         ], label="Content Banner")),
         ('OneColumnBanner', blocks.StructBlock([
             ('header', blocks.CharBlock()),
