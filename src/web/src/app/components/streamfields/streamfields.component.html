@@ -18,4 +18,13 @@
   >
   </one-column-banner>
   
+  <div *ngIf="streamfield.type === 'test_list_block'">
+    <test-list-block 
+      *ngFor="let listBlock of streamfield.value"
+      [name]="listBlock.name"
+      [description]="listBlock.description"
+      >
+    </test-list-block>
+  </div>
+
 </div>

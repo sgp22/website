@@ -10,6 +10,7 @@ import { PageComponent } from './components/page/page.component';
 import { ContentBannerComponent } from './components/molecules/content-banner/content-banner.component';
 import { OneColumnBannerComponent } from './components/molecules/one-column-banner/one-column-banner.component';
 import { StreamfieldsComponent } from './components/streamfields/streamfields.component';
+import { TestListBlockComponent } from './components/molecules/test-list-block/test-list-block.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { StreamfieldsComponent } from './components/streamfields/streamfields.co
     ContentBannerComponent,
     OneColumnBannerComponent,
     StreamfieldsComponent,
+    TestListBlockComponent,
   ],
   imports: [
     BrowserModule,

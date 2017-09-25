@@ -34,7 +34,11 @@ class HomePage(Page):
             ('header', blocks.CharBlock()),
             ('intro', blocks.TextBlock()),
             ('image', ImageChooserBlock(required=False))
-        ], label="One Column Banner"))
+        ], label="One Column Banner")),
+        ('test_list_block', blocks.ListBlock(blocks.StructBlock([
+            ('name', blocks.CharBlock(required=True)),
+            ('description', blocks.CharBlock()),
+        ])))
     ], null=True, blank=True)
 
     # Export fields over the API

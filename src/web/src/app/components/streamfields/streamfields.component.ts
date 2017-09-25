@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StreamfieldsComponent implements OnInit {
 
-  @Input() streamfields: any
+  @Input() streamfields: any;
 
   constructor() { }
 
