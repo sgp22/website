@@ -9,7 +9,26 @@ from wagtail.wagtailcore import blocks
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.api import APIField
+from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.wagtailadmin.edit_handlers import (
+    PageChooserPanel,
+)
 
+@register_snippet
+class FooterPages(models.Model):
+    related_page = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Page link',
+        help_text='Choose a page to link'
+    )
+
+    panels = [
+        PageChooserPanel('related_page')
+    ]
 
 class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
@@ -34,6 +53,7 @@ class HomePage(Page):
         ('ContentBanner', blocks.StructBlock([
             ('image', ImageChooserBlock(required=False)),
             ('header', blocks.CharBlock()),
+            ('page', blocks.PageChooserBlock()),
             ('copy', blocks.TextBlock()),
             ('button', ButtonBlock()),
             ('stream', DemoStreamBlock())
