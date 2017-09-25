@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-page',
@@ -11,8 +13,11 @@ import { PagesService } from '../../services/pages.service';
 export class PageComponent implements OnInit {
 
   public page: any;
+  public children: any;
+  public loading: boolean;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService
   ) { }
@@ -22,21 +27,35 @@ export class PageComponent implements OnInit {
     let slug;
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
-    })
-  
-    this.pagesService.getPage(slug)
+    });
+    
+    this.pagesService.getPageWithNav(slug)
       .subscribe(
-        page => {
-          const items = page.items;
-          items.map((item) => {
-            this.page = item;
-          })
+        (res) => { 
+          this.getPage(res);
         },
-        err => {
+        (err) => {
           console.log(err);
         }
-      )
+    );
+
+    this.router.events
+      .filter((e) => e instanceof NavigationEnd)
+      .switchMap(e => this.pagesService.getPageWithNav(slug))
+        .subscribe(
+          (res) => { 
+            this.getPage(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+      );
       
+  }
+
+  getPage(res) {
+    this.page = res[0];
+    this.children = this.page.children.items;
   }
 
 }

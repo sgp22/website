@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 
 import { routing } from './app.routing';
-import { GettingStartedComponent } from './components/getting-started/getting-started.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageComponent } from './components/page/page.component';
 import { ContentBannerComponent } from './components/molecules/content-banner/content-banner.component';
@@ -15,7 +14,6 @@ import { StreamfieldsComponent } from './components/streamfields/streamfields.co
 @NgModule({
   declarations: [
     AppComponent,
-    GettingStartedComponent,
     HomeComponent,
     PageComponent,
     ContentBannerComponent,
