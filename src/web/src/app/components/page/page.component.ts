@@ -17,6 +17,7 @@ export class PageComponent implements OnInit {
 
   public page: any;
   public children: any;
+  public loading: boolean;
 
   constructor(
     private router: Router,
@@ -32,16 +33,26 @@ export class PageComponent implements OnInit {
     });
     
     this.pagesService.getPageWithNav(slug)
-      .subscribe((res) => { 
-        this.getPage(res);
-      });
+      .subscribe(
+        (res) => { 
+          this.getPage(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+    );
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getPageWithNav(slug))
-        .subscribe((res) => { 
-          this.getPage(res);
-        });
+        .subscribe(
+          (res) => { 
+            this.getPage(res);
+          },
+          (err) => {
+            console.log(err);
+          }
+      );
       
   }
 
