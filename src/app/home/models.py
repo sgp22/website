@@ -6,12 +6,13 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.api import APIField
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailadmin.edit_handlers import (
-    PageChooserPanel,
+    PageChooserPanel
 )
 
 @register_snippet
@@ -55,6 +56,7 @@ class HomePage(Page):
             ('header', blocks.CharBlock()),
             ('page', blocks.PageChooserBlock()),
             ('copy', blocks.TextBlock()),
+            ('snippet', SnippetChooserBlock(FooterPages)),
             ('button', ButtonBlock()),
             ('stream', DemoStreamBlock())
         ], label="Content Banner")),
