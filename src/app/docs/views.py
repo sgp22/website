@@ -15,6 +15,8 @@ from rest_framework import status
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 
+import markdown
+
 
 class GetCreateDocs(APIView):
     """Upload file on the S3 storage."""
@@ -43,13 +45,17 @@ class GetCreateDocs(APIView):
         if re.match(r'[/\-\w,\s]+.[A-Za-z]{2,4}$', path):
             key = Key(bucket=bucket, name=path)
             content = key.get_contents_as_string()
-            if path.endswith('.json'):
+            if path.lower().endswith('.json'):
                 try:
                     content = json.loads(content.decode('utf-8'))
                     return Response(content)
                 except ValueError:
                     return Response({'error': 'JSON file cannot be decoded'},
                                     status=status.HTTP_400_BAD_REQUEST)
+            elif path.lower().endswith('.md'):
+                content = markdown.markdown(content.decode("utf-8"),
+                                            output_format="html5")
+                return HttpResponse(content=content)
             else:
                 return HttpResponse(content=content)
         else:
