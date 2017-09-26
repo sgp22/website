@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
         page => {
           this.page = page;
           this.streamfields = page.body;
-          console.log(this.streamfields);
         },
         err => {
           console.log(err);
