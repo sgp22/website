@@ -6,7 +6,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore import blocks
-from wagtail.wagtailsnippets.blocks import SnippetChooserBlock
+from wagtail.wagtailsnippets.blocks import SnippetChooserBlock as DefaultSnippetChooserBlock
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.api import APIField
@@ -14,6 +14,19 @@ from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailadmin.edit_handlers import (
     PageChooserPanel
 )
+
+class SnippetChooserBlock(DefaultSnippetChooserBlock):
+    def get_api_representation(self, value, context=None):
+        print(value)
+        if value:
+            return {
+                'id': value.id,
+                'page': value.related_page.id,
+                'title': value.related_page.title,
+                'url': value.related_page.url,
+                'url_path': value.related_page.url_path,
+                'content_type': value.related_page.content_type.name,
+            }
 
 @register_snippet
 class FooterPages(models.Model):
