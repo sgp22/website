@@ -29,7 +29,7 @@ class SnippetChooserBlock(DefaultSnippetChooserBlock):
             }
 
 @register_snippet
-class FooterPages(models.Model):
+class Footer(models.Model):
     related_page = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
@@ -69,7 +69,7 @@ class HomePage(Page):
             ('header', blocks.CharBlock()),
             ('page', blocks.PageChooserBlock()),
             ('copy', blocks.TextBlock()),
-            ('snippet', SnippetChooserBlock(FooterPages)),
+            ('snippet', SnippetChooserBlock(Footer)),
             ('button', ButtonBlock()),
             ('stream', DemoStreamBlock())
         ], label="Content Banner")),
