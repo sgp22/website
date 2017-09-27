@@ -1,11 +1,33 @@
 {
-"rules": {
+  "rules": {
+    "at-rule-empty-line-before": [ "always",
+      {
+        "except": [ "after-same-name", "blockless-after-same-name-blockless" ]
+      }
+    ],
     "at-rule-name-case": "lower",
     "block-no-empty": null,
-    "color-no-invalid-hex": true,
     "comment-empty-line-before": [ "always", {
       "ignore": ["stylelint-commands", "after-comment"]
     } ],
+    "comment-no-empty": true,
+    "comment-whitespace-inside": "always",
+    "color-named": "never",
+    "color-hex-case": "lower",
+    "color-no-invalid-hex": true,
+    "custom-property-empty-line-before": [
+      "always",
+      {
+        "except": [
+          "after-custom-property",
+          "first-nested"
+        ],
+        "ignore": [
+          "after-comment",
+          "inside-single-line-block"
+        ]
+      }
+    ],
     "declaration-colon-space-before": "never",
     "declaration-colon-space-after": "always",
     "indentation": 2,
