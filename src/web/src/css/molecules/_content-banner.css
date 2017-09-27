@@ -1,0 +1,15 @@
+/*
+ * Content Banner
+ */
+
+.content-banner {
+  background-color: #c3c3c3;
+}
+
+.content-banner__figure {
+  display: flex;
+}
+
+.content-banner__img {
+  padding-right: 2em;
+}

@@ -1,0 +1,12 @@
+/* 
+ *  Main Nav
+ */
+
+.main-nav {
+  margin-left: auto;
+  & a {
+    display: inline-block;
+    margin-left: 20px;
+    text-decoration: none;
+  }
+}

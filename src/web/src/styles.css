@@ -1,41 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'css/global/normalize.css';
-@import 'css/global/variables.css';
+/* 
+ *  Imports
+ */
 
-
-/*
-  Base
--------------------------------------------------- */
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'helvetica', 'arial', 'sans-serif';
-  color: #333;
-  padding: 0;
-  margin: 0;
-  background-color: var(--main-bg-color);
-  -webkit-font-smoothing: antialiased;
-}
-
-/*
-  Type
---------------------------------------------------- */
-
-p {
-  line-height: 1.4;
-}
-
+@import 'css/global/global.css';
 
 /* 
-  Layout
---------------------------------------------------- */
+ *  Base
+ */
 
-.content {
-  padding: 1.25em;
-  max-width: 1140px;
-  margin: 0 auto;
-}
+@import 'css/base/base.css';
+
+/* 
+ *  Layout
+ */
+
+@import 'css/layout/layout.css';
+
+/* 
+ *  Molecules
+ */
+@import 'css/molecules/molecules.css';
