@@ -17,7 +17,6 @@ from wagtail.wagtailadmin.edit_handlers import (
 
 class SnippetChooserBlock(DefaultSnippetChooserBlock):
     def get_api_representation(self, value, context=None):
-        print(value)
         if value:
             return {
                 'id': value.id,
