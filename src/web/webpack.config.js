@@ -362,7 +362,7 @@ module.exports = {
     new NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([
       {
-        "context": "/Users/jmacaluso/code/docs-site/src/web/src/",
+        "context": "src/",
         "to": "",
         "from": {
           "glob": "assets/**/*",
@@ -370,7 +370,7 @@ module.exports = {
         }
       },
       {
-        "context": "/Users/jmacaluso/code/docs-site/src/web/src/",
+        "context": "src/",
         "to": "",
         "from": {
           "glob": "favicon.ico",
