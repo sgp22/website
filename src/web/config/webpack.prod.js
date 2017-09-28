@@ -23,9 +23,6 @@ module.exports = webpackMerge(commonConfig, {
         "ENV": JSON.stringify(ENV)
       }
     }),
-    new AotPlugin({
-      tsConfigPath: "src/tsconfig.json",
-    }),
     new CommonsChunkPlugin({
       "name": "inline",
       "minChunks": null
