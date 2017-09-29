@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'search',
     'docs',
 
+    'wagtail.contrib.table_block',
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
     'wagtail.api.v2',
+
     'rest_framework',
     'corsheaders',
 
