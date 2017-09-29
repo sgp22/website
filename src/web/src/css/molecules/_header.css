@@ -1,0 +1,19 @@
+/*
+ * Header
+ */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  background-color: #ddd;
+  padding: 1.25em;
+}
+
+.logo {
+  margin: 0;
+  padding: 0;
+
+  & a {
+    text-decoration: none;
+  }
+}
