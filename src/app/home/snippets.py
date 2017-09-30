@@ -31,6 +31,9 @@ class Cornerstone(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 
 @register_snippet
 class Footer(models.Model):
@@ -47,3 +50,6 @@ class Footer(models.Model):
     panels = [
         PageChooserPanel('related_page')
     ]
+
+    def __str__(self):
+        return self.related_page.title

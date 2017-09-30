@@ -22,27 +22,12 @@ from wagtail.contrib.table_block.blocks import TableBlock
 from home import snippets
 from home import relationships
 from home.snippets import Footer
+from home.snippets import Cornerstone
 from home.serializers import (
     ElementDescriptorSerializer,
     CornerstoneSerializer
 )
 
-
-class SnippetChooserBlock(DefaultSnippetChooserBlock):
-    def get_api_representation(self, value, context=None):
-        if value:
-            return {
-                'id': value.id,
-                'page': value.related_page.id,
-                'title': value.related_page.title,
-                'url': value.related_page.url,
-                'url_path': value.related_page.url_path,
-                'content_type': value.related_page.content_type.name,
-            }
-
-
-    def __str__(self):
-        return self.related_page.title
 
 class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
@@ -58,6 +43,19 @@ class DemoStreamBlock(blocks.StreamBlock):
 
 
 class LandingPage(Page):
+
+    class SnippetChooserBlock(DefaultSnippetChooserBlock):
+        def get_api_representation(self, value, context=None):
+            if value:
+                return {
+                    'id': value.id,
+                    'page': value.related_page.id,
+                    'title': value.related_page.title,
+                    'url': value.related_page.url,
+                    'url_path': value.related_page.url_path,
+                    'content_type': value.related_page.content_type.name,
+                }
+
     content = StreamField([
         ('ContentBanner', blocks.StructBlock([
             ('image', ImageChooserBlock(required=False)),
@@ -110,24 +108,21 @@ class LandingPage(Page):
 
 
 class CoreContentPage(Page):
+
+    class SnippetChooserBlock(DefaultSnippetChooserBlock):
+        def get_api_representation(self, value, context=None):
+            if value:
+                return {
+                    'id': value.id,
+                    'name': value.name,
+                    'description': value.description
+                }
+
     content = StreamField([
-        ('ContentBanner', blocks.StructBlock([
-            ('image', ImageChooserBlock(required=False)),
-            ('header', blocks.CharBlock()),
-            ('page', blocks.PageChooserBlock()),
-            ('copy', blocks.TextBlock()),
-            ('snippet', SnippetChooserBlock(Footer)),
-            ('button', ButtonBlock()),
-            ('stream', DemoStreamBlock())
-        ], label="Content Banner")),
-        ('OneColumnBanner', blocks.StructBlock([
-            ('header', blocks.CharBlock()),
-            ('intro', blocks.TextBlock()),
-            ('image', ImageChooserBlock(required=False))
-        ], label="One Column Banner")),
-        ('test_list_block', blocks.ListBlock(blocks.StructBlock([
+        ('list_block_cornerstone_snippet', blocks.ListBlock(blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('description', blocks.CharBlock()),
+            ('snippet', SnippetChooserBlock(Cornerstone)),
         ])))
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
