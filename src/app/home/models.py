@@ -41,6 +41,9 @@ class SnippetChooserBlock(DefaultSnippetChooserBlock):
             }
 
 
+    def __str__(self):
+        return self.related_page.title
+
 class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
     link = blocks.CharBlock(required=True)
