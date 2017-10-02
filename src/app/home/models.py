@@ -42,27 +42,37 @@ class DemoStreamBlock(blocks.StreamBlock):
     paragraph = blocks.RichTextBlock(icon="pilcrow")
 
 
+class LandingPageSnippetChooserBlock(DefaultSnippetChooserBlock):
+    def get_api_representation(self, value, context=None):
+        if value:
+            return {
+                'id': value.id,
+                'page': value.related_page.id,
+                'title': value.related_page.title,
+                'url': value.related_page.url,
+                'url_path': value.related_page.url_path,
+                'content_type': value.related_page.content_type.name,
+            }
+
+
+class CoreContentSnippetChooserBlock(DefaultSnippetChooserBlock):
+    def get_api_representation(self, value, context=None):
+        if value:
+            return {
+                'id': value.id,
+                'name': value.name,
+                'description': value.description
+            }
+
+
 class LandingPage(Page):
-
-    class SnippetChooserBlock(DefaultSnippetChooserBlock):
-        def get_api_representation(self, value, context=None):
-            if value:
-                return {
-                    'id': value.id,
-                    'page': value.related_page.id,
-                    'title': value.related_page.title,
-                    'url': value.related_page.url,
-                    'url_path': value.related_page.url_path,
-                    'content_type': value.related_page.content_type.name,
-                }
-
     content = StreamField([
         ('ContentBanner', blocks.StructBlock([
             ('image', ImageChooserBlock(required=False)),
             ('header', blocks.CharBlock()),
             ('page', blocks.PageChooserBlock()),
             ('copy', blocks.TextBlock()),
-            ('snippet', SnippetChooserBlock(Footer)),
+            ('snippet', LandingPageSnippetChooserBlock(Footer)),
             ('button', ButtonBlock()),
             ('stream', DemoStreamBlock())
         ], label="Content Banner")),
@@ -108,21 +118,11 @@ class LandingPage(Page):
 
 
 class CoreContentPage(Page):
-
-    class SnippetChooserBlock(DefaultSnippetChooserBlock):
-        def get_api_representation(self, value, context=None):
-            if value:
-                return {
-                    'id': value.id,
-                    'name': value.name,
-                    'description': value.description
-                }
-
     content = StreamField([
         ('list_block_cornerstone_snippet', blocks.ListBlock(blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('description', blocks.CharBlock()),
-            ('snippet', SnippetChooserBlock(Cornerstone)),
+            ('snippet', CoreContentSnippetChooserBlock(Cornerstone)),
         ])))
     ], null=True, blank=True)
     description = models.CharField(max_length=255)

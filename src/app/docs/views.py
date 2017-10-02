@@ -37,11 +37,15 @@ class GetCreateDocs(APIView):
 
     def get(self, request, **kwargs):
         # Set connection to s3
-        conn = S3Connection(settings.AWS_ACCESS_KEY_ID,
-                            settings.AWS_SECRET_ACCESS_KEY)
-        bucket = conn.get_bucket(settings.AWS_STORAGE_BUCKET_NAME)
+        conn = S3Connection(
+            settings.AWS_ACCESS_KEY_ID,
+            settings.AWS_SECRET_ACCESS_KEY)
+        bucket = conn.get_bucket(
+            settings.AWS_STORAGE_BUCKET_NAME)
+
         # check if file or folder
         path = request.path_info[5:]
+
         if re.match(r'[/\-\w,\s]+.[A-Za-z]{2,4}$', path):
             key = Key(bucket=bucket, name=path)
             content = key.get_contents_as_string()
