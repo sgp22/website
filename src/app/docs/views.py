@@ -46,7 +46,7 @@ class GetCreateDocs(APIView):
         # check if file or folder
         path = request.path_info[5:]
 
-        if re.match(r'[/\-\w,\s]+.[A-Za-z]{2,4}$', path):
+        if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,4}$', path):
             key = Key(bucket=bucket, name=path)
             content = key.get_contents_as_string()
             if path.lower().endswith('.json'):
