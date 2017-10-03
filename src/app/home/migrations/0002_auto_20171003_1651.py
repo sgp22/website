@@ -21,6 +21,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='elementspage',
             name='types',
-            field=wagtail.wagtailcore.fields.StreamField((('list_block_types', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.StructBlock((('names', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('details', wagtail.wagtailcore.blocks.CharBlock(required=True)))))),), blank=True, null=True),
+            field=wagtail.wagtailcore.fields.StreamField((('list_block_types', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.StructBlock((('name', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('detail', wagtail.wagtailcore.blocks.CharBlock(required=True)))))),), blank=True, null=True),
         ),
     ]

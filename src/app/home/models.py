@@ -176,8 +176,8 @@ class ElementsPage(Page):
 
     types = StreamField([
         ('list_block_types', blocks.ListBlock(blocks.StructBlock([
-            ('names', blocks.CharBlock(required=True)),
-            ('details', blocks.CharBlock(required=True))
+            ('name', blocks.CharBlock(required=True)),
+            ('detail', blocks.CharBlock(required=True))
         ])))
     ], null=True, blank=True)
 
