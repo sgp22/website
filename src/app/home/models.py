@@ -181,6 +181,13 @@ class ElementsPage(Page):
         ]))
     ], null=True, blank=True)
 
+    options = StreamField([
+        ('options', blocks.StructBlock([
+            ('name', blocks.CharBlock(required=True)),
+            ('detail', blocks.CharBlock(required=True))
+        ]))
+    ], null=True, blank=True)
+
     states = models.CharField(
         max_length=255,
         null=True,
@@ -189,6 +196,7 @@ class ElementsPage(Page):
     content_panels = Page.content_panels + [
         InlinePanel('elements_page_element_descriptors_relationship'),
         StreamFieldPanel('types'),
+        StreamFieldPanel('options'),
         FieldPanel('states')
     ]
 
@@ -201,5 +209,6 @@ class ElementsPage(Page):
             )
         ),
         APIField('types'),
+        APIField('options'),
         APIField('states'),
     ]
