@@ -213,11 +213,19 @@ class ElementsPage(Page):
     )
 
     types = StreamField([
-        ('Types', TableBlock())
+        ('types', blocks.StructBlock([
+            ('name', blocks.CharBlock(required=True)),
+            ('detail', blocks.CharBlock(required=True))
+        ]))
     ], null=True, blank=True)
-    attributes = StreamField([
-        ('Attributes', TableBlock())
+
+    options = StreamField([
+        ('options', blocks.StructBlock([
+            ('name', blocks.CharBlock(required=True)),
+            ('detail', blocks.CharBlock(required=True))
+        ]))
     ], null=True, blank=True)
+
     states = models.CharField(
         max_length=255,
         null=True,
@@ -230,7 +238,7 @@ class ElementsPage(Page):
             SnippetChooserPanel('when_to_use_it')
         ]),
         StreamFieldPanel('types'),
-        StreamFieldPanel('attributes'),
+        StreamFieldPanel('options'),
         FieldPanel('states')
     ]
 
@@ -243,6 +251,6 @@ class ElementsPage(Page):
             )
         ),
         APIField('types'),
-        APIField('attributes'),
-        APIField('states')
+        APIField('options'),
+        APIField('states'),
     ]
