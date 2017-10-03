@@ -7,15 +7,23 @@ from wagtail.wagtailadmin.edit_handlers import (
     PageChooserPanel
 )
 
+from modelcluster.models import ClusterableModel
+from modelcluster.fields import ParentalKey
+
+from taggit.models import TaggedItemBase
+from taggit.managers import TaggableManager
+
+class DescriptorTag(TaggedItemBase):
+    content_object = ParentalKey('ElementDescriptor', related_name="tagged_descriptors")
 
 @register_snippet
-class ElementDescriptor(models.Model):
+class ElementDescriptor(ClusterableModel):
     """There can be many ElementDescriptors
     related to many pages."""
     name = models.CharField(max_length=255)
     descriptor_type = models.SmallIntegerField()
     description = models.TextField()
-
+    
     def __str__(self):
         return self.name
 

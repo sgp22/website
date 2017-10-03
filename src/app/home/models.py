@@ -186,8 +186,10 @@ class ElementsPage(Page):
         on_delete=models.SET_NULL,
         related_name='+',
         help_text='select a snippet from the what it does type',
-        verbose_name='What it does'
+        verbose_name='What it does',
+        limit_choices_to={'descriptor_type': 1}        
     )
+
     what_user_can_do = models.ForeignKey(
         'ElementDescriptor',
         null=True,
@@ -195,8 +197,10 @@ class ElementsPage(Page):
         on_delete=models.SET_NULL,
         related_name='+',
         help_text='select a snippet from the what user can do type',
-        verbose_name='What user can do'
+        verbose_name='What user can do',
+        limit_choices_to={'descriptor_type': 2}
     )
+    
     when_to_use_it = models.ForeignKey(
         'ElementDescriptor',
         null=True,
@@ -204,7 +208,8 @@ class ElementsPage(Page):
         on_delete=models.SET_NULL,
         related_name='+',
         help_text='select a snippet from the when to use it type',
-        verbose_name='When to use it'
+        verbose_name='When to use it',
+        limit_choices_to={'descriptor_type': 3}        
     )
 
     types = StreamField([
