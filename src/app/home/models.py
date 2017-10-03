@@ -175,11 +175,12 @@ class ElementsPage(Page):
         return element_descriptors
 
     types = StreamField([
-        ('Types', TableBlock())
+        ('types', blocks.StructBlock([
+            ('name', blocks.CharBlock(required=True)),
+            ('detail', blocks.CharBlock(required=True))
+        ]))
     ], null=True, blank=True)
-    attributes = StreamField([
-        ('Attributes', TableBlock())
-    ], null=True, blank=True)
+
     states = models.CharField(
         max_length=255,
         null=True,
@@ -188,7 +189,6 @@ class ElementsPage(Page):
     content_panels = Page.content_panels + [
         InlinePanel('elements_page_element_descriptors_relationship'),
         StreamFieldPanel('types'),
-        StreamFieldPanel('attributes'),
         FieldPanel('states')
     ]
 
@@ -201,6 +201,5 @@ class ElementsPage(Page):
             )
         ),
         APIField('types'),
-        APIField('attributes'),
-        APIField('states')
+        APIField('states'),
     ]
