@@ -175,10 +175,10 @@ class ElementsPage(Page):
         return element_descriptors
 
     types = StreamField([
-        ('list_block_types', blocks.ListBlock(blocks.StructBlock([
+        ('types', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True))
-        ])))
+        ]))
     ], null=True, blank=True)
 
     states = models.CharField(
