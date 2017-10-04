@@ -28,11 +28,16 @@ from home import relationships
 from home.snippets import Footer
 from home.snippets import Cornerstone
 from home.snippets import ElementDescriptor
+from home.snippets import WhatItDoes
+from home.snippets import WhatUserCanDo
+from home.snippets import WhenToUseIt
+
+from home import admin
+
 from home.serializers import (
     ElementDescriptorSerializer,
     CornerstoneSerializer
 )
-
 
 class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
@@ -180,36 +185,33 @@ class ElementsPage(Page):
         return element_descriptors
 
     what_it_does = models.ForeignKey(
-        'ElementDescriptor',
+        'WhatItDoes',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
         help_text='select a snippet from the what it does type',
         verbose_name='What it does',
-        limit_choices_to={'descriptor_type': 1}        
     )
 
     what_user_can_do = models.ForeignKey(
-        'ElementDescriptor',
+        'WhatUserCanDo',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
         help_text='select a snippet from the what user can do type',
         verbose_name='What user can do',
-        limit_choices_to={'descriptor_type': 2}
     )
     
     when_to_use_it = models.ForeignKey(
-        'ElementDescriptor',
+        'WhenToUseIt',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
         help_text='select a snippet from the when to use it type',
         verbose_name='When to use it',
-        limit_choices_to={'descriptor_type': 3}        
     )
 
     types = StreamField([

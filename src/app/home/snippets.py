@@ -31,6 +31,47 @@ class ElementDescriptor(ClusterableModel):
         verbose_name = "Element Descriptors"
         ordering = ['name']
 
+@register_snippet
+class WhatItDoes(models.Model):
+    """There can be many ElementDescriptors
+    related to many pages."""
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "What it does"
+        ordering = ['name']
+
+@register_snippet
+class WhatUserCanDo(models.Model):
+    """There can be many ElementDescriptors
+    related to many pages."""
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "What user can do"
+        ordering = ['name']
+
+@register_snippet
+class WhenToUseIt(models.Model):
+    """There can be many ElementDescriptors
+    related to many pages."""
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "When to use it"
+        ordering = ['name']
 
 @register_snippet
 class Cornerstone(models.Model):
