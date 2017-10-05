@@ -1,24 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* 
- *  Imports
- */
-
-@import 'css/global/global.css';
-
-/* 
- *  Base
- */
-
-@import 'css/base/base.css';
-
-/* 
- *  Layout
- */
-
-@import 'css/layout/layout.css';
-
-/* 
- *  Molecules
- */
-@import 'css/molecules/molecules.css';
+@import 'css/iux/iux.css';
+@import 'css/site/layout';
