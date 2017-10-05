@@ -118,44 +118,29 @@ class LandingPage(Page):
 
 
 class CoreContentPage(Page):
-    content = StreamField([
-        ('list_block_cornerstone_snippet', blocks.ListBlock(blocks.StructBlock([
-            ('name', blocks.CharBlock(required=True)),
-            ('description', blocks.CharBlock()),
-            ('snippet', CoreContentSnippetChooserBlock(Cornerstone)),
-        ])))
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock(features=[
+            'h2',
+            'h3',
+            'bold',
+            'italic',
+            'link',
+            'document-link'
+        ])),
+        ('image', ImageChooserBlock()),
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
 
-    @property
-    def cornerstones(self):
-        """
-        There can be many Cornerstones
-        related to many CoreContentPage.
-        """
-        cornerstones = [
-            n.cornerstone
-            for n in self.core_content_page_cornerstone_relationship.all()
-        ]
-
-        return cornerstones
-
     content_panels = Page.content_panels + [
-        StreamFieldPanel('content'),
+        StreamFieldPanel('body'),
         FieldPanel('description', classname="full"),
-        InlinePanel('core_content_page_cornerstone_relationship')
     ]
 
     api_fields = [
         APIField('title'),
-        APIField('content'),
+        APIField('body'),
         APIField('description'),
-        APIField(
-            'cornerstones',
-            serializer=serializers.ListField(
-                child=CornerstoneSerializer()
-            )
-        )
     ]
 
 
