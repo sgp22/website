@@ -15,19 +15,29 @@ from wagtail.wagtailsnippets.blocks import SnippetChooserBlock as DefaultSnippet
 from wagtail.wagtailadmin.edit_handlers import (
     InlinePanel,
     FieldPanel,
-    StreamFieldPanel
+    StreamFieldPanel,
+    MultiFieldPanel
 )
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+
 from wagtail.contrib.table_block.blocks import TableBlock
 
 from home import snippets
 from home import relationships
 from home.snippets import Footer
 from home.snippets import Cornerstone
+from home.snippets import ElementDescriptor
+from home.snippets import WhatItDoes
+from home.snippets import WhatUserCanDo
+from home.snippets import WhenToUseIt
+
+from home import admin
+
 from home.serializers import (
     ElementDescriptorSerializer,
     CornerstoneSerializer
 )
-
 
 class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
@@ -159,6 +169,36 @@ class ElementsPage(Page):
 
         return element_descriptors
 
+    what_it_does = models.ForeignKey(
+        'WhatItDoes',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='select a snippet from the what it does type',
+        verbose_name='What it does',
+    )
+
+    what_user_can_do = models.ForeignKey(
+        'WhatUserCanDo',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='select a snippet from the what user can do type',
+        verbose_name='What user can do',
+    )
+    
+    when_to_use_it = models.ForeignKey(
+        'WhenToUseIt',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='select a snippet from the when to use it type',
+        verbose_name='When to use it',
+    )
+
     types = StreamField([
         ('types', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
@@ -179,7 +219,11 @@ class ElementsPage(Page):
         blank=True)
 
     content_panels = Page.content_panels + [
-        InlinePanel('elements_page_element_descriptors_relationship'),
+        MultiFieldPanel([
+            SnippetChooserPanel('what_it_does'),
+            SnippetChooserPanel('what_user_can_do'),
+            SnippetChooserPanel('when_to_use_it')
+        ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('options'),
         FieldPanel('states')
