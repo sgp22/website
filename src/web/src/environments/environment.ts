@@ -6,5 +6,4 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost/api/v2/',
-  dummyApi: 'https://jsonplaceholder.typicode.com/posts'
 };

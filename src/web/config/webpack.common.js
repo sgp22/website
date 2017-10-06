@@ -15,7 +15,6 @@ const stylelint = require("stylelint");
 const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
 const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin } = require('webpack').optimize;
-const { AotPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
@@ -451,17 +450,7 @@ module.exports = {
       "minChunks": 2,
       "async": "common"
     }),
-    new NamedModulesPlugin({}),
-    new AotPlugin({
-      "mainPath": "main.ts",
-      "replaceExport": false,
-      "hostReplacementPaths": {
-        "environments/environment.ts": "environments/environment.ts"
-      },
-      "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json",
-      "skipCodeGeneration": true
-    })
+    new NamedModulesPlugin({})
   ],
   "node": {
     "fs": "empty",

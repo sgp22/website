@@ -19,23 +19,8 @@ export class PagesService {
       .map(res => res.json());
   }
 
-  getPage(slug) {
-    return this.http.get(`${this.apiUrl}pages/?format=json&type=home.HomePage&fields=*&slug=${slug}`)
-      .map(res => res.json());
-  }
-
-  getHomePage() {
-    return this.http.get(`${this.apiUrl}pages/3/?format=json`)
-      .map(res => res.json());
-  }
-
-  getNav(id) {
-    return this.http.get(`${this.apiUrl}pages/?descendant_of=${id}`)
-      .map(res => res.json());
-  }
-
-  getPageWithNav(slug): Observable<any[]> {
-    return this.http.get(`${this.apiUrl}pages/?format=json&type=home.HomePage&fields=*&slug=${slug}`)
+  getPageWithNav(slug, pageType): Observable<any[]> {
+    return this.http.get(`${this.apiUrl}pages/?format=json&type=${pageType}&fields=*&slug=${slug}`)
       .map(res => res.json())
       .flatMap((page) => {
         const parents = page.items;
