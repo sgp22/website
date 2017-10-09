@@ -1,9 +1,20 @@
-<header class="site-header">
-  <h1 class="logo"><a routerLink="/">Docs Site</a></h1>
-  <nav class="main-nav">
-  </nav>
-</header>
+<div class="site">
 
-<section class="content">
-  <router-outlet></router-outlet>
-</section>
+  <header class="site-header">
+    <div class="logo">
+      <img src="assets/logo.svg" alt="">
+      <a routerLink="/">Infor UX</a>
+    </div>
+    <nav class="main-nav">
+      <a class="main-nav__item" href="#0">About</a>
+      <a class="main-nav__item" href="#0">Build</a>
+      <a class="main-nav__item" href="#0">Design</a>
+      <a class="main-nav__item" href="#0">Resources</a>
+    </nav>
+  </header>
+
+  <section class="content">
+    <router-outlet></router-outlet>
+  </section>
+
+</div>

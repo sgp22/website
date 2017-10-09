@@ -1,4 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'css/iux/iux.css';
-@import 'css/site/layout';
+
+/*
+ * Site Styles
+*/
+
+:root {
+  --white: #fff;
+  --link: #888;
+  --body: #606060;
+  --headline: #000000;
+  --spacing: 8px;
+}
+
+body {
+  background-color: var(--white);
+}
+
+.site {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.site-header {
+  align-items: center;
+  display: flex;
+  padding: calc(var(--spacing) * 4) 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  & img {
+    display: block;
+    margin-right: calc(var(--spacing) * 3);
+  }
+  & a {
+    color: var(--headline);
+    font-size: 2.4rem;
+    font-weight: 300;
+  }
+}
+
+.main-nav {
+  margin-left: auto;
+}
+
+.main-nav__item {
+  color: var(--link);
+  font-size: 1.6rem;
+  padding: 0 calc(var(--spacing)*3);
+  &:visited {
+    color: var(--link);
+  }
+}
