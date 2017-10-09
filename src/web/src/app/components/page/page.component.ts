@@ -15,7 +15,8 @@ export class PageComponent implements OnInit {
   public page: any;
   public children: any;
   public loading: boolean;
-  public streamfields: any;  
+  public streamfields: any;
+  public pageType = 'home.CoreContentPage';
 
   constructor(
     private router: Router,
@@ -30,7 +31,7 @@ export class PageComponent implements OnInit {
       slug = params['slug'];
     });
     
-    this.pagesService.getPageWithNav(slug)
+    this.pagesService.getPageWithNav(slug, this.pageType)
       .subscribe(
         (res) => { 
           this.getPage(res);
@@ -42,7 +43,7 @@ export class PageComponent implements OnInit {
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
-      .switchMap(e => this.pagesService.getPageWithNav(slug))
+      .switchMap(e => this.pagesService.getPageWithNav(slug, this.pageType))
         .subscribe(
           (res) => { 
             this.getPage(res);
@@ -58,7 +59,6 @@ export class PageComponent implements OnInit {
     this.page = res[0];
     this.children = this.page.children.items;
     this.streamfields = this.page.body;
-    console.log(this.streamfields)
   }
 
 }

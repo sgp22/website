@@ -21,16 +21,15 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pagesService.getHomePage()
-      .subscribe(
-        page => {
-          this.page = page;
-          this.streamfields = page.body;
-        },
-        err => {
-          console.log(err);
-        }
-      );
+    this.pagesService.getAll()
+      .subscribe((pages) => {
+        let homepage;
+        pages.items.filter((page) => {
+          if(page.meta.slug === 'home') {
+            this.page = page;
+          }
+        })
+      })
   }
 
 }
