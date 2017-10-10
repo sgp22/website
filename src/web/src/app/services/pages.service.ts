@@ -19,6 +19,11 @@ export class PagesService {
       .map(res => res.json());
   }
 
+  getPage(slug, pageType) {
+    return this.http.get(`${this.apiUrl}pages/?format=json&type=${pageType}&fields=*&slug=${slug}`)
+      .map(res => res.json());
+  }
+
   getPageWithNav(slug, pageType): Observable<any[]> {
     return this.http.get(`${this.apiUrl}pages/?format=json&type=${pageType}&fields=*&slug=${slug}`)
       .map(res => res.json())
@@ -36,7 +41,9 @@ export class PagesService {
                       .map(res => res.json())
                       .subscribe((res) => {
                         let grandChildren = res;
-                        childItem.grandChildren = grandChildren;
+                        if(grandChildren.items.length > 0) {
+                          childItem.grandChildren = grandChildren;
+                        }
                       })
                   }) 
                   return parent;

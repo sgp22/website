@@ -16,6 +16,14 @@ body {
   background-color: var(--white);
 }
 
+a {
+  color: var(--link);
+
+  &:visited {
+    color: var(--link);
+  }
+}
+
 .iux-container {
   margin: 0 auto;
   max-width: 1280px;

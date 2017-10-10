@@ -11,6 +11,9 @@ import { ContentBannerComponent } from './components/molecules/content-banner/co
 import { OneColumnBannerComponent } from './components/molecules/one-column-banner/one-column-banner.component';
 import { StreamfieldsComponent } from './components/streamfields/streamfields.component';
 import { TestListBlockComponent } from './components/molecules/test-list-block/test-list-block.component';
+import { ElementPageComponent } from './components/element-page/element-page.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { TestListBlockComponent } from './components/molecules/test-list-block/t
     OneColumnBannerComponent,
     StreamfieldsComponent,
     TestListBlockComponent,
+    ElementPageComponent,
+    LandingPageComponent,
+    CoreContentPageComponent,
   ],
   imports: [
     BrowserModule,
