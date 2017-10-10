@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@infor/iux": "git+https://github.com/d-g-h/soho-foundation.git#install-iux",
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
