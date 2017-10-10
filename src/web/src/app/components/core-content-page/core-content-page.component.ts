@@ -32,7 +32,6 @@ export class CoreContentPageComponent implements OnInit {
         (res) => { 
           this.page = res[0];
           this.children = this.page.children.items;
-          console.log(res);
         },
         (err) => {
           console.log(err);
