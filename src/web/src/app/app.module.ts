@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 
 import { routing } from './app.routing';
 import { HomeComponent } from './components/home/home.component';
-import { PageComponent } from './components/page/page.component';
 import { ContentBannerComponent } from './components/molecules/content-banner/content-banner.component';
 import { OneColumnBannerComponent } from './components/molecules/one-column-banner/one-column-banner.component';
 import { StreamfieldsComponent } from './components/streamfields/streamfields.component';
@@ -20,7 +19,6 @@ import { SidebarNavComponent } from './components/sidebar-nav/sidebar-nav.compon
   declarations: [
     AppComponent,
     HomeComponent,
-    PageComponent,
     ContentBannerComponent,
     OneColumnBannerComponent,
     StreamfieldsComponent,
