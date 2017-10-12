@@ -13,8 +13,7 @@ import 'rxjs/add/operator/switchMap';
 export class LandingPageComponent implements OnInit {
 
   public page: any;
-  public pageType = 'home.LandingPage';
-  public sidebar: boolean = true;
+  public pageType: any = 'home.LandingPage';
   public sidebarNav: any;
 
   constructor(
@@ -44,7 +43,6 @@ export class LandingPageComponent implements OnInit {
       .subscribe(
         (res) => {
           this.sidebarNav = res;
-          console.log(this.sidebarNav);
         }
       )
 

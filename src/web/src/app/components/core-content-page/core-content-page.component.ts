@@ -12,9 +12,9 @@ import 'rxjs/add/operator/switchMap';
 })
 export class CoreContentPageComponent implements OnInit {
 
-  public pageType = 'home.CoreContentPage';  
+  public pageType: any = 'home.CoreContentPage';  
   public page: any;
-  public sidebar: boolean = true;
+  public sidebar: any = true;
   public sidebarNav: any;
 
   constructor(
@@ -56,7 +56,6 @@ export class CoreContentPageComponent implements OnInit {
       .subscribe(
         (res) => {
           this.sidebarNav = res;
-          console.log(this.sidebarNav);
         }
       )
 
@@ -66,7 +65,6 @@ export class CoreContentPageComponent implements OnInit {
         .subscribe(
           (res) => {
             this.sidebarNav = res;
-            console.log(this.sidebarNav);
           }
         ) 
 
