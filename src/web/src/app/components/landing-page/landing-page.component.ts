@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,8 +13,9 @@ import { PagesService } from '../../services/pages.service';
 export class LandingPageComponent implements OnInit {
 
   public page: any;
-  public children: any;
-  public pageType = 'home.LandingPage';  
+  public pageType = 'home.LandingPage';
+  public sidebar: boolean = true;
+  public sidebarNav: any;
 
   constructor(
     private router: Router,
@@ -21,22 +24,51 @@ export class LandingPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    
     let slug;
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
     });
     
-    this.pagesService.getPageWithNav(slug, this.pageType)
+    this.pagesService.getPage(slug, this.pageType)
       .subscribe(
         (res) => { 
-          this.page = res[0];
-          this.children = this.page.children.items;
+          this.page = res.items[0];
         },
         (err) => {
           console.log(err);
         }
     );
+
+    this.pagesService.getSideBarNav()
+      .subscribe(
+        (res) => {
+          this.sidebarNav = res;
+          console.log(this.sidebarNav);
+        }
+      )
+
+    this.router.events
+      .filter((e) => e instanceof NavigationEnd)
+      .switchMap(e => this.pagesService.getPage(slug, this.pageType))
+        .subscribe(
+          (res) => { 
+            this.page = res.items[0];
+          },
+          (err) => {
+            console.log(err);
+          }
+      )
+
+    this.router.events
+      .filter((e) => e instanceof NavigationEnd)
+      .switchMap(e => this.pagesService.getSideBarNav())
+        .subscribe(
+          (res) => {
+            this.sidebarNav = res;
+            console.log(this.sidebarNav);
+          }
+        ) 
 
   }
 

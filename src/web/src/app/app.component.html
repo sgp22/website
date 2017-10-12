@@ -6,10 +6,10 @@
       <span>Infor UX</span>
     </a>
     <nav class="main-nav">
-      <a class="main-nav__item" routerLink="#0">About</a>
-      <a class="main-nav__item" routerLink="#0">Build</a>
-      <a class="main-nav__item" routerLink="/design">Design</a>
-      <a class="main-nav__item" routerLink="#0">Resources</a>
+      <a class="main-nav__item" routerLinkActive="main-nav__item--current" routerLink="/about">About</a>
+      <a class="main-nav__item" routerLinkActive="main-nav__item--current" routerLink="/build">Build</a>
+      <a class="main-nav__item" routerLinkActive="main-nav__item--current" routerLink="/design">Design</a>
+      <a class="main-nav__item" routerLinkActive="main-nav__item--current" routerLink="/resources">Resources</a>
       <button class="main-nav__search">
         <svg>
           <g transform="translate(-1224.000000, -42.000000)" fill="none">
@@ -19,9 +19,11 @@
       </button>
     </nav>
   </header>
-
-  <section class="content">
+  
+  
+  <div class="content">
+    <div *ngIf="showMe">Show me</div>
     <router-outlet></router-outlet>
-  </section>
+  </div>
 
 </div>
