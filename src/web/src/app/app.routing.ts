@@ -26,7 +26,15 @@ const appRoutes: Routes = [
   {
     path: 'design/identity/:slug',
     component: CoreContentPageComponent
-  }
+  },
+  {
+    path: 'build/:slug',
+    component: CoreContentPageComponent
+  },
+  {
+    path: 'build/:child/:slug',
+    component: CoreContentPageComponent
+  },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
