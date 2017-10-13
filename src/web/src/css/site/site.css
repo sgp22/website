@@ -193,6 +193,11 @@ a {
 
 .element-section {
   margin-bottom: calc(var(--spacing) * 12);
+
+  & h1 {
+    margin-bottom: calc(var(--spacing) * 5);
+    margin-top: 0;
+  }
 }
 
 /*
