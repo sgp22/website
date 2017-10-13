@@ -19,6 +19,11 @@ export class PagesService {
       .map(res => res.json());
   }
 
+  getPage(slug, pageType) {
+    return this.http.get(`${this.apiUrl}pages/?format=json&type=${pageType}&fields=*&slug=${slug}`)
+      .map(res => res.json());
+  }
+
   getPageWithNav(slug, pageType): Observable<any[]> {
     return this.http.get(`${this.apiUrl}pages/?format=json&type=${pageType}&fields=*&slug=${slug}`)
       .map(res => res.json())
@@ -36,7 +41,9 @@ export class PagesService {
                       .map(res => res.json())
                       .subscribe((res) => {
                         let grandChildren = res;
-                        childItem.grandChildren = grandChildren;
+                        if(grandChildren.items.length > 0) {
+                          childItem.grandChildren = grandChildren;
+                        }
                       })
                   }) 
                   return parent;
@@ -46,6 +53,39 @@ export class PagesService {
         }
         return Observable.of([]);
       })
+    }
+    
+  getSideBarNav(): Observable<any[]> {
+    return this.http.get(`${this.apiUrl}pages/?format=json&show_in_menus=true`)
+    .map(res => res.json())
+    .flatMap((pages) => {
+      const topLevelPages = pages.items;
+      if(topLevelPages) {
+        return Observable.forkJoin(
+          topLevelPages.map((topLevelPage) => {
+            return this.http.get(`${this.apiUrl}pages/?child_of=${topLevelPage.id}`)
+              .map((res) => {
+                let children = res.json();
+                if(children) {
+                  topLevelPage.children = children;
+                  children.items.map((child) => {
+                    return this.http.get(`${this.apiUrl}pages/?child_of=${child.id}`)
+                      .map(res => res.json())
+                      .subscribe((res) => {
+                        let grandChildren = res;
+                        if(grandChildren.items.length > 0) {
+                          child.grandChildren = grandChildren;
+                        }
+                      })
+                  })
+                  return topLevelPage;
+                }
+              })
+          })
+        )
+      }
+      return Observable.of([]);
+    })
   }
 
 }

@@ -2,7 +2,6 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,6 +13,7 @@ export class HomeComponent implements OnInit {
   public slugs: any;
   public page: any;
   public streamfields: any;
+  public hideGlobalNav: any = true;
 
   constructor(
     private route: ActivatedRoute,

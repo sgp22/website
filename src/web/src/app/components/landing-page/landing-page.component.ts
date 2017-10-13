@@ -5,18 +5,16 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-  selector: 'app-page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.css'],
+  selector: 'app-landing-page',
+  templateUrl: './landing-page.component.html',
+  styleUrls: ['./landing-page.component.css'],
   providers: [PagesService]
 })
-export class PageComponent implements OnInit {
+export class LandingPageComponent implements OnInit {
 
   public page: any;
-  public children: any;
-  public loading: boolean;
-  public streamfields: any;
-  public pageType = 'home.CoreContentPage';
+  public pageType: any = 'home.LandingPage';
+  public sidebarNav: any;
 
   constructor(
     private router: Router,
@@ -25,40 +23,51 @@ export class PageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    
     let slug;
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
     });
     
-    this.pagesService.getPageWithNav(slug, this.pageType)
+    this.pagesService.getPage(slug, this.pageType)
       .subscribe(
         (res) => { 
-          this.getPage(res);
+          this.page = res.items[0];
         },
         (err) => {
           console.log(err);
         }
     );
 
+    this.pagesService.getSideBarNav()
+      .subscribe(
+        (res) => {
+          this.sidebarNav = res;
+        }
+      )
+
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
-      .switchMap(e => this.pagesService.getPageWithNav(slug, this.pageType))
+      .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
           (res) => { 
-            this.getPage(res);
+            this.page = res.items[0];
           },
           (err) => {
             console.log(err);
           }
-      );
-      
-  }
+      )
 
-  getPage(res) {
-    this.page = res[0];
-    this.children = this.page.children.items;
-    this.streamfields = this.page.body;
+    this.router.events
+      .filter((e) => e instanceof NavigationEnd)
+      .switchMap(e => this.pagesService.getSideBarNav())
+        .subscribe(
+          (res) => {
+            this.sidebarNav = res;
+            console.log(this.sidebarNav);
+          }
+        ) 
+
   }
 
 }
