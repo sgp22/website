@@ -4,10 +4,7 @@
     <span>Infor UX</span>
   </a>
   <nav class="main-nav" *ngIf="!hideGlobalNav">
-    <a class="main-nav__item" routerLinkActive="main-nav__item--current" routerLink="/about">About</a>
-    <a class="main-nav__item" routerLinkActive="main-nav__item--current" routerLink="/build">Build</a>
-    <a class="main-nav__item" routerLinkActive="main-nav__item--current" routerLink="/design">Design</a>
-    <a class="main-nav__item" routerLinkActive="main-nav__item--current" routerLink="/resources">Resources</a>
+    <a *ngFor="let navItem of navItems" class="main-nav__item" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
     <button class="main-nav__search">
       <svg>
         <g transform="translate(-1224.000000, -42.000000)" fill="none">

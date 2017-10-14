@@ -1,17 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { PagesService } from '../../services/pages.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  providers: [PagesService]
 })
 export class HeaderComponent implements OnInit {
 
   @Input() hideGlobalNav: any;
+  public navItems: any; 
 
-  constructor() { }
+  constructor(
+    private pagesService: PagesService
+  ) { }
 
   ngOnInit() {
+    this.pagesService.getGlobalNav()
+      .subscribe(
+        (res) => {
+          this.navItems = res.items;
+        }
+      )
   }
 
 }
