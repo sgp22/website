@@ -30,6 +30,12 @@ export class CoreContentPageComponent implements OnInit {
   ngOnInit() {
 
     let slug;
+    let urlSegment;
+    
+    this.route.url.forEach((url) => {
+      urlSegment = url[0].path;
+    });
+
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
     });
@@ -59,10 +65,10 @@ export class CoreContentPageComponent implements OnInit {
     this.pagesService.getSideBarNav()
       .subscribe(
         (res) => {
-          this.sidebarNav = res;
           res.filter((nav) => {
-            console.log(this.page);
-
+            if(nav.meta.slug === urlSegment) {
+              this.sidebarNav = nav;
+            }
           })
         }
       )
@@ -72,7 +78,11 @@ export class CoreContentPageComponent implements OnInit {
       .switchMap(e => this.pagesService.getSideBarNav())
         .subscribe(
           (res) => {
-            this.sidebarNav = res;
+            res.filter((nav) => {
+              if(nav.meta.slug === urlSegment) {
+                this.sidebarNav = nav;
+              }
+            })
           }
         ) 
 
