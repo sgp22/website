@@ -37,6 +37,7 @@ h3 {
 h1,
 .h1 {
   font-size: 4.8rem;
+  margin-top: 0;
 }
 
 h2,
@@ -70,6 +71,7 @@ a {
   align-items: center;
   display: flex;
   padding: var(--spacing) 0;
+  margin-bottom: calc(var(--spacing) * 9);
 }
 
 /*
