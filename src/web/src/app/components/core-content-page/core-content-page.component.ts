@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
+import { Http } from '@angular/http';
+import { environment } from '../../../environments/environment';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
@@ -16,11 +18,13 @@ export class CoreContentPageComponent implements OnInit {
   public page: any;
   public sidebar: any = true;
   public sidebarNav: any;
+  public apiUrl = environment.apiUrl;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pagesService: PagesService
+    private pagesService: PagesService,
+    private http: Http
   ) { }
 
   ngOnInit() {
@@ -56,6 +60,10 @@ export class CoreContentPageComponent implements OnInit {
       .subscribe(
         (res) => {
           this.sidebarNav = res;
+          res.filter((nav) => {
+            console.log(this.page);
+
+          })
         }
       )
 

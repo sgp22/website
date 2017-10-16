@@ -24,6 +24,11 @@ export class PagesService {
       .map(res => res.json());
   }
 
+  getGlobalNav() {
+    return this.http.get(`${this.apiUrl}pages/?format=json&show_in_menus=true`)
+      .map(res => res.json());
+  }
+
   getPageWithNav(slug, pageType): Observable<any[]> {
     return this.http.get(`${this.apiUrl}pages/?format=json&type=${pageType}&fields=*&slug=${slug}`)
       .map(res => res.json())
