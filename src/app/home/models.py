@@ -77,53 +77,15 @@ class CoreContentSnippetChooserBlock(DefaultSnippetChooserBlock):
 
 class LandingPage(Page):
     content = StreamField([
-        ('ContentBanner', blocks.StructBlock([
-            ('image', ImageChooserBlock(required=False)),
-            ('header', blocks.CharBlock()),
-            ('page', blocks.PageChooserBlock()),
-            ('copy', blocks.TextBlock()),
-            ('snippet', LandingPageSnippetChooserBlock(Footer)),
-            ('button', ButtonBlock()),
-            ('stream', DemoStreamBlock())
-        ], label="Content Banner")),
-        ('OneColumnBanner', blocks.StructBlock([
-            ('header', blocks.CharBlock()),
-            ('intro', blocks.TextBlock()),
-            ('image', ImageChooserBlock(required=False))
-        ], label="One Column Banner")),
-        ('test_list_block', blocks.ListBlock(blocks.StructBlock([
-            ('name', blocks.CharBlock(required=True)),
-            ('description', blocks.CharBlock()),
-        ])))
     ], null=True, blank=True)
 
-    @property
-    def cornerstones(self):
-        """
-        There can be many Cornerstones
-        related to many CoreContentPage.
-        """
-        cornerstones = [
-            n.cornerstone
-            for n in self.landing_page_cornerstone_relationship.all()
-        ]
-
-        return cornerstones
-
     content_panels = Page.content_panels + [
-        StreamFieldPanel('content'),
-        InlinePanel('landing_page_cornerstone_relationship')
+        StreamFieldPanel('content')
     ]
 
     api_fields = [
         APIField('title'),
-        APIField('content'),
-        APIField(
-            'cornerstones',
-            serializer=serializers.ListField(
-                child=CornerstoneSerializer()
-            )
-        )
+        APIField('content')
     ]
 
 
@@ -188,7 +150,7 @@ class ElementsPage(Page):
         help_text='select a snippet from the what user can do type',
         verbose_name='What user can do',
     )
-    
+
     when_to_use_it = models.ForeignKey(
         'WhenToUseIt',
         null=True,
