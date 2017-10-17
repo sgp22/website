@@ -39,6 +39,10 @@ from home.serializers import (
     CornerstoneSerializer
 )
 
+class TypeBlock(blocks.StructBlock):
+    name = blocks.TextBlock()
+    description = blocks.TextBlock()
+
 class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
     link = blocks.CharBlock(required=True)
@@ -200,17 +204,17 @@ class ElementsPage(Page):
     )
 
     types = StreamField([
-        ('types', blocks.StructBlock([
+        ('types', blocks.ListBlock(blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True))
-        ]))
-    ], null=True, blank=True)
+        ])))
+    ], null=False, blank=False, default="hello")
 
     options = StreamField([
-        ('options', blocks.StructBlock([
+        ('options', blocks.ListBlock(blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True))
-        ]))
+        ])))
     ], null=True, blank=True)
 
     states = models.CharField(
