@@ -70,8 +70,8 @@ a {
 .site-header {
   align-items: center;
   display: flex;
-  padding: var(--spacing) 0;
   margin-bottom: calc(var(--spacing) * 9);
+  padding: var(--spacing) 0;
 }
 
 /*
