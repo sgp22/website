@@ -1,5 +1,41 @@
 <app-header></app-header>
 
-<h1>Element page</h1>
-<h2>Types</h2>
-<p><strong>Bold Body Text</strong> Body Text</p>
+<h1 class="page-title">{{page?.title}}</h1>
+
+<section class="element-section element-section--types">
+  
+  <h1 class="h2">Types</h1>
+  
+  <table class="section-table">
+    <thead>
+      <th>Type</th>
+      <th>When to use it</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let type of types">
+        <td><div><strong>{{type.value.name}}</strong></div></td>
+        <td><div>{{type.value.detail}}</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+
+<section class="element-section element-section--options">
+  
+  <h1 class="h2">Options</h1>
+  
+  <table class="section-table">
+    <thead>
+      <th>Type</th>
+      <th>Details</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let option of options">
+        <td><div><strong>{{option.value.name}}</strong></div></td>
+        <td><div>{{option.value.detail}}</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
