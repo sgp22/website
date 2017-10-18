@@ -208,7 +208,7 @@ class ElementsPage(Page):
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True))
         ])))
-    ], null=False, blank=False)
+    ], null=True, blank=True)
 
     options = StreamField([
         ('options', blocks.StructBlock([
