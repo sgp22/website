@@ -208,13 +208,13 @@ class ElementsPage(Page):
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True))
         ])))
-    ], null=False, blank=False, default="hello")
+    ], null=False, blank=False)
 
     options = StreamField([
-        ('options', blocks.ListBlock(blocks.StructBlock([
+        ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True))
-        ])))
+        ]))
     ], null=True, blank=True)
 
     states = models.CharField(
