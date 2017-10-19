@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 
 @Component({
@@ -14,14 +14,23 @@ export class ElementPageComponent implements OnInit {
   public page: any;
   public options: any;
   public types: any;
+  public sidebar: any = true;		
+  public sidebarNav: any;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService
   ) { }
 
   ngOnInit() {
     let slug;
+    let urlSegment;
+
+    this.route.url.forEach((url) => {		
+      urlSegment = url[0].path;		
+    });
+
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
     });
@@ -32,9 +41,33 @@ export class ElementPageComponent implements OnInit {
           this.page = res.items[0];
           this.types = res.items[0].types;
           this.options = res.items[0].options;
-          console.log(this.options);
         }
       )
+
+      this.pagesService.getSideBarNav()		
+        .subscribe(		
+          (res) => {		
+            res.filter((nav) => {		
+              if(nav.meta.slug === urlSegment) {		
+                this.sidebarNav = nav;		
+                console.log(nav);
+              }		
+            })		
+          }		
+        )		
+      		
+      this.router.events		
+        .filter((e) => e instanceof NavigationEnd)		
+        .switchMap(e => this.pagesService.getSideBarNav())		
+          .subscribe(		
+            (res) => {		
+              res.filter((nav) => {		
+                if(nav.meta.slug === urlSegment) {		
+                  this.sidebarNav = nav;		
+                }		
+              })		
+            }		
+          ) 
   }
 
 }

@@ -37,6 +37,7 @@ h3 {
 h1,
 .h1 {
   font-size: 4.8rem;
+  margin-top: 0;
 }
 
 h2,
@@ -69,6 +70,7 @@ a {
 .site-header {
   align-items: center;
   display: flex;
+  margin-bottom: calc(var(--spacing) * 9);
   padding: var(--spacing) 0;
 }
 
