@@ -41,6 +41,7 @@ export class ElementPageComponent implements OnInit {
           this.page = res.items[0];
           this.types = res.items[0].types;
           this.options = res.items[0].options;
+          console.log(res);
         }
       )
 
