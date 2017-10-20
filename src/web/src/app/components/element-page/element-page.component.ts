@@ -45,6 +45,17 @@ export class ElementPageComponent implements OnInit {
         }
       )
 
+    this.router.events		
+      .filter((e) => e instanceof NavigationEnd)		
+      .switchMap(e => this.pagesService.getPage(slug, this.pageType))		
+        .subscribe(		
+          (res) => {		
+            this.page = res.items[0];
+            this.types = res.items[0].types;
+            this.options = res.items[0].options;		
+          }		
+        ) 
+
       this.pagesService.getSideBarNav()		
         .subscribe(		
           (res) => {		

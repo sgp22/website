@@ -166,10 +166,10 @@ class ElementsPage(Page):
     )
 
     types = StreamField([
-        ('types', blocks.ListBlock(blocks.StructBlock([
+        ('types', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True))
-        ])))
+        ]))
     ], null=True, blank=True)
 
     options = StreamField([
