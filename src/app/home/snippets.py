@@ -82,23 +82,3 @@ class Cornerstone(models.Model):
 
     def __str__(self):
         return self.name
-
-
-@register_snippet
-class Footer(models.Model):
-    related_page = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        verbose_name='Page link',
-        help_text='Choose a page to link'
-    )
-
-    panels = [
-        PageChooserPanel('related_page')
-    ]
-
-    def __str__(self):
-        return self.related_page.title

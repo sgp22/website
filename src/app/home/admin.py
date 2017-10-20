@@ -10,7 +10,7 @@ from home.snippets import WhatItDoes
 from home.snippets import WhatUserCanDo
 from home.snippets import WhenToUseIt
 from home.snippets import Cornerstone
-from home.snippets import Footer
+
 
 class WhatItDoesAdmin(ModelAdmin):
     model = WhatItDoes
@@ -44,11 +44,3 @@ class CornerstoneAdmin(ModelAdmin):
     list_display = ('name', 'description')
 
 modeladmin_register(CornerstoneAdmin)
-
-class FooterAdmin(ModelAdmin):
-    model = Footer
-    menu_label = 'Footer'
-    menu_icon = 'snippet'
-    list_display = ('name', 'description')
-
-modeladmin_register(FooterAdmin)
