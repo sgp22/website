@@ -25,7 +25,6 @@ from wagtail.contrib.table_block.blocks import TableBlock
 
 from home import snippets
 from home import relationships
-from home.snippets import Footer
 from home.snippets import Cornerstone
 from home.snippets import ElementDescriptor
 from home.snippets import WhatItDoes
