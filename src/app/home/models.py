@@ -206,3 +206,39 @@ class ElementsPage(Page):
         APIField('options'),
         APIField('states'),
     ]
+
+class BlocksPage(Page):
+    types = StreamField([
+        ('types', blocks.StructBlock([
+            ('name', blocks.CharBlock(required=True)),
+            ('detail', blocks.CharBlock(required=True))
+        ]))
+    ], null=True, blank=True)
+
+    options = StreamField([
+        ('options', blocks.StructBlock([
+            ('name', blocks.CharBlock(required=True)),
+            ('detail', blocks.CharBlock(required=True))
+        ]))
+    ], null=True, blank=True)
+
+    states = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True)
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('types'),
+        StreamFieldPanel('options'),
+        FieldPanel('states')
+    ]
+
+    api_fields = [
+        APIField('title'),
+        APIField(
+            'description'
+        ),
+        APIField('types'),
+        APIField('options'),
+        APIField('states'),
+    ]
