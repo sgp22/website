@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UrlFetcher {
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getDocs(url: string) {
-    this.http.get(url).subscribe(data => {
-      console.log(data);
-    });
+    return this.http.get(url);
   }
 }

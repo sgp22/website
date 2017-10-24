@@ -14,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class CoreContentPageComponent implements OnInit {
 
-  public pageType: any = 'home.CoreContentPage';  
+  public pageType: any = 'home.CoreContentPage';
   public page: any;
   public sidebar: any = true;
   public sidebarNav: any;
@@ -30,18 +30,18 @@ export class CoreContentPageComponent implements OnInit {
   ngOnInit() {
 
     let slug;
-    let urlSegment;		  		
-    this.route.url.forEach((url) => {		
-      urlSegment = url[0].path;		
+    let urlSegment;
+    this.route.url.forEach((url: any) => {
+      urlSegment = url[0].path;
     });
 
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
     });
-    
+
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
-        (res) => { 
+        (res: any) => {
           this.page = res.items[0];
         },
         (err) => {
@@ -53,7 +53,7 @@ export class CoreContentPageComponent implements OnInit {
       .filter((e) => e instanceof NavigationEnd)
         .switchMap(e => this.pagesService.getPage(slug, this.pageType))
           .subscribe(
-            (res) => { 
+            (res: any) => {
               this.page = res.items[0];
             },
             (err) => {
@@ -63,29 +63,29 @@ export class CoreContentPageComponent implements OnInit {
 
     this.pagesService.getSideBarNav()
       .subscribe(
-        (res) => {
+        (res: any) => {
           res.filter((nav) => {
-            if(nav.meta.slug === urlSegment) {
+            if (nav.meta.slug === urlSegment) {
               console.log(nav);
               this.sidebarNav = nav;
               console.log(this.sidebarNav);
             }
-          })
+          });
         }
-      )
+      );
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getSideBarNav())
         .subscribe(
-          (res) => {
+          (res: any) => {
             res.filter((nav) => {
-              if(nav.meta.slug === urlSegment) {
+              if (nav.meta.slug === urlSegment) {
                 this.sidebarNav = nav;
               }
-            })
+            });
           }
-        ) 
+        );
 
   }
 }

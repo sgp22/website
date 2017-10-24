@@ -10,7 +10,7 @@ import { PagesService } from '../../services/pages.service';
 export class HeaderComponent implements OnInit {
 
   @Input() hideGlobalNav: any;
-  public navItems: any; 
+  public navItems: any;
 
   constructor(
     private pagesService: PagesService
@@ -19,10 +19,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.pagesService.getGlobalNav()
       .subscribe(
-        (res) => {
+        (res: any) => {
           this.navItems = res.items;
         }
-      )
+      );
   }
 
 }

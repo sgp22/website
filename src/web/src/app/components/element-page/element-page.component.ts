@@ -37,49 +37,49 @@ export class ElementPageComponent implements OnInit {
 
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
-        (res) => {
+        (res: any) => {
           this.page = res.items[0];
           this.types = res.items[0].types;
           this.options = res.items[0].options;
           console.log(res);
         }
-      )
+      );
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
-          (res) => {
+          (res: any) => {
             this.page = res.items[0];
             this.types = res.items[0].types;
             this.options = res.items[0].options;
           }
-        )
+        );
 
       this.pagesService.getSideBarNav()
         .subscribe(
-          (res) => {
+          (res: any) => {
             res.filter((nav) => {
-              if(nav.meta.slug === urlSegment) {
+              if (nav.meta.slug === urlSegment) {
                 this.sidebarNav = nav;
                 console.log(nav);
               }
-            })
+            });
           }
-        )
+        );
 
       this.router.events
         .filter((e) => e instanceof NavigationEnd)
         .switchMap(e => this.pagesService.getSideBarNav())
           .subscribe(
-            (res) => {
+            (res: any) => {
               res.filter((nav) => {
-                if(nav.meta.slug === urlSegment) {
+                if (nav.meta.slug === urlSegment) {
                   this.sidebarNav = nav;
                 }
-              })
+              });
             }
-          )
+          );
   }
 
 }
