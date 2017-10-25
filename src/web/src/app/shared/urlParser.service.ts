@@ -1,25 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Location } from '@angular/common';
 import { UrlSerializer } from '@angular/router';
 import { DefaultUrlSerializer } from '@angular/router';
 import { UrlTree } from '@angular/router';
 
 @Injectable()
 export class UrlParser implements UrlSerializer {
-  constructor(
-    private location: Location
-  ) {}
+  constructor() {}
 
   parse(url: string): UrlTree {
     const serializer = new DefaultUrlSerializer();
-    const normalizedUrl = this.location.normalize(url);
-    const parseUrlTree = serializer.parse(normalizedUrl);
+    const parseUrlTree = serializer.parse(url);
 
     if (parseUrlTree.root.children.primary.segments.length > 2) {
       return parseUrlTree;
     } else {
-      console.error('URL is incorrect: ', url);
-      throw(parseUrlTree);
+      throw new Error(`URL is incorrect: use relative path, not ${url}`);
     }
   }
 
