@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { environment } from '../../../environments/environment';
 import 'rxjs/add/operator/filter';
@@ -18,7 +19,7 @@ export class CoreContentPageComponent implements OnInit {
   public page: any;
   public sidebar: any = true;
   public sidebarNav: any;
-  public apiUrl = environment.apiUrl;
+  public notFound: boolean = false;
 
   constructor(
     private router: Router,
@@ -31,6 +32,7 @@ export class CoreContentPageComponent implements OnInit {
 
     let slug;
     let urlSegment;		  		
+    
     this.route.url.forEach((url) => {		
       urlSegment = url[0].path;		
     });
@@ -41,10 +43,15 @@ export class CoreContentPageComponent implements OnInit {
     
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
-        (res) => { 
-          this.page = res.items[0];
+        (res: any) => {
+          if(res.items.length) {
+            this.page = res.items[0];
+            this.notFound = false;
+          } else {
+            this.notFound = true;
+          }
         },
-        (err) => {
+        (err: HttpErrorResponse) => {
           console.log(err);
         }
     );
@@ -53,24 +60,30 @@ export class CoreContentPageComponent implements OnInit {
       .filter((e) => e instanceof NavigationEnd)
         .switchMap(e => this.pagesService.getPage(slug, this.pageType))
           .subscribe(
-            (res) => { 
-              this.page = res.items[0];
+            (res: any) => { 
+              if(res.items.length) {
+                this.page = res.items[0];
+                this.notFound = false;
+              } else {
+                this.notFound = true;
+              }
             },
-            (err) => {
+            (err: HttpErrorResponse) => {
               console.log(err);
             }
         );
 
     this.pagesService.getSideBarNav()
       .subscribe(
-        (res) => {
+        (res: any) => {
           res.filter((nav) => {
             if(nav.meta.slug === urlSegment) {
-              console.log(nav);
               this.sidebarNav = nav;
-              console.log(this.sidebarNav);
             }
           })
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
         }
       )
 
@@ -78,12 +91,15 @@ export class CoreContentPageComponent implements OnInit {
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getSideBarNav())
         .subscribe(
-          (res) => {
+          (res: any) => {
             res.filter((nav) => {
               if(nav.meta.slug === urlSegment) {
                 this.sidebarNav = nav;
               }
             })
+          },
+          (err: HttpErrorResponse) => {
+            console.log(err);
           }
         ) 
 

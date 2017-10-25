@@ -16,6 +16,7 @@ export class LandingPageComponent implements OnInit {
   public page: any;
   public pageType: any = 'home.LandingPage';
   public sidebarNav: any;
+  public notFound: boolean = false;
 
   constructor(
     private router: Router,
@@ -32,8 +33,13 @@ export class LandingPageComponent implements OnInit {
     
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
-        (res) => { 
-          this.page = res.items[0];
+        (res: any) => {
+          if(res.items.length) {
+            this.page = res.items[0];
+            this.notFound = false;
+          } else {
+            this.notFound = true;
+          }
         },
         (err: HttpErrorResponse) => {
           console.log(err);
@@ -51,8 +57,13 @@ export class LandingPageComponent implements OnInit {
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
-          (res) => { 
-            this.page = res.items[0];
+          (res: any) => {
+            if(res.items.length) {
+              this.page = res.items[0];
+              this.notFound = false;
+            } else {
+              this.notFound = true;
+            }
           },
           (err: HttpErrorResponse) => {
             console.log(err);
@@ -65,7 +76,6 @@ export class LandingPageComponent implements OnInit {
         .subscribe(
           (res) => {
             this.sidebarNav = res;
-            console.log(this.sidebarNav);
           }
         ) 
 
