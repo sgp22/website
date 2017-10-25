@@ -14,14 +14,24 @@ export class PagesService {
     console.log('PagesService initialized...');  
   }
 
+  private handleError(error: any): Promise<any> {
+    console.error('An error occured', error);
+    return Promise.reject(error.message || error);
+  }
+
   getAll() {
     return this.http.get(`${this.apiUrl}pages/?format=json`)
-      .map(res => res.json());
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   getPage(slug, pageType) {
     return this.http.get(`${this.apiUrl}pages/?format=json&type=${pageType}&fields=*&slug=${slug}`)
-      .map(res => res.json());
+      .map((res, status) => { 
+        res.json()
+        console.log(status);
+      })
+      .catch(this.handleError);
   }
 
   getGlobalNav() {

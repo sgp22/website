@@ -5,15 +5,13 @@ import {HomeComponent} from './components/home/home.component';
 import {LandingPageComponent} from './components/landing-page/landing-page.component';
 import {ElementPageComponent} from './components/element-page/element-page.component';
 import {CoreContentPageComponent} from './components/core-content-page/core-content-page.component';
+import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {
-    path: '',
-    component: HomeComponent
-  },
-  {
     path: ':slug',
-    component: LandingPageComponent
+    component: LandingPageComponent,
+    pathMatch: 'full'
   },
   {
     path: 'design/:slug',
@@ -35,6 +33,14 @@ const appRoutes: Routes = [
     path: 'build/:child/:slug',
     component: CoreContentPageComponent
   },
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'error/404',
+    component: PageNotFoundComponent
+  }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
