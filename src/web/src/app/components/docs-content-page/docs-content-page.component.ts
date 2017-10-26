@@ -49,9 +49,15 @@ export class DocsContentPageComponent implements OnInit {
 
       this.path = urlSegment.join('/');
       this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
-      this.urlFetcher.getDocs(`${this.domainPath}/${this.mapPath}`).subscribe((docs: any) => {
-        this.docs = docs;
-      });
+      this.urlFetcher.getDocs(`${this.domainPath}/${this.mapPath}`).subscribe(
+        (docs: any) => {
+          this.docs = docs;
+        },
+        err => {
+          // redirect?! Load 404 page
+          console.error('Wrong endpoint? 400?', err);
+        }
+      );
     });
 
     this.route.params.forEach((params: Params) => {
