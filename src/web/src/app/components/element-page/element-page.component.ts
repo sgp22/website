@@ -16,6 +16,7 @@ export class ElementPageComponent implements OnInit {
   public types: any;
   public sidebar: any = true;
   public sidebarNav: any;
+  public notFound = false;
 
   constructor(
     private router: Router,
@@ -38,10 +39,14 @@ export class ElementPageComponent implements OnInit {
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
         (res: any) => {
-          this.page = res.items[0];
-          this.types = res.items[0].types;
-          this.options = res.items[0].options;
-          console.log(res);
+          if(res && res.items.length) {
+            this.page = res.items[0];
+            this.types = res.items[0].types;
+            this.options = res.items[0].options;
+            this.notFound = false;
+          } else {
+            this.notFound = true;
+          }
         }
       );
 
@@ -50,9 +55,14 @@ export class ElementPageComponent implements OnInit {
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
           (res: any) => {
-            this.page = res.items[0];
-            this.types = res.items[0].types;
-            this.options = res.items[0].options;
+            if(res && res.items.length) {
+              this.page = res.items[0];
+              this.types = res.items[0].types;
+              this.options = res.items[0].options;
+              this.notFound = false;
+            } else {
+              this.notFound = true;
+            }
           }
         );
 

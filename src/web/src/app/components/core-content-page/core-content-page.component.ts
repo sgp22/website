@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
@@ -18,7 +17,7 @@ export class CoreContentPageComponent implements OnInit {
   public page: any;
   public sidebar: any = true;
   public sidebarNav: any;
-  public apiUrl = environment.apiUrl;
+  public notFound = false;
 
   constructor(
     private router: Router,
@@ -42,7 +41,12 @@ export class CoreContentPageComponent implements OnInit {
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
         (res: any) => {
-          this.page = res.items[0];
+          if(res && res.items.length) {
+            this.page = res.items[0];
+            this.notFound = false;
+          } else {
+            this.notFound = true;
+          }
         },
         (err) => {
           console.log(err);
@@ -54,7 +58,12 @@ export class CoreContentPageComponent implements OnInit {
         .switchMap(e => this.pagesService.getPage(slug, this.pageType))
           .subscribe(
             (res: any) => {
-              this.page = res.items[0];
+              if(res && res.items.length) {
+                this.page = res.items[0];
+                this.notFound = false;
+              } else {
+                this.notFound = true;
+              }
             },
             (err) => {
               console.log(err);
