@@ -27,5 +27,5 @@ describe('PageNotFoundComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('404 Page Not Found');
   });
-  
+
 });
