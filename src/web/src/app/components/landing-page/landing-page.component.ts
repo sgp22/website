@@ -33,7 +33,7 @@ export class LandingPageComponent implements OnInit {
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
         (res: any) => {
-          if(res && res.items.length) {
+          if (res && res.items.length) {
             this.page = res.items[0];
             this.notFound = false;
           } else {
@@ -57,7 +57,7 @@ export class LandingPageComponent implements OnInit {
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
           (res: any) => {
-            if(res && res.items.length) {
+            if (res && res.items.length) {
               this.page = res.items[0];
               this.notFound = false;
             } else {

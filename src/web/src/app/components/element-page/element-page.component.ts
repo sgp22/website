@@ -39,7 +39,7 @@ export class ElementPageComponent implements OnInit {
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
         (res: any) => {
-          if(res && res.items.length) {
+          if (res && res.items.length) {
             this.page = res.items[0];
             this.types = res.items[0].types;
             this.options = res.items[0].options;
@@ -55,7 +55,7 @@ export class ElementPageComponent implements OnInit {
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
           (res: any) => {
-            if(res && res.items.length) {
+            if (res && res.items.length) {
               this.page = res.items[0];
               this.types = res.items[0].types;
               this.options = res.items[0].options;
