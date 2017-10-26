@@ -13,6 +13,7 @@ import { TestListBlockComponent } from './components/molecules/test-list-block/t
 import { ElementPageComponent } from './components/element-page/element-page.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
+import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { SidebarNavComponent } from './components/sidebar-nav/sidebar-nav.component';
 import { HeaderComponent } from './components/header/header.component';
 
@@ -27,6 +28,7 @@ import { HeaderComponent } from './components/header/header.component';
     ElementPageComponent,
     LandingPageComponent,
     CoreContentPageComponent,
+    DocsContentPageComponent,
     SidebarNavComponent,
     HeaderComponent,
   ],

@@ -1,38 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
-import { PagesService } from '../../services/pages.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
-
+import { UrlParser } from '../../shared/urlParser.service';
+import { UrlMapper } from '../../shared/urlMapper.service';
+import { UrlFetcher } from '../../shared/urlFetcher.service';
+import { PagesService } from '../../services/pages.service';
 @Component({
-  selector: 'app-core-content-page',
-  templateUrl: './core-content-page.component.html',
-  styleUrls: ['./core-content-page.component.css'],
-  providers: [PagesService]
+  selector: 'app-docs-content-page',
+  templateUrl: './docs-content-page.component.html',
+  providers: [
+    UrlParser,
+    UrlMapper,
+    UrlFetcher,
+    PagesService
+  ]
 })
-export class CoreContentPageComponent implements OnInit {
 
-  public pageType: any = 'home.CoreContentPage';
+export class DocsContentPageComponent implements OnInit {
+
+  public pageType = 'docs.docsContentPage';
   public page: any;
+  public path = '';
+  public mapPath = '';
+  public domainPath = 'http://docs-site-staging.us-east-1.elasticbeanstalk.com';
+  public docs: any;
   public sidebar: any = true;
   public sidebarNav: any;
-  public apiUrl = environment.apiUrl;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pagesService: PagesService,
-    private http: HttpClient
+    private http: HttpClient,
+    private urlParser: UrlParser,
+    private urlMapper: UrlMapper,
+    private urlFetcher: UrlFetcher,
+    private pagesService: PagesService
   ) { }
 
   ngOnInit() {
-
     let slug;
-    let urlSegment;
-    this.route.url.forEach((url: any) => {
-      urlSegment = url[0].path;
+    const urlSegment = [];
+    this.route.url.subscribe(segment => {
+      for (let i = 0; i < segment.length; i++) {
+        urlSegment[i] = segment[i].path;
+      }
+
+      this.path = urlSegment.join('/');
+      this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
+      this.urlFetcher.getDocs(`${this.domainPath}/${this.mapPath}`).subscribe((docs: any) => {
+        this.docs = docs;
+      });
+    });
+
+    this.route.params.forEach((params: Params) => {
+      slug = params['slug'];
     });
 
     this.route.params.forEach((params: Params) => {
@@ -86,6 +109,5 @@ export class CoreContentPageComponent implements OnInit {
             });
           }
         );
-
   }
 }
