@@ -1,10 +1,10 @@
-import {ModuleWithProviders} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-
-import {HomeComponent} from './components/home/home.component';
-import {LandingPageComponent} from './components/landing-page/landing-page.component';
-import {ElementPageComponent} from './components/element-page/element-page.component';
-import {CoreContentPageComponent} from './components/core-content-page/core-content-page.component';
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ElementPageComponent } from './components/element-page/element-page.component';
+import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
+import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 
 const appRoutes: Routes = [
   {
@@ -35,6 +35,10 @@ const appRoutes: Routes = [
     path: 'build/:child/:slug',
     component: CoreContentPageComponent
   },
+  {
+    path: ':branch/:library/:version/:component',
+    component: DocsContentPageComponent
+  }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

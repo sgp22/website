@@ -9,9 +9,11 @@ import { PagesService } from '../../services/pages.service';
   providers: [PagesService]
 })
 export class HomeComponent implements OnInit {
-  
+
   public slugs: any;
   public page: any;
+  public docs: any;
+  public docsBody: any;
   public streamfields: any;
   public hideGlobalNav: any = true;
 
@@ -22,14 +24,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.pagesService.getAll()
-      .subscribe((pages) => {
-        let homepage;
+      .subscribe((pages: any) => {
         pages.items.filter((page) => {
-          if(page.meta.slug === 'home') {
+          if (page.meta.slug === 'home') {
             this.page = page;
           }
-        })
-      })
+        });
+      });
   }
 
 }

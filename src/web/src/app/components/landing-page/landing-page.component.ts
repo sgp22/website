@@ -23,15 +23,15 @@ export class LandingPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     let slug;
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
     });
-    
+
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
-        (res) => { 
+        (res: any) => {
           this.page = res.items[0];
         },
         (err) => {
@@ -44,19 +44,19 @@ export class LandingPageComponent implements OnInit {
         (res) => {
           this.sidebarNav = res;
         }
-      )
+      );
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
-          (res) => { 
+          (res: any) => {
             this.page = res.items[0];
           },
           (err) => {
             console.log(err);
           }
-      )
+      );
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
@@ -66,7 +66,7 @@ export class LandingPageComponent implements OnInit {
             this.sidebarNav = res;
             console.log(this.sidebarNav);
           }
-        ) 
+        );
 
   }
 
