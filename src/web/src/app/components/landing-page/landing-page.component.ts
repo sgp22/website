@@ -16,7 +16,7 @@ export class LandingPageComponent implements OnInit {
   public page: any;
   public pageType: any = 'home.LandingPage';
   public sidebarNav: any;
-  public notFound: boolean = false;
+  public notFound = false;
 
   constructor(
     private router: Router,

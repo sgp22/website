@@ -17,7 +17,7 @@ export class ElementPageComponent implements OnInit {
   public types: any;
   public sidebar: any = true;		
   public sidebarNav: any;
-  public notFound: boolean = false;
+  public notFound = false;
 
   constructor(
     private router: Router,

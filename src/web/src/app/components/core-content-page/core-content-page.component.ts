@@ -19,7 +19,7 @@ export class CoreContentPageComponent implements OnInit {
   public page: any;
   public sidebar: any = true;
   public sidebarNav: any;
-  public notFound: boolean = false;
+  public notFound = false;
 
   constructor(
     private router: Router,
