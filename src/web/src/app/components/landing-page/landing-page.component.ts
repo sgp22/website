@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
@@ -16,7 +15,6 @@ export class LandingPageComponent implements OnInit {
   public page: any;
   public pageType: any = 'home.LandingPage';
   public sidebarNav: any;
-  public notFound = false;
 
   constructor(
     private router: Router,
@@ -25,50 +23,40 @@ export class LandingPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     let slug;
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
     });
-    
+
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
         (res: any) => {
-          if(res.items.length) {
-            this.page = res.items[0];
-            this.notFound = false;
-          } else {
-            this.notFound = true;
-          }
+          this.page = res.items[0];
         },
-        (err: HttpErrorResponse) => {
+        (err) => {
           console.log(err);
         }
-      );
+    );
 
     this.pagesService.getSideBarNav()
       .subscribe(
         (res) => {
           this.sidebarNav = res;
         }
-      )
+      );
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
           (res: any) => {
-            if(res.items.length) {
-              this.page = res.items[0];
-              this.notFound = false;
-            } else {
-              this.notFound = true;
-            }
+            this.page = res.items[0];
           },
-          (err: HttpErrorResponse) => {
+          (err) => {
             console.log(err);
           }
-        )
+      );
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
@@ -76,8 +64,9 @@ export class LandingPageComponent implements OnInit {
         .subscribe(
           (res) => {
             this.sidebarNav = res;
+            console.log(this.sidebarNav);
           }
-        ) 
+        );
 
   }
 

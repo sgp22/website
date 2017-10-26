@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-element-page',
@@ -15,9 +14,8 @@ export class ElementPageComponent implements OnInit {
   public page: any;
   public options: any;
   public types: any;
-  public sidebar: any = true;		
+  public sidebar: any = true;
   public sidebarNav: any;
-  public notFound = false;
 
   constructor(
     private router: Router,
@@ -26,10 +24,9 @@ export class ElementPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
     let slug;
     let urlSegment;
-    
+
     this.route.url.forEach((url) => {
       urlSegment = url[0].path;
     });
@@ -41,68 +38,48 @@ export class ElementPageComponent implements OnInit {
     this.pagesService.getPage(slug, this.pageType)
       .subscribe(
         (res: any) => {
-          if(res.items.length) {
-            this.page = res.items[0];
-            this.types = res.items[0].types;
-            this.options = res.items[0].options;
-            this.notFound = false;
-          } else {
-            this.notFound = true;
-          }
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err);
+          this.page = res.items[0];
+          this.types = res.items[0].types;
+          this.options = res.items[0].options;
+          console.log(res);
         }
-      )
+      );
 
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
         .subscribe(
           (res: any) => {
-            if(res.items.length) {
-              this.page = res.items[0];
-              this.types = res.items[0].types;
-              this.options = res.items[0].options;
-              this.notFound = false; 
-            }	else {
-              this.notFound = true;
-            }
-          },
-          (err: HttpErrorResponse) => {
-            console.log(err);
+            this.page = res.items[0];
+            this.types = res.items[0].types;
+            this.options = res.items[0].options;
           }
-        )
+        );
 
       this.pagesService.getSideBarNav()
         .subscribe(
           (res: any) => {
             res.filter((nav) => {
-              if(nav.meta.slug === urlSegment) {
+              if (nav.meta.slug === urlSegment) {
                 this.sidebarNav = nav;
-              }		
-            })
-          },
-          (err: HttpErrorResponse) => {
-            console.log(err);
+                console.log(nav);
+              }
+            });
           }
-        )	
-      		
+        );
+
       this.router.events
         .filter((e) => e instanceof NavigationEnd)
-        .switchMap(e => this.pagesService.getSideBarNav())	
+        .switchMap(e => this.pagesService.getSideBarNav())
           .subscribe(
             (res: any) => {
               res.filter((nav) => {
-                if(nav.meta.slug === urlSegment) {
+                if (nav.meta.slug === urlSegment) {
                   this.sidebarNav = nav;
                 }
-              })
-            },
-            (err: HttpErrorResponse) => {
-              console.log(err);
+              });
             }
-          )
+          );
   }
 
 }

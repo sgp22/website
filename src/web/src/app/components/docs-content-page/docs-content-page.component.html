@@ -1,0 +1,9 @@
+<app-header></app-header>
+
+<div class="iux-row">
+  <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar" [sidebarNav]="sidebarNav"></sidebar-nav>
+  <div class="iux-row--col-sm-9 iux-row--col-md-9">
+    <h1>{{docs?.title}}</h1>
+    <div [innerHTML]="docs?.body"></div>
+  </div>
+</div>
