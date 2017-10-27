@@ -12,28 +12,27 @@ from .api import api_router
 
 from search import views as search_views
 
+
 urlpatterns = [
+    # Wagtail API.
     url(r'^api/v2/', api_router.urls),
 
-    url(r'^django-admin/', include(admin.site.urls)),
+    # Django default admin.
+    url(r'^dj_default_admin/', include(admin.site.urls)),
 
+    # Wagtail admin, documents, and search.
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-
     url(r'^search/$', search_views.search, name='search'),
 
-    # For anything not caught by a more specific rule above, hand over to
-    # Wagtail's page serving mechanism. This should be the last pattern in
-    # the list:
-    # url(r'', include(wagtail_urls)),
+    # Wagtail pages.
+    url(r'^', include(wagtail_urls)),
 
-    # Alternatively, if you want Wagtail pages to be served from a subpath
-    # of your site, rather than the site root:
-    url(r'^pages/', include(wagtail_urls)),
+    # Deployed docs API.
     url(r'^api/docs/', include('docs.urls'))
 ]
 
-"""
+
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -41,4 +40,3 @@ if settings.DEBUG:
     # Serve static and media files from development server
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-"""
