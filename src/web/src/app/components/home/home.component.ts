@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
@@ -9,13 +9,14 @@ import { DisplayGlobalNavService } from '../../shared/display-global-nav.service
   styleUrls: ['./home.component.css'],
   providers: [PagesService]
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public slugs: any;
   public page: any;
   public docs: any;
   public docsBody: any;
   public streamfields: any;
+  public loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +25,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit() {
 
     this.globalNav.displayGlobalNav = false;
 
@@ -33,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         pages.items.filter((page) => {
           if (page.meta.slug === 'home') {
             this.page = page;
+            this.loading = false;
           }
         });
       });

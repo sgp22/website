@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/filter';
@@ -18,7 +18,7 @@ import { PagesService } from '../../services/pages.service';
   ]
 })
 
-export class DocsContentPageComponent implements OnInit {
+export class DocsContentPageComponent implements OnInit, AfterViewInit {
 
   public pageType = 'docs.docsContentPage';
   public page: any;
@@ -28,6 +28,7 @@ export class DocsContentPageComponent implements OnInit {
   public docs: any;
   public sidebar: any = true;
   public sidebarNav: any;
+  public loading = true;
 
   constructor(
     private router: Router,
@@ -39,7 +40,9 @@ export class DocsContentPageComponent implements OnInit {
     private pagesService: PagesService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngAfterViewInit() {
     let slug;
     const urlSegment = [];
     this.route.url.subscribe(segment => {
@@ -52,6 +55,7 @@ export class DocsContentPageComponent implements OnInit {
       this.urlFetcher.getDocs(`${this.domainPath}/${this.mapPath}`).subscribe(
         (docs: any) => {
           this.docs = docs;
+          this.loading = false;
         },
         err => {
           // redirect?! Load 404 page

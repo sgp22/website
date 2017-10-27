@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 import { HttpClient } from '@angular/common/http';
@@ -11,13 +11,14 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./core-content-page.component.css'],
   providers: [PagesService]
 })
-export class CoreContentPageComponent implements OnInit {
+export class CoreContentPageComponent implements OnInit, AfterViewInit {
 
   public pageType: any = 'home.CoreContentPage';
   public page: any;
   public sidebar: any = true;
   public sidebarNav: any;
   public notFound = false;
+  public loading = true;
 
   constructor(
     private router: Router,
@@ -26,8 +27,9 @@ export class CoreContentPageComponent implements OnInit {
     private http: HttpClient,
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  ngAfterViewInit() {
 
     let slug;
     let urlSegment;
@@ -45,6 +47,7 @@ export class CoreContentPageComponent implements OnInit {
           if (res && res.items.length) {
             this.page = res.items[0];
             this.notFound = false;
+            this.loading = false;
           } else {
             this.notFound = true;
           }

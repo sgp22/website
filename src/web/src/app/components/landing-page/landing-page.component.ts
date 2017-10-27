@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 import 'rxjs/add/operator/filter';
@@ -10,12 +10,13 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./landing-page.component.css'],
   providers: [PagesService]
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, AfterViewInit {
 
   public page: any;
   public pageType: any = 'home.LandingPage';
   public sidebarNav: any;
   public notFound = false;
+  public loading = true;
 
   constructor(
     private router: Router,
@@ -23,9 +24,10 @@ export class LandingPageComponent implements OnInit {
     private pagesService: PagesService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-
+  ngAfterViewInit() {
+    
     let slug;
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];
@@ -37,6 +39,7 @@ export class LandingPageComponent implements OnInit {
           if (res && res.items.length) {
             this.page = res.items[0];
             this.notFound = false;
+            this.loading = false;
           } else {
             this.notFound = true;
           }

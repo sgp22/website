@@ -1,52 +1,56 @@
 
 <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
-<div *ngIf="!notFound" class="iux-row iux-row--gutter">
+<div *ngIf="!loading">
 
-  <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar" [sidebarNav]="sidebarNav"></sidebar-nav>
+  <div *ngIf="!notFound" class="iux-row iux-row--gutter">
 
-  <div class="iux-row--col-sm-9 iux-row--col-md-9"> 
-    
-    <h1 class="page-title">{{page?.title}}</h1>
+    <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar" [sidebarNav]="sidebarNav"></sidebar-nav>
 
-    <section class="element-section element-section--types">
+    <div class="iux-row--col-sm-9 iux-row--col-md-9"> 
       
-      <h1 class="h2">Types</h1>
-      
-      <table class="section-table">
-        <thead>
-          <th>Type</th>
-          <th>When to use it</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let type of types">
-            {{type.value.name}}
-            <td><div><strong>{{type.value.name}}</strong></div></td>
-            <td><div>{{type.value.detail}}</div></td>
-          </tr>
-        </tbody>
-      </table>
+      <h1 class="page-title">{{page?.title}}</h1>
 
-    </section>
+      <section class="element-section element-section--types">
+        
+        <h1 class="h2">Types</h1>
+        
+        <table class="section-table">
+          <thead>
+            <th>Type</th>
+            <th>When to use it</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let type of types">
+              {{type.value.name}}
+              <td><div><strong>{{type.value.name}}</strong></div></td>
+              <td><div>{{type.value.detail}}</div></td>
+            </tr>
+          </tbody>
+        </table>
 
-    <section class="element-section element-section--options">
-      
-      <h1 class="h2">Options</h1>
-      
-      <table class="section-table">
-        <thead>
-          <th>Type</th>
-          <th>Details</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let option of options">
-            <td><div><strong>{{option.value.name}}</strong></div></td>
-            <td><div>{{option.value.detail}}</div></td>
-          </tr>
-        </tbody>
-      </table>
+      </section>
 
-    </section>
+      <section class="element-section element-section--options">
+        
+        <h1 class="h2">Options</h1>
+        
+        <table class="section-table">
+          <thead>
+            <th>Type</th>
+            <th>Details</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let option of options">
+              <td><div><strong>{{option.value.name}}</strong></div></td>
+              <td><div>{{option.value.detail}}</div></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </section>
+
+    </div>
 
   </div>
 
