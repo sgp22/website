@@ -25,11 +25,11 @@ urlpatterns = [
     url(r'^documents/', include(wagtaildocs_urls)),
     url(r'^search/$', search_views.search, name='search'),
 
+    # Deployed docs API.
+    url(r'^api/docs/', include('docs.urls')),
+
     # Wagtail pages.
     url(r'^', include(wagtail_urls)),
-
-    # Deployed docs API.
-    url(r'^api/docs/', include('docs.urls'))
 ]
 
 
