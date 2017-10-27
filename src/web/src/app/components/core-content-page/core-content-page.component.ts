@@ -23,10 +23,11 @@ export class CoreContentPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   ngOnInit() {
+
 
     let slug;
     let urlSegment;

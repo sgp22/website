@@ -20,10 +20,11 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pagesService: PagesService
+    private pagesService: PagesService,
   ) { }
 
   ngOnInit() {
+
 
     let slug;
     this.route.params.forEach((params: Params) => {
@@ -80,5 +81,6 @@ export class LandingPageComponent implements OnInit {
         );
 
   }
+
 
 }

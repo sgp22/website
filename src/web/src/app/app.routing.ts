@@ -5,6 +5,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ElementPageComponent } from './components/element-page/element-page.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+
 
 const appRoutes: Routes = [
   {
@@ -38,6 +40,10 @@ const appRoutes: Routes = [
   {
     path: ':branch/:library/:version/:component',
     component: DocsContentPageComponent
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 

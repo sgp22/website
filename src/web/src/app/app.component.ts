@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { RouterOutlet } from '@angular/router';
-import { Router } from '@angular/router';
+import { Component, DoCheck } from '@angular/core';
+import { DisplayGlobalNavService } from './shared/display-global-nav.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  providers: [DisplayGlobalNavService]
 })
-export class AppComponent {
+export class AppComponent implements DoCheck {
 
-  constructor(private http: HttpClient) {}
+  public displayGlobalNav: any;
+
+  constructor(private globalNav: DisplayGlobalNavService) {}
+
+  ngDoCheck() {
+    this.displayGlobalNav = this.globalNav.displayGlobalNav;
+  }
 
 }
