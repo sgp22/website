@@ -20,8 +20,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
   ) { }
 
   ngOnInit() {}
-  
-  ngAfterViewInit() {    
+
+  ngAfterViewInit() {
     this.pagesService.getGlobalNav()
       .subscribe(
         (res: any) => {
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
         }
       );
   }
-    
+
   ngDoCheck() {
     this.loading = false;
   }
