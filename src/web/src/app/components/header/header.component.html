@@ -1,9 +1,9 @@
-<header class="site-header">
+<header class="site-header" *ngIf="!loading">
   <a class="logo" routerLink="/">
     <img src="assets/logo.svg" alt="">
     <span>Infor UX</span>
   </a>
-  <nav class="main-nav" *ngIf="!hideGlobalNav">
+  <nav class="main-nav" *ngIf="displayGlobalNav">
     <a *ngFor="let navItem of navItems" class="main-nav__item" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
     <button class="main-nav__search">
       <svg>

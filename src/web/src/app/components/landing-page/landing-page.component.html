@@ -1,2 +1,8 @@
-<app-header></app-header>
-<h1>{{page?.title}}</h1>
+
+<app-page-not-found *ngIf="notFound"></app-page-not-found>
+
+<div *ngIf="!loading">
+  <div *ngIf="!notFound">
+    <h1>{{page?.title}}</h1>
+  </div>
+</div>
