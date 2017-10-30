@@ -72,7 +72,7 @@ export class PagesService {
                   topLevelPage.children = children;
                   children.items.map((child) => {
                     return this.http.get(`${this.apiUrl}pages/?child_of=${child.id}`)
-                      .map(childrenRes => res.json())
+                      .map(childrenRes => res)
                       .subscribe((childrenRes) => {
                         const grandChildren = childrenRes;
                         if (grandChildren.items.length > 0) {

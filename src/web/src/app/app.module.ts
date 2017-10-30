@@ -16,6 +16,7 @@ import { CoreContentPageComponent } from './components/core-content-page/core-co
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { SidebarNavComponent } from './components/sidebar-nav/sidebar-nav.component';
 import { HeaderComponent } from './components/header/header.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HeaderComponent } from './components/header/header.component';
     DocsContentPageComponent,
     SidebarNavComponent,
     HeaderComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
