@@ -246,9 +246,6 @@ class BlocksPage(PageBase):
 
     api_fields = [
         APIField('title'),
-        APIField(
-            'description'
-        ),
         APIField('types'),
         APIField('options'),
         APIField('states'),

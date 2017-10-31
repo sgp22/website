@@ -28,13 +28,10 @@ class CustomPageAPIEndpoint(PagesAPIEndpoint):
     """
     base_serializer_class = CustomPageSerializer
 
-    filter_backends = [
-        FieldsFilter,
+    filter_backends = PagesAPIEndpoint.filter_backends + [
         ChildOfFilter,
         DescendantOfFilter,
         HasChildrenFilter,
-        OrderingFilter,
-        SearchFilter,
     ]
 
     meta_fields = PagesAPIEndpoint.meta_fields + [
@@ -42,8 +39,6 @@ class CustomPageAPIEndpoint(PagesAPIEndpoint):
         'status',
         'children',
     ]
-
-    body_fields = PagesAPIEndpoint.body_fields + []
 
     listing_default_fields = PagesAPIEndpoint.listing_default_fields + [
         'latest_revision_created_at',
@@ -61,43 +56,8 @@ class CustomPageAPIEndpoint(PagesAPIEndpoint):
         'has_children'
     ])
 
-    def get_queryset(self):
-        request = self.request
-
-        # Allow pages to be filtered to a specific type
-        # (Core, Elements, Blocks, Landing, etc...).
-        # Default to wagtailcore.Page.
-        try:
-            models = page_models_from_string(request.GET.get('type', 'wagtailcore.Page'))
-        except (LookupError, ValueError):
-            raise BadRequestError("type doesn't exist")
-
-        if not models:
-            models = [Page]
-
-        if len(models) == 1:
-            queryset = models[0].objects.all()
-        else:
-            queryset = Page.objects.all()
-
-            # Filter pages by specified models.
-            queryset = filter_page_type(queryset, models)
-
-        queryset = queryset.exclude(depth=1).specific()
-
-        return queryset
-
-    def get_type_info(self):
-        types = OrderedDict()
-
-        for name, model in self.seen_types.items():
-            types[name] = OrderedDict([
-                ('verbose_name', model._meta.verbose_name),
-                ('verbose_name_plural', model._meta.verbose_name_plural),
-            ])
-
-        return types
-
+    # Including all of the below just for reference,
+    # even tho it can be deleted.
     def listing_view(self, request):
         response = super(CustomPageAPIEndpoint, self).listing_view(request)
         return response
