@@ -3,6 +3,8 @@ from wagtail.api.v2.router import WagtailAPIRouter
 from wagtail.wagtailimages.api.v2.endpoints import ImagesAPIEndpoint
 from wagtail.wagtaildocs.api.v2.endpoints import DocumentsAPIEndpoint
 
+from home.router import PageHierarchyAPIEndpoint
+
 
 # Create the router. "wagtailapi" is the URL namespace
 api_router = WagtailAPIRouter('wagtailapi')
@@ -15,3 +17,4 @@ api_router = WagtailAPIRouter('wagtailapi')
 api_router.register_endpoint('pages', PagesAPIEndpoint)
 api_router.register_endpoint('images', ImagesAPIEndpoint)
 api_router.register_endpoint('documents', DocumentsAPIEndpoint)
+api_router.register_endpoint('page_hierarchy', PageHierarchyAPIEndpoint)
