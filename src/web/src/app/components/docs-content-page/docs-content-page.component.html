@@ -7,8 +7,8 @@
           <a class="sidebar-nav__child-item" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">
             {{child.name}}<br>
           </a>
-          <ul *ngIf="child.Pages || child.page">
-            <li *ngFor="let grandChild of child.Pages">
+          <ul *ngIf="child.pages">
+            <li *ngFor="let grandChild of child.pages">
               <a class="sidebar-nav__grandchild-item" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
                 {{grandChild.name}}
               </a>

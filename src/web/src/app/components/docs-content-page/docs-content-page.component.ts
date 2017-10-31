@@ -65,18 +65,16 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
           this.notFound = false;
         },
         err => {
-          this.notFound = true;
           // redirect?! Load 404 page
-          console.error('Wrong endpoint? 400?', err);
+          this.notFound = true;
         }
       );
 
       this.sidebarPath = urlSegment.slice(1, -1).join('/');
-      console.log(this.sidebarPath);
       this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
         .subscribe(
           res => {
-            this.sidebarNav = res['Sections'];
+            this.sidebarNav = res['sections'];
           }
         )
 
