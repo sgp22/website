@@ -63,6 +63,25 @@ a {
   }
 }
 
+pre,
+code {
+  font-family: monospace;
+}
+
+pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+code {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+}
+
 /*
  * Header
 */

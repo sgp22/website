@@ -4,23 +4,26 @@
     <nav class="sidebar-nav">
       <ul>
         <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
-          <a class="sidebar-nav__child-item" [routerLink]="['', child.slug]">
+          <a class="sidebar-nav__child-item" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">
             {{child.name}}<br>
           </a>
-          <!-- <ul *ngIf="child.grandChildren?.items.length > 0">
-            <li *ngFor="let grandChild of child.grandChildren?.items">
-              <a class="sidebar-nav__grandchild-item" [routerLink]="['', sidebarNav.meta.slug, child.meta.slug, grandChild.meta.slug]">
-                {{grandChild?.title}}<br>
+          <ul *ngIf="child.Pages || child.page">
+            <li *ngFor="let grandChild of child.Pages">
+              <a class="sidebar-nav__grandchild-item" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
+                {{grandChild.name}}
               </a>
             </li>
-          </ul> -->
+          </ul>
         </li>
       </ul>
     </nav>
   </aside>
 
-  <div class="iux-row--col-sm-9 iux-row--col-md-9">
+  <app-page-not-found *ngIf="notFound"></app-page-not-found>
+  
+  <div class="iux-row--col-sm-9 iux-row--col-md-9" *ngIf="!notFound">
     <h1>{{docs?.title}}</h1>
     <div *ngIf="!loading" [innerHTML]="docs?.body"></div>
   </div>
+
 </div>

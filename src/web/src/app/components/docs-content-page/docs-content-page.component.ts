@@ -27,6 +27,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
   public sidebarPath = '';
   public sidebarNav: any;
   public loading = true;
+  public notFound = false;
 
   constructor(
     private router: Router,
@@ -41,8 +42,14 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
 
+    this.route.url
+      .subscribe(
+        segment => {
+          this.section = segment[0].path;
+        }
+      )
+
     const urlSegment = [];
-    
     this.route.url.subscribe(segment => {
 
       for (let i = 0; i < segment.length; i++) {
@@ -55,19 +62,21 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
         (docs: any) => {
           this.docs = docs;
           this.loading = false;
+          this.notFound = false;
         },
         err => {
+          this.notFound = true;
           // redirect?! Load 404 page
           console.error('Wrong endpoint? 400?', err);
         }
       );
 
       this.sidebarPath = urlSegment.slice(1, -1).join('/');
+      console.log(this.sidebarPath);
       this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
         .subscribe(
           res => {
             this.sidebarNav = res['Sections'];
-            console.log(this.sidebarNav);
           }
         )
 
