@@ -6,7 +6,6 @@ import 'rxjs/add/operator/switchMap';
 import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
 import { UrlFetcher } from '../../shared/urlFetcher.service';
-import { PagesService } from '../../services/pages.service';
 
 @Component({
   selector: 'app-docs-content-page',
@@ -15,7 +14,6 @@ import { PagesService } from '../../services/pages.service';
     UrlParser,
     UrlMapper,
     UrlFetcher,
-    PagesService
   ]
 })
 export class DocsContentPageComponent implements OnInit, AfterViewInit {
@@ -24,6 +22,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
   public mapPath = '';
   public domainPath = 'http://docs-site-staging.us-east-1.elasticbeanstalk.com';
   public docs: any;
+  public section: any;
   public sidebar: any = true;
   public sidebarPath = '';
   public sidebarNav: any;
@@ -35,8 +34,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
     private http: HttpClient,
     private urlParser: UrlParser,
     private urlMapper: UrlMapper,
-    private urlFetcher: UrlFetcher,
-    private pagesService: PagesService
+    private urlFetcher: UrlFetcher
   ) { }
 
   ngOnInit() {}
@@ -50,7 +48,6 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }
-
 
       this.path = urlSegment.join('/');
       this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
@@ -69,37 +66,12 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
         .subscribe(
           res => {
-            console.log(res);
+            this.sidebarNav = res['Sections'];
+            console.log(this.sidebarNav);
           }
         )
 
     });
-
-    // this.pagesService.getSideBarNav()
-    //   .subscribe(
-    //     (res: any) => {
-    //       res.filter((nav) => {
-    //         if (nav.meta.slug === urlSegment) {
-    //           console.log(nav);
-    //           this.sidebarNav = nav;
-    //           console.log(this.sidebarNav);
-    //         }
-    //       });
-    //     }
-    //   );
-
-    // this.router.events
-    //   .filter((e) => e instanceof NavigationEnd)
-    //   .switchMap(e => this.pagesService.getSideBarNav())
-    //     .subscribe(
-    //       (res: any) => {
-    //         res.filter((nav) => {
-    //           if (nav.meta.slug === urlSegment) {
-    //             this.sidebarNav = nav;
-    //           }
-    //         });
-    //       }
-    //     );
 
   }
 

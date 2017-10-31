@@ -1,6 +1,24 @@
-
 <div class="iux-row">
-  <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar" [sidebarNav]="sidebarNav"></sidebar-nav>
+  
+  <aside class="sidebar iux-row--col-sm-3 iux-row--col-md-3" *ngIf="sidebar">
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
+          <a class="sidebar-nav__child-item" [routerLink]="['', child.slug]">
+            {{child.name}}<br>
+          </a>
+          <!-- <ul *ngIf="child.grandChildren?.items.length > 0">
+            <li *ngFor="let grandChild of child.grandChildren?.items">
+              <a class="sidebar-nav__grandchild-item" [routerLink]="['', sidebarNav.meta.slug, child.meta.slug, grandChild.meta.slug]">
+                {{grandChild?.title}}<br>
+              </a>
+            </li>
+          </ul> -->
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
   <div class="iux-row--col-sm-9 iux-row--col-md-9">
     <h1>{{docs?.title}}</h1>
     <div *ngIf="!loading" [innerHTML]="docs?.body"></div>
