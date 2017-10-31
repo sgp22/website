@@ -20,8 +20,12 @@ from .filters import HasChildrenFilter
 from .serializers import CustomPageSerializer
 
 
-class PageHierarchyAPIEndpoint(PagesAPIEndpoint):
-    """Same as Pages API Endpoint but returns page content related to a revision."""
+class CustomPageAPIEndpoint(PagesAPIEndpoint):
+    """
+    Same as Pages API Endpoint but returns page with
+    custom content like the child hirarchy and other
+    extra data.
+    """
     base_serializer_class = CustomPageSerializer
 
     filter_backends = [
@@ -51,6 +55,8 @@ class PageHierarchyAPIEndpoint(PagesAPIEndpoint):
     # Allow the parent field to appear on listings.
     detail_only_fields = []
 
+    # Leaving this just in case if somewhere in the app we still
+    # use the "&has_children=false/true" url parameter.
     known_query_parameters = PagesAPIEndpoint.known_query_parameters.union([
         'has_children'
     ])
@@ -58,7 +64,9 @@ class PageHierarchyAPIEndpoint(PagesAPIEndpoint):
     def get_queryset(self):
         request = self.request
 
-        # Allow pages to be filtered to a specific type.
+        # Allow pages to be filtered to a specific type
+        # (Core, Elements, Blocks, Landing, etc...).
+        # Default to wagtailcore.Page.
         try:
             models = page_models_from_string(request.GET.get('type', 'wagtailcore.Page'))
         except (LookupError, ValueError):
@@ -90,16 +98,14 @@ class PageHierarchyAPIEndpoint(PagesAPIEndpoint):
 
         return types
 
-
     def listing_view(self, request):
-        response = super(PageHierarchyAPIEndpoint, self).listing_view(request)
+        response = super(CustomPageAPIEndpoint, self).listing_view(request)
         return response
 
 
     def detail_view(self, request, pk):
-        response = super(PageHierarchyAPIEndpoint, self).detail_view(request, pk)
+        response = super(CustomPageAPIEndpoint, self).detail_view(request, pk)
         return response
-
 
     @classmethod
     def get_urlpatterns(cls):

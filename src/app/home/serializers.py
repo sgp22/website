@@ -19,25 +19,31 @@ def get_page_serializer_class(value):
         base=PageSerializer
     )
 
-'''
-def get_model_listing_url(context, model):
-    url_path = context['router'].get_model_listing_urlpath(model)
 
-    if url_path:
-        return get_full_url(context['request'], url_path)
-'''
+def get_children_hirarchy(obj):
+    """Recursively generate the children hirarchy."""
+    children_list = []
+    children_count = 0
+    children = obj.get_children().live()
+
+    if children:
+        children_count = children.count()
+
+        for child in children:
+            children_list.append(get_children_hirarchy(child))
+
+    return OrderedDict([
+        ('id', obj.id),
+        ('slug', obj.slug),
+        ('url', obj.url),
+        ('url_path', obj.url_path),
+        ('children_count', children_count),
+        ('children', children_list),
+    ])
 
 
 class PageStatusField(Field):
-    """
-    Serializes the "status" field.
-    Example:
-    "status": {
-        "status": "live",
-        "live": true,
-        "has_unpublished_changes": false
-    },
-    """
+    """Serializes the "status" field."""
     def get_attribute(self, instance):
         return instance
 
@@ -70,25 +76,12 @@ class PageChildrenField(Field):
         return instance
 
     def to_representation(self, page):
-        ret_obj = {
-            'count': None,
-            'children': []
-        }
+        child_structure = get_children_hirarchy(page)
 
-        children = page.get_live_children
-        ret_obj['count'] = page.get_live_children.count()
-
-        for child in children:
-            child_struct = {
-                'id': child.id,
-                'slug': child.slug,
-                'url': child.url,
-                'url_path': child.url_path
-            }
-
-            ret_obj['children'].append(child_struct)
-
-        return ret_obj
+        return OrderedDict([
+            ('children_count', child_structure['children_count']),
+            ('children', child_structure['children'])
+        ])
 
 
 class PageParentField(Field):
