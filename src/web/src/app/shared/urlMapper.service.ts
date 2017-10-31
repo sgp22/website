@@ -3,7 +3,9 @@ import { UrlTree } from '@angular/router';
 
 @Injectable()
 export class UrlMapper {
+
   map(tree: UrlTree): string {
+
     const segments = tree.root.children.primary.segments;
     const paths = [];
 
@@ -17,9 +19,7 @@ export class UrlMapper {
 
     let libName, version, compName = '';
 
-    if (paths[1] === 'tempo') {
-      libName = 'iux';
-    } else {
+    if (paths[1]) {
       libName = paths[1];
     }
 
@@ -31,7 +31,9 @@ export class UrlMapper {
       compName = paths[3];
     }
 
-    const mapPath = `/api/docs/${version}/${compName}.json`;
+    const mapPath = `/api/docs/${libName}/${version}/${compName}.json`;
     return mapPath;
+
   }
+
 }
