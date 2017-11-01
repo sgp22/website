@@ -17,7 +17,7 @@ export class PagesService {
   }
 
   getAll() {
-    return this.http.get(`${this.apiUrl}pages/?format=json`);
+    return this.http.get(`${this.apiUrl}pages`);
   }
 
   getPage(slug, pageType) {

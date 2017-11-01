@@ -15,7 +15,6 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
   public options: any;
   public types: any;
   public sidebar: any = true;
-  public sidebarNav: any;
   public notFound = false;
   public loading = true;
 
@@ -71,29 +70,6 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
           }
         );
 
-      this.pagesService.getSideBarNav()
-        .subscribe(
-          (res: any) => {
-            res.filter((nav) => {
-              if (nav.meta.slug === urlSegment) {
-                this.sidebarNav = nav;
-              }
-            });
-          }
-        );
-
-      this.router.events
-        .filter((e) => e instanceof NavigationEnd)
-        .switchMap(e => this.pagesService.getSideBarNav())
-          .subscribe(
-            (res: any) => {
-              res.filter((nav) => {
-                if (nav.meta.slug === urlSegment) {
-                  this.sidebarNav = nav;
-                }
-              });
-            }
-          );
   }
 
 }
