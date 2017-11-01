@@ -12,7 +12,7 @@ describe('url Mapper', () => {
   beforeEach(() => {
     urlParser = new UrlParser();
     urlMapper = new UrlMapper();
-    correctPath = '/develop/tempo/1.0.0/adaptive';
+    correctPath = '/develop/iux/1.0.0/adaptive';
     inCorrectPath = '/test/test/develop/tempo/1.0.0/adaptive';
     urlTree = urlParser.parse(correctPath);
     urlIncorrectTree = urlParser.parse(inCorrectPath);
@@ -23,7 +23,7 @@ describe('url Mapper', () => {
   }));
 
   it('should create docs path', (() => {
-    expect(urlMapper.map(urlTree)).toBe('/api/docs/1.0.0/adaptive.json');
+    expect(urlMapper.map(urlTree)).toContain('/api/docs/');
   }));
 
   it('should throw err', (() => {

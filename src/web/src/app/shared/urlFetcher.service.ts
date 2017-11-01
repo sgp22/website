@@ -9,4 +9,5 @@ export class UrlFetcher {
   getDocs(url: string) {
     return this.http.get(url);
   }
+
 }

@@ -1,8 +1,29 @@
-
 <div class="iux-row">
-  <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar" [sidebarNav]="sidebarNav"></sidebar-nav>
-  <div class="iux-row--col-sm-9 iux-row--col-md-9">
+  
+  <aside class="sidebar iux-row--col-sm-3 iux-row--col-md-3" *ngIf="sidebar">
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
+          <a class="sidebar-nav__child-item" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">
+            {{child.name}}<br>
+          </a>
+          <ul *ngIf="child.pages">
+            <li *ngFor="let grandChild of child.pages">
+              <a class="sidebar-nav__grandchild-item" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
+                {{grandChild.name}}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <app-page-not-found *ngIf="notFound"></app-page-not-found>
+  
+  <div class="iux-row--col-sm-9 iux-row--col-md-9" *ngIf="!notFound">
     <h1>{{docs?.title}}</h1>
     <div *ngIf="!loading" [innerHTML]="docs?.body"></div>
   </div>
+
 </div>
