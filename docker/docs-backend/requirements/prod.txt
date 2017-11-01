@@ -1,4 +1,5 @@
 wagtailtinymce==4.2.1.5
+git+git://github.com/hookandloop/wagtailtinymce@master#egg=wagtailtinymce
 wagtail==1.12.2
 django-cors-headers==2.0.0
 django-storages==1.6.5
