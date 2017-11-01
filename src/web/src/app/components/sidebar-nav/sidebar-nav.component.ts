@@ -35,7 +35,7 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
       .subscribe(
         res => {
           res['items'].filter((item) => {
-            if (item.title.toLowerCase() === this.section) {
+            if (item.meta.slug === this.section) {
               this.sidebarNav = item.meta.children.children;
             }
           });
