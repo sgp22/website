@@ -27,7 +27,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    
+
     let slug;
     this.route.params.forEach((params: Params) => {
       slug = params['slug'];

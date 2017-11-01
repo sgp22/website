@@ -24,11 +24,11 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private pagesService: PagesService
   ) { }
-  
+
   ngOnInit() {}
 
   ngAfterViewInit() {
-    
+
     let slug;
     let urlSegment;
 

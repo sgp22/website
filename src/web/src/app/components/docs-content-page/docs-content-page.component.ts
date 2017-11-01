@@ -47,7 +47,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
         segment => {
           this.section = segment[0].path;
         }
-      )
+      );
 
     const urlSegment = [];
     this.route.url.subscribe(segment => {
@@ -76,7 +76,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
           res => {
             this.sidebarNav = res['sections'];
           }
-        )
+        );
 
     });
 
