@@ -1,14 +1,14 @@
 <aside class="sidebar" *ngIf="sidebar">
   <nav class="sidebar-nav">
     <ul>
-      <li class="sidebar-nav__group" *ngFor="let child of sidebarNav?.children.items">
-        <a class="sidebar-nav__child-item" [routerLink]="['', sidebarNav.meta.slug, child.meta.slug]">
-          {{child.title}}<br>
+      <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
+        <a class="sidebar-nav__child-item" routerLink="{{child.url}}">
+          {{child.title}}
         </a>
-        <ul *ngIf="child.grandChildren?.items.length > 0">
-          <li *ngFor="let grandChild of child.grandChildren?.items">
-            <a class="sidebar-nav__grandchild-item" [routerLink]="['', sidebarNav.meta.slug, child.meta.slug, grandChild.meta.slug]">
-              {{grandChild?.title}}<br>
+        <ul *ngIf="child.children.length > 0">
+          <li *ngFor="let grandChild of child.children">
+            <a class="sidebar-nav__grandchild-item" routerLink="{{grandChild.url}}">
+              {{grandChild.title}}
             </a>
           </li>
         </ul>

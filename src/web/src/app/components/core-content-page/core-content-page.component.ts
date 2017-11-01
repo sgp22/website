@@ -16,7 +16,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
   public pageType: any = 'home.CoreContentPage';
   public page: any;
   public sidebar: any = true;
-  public sidebarNav: any;
   public notFound = false;
   public loading = true;
 
@@ -72,32 +71,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
             (err) => {
               console.log(err);
             }
-        );
-
-    this.pagesService.getSideBarNav()
-      .subscribe(
-        (res: any) => {
-          res.filter((nav) => {
-            if (nav.meta.slug === urlSegment) {
-              console.log(nav);
-              this.sidebarNav = nav;
-              console.log(this.sidebarNav);
-            }
-          });
-        }
-      );
-
-    this.router.events
-      .filter((e) => e instanceof NavigationEnd)
-      .switchMap(e => this.pagesService.getSideBarNav())
-        .subscribe(
-          (res: any) => {
-            res.filter((nav) => {
-              if (nav.meta.slug === urlSegment) {
-                this.sidebarNav = nav;
-              }
-            });
-          }
         );
 
   }
