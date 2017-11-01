@@ -73,31 +73,5 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
             }
         );
 
-    // this.pagesService.getSideBarNav()
-    //   .subscribe(
-    //     (res: any) => {
-    //       res.filter((nav) => {
-    //         if (nav.meta.slug === urlSegment) {
-    //           console.log(nav);
-    //           this.sidebarNav = nav;
-    //           console.log(this.sidebarNav);
-    //         }
-    //       });
-    //     }
-    //   );
-
-    // this.router.events
-    //   .filter((e) => e instanceof NavigationEnd)
-    //   .switchMap(e => this.pagesService.getSideBarNav())
-    //     .subscribe(
-    //       (res: any) => {
-    //         res.filter((nav) => {
-    //           if (nav.meta.slug === urlSegment) {
-    //             this.sidebarNav = nav;
-    //           }
-    //         });
-    //       }
-    //     );
-
   }
 }

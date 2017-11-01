@@ -2,13 +2,17 @@
 <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
 <div *ngIf="!loading">
+  
   <div *ngIf="!notFound" class="iux-row">
     
     <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar"></sidebar-nav>  
     
     <div class="iux-row--col-sm-9 iux-row--col-md-9"> 
+      
       <h1>{{page?.title}}</h1>
+
     </div>
 
   </div>
+  
 </div>
