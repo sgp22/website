@@ -34,6 +34,7 @@ def get_children_hirarchy(obj):
 
     return OrderedDict([
         ('id', obj.id),
+        ('title', obj.title),
         ('slug', obj.slug),
         ('url', obj.url),
         ('url_path', obj.url_path),
