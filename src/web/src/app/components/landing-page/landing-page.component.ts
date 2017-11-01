@@ -14,7 +14,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
 
   public page: any;
   public pageType: any = 'home.LandingPage';
-  public sidebarNav: any;
   public notFound = false;
   public loading = true;
 
@@ -49,13 +48,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
         }
     );
 
-    this.pagesService.getSideBarNav()
-      .subscribe(
-        (res) => {
-          this.sidebarNav = res;
-        }
-      );
-
     this.router.events
       .filter((e) => e instanceof NavigationEnd)
       .switchMap(e => this.pagesService.getPage(slug, this.pageType))
@@ -72,16 +64,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
             console.log(err);
           }
       );
-
-    this.router.events
-      .filter((e) => e instanceof NavigationEnd)
-      .switchMap(e => this.pagesService.getSideBarNav())
-        .subscribe(
-          (res) => {
-            this.sidebarNav = res;
-            console.log(this.sidebarNav);
-          }
-        );
 
   }
 

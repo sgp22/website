@@ -11,7 +11,6 @@ import { PagesService } from '../../services/pages.service';
 export class SidebarNavComponent implements OnInit, AfterViewInit {
 
   @Input() sidebar: boolean;
-  // @Input() sidebarNav: any;
   public sidebarNav: any;
   public section: any;
 
