@@ -16,7 +16,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
   public pageType: any = 'home.CoreContentPage';
   public page: any;
   public sidebar: any = true;
-  public sidebarNav: any;
   public notFound = false;
   public loading = true;
 

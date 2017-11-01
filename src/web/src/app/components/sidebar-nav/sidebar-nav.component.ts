@@ -38,6 +38,7 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
           res['items'].filter((item) => {
             if (item.title.toLowerCase() === this.section) {
               this.sidebarNav = item.meta.children.children;
+              console.log(this.sidebarNav);
             }
           });
         }
