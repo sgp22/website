@@ -78,7 +78,18 @@ class CoreContentSnippetChooserBlock(DefaultSnippetChooserBlock):
             }
 
 
-class LandingPage(Page):
+class PageBase(Page):
+    is_creatable = False
+
+    @property
+    def get_live_children(self):
+        return self.get_children().live()
+
+    class Meta:
+        proxy = True
+
+
+class LandingPage(PageBase):
     content = StreamField([
     ], null=True, blank=True)
 
@@ -92,7 +103,7 @@ class LandingPage(Page):
     ]
 
 
-class CoreContentPage(Page):
+class CoreContentPage(PageBase):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('paragraph', blocks.RichTextBlock(features=[
@@ -119,7 +130,7 @@ class CoreContentPage(Page):
     ]
 
 
-class ElementsPage(Page):
+class ElementsPage(PageBase):
     """Elements page type."""
     @property
     def description(self):
@@ -207,7 +218,7 @@ class ElementsPage(Page):
         APIField('states'),
     ]
 
-class BlocksPage(Page):
+class BlocksPage(PageBase):
     types = StreamField([
         ('types', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
@@ -235,9 +246,6 @@ class BlocksPage(Page):
 
     api_fields = [
         APIField('title'),
-        APIField(
-            'description'
-        ),
         APIField('types'),
         APIField('options'),
         APIField('states'),
