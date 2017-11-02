@@ -106,14 +106,7 @@ class LandingPage(PageBase):
 class CoreContentPage(PageBase):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock(features=[
-            'h2',
-            'h3',
-            'bold',
-            'italic',
-            'link',
-            'document-link'
-        ])),
+        ('html', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
