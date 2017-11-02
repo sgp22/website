@@ -43,6 +43,7 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
       .subscribe(
         (res: any) => {
           if (res && res.items.length) {
+            console.log(res);
             this.page = res.items[0];
             this.types = res.items[0].types;
             this.options = res.items[0].options;
