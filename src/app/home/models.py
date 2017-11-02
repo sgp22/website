@@ -189,10 +189,11 @@ class ElementsPage(PageBase):
         ]))
     ], null=True, blank=True)
 
-    states = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True)
+    states = StreamField([
+        ('states', blocks.StructBlock([
+            ('state', blocks.CharBlock(required=True)),
+        ]))
+    ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
@@ -202,7 +203,7 @@ class ElementsPage(PageBase):
         ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('options'),
-        FieldPanel('states')
+        StreamFieldPanel('states')
     ]
 
     api_fields = [

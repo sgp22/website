@@ -14,6 +14,7 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
   public page: any;
   public options: any;
   public types: any;
+  public states: any;
   public sidebar: any = true;
   public notFound = false;
   public loading = true;
@@ -47,6 +48,7 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
             this.page = res.items[0];
             this.types = res.items[0].types;
             this.options = res.items[0].options;
+            this.states = res.items[0].states;
             this.notFound = false;
             this.loading = false;
           } else {
@@ -64,6 +66,7 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
               this.page = res.items[0];
               this.types = res.items[0].types;
               this.options = res.items[0].options;
+              this.states = res.items[0].states;
               this.notFound = false;
             } else {
               this.notFound = true;
