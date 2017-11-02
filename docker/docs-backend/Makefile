@@ -2,7 +2,7 @@
 
 ORGANIZATION = hookandloop
 CONTAINER = docs-backend
-VERSION = 1.0.0
+VERSION = 1.0.1
 
 .PHONY: build
 
