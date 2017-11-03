@@ -9,7 +9,7 @@ import { DisplayGlobalNavService } from './shared/display-global-nav.service';
 })
 export class AppComponent {
 
-  public displayGlobalNav: any;
+  public displayGlobalNav: boolean;
 
   constructor(private globalNav: DisplayGlobalNavService) {
     this.displayGlobalNav = this.globalNav.displayGlobalNav;
