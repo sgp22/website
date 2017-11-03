@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
 import { DisplayGlobalNavService } from './shared/display-global-nav.service';
 
 @Component({
@@ -7,13 +7,11 @@ import { DisplayGlobalNavService } from './shared/display-global-nav.service';
   styleUrls: ['./app.component.css'],
   providers: [DisplayGlobalNavService]
 })
-export class AppComponent implements DoCheck {
+export class AppComponent {
 
   public displayGlobalNav: any;
 
-  constructor(private globalNav: DisplayGlobalNavService) {}
-
-  ngDoCheck() {
+  constructor(private globalNav: DisplayGlobalNavService) {
     this.displayGlobalNav = this.globalNav.displayGlobalNav;
   }
 
