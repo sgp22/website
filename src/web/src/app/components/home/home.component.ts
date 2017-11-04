@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
@@ -9,7 +9,8 @@ import { DisplayGlobalNavService } from '../../shared/display-global-nav.service
   styleUrls: ['./home.component.css'],
   providers: [PagesService]
 })
-export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+
+export class HomeComponent implements OnDestroy {
 
   public slugs: any;
   public page: any;
@@ -23,14 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private pagesService: PagesService,
     private globalNav: DisplayGlobalNavService
   ) {
-  }
-
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-
     this.globalNav.displayGlobalNav = false;
-
     this.pagesService.getAll()
       .subscribe((pages: any) => {
         pages.items.filter((page) => {

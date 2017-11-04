@@ -7,9 +7,10 @@ import { DisplayGlobalNavService } from './shared/display-global-nav.service';
   styleUrls: ['./app.component.css'],
   providers: [DisplayGlobalNavService]
 })
+
 export class AppComponent implements DoCheck {
 
-  public displayGlobalNav: any;
+  public displayGlobalNav: boolean;
 
   constructor(private globalNav: DisplayGlobalNavService) {}
 
