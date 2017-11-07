@@ -28,8 +28,8 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
   public sidebarPath = '';
   public sidebarNav: any;
   public library: any;
-  public versionPaths: any = '';
-  public selectedVersion: any = '';
+  public versionPaths: any;
+  public selectedVersion = '';
   public loading = true;
   public notFound = false;
 
@@ -82,29 +82,29 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
             this.sidebarNav = res['sections'];
           }
         );
-      
+
       // Version Picker
       this.library = urlSegment.slice(1, -2).join('');
-      this.selectedVersion = `/${this.sidebarPath}/`
+      this.selectedVersion = `/${this.sidebarPath}/`;
       this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.library}`)
       .subscribe(
         res => {
           this.versionPaths = res['files'].map((file) => {
-            let versions = {};
+            const versions = {};
             versions['full'] = file.replace(/docs/, '');
             versions['label'] = file.split('/').slice(-2, -1).join('');
             return versions;
           });
-  
+
         }
-      )
+      );
 
     });
 
   }
 
   onVersionChange(version) {
-    this.router.navigate([version])
+    this.router.navigate([version]);
   }
 
 }
