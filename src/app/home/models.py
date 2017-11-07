@@ -13,30 +13,20 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.api import APIField
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock as DefaultSnippetChooserBlock
 from wagtail.wagtailadmin.edit_handlers import (
-    InlinePanel,
     FieldPanel,
     StreamFieldPanel,
     MultiFieldPanel
 )
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
-from wagtail.contrib.table_block.blocks import TableBlock
 
-from home import snippets
+
 from home import relationships
-from home.snippets import Cornerstone
-from home.snippets import ElementDescriptor
-from home.snippets import WhatItDoes
-from home.snippets import WhatUserCanDo
-from home.snippets import WhenToUseIt
-
-from home import admin
 
 from home.serializers import (
-    ElementDescriptorSerializer,
-    CornerstoneSerializer
+    ElementDescriptorSerializer
 )
+
 
 class TypeBlock(blocks.StructBlock):
     name = blocks.TextBlock()
@@ -90,6 +80,7 @@ class PageBase(Page):
 
 
 class LandingPage(PageBase):
+    menu_order = models.IntegerField(default=0)
     content = StreamField([
     ], null=True, blank=True)
 
@@ -97,13 +88,19 @@ class LandingPage(PageBase):
         StreamFieldPanel('content')
     ]
 
+    promote_panels = Page.promote_panels + [
+        FieldPanel('menu_order', classname="full"),
+    ]
+
     api_fields = [
+        APIField('menu_order'),
         APIField('title'),
         APIField('content')
     ]
 
 
 class CoreContentPage(PageBase):
+    menu_order = models.IntegerField(default=0)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('html', blocks.RichTextBlock()),
@@ -116,7 +113,12 @@ class CoreContentPage(PageBase):
         FieldPanel('description', classname="full"),
     ]
 
+    promote_panels = Page.promote_panels + [
+        FieldPanel('menu_order', classname="full"),
+    ]
+
     api_fields = [
+        APIField('menu_order'),
         APIField('title'),
         APIField('body'),
         APIField('description'),
@@ -130,6 +132,9 @@ class ElementsPage(PageBase):
         """
         There can be many ElementDescriptors
         related to many ElementPages.
+        TODO: This is not showing up in the admin panel
+        and the rest response for this page type returns an
+        empty description array description: [ ]...
         """
         element_descriptors = [
             n.element_descriptor
