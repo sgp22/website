@@ -90,14 +90,17 @@ class PageBase(Page):
 
 
 class LandingPage(PageBase):
+    menu_order = models.IntegerField(default=0)
     content = StreamField([
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('menu_order', classname="full"),
         StreamFieldPanel('content')
     ]
 
     api_fields = [
+        APIField('menu_order'),
         APIField('title'),
         APIField('content')
     ]
@@ -130,6 +133,9 @@ class ElementsPage(PageBase):
         """
         There can be many ElementDescriptors
         related to many ElementPages.
+        TODO: This is not showing up in the admin panel
+        and the rest response for this page type returns an
+        empty description array description: [ ]...
         """
         element_descriptors = [
             n.element_descriptor

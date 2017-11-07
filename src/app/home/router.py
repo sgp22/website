@@ -34,21 +34,21 @@ class CustomPageAPIEndpoint(PagesAPIEndpoint):
         HasChildrenFilter,
     ]
 
+    # Set the fields that show up in meta.
     meta_fields = PagesAPIEndpoint.meta_fields + [
         'latest_revision_created_at',
         'status',
         'children',
+        'menu_order',
     ]
 
     listing_default_fields = PagesAPIEndpoint.listing_default_fields + [
         'latest_revision_created_at',
         'status',
         'children',
-        'parent'
+        'parent',
+        'menu_order',
     ]
-
-    # Allow the parent field to appear on listings.
-    detail_only_fields = []
 
     # Leaving this just in case if somewhere in the app we still
     # use the "&has_children=false/true" url parameter.

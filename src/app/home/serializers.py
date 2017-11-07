@@ -56,6 +56,21 @@ class PageStatusField(Field):
         ])
 
 
+class PageMenuOrderField(Field):
+    """Serializes the "menu_order" field.
+     It shows up in meta, this is the only way we where able to
+     get it to show up in list view. For some reason, just adding
+     it to listing_default_fields does not work."""
+    def get_attribute(self, instance):
+        return instance
+
+    def to_representation(self, page):
+        obj = page.specific
+
+        return obj.menu_order if hasattr(obj, 'menu_order') else None
+
+
+'''
 class PageListField(Field):
     """Serializes a list of Page objects."""
     def to_representation(self, value):
@@ -69,6 +84,7 @@ class PageListField(Field):
             serializer.to_representation(child_object)
             for child_object in value
         ]
+'''
 
 
 class PageChildrenField(Field):
@@ -116,3 +132,4 @@ class CustomPageSerializer(PageSerializer):
     status = PageStatusField(read_only=True)
     children = PageChildrenField(read_only=True)
     parent = PageParentField(read_only=True)
+    menu_order = PageMenuOrderField(read_only=True)
