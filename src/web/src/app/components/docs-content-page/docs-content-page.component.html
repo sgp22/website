@@ -1,6 +1,16 @@
 <div class="iux-row">
   
   <aside class="sidebar iux-row--col-sm-3 iux-row--col-md-3" *ngIf="sidebar">
+    
+    <div class="form-group form-group--select-version">
+      <label for="select-version">Version</label>
+      <select (change)="onVersionChange($event.target.value)" id="select-version" class="form-control">
+        <option *ngFor="let version of versionPaths" value="/{{section}}{{version}}{{element}}" [selected]="version == defaultVersion">
+          {{ version }}
+        </option>
+      </select>
+    </div>
+
     <nav class="sidebar-nav">
       <ul>
         <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
@@ -17,6 +27,7 @@
         </li>
       </ul>
     </nav>
+
   </aside>
 
   <app-page-not-found *ngIf="notFound"></app-page-not-found>
