@@ -35,11 +35,6 @@ export class AppComponent implements DoCheck {
 
   }
 
-  public setTitle(newTitle: string) {
-    this.titleService.setTitle(newTitle);
-    console.log(newTitle);
-  }
-
   public capitalizeTitle(str) {
    return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
   }
