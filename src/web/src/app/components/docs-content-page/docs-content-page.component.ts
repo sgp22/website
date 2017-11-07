@@ -29,7 +29,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
   public sidebarNav: any;
   public library: any;
   public versionPaths: any = '';
-  public defaultVersion: any = '';
+  public selectedVersion: any = '';
   public loading = true;
   public notFound = false;
 
@@ -85,7 +85,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       
       // Version Picker
       this.library = urlSegment.slice(1, -2).join('');
-      this.defaultVersion = `/${this.sidebarPath}/`
+      this.selectedVersion = `/${this.sidebarPath}/`
       this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.library}`)
       .subscribe(
         res => {

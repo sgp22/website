@@ -5,7 +5,7 @@
     <div class="form-group form-group--select-version">
       <label for="select-version">Version</label>
       <select (change)="onVersionChange($event.target.value)" id="select-version" class="form-control">
-        <option *ngFor="let version of versionPaths" value="/{{section}}{{version}}{{element}}" [selected]="version == defaultVersion">
+        <option *ngFor="let version of versionPaths" value="/{{section}}{{version}}{{element}}" [selected]="version == selectedVersion">
           {{ version }}
         </option>
       </select>
