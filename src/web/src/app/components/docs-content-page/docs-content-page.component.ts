@@ -90,9 +90,12 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       .subscribe(
         res => {
           this.versionPaths = res['files'].map((file) => {
-            const versions = file.replace(/docs/, '');
+            let versions = {};
+            versions['full'] = file.replace(/docs/, '');
+            versions['label'] = file.split('/').slice(-2, -1).join('');
             return versions;
           });
+  
         }
       )
 
