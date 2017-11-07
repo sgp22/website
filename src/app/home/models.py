@@ -19,9 +19,14 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
+
+
+from home import relationships
+
 from home.serializers import (
     ElementDescriptorSerializer
 )
+
 
 class TypeBlock(blocks.StructBlock):
     name = blocks.TextBlock()
