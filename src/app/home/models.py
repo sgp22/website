@@ -13,29 +13,14 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.api import APIField
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock as DefaultSnippetChooserBlock
 from wagtail.wagtailadmin.edit_handlers import (
-    InlinePanel,
     FieldPanel,
     StreamFieldPanel,
     MultiFieldPanel
 )
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-
-from wagtail.contrib.table_block.blocks import TableBlock
-
-from home import snippets
-from home import relationships
-from home.snippets import Cornerstone
-from home.snippets import ElementDescriptor
-from home.snippets import WhatItDoes
-from home.snippets import WhatUserCanDo
-from home.snippets import WhenToUseIt
-
-from home import admin
 
 from home.serializers import (
-    ElementDescriptorSerializer,
-    CornerstoneSerializer
+    ElementDescriptorSerializer
 )
 
 class TypeBlock(blocks.StructBlock):
@@ -95,8 +80,11 @@ class LandingPage(PageBase):
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('menu_order', classname="full"),
         StreamFieldPanel('content')
+    ]
+
+    promote_panels = Page.promote_panels + [
+        FieldPanel('menu_order', classname="full"),
     ]
 
     api_fields = [
@@ -107,6 +95,7 @@ class LandingPage(PageBase):
 
 
 class CoreContentPage(PageBase):
+    menu_order = models.IntegerField(default=0)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('html', blocks.RichTextBlock()),
@@ -119,7 +108,12 @@ class CoreContentPage(PageBase):
         FieldPanel('description', classname="full"),
     ]
 
+    promote_panels = Page.promote_panels + [
+        FieldPanel('menu_order', classname="full"),
+    ]
+
     api_fields = [
+        APIField('menu_order'),
         APIField('title'),
         APIField('body'),
         APIField('description'),
