@@ -27,8 +27,8 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
   public sidebar: any = true;
   public sidebarPath = '';
   public sidebarNav: any;
-  public library: any;
   public versionPaths: any;
+  public library = '';
   public selectedVersion = '';
   public loading = true;
   public notFound = false;
@@ -95,7 +95,6 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
             versions['label'] = file.split('/').slice(-2, -1).join('');
             return versions;
           });
-
         }
       );
 
