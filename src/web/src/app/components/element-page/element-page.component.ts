@@ -50,6 +50,7 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
             this.options = res.items[0].options;
             this.states = res.items[0].states;
             this.descriptors = res.items[0].descriptors;
+            console.log(this.descriptors);
             this.notFound = false;
             this.loading = false;
           } else {

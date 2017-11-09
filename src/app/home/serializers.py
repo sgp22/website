@@ -147,7 +147,7 @@ class ElementDescriptorSerializer(serializers.ModelSerializer):
 
     def to_representation(self, page):
         return {
-            'what_id_does': element_single_descriptor_serializer(page.what_it_does),
+            'what_it_does': element_single_descriptor_serializer(page.what_it_does),
             'what_user_can_do': element_single_descriptor_serializer(page.what_user_can_do),
             'when_to_use_it': element_single_descriptor_serializer(page.when_to_use_it),
         }
