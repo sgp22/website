@@ -57,7 +57,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
               }
               if (b.type === 'image') {
                 this.image = b;
-                console.log(this.image);
               }
             });
           }
