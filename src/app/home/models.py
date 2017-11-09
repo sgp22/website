@@ -19,18 +19,23 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
-
-
 from home import relationships
 
 from home.serializers import (
-    ElementDescriptorSerializer
+    ElementDescriptorSerializer,
+    WagtailImageSerializer 
 )
+
+
+class APIImageChooserBlock(ImageChooserBlock):
+    def get_api_representation(self, value, context=None):
+        return WagtailImageSerializer(context=context).to_representation(value)
 
 
 class TypeBlock(blocks.StructBlock):
     name = blocks.TextBlock()
     description = blocks.TextBlock()
+
 
 class ButtonBlock(blocks.StructBlock):
     label = blocks.CharBlock(required=True)
@@ -104,7 +109,7 @@ class CoreContentPage(PageBase):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('html', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('image', APIImageChooserBlock()),
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
 

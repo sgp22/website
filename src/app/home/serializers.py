@@ -4,9 +4,12 @@ from collections import OrderedDict
 
 from rest_framework import serializers
 
+from wagtail import wagtailimages
 from wagtail.api.v2.serializers import PageSerializer, Field, StreamField, get_serializer_class
 from wagtail.api.v2.utils import get_full_url
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailimages.models import Image as WagtailImage
 
 from rest_framework.fields import Field, ReadOnlyField
 
@@ -41,6 +44,14 @@ def get_children_hirarchy(obj):
         ('children_count', children_count),
         ('children', children_list),
     ])
+
+
+class WagtailImageSerializer(serializers.ModelSerializer):
+    """Serializes the image field that is used in
+    the CoreContent Page StreamField.."""
+    class Meta:
+        model = WagtailImage
+        fields = ['title', 'file', 'width', 'height', 'file_size']
 
 
 class PageStatusField(Field):

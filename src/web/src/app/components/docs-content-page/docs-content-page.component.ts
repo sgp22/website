@@ -23,9 +23,13 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
   public domainPath = 'http://docs-site-staging.us-east-1.elasticbeanstalk.com';
   public docs: any;
   public section: any;
+  public element: any;
   public sidebar: any = true;
   public sidebarPath = '';
   public sidebarNav: any;
+  public versionPaths: any;
+  public library = '';
+  public selectedVersion = '';
   public loading = true;
   public notFound = false;
 
@@ -46,6 +50,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       .subscribe(
         segment => {
           this.section = segment[0].path;
+          this.element = segment.slice(-1)[0].path;
         }
       );
 
@@ -78,8 +83,27 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
           }
         );
 
+      // Version Picker
+      this.library = urlSegment.slice(1, -2).join('');
+      this.selectedVersion = `/${this.sidebarPath}/`;
+      this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.library}`)
+      .subscribe(
+        res => {
+          this.versionPaths = res['files'].map((file) => {
+            const versions = {};
+            versions['full'] = file.replace(/docs/, '');
+            versions['label'] = file.split('/').slice(-2, -1).join('');
+            return versions;
+          });
+        }
+      );
+
     });
 
+  }
+
+  onVersionChange(version) {
+    this.router.navigate([version]);
   }
 
 }
