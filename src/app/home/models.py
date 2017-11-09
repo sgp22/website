@@ -23,7 +23,7 @@ from home import relationships
 
 from home.serializers import (
     ElementDescriptorSerializer,
-    WagtailImageSerializer 
+    WagtailImageSerializer
 )
 
 
@@ -211,12 +211,7 @@ class ElementsPage(PageBase):
 
     api_fields = [
         APIField('title'),
-        APIField(
-            'description',
-            serializer=serializers.ListField(
-                child=ElementDescriptorSerializer()
-            )
-        ),
+        APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('options'),
         APIField('states'),

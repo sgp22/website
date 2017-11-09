@@ -125,11 +125,29 @@ class PageParentField(Field):
         }
 
 
+def element_single_descriptor_serializer(obj):
+    """
+    Serializes the WhatItDoes, WhatUserCanDo WhenToUseIt snippets,
+    since they are all the same structure.  Could be refactored.
+    """
+    return {
+        'id': obj.id,
+        'name': obj.name,
+        'description': obj.description
+    }
+
+
 class ElementDescriptorSerializer(serializers.ModelSerializer):
     """Default ElementDescriptior snippet serializer."""
-    class Meta:
-        model = 'home.ElementDescriptor'
-        fields = ('id', 'name', 'descriptor_type', 'description')
+    def get_attribute(self, instance):
+        return instance
+
+    def to_representation(self, page):
+        return {
+            'what_id_does': element_single_descriptor_serializer(page.what_it_does),
+            'what_user_can_do': element_single_descriptor_serializer(page.what_user_can_do),
+            'when_to_use_it': element_single_descriptor_serializer(page.when_to_use_it),
+        }
 
 
 class CornerstoneSerializer(serializers.ModelSerializer):
