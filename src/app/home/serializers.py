@@ -130,6 +130,9 @@ def element_single_descriptor_serializer(obj):
     Serializes the WhatItDoes, WhatUserCanDo WhenToUseIt snippets,
     since they are all the same structure.  Could be refactored.
     """
+    if obj is None:
+        return None
+
     return {
         'id': obj.id,
         'name': obj.name,
