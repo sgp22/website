@@ -11,6 +11,22 @@
       
       <h1 class="page-title">{{page?.title}}</h1>
 
+      <section *ngIf="descriptors" class="element-section">
+
+        <p>
+          <span *ngIf="descriptors.what_it_does" class="what-it-does">
+            {{descriptors.what_it_does.description}}
+          </span>
+          <span *ngIf="descriptors.what_user_can_do" class="what-user-can-do">
+            {{descriptors.what_user_can_do.description}}
+          </span>
+          <span *ngIf="descriptors.when_to_use_it" class="when-to-use-it">
+            {{descriptors.when_to_use_it.description}}
+          </span>
+        </p>
+
+      </section>
+
       <section *ngIf="types.length" class="element-section element-section--types">
         
         <h1 class="h2">Types</h1>

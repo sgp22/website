@@ -12,9 +12,12 @@ import 'rxjs/add/operator/switchMap';
   providers: [PagesService]
 })
 export class CoreContentPageComponent implements OnInit, AfterViewInit {
-
   public pageType: any = 'home.CoreContentPage';
   public page: any;
+  public body: any;
+  public heading: any;
+  public html: any;
+  public image: any;
   public sidebar: any = true;
   public notFound = false;
   public loading = true;
@@ -23,13 +26,12 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private http: HttpClient,
-  ) { }
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-
     let slug;
     let urlSegment;
     this.route.url.forEach((url: any) => {
@@ -40,38 +42,68 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
       slug = params['slug'];
     });
 
-    this.pagesService.getPage(slug, this.pageType)
+    this.pagesService.getPage(slug, this.pageType).subscribe(
+      (res: any) => {
+        if (res && res.items.length) {
+          this.page = res.items[0];
+          this.body = res.items[0].body;
+          if (this.body.length) {
+            this.body.filter(b => {
+              if (b.type === 'html') {
+                this.html = b;
+              }
+              if (b.type === 'heading') {
+                this.heading = b;
+              }
+              if (b.type === 'image') {
+                this.image = b;
+              }
+            });
+          }
+          this.notFound = false;
+          this.loading = false;
+        } else {
+          this.notFound = true;
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
+    this.router.events
+      .filter(e => e instanceof NavigationEnd)
+      .switchMap(e => this.pagesService.getPage(slug, this.pageType))
       .subscribe(
         (res: any) => {
           if (res && res.items.length) {
             this.page = res.items[0];
+            this.body = res.items[0].body;
+            if (this.body.length) {
+              this.body.filter(b => {
+                if (b.type === 'html') {
+                  this.html = b;
+                }
+                if (b.type === 'heading') {
+                  this.heading = b;
+                }
+                if (b.type === 'image') {
+                  this.image = b;
+                }
+              });
+            } else {
+              this.html = '';
+              this.heading = '';
+              this.image = '';
+            }
             this.notFound = false;
-            this.loading = false;
           } else {
             this.notFound = true;
           }
         },
-        (err) => {
+        err => {
           console.log(err);
         }
-    );
-
-    this.router.events
-      .filter((e) => e instanceof NavigationEnd)
-        .switchMap(e => this.pagesService.getPage(slug, this.pageType))
-          .subscribe(
-            (res: any) => {
-              if (res && res.items.length) {
-                this.page = res.items[0];
-                this.notFound = false;
-              } else {
-                this.notFound = true;
-              }
-            },
-            (err) => {
-              console.log(err);
-            }
-        );
-
+      );
   }
 }
