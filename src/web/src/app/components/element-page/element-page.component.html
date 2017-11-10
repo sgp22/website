@@ -13,20 +13,17 @@
 
       <section *ngIf="descriptors" class="element-section">
 
-        <div *ngIf="descriptors.what_it_does" class="what-it-does">
-          <h2>What it does</h2>
-          <p>{{descriptors.what_it_does.name}} {{descriptors.what_it_does.description}}</p>
-        </div>
-
-        <div *ngIf="descriptors.what_user_can_do" class="what-user-can-do">
-          <h2>What user can do</h2>
-          <p>{{descriptors.what_user_can_do.name}} {{descriptors.what_user_can_do.description}}</p>
-        </div>
-
-        <div *ngIf="descriptors.when_to_use_it" class="when-to-use-it">
-          <h2>When to use it</h2>
-          <p>{{descriptors.when_to_use_it.name}} {{descriptors.when_to_use_it.description}}</p>
-        </div>
+        <p>
+          <span *ngIf="descriptors.what_it_does" class="what-it-does">
+            {{descriptors.what_it_does.description}}
+          </span>
+          <span *ngIf="descriptors.what_user_can_do" class="what-user-can-do">
+            {{descriptors.what_user_can_do.description}}
+          </span>
+          <span *ngIf="descriptors.when_to_use_it" class="when-to-use-it">
+            {{descriptors.when_to_use_it.description}}
+          </span>
+        </p>
 
       </section>
 
