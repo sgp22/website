@@ -15,9 +15,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
   public pageType: any = 'home.CoreContentPage';
   public page: any;
   public body: any;
-  public heading: any;
-  public html: any;
-  public image: any;
   public streamfields: any;
   public sidebar: any = true;
   public notFound = false;
@@ -39,11 +36,8 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
       urlSegment = url[0].path;
     });
 
-    this.route.params.forEach((params: Params) => {
-      slug = params['slug'];
-    });
-
     this.route.params.subscribe(params => {
+      slug = params['slug'];
       this.pagesService
         .getPage(slug, this.pageType)
         .subscribe(
@@ -52,19 +46,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
               this.page = res.items[0];
               this.body = res.items[0].body;
               this.streamfields = res.items[0].body;
-              if (this.body.length) {
-                this.body.filter(b => {
-                  if (b.type === "html") {
-                    this.html = b;
-                  }
-                  if (b.type === "heading") {
-                    this.heading = b;
-                  }
-                  if (b.type === "image") {
-                    this.image = b;
-                  }
-                });
-              }
               this.notFound = false;
               this.loading = false;
             } else {
@@ -76,6 +57,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
           }
         );
     });
-    
+
   }
 }
