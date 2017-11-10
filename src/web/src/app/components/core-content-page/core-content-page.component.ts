@@ -18,6 +18,7 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
   public heading: any;
   public html: any;
   public image: any;
+  public streamfields: any;
   public sidebar: any = true;
   public notFound = false;
   public loading = true;
@@ -47,6 +48,8 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
         if (res && res.items.length) {
           this.page = res.items[0];
           this.body = res.items[0].body;
+          this.streamfields = res.items[0].body;
+          console.log(this.body);
           if (this.body.length) {
             this.body.filter(b => {
               if (b.type === 'html') {
