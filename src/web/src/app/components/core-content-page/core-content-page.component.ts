@@ -43,69 +43,39 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
       slug = params['slug'];
     });
 
-    this.pagesService.getPage(slug, this.pageType).subscribe(
-      (res: any) => {
-        if (res && res.items.length) {
-          this.page = res.items[0];
-          this.body = res.items[0].body;
-          this.streamfields = res.items[0].body;
-          if (this.body.length) {
-            this.body.filter(b => {
-              if (b.type === 'html') {
-                this.html = b;
+    this.route.params.subscribe(params => {
+      this.pagesService
+        .getPage(slug, this.pageType)
+        .subscribe(
+          (res: any) => {
+            if (res && res.items.length) {
+              this.page = res.items[0];
+              this.body = res.items[0].body;
+              this.streamfields = res.items[0].body;
+              if (this.body.length) {
+                this.body.filter(b => {
+                  if (b.type === "html") {
+                    this.html = b;
+                  }
+                  if (b.type === "heading") {
+                    this.heading = b;
+                  }
+                  if (b.type === "image") {
+                    this.image = b;
+                  }
+                });
               }
-              if (b.type === 'heading') {
-                this.heading = b;
-              }
-              if (b.type === 'image') {
-                this.image = b;
-              }
-            });
-          }
-          this.notFound = false;
-          this.loading = false;
-        } else {
-          this.notFound = true;
-        }
-      },
-      err => {
-        console.log(err);
-      }
-    );
-
-    this.router.events
-      .filter(e => e instanceof NavigationEnd)
-      .switchMap(e => this.pagesService.getPage(slug, this.pageType))
-      .subscribe(
-        (res: any) => {
-          if (res && res.items.length) {
-            this.page = res.items[0];
-            this.body = res.items[0].body;
-            if (this.body.length) {
-              this.body.filter(b => {
-                if (b.type === 'html') {
-                  this.html = b;
-                }
-                if (b.type === 'heading') {
-                  this.heading = b;
-                }
-                if (b.type === 'image') {
-                  this.image = b;
-                }
-              });
+              this.notFound = false;
+              this.loading = false;
             } else {
-              this.html = '';
-              this.heading = '';
-              this.image = '';
+              this.notFound = true;
             }
-            this.notFound = false;
-          } else {
-            this.notFound = true;
+          },
+          err => {
+            console.log(err);
           }
-        },
-        err => {
-          console.log(err);
-        }
-      );
+        );
+    });
+    
   }
 }
