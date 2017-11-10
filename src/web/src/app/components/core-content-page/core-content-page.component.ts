@@ -49,7 +49,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
           this.page = res.items[0];
           this.body = res.items[0].body;
           this.streamfields = res.items[0].body;
-          console.log(this.body);
           if (this.body.length) {
             this.body.filter(b => {
               if (b.type === 'html') {
