@@ -175,6 +175,11 @@ module.exports = {
         "to": "assets/iux/css",
         "from": "../node_modules/@infor/iux/src/packages/iux-components-webapp/dist"
       },
+      {
+        "context": "src/",
+        "to": "assets/documentation-css/css",
+        "from": "../node_modules/@infor/documentation-css/dist"
+      }
     ], {
       "ignore": [
         ".gitkeep"

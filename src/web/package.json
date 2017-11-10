@@ -13,7 +13,6 @@
   },
   "private": true,
   "dependencies": {
-    "@infor/iux": "d-g-h/soho-foundation.git#install-iux",
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
@@ -23,6 +22,8 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@infor/documentation-css": "0.1.2",
+    "@infor/iux": "github:d-g-h/soho-foundation#install-iux",
     "core-js": "^2.4.1",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
