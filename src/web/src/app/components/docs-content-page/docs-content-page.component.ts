@@ -50,7 +50,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       .subscribe(
         segment => {
           this.section = segment[0].path;
-          if(segment.length === 4) {
+          if (segment.length === 4) {
             this.element = segment.slice(-1)[0].path;
           } else {
             this.element = null;
@@ -81,9 +81,9 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       if (urlSegment.length === 4) {
         this.sidebarPath = urlSegment.slice(1, -1).join('/');
       } else {
-        this.sidebarPath = urlSegment.slice(1, 3).join("/");
+        this.sidebarPath = urlSegment.slice(1, 3).join('/');
       }
-      
+
       this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
         .subscribe(
           res => {
@@ -95,7 +95,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       if (urlSegment.length === 4) {
         this.library = urlSegment.slice(1, -2).join('');
       } else {
-        this.library = urlSegment.slice(1, -1).join("");
+        this.library = urlSegment.slice(1, -1).join('');
       }
       this.selectedVersion = `/${this.sidebarPath}/`;
       this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.library}`)
