@@ -42,6 +42,10 @@ const appRoutes: Routes = [
     component: DocsContentPageComponent
   },
   {
+    path: ':branch/:library/:version',
+    component: DocsContentPageComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
