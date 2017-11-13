@@ -1,7 +1,7 @@
 <div class="iux-row">
-  
+
   <aside class="sidebar iux-row--col-sm-3 iux-row--col-md-3" *ngIf="sidebar">
-    
+
     <div class="form-group form-group--select-version">
       <label for="select-version">Version</label>
       <select #option (change)="onVersionChange(option.value)" id="select-version" class="form-control">
@@ -31,9 +31,44 @@
   </aside>
 
   <app-page-not-found *ngIf="notFound"></app-page-not-found>
-  
+
   <div class="iux-row--col-sm-9 iux-row--col-md-9" *ngIf="!notFound">
     <h1>{{docs?.title}}</h1>
+    <div *ngFor="let element of elements">
+      <h2>Class {{element.name}}</h2>
+      <div *ngFor="let constructorTag of element.constructorTags">
+        <span>Constructor</span>
+        <code>new {{element.name}}({{constructorTag.name}}({{constructorTag.type.name}}): {{constructorTag.description}})</code>
+      </div>
+      <table class="section-table">
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let method of element.methods">
+            <td>
+              <div *ngIf="method.params.length; then thenTemplateName; else elseTemplateName">
+                  your Content ignored
+              </div>
+            </td>
+            <ng-template #thenTemplateName>
+              <td>
+                <div>{{method.name}}&#40;<span *ngFor="let param of method.params; let isLast=last">{{param.paramName}} = {{param.paramDescription}}{{isLast ? '' : ', '}}</span>&#41;</div>
+              </td>
+            </ng-template>
+            <ng-template #elseTemplateName>
+              <td>
+                <div>{{method.name}}</div>
+              </td>
+            </ng-template>
+            <td>
+              <div>{{method.info}}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div *ngIf="!loading" [innerHTML]="docs?.body"></div>
   </div>
 
