@@ -70,6 +70,7 @@ export class DocsContentPageComponent implements OnInit {
       this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
       this.urlFetcher.getDocs(`${this.domainPath}/${this.mapPath}`).subscribe(
         (docs: any) => {
+          this.elements = [];
           this.docs = docs;
           if (this.docs.api) {
             for (const i in this.docs.api) {
