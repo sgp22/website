@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/filter';
@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
 import { UrlFetcher } from '../../shared/urlFetcher.service';
+import { Comments } from '../../shared/comments.service';
 
 @Component({
   selector: 'app-docs-content-page',
@@ -14,9 +15,10 @@ import { UrlFetcher } from '../../shared/urlFetcher.service';
     UrlParser,
     UrlMapper,
     UrlFetcher,
+    Comments
   ]
 })
-export class DocsContentPageComponent implements OnInit, AfterViewInit {
+export class DocsContentPageComponent implements OnInit {
 
   public path = '';
   public mapPath = '';
@@ -32,6 +34,7 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
   public selectedVersion = '';
   public loading = true;
   public notFound = false;
+  public elements = [];
 
   constructor(
     private router: Router,
@@ -39,13 +42,11 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
     private http: HttpClient,
     private urlParser: UrlParser,
     private urlMapper: UrlMapper,
-    private urlFetcher: UrlFetcher
+    private urlFetcher: UrlFetcher,
+    private comments: Comments
   ) { }
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-
+  ngOnInit() {
     this.route.url
       .subscribe(
         segment => {
@@ -69,7 +70,16 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
       this.urlFetcher.getDocs(`${this.domainPath}/${this.mapPath}`).subscribe(
         (docs: any) => {
+          this.elements = [];
           this.docs = docs;
+          if (this.docs.api) {
+            for (const i in this.docs.api) {
+              if (this.docs.api[i]) {
+                this.elements.push(this.comments.parse(this.docs.api[i]));
+              }
+            }
+          }
+
           this.loading = false;
           this.notFound = false;
         },
@@ -111,7 +121,6 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
       );
 
     });
-
   }
 
   onVersionChange(version) {
