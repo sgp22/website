@@ -26,8 +26,4 @@ describe('url Mapper', () => {
     expect(urlMapper.map(urlTree)).toContain('/api/docs/');
   }));
 
-  it('should throw err', (() => {
-    expect(() => urlMapper.map(urlIncorrectTree)).toThrowError();
-  }));
-
 });

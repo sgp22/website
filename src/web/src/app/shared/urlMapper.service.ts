@@ -9,10 +9,6 @@ export class UrlMapper {
     const segments = tree.root.children.primary.segments;
     const paths = [];
 
-    if (segments.length !== 4) {
-      throw new Error('Unexpected path segments: expected 4');
-    }
-
     for (let i = 0; i < segments.length; i++) {
       paths[i] = segments[i].path;
     }
@@ -29,6 +25,8 @@ export class UrlMapper {
 
     if (paths[3]) {
       compName = paths[3];
+    } else {
+      compName = 'index';
     }
 
     const mapPath = `/api/docs/${libName}/${version}/${compName}.json`;
