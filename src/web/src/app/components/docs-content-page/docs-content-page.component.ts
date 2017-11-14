@@ -107,7 +107,6 @@ export class DocsContentPageComponent implements OnInit, AfterViewInit {
             versions['label'] = file.split('/').slice(-2, -1).join('');
             return versions;
           });
-          console.log(this.versionPaths);
         }
       );
 
