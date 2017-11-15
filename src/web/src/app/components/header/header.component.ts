@@ -5,7 +5,6 @@ import { DisplayGlobalNavService } from '../../shared/display-global-nav.service
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
   providers: [PagesService, DisplayGlobalNavService],
 })
 export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
