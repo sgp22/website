@@ -25,7 +25,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
     this.pagesService.getGlobalNav()
       .subscribe(
         (res: any) => {
-          this.navItems = res.items;
+          this.navItems = res.items.sort((a, b) => {
+            return a.meta.menu_order > b.meta.menu_order ? 1 : -1;
+          });
         }
       );
   }
