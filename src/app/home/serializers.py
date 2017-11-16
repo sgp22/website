@@ -28,13 +28,14 @@ def get_children_hirarchy(obj):
     children_list = []
     children_count = 0
     children = obj.get_children().live()
+    menu_order = getattr(obj.specific, 'menu_order', 0)
 
     if children:
         children_count = children.count()
 
         for child in children:
             children_list.append(get_children_hirarchy(child))
-
+    
     return OrderedDict([
         ('id', obj.id),
         ('title', obj.title),
@@ -43,8 +44,8 @@ def get_children_hirarchy(obj):
         ('url_path', obj.url_path),
         ('children_count', children_count),
         ('children', children_list),
+        ('menu_order', menu_order),
     ])
-
 
 class WagtailImageSerializer(serializers.ModelSerializer):
     """Serializes the image field that is used in
@@ -108,7 +109,7 @@ class PageChildrenField(Field):
 
         return OrderedDict([
             ('children_count', child_structure['children_count']),
-            ('children', child_structure['children'])
+            ('children', child_structure['children']),
         ])
 
 

@@ -36,7 +36,14 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
         res => {
           res['items'].filter((item) => {
             if (item.meta.slug === this.section) {
-              this.sidebarNav = item.meta.children.children;
+              this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
+                item.meta.children.children.map(child => {
+                  child.children.sort((thisGrandChild, nextGrandchild) => {
+                    return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
+                  });
+                });
+                return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
+              });
             }
           });
         }
