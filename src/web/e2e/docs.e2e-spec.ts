@@ -7,9 +7,11 @@ describe('ux-site Docs', () => {
     page = new DocsPage();
   });
 
-  it('should display docs h1 title', () => {
+  it('should contain "tab" in h1 text', () => {
     page.navigateTo();
-    expect(page.getFirstSectionHeading()).toBe('h1');
+    page.getFirstSectionHeadingText().then((text: string) => {
+      expect(text.toLowerCase()).toContain('tab');
+    });
   });
 
   it('should display nav', () => {
