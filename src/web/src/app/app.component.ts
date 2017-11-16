@@ -2,6 +2,7 @@ import { Component, DoCheck } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { DisplayGlobalNavService } from './shared/display-global-nav.service';
 import { Title } from '@angular/platform-browser';
+declare let pendo: Object;
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ export class AppComponent implements DoCheck {
         } else {
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor UX`);
         }
+        pendo;
       }
     });
 
