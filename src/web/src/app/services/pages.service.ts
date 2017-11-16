@@ -5,27 +5,26 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/forkJoin';
-import { environment } from '../../environments/environment';
 
 @Injectable()
 export class PagesService {
 
-  apiUrl = environment.apiUrl;
+  public apiUrl: string = API_SERVER;
+  public apiVersion: string = API_SERVER_VERSION;
 
-  constructor(private http: HttpClient) {
-    console.log('PagesService initialized...');
-  }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getAll() {
-    return this.http.get(`${this.apiUrl}pages`);
+    return this.http.get(`${this.apiUrl}/api/${this.apiVersion}/pages`);
   }
 
   getPage(slug, pageType) {
-    return this.http.get(`${this.apiUrl}pages/?format=json&type=${pageType}&fields=*&slug=${slug}`);
+    return this.http.get(`${this.apiUrl}/api/${this.apiVersion}/pages?format=json&type=${pageType}&fields=*&slug=${slug}`);
   }
 
   getGlobalNav() {
-    return this.http.get(`${this.apiUrl}pages/?format=json&show_in_menus=true`);
+    return this.http.get(`${this.apiUrl}/api/${this.apiVersion}/pages/?format=json&show_in_menus=true`);
   }
-
 }

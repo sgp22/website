@@ -16,6 +16,7 @@ module.exports = webpackMerge(commonConfig, {
   },
   "plugins": [
     new DefinePlugin({
+      "ENV": JSON.stringify(ENV),
       "process.env": {
         "ENV": JSON.stringify(ENV)
       }
@@ -23,9 +24,6 @@ module.exports = webpackMerge(commonConfig, {
     new AngularCompilerPlugin({
       "mainPath": "main.ts",
       "platform": 0,
-      "hostReplacementPaths": {
-        "environments/environment.ts": "environments/environment.prod.ts"
-      },
       "sourceMap": false,
       "tsConfigPath": "src/tsconfig.app.json",
       "compilerOptions": {}

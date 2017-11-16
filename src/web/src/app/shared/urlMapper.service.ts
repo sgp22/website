@@ -5,33 +5,17 @@ import { UrlTree } from '@angular/router';
 export class UrlMapper {
 
   map(tree: UrlTree): string {
-
     const segments = tree.root.children.primary.segments;
-    const paths = [];
-
-    for (let i = 0; i < segments.length; i++) {
-      paths[i] = segments[i].path;
-    }
-
     let libName, version, compName = '';
 
-    if (paths[1]) {
-      libName = paths[1];
-    }
-
-    if (paths[2]) {
-      version = paths[2];
-    }
-
-    if (paths[3]) {
-      compName = paths[3];
+    if (segments[1].path && segments[2].path) {
+      libName  = segments[1].path;
+      version  = segments[2].path;
+      compName = segments[3].path || 'index';
     } else {
-      compName = 'index';
+      throw new Error('Incorrect URL: Missing UrlTree segments');
     }
 
-    const mapPath = `/api/docs/${libName}/${version}/${compName}.json`;
-    return mapPath;
-
+    return `api/docs/${libName}/${version}/${compName}.json`;
   }
-
 }

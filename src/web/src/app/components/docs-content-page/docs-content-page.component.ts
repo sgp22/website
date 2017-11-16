@@ -20,10 +20,9 @@ import * as semver from 'semver';
   ]
 })
 export class DocsContentPageComponent implements OnInit {
-
   public path = '';
   public mapPath = '';
-  public domainPath = 'http://docs-site-staging.us-east-1.elasticbeanstalk.com';
+  public domainPath = API_SERVER;
   public docs: any;
   public section: any;
   public element: any;
@@ -45,7 +44,11 @@ export class DocsContentPageComponent implements OnInit {
     private urlMapper: UrlMapper,
     private urlFetcher: UrlFetcher,
     private comments: Comments
-  ) { }
+  ) {
+    if (this.domainPath.includes('localhost')) {
+      this.domainPath = API_SERVER_PROD;
+    }
+  }
 
   ngOnInit() {
 
