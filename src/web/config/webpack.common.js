@@ -16,7 +16,6 @@ const stylelint = require("stylelint");
 const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
 const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin, SuppressExtractedTextChunksWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin } = require('webpack').optimize;
-const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
@@ -283,17 +282,7 @@ module.exports = {
       "async": "common"
     }),
     new NamedModulesPlugin({}),
-    new SuppressExtractedTextChunksWebpackPlugin(),
-    new AngularCompilerPlugin({
-      "mainPath": "main.ts",
-      "platform": 0,
-      "hostReplacementPaths": {
-        "environments/environment.ts": "environments/environment.ts"
-      },
-      "sourceMap": false,
-      "tsConfigPath": "src/tsconfig.app.json",
-      "compilerOptions": {}
-    })
+    new SuppressExtractedTextChunksWebpackPlugin()
   ],
   "node": {
     "fs": "empty",
