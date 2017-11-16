@@ -5,8 +5,8 @@ export class DocsPage {
     return browser.get('/develop/iux/1.0.0/tab');
   }
 
-  getHeaderText() {
-    return element(by.css('h1')).getText();
+  getFirstSectionHeading () {
+    return element(by.css('h1')).getTagName();
   }
 
   getNavText() {

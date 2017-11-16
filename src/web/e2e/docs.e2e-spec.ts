@@ -9,7 +9,7 @@ describe('ux-site Docs', () => {
 
   it('should display docs h1 title', () => {
     page.navigateTo();
-    expect(page.getHeaderText()).toEqual('Tabs');
+    expect(page.getFirstSectionHeading()).toBe('h1');
   });
 
   it('should display nav', () => {
