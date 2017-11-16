@@ -30,7 +30,6 @@ export class AppComponent implements DoCheck {
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor UX`);
         }
       }
-
     });
 
   }
