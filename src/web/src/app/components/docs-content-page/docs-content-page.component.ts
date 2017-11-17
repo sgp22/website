@@ -48,7 +48,7 @@ export class DocsContentPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     this.route.url.subscribe(segment => {
       this.section = segment[0].path;
       if (segment.length === 4) {
@@ -65,19 +65,19 @@ export class DocsContentPageComponent implements OnInit {
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }
-      
+
       if (urlSegment.length === 4) {
         this.library = urlSegment.slice(1, -2).join('');
       } else {
         this.library = urlSegment.slice(1, -1).join('');
       }
-      
+
       this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.library}`)
         .subscribe(res => {
 
           let latestVersion = '';
 
-          this.versionPaths = res["files"].map(file => {
+          this.versionPaths = res['files'].map(file => {
             const versions = {};
             versions['full'] = file.replace(/docs/, '');
             versions['label'] = file.split('/').slice(-2, -1).join('');
@@ -87,9 +87,9 @@ export class DocsContentPageComponent implements OnInit {
           });
 
           latestVersion = this.versionPaths[0]['label'];
-          
-          this.path = urlSegment.join("/");
-          if (this.path.indexOf("latest") !== -1) {
+
+          this.path = urlSegment.join('/');
+          if (this.path.indexOf('latest') !== -1) {
             const latestPath = this.path.replace(/latest/, latestVersion);
             this.mapPath = this.urlMapper.map(this.urlParser.parse(latestPath));
           } else {
@@ -118,22 +118,20 @@ export class DocsContentPageComponent implements OnInit {
           if (urlSegment.length === 4) {
             this.sidebarPath = urlSegment.slice(1, -1).join('/');
           } else {
-            if(urlSegment[2] === 'latest') {
-              const latestPath = urlSegment.slice(1, 3).join("/");
+            if (urlSegment[2] === 'latest') {
+              const latestPath = urlSegment.slice(1, 3).join('/');
               this.sidebarPath = latestPath.replace(/latest/, latestVersion);
             } else {
               this.sidebarPath = urlSegment.slice(1, 3).join('/');
             }
-          } 
+          }
 
           this.selectedVersion = `/${this.sidebarPath}/`;
 
           this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
-          .subscribe(
-            res => {
-              this.sidebarNav = res['sections'];
-            }
-          );
+            .subscribe(sidebar => {
+              this.sidebarNav = sidebar['sections'];
+            });
 
         });
 
