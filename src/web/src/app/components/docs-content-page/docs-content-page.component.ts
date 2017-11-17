@@ -7,6 +7,7 @@ import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
 import { UrlFetcher } from '../../shared/urlFetcher.service';
 import { Comments } from '../../shared/comments.service';
+import * as semver from 'semver';
 
 @Component({
   selector: 'app-docs-content-page',
@@ -47,7 +48,7 @@ export class DocsContentPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    
     this.route.url.subscribe(segment => {
       this.section = segment[0].path;
       if (segment.length === 4) {
@@ -82,7 +83,7 @@ export class DocsContentPageComponent implements OnInit {
             versions['label'] = file.split('/').slice(-2, -1).join('');
             return versions;
           }).sort((a, b) => {
-            return a > b ? 1 : -1;
+            return semver.compare(a.label, b.label);
           });
 
           latestVersion = this.versionPaths[0]['label'];
