@@ -8,7 +8,6 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-core-content-page',
   templateUrl: './core-content-page.component.html',
-  styleUrls: ['./core-content-page.component.css'],
   providers: [PagesService]
 })
 export class CoreContentPageComponent implements OnInit, AfterViewInit {

@@ -5,7 +5,6 @@ import { PagesService } from '../../services/pages.service';
 @Component({
   selector: 'app-element-page',
   templateUrl: './element-page.component.html',
-  styleUrls: ['./element-page.component.css'],
   providers: [PagesService]
 })
 export class ElementPageComponent implements OnInit, AfterViewInit {

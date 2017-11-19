@@ -7,7 +7,6 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.css'],
   providers: [PagesService]
 })
 export class LandingPageComponent implements OnInit, AfterViewInit {

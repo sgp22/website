@@ -14,7 +14,7 @@ const postcssCssnext = require('postcss-cssnext');
 const stylelint = require("stylelint");
 
 const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
-const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/plugins/webpack');
+const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin, SuppressExtractedTextChunksWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin } = require('webpack').optimize;
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
@@ -79,6 +79,7 @@ module.exports = {
   },
   "resolveLoader": {
     "modules": [
+      "./node_modules",
       "./node_modules"
     ]
   },
@@ -119,12 +120,29 @@ module.exports = {
         "loader": "url-loader?name=[name].[hash:20].[ext]&limit=10000"
       },
       {
+        "test": /\.js$/,
+        "use": [
+          {
+            "loader": "@angular-devkit/build-optimizer/webpack-loader",
+            "options": {
+              "sourceMap": true
+            }
+          }
+        ]
+      },
+      {
+        "include": [
+          path.join(process.cwd(), "src/styles.css")
+        ],
         test: /\.css$/,
         use: [
           { "loader": "raw-loader" }
         ]
       },
       {
+        "include": [
+          path.join(process.cwd(), "src/styles.css")
+        ],
         "test": /\.css$/,
         "use": ExtractTextPlugin.extract({
           "fallback": "style-loader",
@@ -146,8 +164,16 @@ module.exports = {
         })
       },
       {
-        "test": /\.ts$/,
-        "loader": "@ngtools/webpack"
+        "test": /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+        "use": [
+          {
+            "loader": "@angular-devkit/build-optimizer/webpack-loader",
+            "options": {
+              "sourceMap": true
+            }
+          },
+          "@ngtools/webpack"
+        ]
       }
     ]
   },
@@ -255,7 +281,8 @@ module.exports = {
       "minChunks": 2,
       "async": "common"
     }),
-    new NamedModulesPlugin({})
+    new NamedModulesPlugin({}),
+    new SuppressExtractedTextChunksWebpackPlugin()
   ],
   "node": {
     "fs": "empty",
