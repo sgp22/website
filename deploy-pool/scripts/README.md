@@ -39,7 +39,7 @@ docker service create \
     --mount type=volume,src=docs-staging-media-data,dst=/home/app/media/ \
     --publish 9003 \
     --publish 9002:9002 \
-    docker.infor.com/hookandloop/docs_backend_pool:1.0.1
+    docker.infor.com/hookandloop/docs_backend_pool:1.0.0
 ```
 
 ## Create the nginx service
