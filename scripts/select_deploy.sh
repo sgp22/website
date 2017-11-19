@@ -62,10 +62,21 @@ fi
 # run make command
 make -f "${ROOTDIR}/Makefile" ${MAKECOMMAND}
 
+curl -X POST -u admin:n98Y-uhPb-llGa-LdUl http://usalvlhlpool1/swarm/update_config
+curl -X POST -u admin:n98Y-uhPb-llGa-LdUl http://usalvlhlpool1/swarm/reload_nginx
+
 # revert the state of the directories
-rm -f ${ROOTDIR}/Dockerrun.aws.json
+declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
+                "${ROOTDIR}/scripts/predeploy_env_vars.sh"
+                "${ROOTDIR}/scripts/build_push_images.sh"
+                )
+
+for i in "${to_delete[@]}"
+do
+   rm -f "$i"
+done
 
 git fetch
-git checkout scripts src/config Makefile
+git checkout src/config Makefile
 
 exec bash
