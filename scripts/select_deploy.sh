@@ -68,6 +68,7 @@ curl -X POST -u admin:n98Y-uhPb-llGa-LdUl http://usalvlhlpool1/swarm/reload_ngin
 # revert the state of the directories
 declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
                 "${ROOTDIR}/scripts/predeploy_env_vars.sh"
+                "${ROOTDIR}/scripts/create_services.sh"
                 "${ROOTDIR}/scripts/build_push_images.sh"
                 )
 
