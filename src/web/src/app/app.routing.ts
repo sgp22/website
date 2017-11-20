@@ -38,11 +38,15 @@ const appRoutes: Routes = [
     component: CoreContentPageComponent
   },
   {
-    path: ':branch/:library/:version/:component',
+    path: 'develop/:library/:version/:component',
     component: DocsContentPageComponent
   },
   {
-    path: ':branch/:library/:version',
+    path: 'develop/:library/:version',
+    component: DocsContentPageComponent
+  },
+  {
+    path: 'develop/:library/latest',
     component: DocsContentPageComponent
   },
   {

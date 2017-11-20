@@ -28,6 +28,7 @@
     "@infor/documentation-css": "0.1.4",
     "@infor/iux": "github:d-g-h/soho-foundation#install-iux",
     "core-js": "^2.4.1",
+    "semver": "5.4.1",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
