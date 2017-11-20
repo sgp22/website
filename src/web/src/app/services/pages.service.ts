@@ -9,8 +9,8 @@ import 'rxjs/add/observable/forkJoin';
 @Injectable()
 export class PagesService {
 
-  public apiUrl: string = API_SERVER;
-  public apiVersion: string = API_SERVER_VERSION;
+  public apiUrl: string = DOMAIN;
+  public apiVersion: string = DOMAIN_VERSION;
 
   constructor(
     private http: HttpClient

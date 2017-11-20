@@ -22,7 +22,7 @@ import * as semver from 'semver';
 export class DocsContentPageComponent implements OnInit {
   public path = '';
   public mapPath = '';
-  public domainPath = API_SERVER;
+  public domainPath = DOMAIN;
   public docs: any;
   public section: any;
   public element: any;
@@ -46,7 +46,7 @@ export class DocsContentPageComponent implements OnInit {
     private comments: Comments
   ) {
     if (this.domainPath.includes('localhost')) {
-      this.domainPath = API_SERVER_PROD;
+      this.domainPath = DOMAIN_PROD;
     }
   }
 

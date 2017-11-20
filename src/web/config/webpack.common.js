@@ -182,14 +182,14 @@ module.exports = {
   "plugins": [
     new DefinePlugin({
       "ENV": JSON.stringify(ENV) || 'development',
-      "API_SERVER": JSON.stringify(process.env.API_SERVER) || JSON.stringify('http://localhost'),
-      "API_SERVER_PROD": JSON.stringify(process.env.API_SERVER_PROD) || JSON.stringify('http://docs-site-staging.us-east-1.elasticbeanstalk.com'),
-      "API_SERVER_VERSION": JSON.stringify(process.env.API_SERVER_VERSION) || JSON.stringify('v2'),
+      "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify('http://localhost'),
+      "DOMAIN_PROD": JSON.stringify(process.env.DOMAIN_PROD) || JSON.stringify('http://docs-site-staging.us-east-1.elasticbeanstalk.com'),
+      "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify('v2'),
       "process.env": {
         "ENV": JSON.stringify(ENV) || 'development',
-        "API_SERVER_PROD": JSON.stringify(process.env.API_SERVER_PROD) || JSON.stringify('http://docs-site-staging.us-east-1.elasticbeanstalk.com'),
-        "API_SERVER": JSON.stringify(process.env.API_SERVER) || JSON.stringify('http://localhost'),
-        "API_SERVER_VERSION": JSON.stringify(process.env.API_SERVER_VERSION) || JSON.stringify('v2')
+        "DOMAIN_PROD": JSON.stringify(process.env.DOMAIN_PROD) || JSON.stringify('http://docs-site-staging.us-east-1.elasticbeanstalk.com'),
+        "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify('http://localhost'),
+        "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify('v2')
       }
     }),
     new NoEmitOnErrorsPlugin(),
