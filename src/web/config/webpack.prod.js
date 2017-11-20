@@ -2,10 +2,7 @@ const path = require("path");
 const webpackMerge = require("webpack-merge");
 const commonConfig = require("./webpack.common.js");
 const DefinePlugin = require("webpack/lib/DefinePlugin");
-const nodeModules = path.join(process.cwd(), "node_modules");
-const { CommonsChunkPlugin } = require("webpack").optimize;
-const { AotPlugin } = require('@ngtools/webpack');
-
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const ENV = process.env.NODE_ENV = process.env.ENV = "production";
 
 module.exports = webpackMerge(commonConfig, {
@@ -23,26 +20,15 @@ module.exports = webpackMerge(commonConfig, {
         "ENV": JSON.stringify(ENV)
       }
     }),
-    new AotPlugin({
+    new AngularCompilerPlugin({
       "mainPath": "main.ts",
-      "replaceExport": false,
+      "platform": 0,
       "hostReplacementPaths": {
         "environments/environment.ts": "environments/environment.prod.ts"
       },
-      "exclude": [],
+      "sourceMap": false,
       "tsConfigPath": "src/tsconfig.app.json",
-      "skipCodeGeneration": true
-    }),
-    new CommonsChunkPlugin({
-      "name": "inline",
-      "minChunks": null
-    }),
-    new CommonsChunkPlugin({
-      "name": "vendor",
-      "minChunks": (module) => module.resource && module.resource.startsWith(nodeModules),
-      "chunks": [
-        "main"
-      ]
-    }),
-  ],
+      "compilerOptions": {}
+    })
+  ]
 });

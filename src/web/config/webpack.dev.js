@@ -1,8 +1,9 @@
 const path = require("path");
-const { ContextReplacementPlugin } = require("webpack");
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
-const { AotPlugin } = require('@ngtools/webpack');
+const DefinePlugin = require("webpack/lib/DefinePlugin");
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
+const ENV = process.env.NODE_ENV = process.env.ENV = "development";
 
 module.exports = webpackMerge(commonConfig, {
   "module": {
@@ -17,19 +18,20 @@ module.exports = webpackMerge(commonConfig, {
     ]
   },
   "plugins": [
-    new ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)@angular/,
-      path.resolve(__dirname, '../src')
-    ),
-    new AotPlugin({
+    new DefinePlugin({
+      "process.env": {
+        "ENV": JSON.stringify(ENV)
+      }
+    }),
+    new AngularCompilerPlugin({
       "mainPath": "main.ts",
-      "replaceExport": false,
+      "platform": 0,
       "hostReplacementPaths": {
         "environments/environment.ts": "environments/environment.ts"
       },
-      "exclude": [],
+      "sourceMap": false,
       "tsConfigPath": "src/tsconfig.app.json",
-      "skipCodeGeneration": true
-    }),
+      "compilerOptions": {}
+    })
   ]
 });
