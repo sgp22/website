@@ -192,12 +192,12 @@ module.exports = {
     new DefinePlugin({
       "ENV": JSON.stringify(ENV) || "development",
       "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify("http://localhost"),
-      "DOMAIN_PROD": JSON.stringify(process.env.DOMAIN_PROD) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
+      "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
       "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
       "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
       "process.env": {
         "ENV": JSON.stringify(ENV) || "development",
-        "DOMAIN_PROD": JSON.stringify(process.env.DOMAIN_PROD) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
+        "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
         "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify("http://localhost"),
         "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
         "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),

@@ -22,7 +22,7 @@ import * as semver from 'semver';
 export class DocsContentPageComponent implements OnInit {
   public path = '';
   public mapPath = '';
-  public domainPath = DOMAIN;
+  public domainPath = DOMAIN_DOCS_API;
   public docs: any;
   public section: any;
   public element: any;
@@ -44,11 +44,7 @@ export class DocsContentPageComponent implements OnInit {
     private urlMapper: UrlMapper,
     private urlFetcher: UrlFetcher,
     private comments: Comments
-  ) {
-    if (this.domainPath.includes('localhost')) {
-      this.domainPath = DOMAIN_PROD;
-    }
-  }
+  ) { }
 
   ngOnInit() {
 
