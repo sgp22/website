@@ -6,6 +6,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
@@ -66,6 +67,13 @@ const postcssPlugins = function () {
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
 const ENV = process.env.NODE_ENV = process.env.ENV = "development";
+let DOMAIN = process.env.DOMAIN || "";
+const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "";
+
+// Subdirectory app root for pool server
+if (ROOT_URL_PATH && ROOT_URL_PATH.length) {
+  DOMAIN = `${DOMAIN}/${ROOT_URL_PATH}`;
+}
 
 module.exports = {
   "resolve": {
@@ -96,6 +104,7 @@ module.exports = {
   },
   "output": {
     "path": path.join(process.cwd(), "dist"),
+    "publicPath": DOMAIN,
     "filename": "[name].bundle.js",
     "chunkFilename": "[id].chunk.js"
   },
@@ -181,15 +190,17 @@ module.exports = {
   },
   "plugins": [
     new DefinePlugin({
-      "ENV": JSON.stringify(ENV) || 'development',
-      "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify('http://localhost'),
-      "DOMAIN_PROD": JSON.stringify(process.env.DOMAIN_PROD) || JSON.stringify('http://docs-site-staging.us-east-1.elasticbeanstalk.com'),
-      "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify('v2'),
+      "ENV": JSON.stringify(ENV) || "development",
+      "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify("http://localhost"),
+      "DOMAIN_PROD": JSON.stringify(process.env.DOMAIN_PROD) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
+      "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
+      "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
       "process.env": {
-        "ENV": JSON.stringify(ENV) || 'development',
-        "DOMAIN_PROD": JSON.stringify(process.env.DOMAIN_PROD) || JSON.stringify('http://docs-site-staging.us-east-1.elasticbeanstalk.com'),
-        "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify('http://localhost'),
-        "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify('v2')
+        "ENV": JSON.stringify(ENV) || "development",
+        "DOMAIN_PROD": JSON.stringify(process.env.DOMAIN_PROD) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
+        "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify("http://localhost"),
+        "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
+        "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
       }
     }),
     new NoEmitOnErrorsPlugin(),
@@ -245,7 +256,6 @@ module.exports = {
       "showErrors": true,
       "chunks": "all",
       "excludeChunks": [],
-      "title": "Webpack App",
       "xhtml": true,
       "chunksSortMode": function sort(left, right) {
         let leftIndex = entryPoints.indexOf(left.names[0]);
@@ -259,7 +269,15 @@ module.exports = {
         else {
             return 0;
         }
-    }
+      }
+    }),
+    new HtmlWebpackIncludeAssetsPlugin({
+      assets: [
+        "assets/documentation-css/css/documentation.min.css",
+        "assets/iux/css/iux.min.css"
+      ],
+      append: true,
+      publicPath: true
     }),
     new BaseHrefWebpackPlugin({}),
     new CommonsChunkPlugin({
