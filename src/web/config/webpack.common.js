@@ -199,7 +199,7 @@ module.exports = {
       {
         "context": "src/",
         "to": "assets/iux/css",
-        "from": "../node_modules/@infor/iux/src/packages/iux-components-webapp/dist"
+        "from": "../node_modules/@infor/iux-components/dist"
       },
       {
         "context": "src/",
