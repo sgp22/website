@@ -213,12 +213,12 @@ module.exports = {
       {
         "context": "src/",
         "to": "assets/iux/css",
-        "from": "../node_modules/@infor/iux-components/dist"
+        "from": "../node_modules/@infor/iux-components/dist/iux.min.css"
       },
       {
         "context": "src/",
         "to": "assets/documentation-css/css",
-        "from": "../node_modules/@infor/documentation-css/dist"
+        "from": "../node_modules/@infor/documentation-css/dist/documentation.min.css"
       }
     ], {
       "ignore": [
