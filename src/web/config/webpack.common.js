@@ -68,7 +68,8 @@ const postcssPlugins = function () {
 };
 const ENV = process.env.NODE_ENV = process.env.ENV || "development";
 const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "/";
-let DOMAIN = process.env.DOMAIN || "";
+
+let DOMAIN = process.env.DOMAIN || "http://localhost";
 let METADATA = {
   baseUrl: `${ROOT_URL_PATH}`,
 };
