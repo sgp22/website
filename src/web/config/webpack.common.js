@@ -66,7 +66,7 @@ const postcssPlugins = function () {
       ]),
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
-const ENV = process.env.NODE_ENV = process.env.ENV = "development";
+const ENV = process.env.NODE_ENV = process.env.ENV || "development";
 const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "/";
 let DOMAIN = process.env.DOMAIN || "";
 let METADATA = {
@@ -200,14 +200,14 @@ module.exports = {
   "plugins": [
     new DefinePlugin({
       "ENV": JSON.stringify(ENV) || "development",
-      "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify("http://localhost"),
+      "DOMAIN": JSON.stringify(DOMAIN) || JSON.stringify("http://localhost"),
       "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
       "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
       "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
       "process.env": {
         "ENV": JSON.stringify(ENV) || "development",
         "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
-        "DOMAIN": JSON.stringify(process.env.DOMAIN) || JSON.stringify("http://localhost"),
+        "DOMAIN": JSON.stringify(DOMAIN) || JSON.stringify("http://localhost"),
         "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
         "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
       }
@@ -260,7 +260,7 @@ module.exports = {
       "metadata": METADATA,
       "inject": true,
       "compile": true,
-      "favicon": false,
+      "favicon": "./src/favicon.ico",
       "minify": false,
       "cache": true,
       "showErrors": true,
