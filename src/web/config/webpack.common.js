@@ -67,11 +67,16 @@ const postcssPlugins = function () {
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
 const ENV = process.env.NODE_ENV = process.env.ENV = "development";
-let DOMAIN = process.env.DOMAIN || "";
 const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "/";
-const METADATA = {
-  baseUrl: ROOT_URL_PATH,
+let DOMAIN = process.env.DOMAIN || "";
+let METADATA = {
+  baseUrl: `${ROOT_URL_PATH}`,
 };
+
+// Add leading slash
+if (process.env.ROOT_URL_PATH) {
+  METADATA.baseUrl = `/${ROOT_URL_PATH}`;
+}
 
 // Subdirectory app root for pool server
 if (ROOT_URL_PATH !== "/") {
