@@ -74,7 +74,7 @@ const METADATA = {
 };
 
 // Subdirectory app root for pool server
-if (ROOT_URL_PATH && ROOT_URL_PATH.length && ROOT_URL_PATH !== '/') {
+if (ROOT_URL_PATH !== "/") {
   DOMAIN = `${DOMAIN}/${ROOT_URL_PATH}`;
 }
 
