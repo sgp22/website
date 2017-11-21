@@ -68,10 +68,13 @@ const postcssPlugins = function () {
 };
 const ENV = process.env.NODE_ENV = process.env.ENV = "development";
 let DOMAIN = process.env.DOMAIN || "";
-const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "";
+const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "/";
+const METADATA = {
+  baseUrl: ROOT_URL_PATH,
+};
 
 // Subdirectory app root for pool server
-if (ROOT_URL_PATH && ROOT_URL_PATH.length) {
+if (ROOT_URL_PATH && ROOT_URL_PATH.length && ROOT_URL_PATH !== '/') {
   DOMAIN = `${DOMAIN}/${ROOT_URL_PATH}`;
 }
 
@@ -120,7 +123,8 @@ module.exports = {
       },
       {
         "test": /\.html$/,
-        "loader": "raw-loader"
+        "loader": "raw-loader",
+        "exclude": path.join(process.cwd(), "src/index.html")
       },
       {
         "test": /\.(eot|svg|cur)$/,
@@ -248,6 +252,7 @@ module.exports = {
       "template": "./src/index.html",
       "filename": "./index.html",
       "hash": false,
+      "metadata": METADATA,
       "inject": true,
       "compile": true,
       "favicon": false,
