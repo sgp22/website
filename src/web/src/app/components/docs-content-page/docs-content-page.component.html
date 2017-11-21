@@ -69,7 +69,7 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="!loading" [innerHTML]="docs?.body"></div>
+    <div *ngIf="!loading" #link [innerHTML]="docs?.body" (click)="relativeLinks(link)"></div>
   </div>
 
 </div>

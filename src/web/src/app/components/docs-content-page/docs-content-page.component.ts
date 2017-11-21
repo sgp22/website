@@ -12,15 +12,9 @@ import * as semver from 'semver';
 @Component({
   selector: 'app-docs-content-page',
   templateUrl: './docs-content-page.component.html',
-  providers: [
-    UrlParser,
-    UrlMapper,
-    UrlFetcher,
-    Comments
-  ]
+  providers: [UrlParser, UrlMapper, UrlFetcher, Comments]
 })
 export class DocsContentPageComponent implements OnInit {
-
   public path = '';
   public mapPath = '';
   public domainPath = 'http://docs-site-staging.us-east-1.elasticbeanstalk.com';
@@ -45,10 +39,9 @@ export class DocsContentPageComponent implements OnInit {
     private urlMapper: UrlMapper,
     private urlFetcher: UrlFetcher,
     private comments: Comments
-  ) { }
+  ) {}
 
   ngOnInit() {
-
     this.route.url.subscribe(segment => {
       this.section = segment[0].path;
       if (segment.length === 4) {
@@ -61,7 +54,6 @@ export class DocsContentPageComponent implements OnInit {
     const urlSegment = [];
 
     this.route.url.subscribe(segment => {
-
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }
@@ -72,19 +64,24 @@ export class DocsContentPageComponent implements OnInit {
         this.library = urlSegment.slice(1, -1).join('');
       }
 
-      this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.library}`)
+      this.urlFetcher
+        .getDocs(`${this.domainPath}/api/docs/${this.library}`)
         .subscribe(res => {
-
           let latestVersion = '';
 
-          this.versionPaths = res['files'].map(file => {
-            const versions = {};
-            versions['full'] = file.replace(/docs/, '');
-            versions['label'] = file.split('/').slice(-2, -1).join('');
-            return versions;
-          }).sort((a, b) => {
-            return semver.compare(a.label, b.label);
-          });
+          this.versionPaths = res['files']
+            .map(file => {
+              const versions = {};
+              versions['full'] = file.replace(/docs/, '');
+              versions['label'] = file
+                .split('/')
+                .slice(-2, -1)
+                .join('');
+              return versions;
+            })
+            .sort((a, b) => {
+              return semver.compare(a.label, b.label);
+            });
 
           latestVersion = this.versionPaths[0]['label'];
 
@@ -96,51 +93,58 @@ export class DocsContentPageComponent implements OnInit {
             this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
           }
 
-          this.urlFetcher.getDocs(`${this.domainPath}/${this.mapPath}`).subscribe(
-            (docs: any) => {
-              this.elements = [];
-              this.docs = docs;
-              if (this.docs.api) {
-                for (const i in this.docs.api) {
-                  if (this.docs.api[i]) {
-                    this.elements.push(this.comments.parse(this.docs.api[i]));
+          this.urlFetcher
+            .getDocs(`${this.domainPath}/${this.mapPath}`)
+            .subscribe(
+              (docs: any) => {
+                this.elements = [];
+                this.docs = docs;
+                if (this.docs.api) {
+                  for (const i in this.docs.api) {
+                    if (this.docs.api[i]) {
+                      this.elements.push(this.comments.parse(this.docs.api[i]));
+                    }
                   }
                 }
+                this.loading = false;
+                this.notFound = false;
+              },
+              err => {
+                this.notFound = true;
               }
-              this.loading = false;
-              this.notFound = false;
-            },
-            err => {
-              this.notFound = true;
-            }
-          );
+            );
 
-          if (urlSegment.length === 4) {
-            this.sidebarPath = urlSegment.slice(1, -1).join('/');
+          if (urlSegment[2] === 'latest') {
+            const latestPath = urlSegment.slice(1, 3).join('/');
+            this.sidebarPath = latestPath.replace(/latest/, latestVersion);
           } else {
-            if (urlSegment[2] === 'latest') {
-              const latestPath = urlSegment.slice(1, 3).join('/');
-              this.sidebarPath = latestPath.replace(/latest/, latestVersion);
+            if (urlSegment.length === 4) {
+              this.sidebarPath = urlSegment.slice(1, -1).join('/');
             } else {
               this.sidebarPath = urlSegment.slice(1, 3).join('/');
             }
           }
 
           this.selectedVersion = `/${this.sidebarPath}/`;
-
-          this.urlFetcher.getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
+          this.urlFetcher
+            .getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
             .subscribe(sidebar => {
               this.sidebarNav = sidebar['sections'];
             });
-
         });
-
     });
-
   }
 
   onVersionChange(version) {
     this.router.navigate([version]);
+  }
+
+  relativeLinks(link) {
+    event.preventDefault();
+    if (event.target.tagName.toLowerCase() === 'a') {
+      const relattiveLink = event.target.getAttribute('href').replace(/(^\.\/|.html$)/g, '');
+      this.router.navigate([`${this.path}/${relattiveLink}`]);
+    }
   }
 
 }
