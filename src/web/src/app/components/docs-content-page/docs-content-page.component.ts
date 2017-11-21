@@ -142,8 +142,8 @@ export class DocsContentPageComponent implements OnInit {
   relativeLinks(link) {
     event.preventDefault();
     const el = event.target as HTMLElement;
-    if (el.tagName.toLowerCase() === "a") {
-      const relativeLink = el.getAttribute("href").replace(/(^\.\/|.html$)/g, "");
+    if (el.tagName.toLowerCase() === 'a') {
+      const relativeLink = el.getAttribute('href').replace(/(^\.\/|.html$)/g, '');
       this.router.navigate([`${this.path}/${relativeLink}`]);
     }
   }
