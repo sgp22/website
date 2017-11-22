@@ -5,17 +5,14 @@ import { UrlTree } from '@angular/router';
 describe('url Mapper', () => {
   let urlMapper: UrlMapper;
   let urlTree: UrlTree;
-  let urlIncorrectTree: UrlTree;
   let urlParser: UrlParser;
-  let correctPath, inCorrectPath = '';
+  let correctPath;
 
   beforeEach(() => {
     urlParser = new UrlParser();
     urlMapper = new UrlMapper();
-    correctPath = '/develop/iux/1.0.0/adaptive';
-    inCorrectPath = '/test/test/develop/tempo/1.0.0/adaptive';
+    correctPath = 'cats/dogs/v9999/test';
     urlTree = urlParser.parse(correctPath);
-    urlIncorrectTree = urlParser.parse(inCorrectPath);
   });
 
   it('should create map object', (() => {
@@ -23,7 +20,7 @@ describe('url Mapper', () => {
   }));
 
   it('should create docs path', (() => {
-    expect(urlMapper.map(urlTree)).toContain('/api/docs/');
+    expect(urlMapper.map(urlTree)).toContain('api/docs/dogs/v9999/test.json');
   }));
 
 });

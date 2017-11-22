@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() displayGlobalNav: any;
   public navItems: any;
   public loading = true;
+  public domain: string = DOMAIN;
 
   constructor(
     private pagesService: PagesService,

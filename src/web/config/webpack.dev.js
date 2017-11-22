@@ -6,6 +6,9 @@ const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const ENV = process.env.NODE_ENV = process.env.ENV = "development";
 
 module.exports = webpackMerge(commonConfig, {
+  "output": {
+    "publicPath": ""
+  },
   "module": {
     "rules": [
       {
@@ -26,9 +29,6 @@ module.exports = webpackMerge(commonConfig, {
     new AngularCompilerPlugin({
       "mainPath": "main.ts",
       "platform": 0,
-      "hostReplacementPaths": {
-        "environments/environment.ts": "environments/environment.ts"
-      },
       "sourceMap": false,
       "tsConfigPath": "src/tsconfig.app.json",
       "compilerOptions": {}
