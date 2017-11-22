@@ -2,10 +2,9 @@
 
 set -e
 
-ORG=hookandloop
-REGISTRY=docker.infor.com
-BACKEND_VERSION=1.0.0
-NGINX_VERSION=1.0.0
+API_USER=hookandloop
+API_PASS=hookandloop
+SWARM_URL=http://usalvlhlpool1.infor.com/swarmproxy
 BACKEND_VERSION_ON_POOL=1.0.0
 NGINX_VERSION_ON_POOL=1.0.0
 BACKEND_POOL_CONTAINER=docs_backend_pool
@@ -14,7 +13,7 @@ NGINX_POOL_CONTAINER=docs_nginx_pool
 BODY_PULL_NGINX_IMAGE=$(cat  << EOF
 {
     "image_name": "docker.infor.com/hookandloop/$NGINX_POOL_CONTAINER",
-    "image_version": "$NGINX_VER"
+    "image_version": "$NGINX_VERSION_ON_POOL"
 }
 EOF
 )
@@ -22,7 +21,7 @@ EOF
 BODY_PULL_BACKEND_IMAGE=$(cat  << EOF
 {
     "image_name": "docker.infor.com/hookandloop/$BACKEND_POOL_CONTAINER",
-    "image_version": "$BACKEND_VERSION"
+    "image_version": "$BACKEND_VERSION_ON_POOL"
 }
 EOF
 )

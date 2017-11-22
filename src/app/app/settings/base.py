@@ -157,7 +157,7 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-ROOT_URL_PATH = os.getenv('ROOT_URL_PATH', '/')
+ROOT_URL_PATH = os.getenv('ROOT_URL_PATH', None)
 S3_STORAGE = os.getenv('S3_STORAGE', 'false').lower() == 'true'
 
 STATICFILES_FINDERS = [
@@ -170,10 +170,14 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = "/%s/static/" % ROOT_URL_PATH
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = "/%s/media/" % ROOT_URL_PATH
+
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+
+if ROOT_URL_PATH:
+    STATIC_URL = "/%s/static/" % ROOT_URL_PATH
+    MEDIA_URL = "/%s/media/" % ROOT_URL_PATH
 
 if S3_STORAGE:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
