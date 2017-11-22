@@ -1,6 +1,35 @@
-# All services need to stay on the soho-pool network so hl-nginx-swarm service can see it
+# Deploy steps, to pool and AWS
+
+- AWS
+
+```shell
+export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+export DOMAIN=<DOMAIN>
+export ENV=<ENV>
+```
+
+- Pool
+
+```shell
+export DOMAIN=<DOMAIN>
+export ENV=<ENV>
+export ROOT_URL_PATH=<ROOT_URL_PATH>
+```
+
+- `. ./deploy-pool/scripts/predeploy_env_vars.sh`
+- Pool `. ./scripts/select_deploy.sh -f deploy-pool -c deploy`
+- AWS `. ./scripts/select_deploy.sh -f deploy-aws -c deploy`
+
+On a fresh setup on pool or prod we need to set permissions for the media folder.
+TODO: Change the loose permissons and implement minio.
+
+- `mkdir -p /home/app/media/`
+- `chmod 777 -R /home/app/media/`
 
 ## Create Minio service
+
+All services need to stay on the soho-pool network so hl-nginx-swarm service can see it
 
 ```shell
 docker service create \

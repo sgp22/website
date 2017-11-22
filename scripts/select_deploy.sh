@@ -34,9 +34,11 @@ if [ -z ${MAKECOMMAND} ]; then
 fi
 
 NGINX_PATH=$(env | grep -w "NGINX_PATH" | grep -oe '[^=]*$' || true);
+DJANGO_URL_PATH=$(env | grep -w "DJANGO_URL_PATH" | grep -oe '[^=]*$' || true);
 ROOTDIR="$( cd "$(dirname `dirname "${BASH_SOURCE[0]}"` )" && pwd )"
 DIRECTORY="${ROOTDIR}/${SOURCEFOLDER}"
 NGINX_CONFIG_FILE_PATH="$ROOTDIR/src/config/nginx/frontend.conf"
+URLS_CONFIG_FILE_PATH="$ROOTDIR/src/app/app/urls.py"
 RED='\033[0;31m'
 NC='\033[0m'
 ERROR_STR=${RED}Error${NC}: 
@@ -55,21 +57,27 @@ if [ -e "$NGINX_CONFIG_FILE_PATH" ] && [ -n "$NGINX_PATH" ]; then
     } || { # catch
         printf "$ERROR_STR Something is wrong with the sed command, make sure your NGINX_PATH var is properly set.\n"
     }
-else
-    printf "$ERROR_STR NGINX_PATH var is not set or nginx config file does not exist...\n"
+fi
+
+if [ -e "$URLS_CONFIG_FILE_PATH" ] && [ -n "$DJANGO_URL_PATH" ]; then
+    {
+        sed -i '' -e "s/<DJANGO_URL_PATH>/$DJANGO_URL_PATH/g" "$URLS_CONFIG_FILE_PATH"
+    } || { # catch
+        printf "$ERROR_STR Something is wrong with the sed command, make sure your DJANGO_URL_PATH var is properly set.\n"
+    }
 fi
 
 # run make command
 make -f "${ROOTDIR}/Makefile" ${MAKECOMMAND}
-
-curl -X POST -u admin:n98Y-uhPb-llGa-LdUl http://usalvlhlpool1/swarm/update_config
-curl -X POST -u admin:n98Y-uhPb-llGa-LdUl http://usalvlhlpool1/swarm/reload_nginx
 
 # revert the state of the directories
 declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
                 "${ROOTDIR}/scripts/predeploy_env_vars.sh"
                 "${ROOTDIR}/scripts/create_services.sh"
                 "${ROOTDIR}/scripts/build_push_images.sh"
+                "${ROOTDIR}/scripts/post_deploy.sh"
+                "${ROOTDIR}/scripts/eb_deploy.sh"
+                "${ROOTDIR}/scripts/eb_env_vars.sh"
                 )
 
 for i in "${to_delete[@]}"
@@ -78,6 +86,6 @@ do
 done
 
 git fetch
-git checkout src/config Makefile
+#git checkout src Makefile
 
 exec bash

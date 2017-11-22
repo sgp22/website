@@ -14,6 +14,8 @@ printf "
 FROM hookandloop/docs-backend:$BACKEND_VERSION
 MAINTAINER Hook & Loop Dev <hookandloopjenkins@gmail.com>\n
 
+ENV DJANGO_URL_PATH $DJANGO_URL_PATH\n
+ENV ROOT_URL_PATH $ROOT_URL_PATH\n
 ADD ./src/app /home/app\n
 ADD ./src/config /home/config\n
 ADD ./src/config/supervisor/backend.conf /etc/supervisor/conf.d/backend.conf\n" > Dockerfile
