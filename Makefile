@@ -52,7 +52,7 @@ restart_vm :
 	docker-machine restart
 
 
-# Web.
+# Web
 run_dev :
 	cd src/web && npm install && npm run start
 
@@ -60,15 +60,7 @@ build_prod :
 	cd src/web && npm install && npm run build
 
 
-# ElasticBeanstalk
-eb_setup :
-	. scripts/eb_env_vars.sh
-
-eb_deploy : build_prod
-	eb use docs-site-staging && \
-	. scripts/eb_deploy.sh
-
-
+# Nginx
 shell_nginx :
 	docker exec -ti $(NGINX_CONTAINER) /bin/bash
 
@@ -80,6 +72,7 @@ build_nginx :
 		make build
 
 
+# Backend
 shell_backend :
 	docker exec -ti $(BACKEND_CONTAINER) /bin/bash
 
@@ -94,6 +87,7 @@ build_backend :
 		make build
 
 
+# Postgres
 shell_postgres :
 	docker exec -ti $(POSTGRES_CONTAINER) /bin/bash
 
