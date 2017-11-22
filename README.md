@@ -5,6 +5,7 @@
 ```
 export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
 export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+export S3_STORAGE=<S3_STORAGE>
 ```
 - `. ./scripts/set_dev_vars.sh`
 - `make up`

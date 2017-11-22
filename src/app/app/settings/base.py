@@ -147,27 +147,18 @@ USE_TZ = True
 
 # AWS
 
-AWS_STORAGE_BUCKET_NAME = os.getenv(
-    'AWS_STORAGE_BUCKET_NAME',
-    None)
-
-AWS_ACCESS_KEY_ID = os.getenv(
-    'AWS_ACCESS_KEY_ID',
-    None)
-
-AWS_SECRET_ACCESS_KEY = os.getenv(
-    'AWS_SECRET_ACCESS_KEY',
-    None)
-
-AWS_QUERYSTRING_AUTH = os.getenv(
-    'AWS_QUERYSTRING_AUTH',
-    'false').lower() == 'true'
-
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', None)
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', None)
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', None)
+AWS_QUERYSTRING_AUTH = os.getenv('AWS_QUERYSTRING_AUTH', 'false').lower() == 'true'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
+
+ROOT_URL_PATH = os.getenv('ROOT_URL_PATH', '/')
+S3_STORAGE = os.getenv('S3_STORAGE', 'false').lower() == 'true'
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -179,15 +170,16 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+STATIC_URL = "/%s/static/" % ROOT_URL_PATH
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = "/%s/media/" % ROOT_URL_PATH
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if S3_STORAGE:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
 # Wagtail settings
