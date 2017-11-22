@@ -8,7 +8,7 @@ SWARM_URL=http://usalvlhlpool1.infor.com/swarmproxy
 NETWORK="soho-pool"
 NGINX_VER="1.0.0"
 
-BODY_CREATE=$(cat  << EOF
+BODY_NGINX_CREATE=$(cat  << EOF
 {
     "name": "docs",
     "network: "soho-pool",
@@ -22,21 +22,23 @@ BODY_CREATE=$(cat  << EOF
 EOF
 )
 
-BODY_DELETE=$(cat  << EOF
+BODY_NGINX_DELETE=$(cat  << EOF
 {
     "name": "docs"
 }
 EOF
 )
 
-{
-    curl -X DELETE -H "Content-Type: application/json" \
-        -u $API_USER:$API_PASS \
-        $SWARM_URL/rm_service/ \
-        -d "$BODY_DELETE"
-} || {
-    printf "\n"
-    printf "Something went wrong with curl delete request.\n"
+function delete_nginx_service {
+    {
+        curl -X DELETE -H "Content-Type: application/json" \
+            -u $API_USER:$API_PASS \
+            $SWARM_URL/rm_service/ \
+            -d "$BODY_NGINX_DELETE"
+    } || {
+        printf "\n"
+        printf "Something went wrong with curl delete request.\n"
+    }
 }
 
 # This cant happen yet as the swarmproxy create_service
@@ -44,12 +46,14 @@ EOF
 # http://git.infor.com/projects/HL/repos/hl-swarmproxy/browse/src/swarmproxy/server.py
 function create_service {
     {
-    curl -X POST -H "Content-Type: application/json" \
-        -u $API_USER:$API_PASS \
-        $SWARM_URL/create_service/ \
-        -d "$BODY_CREATE"
+        curl -X POST -H "Content-Type: application/json" \
+            -u $API_USER:$API_PASS \
+            $SWARM_URL/create_service/ \
+            -d "$BODY_NGINX_CREATE"
     } || {
         printf "\n"
         printf "Something went wrong with curl create request.\n"
     }
 }
+
+delete_nginx_service

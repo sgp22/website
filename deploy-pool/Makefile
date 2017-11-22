@@ -10,5 +10,6 @@ build_prod :
 #    as the pool will not re-pull an existing image automatically.
 # 5. Stop and re-create the swarm services (nginx and backend).  TODO: Fix hl-swarmproxy.
 # 6. Update the swarm nginx config, and restart.
-deploy_pool: build_prod
-	. scripts/build_push_images.sh
+deploy: build_prod
+	. scripts/build_push_images.sh && \
+	. scripts/post_deploy.sh
