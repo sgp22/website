@@ -4,7 +4,7 @@ set -e
 
 ORG=hookandloop
 REGISTRY=docker.infor.com
-BACKEND_VERSION=1.0.0
+BACKEND_VERSION=1.0.1
 NGINX_VERSION=1.0.0
 BACKEND_VERSION_ON_POOL=1.0.0
 NGINX_VERSION_ON_POOL=1.0.0
@@ -42,5 +42,3 @@ ADD ./src/config/nginx/frontend.conf /etc/nginx/sites-available/default" > Docke
 # Build and push nginx container
 docker build -t $REGISTRY/$ORG/$NGINX_POOL_CONTAINER:$NGINX_VERSION_ON_POOL -f ./Dockerfile .
 docker push $REGISTRY/$ORG/$NGINX_POOL_CONTAINER:$NGINX_VERSION_ON_POOL
-
-rm Dockerfile

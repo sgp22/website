@@ -78,6 +78,8 @@ declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
                 "${ROOTDIR}/scripts/post_deploy.sh"
                 "${ROOTDIR}/scripts/eb_deploy.sh"
                 "${ROOTDIR}/scripts/eb_env_vars.sh"
+                "${ROOTDIR}/scripts/pull_images.sh"
+                "${ROOTDIR}/Dockerfile"
                 )
 
 for i in "${to_delete[@]}"

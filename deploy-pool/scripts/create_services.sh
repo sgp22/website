@@ -2,10 +2,9 @@
 
 set -e
 
-ORG=hookandloop
-REGISTRY=docker.infor.com
-BACKEND_VERSION=1.0.0
-NGINX_VERSION=1.0.0
+API_USER=hookandloop
+API_PASS=hookandloop
+SWARM_URL=http://usalvlhlpool1.infor.com/swarmproxy
 BACKEND_VERSION_ON_POOL=1.0.0
 NGINX_VERSION_ON_POOL=1.0.0
 BACKEND_POOL_CONTAINER=docs_backend_pool

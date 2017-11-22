@@ -12,4 +12,4 @@ build_prod :
 # 6. Update the swarm nginx config, and restart.
 deploy: build_prod
 	. scripts/build_push_images.sh && \
-	. scripts/post_deploy.sh
+	. scripts/pull_images.sh
