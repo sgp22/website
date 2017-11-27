@@ -12,6 +12,7 @@ import 'rxjs/add/operator/switchMap';
 export class LandingPageComponent implements OnInit, AfterViewInit {
 
   public page: any;
+  public flexibleContent: any;
   public pageType: any = 'home.LandingPage';
   public notFound = false;
   public loading = true;
@@ -35,8 +36,9 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
         .subscribe(
           (res: any) => {
             if (res && res.items.length) {
-              console.log(res);
               this.page = res.items[0];
+              this.flexibleContent = res.items[0].content;
+              console.log(this.flexibleContent);
               this.notFound = false;
               this.loading = false;
             } else {

@@ -1,0 +1,11 @@
+<section class="full-width" [ngStyle]="backgroundColor && { 'background-color': '#' + backgroundColor + '' }">
+  
+  <div class="bg-image" [ngStyle]="backgroundImage && {'background-image': 'url(' + backgroundImage + ')'}"></div>
+  
+  <div [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
+    <h1 [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
+    <p [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{content}}</p>
+    <a *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
+  </div>
+
+</section>
