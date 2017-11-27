@@ -27,42 +27,27 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
     let slug;
-    this.route.params.forEach((params: Params) => {
-      slug = params['slug'];
-    });
 
-    this.pagesService.getPage(slug, this.pageType)
-      .subscribe(
-        (res: any) => {
-          if (res && res.items.length) {
-            this.page = res.items[0];
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
-        },
-        (err) => {
-          console.log(err);
-        }
-    );
-
-    this.router.events
-      .filter((e) => e instanceof NavigationEnd)
-      .switchMap(e => this.pagesService.getPage(slug, this.pageType))
+    this.route.params.subscribe(params => {
+      slug = params["slug"];
+      this.pagesService
+        .getPage(slug, this.pageType)
         .subscribe(
           (res: any) => {
             if (res && res.items.length) {
+              console.log(res);
               this.page = res.items[0];
               this.notFound = false;
+              this.loading = false;
             } else {
               this.notFound = true;
             }
           },
-          (err) => {
+          err => {
             console.log(err);
           }
-      );
+        );
+    })
 
   }
 

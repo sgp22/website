@@ -29,7 +29,8 @@ from home.serializers import (
 
 class APIImageChooserBlock(ImageChooserBlock):
     def get_api_representation(self, value, context=None):
-        return WagtailImageSerializer(context=context).to_representation(value)
+        if value:
+            return WagtailImageSerializer(context=context).to_representation(value)
 
 
 class TypeBlock(blocks.StructBlock):
@@ -49,6 +50,19 @@ class DemoStreamBlock(blocks.StreamBlock):
     intro = blocks.RichTextBlock(icon="pilcrow")
     paragraph = blocks.RichTextBlock(icon="pilcrow")
 
+class FullWidthStreamField(blocks.StructBlock):
+    title = blocks.CharBlock()
+    content = blocks.TextBlock()
+    cta_text = blocks.CharBlock(required=False)
+    cta_link = blocks.CharBlock(required=False, help_text="enter slug or link")
+    background_image = APIImageChooserBlock(required=False)
+    background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter hex code")
+    invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")
+    text_align = blocks.ChoiceBlock(choices=[
+        ('left', 'left'),
+        ('center', 'center'),
+        ('right', 'right')
+    ], required=False)
 
 class LandingPageSnippetChooserBlock(DefaultSnippetChooserBlock):
     def get_api_representation(self, value, context=None):
@@ -87,6 +101,7 @@ class PageBase(Page):
 class LandingPage(PageBase):
     menu_order = models.IntegerField(default=0)
     content = StreamField([
+        ('fullWidth', FullWidthStreamField())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
