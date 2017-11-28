@@ -2,7 +2,7 @@
 
 <div *ngIf="!loading">
 
-  <div *ngIf="!notFound" class="iux-row">
+  <div *ngIf="!notFound" class="iux-row iux-row--gutter">
 
     <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar"></sidebar-nav>
 
@@ -13,15 +13,15 @@
 
       <section *ngIf="streamfields">
 
-        <div 
+        <div
           *ngFor="let streamfield of streamfields"
           [class.streamfield--heading]="streamfield.type === 'heading'"
           [class.streamfield--html]="streamfield.type === 'html'"
-          [class.streamfield--image]="streamfield.type === 'image'"          
+          [class.streamfield--image]="streamfield.type === 'image'"
         >
           <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
           <div *ngIf="streamfield.type === 'html'" [innerHTML]="streamfield?.value"></div>
-          <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield.value.title}}">          
+          <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield.value.title}}">
         </div>
 
       </section>
