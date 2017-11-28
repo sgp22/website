@@ -1,0 +1,76 @@
+/*
+ * Common (move to doc-css)
+ */
+
+/* stylelint-disable */
+:root {
+  --black: #000;
+  --white: #fff;
+  --link: #888;
+  --link-dark: #1f1f1f;
+  --body: #606060;
+  --headline: var(--black);
+  --spacing: 8px;
+  --border: var(--body);
+  --border-light: rgba(96, 96, 96, 0.3);
+}
+/* stylelint-enable */
+
+/*
+  Header
+*/
+
+.logo {
+  & svg {
+    display: flex;
+    flex-shrink: 0;
+    margin-right: calc(var(--spacing) * 2);
+  }
+}
+
+.site-header {
+  display: block; /* this is an override. doesn't need to be moved into doc-css */
+
+  & .iux-container {
+    display: flex;
+  }
+}
+
+/*
+  Full width component
+*/
+
+.full-width {
+  padding: calc(var(--spacing) * 8) 0;
+  position: relative;
+  text-align: center;
+
+  & h1 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+  & p {
+    margin-bottom: calc(var(--spacing) * 8);
+  }
+
+  & .hero-image {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+
+  & .bg-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+  }
+
+  & .iux-container {
+    position: relative;
+    z-index: 1;
+  }
+}

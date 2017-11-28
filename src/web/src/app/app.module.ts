@@ -14,6 +14,7 @@ import { DocsContentPageComponent } from './components/docs-content-page/docs-co
 import { SidebarNavComponent } from './components/sidebar-nav/sidebar-nav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { FullWidthComponent } from './components/full-width/full-width.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     SidebarNavComponent,
     HeaderComponent,
     PageNotFoundComponent,
+    FullWidthComponent,
   ],
   imports: [
     BrowserModule,
