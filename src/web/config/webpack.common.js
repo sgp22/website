@@ -247,7 +247,6 @@ module.exports = {
       ],
       "debug": "warning"
     }),
-    new ExtractTextPlugin("styles.css"),
     new ProgressPlugin(),
     new CircularDependencyPlugin({
       "exclude": /(\\|\/)node_modules(\\|\/)/,
@@ -272,24 +271,25 @@ module.exports = {
         let leftIndex = entryPoints.indexOf(left.names[0]);
         let rightindex = entryPoints.indexOf(right.names[0]);
         if (leftIndex > rightindex) {
-            return 1;
+          return 1;
         }
         else if (leftIndex < rightindex) {
-            return -1;
+          return -1;
         }
         else {
-            return 0;
+          return 0;
         }
       }
     }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
-        "assets/documentation-css/css/documentation.min.css",
-        "assets/iux/css/iux.min.css"
+        "assets/iux/css/iux.min.css",
+        "assets/documentation-css/css/documentation.min.css"
       ],
-      append: true,
+      append: false,
       publicPath: true
     }),
+    new ExtractTextPlugin("styles.css"),
     new BaseHrefWebpackPlugin({}),
     new CommonsChunkPlugin({
       "name": [
