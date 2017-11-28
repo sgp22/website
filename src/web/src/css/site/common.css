@@ -24,11 +24,12 @@
   & svg {
     display: flex;
     flex-shrink: 0;
+    margin-right: calc(var(--spacing) * 2);
   }
 }
 
 .site-header {
-  display: block;
+  display: block; /* this is an override. doesn't need to be moved into doc-css */
 
   & .iux-container {
     display: flex;

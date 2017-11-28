@@ -55,6 +55,7 @@ class FullWidthStreamField(blocks.StructBlock):
     content = blocks.TextBlock()
     cta_text = blocks.CharBlock(required=False)
     cta_link = blocks.CharBlock(required=False, help_text="enter slug or link")
+    hero_image = APIImageChooserBlock(required=False)    
     background_image = APIImageChooserBlock(required=False)
     background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter hex code")
     invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")

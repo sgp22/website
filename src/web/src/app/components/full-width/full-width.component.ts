@@ -10,6 +10,8 @@ export class FullWidthComponent implements OnInit, AfterViewInit {
   @Input() content: string;
   @Input() ctaText: string;
   @Input() ctaLink: string;
+  @Input() heroImage: string;
+  @Input() heroImageTitle: string;
   @Input() backgroundImage: string;
   @Input() backgroundColor: string;
   @Input() invertTextColor: string;
