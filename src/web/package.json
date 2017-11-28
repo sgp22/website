@@ -9,7 +9,7 @@
     "e2e:prod": "protractor ./protractor.conf.js --baseUrl=\"http://localhost:3000\"",
     "e2e:dev": "protractor ./protractor.conf.js",
     "prod": "npm run build && npm run lite-server -- --baseDir=\"dist\"",
-    "build": "webpack --optimize-minimize --config config/webpack.prod.js --env.production",
+    "build": "webpack --optimize-minimize --config config/webpack.prod.js",
     "lite-server": "lite-server",
     "ng": "ng",
     "pree2e": "webdriver-manager update --standalone false --gecko false --quiet"
