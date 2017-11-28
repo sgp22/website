@@ -1,6 +1,6 @@
 <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
-<div *ngIf="!loading">
+<div *ngIf="!loading" class="iux-container">
 
   <div *ngIf="!notFound" class="iux-row iux-row--gutter">
 
@@ -13,16 +13,11 @@
 
       <section *ngIf="streamfields">
 
-        <div
-          *ngFor="let streamfield of streamfields"
-          [class.streamfield--heading]="streamfield.type === 'heading'"
-          [class.streamfield--html]="streamfield.type === 'html'"
-          [class.streamfield--image]="streamfield.type === 'image'"
-        >
+        <ng-container *ngFor="let streamfield of streamfields">
           <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
           <div *ngIf="streamfield.type === 'html'" [innerHTML]="streamfield?.value"></div>
           <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield.value.title}}">
-        </div>
+        </ng-container>
 
       </section>
 
