@@ -1,0 +1,53 @@
+/*
+ * Common (move to doc-css)
+ */
+
+/* stylelint-disable */
+:root {
+  --black: #000;
+  --white: #fff;
+  --link: #888;
+  --link-dark: #1f1f1f;
+  --body: #606060;
+  --headline: var(--black);
+  --spacing: 8px;
+  --border: var(--body);
+  --border-light: rgba(96, 96, 96, 0.3);
+}
+/* stylelint-enable */
+
+/*
+  Header
+*/
+
+.logo {
+  & svg {
+    display: flex;
+    flex-shrink: 0;
+  }
+}
+
+.site-header {
+  display: block;
+
+  & .iux-container {
+    display: flex;
+  }
+}
+
+/*
+  Full width component
+*/
+
+.full-width {
+  padding: calc(var(--spacing) * 8) 0;
+  text-align: center;
+
+  & h1 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+
+  & p {
+    margin-bottom: calc(var(--spacing) * 8);
+  }
+}
