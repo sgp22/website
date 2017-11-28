@@ -66,7 +66,7 @@ const postcssPlugins = function () {
       ]),
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
-const ENV = process.env.NODE_ENV = process.env.ENV || "development";
+
 const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "/";
 
 let DOMAIN = process.env.DOMAIN || "http://localhost";
@@ -200,13 +200,11 @@ module.exports = {
   },
   "plugins": [
     new DefinePlugin({
-      "ENV": JSON.stringify(ENV) || "development",
       "DOMAIN": JSON.stringify(DOMAIN) || JSON.stringify("http://localhost"),
       "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
       "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
       "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
       "process.env": {
-        "ENV": JSON.stringify(ENV) || "development",
         "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
         "DOMAIN": JSON.stringify(DOMAIN) || JSON.stringify("http://localhost"),
         "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),

@@ -22,8 +22,9 @@ module.exports = webpackMerge(commonConfig, {
   },
   "plugins": [
     new DefinePlugin({
+      "ENV": JSON.stringify(ENV) || "development",
       "process.env": {
-        "ENV": JSON.stringify(ENV)
+        "ENV": JSON.stringify(ENV) || "development"
       }
     }),
     new AngularCompilerPlugin({
