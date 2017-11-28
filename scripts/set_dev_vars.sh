@@ -5,7 +5,14 @@
 export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 export AWS_STORAGE_BUCKET_NAME="hl-docs-site-dev"
-export S3_STORAGE="False"
+
+# TODO: Will get
+#       PermissionError at /admin/images/1/
+#       [Errno 13] Permission denied: '/home/app/media/original_images'
+#       If its set to False
+#       Need to set proper permissions to the volumes.
+export S3_STORAGE=$S3_STORAGE
+
 export DEBUG="True"
 export ROOT_URL_PATH=""
 export ENV=""
