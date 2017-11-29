@@ -41,6 +41,8 @@
 */
 
 .flexible-content {
+  position: relative;
+
   & .bg-image {
     background-position: center center;
     background-repeat: no-repeat;
@@ -56,12 +58,6 @@
   & .hero-image {
     margin-bottom: calc(var(--spacing) * 4);
   }
-}
-
-.full-width {
-  padding: calc(var(--spacing) * 8) 0;
-  position: relative;
-  text-align: center;
 
   & h1 {
     margin-bottom: calc(var(--spacing) * 3);
@@ -70,6 +66,12 @@
   & p {
     margin-bottom: calc(var(--spacing) * 8);
   }
+}
+
+.full-width {
+  padding: calc(var(--spacing) * 8) 0;
+  position: relative;
+  text-align: center;
 
   & .iux-container {
     position: relative;
@@ -93,5 +95,25 @@
 
   & p {
     margin-bottom: calc(var(--spacing) * 4);
+  }
+}
+
+.two-col-text-image {
+  padding: calc(var(--spacing) * 16) 0;
+
+  & .iux-container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.two-col-text-image--image {
+  &.right {
+    order: 2;
+  }
+
+  & img {
+    max-width: 100%;
+    width: 100%;
   }
 }
