@@ -1,5 +1,5 @@
 <div class="iux-container">
-  <div class="iux-row">
+  <div class="iux-row iux-row--gutter">
 
     <aside class="sidebar iux-row--col-sm-3 iux-row--col-md-3" *ngIf="sidebar">
 
@@ -13,12 +13,12 @@
       </div>
 
       <nav class="sidebar-nav">
-        <ul>
+        <ul class="iux-list--plain">
           <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
             <a class="sidebar-nav__child-item" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">
               {{child.name}}<br>
             </a>
-            <ul *ngIf="child.pages">
+            <ul class="iux-list--plain" *ngIf="child.pages">
               <li *ngFor="let grandChild of child.pages">
                 <a class="sidebar-nav__grandchild-item" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
                   {{grandChild.name}}
