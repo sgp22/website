@@ -30,7 +30,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
     let slug;
 
     this.route.params.subscribe(params => {
-      slug = params["slug"];
+      slug = params['slug'];
       this.pagesService
         .getPage(slug, this.pageType)
         .subscribe(
@@ -48,7 +48,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
             console.log(err);
           }
         );
-    })
+    });
 
   }
 

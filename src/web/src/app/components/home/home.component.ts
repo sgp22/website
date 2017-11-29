@@ -4,13 +4,13 @@ import { PagesService } from '../../services/pages.service';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
+  selector: 'app-home',
+  templateUrl: './home.component.html',
   providers: [PagesService]
 })
 export class HomeComponent implements OnDestroy {
   public slugs: any;
-  public pageType: any = "home.LandingPage";
+  public pageType: any = 'home.LandingPage';
   public page: any;
   public flexibleContent: any;
   public docs: any;
