@@ -15,6 +15,7 @@ const atImport = require("postcss-import");
 const postcssCssnext = require('postcss-cssnext');
 const stylelint = require("stylelint");
 
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
 const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin, SuppressExtractedTextChunksWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin } = require('webpack').optimize;
@@ -67,21 +68,14 @@ const postcssPlugins = function () {
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
 
-const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "/";
 
 let DOMAIN = process.env.DOMAIN || "http://localhost";
-let METADATA = {
-  baseUrl: `${ROOT_URL_PATH}`,
-};
+let METADATA = { baseUrl: `/` };
 
 // Add leading slash
 if (process.env.ROOT_URL_PATH) {
-  METADATA.baseUrl = `/${ROOT_URL_PATH}`;
-}
-
-// Subdirectory app root for pool server
-if (ROOT_URL_PATH !== "/") {
-  DOMAIN = `${DOMAIN}/${ROOT_URL_PATH}`;
+  METADATA.baseUrl = `/${process.env.ROOT_URL_PATH}`; // Add leading slash
+  DOMAIN += `/${process.env.ROOT_URL_PATH}`; // Subdirectory app root for pool server
 }
 
 module.exports = {
@@ -323,7 +317,14 @@ module.exports = {
       "async": "common"
     }),
     new NamedModulesPlugin({}),
-    new SuppressExtractedTextChunksWebpackPlugin()
+    new SuppressExtractedTextChunksWebpackPlugin(),
+    new AngularCompilerPlugin({
+      "mainPath": "main.ts",
+      "platform": 0,
+      "sourceMap": false,
+      "tsConfigPath": "src/tsconfig.app.json",
+      "compilerOptions": {}
+    })
   ],
   "node": {
     "fs": "empty",

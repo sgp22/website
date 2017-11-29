@@ -1,3 +1,7 @@
+// ************************************************
+// Webpack Environment: development
+// ************************************************
+
 const path = require("path");
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
@@ -26,13 +30,6 @@ module.exports = webpackMerge(commonConfig, {
       "process.env": {
         "ENV": JSON.stringify(ENV) || "development"
       }
-    }),
-    new AngularCompilerPlugin({
-      "mainPath": "main.ts",
-      "platform": 0,
-      "sourceMap": false,
-      "tsConfigPath": "src/tsconfig.app.json",
-      "compilerOptions": {}
     })
   ]
 });
