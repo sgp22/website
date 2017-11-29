@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 
 @Component({
-  selector: "full-width",
-  templateUrl: "./full-width.component.html"
+  selector: 'full-width',
+  templateUrl: './full-width.component.html'
 })
 export class FullWidthComponent implements OnInit, AfterViewInit {
   @Input() flexible_content: any;
