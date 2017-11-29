@@ -30,14 +30,6 @@ const appRoutes: Routes = [
     component: CoreContentPageComponent
   },
   {
-    path: 'build/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'build/:child/:slug',
-    component: CoreContentPageComponent
-  },
-  {
     path: 'develop/:library/:version/:component',
     component: DocsContentPageComponent
   },
@@ -48,6 +40,18 @@ const appRoutes: Routes = [
   {
     path: 'develop/:library/latest',
     component: DocsContentPageComponent
+  },
+  {
+    path: 'about',
+    component: CoreContentPageComponent
+  },
+  {
+    path: 'examples',
+    component: CoreContentPageComponent
+  },
+  {
+    path: 'resources',
+    component: CoreContentPageComponent
   },
   {
     path: '**',
