@@ -15,6 +15,7 @@ import { SidebarNavComponent } from './components/sidebar-nav/sidebar-nav.compon
 import { HeaderComponent } from './components/header/header.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FullWidthComponent } from './components/full-width/full-width.component';
+import { TwoColumnComponent } from './components/two-column/two-column.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FullWidthComponent } from './components/full-width/full-width.component
     HeaderComponent,
     PageNotFoundComponent,
     FullWidthComponent,
+    TwoColumnComponent,
   ],
   imports: [
     BrowserModule,

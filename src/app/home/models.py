@@ -65,6 +65,36 @@ class FullWidthStreamField(blocks.StructBlock):
         ('right', 'right')
     ], required=False)
 
+class TwoColumnStreamField(blocks.StructBlock):
+    column_1_title = blocks.CharBlock()
+    column_1_content = blocks.TextBlock()
+    column_1_cta_text = blocks.CharBlock(required=False)
+    column_1_cta_link = blocks.CharBlock(required=False, help_text="enter slug or link")
+    column_1_hero_image = APIImageChooserBlock(required=False)    
+    column_1_background_image = APIImageChooserBlock(required=False)
+    column_1_background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter 6 digit hex code without #")
+    column_1_invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")
+    column_1_text_align = blocks.ChoiceBlock(choices=[
+        ('left', 'left'),
+        ('center', 'center'),
+        ('right', 'right')
+    ], required=False)
+    column_2_title = blocks.CharBlock()
+    column_2_content = blocks.TextBlock()
+    column_2_cta_text = blocks.CharBlock(required=False)
+    column_2_cta_link = blocks.CharBlock(required=False, help_text="enter slug or link")
+    column_2_hero_image = APIImageChooserBlock(required=False)    
+    column_2_background_image = APIImageChooserBlock(required=False)
+    column_2_background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter 6 digit hex code without #")
+    column_2_invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")
+    column_2_text_align = blocks.ChoiceBlock(choices=[
+        ('left', 'left'),
+        ('center', 'center'),
+        ('right', 'right')
+    ], required=False)
+    class Meta:
+        form_classname = 'two-column-block struct-block'
+
 class LandingPageSnippetChooserBlock(DefaultSnippetChooserBlock):
     def get_api_representation(self, value, context=None):
         if value:
@@ -102,7 +132,8 @@ class PageBase(Page):
 class LandingPage(PageBase):
     menu_order = models.IntegerField(default=0)
     content = StreamField([
-        ('fullWidth', FullWidthStreamField())
+        ('fullWidth', FullWidthStreamField()),
+        ('twoColumn', TwoColumnStreamField())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [

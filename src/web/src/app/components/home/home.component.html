@@ -6,10 +6,40 @@
 
       <ng-container *ngFor="let section of flexibleContent">
 
-        <full-width *ngIf="section.type === 'fullWidth'" [title]="section.value.title" [content]="section.value.content" [textAlign]="section.value.text_align"
-          [invertTextColor]="section.value.invert_text_color" [heroImage]="section.value.hero_image?.file" [heroImageTitle]="section.value.hero_image?.title"
-          [backgroundImage]="section.value.background_image?.file" [backgroundColor]="section.value.background_color" [ctaText]="section.value.cta_text"
+        <full-width *ngIf="section.type === 'fullWidth'" 
+          [title]="section.value.title"
+          [content]="section.value.content"
+          [textAlign]="section.value.text_align"
+          [invertTextColor]="section.value.invert_text_color"
+          [heroImage]="section.value.hero_image?.file"
+          [heroImageTitle]="section.value.hero_image?.title"
+          [backgroundImage]="section.value.background_image?.file"
+          [backgroundColor]="section.value.background_color"
+          [ctaText]="section.value.cta_text"
           [ctaLink]="section.value.cta_link"></full-width>
+
+        <two-column *ngIf="section.type === 'twoColumn'"
+          [col1Title]="section.value.column_1_title"
+          [col1Content]="section.value.column_1_content"
+          [col1TextAlign]="section.value.column_1_text_align"
+          [col1InvertTextColor]="section.value.column_1_invert_text_color"
+          [col1HeroImage]="section.value.column_1_hero_image?.file"
+          [col1HeroImageTitle]="section.value.column_1_hero_image?.title"          
+          [col1BackgroundImage]="section.value.column_1_background_image?.file"
+          [col1BackgroundColor]="section.value.column_1_background_color"
+          [col1CtaText]="section.value.column_1_cta_text"
+          [col1CtaLink]="section.value.column_1_cta_link"
+          [col2Title]="section.value.column_2_title"
+          [col2Content]="section.value.column_2_content"
+          [col2TextAlign]="section.value.column_2_text_align"
+          [col2InvertTextColor]="section.value.column_2_invert_text_color"
+          [col2HeroImage]="section.value.column_2_hero_image?.file"
+          [col2HeroImageTitle]="section.value.column_2_hero_image?.title"          
+          [col2BackgroundImage]="section.value.column_2_background_image?.file"
+          [col2BackgroundColor]="section.value.column_2_background_color"
+          [col2CtaText]="section.value.column_2_cta_text"
+          [col2CtaLink]="section.value.column_2_cta_link"             
+        ></two-column>
 
       </ng-container>
 
