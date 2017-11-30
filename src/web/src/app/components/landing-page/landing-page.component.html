@@ -45,6 +45,19 @@
           [col2CtaLink]="section.value.column_2_cta_link"             
         ></two-column>
 
+        <two-col-text-image *ngIf="section.type === 'twoColTextImage'"
+          [title]="section.value.title"
+          [content]="section.value.content"
+          [ctaText]="section.value.cta_text"
+          [ctaLink]="section.value.cta_link" 
+          [image]="section.value.image?.file"
+          [imageTitle]="section.value.image?.title" 
+          [imageAlign]="section.value.image_align"
+          [backgroundImage]="section.value.background_image?.file"
+          [backgroundColor]="section.value.background_color"              
+          [invertTextColor]="section.value.invert_text_color"         
+        ></two-col-text-image>
+
       </ng-container>
 
     </ng-container>

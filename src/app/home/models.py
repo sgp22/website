@@ -33,23 +33,6 @@ class APIImageChooserBlock(ImageChooserBlock):
             return WagtailImageSerializer(context=context).to_representation(value)
 
 
-class TypeBlock(blocks.StructBlock):
-    name = blocks.TextBlock()
-    description = blocks.TextBlock()
-
-
-class ButtonBlock(blocks.StructBlock):
-    label = blocks.CharBlock(required=True)
-    link = blocks.CharBlock(required=True)
-
-
-class DemoStreamBlock(blocks.StreamBlock):
-    h2 = blocks.CharBlock(icon="title", classname="title")
-    h3 = blocks.CharBlock(icon="title", classname="title")
-    h4 = blocks.CharBlock(icon="title", classname="title")
-    intro = blocks.RichTextBlock(icon="pilcrow")
-    paragraph = blocks.RichTextBlock(icon="pilcrow")
-
 class FullWidthStreamField(blocks.StructBlock):
     title = blocks.CharBlock()
     content = blocks.TextBlock()
@@ -64,6 +47,7 @@ class FullWidthStreamField(blocks.StructBlock):
         ('center', 'center'),
         ('right', 'right')
     ], required=False)
+
 
 class TwoColumnStreamField(blocks.StructBlock):
     column_1_title = blocks.CharBlock()
@@ -94,6 +78,22 @@ class TwoColumnStreamField(blocks.StructBlock):
     ], required=False)
     class Meta:
         form_classname = 'two-column-block struct-block'
+
+
+class TwoColTextImageStreamField(blocks.StructBlock):
+    title = blocks.CharBlock()
+    content = blocks.TextBlock()
+    cta_text = blocks.CharBlock(required=False)
+    cta_link = blocks.CharBlock(required=False, help_text="enter slug or link")
+    image = APIImageChooserBlock(required=False)
+    image_align = blocks.ChoiceBlock(choices=[
+        ('left', 'left'),
+        ('right', 'right')
+    ], required=False)  
+    background_image = APIImageChooserBlock(required=False)
+    background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter hex code")
+    invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")
+
 
 class LandingPageSnippetChooserBlock(DefaultSnippetChooserBlock):
     def get_api_representation(self, value, context=None):
@@ -133,7 +133,8 @@ class LandingPage(PageBase):
     menu_order = models.IntegerField(default=0)
     content = StreamField([
         ('fullWidth', FullWidthStreamField()),
-        ('twoColumn', TwoColumnStreamField())
+        ('twoColumn', TwoColumnStreamField()),
+        ('twoColTextImage', TwoColTextImageStreamField())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [

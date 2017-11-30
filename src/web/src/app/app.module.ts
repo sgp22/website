@@ -16,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FullWidthComponent } from './components/full-width/full-width.component';
 import { TwoColumnComponent } from './components/two-column/two-column.component';
+import { TwoColTextImageComponent } from './components/two-col-text-image/two-col-text-image.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TwoColumnComponent } from './components/two-column/two-column.component
     PageNotFoundComponent,
     FullWidthComponent,
     TwoColumnComponent,
+    TwoColTextImageComponent,
   ],
   imports: [
     BrowserModule,
