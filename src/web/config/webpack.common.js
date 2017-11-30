@@ -31,44 +31,46 @@ const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"
 const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
+
 const postcssPlugins = function () {
   // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193
   const importantCommentRe = /@preserve|@license|[@#]\s*source(?:Mapping)?URL|^!/i;
   const minimizeOptions = {
-      autoprefixer: false,
-      safe: true,
-      mergeLonghand: false,
-      discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
+    autoprefixer: false,
+    safe: true,
+    mergeLonghand: false,
+    discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
   };
   return [
-      postcss([
-        postcssUrl({
-            url: (URL) => {
-                // Only convert root relative URLs, which CSS-Loader won't process into require().
-                if (!URL.startsWith('/') || URL.startsWith('//')) {
-                    return URL;
-                }
-                if (deployUrl.match(/:\/\//)) {
-                    // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
-                    return `${deployUrl.replace(/\/$/, '')}${URL}`;
-                }
-                else if (baseHref.match(/:\/\//)) {
-                    // If baseHref contains a scheme, include it as is.
-                    return baseHref.replace(/\/$/, '') +
-                        `/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-                }
-                else {
-                    // Join together base-href, deploy-url and the original URL.
-                    // Also dedupe multiple slashes into single ones.
-                    return `/${baseHref}/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-                }
-            }
-        }),
-        atImport({
-          plugins: [ stylelint() ]
-        }),
-        postcssCssnext()
-      ]),
+    postcss([
+      postcssUrl({
+        url: (URL) => {
+
+          // Only convert root relative URLs, which CSS-Loader won't process into require().
+          if (!URL.startsWith('/') || URL.startsWith('//')) {
+            return URL;
+          }
+
+          // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
+          if (deployUrl.match(/:\/\//)) {
+            return `${deployUrl.replace(/\/$/, '')}${URL}`;
+
+          } else if (baseHref.match(/:\/\//)) {
+            // If baseHref contains a scheme, include it as is.
+            return baseHref.replace(/\/$/, '') + `/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
+
+          } else {
+            // Join together base-href, deploy-url and the original URL.
+            // Also dedupe multiple slashes into single ones.
+            return `/${baseHref}/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
+          }
+        }
+      }),
+      atImport({
+        plugins: [ stylelint() ]
+      }),
+      postcssCssnext()
+    ]),
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
 
@@ -293,11 +295,11 @@ module.exports = {
         "vendor"
       ],
       "minChunks": (module) => {
-                return module.resource
-                    && (module.resource.startsWith(nodeModules)
-                        || module.resource.startsWith(genDirNodeModules)
-                        || module.resource.startsWith(realNodeModules));
-            },
+        return module.resource
+        && (module.resource.startsWith(nodeModules)
+        || module.resource.startsWith(genDirNodeModules)
+        || module.resource.startsWith(realNodeModules));
+      },
       "chunks": [
         "main"
       ]
