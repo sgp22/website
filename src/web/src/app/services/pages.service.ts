@@ -14,14 +14,14 @@ export class PagesService {
   ) {}
 
   getAll() {
-    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages`);
+    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/`);
   }
 
   getPage(slug, pageType) {
-    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages?format=json&type=${pageType}&fields=*&slug=${slug}`);
+    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/?format=json&type=${pageType}&fields=*&slug=${slug}`);
   }
 
   getGlobalNav() {
-    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages?format=json&show_in_menus=true`);
+    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/?format=json&show_in_menus=true`);
   }
 }
