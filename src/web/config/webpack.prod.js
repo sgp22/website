@@ -2,12 +2,11 @@
 // Webpack Environment: production
 // ************************************************
 
-const path = require("path");
+// Set all node environment variables
+process.env.NODE_ENV = process.env.ENV = "production";
+
 const webpackMerge = require("webpack-merge");
 const commonConfig = require("./webpack.common.js");
-const DefinePlugin = require("webpack/lib/DefinePlugin");
-const { AngularCompilerPlugin } = require('@ngtools/webpack');
-const ENV = process.env.NODE_ENV = process.env.ENV = "production";
 
 module.exports = webpackMerge(commonConfig, {
   "module": {
@@ -17,13 +16,5 @@ module.exports = webpackMerge(commonConfig, {
         "loader": "@ngtools/webpack",
       }
     ]
-  },
-  "plugins": [
-    new DefinePlugin({
-      "ENV": JSON.stringify(ENV) || "production",
-      "process.env": {
-        "ENV": JSON.stringify(ENV) || "production"
-      }
-    })
-  ]
+  }
 });

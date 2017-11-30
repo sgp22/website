@@ -1,3 +1,5 @@
+
+// NPM Modules
 const fs = require('fs');
 const path = require('path');
 const DefinePlugin = require("webpack/lib/DefinePlugin");
@@ -15,11 +17,13 @@ const atImport = require("postcss-import");
 const postcssCssnext = require('postcss-cssnext');
 const stylelint = require("stylelint");
 
+// Plugins
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
 const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin, SuppressExtractedTextChunksWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin } = require('webpack').optimize;
 
+// Constants
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
 const genDirNodeModules = path.join(process.cwd(), 'src', '$$_gendir', 'node_modules');
@@ -68,16 +72,16 @@ const postcssPlugins = function () {
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
 
+// Variables
+let appDomain = process.env.DOMAIN || "http://localhost";
+let metaData = { baseUrl: `/` };
 
-let DOMAIN = process.env.DOMAIN || "http://localhost";
-let METADATA = { baseUrl: `/` };
-
-// Add leading slash
 if (process.env.ROOT_URL_PATH) {
-  METADATA.baseUrl = `/${process.env.ROOT_URL_PATH}`; // Add leading slash
-  DOMAIN += `/${process.env.ROOT_URL_PATH}`; // Subdirectory app root for pool server
+  appDomain += `/${process.env.ROOT_URL_PATH}`; // Prefix with subdirectory app root for pool server
+  metaData.baseUrl += `${process.env.ROOT_URL_PATH}`;
 }
 
+// Common Webpack Config
 module.exports = {
   "resolve": {
     "extensions": [
@@ -107,7 +111,7 @@ module.exports = {
   },
   "output": {
     "path": path.join(process.cwd(), "dist"),
-    "publicPath": DOMAIN,
+    "publicPath": appDomain,
     "filename": "[name].bundle.js",
     "chunkFilename": "[id].chunk.js"
   },
@@ -194,16 +198,11 @@ module.exports = {
   },
   "plugins": [
     new DefinePlugin({
-      "DOMAIN": JSON.stringify(DOMAIN) || JSON.stringify("http://localhost"),
+      "IS_PRODUCTION": JSON.stringify(process.env.NODE_ENV === 'production'),
+      "DOMAIN": JSON.stringify(appDomain) || JSON.stringify("http://localhost"),
       "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
       "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
-      "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
-      "process.env": {
-        "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
-        "DOMAIN": JSON.stringify(DOMAIN) || JSON.stringify("http://localhost"),
-        "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
-        "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
-      }
+      "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify("")
     }),
     new NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([
@@ -249,7 +248,7 @@ module.exports = {
       "template": "./src/index.html",
       "filename": "./index.html",
       "hash": false,
-      "metadata": METADATA,
+      "metadata": metaData,
       "inject": true,
       "compile": true,
       "favicon": "./src/favicon.ico",
