@@ -164,11 +164,23 @@ class CornerstoneSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'description')
 
 
-class EscapeHtml(Extension):
-    def extendMarkdown(self, md, md_globals):
-        del md.preprocessors['html_block']
-        del md.inlinePatterns['html']
+def markdown_filter(data):
+    if not data:
+        return ''
+    
+    md = markdown.Markdown(
+        safe_mode="replace",
+        html_replacement_text="--RAW HTML NOT ALLOWED--"
+    )
 
+    return md.convert(data)
+
+class MarkdownBlockSerializer(serializers.ModelSerializer):
+    def get_attribute(self, instance):
+        return instance
+    
+    def to_representation(self, page):
+        return markdown_filter(self)
 
 class CustomPageSerializer(PageSerializer):
     status = PageStatusField(read_only=True)
