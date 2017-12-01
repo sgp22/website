@@ -74,6 +74,7 @@ make -f "${ROOTDIR}/Makefile" ${MAKECOMMAND}
 declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
                 "${ROOTDIR}/scripts/predeploy_env_vars.sh"
                 "${ROOTDIR}/scripts/create_services.sh"
+                "${ROOTDIR}/scripts/delete_services.sh"
                 "${ROOTDIR}/scripts/build_push_images.sh"
                 "${ROOTDIR}/scripts/post_deploy.sh"
                 "${ROOTDIR}/scripts/eb_deploy.sh"
@@ -88,6 +89,6 @@ do
 done
 
 git fetch
-#git checkout src Makefile
+git checkout src Makefile
 
 exec bash

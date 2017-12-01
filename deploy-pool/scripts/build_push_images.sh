@@ -42,3 +42,5 @@ ADD ./src/config/nginx/frontend.conf /etc/nginx/sites-available/default" > Docke
 # Build and push nginx container
 docker build -t $REGISTRY/$ORG/$NGINX_POOL_CONTAINER:$NGINX_VERSION_ON_POOL -f ./Dockerfile .
 docker push $REGISTRY/$ORG/$NGINX_POOL_CONTAINER:$NGINX_VERSION_ON_POOL
+
+rm Dockerfile
