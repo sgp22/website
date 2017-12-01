@@ -45,7 +45,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
               this.page = res.items[0];
               this.body = res.items[0].body;
               this.streamfields = res.items[0].body;
-              console.log(this.streamfields);
               this.notFound = false;
               this.loading = false;
             } else {
