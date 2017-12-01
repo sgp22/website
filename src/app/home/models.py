@@ -23,8 +23,7 @@ from home import relationships
 
 from home.serializers import (
     ElementDescriptorSerializer,
-    WagtailImageSerializer,
-    MarkdownBlockSerializer
+    WagtailImageSerializer
 )
 
 import markdown
