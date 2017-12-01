@@ -13,6 +13,9 @@ from wagtail.wagtailimages.models import Image as WagtailImage
 
 from rest_framework.fields import Field, ReadOnlyField
 
+import bleach
+import markdown
+from markdown.extensions import Extension
 
 def get_page_serializer_class(value):
     return get_serializer_class(
@@ -159,6 +162,12 @@ class CornerstoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = 'home.Cornerstone'
         fields = ('id', 'name', 'description')
+
+
+class EscapeHtml(Extension):
+    def extendMarkdown(self, md, md_globals):
+        del md.preprocessors['html_block']
+        del md.inlinePatterns['html']
 
 
 class CustomPageSerializer(PageSerializer):

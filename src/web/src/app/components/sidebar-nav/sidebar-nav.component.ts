@@ -43,6 +43,7 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
                 });
                 return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
               });
+              console.log(this.sidebarNav);
             }
           });
         }

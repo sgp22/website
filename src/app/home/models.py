@@ -23,9 +23,11 @@ from home import relationships
 
 from home.serializers import (
     ElementDescriptorSerializer,
-    WagtailImageSerializer
+    WagtailImageSerializer,
+    EscapeHtml
 )
 
+from wagtailmarkdownblock.blocks import MarkdownBlock
 
 class APIImageChooserBlock(ImageChooserBlock):
     def get_api_representation(self, value, context=None):
@@ -134,7 +136,8 @@ class LandingPage(PageBase):
     content = StreamField([
         ('fullWidth', FullWidthStreamField()),
         ('twoColumn', TwoColumnStreamField()),
-        ('twoColTextImage', TwoColTextImageStreamField())
+        ('twoColTextImage', TwoColTextImageStreamField()),
+        ('markdown', MarkdownBlock())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
@@ -158,6 +161,7 @@ class CoreContentPage(PageBase):
         ('heading', blocks.CharBlock(classname="full title")),
         ('html', blocks.RichTextBlock()),
         ('image', APIImageChooserBlock()),
+        ('markdown', MarkdownBlock())
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
 
