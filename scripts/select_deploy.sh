@@ -48,9 +48,10 @@ if [ ! -d ${DIRECTORY} ]; then
     return
 fi
 
-# copy all stuff from source dir to the root except of readme
+# Copy all stuff from source dir to the root except of readme.
 rsync -a "${DIRECTORY}/" ${ROOTDIR} --exclude=README.md
 
+# For internal servers, changing nginx locations.
 if [ -e "$NGINX_CONFIG_FILE_PATH" ] && [ -n "$NGINX_PATH" ]; then
     {
         sed -i '' -e "s/<NGINX_PATH>/$NGINX_PATH/g" "$NGINX_CONFIG_FILE_PATH"
@@ -59,6 +60,7 @@ if [ -e "$NGINX_CONFIG_FILE_PATH" ] && [ -n "$NGINX_PATH" ]; then
     }
 fi
 
+# For internal servers, changing django url declarations.
 if [ -e "$URLS_CONFIG_FILE_PATH" ] && [ -n "$DJANGO_URL_PATH" ]; then
     {
         sed -i '' -e "s/<DJANGO_URL_PATH>/$DJANGO_URL_PATH/g" "$URLS_CONFIG_FILE_PATH"
@@ -67,7 +69,7 @@ if [ -e "$URLS_CONFIG_FILE_PATH" ] && [ -n "$DJANGO_URL_PATH" ]; then
     }
 fi
 
-# run make command
+# Run the make command.
 make -f "${ROOTDIR}/Makefile" ${MAKECOMMAND}
 
 # revert the state of the directories
