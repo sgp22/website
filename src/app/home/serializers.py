@@ -13,7 +13,6 @@ from wagtail.wagtailimages.models import Image as WagtailImage
 
 from rest_framework.fields import Field, ReadOnlyField
 
-
 def get_page_serializer_class(value):
     return get_serializer_class(
         value.__class__,

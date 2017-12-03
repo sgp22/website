@@ -26,11 +26,31 @@ from home.serializers import (
     WagtailImageSerializer
 )
 
+import markdown
+from wagtailmarkdownblock.blocks import MarkdownBlock
 
 class APIImageChooserBlock(ImageChooserBlock):
     def get_api_representation(self, value, context=None):
         if value:
             return WagtailImageSerializer(context=context).to_representation(value)
+
+
+def markdown_filter(data):
+    if not data:
+        return ''
+    
+    md = markdown.Markdown(
+        safe_mode="replace",
+        html_replacement_text="--RAW HTML NOT ALLOWED--"
+    )
+
+    return md.convert(data)
+
+
+class APIMarkDownBlock(MarkdownBlock):
+    def get_api_representation(self, value, context=None):
+        if value:
+            return markdown_filter(value)
 
 
 class FullWidthStreamField(blocks.StructBlock):
@@ -134,7 +154,8 @@ class LandingPage(PageBase):
     content = StreamField([
         ('fullWidth', FullWidthStreamField()),
         ('twoColumn', TwoColumnStreamField()),
-        ('twoColTextImage', TwoColTextImageStreamField())
+        ('twoColTextImage', TwoColTextImageStreamField()),
+        ('markdown', APIMarkDownBlock())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
@@ -158,6 +179,7 @@ class CoreContentPage(PageBase):
         ('heading', blocks.CharBlock(classname="full title")),
         ('html', blocks.RichTextBlock()),
         ('image', APIImageChooserBlock()),
+        ('markdown', APIMarkDownBlock())
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
 
