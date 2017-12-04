@@ -4,9 +4,9 @@
 # Default env var state.
 export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-export AWS_STORAGE_BUCKET_NAME="hl-docs-site-dev"
+export AWS_STORAGE_BUCKET_NAME="$AWS_STORAGE_BUCKET_NAME"
 
-# TODO: Will get
+# TODO: On initial deploy, will throw:
 #       PermissionError at /admin/images/1/
 #       [Errno 13] Permission denied: '/home/app/media/original_images'
 #       If its set to False

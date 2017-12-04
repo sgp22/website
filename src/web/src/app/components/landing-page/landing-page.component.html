@@ -58,6 +58,8 @@
           [invertTextColor]="section.value.invert_text_color"         
         ></two-col-text-image>
 
+        <div *ngIf="section.type === 'markdown'" [innerHTML]="section.value"></div>
+
       </ng-container>
 
     </ng-container>
