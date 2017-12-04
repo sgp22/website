@@ -1,3 +1,5 @@
+
+// NPM Modules
 const fs = require('fs');
 const path = require('path');
 const DefinePlugin = require("webpack/lib/DefinePlugin");
@@ -15,10 +17,13 @@ const atImport = require("postcss-import");
 const postcssCssnext = require('postcss-cssnext');
 const stylelint = require("stylelint");
 
+// Plugins
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const { NoEmitOnErrorsPlugin, SourceMapDevToolPlugin, NamedModulesPlugin } = require('webpack');
 const { NamedLazyChunksWebpackPlugin, BaseHrefWebpackPlugin, SuppressExtractedTextChunksWebpackPlugin } = require('@angular/cli/plugins/webpack');
 const { CommonsChunkPlugin } = require('webpack').optimize;
 
+// Constants
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
 const genDirNodeModules = path.join(process.cwd(), 'src', '$$_gendir', 'node_modules');
@@ -26,64 +31,59 @@ const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"
 const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
+
 const postcssPlugins = function () {
   // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193
   const importantCommentRe = /@preserve|@license|[@#]\s*source(?:Mapping)?URL|^!/i;
   const minimizeOptions = {
-      autoprefixer: false,
-      safe: true,
-      mergeLonghand: false,
-      discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
+    autoprefixer: false,
+    safe: true,
+    mergeLonghand: false,
+    discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
   };
   return [
-      postcss([
-        postcssUrl({
-            url: (URL) => {
-                // Only convert root relative URLs, which CSS-Loader won't process into require().
-                if (!URL.startsWith('/') || URL.startsWith('//')) {
-                    return URL;
-                }
-                if (deployUrl.match(/:\/\//)) {
-                    // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
-                    return `${deployUrl.replace(/\/$/, '')}${URL}`;
-                }
-                else if (baseHref.match(/:\/\//)) {
-                    // If baseHref contains a scheme, include it as is.
-                    return baseHref.replace(/\/$/, '') +
-                        `/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-                }
-                else {
-                    // Join together base-href, deploy-url and the original URL.
-                    // Also dedupe multiple slashes into single ones.
-                    return `/${baseHref}/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-                }
-            }
-        }),
-        atImport({
-          plugins: [ stylelint() ]
-        }),
-        postcssCssnext()
-      ]),
+    postcss([
+      postcssUrl({
+        url: (URL) => {
+
+          // Only convert root relative URLs, which CSS-Loader won't process into require().
+          if (!URL.startsWith('/') || URL.startsWith('//')) {
+            return URL;
+          }
+
+          // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
+          if (deployUrl.match(/:\/\//)) {
+            return `${deployUrl.replace(/\/$/, '')}${URL}`;
+
+          } else if (baseHref.match(/:\/\//)) {
+            // If baseHref contains a scheme, include it as is.
+            return baseHref.replace(/\/$/, '') + `/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
+
+          } else {
+            // Join together base-href, deploy-url and the original URL.
+            // Also dedupe multiple slashes into single ones.
+            return `/${baseHref}/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
+          }
+        }
+      }),
+      atImport({
+        plugins: [ stylelint() ]
+      }),
+      postcssCssnext()
+    ]),
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
 
-const ROOT_URL_PATH = process.env.ROOT_URL_PATH || "/";
+// Variables
+let appDomain = process.env.DOMAIN || "http://localhost";
+let metaData = { baseUrl: `/` };
 
-let DOMAIN = process.env.DOMAIN || "http://localhost";
-let METADATA = {
-  baseUrl: `${ROOT_URL_PATH}`,
-};
-
-// Add leading slash
 if (process.env.ROOT_URL_PATH) {
-  METADATA.baseUrl = `/${ROOT_URL_PATH}`;
+  appDomain += `/${process.env.ROOT_URL_PATH}`; // Prefix with subdirectory app root for pool server
+  metaData.baseUrl += `${process.env.ROOT_URL_PATH}`;
 }
 
-// Subdirectory app root for pool server
-if (ROOT_URL_PATH !== "/") {
-  DOMAIN = `${DOMAIN}/${ROOT_URL_PATH}`;
-}
-
+// Common Webpack Config
 module.exports = {
   "resolve": {
     "extensions": [
@@ -113,7 +113,7 @@ module.exports = {
   },
   "output": {
     "path": path.join(process.cwd(), "dist"),
-    "publicPath": DOMAIN,
+    "publicPath": appDomain,
     "filename": "[name].bundle.js",
     "chunkFilename": "[id].chunk.js"
   },
@@ -200,16 +200,10 @@ module.exports = {
   },
   "plugins": [
     new DefinePlugin({
-      "DOMAIN": JSON.stringify(DOMAIN) || JSON.stringify("http://localhost"),
-      "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
+      "IS_PRODUCTION": JSON.stringify(process.env.NODE_ENV === 'production'),
+      "DOMAIN": JSON.stringify(appDomain) || JSON.stringify("http://localhost"),
       "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
-      "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
-      "process.env": {
-        "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com"),
-        "DOMAIN": JSON.stringify(DOMAIN) || JSON.stringify("http://localhost"),
-        "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
-        "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
-      }
+      "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify("")
     }),
     new NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([
@@ -255,7 +249,7 @@ module.exports = {
       "template": "./src/index.html",
       "filename": "./index.html",
       "hash": false,
-      "metadata": METADATA,
+      "metadata": metaData,
       "inject": true,
       "compile": true,
       "favicon": "./src/favicon.ico",
@@ -300,11 +294,11 @@ module.exports = {
         "vendor"
       ],
       "minChunks": (module) => {
-                return module.resource
-                    && (module.resource.startsWith(nodeModules)
-                        || module.resource.startsWith(genDirNodeModules)
-                        || module.resource.startsWith(realNodeModules));
-            },
+        return module.resource
+        && (module.resource.startsWith(nodeModules)
+        || module.resource.startsWith(genDirNodeModules)
+        || module.resource.startsWith(realNodeModules));
+      },
       "chunks": [
         "main"
       ]
@@ -323,7 +317,14 @@ module.exports = {
       "async": "common"
     }),
     new NamedModulesPlugin({}),
-    new SuppressExtractedTextChunksWebpackPlugin()
+    new SuppressExtractedTextChunksWebpackPlugin(),
+    new AngularCompilerPlugin({
+      "mainPath": "main.ts",
+      "platform": 0,
+      "sourceMap": false,
+      "tsConfigPath": "src/tsconfig.app.json",
+      "compilerOptions": {}
+    })
   ],
   "node": {
     "fs": "empty",
