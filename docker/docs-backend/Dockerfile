@@ -54,7 +54,8 @@ RUN yes | add-apt-repository ppa:fkrull/deadsnakes \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install --upgrade pip \
-  && pip3 install --upgrade distribute
+  && pip3 install --upgrade distribute \
+  && pip3 install --ignore-installed six
 
 ADD ./requirements /home/app/requirements/
 
