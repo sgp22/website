@@ -29,9 +29,14 @@ def get_page_serializer_class(value):
 
 def build_relative_path(path):
     """Strip out the root url path."""
-    root_path_str = settings.ROOT_URL_PATH + '/'
+    root_url = settings.ROOT_URL_PATH
 
-    return path.replace(root_path_str, '')
+    if root_url:
+        root_url += '/'
+    else:
+        root_url = ''
+
+    return path.replace(root_url, '')
 
 
 def get_children_hirarchy(obj):
