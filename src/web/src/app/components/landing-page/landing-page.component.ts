@@ -38,7 +38,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
             if (res && res.items.length) {
               this.page = res.items[0];
               this.flexibleContent = res.items[0].content;
-              console.log(this.flexibleContent);
               this.notFound = false;
               this.loading = false;
             } else {

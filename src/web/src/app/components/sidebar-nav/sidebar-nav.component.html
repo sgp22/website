@@ -7,7 +7,7 @@
         </span>
         <ul class="iux-list--plain" *ngIf="child.children.length > 0">
           <li *ngFor="let grandChild of child.children">
-            <a class="sidebar-nav__grandchild-item" routerLink="{{grandChild.url}}">
+            <a class="sidebar-nav__grandchild-item" routerLink="{{grandChild.relative_url}}">
               {{grandChild.title}}
             </a>
           </li>
