@@ -1,6 +1,5 @@
 <section class="flexible-content two-column">
 
-  <div class="iux-container">
 
     <div class="iux-row">
 
@@ -10,7 +9,7 @@
           <img class="hero-image" *ngIf="col1HeroImage" src="{{col1HeroImage}}" alt="{{col1HeroImageTitle}}">
           <h1 [ngStyle]="col1InvertTextColor && {'color': '#ffffff'}">{{col1Title}}</h1>
           <p [ngStyle]="col1InvertTextColor && {'color': '#ffffff'}">{{col1Content}}</p>
-          <a class="btn btn--default" *ngIf="col1CtaText" routerLink="{{col1CtaLink}}">{{col1CtaText}}</a>
+          <a class="btn btn--custom" [ngClass]="col1InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col1CtaText" routerLink="{{col1CtaLink}}">{{col1CtaText}}</a>
         </div>
       </div>
 
@@ -20,12 +19,11 @@
           <img class="hero-image" *ngIf="col2HeroImage" src="{{col2HeroImage}}" alt="{{col2HeroImageTitle}}">
           <h1 [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}">{{col2Title}}</h1>
           <p [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}">{{col2Content}}</p>
-          <a class="btn btn--default" *ngIf="col2CtaText" routerLink="{{col2CtaLink}}">{{col2CtaText}}</a>
+          <a class="btn btn--custom" [ngClass]="col2InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col2CtaText" routerLink="{{col2CtaLink}}">{{col2CtaText}}</a>
         </div>
       </div>
       
     </div>
 
-  </div>
 
 </section>

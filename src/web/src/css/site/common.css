@@ -13,6 +13,7 @@
   --spacing: 8px;
   --border: var(--body);
   --border-light: rgba(96, 96, 96, 0.3);
+  --brand-blue: #3770FF;
 }
 /* stylelint-enable */
 
@@ -37,6 +38,35 @@
 }
 
 /*
+  Buttons
+*/
+
+.btn--custom {
+  border-radius: 50px;
+  padding: calc(var(--spacing) * 2) 40px;
+  text-transform: uppercase;
+
+  &:visited {
+    color: var(--white);
+  }
+
+  &:active,
+  &:focus {
+    border-radius: 50px;
+  }
+}
+
+.btn--custom--solid {
+  background-color: var(--brand-blue);
+  color: var(--white);
+}
+
+.btn--custom--inverted {
+  border: 1px solid var(--white);
+  color: var(--white);
+}
+
+/*
   Flexible streamfield components
 */
 
@@ -55,16 +85,22 @@
     z-index: 0;
   }
 
+  & .iux-row {
+    position: relative;
+    z-index: 1;
+  }
+
   & .hero-image {
     margin-bottom: calc(var(--spacing) * 4);
   }
 
   & h1 {
-    margin-bottom: calc(var(--spacing) * 3);
+    color: var(--brand-blue);
+    margin-bottom: calc(var(--spacing) * 2);
   }
 
   & p {
-    margin-bottom: calc(var(--spacing) * 8);
+    margin-bottom: calc(var(--spacing) * 4);
   }
 }
 
@@ -81,11 +117,7 @@
 
 .two-column {
   & .two-column--col {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    padding: calc(var(--spacing) * 4) 0;
-    position: relative;
+    padding: calc(var(--spacing) * 10) 0;
   }
 
   & .two-column--content {
@@ -99,7 +131,7 @@
 }
 
 .two-col-text-image {
-  padding: calc(var(--spacing) * 16) 0;
+  padding: calc(var(--spacing) * 20) 0;
 
   & .iux-container {
     position: relative;
