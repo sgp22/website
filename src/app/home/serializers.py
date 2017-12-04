@@ -1,17 +1,22 @@
-from __future__ import absolute_import, unicode_literals
+from __future__ import (
+    absolute_import,
+    unicode_literals
+)
 
 from collections import OrderedDict
 
-from rest_framework import serializers
+from django.conf import settings
 
-from wagtail import wagtailimages
-from wagtail.api.v2.serializers import PageSerializer, Field, StreamField, get_serializer_class
-from wagtail.api.v2.utils import get_full_url
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from rest_framework import serializers
+from rest_framework.fields import Field
+
+from wagtail.api.v2.serializers import (
+    PageSerializer,
+    Field,
+    get_serializer_class
+)
 from wagtail.wagtailimages.models import Image as WagtailImage
 
-from rest_framework.fields import Field, ReadOnlyField
 
 def get_page_serializer_class(value):
     return get_serializer_class(
@@ -20,6 +25,18 @@ def get_page_serializer_class(value):
         meta_fields=['type', 'detail_url', 'html_url'],
         base=PageSerializer
     )
+
+
+def build_relative_path(path):
+    """Strip out the root url path."""
+    root_url = settings.ROOT_URL_PATH
+
+    if root_url:
+        root_url += '/'
+    else:
+        root_url = ''
+
+    return path.replace(root_url, '')
 
 
 def get_children_hirarchy(obj):
@@ -34,17 +51,19 @@ def get_children_hirarchy(obj):
 
         for child in children:
             children_list.append(get_children_hirarchy(child))
-    
+
     return OrderedDict([
         ('id', obj.id),
         ('title', obj.title),
         ('slug', obj.slug),
         ('url', obj.url),
         ('url_path', obj.url_path),
+        ('relative_url', build_relative_path(obj.url)),
         ('children_count', children_count),
         ('children', children_list),
         ('menu_order', menu_order),
     ])
+
 
 class WagtailImageSerializer(serializers.ModelSerializer):
     """Serializes the image field that is used in
