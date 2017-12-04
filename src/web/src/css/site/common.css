@@ -117,10 +117,11 @@
 
 .two-column {
   & .two-column--col {
-    padding: calc(var(--spacing) * 10) 0;
+    position: relative;
   }
 
   & .two-column--content {
+    padding: calc(var(--spacing) * 10) 0;
     position: relative;
     z-index: 1;
   }
