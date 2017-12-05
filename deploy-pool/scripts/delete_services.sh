@@ -23,7 +23,7 @@ EOF
 )
 
 
-function delete_service () {
+function delete_service {
     {
         BODY=$1
         curl -X DELETE -H "Content-Type: application/json" \
