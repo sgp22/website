@@ -25,7 +25,7 @@ EOF
 )
 
 
-function pull_image () {
+function pull_image {
     {
         BODY=$1
         curl -X POST -H "Content-Type: application/json" \

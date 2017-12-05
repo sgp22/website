@@ -51,7 +51,7 @@ EOF
 )
 
 
-function create_service () {
+function create_service {
     {
         BODY=$1
         curl -X POST -H "Content-Type: application/json" \
