@@ -16,8 +16,7 @@
           <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
           <div *ngIf="streamfield.type === 'html'" [innerHTML]="streamfield?.value"></div>
           <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
-          <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value">
-          </div>
+          <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
         </ng-container>
 
       </section>
