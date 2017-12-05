@@ -2,14 +2,12 @@
   
   <div class="bg-image" [ngStyle]="backgroundImage && {'background-image': 'url(' + backgroundImage + ')'}"></div>
 
-  <div class="iux-container">
-    <div class="iux-row">
-      <div class="iux-row--col-md-8 iux-row--offset-md-2" [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
-        <img class="hero-image" *ngIf="heroImage" src="{{heroImage}}" alt="{{heroImageTitle}}">
-        <h1 [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
-        <p [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{content}}</p>
-        <a class="btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
-      </div>
+  <div class="iux-row iux-container">
+    <div class="iux-row--col-md-8 iux-row--offset-md-2" [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
+      <img class="hero-image" *ngIf="heroImage" src="{{heroImage}}" alt="{{heroImageTitle}}">
+      <h1 [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
+      <p [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{content}}</p>
+      <a class="btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
     </div>
   </div>
 

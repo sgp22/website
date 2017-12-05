@@ -41,6 +41,10 @@
           [col2CtaLink]="section.value.column_2_cta_link"             
         ></two-column>
 
+        <div *ngIf="section.type === 'markdown'" class="iux-row iux-container">
+          <div class="iux-row--col-md-9 iux-row--offset-md-1" [innerHTML]="section.value"></div>
+        </div>
+
       </ng-container>
 
     </ng-container>
