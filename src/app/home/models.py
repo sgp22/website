@@ -155,7 +155,8 @@ class LandingPage(PageBase):
         ('fullWidth', FullWidthStreamField()),
         ('twoColumn', TwoColumnStreamField()),
         ('twoColTextImage', TwoColTextImageStreamField()),
-        ('markdown', APIMarkDownBlock())
+        ('markdown', APIMarkDownBlock()),
+        ('richText', blocks.RichTextBlock())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [

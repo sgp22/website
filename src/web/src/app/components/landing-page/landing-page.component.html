@@ -62,6 +62,10 @@
           <div class="iux-row--col-md-9 iux-row--offset-md-1" [innerHTML]="section.value"></div>
         </div>
 
+        <div *ngIf="section.type === 'richText'" class="iux-row iux-container">
+          <div class="iux-row--col-md-9 iux-row--offset-md-1" [innerHTML]="section.value"></div>
+        </div>
+
       </ng-container>
 
     </ng-container>
