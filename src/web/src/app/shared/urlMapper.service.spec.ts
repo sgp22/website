@@ -20,7 +20,7 @@ describe('url Mapper', () => {
   }));
 
   it('should create docs path', (() => {
-    expect(urlMapper.map(urlTree)).toContain('api/docs/dogs/v9999/test.json');
+    expect(urlMapper.map(urlTree)).toContain('api/docs/dogs/v9999/docs/test.json');
   }));
 
 });
