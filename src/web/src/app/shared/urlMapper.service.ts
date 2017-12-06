@@ -16,6 +16,6 @@ export class UrlMapper {
       throw new Error('Incorrect URL: Missing UrlTree segments');
     }
 
-    return `api/docs/${libName}/${version}/${compName}.json`;
+    return `api/docs/${libName}/${version}/docs/${compName}.json`;
   }
 }
