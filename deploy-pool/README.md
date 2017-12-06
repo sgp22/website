@@ -1,15 +1,4 @@
-# Deploy steps, to pool and AWS
-
-- AWS
-
-```shell
-export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
-export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
-export DOMAIN=<DOMAIN>
-export ENV=<ENV>
-```
-
-- Pool
+# Deploy steps to pool (staging)
 
 ```shell
 export DOMAIN=<DOMAIN>
@@ -19,17 +8,19 @@ export ROOT_URL_PATH=<ROOT_URL_PATH>
 
 - `. ./deploy-pool/scripts/predeploy_env_vars.sh`
 - Pool `. ./scripts/select_deploy.sh -f deploy-pool -c deploy`
-- AWS `. ./scripts/select_deploy.sh -f deploy-aws -c deploy`
 
 On a fresh setup on pool or prod we need to set permissions for the media folder.
-TODO: Change the loose permissons and implement minio.
+TODO: Have a better permission policy, bake it into the image on start.
 
 - `mkdir -p /home/app/media/`
 - `chmod 777 -R /home/app/media/`
 
-## Create Minio service
+## Services commands
 
-All services need to stay on the soho-pool network so hl-nginx-swarm service can see it
+The below commands do not need to be ran, everything is handled by the deploy script or the Bamboo jobs, I just kept it as a reference.
+All services need to stay on the soho-pool network so hl-nginx-swarm service can see it.
+
+## Create Minio service (not used)
 
 ```shell
 docker service create \
@@ -68,7 +59,7 @@ docker service create \
     --mount type=volume,src=docs-staging-media-data,dst=/home/app/media/ \
     --publish 9003 \
     --publish 9002:9002 \
-    docker.infor.com/hookandloop/docs_backend_pool:1.0.0
+    docker.infor.com/hookandloop/docs_backend_pool:1.0.2
 ```
 
 ## Create the nginx service
