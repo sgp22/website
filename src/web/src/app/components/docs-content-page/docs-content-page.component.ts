@@ -17,7 +17,7 @@ import * as semver from 'semver';
 export class DocsContentPageComponent implements OnInit {
   public path = '';
   public mapPath = '';
-  public domainPath = DOMAIN;
+  public domainPath = DOMAIN_DOCS_API;
   public docs: any;
   public section: any;
   public element: any;
