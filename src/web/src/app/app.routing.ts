@@ -54,6 +54,10 @@ const appRoutes: Routes = [
     component: CoreContentPageComponent
   },
   {
+    path: 'resources/:slug',
+    component: CoreContentPageComponent
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   }
