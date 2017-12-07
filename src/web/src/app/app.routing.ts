@@ -15,19 +15,31 @@ const appRoutes: Routes = [
   },
   {
     path: ':slug',
-    component: LandingPageComponent
+    component: LandingPageComponent,
+    children: [
+      { path: 'preview', component: LandingPageComponent }
+    ]
   },
   {
     path: 'design/:slug',
-    component: CoreContentPageComponent
+    component: CoreContentPageComponent,
+    children: [
+      { path: 'preview', component: CoreContentPageComponent }
+    ]
   },
   {
     path: 'design/elements/:slug',
-    component: ElementPageComponent
+    component: ElementPageComponent,
+    children: [
+      {path: 'preview', component: ElementPageComponent}
+    ]
   },
   {
     path: 'design/identity/:slug',
-    component: CoreContentPageComponent
+    component: CoreContentPageComponent,
+    children: [
+      { path: 'preview', component: ElementPageComponent }
+    ]
   },
   {
     path: 'develop/:library/:version/:component',
@@ -43,15 +55,24 @@ const appRoutes: Routes = [
   },
   {
     path: 'about',
-    component: CoreContentPageComponent
+    component: CoreContentPageComponent,
+    children: [
+      { path: 'preview', component: CoreContentPageComponent }
+    ]
   },
   {
     path: 'examples',
-    component: CoreContentPageComponent
+    component: CoreContentPageComponent,
+    children: [
+      { path: 'preview', component: CoreContentPageComponent }
+    ]
   },
   {
     path: 'resources',
-    component: CoreContentPageComponent
+    component: CoreContentPageComponent,
+    children: [
+      { path: 'preview', component: CoreContentPageComponent }
+    ]
   },
   {
     path: '**',
