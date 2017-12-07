@@ -1,14 +1,10 @@
 
 <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
-<div *ngIf="!loading" class="iux-container">
+<ng-container *ngIf="!loading">
 
-  <div *ngIf="!notFound" class="iux-row iux-row--gutter">
-
-    <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar"></sidebar-nav>
-
-    <div class="iux-row--col-sm-9 iux-row--col-md-9">
-
+  <ng-container *ngIf="!notFound">
+    
       <h1 class="page-title">{{page?.title}}</h1>
 
       <section *ngIf="descriptors" class="element-section">
@@ -72,8 +68,8 @@
         </ul>
       </section>
 
-    </div>
-
-  </div>
-
-</div>
+      
+    </ng-container>
+    
+  </ng-container>
+  

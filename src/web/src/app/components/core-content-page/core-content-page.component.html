@@ -1,28 +1,23 @@
+
 <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
-<div *ngIf="!loading" class="iux-container">
+<ng-container *ngIf="!loading">
 
-  <div *ngIf="!notFound" class="iux-row iux-row--gutter">
+  <ng-container *ngIf="!notFound">
+  
+    <h1>{{page?.title}}</h1>
 
-    <sidebar-nav class="iux-row--col-sm-3 iux-row--col-md-3" [sidebar]="sidebar"></sidebar-nav>
+    <section *ngIf="streamfields">
 
-    <div class="iux-row--col-sm-9 iux-row--col-md-9">
+      <ng-container *ngFor="let streamfield of streamfields">
+        <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
+        <div *ngIf="streamfield.type === 'html'" [innerHTML]="streamfield?.value"></div>
+        <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
+        <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
+      </ng-container>
 
-      <h1>{{page?.title}}</h1>
+    </section>
 
-      <section *ngIf="streamfields">
-
-        <ng-container *ngFor="let streamfield of streamfields">
-          <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
-          <div *ngIf="streamfield.type === 'html'" [innerHTML]="streamfield?.value"></div>
-          <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
-          <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
-        </ng-container>
-
-      </section>
-
-    </div>
-
-  </div>
-
-</div>
+  </ng-container>
+  
+</ng-container>

@@ -1,34 +1,36 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
+import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
   selector: 'sidebar-nav',
   templateUrl: './sidebar-nav.component.html',
-  providers: [PagesService]
+  providers: [PagesService, DisplayGlobalNavService]
 })
 export class SidebarNavComponent implements OnInit, AfterViewInit {
 
-  @Input() sidebar: boolean;
+  @Input() displaySidebarNav: any;
   public sidebarNav: any;
   public section: any;
 
   constructor(
     private pagesService: PagesService,
     private router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private globalNav: DisplayGlobalNavService
+  ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
 
-    this.route.url
-      .subscribe(
-        section => {
-          this.section = section[0].path;
-        }
-      );
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const urlSegments = event.url.split('/');
+        this.section = urlSegments[1];
+      }
+    });
 
     this.pagesService.getAll()
       .subscribe(
