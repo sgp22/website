@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostBinding, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 import { HttpClient } from '@angular/common/http';
+import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
@@ -10,7 +11,8 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './core-content-page.component.html',
   providers: [PagesService]
 })
-export class CoreContentPageComponent implements OnInit, AfterViewInit {
+export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  @HostBinding('class.iux-row--col-sm-9') iuxRow: any = true;
   public pageType: any = 'home.CoreContentPage';
   public page: any;
   public body: any;
@@ -23,8 +25,11 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private globalNav: DisplayGlobalNavService
+  ) {
+    this.globalNav.displaySidebarNav = true;
+  }
 
   ngOnInit() {}
 
@@ -55,7 +60,13 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
             console.log(err);
           }
         );
+
     });
 
   }
+
+  ngOnDestroy() {
+    this.globalNav.displaySidebarNav = false;
+  }
+
 }

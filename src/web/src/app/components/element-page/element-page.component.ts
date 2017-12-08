@@ -1,14 +1,15 @@
-import { Component, OnInit, DoCheck, AfterViewInit } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterViewInit, HostBinding, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
+import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
   selector: 'app-element-page',
   templateUrl: './element-page.component.html',
   providers: [PagesService]
 })
-export class ElementPageComponent implements OnInit, AfterViewInit {
-
+export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
+  @HostBinding('class.iux-row--col-sm-9') iuxRow: any = true;
   public pageType: any = 'home.ElementsPage';
   public page: any;
   public options: any;
@@ -22,8 +23,11 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pagesService: PagesService
-  ) { }
+    private pagesService: PagesService,
+    private globalNav: DisplayGlobalNavService
+  ) {
+    this.globalNav.displaySidebarNav = true;
+  }
 
   ngOnInit() {}
 
@@ -75,6 +79,10 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
           }
         );
 
+  }
+
+  ngOnDestroy() {
+    this.globalNav.displaySidebarNav = false;
   }
 
 }

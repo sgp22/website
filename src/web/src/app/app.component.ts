@@ -13,6 +13,7 @@ declare let pendo;
 export class AppComponent implements DoCheck {
 
   public displayGlobalNav: boolean;
+  public displaySidebarNav: boolean;
 
   constructor(
     private globalNav: DisplayGlobalNavService,
@@ -64,6 +65,7 @@ export class AppComponent implements DoCheck {
 
   ngDoCheck() {
     this.displayGlobalNav = this.globalNav.displayGlobalNav;
+    this.displaySidebarNav = this.globalNav.displaySidebarNav;
   }
 
 }
