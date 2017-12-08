@@ -70,7 +70,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-static/
+src/app/static/
 env/
 build/
 develop-eggs/
