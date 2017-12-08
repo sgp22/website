@@ -81,7 +81,8 @@ export class DocsContentPageComponent implements OnInit {
             })
             .sort((a, b) => {
               return semver.compare(a.label, b.label);
-            });
+            })
+            .reverse();
 
           latestVersion = this.versionPaths[0]['label'];
 
