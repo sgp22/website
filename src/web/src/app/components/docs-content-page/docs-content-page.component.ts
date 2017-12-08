@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 import { UrlParser } from '../../shared/urlParser.service';
@@ -19,6 +20,7 @@ export class DocsContentPageComponent implements OnInit {
   public mapPath = '';
   public domainPath = DOMAIN_DOCS_API;
   public docs: any;
+  public trustedHtml : any;
   public section: any;
   public element: any;
   public sidebar: any = true;
@@ -38,7 +40,8 @@ export class DocsContentPageComponent implements OnInit {
     private urlParser: UrlParser,
     private urlMapper: UrlMapper,
     private urlFetcher: UrlFetcher,
-    private comments: Comments
+    private comments: Comments,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -100,6 +103,7 @@ export class DocsContentPageComponent implements OnInit {
               (docs: any) => {
                 this.elements = [];
                 this.docs = docs;
+                this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.body);
                 if (this.docs.api) {
                   for (const i in this.docs.api) {
                     if (this.docs.api[i]) {
