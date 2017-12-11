@@ -204,7 +204,7 @@ module.exports = {
       "DOMAIN": JSON.stringify(appDomain) || JSON.stringify("http://localhost"),
       "DOMAIN_VERSION": JSON.stringify(process.env.DOMAIN_VERSION) || JSON.stringify("v2"),
       "ROOT_URL_PATH": JSON.stringify(process.env.ROOT_URL_PATH) || JSON.stringify(""),
-      "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://docs-site-staging.us-east-1.elasticbeanstalk.com")      
+      "DOMAIN_DOCS_API": JSON.stringify(process.env.DOMAIN_DOCS_API) || JSON.stringify("http://localhost")
     }),
     new NoEmitOnErrorsPlugin(),
     new CopyWebpackPlugin([
