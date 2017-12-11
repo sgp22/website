@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --optimize-minimize --config config/webpack.prod.js",
+    "build:prod": "webpack --optimize-minimize --config config/webpack.prod.js",
+    "build:dev": "webpack  --config config/webpack.dev.js",
     "e2e:setup": "webdriver-manager update --standalone false --gecko false --quiet",
     "e2e:prod": "npm run e2e:setup && protractor ./protractor.conf.js --baseUrl=\"http://localhost:3000\"",
     "e2e:dev": "npm run e2e:setup && protractor ./protractor.conf.js",
     "lint": "ng lint",
-    "start": "webpack-dev-server --port=4200",
-    "test": "karma start ./karma.conf.js"
+    "test": "karma start ./karma.conf.js",
+    "start": "npm run build:dev"
   },
   "private": true,
   "dependencies": {
