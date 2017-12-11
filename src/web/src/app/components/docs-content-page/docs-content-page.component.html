@@ -35,7 +35,7 @@
 
     <div class="iux-row--col-sm-9 iux-row--col-md-9" *ngIf="!notFound">
       <h1>{{docs?.title}}</h1>
-      <a  *ngIf="docs?.demo?.path" href="{{domainPath}}/api/docs{{selectedVersion}}demo{{docs.demo.path}}">View Live Demo</a>
+      <a  *ngIf="docs?.demo?.path" href="{{basePath}}/demo{{docs.demo.path}}">View Live Demo</a>
       <div *ngFor="let element of elements">
         <h2>Class {{element.name}}</h2>
         <div *ngFor="let constructorTag of element.constructorTags">
