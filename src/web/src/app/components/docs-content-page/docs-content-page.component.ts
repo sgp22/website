@@ -69,8 +69,6 @@ export class DocsContentPageComponent implements OnInit {
         this.library = urlSegment.slice(1, -1).join('');
         this.basePath = urlSegment.join('/');
       }
-
-      console.log(this.basePath);
       
       this.urlFetcher
         .getDocs(`${this.domainPath}/api/docs/${this.library}`)
