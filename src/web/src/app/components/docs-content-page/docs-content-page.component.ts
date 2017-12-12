@@ -123,33 +123,15 @@ export class DocsContentPageComponent implements OnInit {
                 */
 
                 if (allHrefs.length) {
-                  allHrefs.map((a) => {
-                    const href = a.getAttribute('href');
-                    if (!absolute.test(href)) {
-                      const relativeHref = href.replace(/(^\.\/|.html$)/g, '');
-                      a.setAttribute('href', `${this.path}/${relativeHref}`);
-                    }
-                  });
+                  allHrefs.map( a => this.createRelativePath(a, 'href') );
                 }
 
                 if (allImgs.length) {
-                  allImgs.map((img) => {
-                    const src = img.getAttribute('src');
-                    if (!absolute.test(src)) {
-                      const relativeSrc = src.replace(/(^\.\/)/g, '');
-                      img.setAttribute('src', `${this.path}/${relativeSrc}`);
-                    }
-                  });
+                  allImgs.map( img => this.createRelativePath(img, 'src'));
                 }
 
                 if (allIframes.length) {
-                  allIframes.map((iframe) => {
-                    const src = iframe.getAttribute('src');
-                    if (!absolute.test(src)) {
-                      const relativeSrc = src.replace(/(^\.\/)/g, '');
-                      iframe.setAttribute('src', `${this.path}/${relativeSrc}`);
-                    }
-                  });
+                  allIframes.map( iframe => this.createRelativePath(iframe, 'src'));
                 }
 
                 /*
@@ -201,6 +183,19 @@ export class DocsContentPageComponent implements OnInit {
     });
   }
 
+  createRelativePath(el, attr, navigate = false) {
+    const absolute = /^((http|https|ftp):\/\/)/;
+    if (!absolute.test(el.getAttribute(attr))) {
+      if (navigate) {
+        const relativeLink = el.getAttribute(attr);
+        this.router.navigate([`${relativeLink}`]);
+      } else {
+        const relativeHref = el.getAttribute(attr).replace(/(^\.\/|.html$)/g, '');
+        el.setAttribute(attr, `${this.path}/${relativeHref}`);
+      }
+    }
+  }
+
   onVersionChange(version) {
     this.router.navigate([version]);
   }
@@ -208,13 +203,8 @@ export class DocsContentPageComponent implements OnInit {
   relativeLinks(link) {
     event.preventDefault();
     const el = event.target as HTMLElement;
-    const href = el.getAttribute('href');
-    const absolute = /^((http|https|ftp):\/\/)/;
     if (el.tagName.toLowerCase() === 'a') {
-      if (!absolute.test(href)) {
-        const relativeLink = href;
-        this.router.navigate([`${relativeLink}`]);
-      }
+      this.createRelativePath(el, 'href', true);
     }
   }
 
