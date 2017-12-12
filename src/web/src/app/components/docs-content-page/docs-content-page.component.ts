@@ -20,7 +20,7 @@ export class DocsContentPageComponent implements OnInit {
   public mapPath = '';
   public domainPath = DOMAIN_DOCS_API;
   public docs: any;
-  public trustedHtml : any;
+  public trustedHtml: any;
   public section: any;
   public element: any;
   public sidebar: any = true;
@@ -101,9 +101,64 @@ export class DocsContentPageComponent implements OnInit {
             .getDocs(`${this.domainPath}/${this.mapPath}`)
             .subscribe(
               (docs: any) => {
+
                 this.elements = [];
                 this.docs = docs;
-                this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.body);
+
+                /*
+                  Relative Link support.
+                  tempNode needs to be created in order to convert
+                  the fragment back to a string
+                */
+
+                const tempNode = document.createElement('div');
+                const absolute = /^((http|https|ftp):\/\/)/;
+                const bodyFragments = document.createRange().createContextualFragment( docs.body );
+                const allHrefs = Array.from( bodyFragments.querySelectorAll('a') );
+                const allImgs = Array.from( bodyFragments.querySelectorAll('img') );
+                const allIframes = Array.from( bodyFragments.querySelectorAll('iframe') );
+
+                /*
+                  Modify relative hrefs, img src and iframe src.
+                */
+
+                if (allHrefs.length) {
+                  allHrefs.map((a) => {
+                    const href = a.getAttribute('href');
+                    if (!absolute.test(href)) {
+                      const relativeHref = href.replace(/(^\.\/|.html$)/g, '');
+                      a.setAttribute('href', `${this.path}/${relativeHref}`);
+                    }
+                  });
+                }
+
+                if (allImgs.length) {
+                  allImgs.map((img) => {
+                    const src = img.getAttribute('src');
+                    if (!absolute.test(src)) {
+                      const relativeSrc = src.replace(/(^\.\/)/g, '');
+                      img.setAttribute('src', `${this.path}/${relativeSrc}`);
+                    }
+                  });
+                }
+
+                if (allIframes.length) {
+                  allIframes.map((iframe) => {
+                    const src = iframe.getAttribute('src');
+                    if (!absolute.test(src)) {
+                      const relativeSrc = src.replace(/(^\.\/)/g, '');
+                      iframe.setAttribute('src', `${this.path}/${relativeSrc}`);
+                    }
+                  });
+                }
+
+                /*
+                  Append the modified fragment to the tempNode
+                */
+
+                tempNode.appendChild(bodyFragments);
+                this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(tempNode.innerHTML);
+
                 if (this.docs.api) {
                   for (const i in this.docs.api) {
                     if (this.docs.api[i]) {
@@ -111,8 +166,10 @@ export class DocsContentPageComponent implements OnInit {
                     }
                   }
                 }
+
                 this.loading = false;
                 this.notFound = false;
+
               },
               err => {
                 this.notFound = true;
@@ -147,9 +204,13 @@ export class DocsContentPageComponent implements OnInit {
   relativeLinks(link) {
     event.preventDefault();
     const el = event.target as HTMLElement;
+    const href = el.getAttribute('href');
+    const absolute = /^((http|https|ftp):\/\/)/;
     if (el.tagName.toLowerCase() === 'a') {
-      const relativeLink = el.getAttribute('href').replace(/(^\.\/|.html$)/g, '');
-      this.router.navigate([`${this.path}/${relativeLink}`]);
+      if (!absolute.test(href)) {
+        const relativeLink = href;
+        this.router.navigate([`${relativeLink}`]);
+      }
     }
   }
 
