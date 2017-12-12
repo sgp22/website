@@ -19,6 +19,7 @@ export class DocsContentPageComponent implements OnInit {
   public path = '';
   public basePath = '';
   public mapPath = '';
+  public basePath = '';
   public domainPath = DOMAIN_DOCS_API;
   public docs: any;
   public trustedHtml: any;
@@ -100,6 +101,8 @@ export class DocsContentPageComponent implements OnInit {
           } else {
             this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
           }
+          var basePathSegments = urlSegment.slice(0,-1);
+          this.basePath = basePathSegments.join('/');
 
           this.urlFetcher
             .getDocs(`${this.domainPath}/${this.mapPath}`)
