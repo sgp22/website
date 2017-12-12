@@ -10,11 +10,6 @@ const commonConfig = require("./webpack.common.js");
 
 module.exports = webpackMerge(commonConfig, {
   "module": {
-    "rules": [
-      {
-        "test": /\.ts$/,
-        "loader": "@ngtools/webpack",
-      }
-    ]
+    "rules": []
   }
 });

@@ -91,14 +91,12 @@ module.exports = {
       ".js"
     ],
     "modules": [
-      "./node_modules",
       "./node_modules"
     ],
     "symlinks": true
   },
   "resolveLoader": {
     "modules": [
-      "./node_modules",
       "./node_modules"
     ]
   },
@@ -337,10 +335,5 @@ module.exports = {
     "module": false,
     "clearImmediate": false,
     "setImmediate": false
-  },
-  "devServer": {
-    "historyApiFallback": {
-      "disableDotRule": true
-    },
   }
 };
