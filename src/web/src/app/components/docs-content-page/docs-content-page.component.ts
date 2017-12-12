@@ -17,10 +17,11 @@ import * as semver from 'semver';
 })
 export class DocsContentPageComponent implements OnInit {
   public path = '';
+  public basePath = '';
   public mapPath = '';
   public domainPath = DOMAIN_DOCS_API;
   public docs: any;
-  public trustedHtml : any;
+  public trustedHtml: any;
   public section: any;
   public element: any;
   public sidebar: any = true;
@@ -63,8 +64,10 @@ export class DocsContentPageComponent implements OnInit {
 
       if (urlSegment.length === 4) {
         this.library = urlSegment.slice(1, -2).join('');
+        this.basePath = urlSegment.slice(0, -1).join('/');
       } else {
         this.library = urlSegment.slice(1, -1).join('');
+        this.basePath = urlSegment.join('/');
       }
 
       this.urlFetcher
@@ -90,6 +93,7 @@ export class DocsContentPageComponent implements OnInit {
           latestVersion = this.versionPaths[0]['label'];
 
           this.path = urlSegment.join('/');
+
           if (this.path.indexOf('latest') !== -1) {
             const latestPath = this.path.replace(/latest/, latestVersion);
             this.mapPath = this.urlMapper.map(this.urlParser.parse(latestPath));
@@ -101,9 +105,50 @@ export class DocsContentPageComponent implements OnInit {
             .getDocs(`${this.domainPath}/${this.mapPath}`)
             .subscribe(
               (docs: any) => {
+
                 this.elements = [];
                 this.docs = docs;
-                this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.body);
+
+                /*
+                  Relative Link support.
+                  tempNode needs to be created in order to convert
+                  the fragment back to a string
+                */
+
+                const tempNode = document.createElement('div');
+                const absolute = /^((http|https|ftp):\/\/)/;
+                const bodyFragments = document.createRange().createContextualFragment( docs.body );
+                const allHrefs = Array.from( bodyFragments.querySelectorAll('a') );
+                const allImgs = Array.from( bodyFragments.querySelectorAll('img') );
+                const allIframes = Array.from( bodyFragments.querySelectorAll('iframe') );
+
+                /*
+                  Modify relative hrefs, img src and iframe src.
+                */
+
+                if (allHrefs.length) {
+                  allHrefs.map( a => this.createRelativePath(a, 'href') );
+                }
+
+                if (allImgs.length) {
+                  allImgs.map( img => this.createRelativePath(img, 'src'));
+                }
+
+                if (allIframes.length) {
+                  allIframes.map( iframe => this.createRelativePath(iframe, 'src'));
+                }
+
+                /*
+                  Append the modified fragment to the tempNode
+                  and assign the innerHTML to the template var
+                */
+
+                tempNode.appendChild(bodyFragments);
+                this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(tempNode.innerHTML);
+
+                /*
+                  API portion of docs json which is output of DocumentationJS
+                */
                 if (this.docs.api) {
                   for (const i in this.docs.api) {
                     if (this.docs.api[i]) {
@@ -111,8 +156,10 @@ export class DocsContentPageComponent implements OnInit {
                     }
                   }
                 }
+
                 this.loading = false;
                 this.notFound = false;
+
               },
               err => {
                 this.notFound = true;
@@ -140,16 +187,29 @@ export class DocsContentPageComponent implements OnInit {
     });
   }
 
+  createRelativePath(el, attr, navigate = false) {
+    const absolute = /^((http|https|ftp):\/\/)/;
+    if (!absolute.test(el.getAttribute(attr))) {
+      if (navigate) {
+        const relativeLink = el.getAttribute(attr);
+        this.router.navigate([`${relativeLink}`]);
+      } else {
+        const relativeHref = el.getAttribute(attr).replace(/(^\.\/|\/|.html$)/g, '');
+        el.setAttribute(attr, `/${this.basePath}/${relativeHref}`);
+      }
+    }
+  }
+
   onVersionChange(version) {
     this.router.navigate([version]);
   }
 
   relativeLinks(link) {
+    const absolute = /^((http|https|ftp):\/\/)/;
     event.preventDefault();
     const el = event.target as HTMLElement;
     if (el.tagName.toLowerCase() === 'a') {
-      const relativeLink = el.getAttribute('href').replace(/(^\.\/|.html$)/g, '');
-      this.router.navigate([`${this.path}/${relativeLink}`]);
+      this.createRelativePath(el, 'href', true);
     }
   }
 
