@@ -194,7 +194,7 @@ export class DocsContentPageComponent implements OnInit {
         const relativeLink = el.getAttribute(attr);
         this.router.navigate([`${relativeLink}`]);
       } else {
-        const relativeHref = el.getAttribute(attr).replace(/(^\.\/|\/|.html$)/g, '');
+        const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
         el.setAttribute(attr, `/${this.basePath}/${relativeHref}`);
       }
     }
