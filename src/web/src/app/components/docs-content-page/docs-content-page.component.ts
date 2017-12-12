@@ -154,11 +154,15 @@ export class DocsContentPageComponent implements OnInit {
 
                 /*
                   Append the modified fragment to the tempNode
+                  and assign the innerHTML to the template var
                 */
 
                 tempNode.appendChild(bodyFragments);
                 this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(tempNode.innerHTML);
 
+                /*
+                  API portion of docs json which is output of DocumentationJS
+                */
                 if (this.docs.api) {
                   for (const i in this.docs.api) {
                     if (this.docs.api[i]) {
