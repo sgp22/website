@@ -77,6 +77,12 @@ def get(request):
                     output_format='html5')
 
                 return HttpResponse(content=content)
+            elif path.endswith('.png'):
+                return HttpResponse(content=content, content_type="image/png")
+            elif path.endswith('.jpeg'):
+                return HttpResponse(content=content, content_type="image/jpeg")
+            else:
+                return HttpResponse(content=content)
         else:
             result = []
 
