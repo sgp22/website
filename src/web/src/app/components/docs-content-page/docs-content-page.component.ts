@@ -194,12 +194,8 @@ export class DocsContentPageComponent implements OnInit {
         const relativeLink = el.getAttribute(attr);
         this.router.navigate([`${relativeLink}`]);
       } else {
-        const relativeHref = el.getAttribute(attr).replace(/(^\.\/|.html$)/g, '');
-        if (attr === 'src') {
-          el.setAttribute(attr, `/${this.basePath}/${relativeHref}`);
-        } else {
-          el.setAttribute(attr, `/${this.path}/${relativeHref}`);
-        }
+        const relativeHref = el.getAttribute(attr).replace(/(^\.\/|\/|.html$)/g, '');
+        el.setAttribute(attr, `/${this.basePath}/${relativeHref}`);
       }
     }
   }
@@ -209,6 +205,7 @@ export class DocsContentPageComponent implements OnInit {
   }
 
   relativeLinks(link) {
+    const absolute = /^((http|https|ftp):\/\/)/;
     event.preventDefault();
     const el = event.target as HTMLElement;
     if (el.tagName.toLowerCase() === 'a') {
