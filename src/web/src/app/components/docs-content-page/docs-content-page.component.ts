@@ -17,6 +17,7 @@ import * as semver from 'semver';
 })
 export class DocsContentPageComponent implements OnInit {
   public path = '';
+  public basePath = '';
   public mapPath = '';
   public domainPath = DOMAIN_DOCS_API;
   public docs: any;
@@ -63,8 +64,10 @@ export class DocsContentPageComponent implements OnInit {
 
       if (urlSegment.length === 4) {
         this.library = urlSegment.slice(1, -2).join('');
+        this.basePath = urlSegment.slice(0, -1).join('/');
       } else {
         this.library = urlSegment.slice(1, -1).join('');
+        this.basePath = urlSegment.join('/');
       }
 
       this.urlFetcher
@@ -90,6 +93,7 @@ export class DocsContentPageComponent implements OnInit {
           latestVersion = this.versionPaths[0]['label'];
 
           this.path = urlSegment.join('/');
+
           if (this.path.indexOf('latest') !== -1) {
             const latestPath = this.path.replace(/latest/, latestVersion);
             this.mapPath = this.urlMapper.map(this.urlParser.parse(latestPath));
@@ -191,7 +195,11 @@ export class DocsContentPageComponent implements OnInit {
         this.router.navigate([`${relativeLink}`]);
       } else {
         const relativeHref = el.getAttribute(attr).replace(/(^\.\/|.html$)/g, '');
-        el.setAttribute(attr, `${this.path}/${relativeHref}`);
+        if (attr === 'src') {
+          el.setAttribute(attr, `/${this.basePath}/${relativeHref}`);
+        } else {
+          el.setAttribute(attr, `/${this.path}/${relativeHref}`);
+        }
       }
     }
   }
