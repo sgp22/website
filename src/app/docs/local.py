@@ -79,7 +79,6 @@ def get(request):
             else:
                 latest_version = all_versions[0]
 
-            print("Latest version:", latest_version)
             latest_file_pointer = os.path.join(*(
                 settings.MEDIA_ROOT,
                 'docs',
