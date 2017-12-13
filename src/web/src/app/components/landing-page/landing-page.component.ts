@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
-import { PagesService } from '../../services/pages.service';
+import { PagesService } from '../../shared/pages.service';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
