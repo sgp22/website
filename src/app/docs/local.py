@@ -74,9 +74,6 @@ def get(request):
             if len(all_versions) > 1:
                 for a, b in itertools.combinations(all_versions, 2):
                     highest_version = semver.max_ver(a, b)
-                    print('a', a)
-                    print('b', b)
-                    print('h', highest_version)
                     if highest_version > latest_version:
                         latest_version = highest_version
             else:
