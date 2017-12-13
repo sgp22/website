@@ -93,7 +93,7 @@ export class DocsContentPageComponent implements OnInit {
           this.versionPaths.unshift({
             full: `/${this.library}/latest/`,
             label: `Latest (${this.versionPaths[0]['label']})`
-          })
+          });
 
           latestVersion = this.versionPaths[1]['label'];
 
