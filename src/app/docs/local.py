@@ -4,6 +4,8 @@ import os
 import re
 import zipfile
 import markdown
+import semver
+import itertools
 
 
 from django.core.files.storage import default_storage
@@ -57,7 +59,30 @@ def get(request):
             settings.MEDIA_ROOT,
             request.path_info[5:].lower()))
 
-        print(path)
+        path_segments = path.split('/')
+        library = path_segments[5]
+        version = path_segments[6]
+        file_path = "/".join(path_segments[7:])
+        library_path = os.path.join(*(
+            settings.MEDIA_ROOT,
+            'docs',
+            library))
+
+        if version == "latest":
+            all_versions = next(os.walk(library_path))[1]
+            latest_version = "0.0.0"
+            for a, b in itertools.combinations(all_versions, 2):
+                highest_version = semver.max_ver(a, b)
+                if highest_version > latest_version:
+                    latest_version = highest_version
+            print("Latest version:", latest_version)
+            latest_file_pointer = os.path.join(*(
+                settings.MEDIA_ROOT,
+                'docs',
+                library_path,
+                latest_version,
+                file_path))
+            path = latest_file_pointer
 
         if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,4}$', path):
             content = open(path, 'rb').read()
