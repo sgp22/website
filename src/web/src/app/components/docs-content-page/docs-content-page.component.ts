@@ -206,10 +206,13 @@ export class DocsContentPageComponent implements OnInit {
 
   relativeLinks(link) {
     const absolute = /^((http|https|ftp):\/\/)/;
-    event.preventDefault();
     const el = event.target as HTMLElement;
-    if (el.tagName.toLowerCase() === 'a') {
-      this.createRelativePath(el, 'href', true);
+    const href = el.getAttribute('href');
+    if (!absolute.test(href)) {
+      event.preventDefault();
+      if (el.tagName.toLowerCase() === 'a') {
+        this.createRelativePath(el, 'href', true);
+      }
     }
   }
 
