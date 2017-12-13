@@ -90,16 +90,15 @@ export class DocsContentPageComponent implements OnInit {
             })
             .reverse();
 
-          latestVersion = this.versionPaths[0]['label'];
+          this.versionPaths.unshift({
+            full: `/${this.library}/latest/`,
+            label: `Latest (${this.versionPaths[0]['label']})`
+          })
+
+          latestVersion = this.versionPaths[1]['label'];
 
           this.path = urlSegment.join('/');
-
-          if (this.path.indexOf('latest') !== -1) {
-            const latestPath = this.path.replace(/latest/, latestVersion);
-            this.mapPath = this.urlMapper.map(this.urlParser.parse(latestPath));
-          } else {
-            this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
-          }
+          this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
 
           this.urlFetcher
             .getDocs(`${this.domainPath}/${this.mapPath}`)
@@ -167,8 +166,7 @@ export class DocsContentPageComponent implements OnInit {
             );
 
           if (urlSegment[2] === 'latest') {
-            const latestPath = urlSegment.slice(1, 3).join('/');
-            this.sidebarPath = latestPath.replace(/latest/, latestVersion);
+            this.sidebarPath = urlSegment.slice(1, 3).join('/');
           } else {
             if (urlSegment.length === 4) {
               this.sidebarPath = urlSegment.slice(1, -1).join('/');
