@@ -4,6 +4,8 @@ import os
 import re
 import zipfile
 import markdown
+import semver
+import itertools
 
 
 from django.core.files.storage import default_storage
@@ -57,7 +59,33 @@ def get(request):
             settings.MEDIA_ROOT,
             request.path_info[5:].lower()))
 
-        print(path)
+        path_segments = path.split('/')
+        library = path_segments[5] if len(path_segments) > 5 else None
+        version = path_segments[6] if len(path_segments) > 6 else None
+        file_path = "/".join(path_segments[7:])
+        library_path = os.path.join(*(
+            settings.MEDIA_ROOT,
+            'docs',
+            library))
+
+        if version == "latest":
+            all_versions = next(os.walk(library_path))[1]
+            latest_version = "0.0.0"
+            if len(all_versions) > 1:
+                for a, b in itertools.combinations(all_versions, 2):
+                    highest_version = semver.max_ver(a, b)
+                    if highest_version > latest_version:
+                        latest_version = highest_version
+            else:
+                latest_version = all_versions[0]
+
+            latest_file_pointer = os.path.join(*(
+                settings.MEDIA_ROOT,
+                'docs',
+                library_path,
+                latest_version,
+                file_path))
+            path = latest_file_pointer
 
         if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,4}$', path):
             content = open(path, 'rb').read()
@@ -76,6 +104,12 @@ def get(request):
                     content.decode('utf-8'),
                     output_format='html5')
 
+                return HttpResponse(content=content)
+            elif path.endswith('.png'):
+                return HttpResponse(content=content, content_type="image/png")
+            elif path.endswith('.jpeg'):
+                return HttpResponse(content=content, content_type="image/jpeg")
+            else:
                 return HttpResponse(content=content)
         else:
             result = []
