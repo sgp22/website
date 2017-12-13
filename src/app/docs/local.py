@@ -71,10 +71,17 @@ def get(request):
         if version == "latest":
             all_versions = next(os.walk(library_path))[1]
             latest_version = "0.0.0"
-            for a, b in itertools.combinations(all_versions, 2):
-                highest_version = semver.max_ver(a, b)
-                if highest_version > latest_version:
-                    latest_version = highest_version
+            if len(all_versions) > 1:
+                for a, b in itertools.combinations(all_versions, 2):
+                    highest_version = semver.max_ver(a, b)
+                    print('a', a)
+                    print('b', b)
+                    print('h', highest_version)
+                    if highest_version > latest_version:
+                        latest_version = highest_version
+            else:
+                latest_version = all_versions[0]
+
             print("Latest version:", latest_version)
             latest_file_pointer = os.path.join(*(
                 settings.MEDIA_ROOT,
