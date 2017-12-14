@@ -5,3 +5,4 @@
 # Everything here is backend related, nothing for the Angular client.
 export NGINX_PATH="\/"$ROOT_URL_PATH
 export DJANGO_URL_PATH=$ROOT_URL_PATH"\/"
+export ENV=production
