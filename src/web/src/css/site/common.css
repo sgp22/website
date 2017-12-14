@@ -19,6 +19,7 @@
 @custom-media --extra-small-viewport (max-width: 400px);
 @custom-media --small-viewport (max-width: 600px);
 @custom-media --medium-viewport (max-width: 840px);
+@custom-media --medium-viewport-up (min-width: 840px);
 @custom-media --large-viewport (max-width: 1280px);
 @custom-media --extra-large-viewport (max-width: 1440px);
 
@@ -40,6 +41,7 @@
   display: block; /* this is an override. doesn't need to be moved into doc-css */
 
   & .iux-container {
+    align-items: center;
     display: flex;
   }
 }
@@ -71,6 +73,48 @@
 .btn--custom--inverted {
   border: 1px solid var(--white);
   color: var(--white);
+}
+
+.btn--custom--small--inverted {
+  border: 1px solid var(--border);
+  color: var(--body);
+  padding: var(--spacing) 20px;
+
+  &.btn--custom--small--active {
+    background-color: var(--border);
+    color: var(--white);
+  }
+}
+
+/*
+  Mobile Nav
+*/
+
+.main-nav {
+  @media (--medium-viewport) {
+    display: none;
+  }
+}
+
+.main-nav--mobile {
+  display: none;
+
+  &.main-nav--mobile--active {
+    display: block;
+
+    @media (--medium-viewport-up) {
+      display: none;
+    }
+  }
+}
+
+.btn--nav--toggle {
+  display: none;
+  margin-left: auto;
+
+  @media (--medium-viewport) {
+    display: block;
+  }
 }
 
 /*

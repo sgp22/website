@@ -31,8 +31,15 @@
       </svg>
       <span>Infor UX</span>
     </a>
-    <nav class="main-nav" *ngIf="displayGlobalNav">
-      <a *ngFor="let navItem of navItems" class="main-nav__item" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
-    </nav>
+    <ng-container *ngIf="displayGlobalNav">
+      <nav class="main-nav">
+        <a *ngFor="let navItem of navItems" class="main-nav__item" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+      </nav>
+    </ng-container>
+    <button class="btn btn--custom btn--custom--small--inverted btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'" (click)="toggleNav()">Menu</button>
   </div>
 </header>
+
+<nav class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'">
+  <a *ngFor="let navItem of navItems" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+</nav>
