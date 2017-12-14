@@ -60,13 +60,13 @@ def get(request):
             request.path_info[5:].lower()))
 
         path_segments = path.split('/')
-        library = path_segments[5] if len(path_segments) > 5 else None
-        version = path_segments[6] if len(path_segments) > 6 else None
+        library_name = path_segments[5] if len(path_segments) > 5 else ''
+        version = path_segments[6] if len(path_segments) > 6 else ''
         file_path = "/".join(path_segments[7:])
         library_path = os.path.join(*(
             settings.MEDIA_ROOT,
             'docs',
-            library))
+            library_name))
 
         if version == "latest":
             all_versions = next(os.walk(library_path))[1]
