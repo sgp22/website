@@ -13,7 +13,8 @@ On a fresh setup on pool or prod we need to set permissions for the media folder
 TODO: Have a better permission policy, bake it into the image on start.
 
 - `mkdir -p /home/app/media/`
-- `chmod 777 -R /home/app/media/`
+- ~~`chmod 777 -R /home/app/media/`~~
+- `chown -R uwsgi /home/app/media/`
 
 ## Services commands
 
