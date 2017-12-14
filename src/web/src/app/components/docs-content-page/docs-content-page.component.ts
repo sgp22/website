@@ -20,7 +20,7 @@ export class DocsContentPageComponent implements OnInit {
   public basePath = '';
   public mapPath = '';
   public domainPath = DOMAIN_DOCS_API;
-  public rooUrlPath = ROOT_URL_PATH;
+  public rootUrlPath = ROOT_URL_PATH;
   public docs: any;
   public trustedHtml: any;
   public section: any;
@@ -194,8 +194,8 @@ export class DocsContentPageComponent implements OnInit {
         this.router.navigate([`${relativeLink}`]);
       } else {
         const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
-        if (this.rooUrlPath) {
-          el.setAttribute(attr, `/${this.rooUrlPath}/${this.basePath}/${relativeHref}`);
+        if (this.rootUrlPath) {
+          el.setAttribute(attr, `/${this.rootUrlPath}/${this.basePath}/${relativeHref}`);
         } else {
           el.setAttribute(attr, `/${this.basePath}/${relativeHref}`);
         }
