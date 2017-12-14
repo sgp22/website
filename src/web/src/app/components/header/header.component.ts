@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, DoCheck } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../services/pages.service';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
@@ -17,12 +18,14 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
 
   constructor(
     private pagesService: PagesService,
-    private globalNav: DisplayGlobalNavService
+    private globalNav: DisplayGlobalNavService,
+    private router: Router,
   ) { }
 
   ngOnInit() {}
 
   ngAfterViewInit() {
+
     this.pagesService.getGlobalNav()
       .subscribe(
         (res: any) => {
@@ -31,6 +34,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
           });
         }
       );
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.navToggle = false;
+      }
+    })
+
   }
 
   ngDoCheck() {

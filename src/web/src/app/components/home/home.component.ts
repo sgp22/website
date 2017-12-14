@@ -42,6 +42,7 @@ export class HomeComponent implements OnDestroy {
         }
       );
     });
+    console.log(this.globalNav.displayGlobalNav);
   }
 
   ngOnDestroy() {

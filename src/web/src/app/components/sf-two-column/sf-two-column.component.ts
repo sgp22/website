@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'sf-two-column',
-  templateUrl: './two-column.component.html',
+  templateUrl: './sf-two-column.component.html',
 })
 export class TwoColumnComponent implements OnInit {
   @Input() col1Title: string;

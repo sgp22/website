@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'sf-full-width',
-  templateUrl: './full-width.component.html'
+  templateUrl: './sf-full-width.component.html'
 })
 export class FullWidthComponent implements OnInit, AfterViewInit {
   @Input() flexible_content: any;

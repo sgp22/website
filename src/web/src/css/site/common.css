@@ -144,6 +144,10 @@
   &:last-child {
     margin-bottom: calc(var(--spacing) * 5);
   }
+
+  &.main-nav--mobile--item--current {
+    text-decoration: underline;
+  }
 }
 
 .overlay--mobile-nav {
