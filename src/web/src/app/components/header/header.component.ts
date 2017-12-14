@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
   public navItems: any;
   public loading = true;
   public domain: string = DOMAIN;
-  public navToggle: boolean = false;
+  public navToggle = false;
 
   constructor(
     private pagesService: PagesService,

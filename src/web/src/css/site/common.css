@@ -39,6 +39,8 @@
 
 .site-header {
   display: block; /* this is an override. doesn't need to be moved into doc-css */
+  position: relative;
+  z-index: 3;
 
   & .iux-container {
     align-items: center;
@@ -86,6 +88,15 @@
   }
 }
 
+.btn--nav--toggle {
+  display: none;
+  margin-left: auto;
+
+  @media (--medium-viewport) {
+    display: block;
+  }
+}
+
 /*
   Mobile Nav
 */
@@ -97,7 +108,14 @@
 }
 
 .main-nav--mobile {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border-light);
   display: none;
+  padding: 0 var(--spacing);
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  z-index: 3;
 
   &.main-nav--mobile--active {
     display: block;
@@ -105,16 +123,37 @@
     @media (--medium-viewport-up) {
       display: none;
     }
+
+    & ~ .overlay--mobile-nav {
+      display: block;
+    }
   }
 }
 
-.btn--nav--toggle {
-  display: none;
-  margin-left: auto;
+.main-nav--mobile--item {
+  color: var(--link-dark);
+  display: block;
+  font-size: 40px;
+  font-weight: 300;
+  margin-bottom: calc(var(--spacing) * 9);
 
-  @media (--medium-viewport) {
-    display: block;
+  &:visited {
+    color: var(--link-dark);
   }
+
+  &:last-child {
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+}
+
+.overlay--mobile-nav {
+  background-color: rgba(255, 255, 255, 0.5);
+  bottom: 0;
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
 }
 
 /*

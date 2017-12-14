@@ -41,5 +41,7 @@
 </header>
 
 <nav class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'">
-  <a *ngFor="let navItem of navItems" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+  <a *ngFor="let navItem of navItems" class="main-nav--mobile--item" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
 </nav>
+
+<div class="overlay--mobile-nav"></div>

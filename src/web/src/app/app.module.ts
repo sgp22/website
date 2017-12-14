@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 
 import { routing } from './app.routing';
 import { HomeComponent } from './components/home/home.component';
-import { StreamfieldsComponent } from './components/streamfields/streamfields.component';
 import { ElementPageComponent } from './components/element-page/element-page.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
@@ -22,7 +21,6 @@ import { TwoColTextImageComponent } from './components/two-col-text-image/two-co
   declarations: [
     AppComponent,
     HomeComponent,
-    StreamfieldsComponent,
     ElementPageComponent,
     LandingPageComponent,
     CoreContentPageComponent,
