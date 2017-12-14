@@ -38,7 +38,7 @@ class APIImageChooserBlock(ImageChooserBlock):
 def markdown_filter(data):
     if not data:
         return ''
-    
+
     md = markdown.Markdown(
         safe_mode="replace",
         html_replacement_text="--RAW HTML NOT ALLOWED--"
@@ -58,7 +58,7 @@ class FullWidthStreamField(blocks.StructBlock):
     content = blocks.TextBlock()
     cta_text = blocks.CharBlock(required=False)
     cta_link = blocks.CharBlock(required=False, help_text="enter slug or link")
-    hero_image = APIImageChooserBlock(required=False)    
+    hero_image = APIImageChooserBlock(required=False)
     background_image = APIImageChooserBlock(required=False)
     background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter hex code")
     invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")
@@ -74,7 +74,7 @@ class TwoColumnStreamField(blocks.StructBlock):
     column_1_content = blocks.TextBlock()
     column_1_cta_text = blocks.CharBlock(required=False)
     column_1_cta_link = blocks.CharBlock(required=False, help_text="enter slug or link")
-    column_1_hero_image = APIImageChooserBlock(required=False)    
+    column_1_hero_image = APIImageChooserBlock(required=False)
     column_1_background_image = APIImageChooserBlock(required=False)
     column_1_background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter 6 digit hex code without #")
     column_1_invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")
@@ -87,7 +87,7 @@ class TwoColumnStreamField(blocks.StructBlock):
     column_2_content = blocks.TextBlock()
     column_2_cta_text = blocks.CharBlock(required=False)
     column_2_cta_link = blocks.CharBlock(required=False, help_text="enter slug or link")
-    column_2_hero_image = APIImageChooserBlock(required=False)    
+    column_2_hero_image = APIImageChooserBlock(required=False)
     column_2_background_image = APIImageChooserBlock(required=False)
     column_2_background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter 6 digit hex code without #")
     column_2_invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")
@@ -109,7 +109,7 @@ class TwoColTextImageStreamField(blocks.StructBlock):
     image_align = blocks.ChoiceBlock(choices=[
         ('left', 'left'),
         ('right', 'right')
-    ], required=False)  
+    ], required=False)
     background_image = APIImageChooserBlock(required=False)
     background_color = blocks.CharBlock(required=False, max_length=6, help_text="enter hex code")
     invert_text_color = blocks.BooleanBlock(required=False, help_text="check to invert text color")
@@ -178,7 +178,7 @@ class CoreContentPage(PageBase):
     menu_order = models.IntegerField(default=0)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
-        ('html', blocks.RichTextBlock()),
+        ('richText', blocks.RichTextBlock()),
         ('image', APIImageChooserBlock()),
         ('markdown', APIMarkDownBlock())
     ], null=True, blank=True)
