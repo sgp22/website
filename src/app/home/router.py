@@ -107,7 +107,7 @@ class CustomPageAPIEndpoint(PagesAPIEndpoint):
     def get_object(self):
         request = self.request
         base = super(CustomPageAPIEndpoint, self).get_object()
-        preview = request.GET['preview']
+        preview = request.GET.get('preview', None)
 
         if preview:
             return base.get_latest_revision().as_page_object().specific
