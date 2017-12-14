@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
       if (event instanceof NavigationEnd) {
         this.navToggle = false;
       }
-    })
+    });
 
   }
 
