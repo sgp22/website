@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'two-col-text-image',
+  selector: 'sf-two-col-text-image',
   templateUrl: './two-col-text-image.component.html'
 })
 export class TwoColTextImageComponent implements OnInit {
