@@ -55,14 +55,24 @@ def post(request):
 
 def get(request):
     try:
+        request_path_segments = request.path_info.lower().split('/')
+        if os.environ['ROOT_URL_PATH']:
+            # remove the leading '/ROOT_URL_PATH/api/docs/'
+            requested_file = "/".join(request_path_segments[4:])
+        else:
+            # just remove '/api/docs/'
+            requested_file = "/".join(request_path_segments[3:])
+
         path = os.path.join(*(
             settings.MEDIA_ROOT,
-            request.path_info[5:].lower()))
+            'docs',
+            requested_file))
 
-        path_segments = path.split('/')
-        library_name = path_segments[5] if len(path_segments) > 5 else ''
-        version = path_segments[6] if len(path_segments) > 6 else ''
-        file_path = "/".join(path_segments[7:])
+        requested_file_segments = requested_file.split('/')
+        library_name = requested_file_segments[0] if len(requested_file_segments) > 0 else ''
+        version = requested_file_segments[1] if len(requested_file_segments) > 1 else ''
+        file_path = "/".join(requested_file_segments[2:])
+
         library_path = os.path.join(*(
             settings.MEDIA_ROOT,
             'docs',
