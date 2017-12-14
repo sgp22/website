@@ -11,6 +11,10 @@ NGINX_VERSION_ON_POOL=1.0.0
 BACKEND_POOL_CONTAINER=docs_backend_pool
 NGINX_POOL_CONTAINER=docs_nginx_pool
 
+# These are public so no auth is required
+docker pull hookandloop/docs-backend:$BACKEND_VERSION
+docker pull hookandloop/docs-nginx:$NGINX_VERSION
+
 # Create the backend Dockerfile
 printf "
 FROM hookandloop/docs-backend:$BACKEND_VERSION

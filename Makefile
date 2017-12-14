@@ -56,8 +56,9 @@ restart_vm :
 run_dev :
 	cd src/web && npm install && npm run start
 
+# This is mostly for testing locally.
 build_prod :
-	cd src/web && npm install && npm run build
+	cd src/web && npm install && npm run build:prod
 
 
 # Nginx
