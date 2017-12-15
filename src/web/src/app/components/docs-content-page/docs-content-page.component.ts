@@ -19,7 +19,7 @@ export class DocsContentPageComponent implements OnInit {
   public path = '';
   public basePath = '';
   public mapPath = '';
-  public demoPath = '';
+  public absolutePath = '';
   public domainPath = DOMAIN_DOCS_API;
   public rootUrlPath = ROOT_URL_PATH;
   public docs: any;
@@ -72,10 +72,9 @@ export class DocsContentPageComponent implements OnInit {
         this.basePath = urlSegment.join('/');
       }
 
+      this.absolutePath = `/${this.basePath}`;
       if (this.rootUrlPath) {
-        this.demoPath = `/${this.rootUrlPath}/${this.basePath}/demo`;
-      } else {
-        this.demoPath = `/${this.basePath}/demo`;
+        this.absolutePath = `/${this.rootUrlPath}/${this.basePath}`;
       }
 
       this.urlFetcher
@@ -202,9 +201,9 @@ export class DocsContentPageComponent implements OnInit {
       } else {
         const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
         if (this.rootUrlPath) {
-          el.setAttribute(attr, `/${this.rootUrlPath}/${this.basePath}/${relativeHref}`);
+          el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
         } else {
-          el.setAttribute(attr, `/${this.basePath}/${relativeHref}`);
+          el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
         }
       }
     }
