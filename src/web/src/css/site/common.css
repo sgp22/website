@@ -19,6 +19,7 @@
 @custom-media --extra-small-viewport (max-width: 400px);
 @custom-media --small-viewport (max-width: 600px);
 @custom-media --medium-viewport (max-width: 840px);
+@custom-media --medium-viewport-up (min-width: 840px);
 @custom-media --large-viewport (max-width: 1280px);
 @custom-media --extra-large-viewport (max-width: 1440px);
 
@@ -38,8 +39,11 @@
 
 .site-header {
   display: block; /* this is an override. doesn't need to be moved into doc-css */
+  position: relative;
+  z-index: 3;
 
   & .iux-container {
+    align-items: center;
     display: flex;
   }
 }
@@ -71,6 +75,93 @@
 .btn--custom--inverted {
   border: 1px solid var(--white);
   color: var(--white);
+}
+
+.btn--custom--small--inverted {
+  border: 1px solid var(--border);
+  color: var(--body);
+  padding: var(--spacing) 20px;
+
+  &.btn--custom--small--active {
+    background-color: var(--border);
+    color: var(--white);
+  }
+}
+
+.btn--nav--toggle {
+  display: none;
+  margin-left: auto;
+
+  @media (--medium-viewport) {
+    display: block;
+  }
+}
+
+/*
+  Mobile Nav
+*/
+
+.main-nav {
+  @media (--medium-viewport) {
+    display: none;
+  }
+}
+
+.main-nav--mobile {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border-light);
+  display: none;
+  padding: 0 var(--spacing);
+  position: absolute;
+  top: 100px;
+  width: 100%;
+  z-index: 3;
+
+  &.main-nav--mobile--active {
+    display: block;
+
+    @media (--medium-viewport-up) {
+      display: none;
+    }
+
+    & ~ .overlay--mobile-nav {
+      display: block;
+
+      @media (--medium-viewport-up) {
+        display: none;
+      }
+    }
+  }
+}
+
+.main-nav--mobile--item {
+  color: var(--link-dark);
+  display: block;
+  font-size: 40px;
+  font-weight: 300;
+  margin-bottom: calc(var(--spacing) * 9);
+
+  &:visited {
+    color: var(--link-dark);
+  }
+
+  &:last-child {
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+
+  &.main-nav--mobile--item--current {
+    text-decoration: underline;
+  }
+}
+
+.overlay--mobile-nav {
+  background-color: rgba(255, 255, 255, 0.5);
+  bottom: 0;
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
 }
 
 /*
