@@ -1,14 +1,12 @@
 $(function () {
 
   const host = window.location.hostname;
-  let port;
-  
   const slug = $('.status-tag').attr('href');
+  const num = /\d{1,10}/g;
+  const id = window.location.pathname.match(num).toString();
   const button = $('<button>');
-  
-  if (host === 'localhost') {
-    port = ':4200'
-  }
+
+  console.log(id);
 
   /*
     Remove default preview button
@@ -21,7 +19,7 @@ $(function () {
   button
     .addClass('button icon icon-view')
     .text('Preview')
-    .attr('data-action', `http://${host}${port}${slug}preview`);
+    .attr('data-action', `http://${host}/${slug}?preview=true&id=${id}`);
 
   $('.preview').append(button);
 

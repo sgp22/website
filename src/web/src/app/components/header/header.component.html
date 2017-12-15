@@ -33,7 +33,7 @@
     </a>
     <ng-container *ngIf="displayGlobalNav">
       <nav class="main-nav">
-        <a *ngFor="let navItem of navItems" class="main-nav__item" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+        <a *ngFor="let navItem of navItems" class="main-nav__item" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
       </nav>
     </ng-container>
     <button class="btn btn--custom btn--custom--small--inverted btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'" (click)="toggleNav()" *ngIf="displayGlobalNav">Menu</button>
@@ -41,7 +41,7 @@
 </header>
 
 <nav #mainNavMobile (click)="closeNav()" class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'" *ngIf="displayGlobalNav">
-  <a *ngFor="let navItem of navItems" class="main-nav--mobile--item" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+  <a *ngFor="let navItem of navItems" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
 </nav>
 
 <div class="overlay--mobile-nav"></div>

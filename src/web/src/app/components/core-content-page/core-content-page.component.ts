@@ -34,35 +34,60 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestro
   ngOnInit() {}
 
   ngAfterViewInit() {
-    let slug;
-    let urlSegment;
-    this.route.url.forEach((url: any) => {
-      urlSegment = url[0].path;
-    });
 
     this.route.params.subscribe(params => {
-      slug = params['slug'];
-      this.pagesService
-        .getPage(slug, this.pageType)
-        .subscribe(
-          (res: any) => {
-            if (res && res.items.length) {
-              this.page = res.items[0];
-              this.body = res.items[0].body;
-              this.streamfields = res.items[0].body;
-              this.notFound = false;
-              this.loading = false;
-            } else {
-              this.notFound = true;
-            }
-          },
-          err => {
-            console.log(err);
-          }
-        );
+
+      const slug = params['slug'];
+      const url = this.router.routerState.snapshot.url;
+      const preview = url.match(/id=\d{1,10}/g);
+      preview ? this.getPreviewContent(preview) : this.getPageContent(slug);
 
     });
 
+  }
+
+  getPreviewContent(preview) {
+
+    const id = `${preview.toString().match(/\d{1,10}/g)}/?preview=true`;
+
+    this.pagesService
+      .getPreview(id)
+      .subscribe(
+        (res: any) => {
+          if(res) {
+            this.page = res;
+            this.streamfields = res['body'];
+            this.notFound = false;
+            this.loading = false;
+          } else {
+            this.notFound = true;
+          }
+        },
+        err => {
+          console.error(err);
+        }
+      );
+
+  }
+
+  getPageContent(slug) {
+    this.pagesService
+      .getPage(slug, this.pageType)
+      .subscribe(
+        (res: any) => {
+          if (res && res.items.length) {
+            this.page = res.items[0];
+            this.streamfields = res.items[0].body;
+            this.notFound = false;
+            this.loading = false;
+          } else {
+            this.notFound = true;
+          }
+        },
+        err => {
+          console.error(err);
+        }
+      );
   }
 
   ngOnDestroy() {

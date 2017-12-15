@@ -33,18 +33,48 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
 
-    let slug;
-    let urlSegment;
+    this.route.params.subscribe(params => {
 
-    this.route.url.forEach((url) => {
-      urlSegment = url[0].path;
+      const slug = params['slug'];
+      const url = this.router.routerState.snapshot.url;
+      const preview = url.match(/id=\d{1,10}/g);
+      preview ? this.getPreviewContent(preview) : this.getPageContent(slug);
+
     });
 
-    this.route.params.forEach((params: Params) => {
-      slug = params['slug'];
-    });
+  }
 
-    this.pagesService.getPage(slug, this.pageType)
+  getPreviewContent(preview) {
+
+    const id = `${preview.toString().match(/\d{1,10}/g)}/?preview=true`;
+
+    this.pagesService
+      .getPreview(id)
+      .subscribe(
+        (res: any) => {
+          if (res) {
+            this.page = res;
+            this.types = res['types'];
+            this.options = res['options'];
+            this.states = res['states'];
+            this.descriptors = res['descriptors'];
+            this.notFound = false;
+            this.loading = false;
+          } else {
+            this.notFound = true;
+          }
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+
+  }
+
+  getPageContent(slug) {
+
+    this.pagesService
+      .getPage(slug, this.pageType)
       .subscribe(
         (res: any) => {
           if (res && res.items.length) {
@@ -58,26 +88,11 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
           } else {
             this.notFound = true;
           }
+        },
+        (err) => {
+          console.error(err);
         }
       );
-
-    this.router.events
-      .filter((e) => e instanceof NavigationEnd)
-      .switchMap(e => this.pagesService.getPage(slug, this.pageType))
-        .subscribe(
-          (res: any) => {
-            if (res && res.items.length) {
-              this.page = res.items[0];
-              this.types = res.items[0].types;
-              this.options = res.items[0].options;
-              this.states = res.items[0].states;
-              this.descriptors = res.items[0].descriptors;
-              this.notFound = false;
-            } else {
-              this.notFound = true;
-            }
-          }
-        );
 
   }
 
