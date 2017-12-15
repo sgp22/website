@@ -2,6 +2,7 @@ import json
 import shutil
 import os
 import re
+import logging
 import zipfile
 import markdown
 import semver
@@ -15,6 +16,9 @@ from django.http import HttpResponse
 
 from rest_framework.response import Response
 from rest_framework import status
+
+
+logger = logging.getLogger('debug')
 
 
 def post(request):
@@ -56,34 +60,39 @@ def post(request):
 def get(request):
     try:
         request_path_segments = request.path_info.lower().split('/')
+
         if os.environ['ROOT_URL_PATH']:
             # remove the leading '/ROOT_URL_PATH/api/docs/'
-            requested_file = "/".join(request_path_segments[4:])
+            requested_file = '/'.join(request_path_segments[4:])
         else:
             # just remove '/api/docs/'
-            requested_file = "/".join(request_path_segments[3:])
+            requested_file = '/'.join(request_path_segments[3:])
 
         path = os.path.join(*(
             settings.MEDIA_ROOT,
             'docs',
             requested_file))
 
+        logger.debug('Docs get on path %s', path)
+
         requested_file_segments = requested_file.split('/')
         library_name = requested_file_segments[0] if len(requested_file_segments) > 0 else ''
         version = requested_file_segments[1] if len(requested_file_segments) > 1 else ''
-        file_path = "/".join(requested_file_segments[2:])
+        file_path = '/'.join(requested_file_segments[2:])
 
         library_path = os.path.join(*(
             settings.MEDIA_ROOT,
             'docs',
             library_name))
 
-        if version == "latest":
+        if version == 'latest':
             all_versions = next(os.walk(library_path))[1]
-            latest_version = "0.0.0"
+            latest_version = '0.0.0'
+
             if len(all_versions) > 1:
                 for a, b in itertools.combinations(all_versions, 2):
                     highest_version = semver.max_ver(a, b)
+
                     if highest_version > latest_version:
                         latest_version = highest_version
             else:
@@ -116,9 +125,9 @@ def get(request):
 
                 return HttpResponse(content=content)
             elif path.endswith('.png'):
-                return HttpResponse(content=content, content_type="image/png")
+                return HttpResponse(content=content, content_type='image/png')
             elif path.endswith('.jpeg'):
-                return HttpResponse(content=content, content_type="image/jpeg")
+                return HttpResponse(content=content, content_type='image/jpeg')
             else:
                 return HttpResponse(content=content)
         else:

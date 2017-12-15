@@ -201,3 +201,40 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
         'WIDGET': 'home.tinymce.CustomTinyMCE'
     }
 }
+
+
+# Logging.
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'NOTSET',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django.log',
+            'formatter': 'verbose',
+        }
+    },
+    'loggers': {
+        'debug': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True,
+        }
+    }
+}
