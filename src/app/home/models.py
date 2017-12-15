@@ -53,6 +53,14 @@ class APIMarkDownBlock(MarkdownBlock):
             return markdown_filter(value)
 
 
+class APIRichTextBlock(blocks.RichTextBlock):
+    # By overriding this function, we get the raw data value
+    # which is what we wanted, so we return the string.
+    def get_api_representation(self, value, context=None):
+        if value:
+            return str(value)
+
+
 class FullWidthStreamField(blocks.StructBlock):
     title = blocks.CharBlock()
     content = blocks.TextBlock()
@@ -156,7 +164,7 @@ class LandingPage(PageBase):
         ('twoColumn', TwoColumnStreamField()),
         ('twoColTextImage', TwoColTextImageStreamField()),
         ('markdown', APIMarkDownBlock()),
-        ('richText', blocks.RichTextBlock())
+        ('richText', APIRichTextBlock())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
@@ -178,7 +186,7 @@ class CoreContentPage(PageBase):
     menu_order = models.IntegerField(default=0)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
-        ('richText', blocks.RichTextBlock()),
+        ('richText', APIRichTextBlock()),
         ('image', APIImageChooserBlock()),
         ('markdown', APIMarkDownBlock())
     ], null=True, blank=True)
