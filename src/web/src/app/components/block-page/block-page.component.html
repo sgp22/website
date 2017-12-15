@@ -1,0 +1,75 @@
+
+<app-page-not-found *ngIf="notFound"></app-page-not-found>
+
+<ng-container *ngIf="!loading">
+
+  <ng-container *ngIf="!notFound">
+
+      <h1 class="page-title">{{page?.title}}</h1>
+
+      <section *ngIf="descriptors" class="element-section">
+
+        <p>
+          <span *ngIf="descriptors.what_it_does" class="what-it-does">
+            {{descriptors.what_it_does.description}}
+          </span>
+          <span *ngIf="descriptors.what_user_can_do" class="what-user-can-do">
+            {{descriptors.what_user_can_do.description}}
+          </span>
+          <span *ngIf="descriptors.when_to_use_it" class="when-to-use-it">
+            {{descriptors.when_to_use_it.description}}
+          </span>
+        </p>
+
+      </section>
+
+      <section *ngIf="types?.length" class="element-section element-section--types">
+
+        <h1 class="h2">Types</h1>
+
+        <table class="section-table">
+          <thead>
+            <th>Type</th>
+            <th>When to use it</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let type of types">
+              <td><div><strong>{{type.value.name}}</strong></div></td>
+              <td><div>{{type.value.detail}}</div></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </section>
+
+      <section *ngIf="options?.length" class="element-section element-section--options">
+
+        <h1 class="h2">Options</h1>
+
+        <table class="section-table">
+          <thead>
+            <th>Type</th>
+            <th>Details</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let option of options">
+              <td><div><strong>{{option.value.name}}</strong></div></td>
+              <td><div>{{option.value.detail}}</div></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </section>
+
+      <section *ngIf="states?.length" class="element-section element-section--states">
+        <h1 class="h2">States</h1>
+        <ul>
+            <li *ngFor="let state of states">{{state?.value.state}}</li>
+        </ul>
+      </section>
+
+
+    </ng-container>
+
+  </ng-container>
+

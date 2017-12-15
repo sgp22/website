@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { HomeComponent } from './components/home/home.component';
 import { ElementPageComponent } from './components/element-page/element-page.component';
+import { BlockPageComponent } from './components/block-page/block-page.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
@@ -22,6 +23,7 @@ import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-
     AppComponent,
     HomeComponent,
     ElementPageComponent,
+    BlockPageComponent,
     LandingPageComponent,
     CoreContentPageComponent,
     DocsContentPageComponent,
