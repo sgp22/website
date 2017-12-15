@@ -19,6 +19,7 @@ export class DocsContentPageComponent implements OnInit {
   public path = '';
   public basePath = '';
   public mapPath = '';
+  public demoPath = '';
   public domainPath = DOMAIN_DOCS_API;
   public rootUrlPath = ROOT_URL_PATH;
   public docs: any;
@@ -69,6 +70,12 @@ export class DocsContentPageComponent implements OnInit {
       } else {
         this.library = urlSegment.slice(1, -1).join('');
         this.basePath = urlSegment.join('/');
+      }
+
+      if (this.rootUrlPath) {
+        this.demoPath = `/${this.rootUrlPath}/${this.basePath}/demo`;
+      } else {
+        this.demoPath = `/${this.basePath}/demo`;
       }
 
       this.urlFetcher
