@@ -126,6 +126,10 @@
 
     & ~ .overlay--mobile-nav {
       display: block;
+
+      @media (--medium-viewport-up) {
+        display: none;
+      }
     }
   }
 }
