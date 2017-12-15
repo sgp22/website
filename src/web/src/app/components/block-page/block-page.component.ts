@@ -1,22 +1,21 @@
 import { Component, OnInit, DoCheck, AfterViewInit, HostBinding, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
-import { PagesService } from '../../shared/pages.service';
+import { PagesService } from '../../services/pages.service';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
-  selector: 'app-element-page',
-  templateUrl: './element-page.component.html',
+  selector: 'app-block-page',
+  templateUrl: './block-page.component.html',
   providers: [PagesService]
 })
-export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BlockPageComponent implements OnInit, AfterViewInit, OnDestroy {
   @HostBinding('class.iux-row--col-sm-9') iuxRow: any = true;
-  public pageType: any = 'home.ElementsPage';
+  public pageType: any = 'home.BlocksPage';
   public page: any;
   public options: any;
   public types: any;
   public states: any;
   public sidebar: any = true;
-  public descriptors: any;
   public notFound = false;
   public loading = true;
 
@@ -49,7 +48,6 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
               this.types = res.items[0].types;
               this.options = res.items[0].options;
               this.states = res.items[0].states;
-              this.descriptors = res.items[0].descriptors;
               this.notFound = false;
               this.loading = false;
             } else {

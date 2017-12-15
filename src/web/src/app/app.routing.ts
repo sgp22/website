@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ElementPageComponent } from './components/element-page/element-page.component';
+import { BlockPageComponent } from './components/block-page/block-page.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -31,14 +32,28 @@ const appRoutes: Routes = [
     path: 'design/elements/:slug',
     component: ElementPageComponent,
     children: [
-      {path: 'preview', component: ElementPageComponent}
+      {path: 'preview', component: ElementPageComponent }
+    ]
+  },
+  {
+    path: 'design/blocks/:slug',
+    component: BlockPageComponent,
+    children: [
+      {path: 'preview', component: BlockPageComponent }
     ]
   },
   {
     path: 'design/identity/:slug',
     component: CoreContentPageComponent,
     children: [
-      { path: 'preview', component: ElementPageComponent }
+      { path: 'preview', component: CoreContentPageComponent }
+    ]
+  },
+  {
+    path: 'design/page-structure/:slug',
+    component: CoreContentPageComponent,
+    children: [
+      { path: 'preview', component: CoreContentPageComponent }
     ]
   },
   {
@@ -62,6 +77,13 @@ const appRoutes: Routes = [
   },
   {
     path: 'examples',
+    component: CoreContentPageComponent,
+    children: [
+      { path: 'preview', component: CoreContentPageComponent }
+    ]
+  },
+  {
+    path: 'examples/:slug',
     component: CoreContentPageComponent,
     children: [
       { path: 'preview', component: CoreContentPageComponent }
