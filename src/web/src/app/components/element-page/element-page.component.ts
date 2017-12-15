@@ -32,38 +32,16 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {}
 
   ngAfterViewInit() {
-
     let slug;
     let urlSegment;
-
     this.route.url.forEach((url) => {
       urlSegment = url[0].path;
     });
 
-    this.route.params.forEach((params: Params) => {
+    this.route.params.subscribe(params => {
       slug = params['slug'];
-    });
-
-    this.pagesService.getPage(slug, this.pageType)
-      .subscribe(
-        (res: any) => {
-          if (res && res.items.length) {
-            this.page = res.items[0];
-            this.types = res.items[0].types;
-            this.options = res.items[0].options;
-            this.states = res.items[0].states;
-            this.descriptors = res.items[0].descriptors;
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
-        }
-      );
-
-    this.router.events
-      .filter((e) => e instanceof NavigationEnd)
-      .switchMap(e => this.pagesService.getPage(slug, this.pageType))
+      this.pagesService
+        .getPage(slug, this.pageType)
         .subscribe(
           (res: any) => {
             if (res && res.items.length) {
@@ -73,11 +51,17 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
               this.states = res.items[0].states;
               this.descriptors = res.items[0].descriptors;
               this.notFound = false;
+              this.loading = false;
             } else {
               this.notFound = true;
             }
+          },
+          err => {
+            console.log(err);
           }
         );
+
+    });
 
   }
 
