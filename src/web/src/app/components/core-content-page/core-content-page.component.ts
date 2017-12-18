@@ -50,6 +50,7 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestro
 
     const id = `${preview.toString().match(/\d{1,10}/g)}/?preview=true`;
 
+    console.log(id);
     this.pagesService
       .getPreview(id)
       .subscribe(
