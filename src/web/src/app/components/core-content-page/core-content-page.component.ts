@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, HostBinding, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
-import { PagesService } from '../../services/pages.service';
+import { PagesService } from '../../shared/pages.service';
 import { HttpClient } from '@angular/common/http';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 import 'rxjs/add/operator/filter';
@@ -54,7 +54,7 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestro
       .getPreview(id)
       .subscribe(
         (res: any) => {
-          if(res) {
+          if (res) {
             this.page = res;
             this.streamfields = res['body'];
             this.notFound = false;

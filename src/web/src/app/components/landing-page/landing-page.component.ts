@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
-import { PagesService } from '../../services/pages.service';
+import { PagesService } from '../../shared/pages.service';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
@@ -46,7 +46,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
       .getPreview(id)
       .subscribe(
         (res) => {
-          if(res) {
+          if (res) {
             this.page = res;
             this.flexibleContent = res['content'];
             this.notFound = false;
@@ -58,7 +58,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
         (err) => {
           console.error(err);
         }
-      )
+      );
 
   }
 

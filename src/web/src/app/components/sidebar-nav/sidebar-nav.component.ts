@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { PagesService } from '../../services/pages.service';
+import { PagesService } from '../../shared/pages.service';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({

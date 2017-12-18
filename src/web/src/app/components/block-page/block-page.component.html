@@ -23,7 +23,7 @@
 
       </section>
 
-      <section *ngIf="types.length" class="element-section element-section--types">
+      <section *ngIf="types?.length" class="element-section element-section--types">
 
         <h1 class="h2">Types</h1>
 
@@ -42,7 +42,7 @@
 
       </section>
 
-      <section *ngIf="options.length" class="element-section element-section--options">
+      <section *ngIf="options?.length" class="element-section element-section--options">
 
         <h1 class="h2">Options</h1>
 
@@ -61,10 +61,10 @@
 
       </section>
 
-      <section *ngIf="states.length" class="element-section element-section--states">
+      <section *ngIf="states?.length" class="element-section element-section--states">
         <h1 class="h2">States</h1>
         <ul>
-          <li *ngFor="let state of states">{{state.value.state}}</li>
+            <li *ngFor="let state of states">{{state?.value.state}}</li>
         </ul>
       </section>
 
