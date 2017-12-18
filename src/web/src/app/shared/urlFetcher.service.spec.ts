@@ -2,7 +2,7 @@ import { UrlFetcher } from './urlFetcher.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpHandler } from '@angular/common/http';
 
-describe('url Fetcher', () => {
+describe('UrlFetcherService', () => {
   let urlFetcher: UrlFetcher;
   let http: HttpClient;
   // tslint:disable-next-line

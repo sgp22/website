@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class Comments {
-  parse(docComments: any) {
+
+export class JsDocumentation {
+
+  parse(jsDocumentation: any) {
     // Not worrying about nesting yet as API, will probably be new Comp.method, not new.Comp.method.anotherMethod
 
-    const comments = {};
-    if (docComments) {
+    const docObj = {};
 
-      comments['name'] = docComments.name;
-      if (docComments.constructorComment) {
-        comments['constructorTags'] = docComments.constructorComment.tags;
+    if (jsDocumentation) {
+
+      docObj['name'] = jsDocumentation.name;
+
+      if (jsDocumentation.constructorComment) {
+        docObj['constructorTags'] = jsDocumentation.constructorComment.tags;
       }
 
       // Parse first level
-      if (docComments.members.instance.length) {
-        comments['methods'] = docComments.members.instance.map(data => {
-          const methods = {};
-          methods['name'] = data.name;
+      if (jsDocumentation.members.instance.length) {
+
+        docObj['methods'] = jsDocumentation.members.instance.map(data => {
+          const methods = {
+            name: data.name,
+            info: data.description.children[0].children[0].value
+          };
 
           if (data.tags) {
             methods['params'] = [];
@@ -31,14 +38,11 @@ export class Comments {
               }
             }
           }
-
-          methods['info'] = data.description.children[0].children[0].value;
           return methods;
         });
+
       }
     }
-
-    return comments;
+    return docObj;
   }
-
 }

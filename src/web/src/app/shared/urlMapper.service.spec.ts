@@ -2,7 +2,7 @@ import { UrlMapper } from './urlMapper.service';
 import { UrlParser } from './urlParser.service';
 import { UrlTree } from '@angular/router';
 
-describe('url Mapper', () => {
+describe('UrlMapperService', () => {
   let urlMapper: UrlMapper;
   let urlTree: UrlTree;
   let urlParser: UrlParser;
