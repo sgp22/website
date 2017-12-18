@@ -6,8 +6,6 @@ $(function () {
   const id = window.location.pathname.match(num).toString();
   const button = $('<button>');
 
-  console.log(id);
-
   /*
     Remove default preview button
   */
