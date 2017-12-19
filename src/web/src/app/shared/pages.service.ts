@@ -21,6 +21,10 @@ export class PagesService {
     return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/?format=json&type=${pageType}&fields=*&slug=${slug}`);
   }
 
+  getPreview(id) {
+    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/${id}`);
+  }
+
   getGlobalNav() {
     return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/?format=json&show_in_menus=true`);
   }

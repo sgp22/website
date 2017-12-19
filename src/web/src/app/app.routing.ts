@@ -16,45 +16,19 @@ const appRoutes: Routes = [
   },
   {
     path: ':slug',
-    component: LandingPageComponent,
-    children: [
-      { path: 'preview', component: LandingPageComponent }
-    ]
+    component: LandingPageComponent
   },
   {
     path: 'design/:slug',
-    component: CoreContentPageComponent,
-    children: [
-      { path: 'preview', component: CoreContentPageComponent }
-    ]
+    component: CoreContentPageComponent
   },
   {
     path: 'design/elements/:slug',
-    component: ElementPageComponent,
-    children: [
-      {path: 'preview', component: ElementPageComponent }
-    ]
-  },
-  {
-    path: 'design/blocks/:slug',
-    component: BlockPageComponent,
-    children: [
-      {path: 'preview', component: BlockPageComponent }
-    ]
+    component: ElementPageComponent
   },
   {
     path: 'design/identity/:slug',
-    component: CoreContentPageComponent,
-    children: [
-      { path: 'preview', component: CoreContentPageComponent }
-    ]
-  },
-  {
-    path: 'design/page-structure/:slug',
-    component: CoreContentPageComponent,
-    children: [
-      { path: 'preview', component: CoreContentPageComponent }
-    ]
+    component: CoreContentPageComponent
   },
   {
     path: 'develop/:library/:version/:component',
@@ -70,31 +44,19 @@ const appRoutes: Routes = [
   },
   {
     path: 'about',
-    component: CoreContentPageComponent,
-    children: [
-      { path: 'preview', component: CoreContentPageComponent }
-    ]
+    component: CoreContentPageComponent
   },
   {
     path: 'examples',
-    component: CoreContentPageComponent,
-    children: [
-      { path: 'preview', component: CoreContentPageComponent }
-    ]
+    component: CoreContentPageComponent
   },
   {
     path: 'examples/:slug',
-    component: CoreContentPageComponent,
-    children: [
-      { path: 'preview', component: CoreContentPageComponent }
-    ]
+    component: CoreContentPageComponent
   },
   {
     path: 'resources',
-    component: CoreContentPageComponent,
-    children: [
-      { path: 'preview', component: CoreContentPageComponent }
-    ]
+    component: CoreContentPageComponent
   },
   {
     path: 'resources/:slug',

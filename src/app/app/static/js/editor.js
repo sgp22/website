@@ -1,14 +1,11 @@
 $(function () {
 
   const host = window.location.hostname;
-  let port;
-  
-  const slug = $('.status-tag').attr('href');
+  const urlPath = $("header .row .status-tag:contains('live')").attr('href');
+  const num = /\d{1,10}/g;
+  const id = window.location.pathname.match(num).toString();
   const button = $('<button>');
-  
-  if (host === 'localhost') {
-    port = ':4200'
-  }
+  const unpublishBtn = $("footer ul a:contains('Unpublish')");
 
   /*
     Remove default preview button
@@ -21,13 +18,17 @@ $(function () {
   button
     .addClass('button icon icon-view')
     .text('Preview')
-    .attr('data-action', `http://${host}${port}${slug}preview`);
+    .attr('data-action', `http://${host}${urlPath}?preview=true&id=${id}`);
 
-  $('.preview').append(button);
+  if (unpublishBtn.length) {
 
-  button.on('click', function(e) {
-    e.preventDefault();
-    window.open( $(this).data('action') );
-  });
+    $('.preview').append(button);
+
+    button.on('click', function(e) {
+      e.preventDefault();
+      window.open( $(this).data('action') );
+    });
+
+  }
 
 });
