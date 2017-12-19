@@ -1,7 +1,7 @@
 import { UrlParser } from './urlParser.service';
 import { UrlTree } from '@angular/router';
 
-describe('url Parser', () => {
+describe('UrlParserService', () => {
   let urlParser: UrlParser;
   let urlTree: UrlTree;
   let correctPath = '';

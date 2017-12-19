@@ -7,13 +7,13 @@ import 'rxjs/add/operator/switchMap';
 import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
 import { UrlFetcher } from '../../shared/urlFetcher.service';
-import { Comments } from '../../shared/comments.service';
+import { JsDocumentation } from '../../shared/js-documentation.service';
 import * as semver from 'semver';
 
 @Component({
   selector: 'app-docs-content-page',
   templateUrl: './docs-content-page.component.html',
-  providers: [UrlParser, UrlMapper, UrlFetcher, Comments]
+  providers: [UrlParser, UrlMapper, UrlFetcher, JsDocumentation]
 })
 export class DocsContentPageComponent implements OnInit {
   public path = '';
@@ -43,7 +43,7 @@ export class DocsContentPageComponent implements OnInit {
     private urlParser: UrlParser,
     private urlMapper: UrlMapper,
     private urlFetcher: UrlFetcher,
-    private comments: Comments,
+    private comments: JsDocumentation,
     private sanitizer: DomSanitizer
   ) {}
 
