@@ -18,7 +18,7 @@ $(function () {
   button
     .addClass('button icon icon-view')
     .text('Preview')
-    .attr('data-action', `http://${host}/${urlPath}?preview=true&id=${id}`);
+    .attr('data-action', `http://${host}${urlPath}?preview=true&id=${id}`);
 
   if (unpublishBtn.length) {
 
