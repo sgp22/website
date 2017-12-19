@@ -260,7 +260,12 @@ class ElementsPage(PageBase):
     types = StreamField([
         ('types', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
-            ('detail', blocks.CharBlock(required=True))
+            ('detail', blocks.CharBlock(required=True)),
+            ('image', APIImageChooserBlock(required=False)),
+            ('image_type', blocks.ChoiceBlock(choices=[
+                ('full-width', 'Full Width'),
+                ('inline', 'Inline')
+            ], required=False )),
         ]))
     ], null=True, blank=True)
 
@@ -300,7 +305,13 @@ class BlocksPage(PageBase):
     types = StreamField([
         ('types', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
-            ('detail', blocks.CharBlock(required=True))
+            ('detail', blocks.CharBlock(required=True)),
+            ('image', APIImageChooserBlock(required=False)),
+            ('image', APIImageChooserBlock(required=False)),
+            ('image_type', blocks.ChoiceBlock(choices=[
+                ('full-width', 'Full Width'),
+                ('inline', 'Inline')
+            ], required=False )),
         ]))
     ], null=True, blank=True)
 
