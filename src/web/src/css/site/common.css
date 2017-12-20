@@ -265,3 +265,24 @@
     width: 100%;
   }
 }
+
+/*
+  Section table
+*/
+
+.section-table {
+  & td {
+    vertical-align: middle;
+  }
+
+  & .section-table--row--full-image {
+    border-bottom: none;
+  }
+
+  & .section-table--image-row--full {
+    & img {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+}

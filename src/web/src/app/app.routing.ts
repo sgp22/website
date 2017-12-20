@@ -27,6 +27,10 @@ const appRoutes: Routes = [
     component: ElementPageComponent
   },
   {
+    path: 'design/blocks/:slug',
+    component: BlockPageComponent
+  },
+  {
     path: 'design/identity/:slug',
     component: CoreContentPageComponent
   },
