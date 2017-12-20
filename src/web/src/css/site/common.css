@@ -275,6 +275,16 @@
     vertical-align: middle;
   }
 
+  /* When moving to documentation-css
+     Add this to "section table" and
+     remove the style that generically
+     applies stuff to "td > div"
+  */
+  & .section-table--content {
+    line-height: 1.5;
+    padding: calc(var(--spacing) * 3) 0;
+  }
+
   & .section-table--row--full-image {
     border-bottom: none;
   }

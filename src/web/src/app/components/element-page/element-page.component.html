@@ -36,15 +36,15 @@
           <tbody>
             <ng-container *ngFor="let type of types">
               <tr class="section-table--row" [ngClass]="(type.value.image_type === 'full-width') ? 'section-table--row--full-image' : ''">
-                <td><div><strong>{{type.value.name}}</strong></div></td>
-                <td><div>{{type.value.detail}}</div></td>
-                <td *ngIf="type.value.image_type === 'inline'">
-                  <div><img src="{{type.value.image.file}}" alt="{{type.value.image.title}}"></div>
+                <td class="section-table--content"><strong>{{type.value.name}}</strong></td>
+                <td class="section-table--content">{{type.value.detail}}</td>
+                <td class="section-table--content" *ngIf="type.value.image_type === 'inline'">
+                  <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
                 </td>
               </tr>
               <tr *ngIf="type.value.image_type === 'full-width'" class="section-table--image-row--full">
-                <td colspan="3">
-                  <div><img src="{{type.value.image.file}}" alt="{{type.value.image.title}}"></div>
+                <td colspan="3" class="section-table--content">
+                  <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
                 </td>
               </tr>
             </ng-container>
@@ -64,8 +64,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let option of options">
-              <td><div><strong>{{option.value.name}}</strong></div></td>
-              <td><div>{{option.value.detail}}</div></td>
+              <td class="section-table--content"><strong>{{option.value.name}}</strong></td>
+              <td class="section-table--content">{{option.value.detail}}</td>
             </tr>
           </tbody>
         </table>
