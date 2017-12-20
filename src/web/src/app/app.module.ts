@@ -18,6 +18,8 @@ import { FullWidthComponent } from './components/sf-full-width/sf-full-width.com
 import { TwoColumnComponent } from './components/sf-two-column/sf-two-column.component';
 import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-two-col-text-image.component';
 
+import { SafeHtmlPipe } from "./shared/safeHtml.pipe"
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +35,7 @@ import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-
     FullWidthComponent,
     TwoColumnComponent,
     TwoColTextImageComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     BrowserModule,
