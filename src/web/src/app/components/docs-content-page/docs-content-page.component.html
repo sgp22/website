@@ -43,9 +43,6 @@
           <thead>
             <th>Description</th>
             <th>Color / Opacity</th>
-            <th *ngFor="let specTheme of docs?.specs[0]?.themes">
-              {{specTheme.theme}}
-            </th>
           </thead>
           <tbody>
             <tr *ngFor="let spec of docs.specs">
@@ -55,10 +52,7 @@
               <td>
                 <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="spec.value && {'background-color': ''+ spec.value +'' }" title="{{spec.value}}"></span>
                 <span *ngIf="spec.valueType">{{spec.value}}</span>
-                <pre><code class="site-spec--code">var({{spec.originalDeclaration}})</code></pre>
-              </td>
-              <td class="section-table--content" *ngFor="let specTheme of spec.themes">
-                <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="specTheme.value && {'background-color': ''+ specTheme.value +'' }" title="{{specTheme.value}}"></span>
+                <code class="site-spec--code">var({{spec.originalDeclaration}})</code>
               </td>
             </tr>
           </tbody>
