@@ -34,7 +34,6 @@ class APIImageChooserBlock(ImageChooserBlock):
         if value:
             return WagtailImageSerializer(context=context).to_representation(value)
 
-
 def markdown_filter(data):
     if not data:
         return ''
@@ -164,6 +163,7 @@ class LandingPage(PageBase):
         ('twoColumn', TwoColumnStreamField()),
         ('twoColTextImage', TwoColTextImageStreamField()),
         ('markdown', APIMarkDownBlock()),
+        ('rawHtml', blocks.RawHTMLBlock()),
         ('richText', APIRichTextBlock())
     ], null=True, blank=True)
 
