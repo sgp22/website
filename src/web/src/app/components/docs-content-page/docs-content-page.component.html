@@ -36,6 +36,35 @@
     <div class="iux-row--col-sm-9 iux-row--col-md-9" *ngIf="!notFound">
       <h1>{{docs?.title}}</h1>
       <a  *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}">View Live Demo</a>
+
+      <div *ngIf="docs?.specs">
+        <h2>Specifications</h2>
+        <table class="section-table">
+          <thead>
+            <th>Description</th>
+            <th>Color / Opacity</th>
+            <th *ngFor="let specTheme of docs?.specs[0]?.themes">
+              {{specTheme.theme}}
+            </th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let spec of docs.specs">
+              <td class="section-table--content">
+                {{spec.title}}
+              </td>
+              <td>
+                <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="spec.value && {'background-color': ''+ spec.value +'' }" title="{{spec.value}}"></span>
+                <span *ngIf="spec.valueType">{{spec.value}}</span>
+                <pre><code class="site-spec--code">var({{spec.originalDeclaration}})</code></pre>
+              </td>
+              <td class="section-table--content" *ngFor="let specTheme of spec.themes">
+                <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="specTheme.value && {'background-color': ''+ specTheme.value +'' }" title="{{specTheme.value}}"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div *ngFor="let element of elements">
         <h2>Class {{element.name}}</h2>
         <div *ngFor="let constructorTag of element.constructorTags">
