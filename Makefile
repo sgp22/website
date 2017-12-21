@@ -37,7 +37,7 @@ down_clean : down
 	-docker volume rm docssite_static-data
 
 restart :
-	docker-compose restart	
+	docker-compose restart
 
 reset : down
 	make up
@@ -79,6 +79,9 @@ shell_backend :
 
 tail_backend :
 	docker logs -f $(BACKEND_CONTAINER)
+
+tail_backend_python :
+	docker exec -ti $(BACKEND_CONTAINER) tail -f /var/log/django.log
 
 dev_backend :
 	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/manage.py runserver 0.0.0.0:9002
