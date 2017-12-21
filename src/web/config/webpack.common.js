@@ -224,8 +224,18 @@ module.exports = {
       },
       {
         "context": "src/",
+        "to": "assets/iux/svgs",
+        "from": "../node_modules/@infor/iux-components/dist/inline-icons.svg"
+      },
+      {
+        "context": "src/",
         "to": "assets/iux/css",
         "from": "../node_modules/@infor/iux-components/dist/iux.min.css"
+      },
+      {
+        "context": "src/",
+        "to": "assets/iux/css",
+        "from": "../node_modules/@infor/iux-components/dist/iux.min.css.map"
       },
       {
         "context": "src/",
@@ -275,6 +285,7 @@ module.exports = {
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
         "assets/iux/css/iux.min.css",
+        { path: "assets/iux/css/iux.min.css.map", type: "css" },
         "assets/documentation-css/css/documentation.min.css"
       ],
       append: false,
