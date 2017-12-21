@@ -42,7 +42,7 @@
         <table class="section-table">
           <thead>
             <th>Description</th>
-            <th>Color / Opacity</th>
+            <th>Value</th>
           </thead>
           <tbody>
             <tr *ngFor="let spec of docs.specs">
@@ -52,6 +52,8 @@
               <td>
                 <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="spec.value && {'background-color': ''+ spec.value +'' }" title="{{spec.value}}"></span>
                 <span *ngIf="spec.valueType">{{spec.value}}</span>
+              </td>
+              <td>
                 <code class="site-spec--code">var({{spec.originalDeclaration}})</code>
               </td>
             </tr>
