@@ -36,6 +36,31 @@
     <div class="iux-row--col-sm-9 iux-row--col-md-9" *ngIf="!notFound">
       <h1>{{docs?.title}}</h1>
       <a  *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}">View Live Demo</a>
+
+      <div *ngIf="docs?.specs">
+        <h2>Specifications</h2>
+        <table class="section-table">
+          <thead>
+            <th>Description</th>
+            <th>Value</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let spec of docs.specs">
+              <td class="section-table--content">
+                {{spec.title}}
+              </td>
+              <td>
+                <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="spec.value && {'background-color': ''+ spec.value +'' }" title="{{spec.value}}"></span>
+                <span *ngIf="spec.valueType">{{spec.value}}</span>
+              </td>
+              <td>
+                <code class="site-spec--code">var({{spec.originalDeclaration}})</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div *ngFor="let element of elements">
         <h2>Class {{element.name}}</h2>
         <div *ngFor="let constructorTag of element.constructorTags">
@@ -51,21 +76,21 @@
             <tr *ngFor="let method of element.methods">
               <td>
                 <div *ngIf="method.params.length; then thenTemplateName; else elseTemplateName">
-                    your Content ignored
+                  your Content ignored
                 </div>
               </td>
               <ng-template #thenTemplateName>
-                <td>
-                  <div>{{method.name}}&#40;<span *ngFor="let param of method.params; let isLast=last">{{param.paramName}} = {{param.paramDescription}}{{isLast ? '' : ', '}}</span>&#41;</div>
+                <td class="section-table--content">
+                  {{method.name}}&#40;<span *ngFor="let param of method.params; let isLast=last">{{param.paramName}} = {{param.paramDescription}}{{isLast ? '' : ', '}}</span>&#41;
                 </td>
               </ng-template>
               <ng-template #elseTemplateName>
-                <td>
-                  <div>{{method.name}}</div>
+                <td class="section-table--content">
+                  {{method.name}}
                 </td>
               </ng-template>
-              <td>
-                <div>{{method.info}}</div>
+              <td class="section-table--content">
+                {{method.info}}
               </td>
             </tr>
           </tbody>
