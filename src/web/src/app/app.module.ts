@@ -18,6 +18,8 @@ import { FullWidthComponent } from './components/sf-full-width/sf-full-width.com
 import { TwoColumnComponent } from './components/sf-two-column/sf-two-column.component';
 import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-two-col-text-image.component';
 
+import { InlineSVGModule } from 'ng-inline-svg';
+
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
 
 @NgModule({
@@ -40,6 +42,7 @@ import { SafeHtmlPipe } from './shared/safeHtml.pipe';
   imports: [
     BrowserModule,
     HttpClientModule,
+    InlineSVGModule,
     routing
   ],
   providers: [],
