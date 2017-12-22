@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "^5.0.1",
     "@angular/router": "^5.0.1",
     "@infor/documentation-css": "0.1.4",
-    "@infor/iux-components": "^0.11.0-alpha",
+    "@infor/iux-components": "^0.11.1-alpha",
     "core-js": "^2.4.1",
     "ng-inline-svg": "^5.1.2",
     "rxjs": "5.5.2",
