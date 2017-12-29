@@ -35,7 +35,7 @@ export class AppComponent implements DoCheck {
 
         this.svgAssetsPath = 'assets/iux/svgs/inline-icons.svg';
         if (this.rootUrlPath) {
-          this.svgAssetsPath = `${this.rootUrlPath}/assets/iux/svgs/inline-icons.svg`;
+          this.svgAssetsPath = '/assets/iux/svgs/inline-icons.svg';
         }
 
         // Initialize Pendo on page change
