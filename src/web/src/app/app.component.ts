@@ -15,7 +15,7 @@ export class AppComponent implements DoCheck {
   public displayGlobalNav: boolean;
   public displaySidebarNav: boolean;
   public rootUrlPath = ROOT_URL_PATH;
-  public assetsPath = '';
+  public svgAssetsPath = '';
 
   constructor(
     private globalNav: DisplayGlobalNavService,
@@ -33,9 +33,9 @@ export class AppComponent implements DoCheck {
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor UX`);
         }
 
-        this.assetsPath = 'assets/iux/svgs/inline-icons.svg';
+        this.svgAssetsPath = 'assets/iux/svgs/inline-icons.svg';
         if (this.rootUrlPath) {
-          this.assetsPath = `${this.rootUrlPath}/assets/iux/svgs/inline-icons.svg`;
+          this.svgAssetsPath = `${this.rootUrlPath}/assets/iux/svgs/inline-icons.svg`;
         }
 
         // Initialize Pendo on page change
