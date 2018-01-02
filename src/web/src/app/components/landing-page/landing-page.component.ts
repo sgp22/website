@@ -10,8 +10,7 @@ import 'rxjs/add/operator/switchMap';
   providers: [PagesService]
 })
 export class LandingPageComponent implements OnInit, AfterViewInit {
-
-  public page: any;
+  @Input() page;
   public flexibleContent: any;
   public pageType: any = 'home.LandingPage';
   public notFound = false;
@@ -29,10 +28,9 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
 
     this.route.params.subscribe(params => {
 
-      const slug = params['slug'];
       const url = this.router.routerState.snapshot.url;
       const preview = url.match(/id=\d{1,10}/g);
-      preview ? this.getPreviewContent(preview) : this.getPageContent(slug);
+      preview ? this.getPreviewContent(preview) : this.getPageContent(this.page.meta.slug);
 
     });
 
@@ -47,7 +45,6 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
       .subscribe(
         (res) => {
           if (res) {
-            this.page = res;
             this.flexibleContent = res['content'];
             this.notFound = false;
             this.loading = false;
@@ -65,11 +62,10 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
   getPageContent(slug) {
 
     this.pagesService
-      .getPage(slug, this.pageType)
+      .getPage(slug, this.page.meta.type)
       .subscribe(
         (res: any) => {
           if (res && res.items.length) {
-            this.page = res.items[0];
             this.flexibleContent = res.items[0].content;
             this.notFound = false;
             this.loading = false;

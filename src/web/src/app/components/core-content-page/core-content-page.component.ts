@@ -45,7 +45,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
       .subscribe(
         (res: any) => {
           if (res) {
-            this.page = res;
             this.streamfields = res['body'];
             this.notFound = false;
             this.loading = false;
@@ -66,7 +65,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
       .subscribe(
         (res: any) => {
           if (res && res.items.length) {
-            this.page = res.items[0];
             this.streamfields = res.items[0].body;
             this.notFound = false;
             this.loading = false;

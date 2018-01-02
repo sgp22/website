@@ -30,10 +30,26 @@ export class MainComponent implements AfterContentInit {
           this.componentLoader.loadComponent('home.LandingPage', params.slug, this.homeTemplate, {});
           break;
         case 1:
-          this.componentLoader.loadComponent('home.LandingPage', params.slug, this.landingTemplate, {});
+          this.pagesService.getAll().subscribe(data => {
+            data['items'].filter(page => {
+              const slug = page.meta.slug;
+              if (slug == params.slug) {
+                this.page = page;
+                this.componentLoader.loadComponent('home.LandingPage', params.slug, this.landingTemplate, this.page);
+              }
+            });
+          });
           break;
         case 2:
-          this.componentLoader.loadComponent('home.CoreContentPage', params.childSlug, this.coreTemplate, {});
+          this.pagesService.getAll().subscribe(data => {
+            data['items'].filter(page => {
+              const slug = page.meta.slug;
+              if (slug == params.childSlug) {
+                this.page = page;
+                this.componentLoader.loadComponent('home.CoreContentPage', params.childSlug, this.coreTemplate, this.page);
+              }
+            });
+          });
           break;
         case 3:
           this.pagesService.getAll().subscribe(data => {
@@ -50,6 +66,7 @@ export class MainComponent implements AfterContentInit {
               }
             });
           });
+          break;
       }
 
     });
