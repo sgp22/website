@@ -1,0 +1,9 @@
+<div [hidden]="!active">
+  <ng-container
+    *ngIf="template"
+    [slug]="slug"
+    [pageType]="pageType"
+    [ngTemplateOutlet]="template"
+    [ngTemplateOutletContext]="{data: dataContext}"
+  ></ng-container>
+</div>

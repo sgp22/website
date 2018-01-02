@@ -7,68 +7,22 @@ import { BlockPageComponent } from './components/block-page/block-page.component
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ComponentLoaderComponent } from './components/component-loader/component-loader.component';
+import { MainComponent } from './components/main/main.component';
 
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: MainComponent
   },
   {
     path: ':slug',
-    component: LandingPageComponent
+    component: MainComponent
   },
   {
-    path: 'design/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'design/elements/:slug',
-    component: ElementPageComponent
-  },
-  {
-    path: 'design/blocks/:slug',
-    component: BlockPageComponent
-  },
-  {
-    path: 'design/identity/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'develop/:library/:version/:component',
-    component: DocsContentPageComponent
-  },
-  {
-    path: 'develop/:library/:version',
-    component: DocsContentPageComponent
-  },
-  {
-    path: 'develop/:library/latest',
-    component: DocsContentPageComponent
-  },
-  {
-    path: 'about',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'examples',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'examples/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'resources',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'resources/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent
+    path: ':slug/:childSlug',
+    component: MainComponent
   }
 ];
 

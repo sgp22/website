@@ -1,5 +1,5 @@
-import { Component, DoCheck } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, DoCheck, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { DisplayGlobalNavService } from './shared/display-global-nav.service';
 import { Title } from '@angular/platform-browser';
 declare let pendo;
@@ -10,7 +10,7 @@ declare let pendo;
   providers: [DisplayGlobalNavService]
 })
 
-export class AppComponent implements DoCheck {
+export class AppComponent implements AfterContentInit {
 
   public displayGlobalNav: boolean;
   public displaySidebarNav: boolean;
@@ -19,6 +19,7 @@ export class AppComponent implements DoCheck {
     private globalNav: DisplayGlobalNavService,
     private router: Router,
     private titleService: Title,
+    private route: ActivatedRoute
   ) {
 
     router.events.subscribe( (event) => {
@@ -63,9 +64,11 @@ export class AppComponent implements DoCheck {
     });
   }
 
-  ngDoCheck() {
-    this.displayGlobalNav = this.globalNav.displayGlobalNav;
-    this.displaySidebarNav = this.globalNav.displaySidebarNav;
-  }
+  ngAfterContentInit() {}
+
+  // ngDoCheck() {
+  //   this.displayGlobalNav = this.globalNav.displayGlobalNav;
+  //   this.displaySidebarNav = this.globalNav.displaySidebarNav;
+  // }
 
 }

@@ -21,6 +21,9 @@ import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-
 import { InlineSVGModule } from 'ng-inline-svg';
 
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
+import { ComponentLoaderComponent } from './components/component-loader/component-loader.component';
+import { ContainerComponent } from './components/container/container.component';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +41,18 @@ import { SafeHtmlPipe } from './shared/safeHtml.pipe';
     TwoColumnComponent,
     TwoColTextImageComponent,
     SafeHtmlPipe,
+    ComponentLoaderComponent,
+    ContainerComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     InlineSVGModule,
     routing
+  ],
+  entryComponents: [
+    ContainerComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

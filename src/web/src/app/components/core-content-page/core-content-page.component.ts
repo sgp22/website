@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit, HostBinding, OnDestroy } from '@angul
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { HttpClient } from '@angular/common/http';
-import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
@@ -11,13 +10,12 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './core-content-page.component.html',
   providers: [PagesService]
 })
-export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CoreContentPageComponent implements OnInit, AfterViewInit {
   @HostBinding('class.iux-row--col-sm-9') iuxRow: any = true;
   public pageType: any = 'home.CoreContentPage';
   public page: any;
   public body: any;
   public streamfields: any;
-  public sidebar: any = true;
   public notFound = false;
   public loading = true;
 
@@ -25,19 +23,15 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestro
     private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private http: HttpClient,
-    private globalNav: DisplayGlobalNavService
-  ) {
-    this.globalNav.displaySidebarNav = true;
-  }
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
 
     this.route.params.subscribe(params => {
-
-      const slug = params['slug'];
+      const slug = params['childSlug'];
       const url = this.router.routerState.snapshot.url;
       const preview = url.match(/id=\d{1,10}/g);
       preview ? this.getPreviewContent(preview) : this.getPageContent(slug);
@@ -88,10 +82,6 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestro
           console.error(err);
         }
       );
-  }
-
-  ngOnDestroy() {
-    this.globalNav.displaySidebarNav = false;
   }
 
 }

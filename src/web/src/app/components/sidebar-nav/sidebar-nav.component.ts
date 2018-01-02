@@ -1,16 +1,14 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
-import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
   selector: 'sidebar-nav',
   templateUrl: './sidebar-nav.component.html',
-  providers: [PagesService, DisplayGlobalNavService]
+  providers: [PagesService]
 })
 export class SidebarNavComponent implements OnInit, AfterViewInit {
 
-  @Input() displaySidebarNav: any;
   public sidebarNav: any;
   public section: any;
 
@@ -18,23 +16,21 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
     private pagesService: PagesService,
     private router: Router,
     private route: ActivatedRoute,
-    private globalNav: DisplayGlobalNavService
   ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        const urlSegments = event.url.split('/');
-        this.section = urlSegments[1];
-      }
-    });
+    const url = this.router.routerState.snapshot.url;
+    const urlSegments = url.split('/');
+    urlSegments.shift();
+    this.section = urlSegments[0];
 
     this.pagesService.getAll()
       .subscribe(
         res => {
+          console.log(res);
           res['items'].filter((item) => {
             if (item.meta.slug === this.section) {
               this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {

@@ -1,4 +1,4 @@
-<header class="site-header" *ngIf="displayGlobalNav">
+<header class="site-header">
   <div class="iux-container" *ngIf="!loading">
     <a class="logo" routerLink="/">
       <svg xmlns="http://www.w3.org/2000/svg" width="51" height="46" viewBox="0 0 51 46">
@@ -31,6 +31,7 @@
       </svg>
       <span>Infor UX</span>
     </a>
+    <ng-content></ng-content>
     <ng-container>
       <nav class="main-nav">
         <a *ngFor="let navItem of navItems" class="main-nav__item" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>

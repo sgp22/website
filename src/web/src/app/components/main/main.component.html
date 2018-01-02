@@ -1,0 +1,18 @@
+<app-component-loader></app-component-loader>
+
+<ng-template #homeTemplate>
+  <app-home></app-home>
+</ng-template>
+
+<ng-template #landingTemplate>
+  <app-header></app-header>
+  <app-landing-page></app-landing-page>
+</ng-template>
+
+<ng-template #coreTemplate>
+  <app-header></app-header>
+  <div class="iux-row iux-container">
+    <sidebar-nav class="iux-row--col-sm-3"></sidebar-nav>
+    <app-core-content-page class="iux-row--col-sm-9"></app-core-content-page>
+  </div>
+</ng-template>

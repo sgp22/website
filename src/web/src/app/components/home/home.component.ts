@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
@@ -18,12 +18,14 @@ export class HomeComponent implements OnDestroy {
   public streamfields: any;
   public notFound = false;
   public loading = true;
+  @Input() template;
+  @Input() dataContext;
 
   constructor(
     private route: ActivatedRoute,
     private pagesService: PagesService,
     private globalNav: DisplayGlobalNavService,
-    private router: Router
+    private router: Router,
   ) {
     this.globalNav.displayGlobalNav = false;
 
