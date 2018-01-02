@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, HostBinding, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, HostBinding, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { HttpClient } from '@angular/common/http';
@@ -11,9 +11,7 @@ import 'rxjs/add/operator/switchMap';
   providers: [PagesService]
 })
 export class CoreContentPageComponent implements OnInit, AfterViewInit {
-  @HostBinding('class.iux-row--col-sm-9') iuxRow: any = true;
-  public pageType: any = 'home.CoreContentPage';
-  public page: any;
+  @Input() page;
   public body: any;
   public streamfields: any;
   public notFound = false;
@@ -31,11 +29,9 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
     this.route.params.subscribe(params => {
-      const slug = params['childSlug'];
       const url = this.router.routerState.snapshot.url;
       const preview = url.match(/id=\d{1,10}/g);
-      preview ? this.getPreviewContent(preview) : this.getPageContent(slug);
-
+      preview ? this.getPreviewContent(preview) : this.getPageContent(this.page.meta.slug);
     });
 
   }
@@ -66,7 +62,7 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
 
   getPageContent(slug) {
     this.pagesService
-      .getPage(slug, this.pageType)
+      .getPage(slug, this.page.meta.type)
       .subscribe(
         (res: any) => {
           if (res && res.items.length) {

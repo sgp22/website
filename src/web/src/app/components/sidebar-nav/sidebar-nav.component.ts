@@ -30,7 +30,6 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
     this.pagesService.getAll()
       .subscribe(
         res => {
-          console.log(res);
           res['items'].filter((item) => {
             if (item.meta.slug === this.section) {
               this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {

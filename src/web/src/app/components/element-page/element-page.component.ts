@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, AfterViewInit, HostBinding, OnDestroy } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
@@ -8,14 +8,12 @@ import { DisplayGlobalNavService } from '../../shared/display-global-nav.service
   templateUrl: './element-page.component.html',
   providers: [PagesService]
 })
-export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
-  @HostBinding('class.iux-row--col-sm-9') iuxRow: any = true;
+export class ElementPageComponent implements OnInit, AfterViewInit {
   public pageType: any = 'home.ElementsPage';
   public page: any;
   public options: any;
   public types: any;
   public states: any;
-  public sidebar: any = true;
   public descriptors: any;
   public notFound = false;
   public loading = true;
@@ -24,22 +22,17 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private globalNav: DisplayGlobalNavService
-  ) {
-    this.globalNav.displaySidebarNav = true;
-  }
+  ) {}
 
   ngOnInit() {}
 
   ngAfterViewInit() {
 
     this.route.params.subscribe(params => {
-
-      const slug = params['slug'];
+      const slug = params['grandChildSlug'];
       const url = this.router.routerState.snapshot.url;
       const preview = url.match(/id=\d{1,10}/g);
       preview ? this.getPreviewContent(preview) : this.getPageContent(slug);
-
     });
 
   }
@@ -94,10 +87,6 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       );
 
-  }
-
-  ngOnDestroy() {
-    this.globalNav.displaySidebarNav = false;
   }
 
 }
