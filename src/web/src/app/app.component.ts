@@ -33,11 +33,6 @@ export class AppComponent implements DoCheck {
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor UX`);
         }
 
-        this.svgAssetsPath = 'assets/iux/svgs/inline-icons.svg';
-        if (this.rootUrlPath) {
-          this.svgAssetsPath = '/assets/iux/svgs/inline-icons.svg';
-        }
-
         // Initialize Pendo on page change
         pendo.initialize({
           visitor: {
