@@ -13,6 +13,7 @@ export class MainComponent implements AfterContentInit {
   @ViewChild('landingTemplate') landingTemplate;
   @ViewChild('coreTemplate') coreTemplate;
   @ViewChild('elementsTemplate') elementsTemplate;
+  @ViewChild('blockTemplate') blockTemplate;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
   page;
 
@@ -27,52 +28,54 @@ export class MainComponent implements AfterContentInit {
       const keys = Object.keys(params);
       switch (keys.length) {
         case 0:
-          this.componentLoader.loadComponent('home.LandingPage', params.slug, this.homeTemplate, {});
+          this.fetchData('home', 'home.LandingPage', this.homeTemplate)
           break;
         case 1:
-          this.pagesService.getAll().subscribe(data => {
-            data['items'].filter(page => {
-              const slug = page.meta.slug;
-              if (slug == params.slug) {
-                this.page = page;
-                this.componentLoader.loadComponent('home.LandingPage', params.slug, this.landingTemplate, this.page);
-              }
-            });
-          });
+          this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
           break;
         case 2:
-          this.pagesService.getAll().subscribe(data => {
-            data['items'].filter(page => {
-              const slug = page.meta.slug;
-              if (slug == params.childSlug) {
-                this.page = page;
-                this.componentLoader.loadComponent('home.CoreContentPage', params.childSlug, this.coreTemplate, this.page);
-              }
-            });
-          });
+          this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate);
           break;
         case 3:
           this.pagesService.getAll().subscribe(data => {
             data['items'].filter(page => {
               const slug = page.meta.slug;
               if (slug === params.grandChildSlug) {
-                if(page.meta.type === 'home.CoreContentPage') {
-                  this.page = page;
-                  this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.coreTemplate, this.page);
-                } else {
-                  this.page = page;
-                  this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.elementsTemplate, this.page);
+                switch (page.meta.type) {
+                  case 'home.CoreContentPage':
+                    this.page = page;
+                    this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.coreTemplate, this.page);
+                    break;
+                  case 'home.BlocksPage':
+                    this.page = page;
+                    this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.blockTemplate, this.page);
+                    break;
+                  default:
+                    this.page = page;
+                    this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.elementsTemplate, this.page);
                 }
               }
             });
           });
           break;
+        default:
+          console.log('page not found!');
       }
 
     });
 
   }
 
-  fetchData() {}
+  fetchData(paramsSlug, pageType, template, data = {}) {
+    this.pagesService.getAll().subscribe(data => {
+      data['items'].filter(page => {
+        const slug = page.meta.slug;
+        if (slug == paramsSlug) {
+          this.page = page;
+          this.componentLoader.loadComponent(pageType, page.meta.slug, template, this.page);
+        }
+      });
+    });
+  }
 
 }

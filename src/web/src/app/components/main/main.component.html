@@ -21,6 +21,14 @@
   <app-header></app-header>
   <div class="iux-row iux-container">
     <sidebar-nav class="iux-row--col-sm-3"></sidebar-nav>
-    <app-element-page class="iux-row--col-sm-9"></app-element-page>
+    <app-element-page class="iux-row--col-sm-9" [page]="page"></app-element-page>
+  </div>
+</ng-template>
+
+<ng-template #blockTemplate>
+  <app-header></app-header>
+  <div class="iux-row iux-container">
+    <sidebar-nav class="iux-row--col-sm-3"></sidebar-nav>
+    <app-block-page class="iux-row--col-sm-9" [page]="page"></app-block-page>
   </div>
 </ng-template>
