@@ -302,6 +302,13 @@ class ElementsPage(PageBase):
     ]
 
 class BlocksPage(PageBase):
+
+    fka = models.CharField(
+        verbose_name="Formerly Known As",
+        max_length=255,
+        blank=True
+    )
+
     types = StreamField([
         ('types', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
@@ -322,20 +329,22 @@ class BlocksPage(PageBase):
         ]))
     ], null=True, blank=True)
 
-    states = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True)
+    body = StreamField([
+        ('richText', APIRichTextBlock()),
+        ('markdown', APIMarkDownBlock())
+    ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('fka'),
         StreamFieldPanel('types'),
         StreamFieldPanel('options'),
-        FieldPanel('states')
+        StreamFieldPanel('body')
     ]
 
     api_fields = [
         APIField('title'),
+        APIField('fka'),
         APIField('types'),
         APIField('options'),
-        APIField('states'),
+        APIField('body')
     ]

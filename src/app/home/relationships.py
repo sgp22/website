@@ -26,6 +26,21 @@ class ElementsPageElementDescriptorsRelationship(Orderable, models.Model):
         SnippetChooserPanel('element_descriptor')
     ]
 
+class BlocksPageElementDescriptorsRelationship(Orderable, models.Model):
+
+    blocks_page = ParentalKey(
+        'BlocksPage',
+        related_name='blocks_page_element_descriptors_relationship'
+    )
+
+    element_descriptor = models.ForeignKey(
+        'ElementDescriptor',
+        related_name="+"
+    )
+
+    panels = [
+        SnippetChooserPanel('element_descriptor')
+    ]
 
 class CoreContentPageCornerstoneRelationship(Orderable, models.Model):
     """

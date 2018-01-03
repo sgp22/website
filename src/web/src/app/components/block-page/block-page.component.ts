@@ -15,6 +15,7 @@ export class BlockPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public options: any;
   public types: any;
   public states: any;
+  public body: any;
   public sidebar: any = true;
   public notFound = false;
   public loading = true;
@@ -48,8 +49,10 @@ export class BlockPageComponent implements OnInit, AfterViewInit, OnDestroy {
               this.types = res.items[0].types;
               this.options = res.items[0].options;
               this.states = res.items[0].states;
+              this.body = res.items[0].body;
               this.notFound = false;
               this.loading = false;
+              console.log(this.body);
             } else {
               this.notFound = true;
             }
