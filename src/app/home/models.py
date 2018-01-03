@@ -302,6 +302,45 @@ class ElementsPage(PageBase):
     ]
 
 class BlocksPage(PageBase):
+    @property
+    def description(self):
+
+        element_descriptors = [
+            n.element_descriptor
+            for n in self.blocks_page_element_descriptors_relationship.all()
+        ]
+
+        return element_descriptors
+
+    what_it_does = models.ForeignKey(
+        'WhatItDoes',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='select a snippet from the what it does type',
+        verbose_name='What it does',
+    )
+
+    what_user_can_do = models.ForeignKey(
+        'WhatUserCanDo',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='select a snippet from the what user can do type',
+        verbose_name='What user can do',
+    )
+
+    when_to_use_it = models.ForeignKey(
+        'WhenToUseIt',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        help_text='select a snippet from the when to use it type',
+        verbose_name='When to use it',
+    )
 
     fka = models.CharField(
         verbose_name="Formerly Known As",
@@ -336,6 +375,11 @@ class BlocksPage(PageBase):
 
     content_panels = Page.content_panels + [
         FieldPanel('fka'),
+        MultiFieldPanel([
+            SnippetChooserPanel('what_it_does'),
+            SnippetChooserPanel('what_user_can_do'),
+            SnippetChooserPanel('when_to_use_it')
+        ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('options'),
         StreamFieldPanel('body')
@@ -344,6 +388,7 @@ class BlocksPage(PageBase):
     api_fields = [
         APIField('title'),
         APIField('fka'),
+        APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('options'),
         APIField('body')
