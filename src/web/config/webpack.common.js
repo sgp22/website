@@ -241,6 +241,11 @@ module.exports = {
         "context": "src/",
         "to": "assets/documentation-css/css",
         "from": "../node_modules/@infor/documentation-css/dist/documentation.min.css"
+      },
+      {
+        "context": "src/",
+        "to": "assets/documentation-css/css",
+        "from": "../node_modules/@infor/documentation-css/dist/documentation.min.css.map"
       }
     ], {
       "ignore": [
