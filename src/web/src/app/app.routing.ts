@@ -23,10 +23,6 @@ const appRoutes: Routes = [
   {
     path: ':slug/:library/:version/:component',
     component: MainComponent
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent
   }
 ];
 
