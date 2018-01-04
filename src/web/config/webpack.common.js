@@ -230,6 +230,16 @@ module.exports = {
       {
         "context": "src/",
         "to": "assets/iux/css",
+        "from": "../node_modules/@infor/iux-components/dist/reset.min.css"
+      },
+      {
+        "context": "src/",
+        "to": "assets/iux/css",
+        "from": "../node_modules/@infor/iux-components/dist/reset.min.css.map"
+      },
+      {
+        "context": "src/",
+        "to": "assets/iux/css",
         "from": "../node_modules/@infor/iux-components/dist/iux.min.css"
       },
       {
@@ -289,6 +299,7 @@ module.exports = {
     }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
+        "assets/iux/css/reset.min.css",
         "assets/iux/css/iux.min.css",
         "assets/documentation-css/css/documentation.min.css"
       ],
