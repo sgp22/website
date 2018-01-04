@@ -71,6 +71,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
             this.loading = false;
           } else {
             this.notFound = true;
+            console.log('not found');
           }
         },
         (err) => {

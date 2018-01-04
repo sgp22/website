@@ -15,6 +15,7 @@ export class MainComponent implements AfterContentInit {
   @ViewChild('elementsTemplate') elementsTemplate;
   @ViewChild('blockTemplate') blockTemplate;
   @ViewChild('docsTemplate') docsTemplate;
+  @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
   page;
 
@@ -46,28 +47,32 @@ export class MainComponent implements AfterContentInit {
           break;
         case 3:
           this.pagesService.getAll().subscribe(data => {
-            data['items'].filter(page => {
-              const slug = page.meta.slug;
-              if (slug === params.grandChildSlug) {
-                switch (page.meta.type) {
-                  case 'home.CoreContentPage':
-                    this.page = page;
-                    this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.coreTemplate, this.page);
-                    break;
-                  case 'home.BlocksPage':
-                    this.page = page;
-                    this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.blockTemplate, this.page);
-                    break;
-                  default:
-                    this.page = page;
-                    this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.elementsTemplate, this.page);
+            if (this.pageExists(data['items'], params.grandChildSlug)) {
+              data['items'].filter(page => {
+                const slug = page.meta.slug;
+                if (slug === params.grandChildSlug) {
+                  switch (page.meta.type) {
+                    case 'home.CoreContentPage':
+                      this.page = page;
+                      this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.coreTemplate, this.page);
+                      break;
+                    case 'home.BlocksPage':
+                      this.page = page;
+                      this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.blockTemplate, this.page);
+                      break;
+                    default:
+                      this.page = page;
+                      this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.elementsTemplate, this.page);
+                  }
                 }
-              }
-            });
+              });
+            } else {
+              this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+            }
           });
           break;
         default:
-          console.log('page not found!');
+          this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
           break;
       }
 
@@ -75,15 +80,28 @@ export class MainComponent implements AfterContentInit {
 
   }
 
+  pageExists(page, paramsSlug) {
+    const index = page.findIndex(p => p.meta.slug === paramsSlug);
+    if (index !== -1) {
+      return true;
+    }
+  }
+
   fetchData(paramsSlug, pageType, template, data = {}) {
     this.pagesService.getAll().subscribe(d => {
-      d['items'].filter(page => {
-        const slug = page.meta.slug;
-        if (slug === paramsSlug) {
-          this.page = page;
-          this.componentLoader.loadComponent(pageType, page.meta.slug, template, this.page);
-        }
-      });
+      const pageExists = d['items'].findIndex(page => page.meta.slug === paramsSlug);
+      if (this.pageExists(d['items'], paramsSlug)) {
+        d['items'].filter(page => {
+          const slug = page.meta.slug;
+          if (slug === paramsSlug) {
+            this.page = page;
+            this.componentLoader.loadComponent(pageType, page.meta.slug, template, this.page);
+          }
+        });
+      } else {
+        this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+      }
+
     });
   }
 
