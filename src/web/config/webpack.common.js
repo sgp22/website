@@ -290,7 +290,6 @@ module.exports = {
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
         "assets/iux/css/iux.min.css",
-        { path: "assets/iux/css/iux.min.css.map", type: "css" },
         "assets/documentation-css/css/documentation.min.css"
       ],
       append: false,
