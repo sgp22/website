@@ -39,7 +39,7 @@ export class ComponentLoaderComponent implements OnInit {
   }
 
   activeComponent(component: ContainerComponent) {
-    this.dynamicComponent.forEach(component => (component.active = false));
+    this.dynamicComponent.forEach(comp => (comp.active = false));
     component.active = true;
   }
 

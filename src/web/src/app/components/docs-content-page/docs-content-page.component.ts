@@ -60,6 +60,7 @@ export class DocsContentPageComponent implements OnInit {
     const urlSegment = [];
 
     this.route.url.subscribe(segment => {
+
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }

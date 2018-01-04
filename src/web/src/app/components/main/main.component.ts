@@ -14,6 +14,7 @@ export class MainComponent implements AfterContentInit {
   @ViewChild('coreTemplate') coreTemplate;
   @ViewChild('elementsTemplate') elementsTemplate;
   @ViewChild('blockTemplate') blockTemplate;
+  @ViewChild('docsTemplate') docsTemplate;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
   page;
 
@@ -25,10 +26,17 @@ export class MainComponent implements AfterContentInit {
   ngAfterContentInit() {
 
     this.route.params.subscribe(params => {
+
       const keys = Object.keys(params);
+
+      if (params.slug === 'develop') {
+        this.componentLoader.loadComponent(null, null, this.docsTemplate, {});
+        return;
+      }
+
       switch (keys.length) {
         case 0:
-          this.fetchData('home', 'home.LandingPage', this.homeTemplate)
+          this.fetchData('home', 'home.LandingPage', this.homeTemplate);
           break;
         case 1:
           this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
@@ -60,6 +68,7 @@ export class MainComponent implements AfterContentInit {
           break;
         default:
           console.log('page not found!');
+          break;
       }
 
     });
@@ -67,10 +76,10 @@ export class MainComponent implements AfterContentInit {
   }
 
   fetchData(paramsSlug, pageType, template, data = {}) {
-    this.pagesService.getAll().subscribe(data => {
-      data['items'].filter(page => {
+    this.pagesService.getAll().subscribe(d => {
+      d['items'].filter(page => {
         const slug = page.meta.slug;
-        if (slug == paramsSlug) {
+        if (slug === paramsSlug) {
           this.page = page;
           this.componentLoader.loadComponent(pageType, page.meta.slug, template, this.page);
         }

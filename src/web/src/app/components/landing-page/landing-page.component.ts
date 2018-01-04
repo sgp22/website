@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import 'rxjs/add/operator/filter';
@@ -79,11 +79,5 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
       );
 
   }
-
-  ngOnDestroy() {
-    this.page = '';
-    this.flexibleContent = '';
-  }
-
 
 }
