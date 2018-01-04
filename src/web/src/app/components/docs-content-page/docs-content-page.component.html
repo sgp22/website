@@ -1,11 +1,11 @@
 <div class="iux-container">
-  <div class="iux-row iux-row--gutter">
+  <div class="iux-row--gutter">
 
     <aside class="iux-row--col-sm-3 iux-row--col-md-3 sidebar" *ngIf="sidebar">
 
-      <div class="form-group form-group--select-version">
+      <div class="iux-form-group">
         <label for="select-version">Version</label>
-        <select #option (change)="onVersionChange(option.value)" id="select-version" class="form-control">
+        <select #option (change)="onVersionChange(option.value)" id="select-version" class="iux-form-control">
           <option *ngFor="let version of versionPaths" value="/{{section}}{{version.full}}{{element}}" [selected]="version.full == selectedVersion">
             {{ version.label }}
           </option>

@@ -36,7 +36,7 @@
         <a *ngFor="let navItem of navItems" class="main-nav__item" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
       </nav>
     </ng-container>
-    <button class="btn btn--custom btn--custom--small--inverted btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'" (click)="toggleNav()" *ngIf="displayGlobalNav">Menu</button>
+    <button class="iux-btn btn--custom btn--custom--small--inverted btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'" (click)="toggleNav()" *ngIf="displayGlobalNav">Menu</button>
   </div>
 </header>
 

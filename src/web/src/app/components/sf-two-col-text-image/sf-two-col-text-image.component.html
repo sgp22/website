@@ -9,7 +9,7 @@
     <div class="iux-row--col-md-6 iux-row--offset-md-1 two-col-text-image--content">
       <h1 [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
       <p [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{content}}</p>
-      <a class="btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
+      <a class="iux-btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
     </div>
   </div>
 
