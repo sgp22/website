@@ -1,22 +1,16 @@
-import { Component, DoCheck, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
-import { DisplayGlobalNavService } from './shared/display-global-nav.service';
 import { Title } from '@angular/platform-browser';
 declare let pendo;
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  providers: [DisplayGlobalNavService]
+  templateUrl: './app.component.html'
 })
 
 export class AppComponent implements AfterContentInit {
 
-  public displayGlobalNav: boolean;
-  public displaySidebarNav: boolean;
-
   constructor(
-    private globalNav: DisplayGlobalNavService,
     private router: Router,
     private titleService: Title,
     private route: ActivatedRoute
@@ -65,10 +59,5 @@ export class AppComponent implements AfterContentInit {
   }
 
   ngAfterContentInit() {}
-
-  // ngDoCheck() {
-  //   this.displayGlobalNav = this.globalNav.displayGlobalNav;
-  //   this.displaySidebarNav = this.globalNav.displaySidebarNav;
-  // }
 
 }

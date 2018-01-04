@@ -1,14 +1,13 @@
-import { Component, ViewChild, OnDestroy, Input } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
-import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   providers: [PagesService]
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent {
   public slugs: any;
   public pageType: any = 'home.LandingPage';
   public page: any;
@@ -24,10 +23,8 @@ export class HomeComponent implements OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private globalNav: DisplayGlobalNavService,
     private router: Router,
   ) {
-    this.globalNav.displayGlobalNav = false;
 
     this.route.params.subscribe(params => {
 
@@ -83,7 +80,4 @@ export class HomeComponent implements OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    this.globalNav.displayGlobalNav = true;
-  }
 }
