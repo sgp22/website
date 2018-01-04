@@ -89,7 +89,6 @@ export class MainComponent implements AfterContentInit {
 
   fetchData(paramsSlug, pageType, template, data = {}) {
     this.pagesService.getAll().subscribe(d => {
-      const pageExists = d['items'].findIndex(page => page.meta.slug === paramsSlug);
       if (this.pageExists(d['items'], paramsSlug)) {
         d['items'].filter(page => {
           const slug = page.meta.slug;
@@ -101,7 +100,6 @@ export class MainComponent implements AfterContentInit {
       } else {
         this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
       }
-
     });
   }
 
