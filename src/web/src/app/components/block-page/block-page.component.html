@@ -7,7 +7,7 @@
 
       <h1 class="page-title">{{page?.title}}</h1>
 
-      <h2>Formerly Known as: {{page?.fka}}</h2>
+      <h4>Formerly Known as: {{page?.fka}}</h4>
 
       <section *ngIf="descriptors" class="element-section">
         <p>
@@ -25,6 +25,7 @@
 
       <section *ngIf="types?.length" class="element-section element-section--types">
         <h1 class="h2">Types</h1>
+        <p>Types extend a or alter a component’s definition. Only one type can be used at a time</p>
         <table class="section-table">
           <thead>
             <th>Type</th>
@@ -52,6 +53,7 @@
 
       <section *ngIf="options?.length" class="element-section element-section--options">
         <h1 class="h2">Options</h1>
+        <p>Options can be added to configure a component. Many options can be added to a component.</p>
         <table class="section-table">
           <thead>
             <th>Option</th>
