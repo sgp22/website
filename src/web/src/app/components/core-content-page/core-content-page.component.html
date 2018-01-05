@@ -1,23 +1,16 @@
-
-<app-page-not-found *ngIf="notFound"></app-page-not-found>
-
 <ng-container *ngIf="!loading">
 
-  <ng-container *ngIf="!notFound">
+  <h1>{{page?.title}}</h1>
 
-    <h1>{{page?.title}}</h1>
+  <section *ngIf="pageContent">
 
-    <section *ngIf="streamfields">
+    <ng-container *ngFor="let streamfield of pageContent.body">
+      <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
+      <div *ngIf="streamfield.type === 'richText'" [innerHTML]="streamfield?.value"></div>
+      <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
+      <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
+    </ng-container>
 
-      <ng-container *ngFor="let streamfield of streamfields">
-        <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
-        <div *ngIf="streamfield.type === 'richText'" [innerHTML]="streamfield?.value"></div>
-        <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
-        <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
-      </ng-container>
-
-    </section>
-
-  </ng-container>
+  </section>
 
 </ng-container>

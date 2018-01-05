@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { PagesService } from '../../shared/pages.service';
 
 @Component({
   selector: 'app-container',
-  templateUrl: './container.component.html'
+  templateUrl: './container.component.html',
+  providers: [PagesService]
 })
-export class ContainerComponent implements OnInit {
+export class ContainerComponent implements OnInit, AfterViewInit {
   @Input() template;
   @Input() pageType;
   @Input() slug;
@@ -14,5 +16,7 @@ export class ContainerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+
+  ngAfterViewInit() {}
 
 }

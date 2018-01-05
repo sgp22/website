@@ -1,7 +1,6 @@
-import { Component, OnInit, AfterViewInit, HostBinding, OnDestroy, Input } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { ActivatedRoute, Params, Router} from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
-import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
@@ -12,16 +11,13 @@ import 'rxjs/add/operator/switchMap';
 })
 export class CoreContentPageComponent implements OnInit, AfterViewInit {
   @Input() page;
-  public body: any;
-  public streamfields: any;
-  public notFound = false;
+  public pageContent: any;
   public loading = true;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pagesService: PagesService,
-    private http: HttpClient
+    private pagesService: PagesService
   ) {}
 
   ngOnInit() {}
@@ -29,48 +25,23 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
     this.route.params.subscribe(params => {
+
       const url = this.router.routerState.snapshot.url;
-      const preview = url.match(/id=\d{1,10}/g);
-      preview ? this.getPreviewContent(preview) : this.getPageContent(this.page.meta.slug);
+      const preview = url.match(/preview=true&id=\d{1,10}/g);
+      const previewId = `${this.page.id}/?preview=true`;
+      preview ? this.getPageContent(previewId) : this.getPageContent(this.page.id);
+
     });
 
   }
 
-  getPreviewContent(preview) {
-
-    const id = `${preview.toString().match(/\d{1,10}/g)}/?preview=true`;
-
+  getPageContent(id) {
     this.pagesService
-      .getPreview(id)
+      .getPage(id)
       .subscribe(
-        (res: any) => {
-          if (res) {
-            this.streamfields = res['body'];
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
-        },
-        err => {
-          console.error(err);
-        }
-      );
-
-  }
-
-  getPageContent(slug) {
-    this.pagesService
-      .getPage(slug, this.page.meta.type)
-      .subscribe(
-        (res: any) => {
-          if (res && res.items.length) {
-            this.streamfields = res.items[0].body;
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
+        res => {
+          this.pageContent = res;
+          this.loading = false;
         },
         err => {
           console.error(err);

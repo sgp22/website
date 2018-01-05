@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -8,23 +8,17 @@ import { PagesService } from '../../shared/pages.service';
   providers: [PagesService]
 })
 export class HomeComponent {
-  public slugs: any;
-  public pageType: any = 'home.LandingPage';
-  public page: any;
-  public flexibleContent: any;
-  public docs: any;
-  public docsBody: any;
-  public streamfields: any;
-  public notFound = false;
+  @Input() page;
+  public pageContent: any;
   public loading = true;
-  @Input() template;
-  @Input() dataContext;
 
   constructor(
     private route: ActivatedRoute,
     private pagesService: PagesService,
     private router: Router,
-  ) {
+  ) {}
+
+  ngAfterViewInit() {
 
     this.route.params.subscribe(params => {
 
@@ -38,20 +32,14 @@ export class HomeComponent {
 
   getPreviewContent(preview) {
 
-    const id = `${preview.toString().match(/\d{1,10}/g)}/?preview=true`;
+    const id = `${this.page.id}/?preview=true`;
 
     this.pagesService
-      .getPreview(id)
+      .getPage(id)
       .subscribe(
         (res: any) => {
-          if (res) {
-            this.page = res;
-            this.flexibleContent = res['content'];
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
+          this.pageContent = res;
+          this.loading = false;
         },
         (err) => {
           console.log(err);
@@ -61,23 +49,19 @@ export class HomeComponent {
   }
 
   getPageContent() {
+
     this.pagesService
-      .getPage('home', this.pageType)
+      .getPage(this.page.id)
       .subscribe(
         (res: any) => {
-          if (res && res.items.length) {
-            this.page = res.items[0];
-            this.flexibleContent = res.items[0].content;
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
+          this.pageContent = res;
+          this.loading = false;
         },
         (err) => {
           console.log(err);
         }
     );
+
   }
 
 }

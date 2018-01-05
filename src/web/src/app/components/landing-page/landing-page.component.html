@@ -1,13 +1,8 @@
-
-<app-page-not-found *ngIf="notFound"></app-page-not-found>
-
 <ng-container *ngIf="!loading">
 
-  <div *ngIf="!notFound">
+    <ng-container *ngIf="pageContent">
 
-    <ng-container *ngIf="flexibleContent">
-
-      <ng-container *ngFor="let section of flexibleContent">
+      <ng-container *ngFor="let section of pageContent.content">
 
         <sf-full-width *ngIf="section.type === 'fullWidth'"
           [title]="section.value.title"
@@ -66,7 +61,6 @@
           <div class="iux-row--col-md-9 iux-row--offset-md-1" [innerHTML]="section.value"></div>
         </div>
 
-
         <div *ngIf="section.type === 'rawHtml'">
           <div [innerHTML]="section.value | safeHtml"></div>
         </div>
@@ -74,7 +68,5 @@
       </ng-container>
 
     </ng-container>
-
-  </div>
 
 </ng-container>

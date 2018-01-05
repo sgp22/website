@@ -11,6 +11,6 @@ export class DisplayGlobalNavService implements OnInit {
     this.displaySidebarNav = false;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

@@ -1,7 +1,6 @@
-import { Component, OnInit, DoCheck, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
-import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
   selector: 'app-element-page',
@@ -9,13 +8,8 @@ import { DisplayGlobalNavService } from '../../shared/display-global-nav.service
   providers: [PagesService]
 })
 export class ElementPageComponent implements OnInit, AfterViewInit {
-  public pageType: any = 'home.ElementsPage';
-  public page: any;
-  public options: any;
-  public types: any;
-  public states: any;
-  public descriptors: any;
-  public notFound = false;
+  @Input() page;
+  public pageContent;
   public loading = true;
 
   constructor(
@@ -29,58 +23,22 @@ export class ElementPageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
     this.route.params.subscribe(params => {
-      const slug = params['grandChildSlug'];
       const url = this.router.routerState.snapshot.url;
-      const preview = url.match(/id=\d{1,10}/g);
-      preview ? this.getPreviewContent(preview) : this.getPageContent(slug);
+      const preview = url.match(/preview=true&id=\d{1,10}/g);
+      const previewId = `${this.page.id}/?preview=true`;
+      preview ? this.getPageContent(previewId) : this.getPageContent(this.page.id);
     });
 
   }
 
-  getPreviewContent(preview) {
-
-    const id = `${preview.toString().match(/\d{1,10}/g)}/?preview=true`;
+  getPageContent(id) {
 
     this.pagesService
-      .getPreview(id)
+      .getPage(id)
       .subscribe(
         (res: any) => {
-          if (res) {
-            this.page = res;
-            this.types = res['types'];
-            this.options = res['options'];
-            this.states = res['states'];
-            this.descriptors = res['descriptors'];
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
-        },
-        (err) => {
-          console.error(err);
-        }
-      );
-
-  }
-
-  getPageContent(slug) {
-
-    this.pagesService
-      .getPage(slug, this.pageType)
-      .subscribe(
-        (res: any) => {
-          if (res && res.items.length) {
-            this.page = res.items[0];
-            this.types = res.items[0].types;
-            this.options = res.items[0].options;
-            this.states = res.items[0].states;
-            this.descriptors = res.items[0].descriptors;
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
+          this.pageContent = res;
+          this.loading = false;
         },
         (err) => {
           console.error(err);

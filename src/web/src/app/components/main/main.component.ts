@@ -37,7 +37,7 @@ export class MainComponent implements AfterContentInit {
 
       switch (keys.length) {
         case 0:
-          this.fetchData('home', 'home.LandingPage', this.homeTemplate);
+          this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
           break;
         case 1:
           this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
