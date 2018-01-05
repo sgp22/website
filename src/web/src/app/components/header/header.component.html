@@ -1,5 +1,5 @@
 <header class="site-header" *ngIf="displayGlobalNav">
-  <div class="iux-container" *ngIf="!loading">
+  <div class="ids-container" *ngIf="!loading">
     <a class="logo" routerLink="/">
       <svg xmlns="http://www.w3.org/2000/svg" width="51" height="46" viewBox="0 0 51 46">
         <style>
@@ -36,7 +36,7 @@
         <a *ngFor="let navItem of navItems" class="main-nav__item" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
       </nav>
     </ng-container>
-    <button class="iux-btn btn--custom btn--custom--small--inverted btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'" (click)="toggleNav()" *ngIf="displayGlobalNav">Menu</button>
+    <button class="ids-btn btn--custom btn--custom--small--inverted btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'" (click)="toggleNav()" *ngIf="displayGlobalNav">Menu</button>
   </div>
 </header>
 

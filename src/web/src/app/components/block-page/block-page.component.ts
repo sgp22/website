@@ -9,7 +9,7 @@ import { DisplayGlobalNavService } from '../../shared/display-global-nav.service
   providers: [PagesService]
 })
 export class BlockPageComponent implements OnInit, AfterViewInit, OnDestroy {
-  @HostBinding('class.iux-row--col-sm-9') iuxRow: any = true;
+  @HostBinding('class.ids-row--col-sm-9') iuxRow: any = true;
   public pageType: any = 'home.BlocksPage';
   public page: any;
   public options: any;
