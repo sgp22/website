@@ -1,12 +1,15 @@
-version: '3'
+version: '3.4'
 
 volumes:
   static-data:
     driver: local
+    name: design_infor_com_static_data
   media-data:
     driver: local
+    name: design_infor_com_media_data
   postgres-data:
     driver: local
+    name: design_infor_com_postgres_data
 
 services:
   postgres:
