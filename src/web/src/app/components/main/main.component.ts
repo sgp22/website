@@ -50,6 +50,7 @@ export class MainComponent implements AfterContentInit {
           break;
         case 3:
           this.pagesService.getAll().subscribe(data => {
+
             if (this.pageExists(data['items'], params.grandChildSlug)) {
 
               this.getSideBar(data);
@@ -72,9 +73,11 @@ export class MainComponent implements AfterContentInit {
                   }
                 }
               });
+
             } else {
               this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
             }
+
           });
           break;
         default:

@@ -7,7 +7,7 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './home.component.html',
   providers: [PagesService]
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   @Input() page;
   public pageContent: any;
   public loading = true;
