@@ -18,7 +18,7 @@ export class PagesService {
   }
 
   getPage(id) {
-    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/${id}`);
+    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/${id}/`);
   }
 
   getGlobalNav() {
