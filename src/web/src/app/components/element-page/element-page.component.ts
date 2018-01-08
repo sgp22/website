@@ -7,6 +7,7 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './element-page.component.html',
   providers: [PagesService]
 })
+
 export class ElementPageComponent implements OnInit, AfterViewInit {
   @Input() page;
   public pageContent;

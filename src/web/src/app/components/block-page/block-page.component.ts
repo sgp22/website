@@ -7,6 +7,7 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './block-page.component.html',
   providers: [PagesService]
 })
+
 export class BlockPageComponent implements OnInit, AfterViewInit {
   @Input() page;
   public pageContent;
@@ -23,10 +24,12 @@ export class BlockPageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
     this.route.params.subscribe(params => {
+
       const url = this.router.routerState.snapshot.url;
       const preview = url.match(/preview=true&id=\d{1,10}/g);
       const previewId = `${this.page.id}/?preview=true`;
       preview ? this.getPageContent(previewId) : this.getPageContent(this.page.id);
+
     });
 
   }

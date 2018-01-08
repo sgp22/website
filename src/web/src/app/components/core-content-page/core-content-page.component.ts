@@ -9,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './core-content-page.component.html',
   providers: [PagesService]
 })
+
 export class CoreContentPageComponent implements OnInit, AfterViewInit {
   @Input() page;
   public pageContent: any;

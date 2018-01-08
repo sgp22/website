@@ -224,23 +224,28 @@ module.exports = {
       },
       {
         "context": "src/",
-        "to": "assets/iux/svgs",
-        "from": "../node_modules/@infor/iux-components/dist/inline-icons.svg"
+        "to": "assets/ids/svgs",
+        "from": "../node_modules/@infor/ids-web/dist/ids-icons.svg"
       },
       {
         "context": "src/",
-        "to": "assets/iux/css",
-        "from": "../node_modules/@infor/iux-components/dist/iux.min.css"
+        "to": "assets/ids/css",
+        "from": "../node_modules/@infor/ids-web/dist/reset.min.css"
       },
       {
         "context": "src/",
-        "to": "assets/iux/css",
-        "from": "../node_modules/@infor/iux-components/dist/iux.min.css.map"
+        "to": "assets/ids/css",
+        "from": "../node_modules/@infor/ids-web/dist/reset.min.css.map"
       },
       {
         "context": "src/",
         "to": "assets/documentation-css/css",
         "from": "../node_modules/@infor/documentation-css/dist/documentation.min.css"
+      },
+      {
+        "context": "src/",
+        "to": "assets/documentation-css/css",
+        "from": "../node_modules/@infor/documentation-css/dist/documentation.min.css.map"
       }
     ], {
       "ignore": [
@@ -284,8 +289,7 @@ module.exports = {
     }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
-        "assets/iux/css/iux.min.css",
-        { path: "assets/iux/css/iux.min.css.map", type: "css" },
+        "assets/ids/css/reset.min.css",
         "assets/documentation-css/css/documentation.min.css"
       ],
       append: false,

@@ -53,12 +53,12 @@
           [invertTextColor]="section.value.invert_text_color"
         ></sf-two-col-text-image>
 
-        <div *ngIf="section.type === 'markdown'" class="iux-row iux-container">
-          <div class="iux-row--col-md-9 iux-row--offset-md-1" [innerHTML]="section.value"></div>
+        <div *ngIf="section.type === 'markdown'" class="ids-row ids-container">
+          <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
         </div>
 
-        <div *ngIf="section.type === 'richText'" class="iux-row iux-container">
-          <div class="iux-row--col-md-9 iux-row--offset-md-1" [innerHTML]="section.value"></div>
+        <div *ngIf="section.type === 'richText'" class="ids-row ids-container">
+          <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
         </div>
 
         <div *ngIf="section.type === 'rawHtml'">

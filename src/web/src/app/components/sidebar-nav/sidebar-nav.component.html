@@ -1,11 +1,11 @@
 <aside class="sidebar">
   <nav class="sidebar-nav">
-    <ul class="iux-list--plain">
+    <ul class="ids-list--plain">
       <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
         <span class="sidebar-nav__child-item">
           {{child.title}}
         </span>
-        <ul class="iux-list--plain" *ngIf="child.children.length > 0">
+        <ul class="ids-list--plain" *ngIf="child.children.length > 0">
           <li *ngFor="let grandChild of child.children">
             <a class="sidebar-nav__grandchild-item" routerLink="{{grandChild.relative_url}}">
               {{grandChild.title}}

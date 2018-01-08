@@ -1,3 +1,7 @@
 /*
- * Site Styles
+ * Site Specific Styles
  */
+
+.site-header {
+  display: block;
+}

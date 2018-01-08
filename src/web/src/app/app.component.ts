@@ -25,6 +25,7 @@ export class AppComponent implements AfterContentInit {
         } else {
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor UX`);
         }
+
         // Initialize Pendo on page change
         pendo.initialize({
           visitor: {

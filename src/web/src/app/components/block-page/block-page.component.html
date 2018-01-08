@@ -2,6 +2,10 @@
 
   <h1 class="page-title">{{pageContent?.title}}</h1>
 
+  <h4>Formerly Known as: {{page?.fka}}</h4>
+
+  <h2>Definition</h2>
+
   <section *ngIf="pageContent.descriptors" class="element-section">
 
     <p>
@@ -21,6 +25,7 @@
   <section *ngIf="pageContent.types.length" class="element-section element-section--types">
 
     <h1 class="h2">Types</h1>
+    <p>A type extends or alters a component's definition. Only one type can be used at a time.</p>
 
     <table class="section-table">
       <thead>
@@ -53,6 +58,7 @@
   <section *ngIf="pageContent.options.length" class="element-section element-section--options">
 
     <h1 class="h2">Options</h1>
+    <p>Options can be added to configure a component. Many options can be added to a component and all options can be used for all types, unless where specifically noted.</p>
 
     <table class="section-table">
       <thead>
@@ -70,5 +76,10 @@
     </table>
 
   </section>
+
+  <ng-container *ngFor="let b of body">
+    <div *ngIf="b.type === 'richText'" [innerHTML]="b?.value"></div>
+    <div *ngIf="b.type === 'markdown'" [innerHTML]="b?.value"></div>
+  </ng-container>
 
 </ng-container>

@@ -2,14 +2,14 @@
 
   <div class="bg-image" [ngStyle]="backgroundImage && {'background-image': 'url(' + backgroundImage + ')'}"></div>
 
-  <div class="iux-row iux-container">
-    <div class="iux-row--col-md-3 iux-row--offset-md-1 two-col-text-image--image" [ngClass]="{'right' : imageAlign === 'right'}">
+  <div class="ids-row ids-container">
+    <div class="ids-row--col-md-3 ids-row--offset-md-1 two-col-text-image--image" [ngClass]="{'right' : imageAlign === 'right'}">
       <img *ngIf="image" src="{{image}}" alt="{{imageTitle}}">
     </div>
-    <div class="iux-row--col-md-6 iux-row--offset-md-1 two-col-text-image--content">
+    <div class="ids-row--col-md-6 ids-row--offset-md-1 two-col-text-image--content">
       <h1 [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
       <p [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{content}}</p>
-      <a class="btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
+      <a class="ids-btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
     </div>
   </div>
 
