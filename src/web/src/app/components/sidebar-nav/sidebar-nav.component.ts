@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -7,10 +7,10 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './sidebar-nav.component.html',
   providers: [PagesService]
 })
-export class SidebarNavComponent implements OnInit, AfterViewInit {
+export class SidebarNavComponent implements OnInit {
 
+  @Input() sidebarData;
   public sidebarNav: any;
-  public section: any;
 
   constructor(
     private pagesService: PagesService,
@@ -18,33 +18,8 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
   ) {}
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-
-    const url = this.router.routerState.snapshot.url;
-    const urlSegments = url.split('/');
-    urlSegments.shift();
-    this.section = urlSegments[0];
-
-    this.pagesService.getAll()
-      .subscribe(
-        res => {
-          res['items'].filter((item) => {
-            if (item.meta.slug === this.section) {
-              this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
-                item.meta.children.children.map(child => {
-                  child.children.sort((thisGrandChild, nextGrandchild) => {
-                    return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
-                  });
-                });
-                return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
-              });
-            }
-          });
-        }
-      );
-
+  ngOnInit() {
+    this.sidebarNav = this.sidebarData;
   }
 
 }

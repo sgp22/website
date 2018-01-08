@@ -18,9 +18,12 @@ export class MainComponent implements AfterContentInit {
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
   page;
+  section;
+  sidebarNav;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private pagesService: PagesService
   ) { }
 
@@ -43,11 +46,14 @@ export class MainComponent implements AfterContentInit {
           this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
           break;
         case 2:
-          this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate);
+          this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate, {}, true);
           break;
         case 3:
           this.pagesService.getAll().subscribe(data => {
             if (this.pageExists(data['items'], params.grandChildSlug)) {
+
+              this.getSideBar(data);
+
               data['items'].filter(page => {
                 const slug = page.meta.slug;
                 if (slug === params.grandChildSlug) {
@@ -87,8 +93,10 @@ export class MainComponent implements AfterContentInit {
     }
   }
 
-  fetchData(paramsSlug, pageType, template, data = {}) {
+  fetchData(paramsSlug, pageType, template, data = {}, sidebar = false) {
+
     this.pagesService.getAll().subscribe(d => {
+
       if (this.pageExists(d['items'], paramsSlug)) {
         d['items'].filter(page => {
           const slug = page.meta.slug;
@@ -100,7 +108,35 @@ export class MainComponent implements AfterContentInit {
       } else {
         this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
       }
+
+      if (sidebar === true) {
+        this.getSideBar(d);
+      }
+
     });
+
+  }
+
+  getSideBar(res) {
+
+    const url = this.router.routerState.snapshot.url;
+    const urlSegments = url.split('/');
+    urlSegments.shift();
+    this.section = urlSegments[0];
+
+    res['items'].filter((item) => {
+      if (item.meta.slug === this.section) {
+        this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
+          item.meta.children.children.map(child => {
+            child.children.sort((thisGrandChild, nextGrandchild) => {
+              return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
+            });
+          });
+          return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
+        });
+      }
+    });
+
   }
 
 }

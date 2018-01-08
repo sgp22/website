@@ -12,7 +12,7 @@
 <ng-template #coreTemplate>
   <app-header></app-header>
   <div class="ids-row ids-container">
-    <sidebar-nav class="ids-row--col-sm-3"></sidebar-nav>
+    <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
     <app-core-content-page class="ids-row--col-sm-9" [page]="page"></app-core-content-page>
   </div>
 </ng-template>
@@ -20,7 +20,7 @@
 <ng-template #elementsTemplate>
   <app-header></app-header>
   <div class="ids-row ids-container">
-    <sidebar-nav class="ids-row--col-sm-3"></sidebar-nav>
+    <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
     <app-element-page class="ids-row--col-sm-9" [page]="page"></app-element-page>
   </div>
 </ng-template>
@@ -28,7 +28,7 @@
 <ng-template #blockTemplate>
   <app-header></app-header>
   <div class="ids-row ids-container">
-    <sidebar-nav class="ids-row--col-sm-3"></sidebar-nav>
+    <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
     <app-block-page class="ids-row--col-sm-9" [page]="page"></app-block-page>
   </div>
 </ng-template>
