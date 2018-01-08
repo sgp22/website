@@ -12,7 +12,7 @@ import 'rxjs/add/operator/switchMap';
   providers: [PagesService]
 })
 export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestroy {
-  @HostBinding('class.iux-row--col-sm-9') iuxRow: any = true;
+  @HostBinding('class.ids-row--col-sm-9') iuxRow: any = true;
   public pageType: any = 'home.CoreContentPage';
   public page: any;
   public body: any;
