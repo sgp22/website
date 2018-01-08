@@ -18,7 +18,7 @@
 
   </section>
 
-  <section *ngIf="pageContent.types.length" class="element-section element-section--types">
+  <section *ngIf="pageContent.types" class="element-section element-section--types">
 
     <h1 class="h2">Types</h1>
     <p>A type extends or alters a component's definition. Only one type can be used at a time.</p>
@@ -49,7 +49,7 @@
 
   </section>
 
-  <section *ngIf="pageContent.options.length" class="element-section element-section--options">
+  <section *ngIf="pageContent.options" class="element-section element-section--options">
 
     <h1 class="h2">Options</h1>
     <p>Options can be added to configure a component. Many options can be added to a component and all options can be used for all types, unless where specifically noted.</p>
@@ -69,11 +69,13 @@
 
   </section>
 
-  <section *ngIf="pageContent.states.length" class="element-section element-section--states">
+  <section *ngIf="pageContent.states" class="element-section element-section--states">
+
     <h1 class="h2">States</h1>
     <ul>
       <li *ngFor="let state of pageContent.states">{{state.value.state}}</li>
     </ul>
+
   </section>
 
 </ng-container>
