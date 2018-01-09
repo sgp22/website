@@ -7,7 +7,7 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './header.component.html',
   providers: [PagesService],
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements OnInit {
 
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
   @Input() globalNav;
@@ -22,12 +22,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.navItems = this.globalNav;
-    console.log(this.globalNav);
-  }
-
-  ngAfterViewInit() {
-    // this.navItems = this.globalNav;
-    // console.log(this.globalNav);
   }
 
   toggleNav() {
