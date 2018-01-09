@@ -257,6 +257,12 @@ class ElementsPage(PageBase):
         verbose_name='When to use it',
     )
 
+    fka = models.CharField(
+        verbose_name="Formerly Known As",
+        max_length=255,
+        blank=True
+    )
+
     types = StreamField([
         ('types', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
@@ -283,6 +289,7 @@ class ElementsPage(PageBase):
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('fka'),
         MultiFieldPanel([
             SnippetChooserPanel('what_it_does'),
             SnippetChooserPanel('what_user_can_do'),
@@ -295,6 +302,7 @@ class ElementsPage(PageBase):
 
     api_fields = [
         APIField('title'),
+        APIField('fka'),
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('options'),
