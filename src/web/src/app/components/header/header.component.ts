@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -10,6 +10,7 @@ import { PagesService } from '../../shared/pages.service';
 export class HeaderComponent implements OnInit, AfterViewInit {
 
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
+  @Input() globalNav;
   public navItems: any;
   public domain: string = DOMAIN;
   public navToggle = false;
@@ -19,19 +20,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private router: Router,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.navItems = this.globalNav;
+    console.log(this.globalNav);
+  }
 
   ngAfterViewInit() {
-
-    this.pagesService.getGlobalNav()
-      .subscribe(
-        (res: any) => {
-          this.navItems = res.items.sort((a, b) => {
-            return a.meta.menu_order > b.meta.menu_order ? 1 : -1;
-          });
-        }
-      );
-
+    // this.navItems = this.globalNav;
+    // console.log(this.globalNav);
   }
 
   toggleNav() {

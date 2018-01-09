@@ -5,25 +5,33 @@ import {
   ViewContainerRef,
   ComponentFactoryResolver,
   ContentChildren,
-  QueryList
+  QueryList,
+  Input,
+  AfterViewInit
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContainerComponent } from '../container/container.component';
+import { PagesService } from '../../shared/pages.service';
 
 @Component({
   selector: 'app-component-loader',
-  templateUrl: './component-loader.component.html'
+  templateUrl: './component-loader.component.html',
+  providers: [PagesService]
 })
-export class ComponentLoaderComponent implements OnInit {
+export class ComponentLoaderComponent implements AfterViewInit, OnInit {
   @ViewChild('container', { read: ViewContainerRef }) dynamicPlaceholder;
   dynamicComponent: ContainerComponent[] = [];
+  globalNav;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private pagesService: PagesService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  ngAfterViewInit() { }
 
   loadComponent(pageType: string, slug, template, data) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ContainerComponent);

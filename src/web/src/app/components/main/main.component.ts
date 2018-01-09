@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, ViewChild } from '@angular/core';
+import { Component, AfterContentInit, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { PagesService } from '../../shared/pages.service';
@@ -8,7 +8,7 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './main.component.html',
   providers: [PagesService]
 })
-export class MainComponent implements AfterContentInit {
+export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('homeTemplate') homeTemplate;
   @ViewChild('landingTemplate') landingTemplate;
   @ViewChild('coreTemplate') coreTemplate;
@@ -20,12 +20,24 @@ export class MainComponent implements AfterContentInit {
   page;
   section;
   sidebarNav;
+  globalNav;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private pagesService: PagesService
   ) { }
+
+  ngOnInit() {
+    this.pagesService.getGlobalNav()
+      .subscribe(
+        (res: any) => {
+          this.globalNav = res.items.sort((a, b) => {
+            return a.meta.menu_order > b.meta.menu_order ? 1 : -1;
+          });
+        }
+      );
+  }
 
   ngAfterContentInit() {
 
@@ -38,7 +50,7 @@ export class MainComponent implements AfterContentInit {
           case 1:
             this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
             break;
-          case 2:
+          case 2: //develop/:library doesn't exist
             this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
             break;
           default:

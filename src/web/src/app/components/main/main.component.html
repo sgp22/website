@@ -5,12 +5,12 @@
 </ng-template>
 
 <ng-template #landingTemplate>
-  <app-header></app-header>
+  <app-header [globalNav]="globalNav"></app-header>
   <app-landing-page [page]="page"></app-landing-page>
 </ng-template>
 
 <ng-template #coreTemplate>
-  <app-header></app-header>
+  <app-header [globalNav]="globalNav"></app-header>
   <div class="ids-row ids-container">
     <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
     <app-core-content-page class="ids-row--col-sm-9" [page]="page"></app-core-content-page>
@@ -18,7 +18,7 @@
 </ng-template>
 
 <ng-template #elementsTemplate>
-  <app-header></app-header>
+  <app-header [globalNav]="globalNav"></app-header>
   <div class="ids-row ids-container">
     <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
     <app-element-page class="ids-row--col-sm-9" [page]="page"></app-element-page>
@@ -26,7 +26,7 @@
 </ng-template>
 
 <ng-template #blockTemplate>
-  <app-header></app-header>
+  <app-header [globalNav]="globalNav"></app-header>
   <div class="ids-row ids-container">
     <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
     <app-block-page class="ids-row--col-sm-9" [page]="page"></app-block-page>
@@ -34,11 +34,11 @@
 </ng-template>
 
 <ng-template #docsTemplate>
-  <app-header></app-header>
+  <app-header [globalNav]="globalNav"></app-header>
   <app-docs-content-page></app-docs-content-page>
 </ng-template>
 
 <ng-template #notFoundTemplate>
-  <app-header></app-header>
+  <app-header [globalNav]="globalNav"></app-header>
   <app-page-not-found></app-page-not-found>
 </ng-template>
