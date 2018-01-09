@@ -31,7 +31,14 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit, OnDestro
     this.globalNav.displaySidebarNav = true;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0)
+    });
+  }
 
   ngAfterViewInit() {
 
