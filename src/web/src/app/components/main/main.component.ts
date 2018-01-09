@@ -34,7 +34,17 @@ export class MainComponent implements AfterContentInit {
       const keys = Object.keys(params);
 
       if (params.slug === 'develop') {
-        this.componentLoader.loadComponent(null, null, this.docsTemplate, {});
+        switch (keys.length) {
+          case 1:
+            this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
+            break;
+          case 2:
+            this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+            break;
+          default:
+            this.componentLoader.loadComponent(null, null, this.docsTemplate, {});
+            break;
+        }
         return;
       }
 
