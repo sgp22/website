@@ -2,9 +2,7 @@
 
   <h1 class="page-title">{{pageContent?.title}}</h1>
 
-  <h4>Formerly Known as: {{page?.fka}}</h4>
-
-  <h2>Definition</h2>
+  <h4>Formerly Known as: {{pageContent?.fka}}</h4>
 
   <section *ngIf="pageContent.descriptors" class="element-section">
 
@@ -22,7 +20,7 @@
 
   </section>
 
-  <section *ngIf="pageContent.types.length" class="element-section element-section--types">
+  <section *ngIf="pageContent.types" class="element-section element-section--types">
 
     <h1 class="h2">Types</h1>
     <p>A type extends or alters a component's definition. Only one type can be used at a time.</p>
@@ -78,8 +76,8 @@
   </section>
 
   <ng-container *ngFor="let body of pageContent.body">
-    <div *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></div>
-    <div *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></div>
+    <section class="element-section" *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></section>
+    <section class="element-section" *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></section>
   </ng-container>
 
 </ng-container>

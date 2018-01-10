@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
-import { ActivatedRoute, Params, Router} from '@angular/router';
+import { ActivatedRoute, Params, Router, NavigationEnd} from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
@@ -21,7 +21,14 @@ export class CoreContentPageComponent implements OnInit, AfterViewInit {
     private pagesService: PagesService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0)
+    });
+  }
 
   ngAfterViewInit() {
 
