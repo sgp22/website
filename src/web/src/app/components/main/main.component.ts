@@ -28,16 +28,7 @@ export class MainComponent implements AfterContentInit, OnInit {
     private pagesService: PagesService
   ) { }
 
-  ngOnInit() {
-    this.pagesService.getGlobalNav()
-      .subscribe(
-        (res: any) => {
-          this.globalNav = res.items.sort((a, b) => {
-            return a.meta.menu_order > b.meta.menu_order ? 1 : -1;
-          });
-        }
-      );
-  }
+  ngOnInit() {}
 
   ngAfterContentInit() {
 

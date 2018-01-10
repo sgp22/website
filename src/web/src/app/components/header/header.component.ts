@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -21,7 +21,14 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.navItems = this.globalNav;
+    this.pagesService.getGlobalNav()
+      .subscribe(
+        (res: any) => {
+          this.navItems = res.items.sort((a, b) => {
+            return a.meta.menu_order > b.meta.menu_order ? 1 : -1;
+          });
+        }
+      );
   }
 
   toggleNav() {
