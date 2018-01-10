@@ -15,8 +15,7 @@ export class ContainerComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {}
 

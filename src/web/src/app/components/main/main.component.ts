@@ -82,16 +82,14 @@ export class MainComponent implements AfterContentInit, OnInit {
                 if (slug === params.grandChildSlug) {
                   switch (page.meta.type) {
                     case 'home.CoreContentPage':
-                      this.page = page;
-                      this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.coreTemplate, this.page);
+                      this.getPageContent(page, this.coreTemplate);
                       break;
                     case 'home.BlocksPage':
-                      this.page = page;
-                      this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.blockTemplate, this.page);
+                      this.getPageContent(page, this.blockTemplate);
                       break;
                     default:
-                      this.page = page;
-                      this.componentLoader.loadComponent(page.meta.type, page.meta.slug, this.elementsTemplate, this.page);
+                      this.getPageContent(page, this.elementsTemplate);
+                      break;
                   }
                 }
               });
@@ -126,8 +124,7 @@ export class MainComponent implements AfterContentInit, OnInit {
         d['items'].filter(page => {
           const slug = page.meta.slug;
           if (slug === paramsSlug) {
-            this.page = page;
-            this.componentLoader.loadComponent(pageType, page.meta.slug, template, this.page);
+            this.getPageContent(page, template);
           }
         });
       } else {
@@ -161,6 +158,28 @@ export class MainComponent implements AfterContentInit, OnInit {
         });
       }
     });
+
+  }
+
+  getPageContent(page, template) {
+
+    let requestParam;
+    const url = this.router.routerState.snapshot.url;
+    const preview = url.match(/preview=true&id=\d{1,10}/g);
+    const previewId = `${page.id}/?preview=true`;
+    preview ? requestParam = previewId : requestParam = page.id;
+
+    this.pagesService
+      .getPage(requestParam)
+      .subscribe(
+        (res: any) => {
+          this.page = res;
+          this.componentLoader.loadComponent(page.meta.type, page.meta.slug, template, this.page);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
 
   }
 

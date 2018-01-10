@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -7,10 +7,9 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './landing-page.component.html',
   providers: [PagesService]
 })
-export class LandingPageComponent implements OnInit, AfterViewInit {
+export class LandingPageComponent implements OnInit {
   @Input() page;
   public pageContent: any;
-  public loading = true;
 
   constructor(
     private router: Router,
@@ -18,39 +17,10 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
     private pagesService: PagesService,
   ) { }
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-
+  ngOnInit() {
     if (this.page) {
-
-      this.route.params.subscribe(params => {
-
-        const url = this.router.routerState.snapshot.url;
-        const preview = url.match(/preview=true&id=\d{1,10}/g);
-        const previewId = `${this.page.id}/?preview=true`;
-        preview ? this.getPageContent(previewId) : this.getPageContent(this.page.id);
-
-      });
-
+      this.pageContent = this.page;
     }
-
-  }
-
-  getPageContent(id) {
-
-    this.pagesService
-      .getPage(id)
-      .subscribe(
-        (res: any) => {
-          this.pageContent = res;
-          this.loading = false;
-        },
-        (err) => {
-          console.error(err);
-        }
-      );
-
   }
 
 }
