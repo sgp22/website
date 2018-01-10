@@ -11,8 +11,6 @@
 
       <section *ngIf="descriptors" class="element-section">
 
-        <h2>Definition</h2>
-
         <p>
           <span *ngIf="descriptors.what_it_does" class="what-it-does">
             {{descriptors.what_it_does.description}}
@@ -86,8 +84,8 @@
       </section>
 
       <ng-container *ngFor="let b of body">
-        <div *ngIf="b.type === 'richText'" [innerHTML]="b?.value"></div>
-        <div *ngIf="b.type === 'markdown'" [innerHTML]="b?.value"></div>
+        <section class="element-section" *ngIf="b.type === 'richText'" [innerHTML]="b?.value"></section>
+        <section class="element-section" *ngIf="b.type === 'markdown'" [innerHTML]="b?.value"></section>
       </ng-container>
 
     </ng-container>
