@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { PagesService } from '../../shared/pages.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './container.component.html',
   providers: [PagesService]
 })
-export class ContainerComponent implements OnInit, AfterViewInit {
+export class ContainerComponent implements OnInit {
   @Input() template;
   @Input() pageType;
   @Input() slug;
@@ -16,7 +16,5 @@ export class ContainerComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {}
-
-  ngAfterViewInit() {}
 
 }

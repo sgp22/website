@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { Component, AfterContentInit, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { PagesService } from '../../shared/pages.service';
