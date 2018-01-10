@@ -288,6 +288,11 @@ class ElementsPage(PageBase):
         ]))
     ], null=True, blank=True)
 
+    body = StreamField([
+        ('richText', APIRichTextBlock()),
+        ('markdown', APIMarkDownBlock())
+    ], null=True, blank=True)
+
     content_panels = Page.content_panels + [
         FieldPanel('fka'),
         MultiFieldPanel([
@@ -297,7 +302,8 @@ class ElementsPage(PageBase):
         ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('options'),
-        StreamFieldPanel('states')
+        StreamFieldPanel('states'),
+        StreamFieldPanel('body')
     ]
 
     api_fields = [
@@ -307,6 +313,7 @@ class ElementsPage(PageBase):
         APIField('types'),
         APIField('options'),
         APIField('states'),
+        APIField('body')
     ]
 
 class BlocksPage(PageBase):

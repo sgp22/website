@@ -15,6 +15,7 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public options: any;
   public types: any;
   public states: any;
+  public body: any;
   public sidebar: any = true;
   public descriptors: any;
   public notFound = false;
@@ -65,6 +66,7 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.options = res['options'];
             this.states = res['states'];
             this.descriptors = res['descriptors'];
+            this.body = res.items[0].body;
             this.notFound = false;
             this.loading = false;
           } else {
@@ -90,6 +92,7 @@ export class ElementPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.options = res.items[0].options;
             this.states = res.items[0].states;
             this.descriptors = res.items[0].descriptors;
+            this.body = res.items[0].body;
             this.notFound = false;
             this.loading = false;
           } else {
