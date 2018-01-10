@@ -85,6 +85,10 @@
         </ul>
       </section>
 
+      <ng-container *ngFor="let b of body">
+        <div *ngIf="b.type === 'richText'" [innerHTML]="b?.value"></div>
+        <div *ngIf="b.type === 'markdown'" [innerHTML]="b?.value"></div>
+      </ng-container>
 
     </ng-container>
 
