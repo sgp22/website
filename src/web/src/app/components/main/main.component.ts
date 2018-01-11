@@ -95,7 +95,7 @@ export class MainComponent implements AfterContentInit, OnInit {
         case 1:
           this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
           break;
-        case 2: //develop/:library doesn't exist
+        case 2:
           this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
           break;
         default:
