@@ -1,9 +1,9 @@
-<app-header [globalNav]="globalNav"></app-header>
+<app-header [globalNav]="globalNav" [home]="home"></app-header>
 
 <app-component-loader></app-component-loader>
 
 <ng-template #homeTemplate>
-  <app-home [page]="page"></app-home>
+  <app-home [page]="page" class="home"></app-home>
 </ng-template>
 
 <ng-template #landingTemplate>

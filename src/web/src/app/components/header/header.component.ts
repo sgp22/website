@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
   @Input() globalNav;
+  @Input() home;
   public navItems: any;
   public domain: string = DOMAIN;
   public navToggle = false;
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private pagesService: PagesService,
     private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {

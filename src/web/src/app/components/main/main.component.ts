@@ -21,6 +21,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   section;
   sidebarNav;
   globalNav;
+  home = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +46,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   cmsComponents(keys, params) {
     switch (keys.length) {
       case 0:
+        this.home = true;
         this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
         break;
       case 1:
