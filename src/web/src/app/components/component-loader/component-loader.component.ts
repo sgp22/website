@@ -53,4 +53,11 @@ export class ComponentLoaderComponent implements AfterViewInit, OnInit {
     component.active = true;
   }
 
+  // componentExists(components, instance) {
+  //   const index = components.findIndex(comp => comp.slug === instance.slug);
+  //   if (index !== -1) {
+  //     return true;
+  //   }
+  // }
+
 }
