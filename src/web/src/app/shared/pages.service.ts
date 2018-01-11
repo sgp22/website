@@ -14,7 +14,7 @@ export class PagesService {
   ) {}
 
   getAll() {
-    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/`);
+    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/?&limit=200`);
   }
 
   getPage(id) {
