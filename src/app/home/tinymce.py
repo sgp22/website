@@ -16,9 +16,5 @@ class CustomTinyMCE(TinyMCERichTextArea):
         options['style_formats'] = style_formats
         options['language'] = 'en'
         buttons[0].remove(['table'])
-        buttons[0].remove(['bullist', 'numlist', 'outdent', 'indent'])
-        buttons[0].remove(['wagtaildoclink', 'wagtailimage', 'wagtailembed'])
-        buttons[0].remove(['pastetext', 'fullscreen'])
-        buttons[0].append(['wagtaildoclink'])
         buttons[0].append(['code'])
         buttons[0].append(['removeformat'])

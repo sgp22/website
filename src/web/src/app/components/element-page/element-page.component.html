@@ -2,6 +2,8 @@
 
   <h1 class="page-title">{{pageContent?.title}}</h1>
 
+  <h4 *ngIf="page?.fka">Formerly known as: {{page?.fka}}</h4>
+
   <section *ngIf="pageContent.descriptors" class="element-section">
 
     <p>
