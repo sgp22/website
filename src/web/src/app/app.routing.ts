@@ -35,6 +35,10 @@ const appRoutes: Routes = [
     component: CoreContentPageComponent
   },
   {
+    path: 'design/page-structure/:slug',
+    component: CoreContentPageComponent
+  },
+  {
     path: 'develop/:library/:version/:component',
     component: DocsContentPageComponent
   },
