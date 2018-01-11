@@ -35,69 +35,75 @@ export class MainComponent implements AfterContentInit, OnInit {
     this.route.params.subscribe(params => {
 
       const keys = Object.keys(params);
-
-      if (params.slug === 'develop') {
-        switch (keys.length) {
-          case 1:
-            this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
-            break;
-          case 2: //develop/:library doesn't exist
-            this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
-            break;
-          default:
-            this.componentLoader.loadComponent(null, null, this.docsTemplate, {});
-            break;
-        }
-        return;
-      }
-
-      switch (keys.length) {
-        case 0:
-          this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
-          break;
-        case 1:
-          this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
-          break;
-        case 2:
-          this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate, {}, true);
-          break;
-        case 3:
-          this.pagesService.getAll().subscribe(data => {
-
-            if (this.pageExists(data['items'], params.grandChildSlug)) {
-
-              this.getSideBar(data);
-
-              data['items'].filter(page => {
-                const slug = page.meta.slug;
-                if (slug === params.grandChildSlug) {
-                  switch (page.meta.type) {
-                    case 'home.CoreContentPage':
-                      this.getPageContent(page, this.coreTemplate);
-                      break;
-                    case 'home.BlocksPage':
-                      this.getPageContent(page, this.blockTemplate);
-                      break;
-                    default:
-                      this.getPageContent(page, this.elementsTemplate);
-                      break;
-                  }
-                }
-              });
-
-            } else {
-              this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
-            }
-
-          });
-          break;
-        default:
-          this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
-          break;
-      }
+      this.docsComponents(keys, params);
+      this.cmsComponents(keys, params);
 
     });
 
+  }
+
+  cmsComponents(keys, params) {
+    switch (keys.length) {
+      case 0:
+        this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
+        break;
+      case 1:
+        this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
+        break;
+      case 2:
+        this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate, {}, true);
+        break;
+      case 3:
+        this.pagesService.getAll().subscribe(data => {
+
+          if (this.pageExists(data['items'], params.grandChildSlug)) {
+
+            this.getSideBar(data);
+
+            data['items'].filter(page => {
+              const slug = page.meta.slug;
+              if (slug === params.grandChildSlug) {
+                switch (page.meta.type) {
+                  case 'home.CoreContentPage':
+                    this.getPageContent(page, this.coreTemplate);
+                    break;
+                  case 'home.BlocksPage':
+                    this.getPageContent(page, this.blockTemplate);
+                    break;
+                  default:
+                    this.getPageContent(page, this.elementsTemplate);
+                    break;
+                }
+              }
+            });
+
+          } else {
+            this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+          }
+
+        });
+        break;
+      default:
+        this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+        break;
+    }
+  }
+
+  docsComponents(keys, params) {
+    if (params.slug === 'develop') {
+      switch (keys.length) {
+        case 1:
+          this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
+          break;
+        case 2: //develop/:library doesn't exist
+          this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+          break;
+        default:
+          this.componentLoader.loadComponent(null, null, this.docsTemplate, {});
+          break;
+      }
+      return;
+    }
   }
 
   pageExists(page, paramsSlug) {
