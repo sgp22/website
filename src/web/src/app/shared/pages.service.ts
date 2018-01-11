@@ -17,12 +17,8 @@ export class PagesService {
     return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/`);
   }
 
-  getPage(slug, pageType) {
-    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/?format=json&type=${pageType}&fields=*&slug=${slug}`);
-  }
-
-  getPreview(id) {
-    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/${id}`);
+  getPage(id) {
+    return this.http.get(`${DOMAIN}/api/${DOMAIN_VERSION}/pages/${id}/`);
   }
 
   getGlobalNav() {

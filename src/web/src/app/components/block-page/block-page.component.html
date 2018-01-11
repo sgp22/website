@@ -1,78 +1,83 @@
+<ng-container>
 
-<app-page-not-found *ngIf="notFound"></app-page-not-found>
+  <h1 class="page-title">{{pageContent?.title}}</h1>
 
-<ng-container *ngIf="!loading">
+  <h4 *ngIf="page?.fka">Formerly known as: {{page?.fka}}</h4>
 
-  <ng-container *ngIf="!notFound">
+  <section *ngIf="pageContent.descriptors" class="element-section">
 
-      <h1 class="page-title">{{page?.title}}</h1>
+    <p>
+      <span *ngIf="pageContent.descriptors.what_it_does" class="what-it-does">
+        {{pageContent.descriptors.what_it_does.description}}
+      </span>
+      <span *ngIf="pageContent.descriptors.what_user_can_do" class="what-user-can-do">
+        {{pageContent.descriptors.what_user_can_do.description}}
+      </span>
+      <span *ngIf="pageContent.descriptors.when_to_use_it" class="when-to-use-it">
+        {{pageContent.descriptors.when_to_use_it.description}}
+      </span>
+    </p>
 
-      <h4 *ngIf="page?.fka">Formerly known as: {{page?.fka}}</h4>
+  </section>
 
-      <section *ngIf="descriptors" class="element-section">
-        <p>
-          <span *ngIf="descriptors.what_it_does" class="what-it-does">
-            {{descriptors.what_it_does.description}}
-          </span>
-          <span *ngIf="descriptors.what_user_can_do" class="what-user-can-do">
-            {{descriptors.what_user_can_do.description}}
-          </span>
-          <span *ngIf="descriptors.when_to_use_it" class="when-to-use-it">
-            {{descriptors.when_to_use_it.description}}
-          </span>
-        </p>
-      </section>
+  <section *ngIf="pageContent.types" class="element-section element-section--types">
 
-      <section *ngIf="types?.length" class="element-section element-section--types">
-        <h1 class="h2">Types</h1>
-        <p>A type extends or alters a component's definition. Only one type can be used at a time.</p>
-        <table class="section-table">
-          <thead>
-            <th>Type</th>
-            <th>When to use it</th>
-            <th>Examples</th>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let type of types">
-              <tr class="section-table--row" [ngClass]="(type.value.image_type === 'full-width') ? 'section-table--row--full-image' : ''">
-                <td class="section-table--content"><strong>{{type.value.name}}</strong></td>
-                <td class="section-table--content">{{type.value.detail}}</td>
-                  <td *ngIf="type.value.image_type === 'inline'">
-                    <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
-                  </td>
-              </tr>
-              <tr *ngIf="type.value?.image_type === 'full-width'" class="section-table--image-row--full">
-                <td colspan="3" class="section-table--content">
-                  <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
-      </section>
+    <h1 class="h2">Types</h1>
+    <p>A type extends or alters a component's definition. Only one type can be used at a time.</p>
 
-      <section *ngIf="options?.length" class="element-section element-section--options">
-        <h1 class="h2">Options</h1>
-        <p>Options can be added to configure a component. Many options can be added to a component and all options can be used for all types, unless where specifically noted.</p>
-        <table class="section-table">
-          <thead>
-            <th>Option</th>
-            <th>Details</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let option of options">
-              <td class="section-table--content"><strong>{{option.value.name}}</strong></td>
-              <td class="section-table--content">{{option.value.detail}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+    <table class="section-table">
+      <thead>
+        <th>Type</th>
+        <th>When to use it</th>
+        <th>Example</th>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let type of pageContent.types">
+          <tr class="section-table--row" [ngClass]="(type.value.image_type === 'full-width') ? 'section-table--row--full-image' : ''">
+            <td class="section-table--content">
+              <strong>{{type.value.name}}</strong>
+            </td>
+            <td class="section-table--content">{{type.value.detail}}</td>
+            <td class="section-table--content" *ngIf="type.value.image_type === 'inline'">
+              <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
+            </td>
+          </tr>
+          <tr *ngIf="type.value.image_type === 'full-width'" class="section-table--image-row--full">
+            <td colspan="3" class="section-table--content">
+              <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
 
-      <ng-container *ngFor="let b of body">
-        <section class="element-section" *ngIf="b.type === 'richText'" [innerHTML]="b?.value"></section>
-        <section class="element-section" *ngIf="b.type === 'markdown'" [innerHTML]="b?.value"></section>
-      </ng-container>
+  </section>
 
-    </ng-container>
+  <section *ngIf="pageContent.options.length" class="element-section element-section--options">
 
+    <h1 class="h2">Options</h1>
+    <p>Options can be added to configure a component. Many options can be added to a component and all options can be used for all types, unless where specifically noted.</p>
+
+    <table class="section-table">
+      <thead>
+        <th>Option</th>
+        <th>Details</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let option of pageContent.options">
+          <td class="section-table--content">
+            <strong>{{option.value.name}}</strong>
+          </td>
+          <td class="section-table--content">{{option.value.detail}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <ng-container *ngFor="let body of pageContent.body">
+    <section class="element-section" *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></section>
+    <section class="element-section" *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></section>
   </ng-container>
+
+</ng-container>

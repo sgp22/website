@@ -1,26 +1,19 @@
-import { Component, DoCheck } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { DisplayGlobalNavService } from './shared/display-global-nav.service';
+import { Component, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 declare let pendo;
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  providers: [DisplayGlobalNavService]
+  templateUrl: './app.component.html'
 })
 
-export class AppComponent implements DoCheck {
-
-  public displayGlobalNav: boolean;
-  public displaySidebarNav: boolean;
-  public rootUrlPath = ROOT_URL_PATH;
-  public svgAssetsPath = '';
+export class AppComponent implements AfterContentInit {
 
   constructor(
-    private globalNav: DisplayGlobalNavService,
     private router: Router,
     private titleService: Title,
+    private route: ActivatedRoute
   ) {
 
     router.events.subscribe( (event) => {
@@ -66,9 +59,6 @@ export class AppComponent implements DoCheck {
     });
   }
 
-  ngDoCheck() {
-    this.displayGlobalNav = this.globalNav.displayGlobalNav;
-    this.displaySidebarNav = this.globalNav.displaySidebarNav;
-  }
+  ngAfterContentInit() {}
 
 }

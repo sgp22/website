@@ -1,10 +1,8 @@
-<ng-container *ngIf="!loading">
+<ng-container *ngIf="!loading" >
 
-  <div *ngIf="!notFound">
+    <ng-container *ngIf="pageContent">
 
-    <ng-container *ngIf="flexibleContent">
-
-      <ng-container *ngFor="let section of flexibleContent">
+      <ng-container *ngFor="let section of pageContent.content">
 
         <sf-full-width *ngIf="section.type === 'fullWidth'"
           [title]="section.value.title"
@@ -69,7 +67,5 @@
       </ng-container>
 
     </ng-container>
-
-  </div>
 
 </ng-container>

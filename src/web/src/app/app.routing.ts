@@ -1,78 +1,28 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { ElementPageComponent } from './components/element-page/element-page.component';
-import { BlockPageComponent } from './components/block-page/block-page.component';
-import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
-import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
+import { MainComponent } from './components/main/main.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: MainComponent
   },
   {
     path: ':slug',
-    component: LandingPageComponent
+    component: MainComponent
   },
   {
-    path: 'design/:slug',
-    component: CoreContentPageComponent
+    path: ':slug/:childSlug',
+    component: MainComponent
   },
   {
-    path: 'design/elements/:slug',
-    component: ElementPageComponent
+    path: ':slug/:childSlug/:grandChildSlug',
+    component: MainComponent
   },
   {
-    path: 'design/blocks/:slug',
-    component: BlockPageComponent
-  },
-  {
-    path: 'design/identity/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'design/page-structure/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'develop/:library/:version/:component',
-    component: DocsContentPageComponent
-  },
-  {
-    path: 'develop/:library/:version',
-    component: DocsContentPageComponent
-  },
-  {
-    path: 'develop/:library/latest',
-    component: DocsContentPageComponent
-  },
-  {
-    path: 'about',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'examples',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'examples/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'resources',
-    component: CoreContentPageComponent
-  },
-  {
-    path: 'resources/:slug',
-    component: CoreContentPageComponent
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent
+    path: ':slug/:library/:version/:component',
+    component: MainComponent
   }
 ];
 
