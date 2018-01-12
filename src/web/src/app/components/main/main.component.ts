@@ -17,11 +17,11 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('docsTemplate') docsTemplate;
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
-  page;
-  section;
-  sidebarNav;
-  globalNav;
-  home = false;
+  public page;
+  public section;
+  public sidebarNav;
+  public globalNav;
+  public sidebar;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +46,6 @@ export class MainComponent implements AfterContentInit, OnInit {
   cmsComponents(keys, params) {
     switch (keys.length) {
       case 0:
-        this.home = true;
         this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
         break;
       case 1:

@@ -1,5 +1,3 @@
-<app-header [globalNav]="globalNav" [home]="home"></app-header>
-
 <app-component-loader></app-component-loader>
 
 <ng-template #homeTemplate>
@@ -32,9 +30,13 @@
 </ng-template>
 
 <ng-template #docsTemplate>
-  <app-docs-content-page></app-docs-content-page>
+  <div class="ids-row ids-container">
+    <app-docs-content-page></app-docs-content-page>
+  </div>
 </ng-template>
 
 <ng-template #notFoundTemplate>
-  <app-page-not-found></app-page-not-found>
+  <div class="ids-row ids-container">
+    <app-page-not-found></app-page-not-found>
+  </div>
 </ng-template>

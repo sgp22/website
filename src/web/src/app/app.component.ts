@@ -9,6 +9,7 @@ declare let pendo;
 })
 
 export class AppComponent implements AfterContentInit {
+  public home;
 
   constructor(
     private router: Router,
@@ -21,8 +22,10 @@ export class AppComponent implements AfterContentInit {
         const url = router.routerState.snapshot.url;
         const title = url.replace(/^\//g, '').replace(/\//g, ' / ').replace(/-/g, ' ');
         if (url === '/') {
+          this.home = true;
           titleService.setTitle(`Home - Infor UX`);
         } else {
+          this.home = false;
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor UX`);
         }
 

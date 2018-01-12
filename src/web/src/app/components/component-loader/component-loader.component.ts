@@ -20,7 +20,6 @@ import { PagesService } from '../../shared/pages.service';
 })
 export class ComponentLoaderComponent implements AfterViewInit, OnInit {
   @ViewChild('container', { read: ViewContainerRef }) dynamicPlaceholder;
-  array = [];
   dynamicComponent: ContainerComponent[] = [];
   globalNav;
 
@@ -30,7 +29,7 @@ export class ComponentLoaderComponent implements AfterViewInit, OnInit {
     private pagesService: PagesService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngAfterViewInit() { }
 
@@ -52,12 +51,5 @@ export class ComponentLoaderComponent implements AfterViewInit, OnInit {
     this.dynamicComponent.forEach(comp => comp.active = false);
     component.active = true;
   }
-
-  // componentExists(components, instance) {
-  //   const index = components.findIndex(comp => comp.slug === instance.slug);
-  //   if (index !== -1) {
-  //     return true;
-  //   }
-  // }
 
 }
