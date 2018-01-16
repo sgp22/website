@@ -1,20 +1,25 @@
-import { Component, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { PagesService } from './shared/pages.service';
 declare let pendo;
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  providers: [PagesService]
 })
 
-export class AppComponent implements AfterContentInit {
+export class AppComponent {
   public home;
+  public section;
+  public sidebarNav;
 
   constructor(
     private router: Router,
     private titleService: Title,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private pagesService: PagesService
   ) {
 
     router.events.subscribe( (event) => {
@@ -51,6 +56,7 @@ export class AppComponent implements AfterContentInit {
             // as long as it's not one of the above reserved names.
           }
         });
+
       }
     });
 
@@ -61,7 +67,5 @@ export class AppComponent implements AfterContentInit {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   }
-
-  ngAfterContentInit() {}
 
 }

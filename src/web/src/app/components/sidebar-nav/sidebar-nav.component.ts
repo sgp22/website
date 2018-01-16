@@ -10,7 +10,10 @@ import { PagesService } from '../../shared/pages.service';
 export class SidebarNavComponent implements OnInit {
 
   @Input() sidebarData;
+  @Input() template;
   public sidebarNav: any;
+  public sidebar;
+  public section;
 
   constructor(
     private pagesService: PagesService,
@@ -19,7 +22,9 @@ export class SidebarNavComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.sidebarNav = this.sidebarData;
+
   }
 
 }

@@ -1,3 +1,7 @@
+<ng-template #sidebar>
+  <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
+</ng-template>
+
 <app-component-loader></app-component-loader>
 
 <ng-template #homeTemplate>
@@ -10,29 +14,27 @@
 
 <ng-template #coreTemplate>
   <div class="ids-row ids-container">
-    <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
+    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
     <app-core-content-page class="ids-row--col-sm-9" [page]="page"></app-core-content-page>
   </div>
 </ng-template>
 
 <ng-template #elementsTemplate>
   <div class="ids-row ids-container">
-    <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
+    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
     <app-element-page class="ids-row--col-sm-9" [page]="page"></app-element-page>
   </div>
 </ng-template>
 
 <ng-template #blockTemplate>
   <div class="ids-row ids-container">
-    <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
+    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
     <app-block-page class="ids-row--col-sm-9" [page]="page"></app-block-page>
   </div>
 </ng-template>
 
 <ng-template #docsTemplate>
-  <div class="ids-row ids-container">
-    <app-docs-content-page></app-docs-content-page>
-  </div>
+  <app-docs-content-page></app-docs-content-page>
 </ng-template>
 
 <ng-template #notFoundTemplate>
