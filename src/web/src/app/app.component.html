@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>
+<div class="site">
+  <div class="ids-visuallyhidden" [inlineSVG]="'/assets/iux/svgs/inline-icons.svg'"></div>
+  <app-header *ngIf="!home"></app-header>
+  <router-outlet></router-outlet>
+</div>

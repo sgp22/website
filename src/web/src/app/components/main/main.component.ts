@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, ViewChild, OnInit } from '@angular/core';
+import { Component, AfterContentInit, ViewChild, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { PagesService } from '../../shared/pages.service';
@@ -16,12 +16,12 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('blockTemplate') blockTemplate;
   @ViewChild('docsTemplate') docsTemplate;
   @ViewChild('notFoundTemplate') notFoundTemplate;
+  @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
-  page;
-  section;
-  sidebarNav;
-  globalNav;
-  home = false;
+  public page;
+  public section;
+  public sidebarNav;
+  public globalNav;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +39,7 @@ export class MainComponent implements AfterContentInit, OnInit {
       this.docsComponents(keys, params);
       this.cmsComponents(keys, params);
 
+
     });
 
   }
@@ -46,7 +47,6 @@ export class MainComponent implements AfterContentInit, OnInit {
   cmsComponents(keys, params) {
     switch (keys.length) {
       case 0:
-        this.home = true;
         this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
         break;
       case 1:

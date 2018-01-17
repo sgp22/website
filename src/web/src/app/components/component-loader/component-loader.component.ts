@@ -9,7 +9,7 @@ import {
   Input,
   AfterViewInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ContainerComponent } from '../container/container.component';
 import { PagesService } from '../../shared/pages.service';
 
@@ -20,13 +20,14 @@ import { PagesService } from '../../shared/pages.service';
 })
 export class ComponentLoaderComponent implements AfterViewInit, OnInit {
   @ViewChild('container', { read: ViewContainerRef }) dynamicPlaceholder;
-  array = [];
-  dynamicComponent: ContainerComponent[] = [];
-  globalNav;
+  public dynamicComponent: ContainerComponent[] = [];
+  public globalNav;
+  public section;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private route: ActivatedRoute,
+    private router: Router,
     private pagesService: PagesService
   ) { }
 
@@ -52,12 +53,5 @@ export class ComponentLoaderComponent implements AfterViewInit, OnInit {
     this.dynamicComponent.forEach(comp => comp.active = false);
     component.active = true;
   }
-
-  // componentExists(components, instance) {
-  //   const index = components.findIndex(comp => comp.slug === instance.slug);
-  //   if (index !== -1) {
-  //     return true;
-  //   }
-  // }
 
 }
