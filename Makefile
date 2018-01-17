@@ -32,9 +32,9 @@ down :
 	docker-compose down
 
 down_clean : down
-	-docker volume rm docssite_media-data
-	-docker volume rm docssite_postgres-data
-	-docker volume rm docssite_static-data
+	-docker volume rm design_infor_com_static_data
+	-docker volume rm design_infor_com_media_data
+	-docker volume rm design_infor_com_postgres_data
 
 restart :
 	docker-compose restart
