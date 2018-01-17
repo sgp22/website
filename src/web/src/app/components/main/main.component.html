@@ -1,0 +1,44 @@
+<ng-template #sidebar>
+  <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
+</ng-template>
+
+<app-component-loader></app-component-loader>
+
+<ng-template #homeTemplate>
+  <app-home [page]="page" class="home"></app-home>
+</ng-template>
+
+<ng-template #landingTemplate>
+  <app-landing-page [page]="page"></app-landing-page>
+</ng-template>
+
+<ng-template #coreTemplate>
+  <div class="ids-row ids-container">
+    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
+    <app-core-content-page class="ids-row--col-sm-9" [page]="page"></app-core-content-page>
+  </div>
+</ng-template>
+
+<ng-template #elementsTemplate>
+  <div class="ids-row ids-container">
+    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
+    <app-element-page class="ids-row--col-sm-9" [page]="page"></app-element-page>
+  </div>
+</ng-template>
+
+<ng-template #blockTemplate>
+  <div class="ids-row ids-container">
+    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
+    <app-block-page class="ids-row--col-sm-9" [page]="page"></app-block-page>
+  </div>
+</ng-template>
+
+<ng-template #docsTemplate>
+  <app-docs-content-page></app-docs-content-page>
+</ng-template>
+
+<ng-template #notFoundTemplate>
+  <div class="ids-row ids-container">
+    <app-page-not-found></app-page-not-found>
+  </div>
+</ng-template>

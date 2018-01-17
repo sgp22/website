@@ -9,24 +9,24 @@
     </div>
   </div>
 
-  <div class="iux-row iux-container">
+  <div class="ids-row ids-container">
 
-    <div class="iux-row--col-sm-4 iux-row--offset-sm-1">
+    <div class="ids-row--col-sm-4 ids-row--offset-sm-1">
 
       <div class="two-column--content" [ngStyle]="col1TextAlign && {'text-align': ''+ col1TextAlign +'' }">
         <img class="hero-image" *ngIf="col1HeroImage" src="{{col1HeroImage}}" alt="{{col1HeroImageTitle}}">
         <h1 [ngStyle]="col1InvertTextColor && {'color': '#ffffff'}">{{col1Title}}</h1>
-        <p [ngStyle]="col1InvertTextColor && {'color': '#ffffff'}">{{col1Content}}</p>
-        <a class="iux-btn btn--custom" [ngClass]="col1InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col1CtaText" routerLink="{{col1CtaLink}}">{{col1CtaText}}</a>
+        <p [ngStyle]="col1InvertTextColor && {'color': '#ffffff'}" [innerHTML]="col1Content"></p>
+        <a class="ids-btn btn--custom" [ngClass]="col1InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col1CtaText" routerLink="{{col1CtaLink}}">{{col1CtaText}}</a>
       </div>
 
     </div>
 
-    <div class="iux-row--col-sm-4 iux-row--offset-sm-2">
+    <div class="ids-row--col-sm-4 ids-row--offset-sm-2">
       <div class="two-column--content" [ngStyle]="col2TextAlign && {'text-align': ''+ col2TextAlign +'' }">
         <img class="hero-image" *ngIf="col2HeroImage" src="{{col2HeroImage}}" alt="{{col2HeroImageTitle}}">
         <h1 [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}">{{col2Title}}</h1>
-        <p [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}">{{col2Content}}</p>
+        <p [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}" [innerHTML]="col2Content"></p>
         <a class="btn btn--custom" [ngClass]="col2InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col2CtaText" routerLink="{{col2CtaLink}}">{{col2CtaText}}</a>
       </div>
 

@@ -1,31 +1,24 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
-import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   providers: [PagesService]
 })
-export class HomeComponent implements OnDestroy {
-  public slugs: any;
-  public pageType: any = 'home.LandingPage';
-  public page: any;
-  public flexibleContent: any;
-  public docs: any;
-  public docsBody: any;
-  public streamfields: any;
-  public notFound = false;
+export class HomeComponent implements AfterViewInit {
+  @Input() page;
+  public pageContent: any;
   public loading = true;
 
   constructor(
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private globalNav: DisplayGlobalNavService,
-    private router: Router
-  ) {
-    this.globalNav.displayGlobalNav = false;
+    private router: Router,
+  ) {}
+
+  ngAfterViewInit() {
 
     this.route.params.subscribe(params => {
 
@@ -39,20 +32,14 @@ export class HomeComponent implements OnDestroy {
 
   getPreviewContent(preview) {
 
-    const id = `${preview.toString().match(/\d{1,10}/g)}/?preview=true`;
+    const id = `${this.page.id}/?preview=true`;
 
     this.pagesService
-      .getPreview(id)
+      .getPage(id)
       .subscribe(
         (res: any) => {
-          if (res) {
-            this.page = res;
-            this.flexibleContent = res['content'];
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
+          this.pageContent = res;
+          this.loading = false;
         },
         (err) => {
           console.log(err);
@@ -62,26 +49,19 @@ export class HomeComponent implements OnDestroy {
   }
 
   getPageContent() {
+
     this.pagesService
-      .getPage('home', this.pageType)
+      .getPage(this.page.id)
       .subscribe(
         (res: any) => {
-          if (res && res.items.length) {
-            this.page = res.items[0];
-            this.flexibleContent = res.items[0].content;
-            this.notFound = false;
-            this.loading = false;
-          } else {
-            this.notFound = true;
-          }
+          this.pageContent = res;
+          this.loading = false;
         },
         (err) => {
           console.log(err);
         }
     );
+
   }
 
-  ngOnDestroy() {
-    this.globalNav.displayGlobalNav = true;
-  }
 }

@@ -1,32 +1,28 @@
-import { Component, OnInit, Input, AfterViewInit, DoCheck, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
-import { DisplayGlobalNavService } from '../../shared/display-global-nav.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  providers: [PagesService, DisplayGlobalNavService],
+  providers: [PagesService],
 })
-export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
+export class HeaderComponent implements OnInit {
 
-  @Input() displayGlobalNav: any;
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
+  @Input() globalNav;
+  @Input() home;
   public navItems: any;
-  public loading = true;
   public domain: string = DOMAIN;
   public navToggle = false;
 
   constructor(
     private pagesService: PagesService,
-    private globalNav: DisplayGlobalNavService,
     private router: Router,
+    private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-
+  ngOnInit() {
     this.pagesService.getGlobalNav()
       .subscribe(
         (res: any) => {
@@ -35,11 +31,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck {
           });
         }
       );
-
-  }
-
-  ngDoCheck() {
-    this.loading = false;
   }
 
   toggleNav() {

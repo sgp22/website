@@ -48,6 +48,14 @@ export class DocsContentPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0)
+    });
+
     this.route.url.subscribe(segment => {
       this.section = segment[0].path;
       if (segment.length === 4) {
@@ -60,6 +68,7 @@ export class DocsContentPageComponent implements OnInit {
     const urlSegment = [];
 
     this.route.url.subscribe(segment => {
+
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }

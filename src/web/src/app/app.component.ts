@@ -1,26 +1,25 @@
-import { Component, DoCheck } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { DisplayGlobalNavService } from './shared/display-global-nav.service';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { PagesService } from './shared/pages.service';
 declare let pendo;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [DisplayGlobalNavService]
+  providers: [PagesService]
 })
 
-export class AppComponent implements DoCheck {
-
-  public displayGlobalNav: boolean;
-  public displaySidebarNav: boolean;
-  public rootUrlPath = ROOT_URL_PATH;
-  public svgAssetsPath = '';
+export class AppComponent {
+  public home;
+  public section;
+  public sidebarNav;
 
   constructor(
-    private globalNav: DisplayGlobalNavService,
     private router: Router,
     private titleService: Title,
+    private route: ActivatedRoute,
+    private pagesService: PagesService
   ) {
 
     router.events.subscribe( (event) => {
@@ -28,8 +27,10 @@ export class AppComponent implements DoCheck {
         const url = router.routerState.snapshot.url;
         const title = url.replace(/^\//g, '').replace(/\//g, ' / ').replace(/-/g, ' ');
         if (url === '/') {
+          this.home = true;
           titleService.setTitle(`Home - Infor UX`);
         } else {
+          this.home = false;
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor UX`);
         }
 
@@ -55,6 +56,7 @@ export class AppComponent implements DoCheck {
             // as long as it's not one of the above reserved names.
           }
         });
+
       }
     });
 
@@ -64,11 +66,6 @@ export class AppComponent implements DoCheck {
     return str.replace(/\w\S*/g, function(txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
-  }
-
-  ngDoCheck() {
-    this.displayGlobalNav = this.globalNav.displayGlobalNav;
-    this.displaySidebarNav = this.globalNav.displaySidebarNav;
   }
 
 }
