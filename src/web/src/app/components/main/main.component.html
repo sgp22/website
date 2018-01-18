@@ -1,5 +1,9 @@
 <ng-template #sidebar>
-  <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav"></sidebar-nav>
+  <sidebar-nav class="ids-row--col-sm-3"
+    [sidebarData]="sidebarNav"
+    [section]="section"
+    [hasGrandchildren]="hasGrandchildren">
+  </sidebar-nav>
 </ng-template>
 
 <app-component-loader></app-component-loader>
