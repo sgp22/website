@@ -9,16 +9,16 @@
       <ng-container *ngFor="let child of sidebarNav">
 
         <li *ngIf="grandChildren" class="sidebar-nav__group">
-            <span class="sidebar-nav__child-item">
-              {{child.title}}
-            </span>
-            <ul class="ids-list--plain">
-              <li *ngFor="let grandChild of child.children">
-                <a class="sidebar-nav__grandchild-item" routerLink="{{grandChild.relative_url}}">
-                  {{grandChild.title}}
-                </a>
-              </li>
-            </ul>
+          <span class="sidebar-nav__child-item">
+            {{child.title}}
+          </span>
+          <ul class="ids-list--plain">
+            <li *ngFor="let grandChild of child.children">
+              <a class="sidebar-nav__grandchild-item" routerLink="{{grandChild.relative_url}}">
+                {{grandChild.title}}
+              </a>
+            </li>
+          </ul>
         </li>
 
         <li *ngIf="!grandChildren" class="sidebar-nav__group--no-grandchildren">
