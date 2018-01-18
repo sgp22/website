@@ -1,18 +1,34 @@
 <aside class="sidebar">
   <nav class="sidebar-nav">
     <ul class="ids-list--plain">
-      <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
-        <span class="sidebar-nav__child-item">
-          {{child.title}}
-        </span>
-        <ul class="ids-list--plain" *ngIf="child.children.length > 0">
-          <li *ngFor="let grandChild of child.children">
-            <a class="sidebar-nav__grandchild-item" routerLink="{{grandChild.relative_url}}">
-              {{grandChild.title}}
-            </a>
-          </li>
-        </ul>
-      </li>
+
+      <span *ngIf="!grandChildren" class="sidebar-nav__section-title">
+        {{sectionTitle}}
+      </span>
+
+      <ng-container *ngFor="let child of sidebarNav">
+
+        <li *ngIf="grandChildren" class="sidebar-nav__group">
+          <span class="sidebar-nav__child-item">
+            {{child.title}}
+          </span>
+          <ul class="ids-list--plain">
+            <li *ngFor="let grandChild of child.children">
+              <a class="sidebar-nav__grandchild-item" routerLink="{{grandChild.relative_url}}">
+                {{grandChild.title}}
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li *ngIf="!grandChildren" class="sidebar-nav__group--no-grandchildren">
+          <a class="sidebar-nav__grandchild-item" routerLink="{{child.relative_url}}">
+            {{child.title}}
+          </a>
+        </li>
+
+      </ng-container>
+
     </ul>
   </nav>
 </aside>

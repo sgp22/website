@@ -21,6 +21,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   public page;
   public section;
   public sidebarNav;
+  public hasGrandchildren: boolean;
   public globalNav;
 
   constructor(
@@ -149,6 +150,7 @@ export class MainComponent implements AfterContentInit, OnInit {
       if (item.meta.slug === this.section) {
         this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
           item.meta.children.children.map(child => {
+            child.children.length > 0 ? this.hasGrandchildren = true : this.hasGrandchildren = false;
             child.children.sort((thisGrandChild, nextGrandchild) => {
               return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
             });
