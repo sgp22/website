@@ -230,12 +230,22 @@ module.exports = {
       {
         "context": "src/",
         "to": "assets/ids/css",
-        "from": "../node_modules/@infor/ids-web/dist/reset.min.css"
+        "from": "../node_modules/@infor/ids-web/dist/ids-reset.min.css"
       },
       {
         "context": "src/",
         "to": "assets/ids/css",
-        "from": "../node_modules/@infor/ids-web/dist/reset.min.css.map"
+        "from": "../node_modules/@infor/ids-web/dist/ids-reset.min.css.map"
+      },
+      {
+        "context": "src/",
+        "to": "assets/ids/css",
+        "from": "../node_modules/@infor/ids-web/dist/ids-web.min.css"
+      },
+      {
+        "context": "src/",
+        "to": "assets/ids/css",
+        "from": "../node_modules/@infor/ids-web/dist/ids-web.min.css.map"
       },
       {
         "context": "src/",
@@ -290,6 +300,7 @@ module.exports = {
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
         "assets/ids/css/reset.min.css",
+        "assets/ids/css/ids-web.min.css",
         "assets/documentation-css/css/documentation.min.css"
       ],
       append: false,
