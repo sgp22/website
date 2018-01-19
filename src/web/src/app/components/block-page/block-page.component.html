@@ -4,7 +4,7 @@
 
   <h4 *ngIf="page?.fka">Formerly known as: {{page?.fka}}</h4>
 
-  <section *ngIf="pageContent.descriptors" class="element-section">
+  <section *ngIf="pageContent.descriptors" class="page-section">
 
     <p>
       <span *ngIf="pageContent.descriptors.what_it_does" class="what-it-does">
@@ -20,7 +20,7 @@
 
   </section>
 
-  <section *ngIf="pageContent.types.length > 0" class="element-section element-section--types">
+  <section *ngIf="pageContent.types.length > 0" class="page-section page-section--types">
 
     <h1 class="h2">Types</h1>
     <p>A type extends or alters a component's definition.</p>
@@ -53,7 +53,7 @@
 
   </section>
 
-  <section *ngIf="pageContent.options.length > 0" class="element-section element-section--options">
+  <section *ngIf="pageContent.options.length > 0" class="page-section page-section--options">
 
     <h1 class="h2">Options</h1>
     <p>Options can be added to configure a component. Many options can be added to a component and all options can be used for all types, unless where specifically noted.</p>
@@ -76,8 +76,8 @@
   </section>
 
   <ng-container *ngFor="let body of pageContent.body">
-    <section class="element-section" *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></section>
-    <section class="element-section" *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></section>
+    <section class="page-section" *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></section>
+    <section class="page-section" *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></section>
   </ng-container>
 
 </ng-container>
