@@ -1,7 +1,0 @@
-/* Common styles to sync back to documentaion-css */
-
-.site-header {
-  &.home {
-    display: none;
-  }
-}
