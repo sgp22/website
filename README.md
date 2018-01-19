@@ -17,10 +17,7 @@ export S3_STORAGE=<S3_STORAGE>  True or False.
 
 Keep in mind that this will wipe your local database and recreate it exactly how it is on the pool server.
 
-```bash
-export SOURCE_DB_HOST=<SOURCE_DB_HOST> <- the pool server ip
-export TARGET_DB_HOST=172.17.0.1
-```
-
 - The project needs to be up and running locally.
 - `make syncdb`
+
+To get updated image files into your local environment, [follow the instructions](https://github.com/infor-design/design.infor.com/pull/275#issuecomment-359069520). Note that the contents will be outdated since that's just a static zip, but it'll get you started.
