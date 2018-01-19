@@ -39,14 +39,14 @@
 
       <div *ngIf="docs?.specs">
         <h2>Specifications</h2>
-        <table class="section-table">
+        <table>
           <thead>
             <th>Description</th>
             <th>Value</th>
           </thead>
           <tbody>
             <tr *ngFor="let spec of docs.specs">
-              <td class="section-table--content">
+              <td>
                 {{spec.title}}
               </td>
               <td>
@@ -67,7 +67,7 @@
           <span>Constructor</span>
           <code>new {{element.name}}({{constructorTag.name}}({{constructorTag.type.name}}): {{constructorTag.description}})</code>
         </div>
-        <table class="section-table">
+        <table>
           <thead>
             <th>Name</th>
             <th>Description</th>
@@ -80,16 +80,16 @@
                 </div>
               </td>
               <ng-template #thenTemplateName>
-                <td class="section-table--content">
+                <td>
                   {{method.name}}&#40;<span *ngFor="let param of method.params; let isLast=last">{{param.paramName}} = {{param.paramDescription}}{{isLast ? '' : ', '}}</span>&#41;
                 </td>
               </ng-template>
               <ng-template #elseTemplateName>
-                <td class="section-table--content">
+                <td>
                   {{method.name}}
                 </td>
               </ng-template>
-              <td class="section-table--content">
+              <td>
                 {{method.info}}
               </td>
             </tr>

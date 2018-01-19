@@ -138,3 +138,6 @@ yarn-error.log*
 .env.production.local
 
 scripts/local_set_dev_vars.sh
+
+# Temp ignore until images are automated with dbsync
+/wagtail_images
