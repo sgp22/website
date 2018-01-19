@@ -43,9 +43,9 @@ reset : down
 	make up
 
 syncdb :
-	cd config/migrate-postgres && \
-		SOURCE_DB_HOST=$(SOURCE_DB_HOST) \
-		SOURCE_DB_PASS=$(SOURCE_DB_PASS) \
+	cd docker/docs-migrate-postgres && \
+		SOURCE_DB_HOST=$(SOURCE_DB_HOST) && \
+		TARGET_DB_HOST=$(TARGET_DB_HOST) && \
 		make syncdb
 
 restart_vm :
