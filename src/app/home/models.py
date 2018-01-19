@@ -257,6 +257,12 @@ class ElementsPage(PageBase):
         verbose_name='When to use it',
     )
 
+    cross_link = models.CharField(
+        verbose_name="Cross Link",
+        max_length=255,
+        blank=True
+    )
+
     fka = models.CharField(
         verbose_name="Formerly Known As",
         max_length=255,
@@ -295,6 +301,7 @@ class ElementsPage(PageBase):
 
     content_panels = Page.content_panels + [
         FieldPanel('fka'),
+        FieldPanel('cross_link'),
         MultiFieldPanel([
             SnippetChooserPanel('what_it_does'),
             SnippetChooserPanel('what_user_can_do'),
@@ -309,6 +316,7 @@ class ElementsPage(PageBase):
     api_fields = [
         APIField('title'),
         APIField('fka'),
+        APIField('cross_link'),
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('options'),
@@ -357,6 +365,12 @@ class BlocksPage(PageBase):
         verbose_name='When to use it',
     )
 
+    cross_link = models.CharField(
+        verbose_name="Cross Link",
+        max_length=255,
+        blank=True
+    )
+
     fka = models.CharField(
         verbose_name="Formerly Known As",
         max_length=255,
@@ -390,6 +404,7 @@ class BlocksPage(PageBase):
 
     content_panels = Page.content_panels + [
         FieldPanel('fka'),
+        FieldPanel('cross_link'),
         MultiFieldPanel([
             SnippetChooserPanel('what_it_does'),
             SnippetChooserPanel('what_user_can_do'),
@@ -403,6 +418,7 @@ class BlocksPage(PageBase):
     api_fields = [
         APIField('title'),
         APIField('fka'),
+        APIField('cross_link'),
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('options'),
