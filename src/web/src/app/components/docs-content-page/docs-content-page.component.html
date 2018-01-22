@@ -40,7 +40,9 @@
         <a *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}">View Live Demo</a>
         <a class="ids-btn btn--custom btn--custom--ghost" *ngIf="docs?.system" routerLink="/design/{{docs?.system[0].category}}/{{docs?.system[1].name}}">
           <div class="ids-btn--inner">
-            <svg class="ids-btn--icon"><use xlink:href="#icon_information"/></svg>
+            <span title="icon_information icon">
+              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
+            </span>
             View More Information
           </div>
         </a>
