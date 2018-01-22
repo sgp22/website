@@ -15,6 +15,5 @@ class CustomTinyMCE(TinyMCERichTextArea):
         options = self.kwargs['options']
         options['style_formats'] = style_formats
         options['language'] = 'en'
-        buttons[0].remove(['table'])
         buttons[0].append(['code'])
         buttons[0].append(['removeformat'])

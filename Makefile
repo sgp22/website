@@ -1,6 +1,8 @@
 NGINX_CONTAINER = docssite_nginx
 BACKEND_CONTAINER = docssite_backend
 POSTGRES_CONTAINER = docssite_postgres
+SOURCE_DB_HOST = 10.39.160.62
+TARGET_DB_HOST = 172.17.01
 
 .PHONY: up
 
@@ -43,9 +45,9 @@ reset : down
 	make up
 
 syncdb :
-	cd config/migrate-postgres && \
-		SOURCE_DB_HOST=$(SOURCE_DB_HOST) \
-		SOURCE_DB_PASS=$(SOURCE_DB_PASS) \
+	cd docker/docs-migrate-postgres && \
+		SOURCE_DB_HOST=$(SOURCE_DB_HOST) && \
+		TARGET_DB_HOST=$(TARGET_DB_HOST) && \
 		make syncdb
 
 restart_vm :

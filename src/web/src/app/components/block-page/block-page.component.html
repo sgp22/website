@@ -21,7 +21,7 @@
     </a>
   </header>
 
-  <section *ngIf="pageContent.descriptors" class="element-section">
+  <section *ngIf="pageContent.descriptors" class="page-section">
 
     <p>
       <span *ngIf="pageContent.descriptors.what_it_does" class="what-it-does">
@@ -37,12 +37,12 @@
 
   </section>
 
-  <section *ngIf="pageContent.types.length > 0" class="element-section element-section--types">
+  <section *ngIf="pageContent.types.length > 0" class="page-section page-section--types">
 
     <h1 class="h2">Types</h1>
     <p>A type extends or alters a component's definition.</p>
 
-    <table class="section-table">
+    <table>
       <thead>
         <th>Type</th>
         <th>When to use it</th>
@@ -50,17 +50,17 @@
       </thead>
       <tbody>
         <ng-container *ngFor="let type of pageContent.types">
-          <tr class="section-table--row" [ngClass]="(type.value.image_type === 'full-width') ? 'section-table--row--full-image' : ''">
-            <td class="section-table--content">
+          <tr [ngClass]="(type.value.image_type === 'full-width') ? 'row--full-image' : ''">
+            <td>
               <strong>{{type.value.name}}</strong>
             </td>
-            <td class="section-table--content">{{type.value.detail}}</td>
-            <td class="section-table--content" *ngIf="type.value.image_type === 'inline'">
+            <td>{{type.value.detail}}</td>
+            <td *ngIf="type.value.image_type === 'inline'">
               <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
             </td>
           </tr>
-          <tr *ngIf="type.value.image_type === 'full-width'" class="section-table--image-row--full">
-            <td colspan="3" class="section-table--content">
+          <tr *ngIf="type.value.image_type === 'full-width'" class="image-row--full">
+            <td colspan="3">
               <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
             </td>
           </tr>
@@ -70,22 +70,22 @@
 
   </section>
 
-  <section *ngIf="pageContent.options.length > 0" class="element-section element-section--options">
+  <section *ngIf="pageContent.options.length > 0" class="page-section page-section--options">
 
     <h1 class="h2">Options</h1>
     <p>Options can be added to configure a component. Many options can be added to a component and all options can be used for all types, unless where specifically noted.</p>
 
-    <table class="section-table">
+    <table>
       <thead>
         <th>Option</th>
         <th>Details</th>
       </thead>
       <tbody>
         <tr *ngFor="let option of pageContent.options">
-          <td class="section-table--content">
+          <td>
             <strong>{{option.value.name}}</strong>
           </td>
-          <td class="section-table--content">{{option.value.detail}}</td>
+          <td>{{option.value.detail}}</td>
         </tr>
       </tbody>
     </table>
@@ -93,8 +93,8 @@
   </section>
 
   <ng-container *ngFor="let body of pageContent.body">
-    <section class="element-section" *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></section>
-    <section class="element-section" *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></section>
+    <section class="page-section" *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></section>
+    <section class="page-section" *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></section>
   </ng-container>
 
 </ng-container>
