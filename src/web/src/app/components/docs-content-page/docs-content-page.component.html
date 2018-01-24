@@ -20,7 +20,7 @@
             </span>
             <ul class="ids-list--plain" *ngIf="child.pages">
               <li *ngFor="let grandChild of child.pages">
-                <a class="sidebar-nav__grandchild-item" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
+                <a class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
                   {{grandChild.name}}
                 </a>
               </li>
@@ -34,8 +34,20 @@
     <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
     <div class="ids-row--col-sm-9 ids-row--col-md-9" *ngIf="!notFound">
-      <h1>{{docs?.title}}</h1>
-      <a  *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}">View Live Demo</a>
+
+      <header class="page-header">
+        <h1>{{docs?.title}}</h1>
+        <a *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}">View Live Demo</a>
+        <a class="ids-btn btn--custom btn--custom--ghost" *ngIf="docs?.system" routerLink="/design/{{docs?.system.category}}/{{docs?.system.name}}">
+          <div class="ids-btn--inner">
+            <span title="icon_information icon">
+              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
+            </span>
+            View More Information
+          </div>
+        </a>
+      </header>
+
 
       <div *ngIf="docs?.specs">
         <h2>Specifications</h2>
