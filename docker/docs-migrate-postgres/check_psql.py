@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys
 import psycopg2
@@ -16,6 +16,6 @@ try:
         )
     )
 
-    print 0
-except Exception, e:
-    print 1
+    print(0)
+except Exception as e:
+    print(1)
