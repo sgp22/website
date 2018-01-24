@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-eb setenv AWS_STORAGE_BUCKET_NAME="$AWS_STORAGE_BUCKET_NAME" \
-    AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
+eb setenv AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
     AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY" \
-    DEBUG="$DEBUG" \
-    RDS_TRUE="True" \
+    AWS_STORAGE_BUCKET_NAME="ids-com-staging" \
+    DEBUG="True" \
+    RDS_TRUE="False" \
     S3_STORAGE="True"

@@ -6,5 +6,5 @@ setup :
 	. scripts/eb_env_vars.sh
 
 deploy : build_prod
-	eb use docs-site-staging && \
+	eb use ids-com-staging && \
 	. scripts/eb_deploy.sh

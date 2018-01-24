@@ -2,8 +2,8 @@
 {
 	"AWSEBDockerrunVersion": 2,
 	"Authentication": {
-        "Bucket": "videowall-docker-images",
-        "Key": "keys/.dockercfg"
+        "Bucket": "hl-devops-assets",
+        "Key": "docker/keys/.dockercfg"
 	},
 	"volumes": [{
 		"name": "app",
@@ -50,6 +50,11 @@
 		"host": {
 			"sourcePath": "/data/media"
 		}
+	}, {
+		"name": "postgres-data",
+		"host": {
+			"sourcePath": "/data/postgres"
+		}
 	}],
 	"containerDefinitions": [{
 		"name": "backend",
@@ -63,7 +68,9 @@
 			"hostPort": 9002,
 			"containerPort": 9002
 		}],
-		"links": [],
+		"links": [
+			"postgres"
+		],
 		"mountPoints": [{
 			"sourceVolume": "app",
 			"containerPath": "/home/app"
@@ -84,7 +91,7 @@
 		"name": "nginx",
 		"image": "hookandloop/docs-nginx:1.0.0",
 		"essential": true,
-		"memory": 512,
+		"memory": 256,
 		"portMappings": [{
 			"hostPort": 80,
 			"containerPort": 80
@@ -116,6 +123,19 @@
 		}, {
 			"sourceVolume": "media-data",
 			"containerPath": "/home/app/media/"
+		}]
+	}, {
+		"name": "postgres",
+		"image": "postgres:10.1",
+		"essential": true,
+		"memory": 512,
+		"portMappings": [{
+			"hostPort": 5432,
+			"containerPort": 5432
+		}],
+		"mountPoints": [{
+			"sourceVolume": "postgres-data",
+			"containerPath": "/var/lib/postgresql/data"
 		}]
 	}]
 }
