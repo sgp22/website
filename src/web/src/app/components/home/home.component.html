@@ -1,71 +1,112 @@
-<ng-container *ngIf="!loading" >
 
-    <ng-container *ngIf="pageContent">
+<header class="page-hero">
 
-      <ng-container *ngFor="let section of pageContent.content">
+  <h1>The Infor Design System</h1>
+  <p class="sub-headline">It's a set of use-case driven design practices, development tools,
+    <br>and support documentation to create a cohesive user experience
+    <br>across all Infor CloudSuite applications.</p>
 
-        <sf-full-width *ngIf="section.type === 'fullWidth'"
-          [title]="section.value.title"
-          [content]="section.value.content"
-          [textAlign]="section.value.text_align"
-          [invertTextColor]="section.value.invert_text_color"
-          [heroImage]="section.value.hero_image?.file"
-          [heroImageTitle]="section.value.hero_image?.title"
-          [backgroundImage]="section.value.background_image?.file"
-          [backgroundColor]="section.value.background_color"
-          [ctaText]="section.value.cta_text"
-          [ctaLink]="section.value.cta_link"></sf-full-width>
+</header>
 
-        <sf-two-column *ngIf="section.type === 'twoColumn'"
-          [col1Title]="section.value.column_1_title"
-          [col1Content]="section.value.column_1_content"
-          [col1TextAlign]="section.value.column_1_text_align"
-          [col1InvertTextColor]="section.value.column_1_invert_text_color"
-          [col1HeroImage]="section.value.column_1_hero_image?.file"
-          [col1HeroImageTitle]="section.value.column_1_hero_image?.title"
-          [col1BackgroundImage]="section.value.column_1_background_image?.file"
-          [col1BackgroundColor]="section.value.column_1_background_color"
-          [col1CtaText]="section.value.column_1_cta_text"
-          [col1CtaLink]="section.value.column_1_cta_link"
-          [col2Title]="section.value.column_2_title"
-          [col2Content]="section.value.column_2_content"
-          [col2TextAlign]="section.value.column_2_text_align"
-          [col2InvertTextColor]="section.value.column_2_invert_text_color"
-          [col2HeroImage]="section.value.column_2_hero_image?.file"
-          [col2HeroImageTitle]="section.value.column_2_hero_image?.title"
-          [col2BackgroundImage]="section.value.column_2_background_image?.file"
-          [col2BackgroundColor]="section.value.column_2_background_color"
-          [col2CtaText]="section.value.column_2_cta_text"
-          [col2CtaLink]="section.value.column_2_cta_link"
-        ></sf-two-column>
+<section class="page-section-intro">
 
-        <sf-two-col-text-image *ngIf="section.type === 'twoColTextImage'"
-          [title]="section.value.title"
-          [content]="section.value.content"
-          [ctaText]="section.value.cta_text"
-          [ctaLink]="section.value.cta_link"
-          [image]="section.value.image?.file"
-          [imageTitle]="section.value.image?.title"
-          [imageAlign]="section.value.image_align"
-          [backgroundImage]="section.value.background_image?.file"
-          [backgroundColor]="section.value.background_color"
-          [invertTextColor]="section.value.invert_text_color"
-        ></sf-two-col-text-image>
+  <header>
+    <h1 class="page-section-title">Our Principles</h1>
+    <p class="sub-headline" style="color: #9B9B9B; text-align: center;">What we believe in</p>
+  </header>
 
-        <div *ngIf="section.type === 'markdown'" class="ids-row ids-container">
-          <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
-        </div>
+  <div class="ids-row ids-row--gutter ids-container">
 
-        <div *ngIf="section.type === 'richText'" class="ids-row ids-container">
-          <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
-        </div>
+    <div class="ids-row--col-sm-4 ids-row--offset-sm-1">
+      <h2>Approachable</h2>
+      <p>To earn a user's trust, business software needs to offer visual elegance without sacrificing functional depth. With
+        its emphasis on legibility and clarity, Infor software draws in new users with a distinct visual and interactive
+        identity.</p>
+      <br>
+      <h2>Relevant</h2>
+      <p>No two businesses are alike. Infor software aims to present the most relevant, actionable information to every user.
+        </p>
+    </div>
 
-        <div *ngIf="section.type === 'rawHtml'">
-          <div [innerHTML]="section.value | safeHtml"></div>
-        </div>
+    <div class="ids-row--col-sm-4 ids-row--offset-sm-2">
+      <h2>Focused</h2>
+      <p>In enterprise software, where every interaction holds meaning, no inefficiency is insignificant. Infor Design System
+        paves the way for smooth, efficient workflows by shortening steps to completion and minimizing potential distractions.</p>
+      <br>
+      <h2>Perceptive</h2>
+      <p>Information works best when it’s placed in a greater context. Infor software elevates data with contextual insights
+        and predictions.</p>
+    </div>
 
-      </ng-container>
+  </div>
+
+</section>
+
+  <ng-container *ngIf="pageContent">
+
+    <ng-container *ngFor="let section of pageContent.content">
+
+      <sf-full-width *ngIf="section.type === 'fullWidth'"
+        [title]="section.value.title"
+        [content]="section.value.content"
+        [textAlign]="section.value.text_align"
+        [invertTextColor]="section.value.invert_text_color"
+        [heroImage]="section.value.hero_image?.file"
+        [heroImageTitle]="section.value.hero_image?.title"
+        [backgroundImage]="section.value.background_image?.file"
+        [backgroundColor]="section.value.background_color"
+        [ctaText]="section.value.cta_text"
+        [ctaLink]="section.value.cta_link"></sf-full-width>
+
+      <sf-two-column *ngIf="section.type === 'twoColumn'"
+        [col1Title]="section.value.column_1_title"
+        [col1Content]="section.value.column_1_content"
+        [col1TextAlign]="section.value.column_1_text_align"
+        [col1InvertTextColor]="section.value.column_1_invert_text_color"
+        [col1HeroImage]="section.value.column_1_hero_image?.file"
+        [col1HeroImageTitle]="section.value.column_1_hero_image?.title"
+        [col1BackgroundImage]="section.value.column_1_background_image?.file"
+        [col1BackgroundColor]="section.value.column_1_background_color"
+        [col1CtaText]="section.value.column_1_cta_text"
+        [col1CtaLink]="section.value.column_1_cta_link"
+        [col2Title]="section.value.column_2_title"
+        [col2Content]="section.value.column_2_content"
+        [col2TextAlign]="section.value.column_2_text_align"
+        [col2InvertTextColor]="section.value.column_2_invert_text_color"
+        [col2HeroImage]="section.value.column_2_hero_image?.file"
+        [col2HeroImageTitle]="section.value.column_2_hero_image?.title"
+        [col2BackgroundImage]="section.value.column_2_background_image?.file"
+        [col2BackgroundColor]="section.value.column_2_background_color"
+        [col2CtaText]="section.value.column_2_cta_text"
+        [col2CtaLink]="section.value.column_2_cta_link"
+      ></sf-two-column>
+
+      <sf-two-col-text-image *ngIf="section.type === 'twoColTextImage'"
+        [title]="section.value.title"
+        [content]="section.value.content"
+        [ctaText]="section.value.cta_text"
+        [ctaLink]="section.value.cta_link"
+        [image]="section.value.image?.file"
+        [imageTitle]="section.value.image?.title"
+        [imageAlign]="section.value.image_align"
+        [backgroundImage]="section.value.background_image?.file"
+        [backgroundColor]="section.value.background_color"
+        [invertTextColor]="section.value.invert_text_color"
+      ></sf-two-col-text-image>
+
+      <div *ngIf="section.type === 'markdown'" class="ids-row ids-container">
+        <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
+      </div>
+
+      <div *ngIf="section.type === 'richText'" class="ids-row ids-container">
+        <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
+      </div>
+
+      <div *ngIf="section.type === 'rawHtml'">
+        <div [innerHTML]="section.value | safeHtml"></div>
+      </div>
 
     </ng-container>
 
-</ng-container>
+  </ng-container>
+

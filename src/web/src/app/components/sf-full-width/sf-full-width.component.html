@@ -5,7 +5,7 @@
   <div class="ids-row ids-container">
     <div class="ids-row--col-md-8 ids-row--offset-md-2" [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
       <img class="hero-image" *ngIf="heroImage" src="{{heroImage}}" alt="{{heroImageTitle}}">
-      <h1 [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
+      <h1 class="page-section-title" [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
       <p [ngStyle]="invertTextColor && {'color': '#ffffff'}" [innerHTML]="content"></p>
       <a class="ids-btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
     </div>
