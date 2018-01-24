@@ -1,5 +1,5 @@
 <div class="site">
   <div class="ids-visuallyhidden" [inlineSVG]="'/assets/ids/svgs/ids-icons.svg'"></div>
-  <app-header *ngIf="!home"></app-header>
+  <app-header [home]="home"></app-header>
   <router-outlet></router-outlet>
 </div>
