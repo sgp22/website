@@ -1,4 +1,11 @@
 <div class="ids-container">
+
+  <div class="ids-banner ids-banner--top-full-width" [hidden]="!showWarning">
+    <div class="ids-banner-content">
+      <strong>Warning</strong> you are not on the latest version of the development docs.
+    </div>
+  </div>
+
   <div class="ids-row--gutter">
 
     <aside class="ids-row--col-sm-3 ids-row--col-md-3 sidebar" *ngIf="sidebar">
