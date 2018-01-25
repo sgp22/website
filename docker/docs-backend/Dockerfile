@@ -12,10 +12,13 @@ ENV TERM xterm
 RUN apt-get update \
     && apt-get install -y \
       software-properties-common \
-      build-essential
+      build-essential \
+      wget \
+    && yes | add-apt-repository ppa:fkrull/deadsnakes \
+    && add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main"  \
+    && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
-RUN yes | add-apt-repository ppa:fkrull/deadsnakes \
-    && apt-get update \
+RUN apt-get update \
     && apt-get install -y \
       python \
       python-dev \
@@ -24,8 +27,8 @@ RUN yes | add-apt-repository ppa:fkrull/deadsnakes \
       python3-pip \
       python-setuptools \
       python-software-properties \
-      postgresql \
       postgresql-contrib \
+      postgresql-9.6 \
       memcached \
       libpq-dev \
       libtiff5-dev \
@@ -43,7 +46,6 @@ RUN yes | add-apt-repository ppa:fkrull/deadsnakes \
       python-tk \
       supervisor \
       language-pack-en-base \
-      wget \
       git \
       htop \
       nano \
