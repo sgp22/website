@@ -64,6 +64,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'dbbackup',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +134,13 @@ else:
     }
 
 
+# Database backup
+# http://django-dbbackup.readthedocs.io/en/stable/installation.html
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': '/var/backups'}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -170,6 +179,7 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
 ]
 
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
