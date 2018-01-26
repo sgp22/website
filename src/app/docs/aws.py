@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import logging
 import zipfile
 import botocore
 import boto3
@@ -14,6 +15,18 @@ from django.http import HttpResponse
 
 from rest_framework.response import Response
 from rest_framework import status
+
+from . import matching_s3_objects
+
+logger = logging.getLogger('debug')
+
+
+class UniqueDict(dict):
+    def __setitem__(self, key, value):
+        if key not in self:
+            dict.__setitem__(self, key, value)
+        else:
+            raise KeyError("Key already exists")
 
 
 def post(request):
@@ -49,7 +62,8 @@ def get(request):
         }
 
         s3_resource = boto3.resource('s3', **s3_conf)
-        bucket = s3_resource.Bucket(settings.AWS_STORAGE_BUCKET_NAME)
+        bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+        bucket = s3_resource.Bucket(bucket_name)
 
         if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,4}$', path):
             obj = s3_resource.Object(settings.AWS_STORAGE_BUCKET_NAME, path)
@@ -83,14 +97,19 @@ def get(request):
                 return HttpResponse(content=content)
         else:
             result = []
+            filtered_result = set()
 
-            if not path.endswith('/'):
-                path += '/'
+            for item in matching_s3_objects.get_matching_s3_keys(bucket=bucket_name, prefix=path, suffix=('')):
+                result.append(item)
 
-            for item in bucket.objects.filter(Prefix=path):
-                result.append(item.key)
+            for item in result:
+                regex = r"({}.*?/|{}.*)".format(path, path)
+                patterns = re.compile(regex)
+                match = patterns.search(item)
 
-            return Response({'files': result})
+                filtered_result.add(match.group(1))
+
+            return Response({'files': filtered_result})
     except botocore.exceptions.ClientError as exc:
         resp = exc.response
 
