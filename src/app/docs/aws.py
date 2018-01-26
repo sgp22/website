@@ -69,8 +69,6 @@ def post(request):
 
 def get(request):
     try:
-        # Check if the path is a file or folder.
-        #path = request.path_info[5:].lower()
         request_path_segments = request.path_info.lower().split('/')
 
         # just remove '/api/docs/'
