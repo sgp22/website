@@ -299,7 +299,7 @@ module.exports = {
     }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
-        "assets/ids/css/reset.min.css",
+        "assets/ids/css/ids-reset.min.css",
         "assets/ids/css/ids-web.min.css",
         "assets/documentation-css/css/documentation.min.css"
       ],
