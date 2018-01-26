@@ -87,7 +87,7 @@ export class DocsContentPageComponent implements OnInit {
       }
 
       this.urlFetcher
-        .getDocs(`${this.domainPath}/api/docs/${this.library}`)
+        .getDocs(`${this.domainPath}/api/docs/${this.library}/`)
         .subscribe(res => {
           let latestVersion = '';
 
