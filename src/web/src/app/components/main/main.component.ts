@@ -15,6 +15,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('elementsTemplate') elementsTemplate;
   @ViewChild('blockTemplate') blockTemplate;
   @ViewChild('docsTemplate') docsTemplate;
+  @ViewChild('docsLandingTemplate') docsLandingTemplate;
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
@@ -51,7 +52,7 @@ export class MainComponent implements AfterContentInit, OnInit {
         this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
         break;
       case 1:
-        this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
+        this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate, {}, true);
         break;
       case 2:
         this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate, {}, true);
@@ -96,7 +97,7 @@ export class MainComponent implements AfterContentInit, OnInit {
     if (params.slug === 'develop') {
       switch (keys.length) {
         case 1:
-          this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate);
+          this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, false);
           break;
         case 2:
           this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
@@ -134,7 +135,6 @@ export class MainComponent implements AfterContentInit, OnInit {
       if (sidebar === true) {
         this.getSideBar(d);
       }
-
     });
 
   }

@@ -13,6 +13,13 @@
 </ng-template>
 
 <ng-template #landingTemplate>
+  <div class="ids-row ids-container" [hidden]="!sidebar">
+    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar" [hidden]="!sidebar"></ng-container>
+    <app-landing-page class="ids-row--col-sm-9" [page]="page"></app-landing-page>
+  </div>
+</ng-template>
+
+<ng-template #docsLandingTemplate>
   <app-landing-page [page]="page"></app-landing-page>
 </ng-template>
 
