@@ -176,6 +176,7 @@ export class MainComponent implements AfterContentInit, OnInit {
         (res: any) => {
           this.page = res;
           this.componentLoader.loadComponent(page.meta.type, page.meta.slug, template, this.page);
+          window.scrollTo(0, 0);
         },
         (err) => {
           console.error(err);

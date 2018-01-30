@@ -49,13 +49,6 @@ export class DocsContentPageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0)
-    });
-
     this.route.url.subscribe(segment => {
       this.section = segment[0].path;
       if (segment.length === 4) {
@@ -197,6 +190,9 @@ export class DocsContentPageComponent implements OnInit {
             .subscribe(sidebar => {
               this.sidebarNav = sidebar['sections'];
             });
+
+          window.scrollTo(0, 0);
+
         });
     });
   }

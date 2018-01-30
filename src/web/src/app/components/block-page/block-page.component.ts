@@ -20,13 +20,6 @@ export class BlockPageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0)
-    });
-
     this.pageContent = this.page;
 
   }
