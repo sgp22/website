@@ -30,10 +30,12 @@ export class DocsContentPageComponent implements OnInit {
   public sidebarPath = '';
   public sidebarNav: any;
   public versionPaths: any;
+  public currentVersion: any;
   public library = '';
   public selectedVersion = '';
   public loading = true;
   public notFound = false;
+  public showWarning = false;
   public elements = [];
 
   constructor(
@@ -99,6 +101,7 @@ export class DocsContentPageComponent implements OnInit {
             })
             .reverse();
 
+
           this.versionPaths.unshift({
             full: `/${this.library}/latest/`,
             label: `Latest (${this.versionPaths[0]['label']})`
@@ -107,7 +110,14 @@ export class DocsContentPageComponent implements OnInit {
           latestVersion = this.versionPaths[1]['label'];
 
           this.path = urlSegment.join('/');
+          this.currentVersion = urlSegment[2];
           this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
+
+          if(this.currentVersion < latestVersion) {
+            this.showWarning = true;
+          } else {
+            this.showWarning = false;
+          }
 
           this.urlFetcher
             .getDocs(`${this.domainPath}/${this.mapPath}`)
