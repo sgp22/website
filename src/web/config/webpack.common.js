@@ -78,11 +78,6 @@ const postcssPlugins = function () {
 let appDomain = process.env.DOMAIN || "http://localhost";
 let metaData = { baseUrl: `/` };
 
-if (process.env.ROOT_URL_PATH) {
-  appDomain += `/${process.env.ROOT_URL_PATH}`; // Prefix with subdirectory app root for pool server
-  metaData.baseUrl += `${process.env.ROOT_URL_PATH}`;
-}
-
 // Common Webpack Config
 module.exports = {
   "resolve": {
