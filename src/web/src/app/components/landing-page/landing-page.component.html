@@ -14,6 +14,7 @@
         [backgroundColor]="section.value.background_color"
         [ctaText]="section.value.cta_text"
         [ctaLink]="section.value.cta_link"
+        [sidebar]="hasSidebar"
       ></sf-full-width>
 
       <sf-two-column *ngIf="section.type === 'twoColumn'"
@@ -37,6 +38,7 @@
         [col2BackgroundColor]="section.value.column_2_background_color"
         [col2CtaText]="section.value.column_2_cta_text"
         [col2CtaLink]="section.value.column_2_cta_link"
+        [sidebar]="hasSidebar"
       ></sf-two-column>
 
       <sf-two-col-text-image *ngIf="section.type === 'twoColTextImage'"
@@ -50,6 +52,7 @@
         [backgroundImage]="section.value.background_image?.file"
         [backgroundColor]="section.value.background_color"
         [invertTextColor]="section.value.invert_text_color"
+        [sidebar]="hasSidebar"
       ></sf-two-col-text-image>
 
       <div *ngIf="section.type === 'markdown'" class="ids-row ids-container">

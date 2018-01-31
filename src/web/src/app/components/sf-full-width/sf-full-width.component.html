@@ -3,7 +3,7 @@
   <div class="bg-image" [ngStyle]="backgroundImage && {'background-image': 'url(' + backgroundImage + ')'}"></div>
 
   <div class="ids-row ids-container">
-    <div class="ids-row--col-md-8 ids-row--offset-md-2" [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
+    <div [ngClass]="{ 'ids-row--col-md-8 ids-row--offset-md-2' : !hasSidebar, 'ids-row--col-md-12' : hasSidebar }"  [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
       <img class="hero-image" *ngIf="heroImage" src="{{heroImage}}" alt="{{heroImageTitle}}">
       <h1 class="page-section-title" [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
       <p [ngStyle]="invertTextColor && {'color': '#ffffff'}" [innerHTML]="content"></p>

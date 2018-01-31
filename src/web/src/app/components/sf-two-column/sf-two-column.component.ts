@@ -25,8 +25,12 @@ export class TwoColumnComponent implements OnInit {
   @Input() col2BackgroundColor: string;
   @Input() col2InvertTextColor: string;
   @Input() col2TextAlign: string;
+  @Input() sidebar: boolean;
+  public hasSidebar: boolean;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.hasSidebar = this.sidebar;
+  }
 }

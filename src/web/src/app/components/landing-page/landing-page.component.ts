@@ -9,7 +9,9 @@ import { PagesService } from '../../shared/pages.service';
 })
 export class LandingPageComponent implements OnInit {
   @Input() page;
+  @Input() sidebar;
   public pageContent: any;
+  public hasSidebar: boolean;
 
   constructor(
     private router: Router,
@@ -20,6 +22,7 @@ export class LandingPageComponent implements OnInit {
   ngOnInit() {
     if (this.page) {
       this.pageContent = this.page;
+      this.hasSidebar = this.sidebar;
     }
   }
 
