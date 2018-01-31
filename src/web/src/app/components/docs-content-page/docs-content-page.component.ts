@@ -21,7 +21,6 @@ export class DocsContentPageComponent implements OnInit {
   public mapPath = '';
   public absolutePath = '';
   public domainPath = DOMAIN_DOCS_API;
-  public rootUrlPath = ROOT_URL_PATH;
   public docs: any;
   public trustedHtml: any;
   public section: any;
@@ -37,6 +36,7 @@ export class DocsContentPageComponent implements OnInit {
   public notFound = false;
   public showWarning = false;
   public elements = [];
+
 
   constructor(
     private router: Router,
@@ -77,9 +77,6 @@ export class DocsContentPageComponent implements OnInit {
       }
 
       this.absolutePath = `/${this.basePath}`;
-      if (this.rootUrlPath) {
-        this.absolutePath = `/${this.rootUrlPath}/${this.basePath}`;
-      }
 
       this.urlFetcher
         .getDocs(`${this.domainPath}/api/docs/${this.library}/`)
@@ -215,11 +212,7 @@ export class DocsContentPageComponent implements OnInit {
         this.router.navigate([`${relativeLink}`]);
       } else {
         const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
-        if (this.rootUrlPath) {
-          el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
-        } else {
-          el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
-        }
+        el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
       }
     }
   }
