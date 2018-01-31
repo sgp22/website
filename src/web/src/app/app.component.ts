@@ -28,10 +28,10 @@ export class AppComponent {
         const title = url.replace(/^\//g, '').replace(/\//g, ' / ').replace(/-/g, ' ');
         if (url === '/') {
           this.home = true;
-          titleService.setTitle(`Home - Infor UX`);
+          titleService.setTitle(`Home - Infor Design System`);
         } else {
           this.home = false;
-          titleService.setTitle(`${this.capitalizeTitle(title)} - Infor UX`);
+          titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
         }
 
         // Initialize Pendo on page change
