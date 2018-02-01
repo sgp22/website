@@ -172,12 +172,15 @@ export class DocsContentPageComponent implements OnInit {
                   }
                 }
 
-                this.loading = false;
                 this.notFound = false;
 
               },
-              err => {
-                this.notFound = true;
+              () => {
+                this.stopRefreshing();
+              },
+              () => {
+                this.stopRefreshing();
+                window.scrollTo(0, 0);
               }
             );
 
@@ -194,11 +197,11 @@ export class DocsContentPageComponent implements OnInit {
           this.selectedVersion = `/${this.sidebarPath}/`;
           this.urlFetcher
             .getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
-            .subscribe(sidebar => {
-              this.sidebarNav = sidebar['sections'];
-            });
-
-          window.scrollTo(0, 0);
+            .subscribe(
+              (sidebar) => {
+                this.sidebarNav = sidebar['sections'];
+              }
+            );
 
         });
     });
@@ -231,6 +234,10 @@ export class DocsContentPageComponent implements OnInit {
         this.createRelativePath(el, 'href', true);
       }
     }
+  }
+
+  private stopRefreshing() {
+    this.loading = false;
   }
 
 }
