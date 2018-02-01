@@ -3,7 +3,7 @@
   <header class="page-header">
     <h1 class="page-title">{{pageContent?.title}}</h1>
     <h4 *ngIf="page?.fka">Formerly known as: {{page?.fka}}</h4>
-    <a class="ids-btn btn--custom btn--custom--ghost" *ngIf="pageContent.cross_link" routerLink="/develop/ids-web/latest/{{pageContent.cross_link}}">
+    <a class="ids-btn btn--custom btn--custom--ghost" *ngIf="pageContent.cross_link" routerLink="/code/ids-web/latest/{{pageContent.cross_link}}">
       <div class="ids-btn--inner">
         <span title="icon_code icon">
           <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation" viewBox="0 0 26 12">
@@ -18,7 +18,7 @@
             </g>
           </svg>
         </span>
-        View Develop Docs
+        View Code Docs
       </div>
     </a>
   </header>

@@ -47,7 +47,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   }
 
   cmsComponents(keys, params) {
-    if(params.slug !== 'develop') {
+    if(params.slug !== 'code') {
       switch (keys.length) {
         case 0:
           this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
@@ -96,7 +96,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   }
 
   docsComponents(keys, params) {
-    if (params.slug === 'develop') {
+    if (params.slug === 'code') {
       switch (keys.length) {
         case 1:
           this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, false);

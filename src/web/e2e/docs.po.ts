@@ -2,7 +2,7 @@ import { browser, by, element } from 'protractor';
 
 export class DocsPage {
   navigateTo() {
-    return browser.get('/develop/iux/1.0.0/tab');
+    return browser.get('/code/ids-web/1.0.0/tab');
   }
 
   getFirstSectionHeadingText() {
