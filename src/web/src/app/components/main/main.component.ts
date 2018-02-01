@@ -47,49 +47,51 @@ export class MainComponent implements AfterContentInit, OnInit {
   }
 
   cmsComponents(keys, params) {
-    switch (keys.length) {
-      case 0:
-        this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
-        break;
-      case 1:
-        this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate, {}, true);
-        break;
-      case 2:
-        this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate, {}, true);
-        break;
-      case 3:
-        this.pagesService.getAll().subscribe(data => {
+    if(params.slug !== 'develop') {
+      switch (keys.length) {
+        case 0:
+          this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
+          break;
+        case 1:
+          this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate, {}, true);
+          break;
+        case 2:
+          this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate, {}, true);
+          break;
+        case 3:
+          this.pagesService.getAll().subscribe(data => {
 
-          if (this.pageExists(data['items'], params.grandChildSlug)) {
+            if (this.pageExists(data['items'], params.grandChildSlug)) {
 
-            this.getSideBar(data);
+              this.getSideBar(data);
 
-            data['items'].filter(page => {
-              const slug = page.meta.slug;
-              if (slug === params.grandChildSlug) {
-                switch (page.meta.type) {
-                  case 'home.CoreContentPage':
-                    this.getPageContent(page, this.coreTemplate);
-                    break;
-                  case 'home.BlocksPage':
-                    this.getPageContent(page, this.blockTemplate);
-                    break;
-                  default:
-                    this.getPageContent(page, this.elementsTemplate);
-                    break;
+              data['items'].filter(page => {
+                const slug = page.meta.slug;
+                if (slug === params.grandChildSlug) {
+                  switch (page.meta.type) {
+                    case 'home.CoreContentPage':
+                      this.getPageContent(page, this.coreTemplate);
+                      break;
+                    case 'home.BlocksPage':
+                      this.getPageContent(page, this.blockTemplate);
+                      break;
+                    default:
+                      this.getPageContent(page, this.elementsTemplate);
+                      break;
+                  }
                 }
-              }
-            });
+              });
 
-          } else {
-            this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
-          }
+            } else {
+              this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+            }
 
-        });
-        break;
-      default:
-        this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
-        break;
+          });
+          break;
+        default:
+          this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+          break;
+      }
     }
   }
 
@@ -121,6 +123,10 @@ export class MainComponent implements AfterContentInit, OnInit {
 
     this.pagesService.getAll().subscribe(d => {
 
+      if (sidebar === true) {
+        this.getSideBar(d);
+      }
+
       if (this.pageExists(d['items'], paramsSlug)) {
         d['items'].filter(page => {
           const slug = page.meta.slug;
@@ -132,9 +138,6 @@ export class MainComponent implements AfterContentInit, OnInit {
         this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
       }
 
-      if (sidebar === true) {
-        this.getSideBar(d);
-      }
     });
 
   }
@@ -148,9 +151,12 @@ export class MainComponent implements AfterContentInit, OnInit {
 
     res['items'].filter((item) => {
       if (item.meta.slug === this.section) {
+        if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count == 0) {
+          this.hasGrandchildren = false
+        }
         this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
           item.meta.children.children.map(child => {
-            child.children.length > 0 ? this.hasGrandchildren = true : this.hasGrandchildren = false;
+            child.children.length <= 0 ? this.hasGrandchildren = false : this.hasGrandchildren = true;
             child.children.sort((thisGrandChild, nextGrandchild) => {
               return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
             });

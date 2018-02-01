@@ -16,10 +16,14 @@ export class FullWidthComponent implements OnInit, AfterViewInit {
   @Input() backgroundColor: string;
   @Input() invertTextColor: string;
   @Input() textAlign: string;
+  @Input() sidebar: boolean;
+  public hasSidebar: boolean;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.hasSidebar = this.sidebar;
+  }
 
   ngAfterViewInit() {}
 }

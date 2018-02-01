@@ -3,10 +3,10 @@
   <div class="bg-image" [ngStyle]="backgroundImage && {'background-image': 'url(' + backgroundImage + ')'}"></div>
 
   <div class="ids-row ids-container">
-    <div class="ids-row--col-md-3 ids-row--offset-md-1 two-col-text-image--image" [ngClass]="{'right' : imageAlign === 'right'}">
+    <div class="two-col-text-image--image" [ngClass]="( (!hasSidebar ? 'ids-row--col-md-3 ids-row--offset-md-1' : 'ids-row--col-md-4') )" [ngClass]="{'right' : imageAlign === 'right'}">
       <img *ngIf="image" src="{{image}}" alt="{{imageTitle}}">
     </div>
-    <div class="ids-row--col-md-6 ids-row--offset-md-1 two-col-text-image--content">
+    <div class="two-col-text-image--content" [ngClass]="( (!hasSidebar ? 'ids-row--col-md-6 ids-row--offset-md-1' : 'ids-row--col-md-7 ids-row--offset-md-1') )">
       <h1 class="page-section-title" [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
       <p [ngStyle]="invertTextColor && {'color': '#ffffff'}" [innerHTML]="content"></p>
       <a class="ids-btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>

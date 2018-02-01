@@ -1,72 +1,73 @@
-<ng-container>
 
-    <ng-container *ngIf="pageContent">
+  <ng-container *ngIf="pageContent">
 
-      <ng-container *ngFor="let section of pageContent.content">
+    <ng-container *ngFor="let section of pageContent.content">
 
-        <sf-full-width *ngIf="section.type === 'fullWidth'"
-          [title]="section.value.title"
-          [content]="section.value.content"
-          [textAlign]="section.value.text_align"
-          [invertTextColor]="section.value.invert_text_color"
-          [heroImage]="section.value.hero_image?.file"
-          [heroImageTitle]="section.value.hero_image?.title"
-          [backgroundImage]="section.value.background_image?.file"
-          [backgroundColor]="section.value.background_color"
-          [ctaText]="section.value.cta_text"
-          [ctaLink]="section.value.cta_link"
-        ></sf-full-width>
+      <sf-full-width *ngIf="section.type === 'fullWidth'"
+        [title]="section.value.title"
+        [content]="section.value.content"
+        [textAlign]="section.value.text_align"
+        [invertTextColor]="section.value.invert_text_color"
+        [heroImage]="section.value.hero_image?.file"
+        [heroImageTitle]="section.value.hero_image?.title"
+        [backgroundImage]="section.value.background_image?.file"
+        [backgroundColor]="section.value.background_color"
+        [ctaText]="section.value.cta_text"
+        [ctaLink]="section.value.cta_link"
+        [sidebar]="hasSidebar"
+      ></sf-full-width>
 
-        <sf-two-column *ngIf="section.type === 'twoColumn'"
-          [col1Title]="section.value.column_1_title"
-          [col1Content]="section.value.column_1_content"
-          [col1TextAlign]="section.value.column_1_text_align"
-          [col1InvertTextColor]="section.value.column_1_invert_text_color"
-          [col1HeroImage]="section.value.column_1_hero_image?.file"
-          [col1HeroImageTitle]="section.value.column_1_hero_image?.title"
-          [col1BackgroundImage]="section.value.column_1_background_image?.file"
-          [col1BackgroundColor]="section.value.column_1_background_color"
-          [col1CtaText]="section.value.column_1_cta_text"
-          [col1CtaLink]="section.value.column_1_cta_link"
-          [col2Title]="section.value.column_2_title"
-          [col2Content]="section.value.column_2_content"
-          [col2TextAlign]="section.value.column_2_text_align"
-          [col2InvertTextColor]="section.value.column_2_invert_text_color"
-          [col2HeroImage]="section.value.column_2_hero_image?.file"
-          [col2HeroImageTitle]="section.value.column_2_hero_image?.title"
-          [col2BackgroundImage]="section.value.column_2_background_image?.file"
-          [col2BackgroundColor]="section.value.column_2_background_color"
-          [col2CtaText]="section.value.column_2_cta_text"
-          [col2CtaLink]="section.value.column_2_cta_link"
-        ></sf-two-column>
+      <sf-two-column *ngIf="section.type === 'twoColumn'"
+        [col1Title]="section.value.column_1_title"
+        [col1Content]="section.value.column_1_content"
+        [col1TextAlign]="section.value.column_1_text_align"
+        [col1InvertTextColor]="section.value.column_1_invert_text_color"
+        [col1HeroImage]="section.value.column_1_hero_image?.file"
+        [col1HeroImageTitle]="section.value.column_1_hero_image?.title"
+        [col1BackgroundImage]="section.value.column_1_background_image?.file"
+        [col1BackgroundColor]="section.value.column_1_background_color"
+        [col1CtaText]="section.value.column_1_cta_text"
+        [col1CtaLink]="section.value.column_1_cta_link"
+        [col2Title]="section.value.column_2_title"
+        [col2Content]="section.value.column_2_content"
+        [col2TextAlign]="section.value.column_2_text_align"
+        [col2InvertTextColor]="section.value.column_2_invert_text_color"
+        [col2HeroImage]="section.value.column_2_hero_image?.file"
+        [col2HeroImageTitle]="section.value.column_2_hero_image?.title"
+        [col2BackgroundImage]="section.value.column_2_background_image?.file"
+        [col2BackgroundColor]="section.value.column_2_background_color"
+        [col2CtaText]="section.value.column_2_cta_text"
+        [col2CtaLink]="section.value.column_2_cta_link"
+        [sidebar]="hasSidebar"
+      ></sf-two-column>
 
-        <sf-two-col-text-image *ngIf="section.type === 'twoColTextImage'"
-          [title]="section.value.title"
-          [content]="section.value.content"
-          [ctaText]="section.value.cta_text"
-          [ctaLink]="section.value.cta_link"
-          [image]="section.value.image?.file"
-          [imageTitle]="section.value.image?.title"
-          [imageAlign]="section.value.image_align"
-          [backgroundImage]="section.value.background_image?.file"
-          [backgroundColor]="section.value.background_color"
-          [invertTextColor]="section.value.invert_text_color"
-        ></sf-two-col-text-image>
+      <sf-two-col-text-image *ngIf="section.type === 'twoColTextImage'"
+        [title]="section.value.title"
+        [content]="section.value.content"
+        [ctaText]="section.value.cta_text"
+        [ctaLink]="section.value.cta_link"
+        [image]="section.value.image?.file"
+        [imageTitle]="section.value.image?.title"
+        [imageAlign]="section.value.image_align"
+        [backgroundImage]="section.value.background_image?.file"
+        [backgroundColor]="section.value.background_color"
+        [invertTextColor]="section.value.invert_text_color"
+        [sidebar]="hasSidebar"
+      ></sf-two-col-text-image>
 
-        <div *ngIf="section.type === 'markdown'" class="ids-row ids-container">
-          <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
-        </div>
+      <div *ngIf="section.type === 'markdown'" class="ids-row ids-container">
+        <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
+      </div>
 
-        <div *ngIf="section.type === 'richText'" class="ids-row ids-container">
-          <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
-        </div>
+      <div *ngIf="section.type === 'richText'" class="ids-row ids-container">
+        <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
+      </div>
 
-        <div *ngIf="section.type === 'rawHtml'">
-          <div [innerHTML]="section.value | safeHtml"></div>
-        </div>
-
-      </ng-container>
+      <div *ngIf="section.type === 'rawHtml'">
+        <div [innerHTML]="section.value | safeHtml"></div>
+      </div>
 
     </ng-container>
 
-</ng-container>
+  </ng-container>
+

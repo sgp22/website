@@ -15,8 +15,12 @@ export class TwoColTextImageComponent implements OnInit {
   @Input() backgroundColor: string;
   @Input() invertTextColor: string;
   @Input() imageAlign: string;
+  @Input() sidebar: boolean;
+  public hasSidebar: boolean;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.hasSidebar = this.sidebar;
+  }
 }
