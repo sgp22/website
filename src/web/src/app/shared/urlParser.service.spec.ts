@@ -10,7 +10,7 @@ describe('UrlParserService', () => {
 
   beforeEach(() => {
     urlParser = new UrlParser();
-    correctPath = '/develop/tempo/1.0.0/adaptive';
+    correctPath = '/code/tempo/1.0.0/adaptive';
     inCorrectPath = 'http://docs-site-staging.us-east-1.elasticbeanstalk.com/api/docs/1.0.0/adaptive.json';
     urlTree = urlParser.parse(correctPath);
   });
@@ -24,9 +24,9 @@ describe('UrlParserService', () => {
     expect(urlTree.root.children.primary.segments.length).toEqual(4);
   }));
 
-  it('should have segment[0].path === "develop"', (() => {
+  it('should have segment[0].path === "code"', (() => {
     urlTree = urlParser.parse(correctPath);
-    expect(urlTree.root.children.primary.segments[0].path).toBe('develop');
+    expect(urlTree.root.children.primary.segments[0].path).toBe('code');
   }));
 
   it('should have segment[1].path === "tempo"', (() => {
