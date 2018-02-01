@@ -24,6 +24,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   public sidebarNav;
   public hasGrandchildren: boolean;
   public globalNav;
+  public loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -168,7 +169,7 @@ export class MainComponent implements AfterContentInit, OnInit {
 
   }
 
-  getPageContent(page, template) {
+  getPageContent(page, template): void {
 
     let requestParam;
     const url = this.router.routerState.snapshot.url;
@@ -176,19 +177,28 @@ export class MainComponent implements AfterContentInit, OnInit {
     const previewId = `${page.id}/?preview=true`;
     preview ? requestParam = previewId : requestParam = page.id;
 
+    this.loading = true;
+
     this.pagesService
       .getPage(requestParam)
       .subscribe(
         (res: any) => {
           this.page = res;
           this.componentLoader.loadComponent(page.meta.type, page.meta.slug, template, this.page);
-          window.scrollTo(0, 0);
         },
-        (err) => {
-          console.error(err);
+        () => {
+          this.stopRefreshing()
+        },
+        () => {
+          this.stopRefreshing();
+          window.scrollTo(0, 0);
         }
       );
 
+  }
+
+  private stopRefreshing() {
+    this.loading = false;
   }
 
 }
