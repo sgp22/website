@@ -42,7 +42,6 @@ export class MainComponent implements AfterContentInit, OnInit {
       this.docsComponents(keys, params);
       this.cmsComponents(keys, params);
 
-
     });
 
   }
@@ -122,24 +121,29 @@ export class MainComponent implements AfterContentInit, OnInit {
 
   fetchData(paramsSlug, pageType, template, data = {}, sidebar = false) {
 
-    this.pagesService.getAll().subscribe(d => {
+    this.loading = true;
 
-      if (sidebar === true) {
-        this.getSideBar(d);
-      }
+    this.pagesService.getAll().subscribe(
+      (d) => {
 
-      if (this.pageExists(d['items'], paramsSlug)) {
-        d['items'].filter(page => {
-          const slug = page.meta.slug;
-          if (slug === paramsSlug) {
-            this.getPageContent(page, template);
-          }
-        });
-      } else {
-        this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
-      }
+        if (sidebar === true) {
+          this.getSideBar(d);
+        }
 
-    });
+        if (this.pageExists(d['items'], paramsSlug)) {
+          d['items'].filter(page => {
+            const slug = page.meta.slug;
+            if (slug === paramsSlug) {
+              this.getPageContent(page, template);
+            }
+          });
+        } else {
+          this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+        }
+      },
+      () => this.stopRefreshing(),
+      () => this.stopRefreshing()
+    );
 
   }
 
@@ -162,7 +166,11 @@ export class MainComponent implements AfterContentInit, OnInit {
               return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
             });
           });
-          return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
+          if(this.hasGrandchildren) {
+            return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
+          } else {
+            return thisChild.title > nextChild.title ? 1 : -1;
+          }
         });
       }
     });
