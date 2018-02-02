@@ -166,7 +166,7 @@ export class MainComponent implements AfterContentInit, OnInit {
               return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
             });
           });
-          if(this.hasGrandchildren) {
+          if (this.hasGrandchildren) {
             return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
           } else {
             return thisChild.title > nextChild.title ? 1 : -1;
