@@ -2,7 +2,7 @@
 
 # Immediately stop the 
 # script if a command fails.
-set -e
+#set -e
 
 while [[ $# -gt 1 ]]
 do
@@ -82,6 +82,8 @@ declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
                 "${ROOTDIR}/scripts/eb_deploy.sh"
                 "${ROOTDIR}/scripts/eb_env_vars.sh"
                 "${ROOTDIR}/scripts/pull_images.sh"
+                "${ROOTDIR}/staging-Dockerrun.aws.json"
+                "${ROOTDIR}/prod-Dockerrun.aws.json"
                 "${ROOTDIR}/Dockerfile"
                 )
 
