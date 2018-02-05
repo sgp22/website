@@ -13,8 +13,12 @@ RUN apt-get update \
 		supervisor \
 		htop \
 		nano \
-		curl && \
-	rm -rf /var/lib/apt/lists/*
+		curl \
+	&& add-apt-repository ppa:certbot/certbot \
+	&& apt-get update \
+	&& apt-get install -y python-certbot-nginx \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 

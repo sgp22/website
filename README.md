@@ -19,3 +19,9 @@ export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
 export AWS_STORAGE_BUCKET_NAME=<AWS_STORAGE_BUCKET_NAME>
 export S3_STORAGE=<S3_STORAGE>
 ```
+
+## Generate a certificate for prod
+
+- stop nginx first
+- `sudo certbot certonly -d design.infor.com`
+- `sudo certbot certonly -d staging.design.infor.com`
