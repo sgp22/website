@@ -21,14 +21,24 @@
 			"sourcePath": "/var/app/current/src/config"
 		}
 	}, {
+		"name": "nginx-letsencrypt",
+		"host": {
+		  "sourcePath": "/data/letsencrypt"
+		}
+	}, {
+		"name": "nginx-snippets",
+		"host": {
+		  "sourcePath": "/var/app/current/src/config/nginx/snippets"
+		}
+	}, {
 		"name": "config-nginx-nginx",
 		"host": {
 			"sourcePath": "/var/app/current/src/config/nginx/nginx.conf"
 		}
 	}, {
-		"name": "config-nginx-frontend",
+		"name": "config-nginx-prod",
 		"host": {
-			"sourcePath": "/var/app/current/src/config/nginx/frontend.conf"
+			"sourcePath": "/var/app/current/src/config/nginx/prod.conf"
 		}
 	}, {
 		"name": "config-supervisor-backend",
@@ -96,11 +106,17 @@
 			"backend"
 		],
 		"mountPoints": [{
+			"sourceVolume": "nginx-letsencrypt",
+			"containerPath": "/etc/letsencrypt/"
+		}, {
 			"sourceVolume": "web",
 			"containerPath": "/home/web"
 		}, {
 			"sourceVolume": "config",
 			"containerPath": "/home/config"
+		}, {
+			"sourceVolume": "nginx-snippets",
+			"containerPath": "/etc/nginx/snippets"
 		}, {
 			"sourceVolume": "config-supervisor-webserver",
 			"containerPath": "/etc/supervisor/conf.d/webserver.conf"
@@ -108,7 +124,7 @@
 			"sourceVolume": "config-nginx-nginx",
 			"containerPath": "/etc/nginx/nginx.conf"
 		}, {
-			"sourceVolume": "config-nginx-frontend",
+			"sourceVolume": "config-nginx-prod",
 			"containerPath": "/etc/nginx/sites-available/default"
 		}, {
 			"sourceVolume": "static-data",
