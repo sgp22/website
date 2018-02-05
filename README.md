@@ -24,3 +24,4 @@ export S3_STORAGE=<S3_STORAGE>
 
 - stop nginx first
 - `sudo certbot certonly -d design.infor.com`
+- `sudo certbot certonly -d staging.design.infor.com`
