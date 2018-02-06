@@ -9,9 +9,16 @@
       <div *ngIf="streamfield.type === 'richText'" [innerHTML]="streamfield?.value"></div>
       <div *ngIf="streamfield.type === 'table'">
         <table>
+            <ng-template [ngIf]="streamfield.value.first_row_is_table_header == true">
+              <thead>
+                <th *ngFor="let head of streamfield?.value.data[0]">{{ head }}</th>
+              </thead>
+            </ng-template>
           <tbody>
-            <tr *ngFor="let row of streamfield?.value.data">
+            <tr *ngFor="let row of streamfield?.value.data; let first=first;">
+              <ng-container *ngIf="!first">
                 <td *ngFor="let data of row">{{ data }}</td>
+              </ng-container>
             </tr>
           </tbody>
         </table>
