@@ -298,7 +298,9 @@ class ElementsPage(PageBase):
 
     body = StreamField([
         ('richText', APIRichTextBlock()),
-        ('markdown', APIMarkDownBlock())
+        ('markdown', APIMarkDownBlock()),
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('image', APIImageChooserBlock())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
@@ -401,6 +403,8 @@ class BlocksPage(PageBase):
 
     body = StreamField([
         ('richText', APIRichTextBlock()),
+        ('image', APIImageChooserBlock()),
+        ('heading', blocks.CharBlock(classname="full title")),
         ('markdown', APIMarkDownBlock())
     ], null=True, blank=True)
 
