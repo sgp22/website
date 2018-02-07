@@ -18,6 +18,7 @@ from wagtail.wagtailadmin.edit_handlers import (
     MultiFieldPanel
 )
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.contrib.table_block.blocks import TableBlock
 
 from home import relationships
 
@@ -188,6 +189,7 @@ class CoreContentPage(PageBase):
         ('heading', blocks.CharBlock(classname="full title")),
         ('richText', APIRichTextBlock()),
         ('image', APIImageChooserBlock()),
+        ('table', TableBlock()),
         ('markdown', APIMarkDownBlock())
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
@@ -296,7 +298,9 @@ class ElementsPage(PageBase):
 
     body = StreamField([
         ('richText', APIRichTextBlock()),
-        ('markdown', APIMarkDownBlock())
+        ('markdown', APIMarkDownBlock()),
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('image', APIImageChooserBlock())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
@@ -399,6 +403,8 @@ class BlocksPage(PageBase):
 
     body = StreamField([
         ('richText', APIRichTextBlock()),
+        ('image', APIImageChooserBlock()),
+        ('heading', blocks.CharBlock(classname="full title")),
         ('markdown', APIMarkDownBlock())
     ], null=True, blank=True)
 
