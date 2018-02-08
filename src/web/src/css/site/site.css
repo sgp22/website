@@ -5,3 +5,8 @@
 .site-header {
   display: block;
 }
+
+table td,
+table th {
+  white-space: pre-line;
+}
