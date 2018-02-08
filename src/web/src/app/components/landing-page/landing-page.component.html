@@ -55,12 +55,12 @@
         [sidebar]="hasSidebar"
       ></sf-two-col-text-image>
 
-      <div *ngIf="section.type === 'markdown'" class="ids-row ids-container">
-        <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
+      <div *ngIf="section.type === 'markdown'" class="page-section">
+        <div [innerHTML]="section.value"></div>
       </div>
 
-      <div *ngIf="section.type === 'richText'" class="ids-row ids-container">
-        <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
+      <div *ngIf="section.type === 'richText'" class="page-section">
+        <div [innerHTML]="section.value"></div>
       </div>
 
       <div *ngIf="section.type === 'rawHtml'">
