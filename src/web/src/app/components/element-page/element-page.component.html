@@ -1,6 +1,6 @@
 <ng-container>
 
-  <header class="page-header">
+  <header class="page-header ids-container">
     <h1 class="page-title">{{pageContent?.title}}</h1>
     <h4 *ngIf="page?.fka">Formerly known as: {{page?.fka}}</h4>
     <a class="ids-btn btn--custom btn--custom--ghost" *ngIf="pageContent.cross_link" routerLink="/code/ids-web/latest/{{pageContent.cross_link}}">
