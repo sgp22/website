@@ -37,7 +37,6 @@ export class DocsContentPageComponent implements OnInit {
   public showWarning = false;
   public elements = [];
 
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,

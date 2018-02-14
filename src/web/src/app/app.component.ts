@@ -42,6 +42,7 @@ export class AppComponent {
           this.codeSection = false;
         }
 
+
         // Initialize Pendo on page change
         pendo.initialize({
           visitor: {

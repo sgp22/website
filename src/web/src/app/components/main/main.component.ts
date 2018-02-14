@@ -24,6 +24,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   @HostBinding('class.ids-row--offset-sm-4')
   public page;
   public section;
+  public codeSection: boolean;
   public sidebarNav;
   public hasGrandchildren: boolean;
   public globalNav;
@@ -100,6 +101,7 @@ export class MainComponent implements AfterContentInit, OnInit {
 
   docsComponents(keys, params) {
     if (params.slug === 'code') {
+      this.codeSection = true;
       switch (keys.length) {
         case 1:
           this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, false);
@@ -112,6 +114,8 @@ export class MainComponent implements AfterContentInit, OnInit {
           break;
       }
       return;
+    } else {
+      this.codeSection = false;
     }
   }
 

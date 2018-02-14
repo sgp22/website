@@ -5,9 +5,9 @@
     </div>
   </div>
 
-  <div class="container--code">
+  <div class="container--code ids-container ids-row">
 
-    <aside class="sidebar sidebar--code" *ngIf="sidebar">
+    <aside class="sidebar sidebar--code ids-row--col-sm-3" *ngIf="sidebar">
 
       <div class="ids-form-group">
         <label for="select-version">Version</label>
@@ -39,7 +39,7 @@
 
     <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
-    <main>
+    <main class="ids-row--col-sm-8 ids-row--offset-sm-4">
 
       <div class="page-content--code" *ngIf="!notFound">
 
