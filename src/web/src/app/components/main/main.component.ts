@@ -21,6 +21,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
   @HostBinding('class.ids-row--col-sm-8')
+  @HostBinding('class.ids-row--offset-sm-4')
   public page;
   public section;
   public sidebarNav;
