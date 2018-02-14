@@ -1,6 +1,5 @@
 <ng-container>
-  <div class="ids-row page-content">
-    <div class="ids-row--offset-sm-1 ids-row--col-sm-7">
+
       <header class="page-header">
         <h1 class="page-title">{{pageContent?.title}}</h1>
         <h4 *ngIf="page?.fka">Formerly known as: {{page?.fka}}</h4>
@@ -99,8 +98,5 @@
         <section class="page-section" *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></section>
         <section class="page-section" *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></section>
       </ng-container>
-
-    </div>
-  </div>
 
 </ng-container>
