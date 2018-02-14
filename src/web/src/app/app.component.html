@@ -6,7 +6,12 @@
 
   <app-header></app-header>
 
-  <div [ngClass]="{ 'ids-container ids-row' : !codeSection }">
+  <div
+    [class.ids-row]="!home"
+    [class.ids-container]="!home"
+    [class.ids-row]="!codeSection"
+    [class.ids-container]="!codeSection"
+    >
     <sidebar-nav class="sidebar-nav-comp ids-row--col-sm-3" [sidebarData]="sidebarNav" [section]="section"></sidebar-nav>
     <router-outlet></router-outlet>
   </div>
