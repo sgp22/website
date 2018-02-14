@@ -1,7 +1,8 @@
-import { Component, AfterContentInit, ViewChild, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, AfterContentInit, ViewChild, OnInit, ViewContainerRef, HostBinding } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { PagesService } from '../../shared/pages.service';
+
 
 @Component({
   selector: 'app-main',
@@ -19,6 +20,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
+  @HostBinding('class.ids-row--col-sm-8')
   public page;
   public section;
   public sidebarNav;
