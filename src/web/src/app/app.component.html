@@ -1,6 +1,13 @@
 <ngx-loading-bar [color]="'#3770ff'" [includeSpinner]="false"></ngx-loading-bar>
+
 <div class="site">
+
   <div class="ids-visuallyhidden" [inlineSVG]="'/assets/ids/svgs/ids-icons.svg'"></div>
+
   <app-header [home]="home"></app-header>
+
+  <sidebar-nav class="ids-row--col-sm-3" [sidebarData]="sidebarNav" [section]="section"></sidebar-nav>
+
   <router-outlet></router-outlet>
+
 </div>
