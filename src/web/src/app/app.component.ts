@@ -12,6 +12,7 @@ declare let pendo;
 
 export class AppComponent {
   public home;
+  public codeSection;
   public section;
   public sidebarNav;
 
@@ -32,6 +33,13 @@ export class AppComponent {
         } else {
           this.home = false;
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
+        }
+
+        const urlSegments = event.url.split('/');
+        if (urlSegments[1] === 'code') {
+          this.codeSection = true;
+        } else {
+          this.codeSection = false;
         }
 
         // Initialize Pendo on page change

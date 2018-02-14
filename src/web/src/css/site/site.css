@@ -99,3 +99,13 @@ ul.ids-list--plain ul.ids-list--plain {
     display: none;
   }
 }
+
+/*
+  Code page overrides
+*/
+
+.code {
+  & .sidebar--guidelines {
+    display: none;
+  }
+}
