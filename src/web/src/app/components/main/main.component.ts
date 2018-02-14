@@ -44,7 +44,6 @@ export class MainComponent implements AfterContentInit, OnInit {
       const keys = Object.keys(params);
       this.docsComponents(keys, params);
       this.cmsComponents(keys, params);
-      console.log(this.useGrid);
 
     });
 
