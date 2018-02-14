@@ -6,7 +6,6 @@ from rest_framework import serializers
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import (
     StreamField,
-    RichTextField
 )
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -51,14 +50,6 @@ class APIMarkDownBlock(MarkdownBlock):
     def get_api_representation(self, value, context=None):
         if value:
             return markdown_filter(value)
-
-
-class APIRichTextBlock(blocks.RichTextBlock):
-    # By overriding this function, we get the raw data value
-    # which is what we wanted, so we return the string.
-    def get_api_representation(self, value, context=None):
-        if value:
-            return str(value)
 
 
 class FullWidthStreamField(blocks.StructBlock):
@@ -165,7 +156,6 @@ class LandingPage(PageBase):
         ('twoColTextImage', TwoColTextImageStreamField()),
         ('markdown', APIMarkDownBlock()),
         ('rawHtml', blocks.RawHTMLBlock()),
-        ('richText', APIRichTextBlock())
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
@@ -187,7 +177,6 @@ class CoreContentPage(PageBase):
     menu_order = models.IntegerField(default=0)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
-        ('richText', APIRichTextBlock()),
         ('image', APIImageChooserBlock()),
         ('table', TableBlock()),
         ('markdown', APIMarkDownBlock())
@@ -297,7 +286,6 @@ class ElementsPage(PageBase):
     ], null=True, blank=True)
 
     body = StreamField([
-        ('richText', APIRichTextBlock()),
         ('markdown', APIMarkDownBlock()),
         ('heading', blocks.CharBlock(classname="full title")),
         ('image', APIImageChooserBlock())
@@ -402,7 +390,6 @@ class BlocksPage(PageBase):
     ], null=True, blank=True)
 
     body = StreamField([
-        ('richText', APIRichTextBlock()),
         ('image', APIImageChooserBlock()),
         ('heading', blocks.CharBlock(classname="full title")),
         ('markdown', APIMarkDownBlock())
