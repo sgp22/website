@@ -6,11 +6,9 @@
 
   <app-header></app-header>
 
-  <div class="ids-container">
-    <div class="ids-row">
-      <sidebar-nav class="sidebar-nav ids-row--col-sm-3" [sidebarData]="sidebarNav" [section]="section"></sidebar-nav>
-      <router-outlet></router-outlet>
-    </div>
+  <div class="ids-container" [ngClass]="{ 'ids-container ids-row' : !home }">
+    <sidebar-nav class="sidebar-nav-comp ids-row--col-sm-3" [sidebarData]="sidebarNav" [section]="section"></sidebar-nav>
+    <router-outlet></router-outlet>
   </div>
 
 </div>
