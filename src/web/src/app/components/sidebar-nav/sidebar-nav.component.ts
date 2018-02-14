@@ -29,39 +29,48 @@ export class SidebarNavComponent implements OnInit {
     // this.sectionTitle = this.section;
     // this.grandChildren = this.hasGrandchildren;
 
+    // this.router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     const urlSegments = event.url.split('/');
+    //     this.section = urlSegments[1];
+    //     this.sectionTitle = this.section;
+    //   }
+    // });
+
+  }
+
+  ngAfterViewInit() {
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-
         const urlSegments = event.url.split('/');
         this.section = urlSegments[1];
         this.sectionTitle = this.section;
-
-        this.pagesService.getAll().subscribe((res) => {
-          console.log(res);
-          res['items'].filter((item) => {
-            if (item.meta.slug === this.section) {
-              if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count == 0) {
-                this.hasGrandchildren = false
-              }
-              this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
-                item.meta.children.children.map(child => {
-                  child.children.length <= 0 ? this.hasGrandchildren = false : this.hasGrandchildren = true;
-                  child.children.sort((thisGrandChild, nextGrandchild) => {
-                    return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
-                  });
-                });
-                if (this.hasGrandchildren) {
-                  return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
-                } else {
-                  return thisChild.title > nextChild.title ? 1 : -1;
-                }
-              });
-            }
-          });
-        })
-
       }
-    });
+    })
+
+    this.pagesService.getAll().subscribe((res) => {
+        res['items'].filter((item) => {
+          if (item.meta.slug === this.section) {
+            if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count == 0) {
+              this.grandChildren = false
+            }
+            this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
+              item.meta.children.children.map(child => {
+                child.children.length <= 0 ? this.grandChildren = false : this.grandChildren = true;
+                child.children.sort((thisGrandChild, nextGrandchild) => {
+                  return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
+                });
+              });
+              if (this.grandChildren) {
+                return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
+              } else {
+                return thisChild.title > nextChild.title ? 1 : -1;
+              }
+            });
+          }
+        });
+      })
 
   }
 
