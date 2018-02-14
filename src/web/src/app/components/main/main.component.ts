@@ -21,10 +21,9 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
   @HostBinding('class.ids-row--col-sm-8')
-  @HostBinding('class.ids-row--offset-sm-4')
+  @HostBinding('class.ids-row--offset-sm-4') useGrid: boolean = true;
   public page;
   public section;
-  public codeSection: boolean;
   public sidebarNav;
   public hasGrandchildren: boolean;
   public globalNav;
@@ -45,6 +44,7 @@ export class MainComponent implements AfterContentInit, OnInit {
       const keys = Object.keys(params);
       this.docsComponents(keys, params);
       this.cmsComponents(keys, params);
+      console.log(this.useGrid);
 
     });
 
@@ -54,6 +54,7 @@ export class MainComponent implements AfterContentInit, OnInit {
     if(params.slug !== 'code') {
       switch (keys.length) {
         case 0:
+          this.useGrid = false;
           this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
           break;
         case 1:
@@ -85,7 +86,6 @@ export class MainComponent implements AfterContentInit, OnInit {
                   }
                 }
               });
-
             } else {
               this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
             }
@@ -101,7 +101,6 @@ export class MainComponent implements AfterContentInit, OnInit {
 
   docsComponents(keys, params) {
     if (params.slug === 'code') {
-      this.codeSection = true;
       switch (keys.length) {
         case 1:
           this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, false);
@@ -114,8 +113,6 @@ export class MainComponent implements AfterContentInit, OnInit {
           break;
       }
       return;
-    } else {
-      this.codeSection = false;
     }
   }
 

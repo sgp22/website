@@ -12,6 +12,7 @@ declare let pendo;
 
 export class AppComponent {
   public home;
+  public useGrid;
   public codeSection;
   public section;
   public sidebarNav;
@@ -36,12 +37,11 @@ export class AppComponent {
         }
 
         const urlSegments = event.url.split('/');
-        if (urlSegments[1] === 'code') {
-          this.codeSection = true;
+        if (urlSegments[1] === 'code' || url === '/') {
+          this.useGrid = false;
         } else {
-          this.codeSection = false;
+          this.useGrid = true;
         }
-
 
         // Initialize Pendo on page change
         pendo.initialize({
