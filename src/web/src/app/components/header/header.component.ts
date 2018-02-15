@@ -26,7 +26,12 @@ export class HeaderComponent implements OnInit {
     this.pagesService.getGlobalNav()
       .subscribe(
         (res: any) => {
-          this.navItems = res.items.sort((a, b) => {
+
+          const addTrigger = res.items.filter((item) => {
+            (item.meta.slug === 'code') ? item.trigger = true : item.trigger = false;
+            return item;
+          });
+          this.navItems = addTrigger.sort((a, b) => {
             return a.meta.menu_order > b.meta.menu_order ? 1 : -1;
           });
         }
@@ -39,6 +44,11 @@ export class HeaderComponent implements OnInit {
 
   closeNav() {
     this.navToggle = false;
+  }
+
+  dropdown(event) {
+    event.preventDefault();
+    console.log('dropdown');
   }
 
 }

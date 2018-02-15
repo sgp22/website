@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -15,7 +15,7 @@ import * as semver from 'semver';
   templateUrl: './docs-content-page.component.html',
   providers: [UrlParser, UrlMapper, UrlFetcher, JsDocumentation]
 })
-export class DocsContentPageComponent implements OnInit {
+export class DocsContentPageComponent implements OnInit, OnDestroy {
   public path = '';
   public basePath = '';
   public mapPath = '';
@@ -233,6 +233,11 @@ export class DocsContentPageComponent implements OnInit {
         this.createRelativePath(el, 'href', true);
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.sidebarNav = '';
+    console.log(this.sidebarNav);
   }
 
   private stopRefreshing() {

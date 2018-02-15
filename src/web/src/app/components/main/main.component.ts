@@ -102,7 +102,7 @@ export class MainComponent implements AfterContentInit, OnInit {
     if (params.slug === 'code') {
       switch (keys.length) {
         case 1:
-          this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, false);
+          this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, true);
           break;
         case 2:
           this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
