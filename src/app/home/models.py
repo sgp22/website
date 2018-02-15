@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import (
-    StreamField,
+    StreamField
 )
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -51,6 +51,16 @@ class APIMarkDownBlock(MarkdownBlock):
         if value:
             return markdown_filter(value)
 
+# @todo: Remove APIRichTextBlock class
+# Currently removing it breaks migrations
+# @url: https://github.com/infor-design/design.infor.com/issues/345
+
+class APIRichTextBlock(blocks.RichTextBlock):
+    # By overriding this function, we get the raw data value
+    # which is what we wanted, so we return the string.
+    def get_api_representation(self, value, context=None):
+        if value:
+            return str(value)
 
 class FullWidthStreamField(blocks.StructBlock):
     title = blocks.CharBlock()
