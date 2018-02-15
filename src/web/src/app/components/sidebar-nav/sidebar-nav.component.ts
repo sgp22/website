@@ -31,7 +31,6 @@ export class SidebarNavComponent implements OnInit {
 
         const urlSegments = event.url.split('/');
         this.section = urlSegments[1];
-        this.sectionTitle = this.section;
 
         this.loading = true;
         this.pagesService.getAll().subscribe(
@@ -51,6 +50,7 @@ export class SidebarNavComponent implements OnInit {
                   if (this.grandChildren) {
                     return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
                   } else {
+                    this.sectionTitle = this.section;
                     return thisChild.title > nextChild.title ? 1 : -1;
                   }
                 });

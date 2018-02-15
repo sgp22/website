@@ -46,11 +46,15 @@
           <span *ngIf="navItem.trigger" class="main-nav__item--trigger">
             <a
               #trigger
-              class="main-nav__item"
+              type="button"
+              class="main-nav__item ids-btn ids-btn--link"
               id="{{navItem.id}}"
               routerLinkActive="main-nav__item--current"
               >
                 {{navItem.title}}
+              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+                <use xlink:href="#icon_expand"></use>
+              </svg>
             </a>
             <span class="main-nav__popupmenu top" [hidden]="!popupmenuToggle">
               <ul>
