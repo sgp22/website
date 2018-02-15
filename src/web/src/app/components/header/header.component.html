@@ -51,7 +51,7 @@
               (click)="dropdown($event)">
                 {{navItem.title}}
             </a>
-            <span class="main-nav__popupmenu top">
+            <span class="main-nav__popupmenu top" [hidden]="!popupmenuToggle">
               <ul>
                 <li><a href="/code/4.0/latest">4.0</a></li>
                 <li><a href="/code/ids-web/latest">IDS Web</a></li>

@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   public navItems: any;
   public domain: string = DOMAIN;
   public navToggle = false;
+  public popupmenuToggle = false;
 
   constructor(
     private pagesService: PagesService,
@@ -48,7 +49,7 @@ export class HeaderComponent implements OnInit {
 
   dropdown(event) {
     event.preventDefault();
-    console.log('dropdown');
+    this.popupmenuToggle = !this.popupmenuToggle;
   }
 
 }
