@@ -43,14 +43,23 @@
             [routerLink]="['', navItem.meta.slug]">
               {{navItem.title}}
           </a>
-          <a
-            *ngIf="navItem.trigger"
-            class="main-nav__item"
-            id="{{navItem.id}}"
-            routerLinkActive="main-nav__item--current"
-            (click)="dropdown($event)">
-              {{navItem.title}}
-          </a>
+          <span *ngIf="navItem.trigger" class="main-nav__item--trigger ">
+            <a
+              class="main-nav__item"
+              id="{{navItem.id}}"
+              routerLinkActive="main-nav__item--current"
+              (click)="dropdown($event)">
+                {{navItem.title}}
+            </a>
+            <span class="main-nav__popupmenu top">
+              <ul>
+                <li><a href="/code/4.0/latest">4.0</a></li>
+                <li><a href="/code/ids-web/latest">IDS Web</a></li>
+                <li><a href="/code/pendo/latest">Pendo</a></li>
+              </ul>
+              <div class="arrow"></div>
+            </span>
+          </span>
         </ng-container>
       </nav>
     </ng-container>
