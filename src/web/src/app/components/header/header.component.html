@@ -43,12 +43,13 @@
             [routerLink]="['', navItem.meta.slug]">
               {{navItem.title}}
           </a>
-          <span *ngIf="navItem.trigger" class="main-nav__item--trigger ">
+          <span *ngIf="navItem.trigger" class="main-nav__item--trigger">
             <a
+              #trigger
               class="main-nav__item"
               id="{{navItem.id}}"
               routerLinkActive="main-nav__item--current"
-              (click)="dropdown($event)">
+              >
                 {{navItem.title}}
             </a>
             <span class="main-nav__popupmenu top" [hidden]="!popupmenuToggle">
@@ -68,7 +69,10 @@
 </header>
 
 <nav #mainNavMobile (click)="closeNav()" class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'">
-  <a *ngFor="let navItem of navItems" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+  <ng-container *ngFor="let navItem of navItems">
+    <a *ngIf="!navItem.trigger" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+    <a *ngIf="navItem.trigger" class="main-nav--mobile--item" id="{{navItem.id}}">{{navItem.title}}</a>
+  </ng-container>
 </nav>
 
 <div class="overlay--mobile-nav"></div>

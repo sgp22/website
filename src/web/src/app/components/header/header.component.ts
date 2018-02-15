@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  providers: [PagesService],
+  providers: [PagesService]
 })
 export class HeaderComponent implements OnInit {
 
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
+  @ViewChild('trigger') trigger: ElementRef;
   @Input() globalNav;
   @Input() home;
   public navItems: any;
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private pagesService: PagesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private elRef: ElementRef
   ) { }
 
   ngOnInit() {
@@ -47,9 +49,13 @@ export class HeaderComponent implements OnInit {
     this.navToggle = false;
   }
 
+  @HostListener('document:click', ['$event'])
   dropdown(event) {
-    event.preventDefault();
-    this.popupmenuToggle = !this.popupmenuToggle;
+    if ((this.trigger.nativeElement as HTMLElement).contains(event.target)) {
+      this.popupmenuToggle = !this.popupmenuToggle;
+    } else {
+      this.popupmenuToggle = false;
+    }
   }
 
 }
