@@ -69,22 +69,3 @@ ul.ids-list--plain ol.ids-list--plain,
 ul.ids-list--plain ul.ids-list--plain {
   margin-left: 8px;
 }
-
-.main-nav__item {
-  display: inline-block;
-}
-
-.main-nav__item--trigger {
-  display: inline-block;
-}
-
-.main-nav__item.ids-btn.ids-btn--link {
-  color: #000;
-  -webkit-font-smoothing: auto;
-  font-weight: 500;
-  vertical-align: baseline;
-}
-
-.main-nav__popupmenu.top .arrow {
-  right: 19px;
-}
