@@ -50,28 +50,27 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.route.url.subscribe(segment => {
-      this.section = segment[0].path;
-      if (segment.length === 4) {
-        this.element = segment.slice(-1)[0].path;
-      } else {
-        this.element = null;
-      }
-    });
-
     const urlSegment = [];
 
     this.route.url.subscribe(segment => {
+
+      this.section = segment[0].path;
+
+      if (segment.length === 4) {
+        this.library = segment.slice(-3)[0].path;
+        this.element = segment.slice(-1)[0].path;
+      } else {
+        this.library = segment.slice(-2)[0].path;
+        this.element = null;
+      }
 
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }
 
       if (urlSegment.length === 4) {
-        this.library = urlSegment.slice(1, -2).join('');
         this.basePath = urlSegment.slice(0, -1).join('/');
       } else {
-        this.library = urlSegment.slice(1, -1).join('');
         this.basePath = urlSegment.join('/');
       }
 
@@ -80,40 +79,9 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       this.urlFetcher
         .getDocs(`${this.domainPath}/api/docs/${this.library}/`)
         .subscribe(res => {
-          let latestVersion = '';
 
-          this.versionPaths = res['files']
-            .map(file => {
-              const versions = {};
-              versions['full'] = file.replace(/docs/, '');
-              versions['label'] = file
-                .split('/')
-                .slice(-2, -1)
-                .join('');
-              return versions;
-            })
-            .sort((a, b) => {
-              return semver.compare(a.label, b.label);
-            })
-            .reverse();
-
-
-          this.versionPaths.unshift({
-            full: `/${this.library}/latest/`,
-            label: `Latest (${this.versionPaths[0]['label']})`
-          });
-
-          latestVersion = this.versionPaths[1]['label'];
-
-          this.path = urlSegment.join('/');
-          this.currentVersion = urlSegment[2];
-          this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
-
-          if(this.currentVersion < latestVersion) {
-            this.showWarning = true;
-          } else {
-            this.showWarning = false;
-          }
+          this.createVersionPaths(res, urlSegment);
+          this.handleSidebar(urlSegment);
 
           this.urlFetcher
             .getDocs(`${this.domainPath}/${this.mapPath}`)
@@ -122,56 +90,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
                 this.elements = [];
                 this.docs = docs;
-
-                /*
-                  Relative Link support.
-                  tempNode needs to be created in order to convert
-                  the fragment back to a string
-                */
-
-                const tempNode = document.createElement('div');
-                const absolute = /^((http|https|ftp):\/\/)/;
-                const bodyFragments = document.createRange().createContextualFragment( docs.body );
-                const allHrefs = Array.from( bodyFragments.querySelectorAll('a') );
-                const allImgs = Array.from( bodyFragments.querySelectorAll('img') );
-                const allIframes = Array.from( bodyFragments.querySelectorAll('iframe') );
-
-                /*
-                  Modify relative hrefs, img src and iframe src.
-                */
-
-                if (allHrefs.length) {
-                  allHrefs.map( a => this.createRelativePath(a, 'href') );
-                }
-
-                if (allImgs.length) {
-                  allImgs.map( img => this.createRelativePath(img, 'src'));
-                }
-
-                if (allIframes.length) {
-                  allIframes.map( iframe => this.createRelativePath(iframe, 'src'));
-                }
-
-                /*
-                  Append the modified fragment to the tempNode
-                  and assign the innerHTML to the template var
-                */
-
-                tempNode.appendChild(bodyFragments);
-                this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(tempNode.innerHTML);
-
-                /*
-                  API portion of docs json which is output of DocumentationJS
-                */
-                if (this.docs.api) {
-                  for (const i in this.docs.api) {
-                    if (this.docs.api[i]) {
-                      this.elements.push(this.comments.parse(this.docs.api[i]));
-                    }
-                  }
-                }
-
                 this.notFound = false;
+                this.handleRelativeLinks(docs);
 
               },
               () => {
@@ -183,27 +103,49 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
               }
             );
 
-          if (urlSegment[2] === 'latest') {
-            this.sidebarPath = urlSegment.slice(1, 3).join('/');
-          } else {
-            if (urlSegment.length === 4) {
-              this.sidebarPath = urlSegment.slice(1, -1).join('/');
-            } else {
-              this.sidebarPath = urlSegment.slice(1, 3).join('/');
-            }
-          }
-
-          this.selectedVersion = `/${this.sidebarPath}/`;
-          this.urlFetcher
-            .getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
-            .subscribe(
-              (sidebar) => {
-                this.sidebarNav = sidebar['sections'];
-              }
-            );
-
         });
     });
+  }
+
+  handleRelativeLinks(docs) {
+
+    // Relative Link support.
+    // tempNode needs to be created in order to convert
+    // the fragment back to a string
+    const tempNode = document.createElement('div');
+    const absolute = /^((http|https|ftp):\/\/)/;
+    const bodyFragments = document.createRange().createContextualFragment(docs.body);
+    const allHrefs = Array.from(bodyFragments.querySelectorAll('a'));
+    const allImgs = Array.from(bodyFragments.querySelectorAll('img'));
+    const allIframes = Array.from(bodyFragments.querySelectorAll('iframe'));
+
+    // Modify relative hrefs, img src and iframe src.
+    if (allHrefs.length) {
+      allHrefs.map(a => this.createRelativePath(a, 'href'));
+    }
+
+    if (allImgs.length) {
+      allImgs.map(img => this.createRelativePath(img, 'src'));
+    }
+
+    if (allIframes.length) {
+      allIframes.map(iframe => this.createRelativePath(iframe, 'src'));
+    }
+
+    // Append the modified fragment to the tempNode
+    // and assign the innerHTML to the template var
+    tempNode.appendChild(bodyFragments);
+    this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(tempNode.innerHTML);
+
+    // API portion of docs json which is output of DocumentationJS
+    if (this.docs.api) {
+      for (const i in this.docs.api) {
+        if (this.docs.api[i]) {
+          this.elements.push(this.comments.parse(this.docs.api[i]));
+        }
+      }
+    }
+
   }
 
   createRelativePath(el, attr, navigate = false) {
@@ -217,6 +159,67 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
       }
     }
+  }
+
+  handleSidebar(urlSegment) {
+
+    if (urlSegment[2] === 'latest') {
+      this.sidebarPath = urlSegment.slice(1, 3).join('/');
+    } else {
+      if (urlSegment.length === 4) {
+        this.sidebarPath = urlSegment.slice(1, -1).join('/');
+      } else {
+        this.sidebarPath = urlSegment.slice(1, 3).join('/');
+      }
+    }
+
+    this.selectedVersion = `/${this.sidebarPath}/`;
+    this.urlFetcher
+      .getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
+      .subscribe(
+        (sidebar) => {
+          this.sidebarNav = sidebar['sections'];
+        }
+      );
+
+  }
+
+  createVersionPaths(res, urlSegment) {
+
+    let latestVersion = '';
+
+    this.versionPaths = res['files']
+      .map(file => {
+        const versions = {};
+        versions['full'] = file.replace(/docs/, '');
+        versions['label'] = file
+          .split('/')
+          .slice(-2, -1)
+          .join('');
+        return versions;
+      })
+      .sort((a, b) => {
+        return semver.compare(a.label, b.label);
+      })
+      .reverse();
+
+    this.versionPaths.unshift({
+      full: `/${this.library}/latest/`,
+      label: `Latest (${this.versionPaths[0]['label']})`
+    });
+
+    latestVersion = this.versionPaths[1]['label'];
+
+    this.path = urlSegment.join('/');
+    this.currentVersion = urlSegment[2];
+    this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
+
+    if (this.currentVersion < latestVersion) {
+      this.showWarning = true;
+    } else {
+      this.showWarning = false;
+    }
+
   }
 
   onVersionChange(version) {
@@ -237,7 +240,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sidebarNav = '';
-    console.log(this.sidebarNav);
   }
 
   private stopRefreshing() {
