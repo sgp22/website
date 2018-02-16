@@ -37,13 +37,8 @@ export class AppComponent {
         }
 
         const urlSegments = event.url.split('/');
-        if (urlSegments[1] === 'code' || url === '/') {
-          this.useGrid = false;
-          this.codeSection = true;
-        } else {
-          this.useGrid = true;
-          this.codeSection = false;
-        }
+        (urlSegments[1] === 'code') ? this.codeSection = true : this.codeSection = false;
+        (urlSegments[1] === 'code' || url === '/') ? this.useGrid = false : this.useGrid = true;
 
         // Initialize Pendo on page change
         pendo.initialize({
