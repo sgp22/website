@@ -147,6 +147,8 @@ def get(request):
                 return HttpResponse(content=content, content_type="image/png")
             elif path.endswith('.jpeg'):
                 return HttpResponse(content=content, content_type="image/jpeg")
+            elif path.endswith('.css'):
+                return HttpResponse(content=content, content_type="text/css")
             else:
                 return HttpResponse(content=content)
         else:
