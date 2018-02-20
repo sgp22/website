@@ -58,4 +58,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  handleDropdownLink(link) {
+    this.router.navigate([link]);
+  }
+
 }

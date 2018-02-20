@@ -59,8 +59,8 @@
             <span class="main-nav__popupmenu top" [hidden]="!popupmenuToggle">
               <ul>
                 <!-- <li><a href="/code/4.0/latest">Soho 4.0</a></li> -->
-                <li><a href="/code/ids-web/latest">IDS Web</a></li>
-                <li><a href="/code/ids-pendo/latest">IDS Pendo</a></li>
+                <li><a (click)="handleDropdownLink('/code/ids-web/latest')">IDS Web</a></li>
+                <li><a (click)="handleDropdownLink('/code/ids-pendo/latest')">IDS Pendo</a></li>
               </ul>
               <div class="arrow"></div>
             </span>
