@@ -29,9 +29,11 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public sidebarPath = '';
   public sidebarNav: any;
   public versionPaths: any;
+  public libraryPaths: any;
   public currentVersion: any;
   public library = '';
   public selectedVersion = '';
+  public selectedLibrary = '';
   public loading = true;
   public notFound = false;
   public showWarning = false;
@@ -51,6 +53,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     const urlSegment = [];
+    this.createLibraryPaths();
 
     this.route.url.subscribe(segment => {
 
@@ -173,6 +176,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       }
     }
 
+    this.selectedLibrary = urlSegment[1];
     this.selectedVersion = `/${this.sidebarPath}/`;
     this.urlFetcher
       .getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
@@ -192,10 +196,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       .map(file => {
         const versions = {};
         versions['full'] = file.replace(/docs/, '');
-        versions['label'] = file
-          .split('/')
-          .slice(-2, -1)
-          .join('');
+        versions['label'] = file.split('/').slice(-2, -1).join('');
         return versions;
       })
       .sort((a, b) => {
@@ -222,8 +223,25 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   }
 
+  createLibraryPaths() {
+
+    this.urlFetcher.getDocs(`${this.domainPath}/api/docs/`)
+      .subscribe(res => {
+        this.libraryPaths = res['files'].map( file => {
+          const library = {};
+          library['path'] = file.split('/')[1];
+          return library;
+        });
+      })
+
+  }
+
   onVersionChange(version) {
     this.router.navigate([version]);
+  }
+
+  onLibraryChange(library) {
+    this.router.navigate([library]);
   }
 
   relativeLinks(link) {
