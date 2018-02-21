@@ -38,10 +38,7 @@ def markdown_filter(data):
     if not data:
         return ''
 
-    md = markdown.Markdown(
-        safe_mode="replace",
-        html_replacement_text="--RAW HTML NOT ALLOWED--"
-    )
+    md = markdown.Markdown()
 
     return md.convert(data)
 
