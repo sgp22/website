@@ -13,7 +13,7 @@ export class SidebarNavComponent implements OnInit {
   @Input() section;
   public sidebarNav: any;
   public sectionTitle: any;
-  public grandChildren: boolean;
+  public level_2: boolean;
   public loading: boolean;
 
   constructor(
@@ -38,11 +38,11 @@ export class SidebarNavComponent implements OnInit {
             res['items'].filter((item) => {
               if (item.meta.slug === this.section) {
                 if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count == 0) {
-                  this.grandChildren = false
+                  this.level_2 = false
                 }
                 this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
                   item.meta.children.children.map(child => {
-                    child.children.length <= 0 ? this.grandChildren = false : this.grandChildren = true;
+                    child.children.length <= 0 ? this.level_2 = false : this.level_2 = true;
                     child.children.sort((thisGrandChild, nextGrandchild) => {
                       return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
                     });
@@ -55,7 +55,7 @@ export class SidebarNavComponent implements OnInit {
                         }
                       });
                   });
-                  if (this.grandChildren) {
+                  if (this.level_2) {
                     return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
                   } else {
                     this.sectionTitle = this.section;

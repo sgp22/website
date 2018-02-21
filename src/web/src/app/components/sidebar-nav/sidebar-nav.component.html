@@ -2,13 +2,13 @@
   <nav class="sidebar-nav">
     <ul class="ids-list--plain">
 
-      <span *ngIf="!grandChildren" class="sidebar-nav__section-title">
+      <span *ngIf="!level_2" class="sidebar-nav__section-title">
         {{sectionTitle}}
       </span>
 
       <ng-container *ngFor="let child of sidebarNav">
 
-        <li *ngIf="grandChildren" class="sidebar-nav__group">
+        <li *ngIf="level_2" class="sidebar-nav__group">
           <span class="sidebar-nav__child-item">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
@@ -16,26 +16,26 @@
             </svg>
           </span>
           <ul class="ids-list--plain">
-            <li *ngFor="let grandChild of child.children">
-              <a *ngIf="grandChild.children.length <= 0" class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{grandChild.relative_url}}">
-                {{grandChild.title}}
+            <li *ngFor="let level_2 of child.children">
+              <a *ngIf="level_2.children.length <= 0" class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{level_2.relative_url}}">
+                {{level_2.title}}
               </a>
-              <span *ngIf="grandChild.children.length > 0" class="sidebar-nav__grandchild-item">
-                {{grandChild.title}}
+              <span *ngIf="level_2.children.length > 0" class="sidebar-nav__grandchild-item">
+                {{level_2.title}}
                 <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                   <use xlink:href="#icon_expand"></use>
                 </svg>
               </span>
               <ul class="ids-list--plain sidebar-nav__level-3">
-                <li *ngFor="let greatGrandChild of grandChild.children">
-                  <a class="sidebar-nav__level-3-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{greatGrandChild.relative_url}}">{{greatGrandChild.title}}</a>
+                <li *ngFor="let level_3 of level_2.children">
+                  <a class="sidebar-nav__level-3-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{level_3.relative_url}}">{{level_3.title}}</a>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
 
-        <li *ngIf="!grandChildren" class="sidebar-nav__group--no-grandchildren">
+        <li *ngIf="!level_2" class="sidebar-nav__group--no-grandchildren">
           <a class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{child.relative_url}}">
             {{child.title}}
           </a>

@@ -232,7 +232,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
           library['path'] = file.split('/')[1];
           return library;
         });
-      })
+      });
 
   }
 
