@@ -14,9 +14,10 @@
           </span>
           <ul class="ids-list--plain">
             <li *ngFor="let grandChild of child.children">
-              <a class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{grandChild.relative_url}}">
+              <a *ngIf="grandChild.children.length <= 0" class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{grandChild.relative_url}}">
                 {{grandChild.title}}
               </a>
+              <span *ngIf="grandChild.children.length > 0" class="sidebar-nav__grandchild-item">{{grandChild.title}}</span>
               <ul class="sidebar-nav__level-3">
                 <li *ngFor="let greatGrandChild of grandChild.children">
                   <a class="sidebar-nav__level-3-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{greatGrandChild.relative_url}}">{{greatGrandChild.title}}</a>

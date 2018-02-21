@@ -14,6 +14,7 @@ export class SidebarNavComponent implements OnInit {
   public sidebarNav: any;
   public sectionTitle: any;
   public grandChildren: boolean;
+  public greatGrandChildren: boolean;
   public loading: boolean;
 
   constructor(
@@ -45,7 +46,18 @@ export class SidebarNavComponent implements OnInit {
                     child.children.length <= 0 ? this.grandChildren = false : this.grandChildren = true;
                     child.children.sort((thisGrandChild, nextGrandchild) => {
                       return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
-                    })
+                    });
+                    child.children
+                      .filter(child => {
+                        if (child.children.length > 0){
+                          this.greatGrandChildren = true;
+                          child.children.sort((thisChild, nextChild) =>{
+                            return thisChild.title > nextChild.title ? 1 : -1;
+                          });
+                        } else {
+                          this.greatGrandChildren = false;
+                        }
+                      });
                   });
                   if (this.grandChildren) {
                     return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
@@ -54,7 +66,6 @@ export class SidebarNavComponent implements OnInit {
                     return thisChild.title > nextChild.title ? 1 : -1;
                   }
                 });
-                console.log(this.sidebarNav);
               }
             });
           },
