@@ -91,6 +91,35 @@ export class MainComponent implements AfterContentInit, OnInit {
 
           });
           break;
+        case 4:
+          this.pagesService.getAll().subscribe(data => {
+
+            if (this.pageExists(data['items'], params.greatGrandChildSlug)) {
+
+              this.getSideBar(data);
+
+              data['items'].filter(page => {
+                const slug = page.meta.slug;
+                if (slug === params.greatGrandChildSlug) {
+                  switch (page.meta.type) {
+                    case 'home.CoreContentPage':
+                      this.getPageContent(page, this.coreTemplate);
+                      break;
+                    case 'home.BlocksPage':
+                      this.getPageContent(page, this.blockTemplate);
+                      break;
+                    default:
+                      this.getPageContent(page, this.elementsTemplate);
+                      break;
+                  }
+                }
+              });
+            } else {
+              this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+            }
+
+          });
+          break;
         default:
           this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
           break;

@@ -21,6 +21,10 @@ const appRoutes: Routes = [
     component: MainComponent
   },
   {
+    path: ':slug/:childSlug/:grandChildSlug/:greatGrandChildSlug',
+    component: MainComponent
+  },
+  {
     path: ':slug/:library/:version/:component',
     component: MainComponent
   }

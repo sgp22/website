@@ -45,7 +45,7 @@ export class SidebarNavComponent implements OnInit {
                     child.children.length <= 0 ? this.grandChildren = false : this.grandChildren = true;
                     child.children.sort((thisGrandChild, nextGrandchild) => {
                       return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
-                    });
+                    })
                   });
                   if (this.grandChildren) {
                     return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
@@ -54,6 +54,7 @@ export class SidebarNavComponent implements OnInit {
                     return thisChild.title > nextChild.title ? 1 : -1;
                   }
                 });
+                console.log(this.sidebarNav);
               }
             });
           },
