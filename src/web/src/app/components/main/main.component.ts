@@ -66,10 +66,8 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.pagesService.getAll().subscribe(data => {
 
             if (this.pageExists(data['items'], params.grandChildSlug)) {
-
               this.getSideBar(data);
               this.switchPageType(data['items'], params.grandChildSlug);
-
             } else {
               this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
             }
@@ -80,10 +78,8 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.pagesService.getAll().subscribe(data => {
 
             if (this.pageExists(data['items'], params.greatGrandChildSlug)) {
-
               this.getSideBar(data);
               this.switchPageType(data['items'], params.greatGrandChildSlug);
-
             } else {
               this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
             }
