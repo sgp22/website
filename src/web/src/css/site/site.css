@@ -52,10 +52,6 @@ ul {
   margin-bottom: 32px;
 }
 
-.sidebar-nav__child-item {
-  color: #bdbdbd;
-}
-
 .main-nav a,
 .main-nav a:visited,
 .sidebar-nav a,
@@ -70,7 +66,14 @@ ul.ids-list--plain ul.ids-list--plain {
   margin-left: 8px;
 }
 
+/*
+  Sidebar Nav
+*/
+
+.sidebar-nav__child-item {
+  color: #bdbdbd;
+}
+
 .sidebar-nav__level-3 {
-  list-style-type: none;
   margin-top: 24px;
 }

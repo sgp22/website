@@ -31,7 +31,10 @@
         <ul class="ids-list--plain">
           <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
             <span class="sidebar-nav__child-item">
-              {{child.name}}<br>
+              {{child.name}}
+              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+                <use xlink:href="#icon_expand"></use>
+              </svg>
             </span>
             <ul class="ids-list--plain" *ngIf="child.pages">
               <li *ngFor="let grandChild of child.pages">
