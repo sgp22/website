@@ -14,7 +14,6 @@ export class SidebarNavComponent implements OnInit {
   public sidebarNav: any;
   public sectionTitle: any;
   public grandChildren: boolean;
-  public greatGrandChildren: boolean;
   public loading: boolean;
 
   constructor(
@@ -50,12 +49,9 @@ export class SidebarNavComponent implements OnInit {
                     child.children
                       .filter(child => {
                         if (child.children.length > 0){
-                          this.greatGrandChildren = true;
                           child.children.sort((thisChild, nextChild) =>{
                             return thisChild.title > nextChild.title ? 1 : -1;
                           });
-                        } else {
-                          this.greatGrandChildren = false;
                         }
                       });
                   });

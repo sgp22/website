@@ -68,23 +68,8 @@ export class MainComponent implements AfterContentInit, OnInit {
             if (this.pageExists(data['items'], params.grandChildSlug)) {
 
               this.getSideBar(data);
+              this.switchPageType(data['items'], params.grandChildSlug);
 
-              data['items'].filter(page => {
-                const slug = page.meta.slug;
-                if (slug === params.grandChildSlug) {
-                  switch (page.meta.type) {
-                    case 'home.CoreContentPage':
-                      this.getPageContent(page, this.coreTemplate);
-                      break;
-                    case 'home.BlocksPage':
-                      this.getPageContent(page, this.blockTemplate);
-                      break;
-                    default:
-                      this.getPageContent(page, this.elementsTemplate);
-                      break;
-                  }
-                }
-              });
             } else {
               this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
             }
@@ -97,23 +82,8 @@ export class MainComponent implements AfterContentInit, OnInit {
             if (this.pageExists(data['items'], params.greatGrandChildSlug)) {
 
               this.getSideBar(data);
+              this.switchPageType(data['items'], params.greatGrandChildSlug);
 
-              data['items'].filter(page => {
-                const slug = page.meta.slug;
-                if (slug === params.greatGrandChildSlug) {
-                  switch (page.meta.type) {
-                    case 'home.CoreContentPage':
-                      this.getPageContent(page, this.coreTemplate);
-                      break;
-                    case 'home.BlocksPage':
-                      this.getPageContent(page, this.blockTemplate);
-                      break;
-                    default:
-                      this.getPageContent(page, this.elementsTemplate);
-                      break;
-                  }
-                }
-              });
             } else {
               this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
             }
@@ -235,6 +205,25 @@ export class MainComponent implements AfterContentInit, OnInit {
         }
       );
 
+  }
+
+  switchPageType(data, params) {
+    data.filter(page => {
+      const slug = page.meta.slug;
+      if (slug === params) {
+        switch (page.meta.type) {
+          case 'home.CoreContentPage':
+            this.getPageContent(page, this.coreTemplate);
+            break;
+          case 'home.BlocksPage':
+            this.getPageContent(page, this.blockTemplate);
+            break;
+          default:
+            this.getPageContent(page, this.elementsTemplate);
+            break;
+        }
+      }
+    });
   }
 
   private stopRefreshing() {
