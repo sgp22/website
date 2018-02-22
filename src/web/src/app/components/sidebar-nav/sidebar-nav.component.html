@@ -15,7 +15,7 @@
               <use xlink:href="#icon_expand"></use>
             </svg>
           </span>
-          <ul [id]="'ids-list--'+i" class="ids-list ids-list--expandable" [class.ids-list--expanded]="expandedLevel1[i]">
+          <ul class="ids-list ids-list--expandable" [class.ids-list--expanded]="expandedLevel1[i]">
             <li *ngFor="let level_2 of child.children; let i = index">
               <a *ngIf="level_2.children.length <= 0" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{level_2.relative_url}}">
                 {{level_2.title}}
@@ -26,7 +26,7 @@
                   <use xlink:href="#icon_expand"></use>
                 </svg>
               </span>
-              <ul [id]="'ids-list--level--2--'+i" class="ids-list ids-list--expandable" [class.ids-list--expanded]="expandedLevel2[i]">
+              <ul class="ids-list ids-list--expandable" [class.ids-list--expanded]="expandedLevel2[i]">
                 <li *ngFor="let level_3 of level_2.children">
                   <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{level_3.relative_url}}">{{level_3.title}}</a>
                 </li>
