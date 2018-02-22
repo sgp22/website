@@ -1,0 +1,46 @@
+
+/*
+ * Layout
+ */
+
+.home {
+  & .page-content {
+    margin: 0;
+    padding-top: 0;
+    width: 100%;
+  }
+
+  & .sidebar-nav-comp {
+    display: none;
+  }
+}
+
+/*
+ * Code page overrides
+ */
+
+.code-section {
+  & .sidebar-nav-comp {
+    display: none;
+  }
+
+  & .page-content {
+    padding-top: 0;
+  }
+}
+
+.sidebar--code {
+  padding-right: 24px;
+  padding-top: 48px;
+
+  @media (--viewport-sm) {
+    height: 100vh;
+    overflow: scroll;
+    padding-bottom: 150px;
+    position: fixed;
+  }
+}
+
+.page-content--code {
+  padding-top: 48px;
+}

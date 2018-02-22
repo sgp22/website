@@ -1,0 +1,29 @@
+/*
+ * Variables (custom or overriding IDS variables)
+ */
+
+:root {
+  --brand-blue: #3770ff;
+  --black: #000;
+  --white: #fff;
+  --blue-01: #497aff;
+  --blue-02: #77c8ff;
+  --blue-03: rgb(247, 252, 255);
+  --blue-gradient: var(--blue-01), var(--blue-02);
+  --graphite055: #606060;
+  --graphite055-light: rgba(96, 96, 96, 0.3);
+  --font-mono: menlo, monaco, consolas, courier new, monospace;
+  --link-color-custom: #888;
+  --link-color-custom-dark: #1f1f1f;
+  --spacing: 8px;
+
+  /* TODO: REPLACE WITH IDS TOKENS */
+  --graphite03: #bdbdbd;
+
+  /* Media definitions using IDS breakpoints */
+  @custom-media --viewport-xs (min-width: var(--breakpoint-xs));
+  @custom-media --viewport-sm (min-width: var(--breakpoint-sm));
+  @custom-media --viewport-md (min-width: var(--breakpoint-md));
+  @custom-media --viewport-lg (min-width: var(--breakpoint-lg));
+  @custom-media --viewport-xl (min-width: var(--breakpoint-xl));
+}

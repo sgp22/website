@@ -1,0 +1,20 @@
+
+.ids-banner {
+  border-radius: 2px;
+  color: var(--body-text-color);
+
+  & .ids-banner-content {
+    color: var(--body-text-color);
+    font-size: 14px;
+    padding: 15px 0;
+  }
+
+  &.ids-banner--top-full-width {
+    background-color: #c8e9f4; /* TODO: Change to correct token, originally azure01 */
+    border: solid 1px var(--color-primary);
+    margin-bottom: calc(var(--spacing) * 6);
+    text-align: center;
+    width: 100%;
+    z-index: 4;
+  }
+}

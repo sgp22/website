@@ -1,0 +1,11 @@
+/*
+ * Nav
+ */
+
+.main-nav,
+.sidebar-nav {
+  & a,
+  & a:visited {
+    color: var(--black);
+  }
+}

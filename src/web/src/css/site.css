@@ -1,0 +1,25 @@
+/* IDS-Tokens */
+@import '../../node_modules/@infor/ids-tokens/platforms/web/theme-default.custom-properties.css';
+
+/* Variables */
+@import './components/variables';
+
+/* Basics */
+@import './components/syntax-highlighting';
+@import './components/base';
+@import './components/buttons';
+@import './components/type';
+
+/* Layout Styles */
+@import './components/header';
+@import './components/nav';
+@import './components/nav-main';
+@import './components/nav-sidebar';
+@import './components/pages';
+@import './components/layout';
+
+/* Granular styles */
+@import './components/tables';
+@import './components/color-swatches.css';
+@import './components/pendo.css';
+@import './components/banners.css';
