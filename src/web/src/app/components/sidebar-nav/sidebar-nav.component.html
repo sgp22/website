@@ -1,7 +1,7 @@
 <aside class="sidebar sidebar--guidelines">
   <nav class="sidebar-nav-list">
 
-    <span *ngIf="!level_2" class="ids-list--heading">
+    <span class="ids-list--heading">
       {{sectionTitle}}
     </span>
 
@@ -9,7 +9,7 @@
       <ng-container *ngFor="let child of sidebarNav">
 
         <li *ngIf="level_2">
-          <span class="ids-list--item">
+          <span class="ids-list--item ids-list--heading">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
               <use xlink:href="#icon_expand"></use>

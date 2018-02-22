@@ -55,10 +55,10 @@ export class SidebarNavComponent implements OnInit {
                         }
                       });
                   });
+                  this.sectionTitle = item.title;
                   if (this.level_2) {
                     return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
                   } else {
-                    this.sectionTitle = this.section;
                     return thisChild.title > nextChild.title ? 1 : -1;
                   }
                 });
