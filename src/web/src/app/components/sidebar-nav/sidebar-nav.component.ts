@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ElementRef} from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -15,11 +15,14 @@ export class SidebarNavComponent implements OnInit {
   public sectionTitle: any;
   public level_2: boolean;
   public loading: boolean;
+  public expandedLevel1: any = [];
+  public expandedLevel2: any = [];
 
   constructor(
     private pagesService: PagesService,
     private router: Router,
     private route: ActivatedRoute,
+    private elRef: ElementRef
   ) {}
 
   ngOnInit() {}
@@ -87,11 +90,6 @@ export class SidebarNavComponent implements OnInit {
     checkViewport(viewport);
     viewport.addListener(checkViewport);
 
-  }
-
-  toggleCollapse(index) {
-    const list:Element = <HTMLElement>document.querySelector(`#${index}`);
-    list.classList.toggle('ids-list--expanded');
   }
 
 }
