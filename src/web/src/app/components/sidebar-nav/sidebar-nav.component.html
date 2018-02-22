@@ -1,42 +1,42 @@
 <aside class="sidebar sidebar--guidelines">
-  <nav class="sidebar-nav">
-    <ul class="ids-list--plain">
+  <nav class="sidebar-nav-list">
 
-      <span *ngIf="!level_2" class="sidebar-nav__section-title">
-        {{sectionTitle}}
-      </span>
+    <span *ngIf="!level_2" class="ids-list--heading">
+      {{sectionTitle}}
+    </span>
 
+    <ul class="ids-list">
       <ng-container *ngFor="let child of sidebarNav">
 
-        <li *ngIf="level_2" class="sidebar-nav__group">
-          <span class="sidebar-nav__child-item">
+        <li *ngIf="level_2">
+          <span class="ids-list--item">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
               <use xlink:href="#icon_expand"></use>
             </svg>
           </span>
-          <ul class="ids-list--plain">
+          <ul class="ids-list">
             <li *ngFor="let level_2 of child.children">
-              <a *ngIf="level_2.children.length <= 0" class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{level_2.relative_url}}">
+              <a *ngIf="level_2.children.length <= 0" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{level_2.relative_url}}">
                 {{level_2.title}}
               </a>
-              <span *ngIf="level_2.children.length > 0" class="sidebar-nav__grandchild-item">
+              <span *ngIf="level_2.children.length > 0" class="ids-list--item">
                 {{level_2.title}}
                 <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                   <use xlink:href="#icon_expand"></use>
                 </svg>
               </span>
-              <ul class="ids-list--plain sidebar-nav__level-3">
+              <ul class="ids-list">
                 <li *ngFor="let level_3 of level_2.children">
-                  <a class="sidebar-nav__level-3-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{level_3.relative_url}}">{{level_3.title}}</a>
+                  <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{level_3.relative_url}}">{{level_3.title}}</a>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
 
-        <li *ngIf="!level_2" class="sidebar-nav__group--no-grandchildren">
-          <a class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="{{child.relative_url}}">
+        <li *ngIf="!level_2">
+          <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{child.relative_url}}">
             {{child.title}}
           </a>
         </li>
