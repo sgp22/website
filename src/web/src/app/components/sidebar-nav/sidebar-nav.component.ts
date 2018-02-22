@@ -73,7 +73,19 @@ export class SidebarNavComponent implements OnInit {
           }
         )
       }
-    })
+    });
+
+    const checkViewport = (viewport) => {
+      if(viewport.matches) {
+        console.log('remove accordion classes');
+      } else {
+        console.log('add accordion classes');
+      }
+    }
+
+    let viewport = window.matchMedia('(min-width: 600px)');
+    checkViewport(viewport);
+    viewport.addListener(checkViewport);
 
   }
 

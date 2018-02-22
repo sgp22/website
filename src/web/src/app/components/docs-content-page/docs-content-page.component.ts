@@ -225,14 +225,10 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   createLibraryPaths() {
 
-    this.urlFetcher.getDocs(`${this.domainPath}/api/docs/`)
+    this.urlFetcher.getDocs(`${this.domainPath}/static/libraries.json`)
       .subscribe(res => {
-        this.libraryPaths = res['files'].map( file => {
-          const library = {};
-          library['path'] = file.split('/')[1];
-          return library;
-        });
-      });
+        this.libraryPaths = res;
+      })
 
   }
 
