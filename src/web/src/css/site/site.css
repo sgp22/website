@@ -77,3 +77,11 @@ ul.ids-list--plain ul.ids-list--plain {
 .sidebar-nav__level-3 {
   margin-top: 24px;
 }
+
+.ids-list--expandable {
+  display: none;
+
+  &.ids-list--expanded {
+    display: block;
+  }
+}

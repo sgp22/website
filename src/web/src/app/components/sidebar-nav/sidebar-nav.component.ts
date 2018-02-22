@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -77,9 +77,9 @@ export class SidebarNavComponent implements OnInit {
 
     const checkViewport = (viewport) => {
       if(viewport.matches) {
-        console.log('remove accordion classes');
+        // console.log('remove accordion classes');
       } else {
-        console.log('add accordion classes');
+        // console.log('add accordion classes');
       }
     }
 
@@ -87,6 +87,11 @@ export class SidebarNavComponent implements OnInit {
     checkViewport(viewport);
     viewport.addListener(checkViewport);
 
+  }
+
+  toggleCollapse(index) {
+    const list:Element = <HTMLElement>document.querySelector(`#${index}`);
+    list.classList.toggle('ids-list--expanded');
   }
 
 }
