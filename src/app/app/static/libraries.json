@@ -1,0 +1,10 @@
+[
+  {
+    "name": "IDS Web Components",
+    "path": "ids-web"
+  },
+  {
+    "name": "IDS Pendo Styles",
+    "path": "ids-pendo"
+  }
+]
