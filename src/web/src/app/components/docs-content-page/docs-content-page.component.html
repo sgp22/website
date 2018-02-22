@@ -27,18 +27,20 @@
         </select>
       </div>
 
+      <h1 class="ids-list--heading">Library Name Placeholder</h1>
+
       <nav class="sidebar-nav">
-        <ul class="ids-list--plain">
-          <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
-            <span class="sidebar-nav__child-item">
+        <ul class="ids-list">
+          <li *ngFor="let child of sidebarNav">
+            <span class="ids-list--item">
               {{child.name}}
               <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                 <use xlink:href="#icon_expand"></use>
               </svg>
             </span>
-            <ul class="ids-list--plain" *ngIf="child.pages">
+            <ul class="ids-list" *ngIf="child.pages">
               <li *ngFor="let grandChild of child.pages">
-                <a class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
+                <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
                   {{grandChild.name}}
                 </a>
               </li>
