@@ -20,7 +20,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
-  @HostBinding('class.ids-row--col-sm-8')
+  @HostBinding('class.ids-row--col-sm-7')
   @HostBinding('class.ids-row--offset-sm-4') useGrid: boolean = true;
   public page;
   public section;
