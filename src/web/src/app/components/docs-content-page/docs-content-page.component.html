@@ -1,10 +1,4 @@
 
-  <div class="ids-banner ids-banner--top-full-width" [hidden]="!showWarning">
-    <div class="ids-banner-content">
-        <strong>Warning:</strong> You are not on the latest version of this library. <a routerLink="/{{section}}/{{library}}/latest/{{element}}">Go to latest version</a>.
-    </div>
-  </div>
-
   <div class="container--code ids-container ids-row">
 
     <aside class="sidebar sidebar--code ids-row--col-sm-3" *ngIf="sidebar">
@@ -57,10 +51,17 @@
 
     <main class="ids-row--col-sm-7 ids-row--offset-sm-4">
 
+      <div class="ids-banner ids-banner--top-full-width" [hidden]="!showWarning">
+        <div class="ids-banner-content">
+          <strong>Warning:</strong> You are not on the latest version of this library.
+          <a routerLink="/{{section}}/{{library}}/latest/{{element}}">Go to latest version</a>.
+        </div>
+      </div>
+
       <div class="page-content--code" *ngIf="!notFound">
 
         <header class="page-header">
-          <h1>{{docs?.title}}</h1>
+          <h1 class="page-title">{{docs?.title}}</h1>
           <a *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">View Live Demo</a>
           <a class="ids-btn ids-btn--link btn--custom--crosslink" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
             <div class="ids-btn--inner">
