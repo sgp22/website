@@ -29,7 +29,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.pageContent = '';
     this.hasSidebar = !this.sidebar;
-    console.log(this.pageContent);
   }
 
 }
