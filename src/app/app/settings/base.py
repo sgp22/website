@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'search',
     'docs',
 
-    'wagtailtinymce',
     'wagtailmarkdownblock',
 
     'wagtail.contrib.table_block',
@@ -205,12 +204,6 @@ WAGTAIL_SITE_NAME = "app"
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://localhost'
 
-
-WAGTAILADMIN_RICH_TEXT_EDITORS = {
-    'default': {
-        'WIDGET': 'home.tinymce.CustomTinyMCE'
-    }
-}
 
 WAGTAILAPI_LIMIT_MAX = 200
 

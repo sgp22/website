@@ -38,6 +38,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public notFound = false;
   public showWarning = false;
   public elements = [];
+  public expandedLevel1: any = [];
+  public expandedLevel2: any = [];
 
   constructor(
     private router: Router,
