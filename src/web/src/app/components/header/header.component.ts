@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
   @ViewChild('trigger') trigger: ElementRef;
+  @ViewChild('mobileTrigger') mobileTrigger: ElementRef;
   @Input() globalNav;
   @Input() home;
   public navItems: any;
@@ -51,7 +52,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   dropdown(event) {
-    if ((this.trigger.nativeElement as HTMLElement).contains(event.target)) {
+    if ((this.trigger.nativeElement as HTMLElement).contains(event.target) || (this.mobileTrigger.nativeElement as HTMLElement).contains(event.target) ) {
       this.popupmenuToggle = !this.popupmenuToggle;
     } else {
       this.popupmenuToggle = false;

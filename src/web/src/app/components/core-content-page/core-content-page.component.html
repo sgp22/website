@@ -1,40 +1,37 @@
 <ng-container>
-  <div class="ids-row page-content">
-    <div class="ids-row--offset-sm-1 ids-row--col-sm-7">
-      <h1>{{pageContent?.title}}</h1>
-      <section class="page-section" *ngIf="pageContent">
-        <ng-container *ngFor="let streamfield of pageContent.body">
-          <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
-          <div *ngIf="streamfield.type === 'table'">
-            <table>
-              <ng-container *ngIf="streamfield.value.first_row_is_table_header; then thBlock; else tdBlock;">
-              </ng-container>
-              <ng-template #thBlock>
-                <thead>
-                  <th *ngFor="let head of streamfield?.value.data[0]">{{ head }}</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let row of streamfield?.value.data; let first=first;">
-                    <ng-container *ngIf="!first">
-                      <td *ngFor="let data of row">{{ data }}</td>
-                    </ng-container>
-                  </tr>
-                </tbody>
-              </ng-template>
-              <ng-template #tdBlock>
-                <tbody>
-                  <tr *ngFor="let row of streamfield?.value.data;">
-                    <td *ngFor="let data of row">{{ data }}</td>
-                  </tr>
-                </tbody>
-              </ng-template>
-            </table>
-          </div>
-          <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
-          <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
-        </ng-container>
 
-      </section>
-    </div>
-  </div>
+    <h1>{{pageContent?.title}}</h1>
+    <section class="page-section" *ngIf="pageContent">
+      <ng-container *ngFor="let streamfield of pageContent.body">
+        <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
+        <div *ngIf="streamfield.type === 'table'">
+          <table>
+            <ng-container *ngIf="streamfield.value.first_row_is_table_header; then thBlock; else tdBlock;">
+            </ng-container>
+            <ng-template #thBlock>
+              <thead>
+                <th *ngFor="let head of streamfield?.value.data[0]">{{ head }}</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of streamfield?.value.data; let first=first;">
+                  <ng-container *ngIf="!first">
+                    <td *ngFor="let data of row">{{ data }}</td>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </ng-template>
+            <ng-template #tdBlock>
+              <tbody>
+                <tr *ngFor="let row of streamfield?.value.data;">
+                  <td *ngFor="let data of row">{{ data }}</td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+        </div>
+        <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
+        <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
+      </ng-container>
+    </section>
+
 </ng-container>
