@@ -47,6 +47,21 @@
   font-weight: 700;
 }
 
+.ids-list--heading {
+  cursor: pointer;
+
+  & .ids-icon {
+    transform: rotate(-90deg);
+  }
+
+  &.ids-list--heading--active {
+
+    & .ids-icon {
+      transform: rotate(0);
+    }
+  }
+}
+
 .ids-list--expandable {
   display: none;
 

@@ -31,14 +31,14 @@
 
       <nav class="sidebar-nav">
         <ul class="ids-list">
-          <li *ngFor="let child of sidebarNav">
-            <span class="ids-list--item ids-list--heading">
+          <li *ngFor="let child of sidebarNav; let i = index;">
+            <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading" [class.ids-list--heading--active]="expandedLevel1[i]">
               {{child.name}}
               <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                 <use xlink:href="#icon_expand"></use>
               </svg>
             </span>
-            <ul class="ids-list" *ngIf="child.pages">
+            <ul *ngIf="child.pages" class="ids-list ids-list--expandable" [class.ids-list--expanded]="expandedLevel1[i]">
               <li *ngFor="let grandChild of child.pages">
                 <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
                   {{grandChild.name}}

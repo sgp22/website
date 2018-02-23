@@ -2,8 +2,7 @@
  * Nav
  */
 
-.main-nav,
-.sidebar-nav {
+.main-nav {
   & a,
   & a:visited {
     color: var(--black);
