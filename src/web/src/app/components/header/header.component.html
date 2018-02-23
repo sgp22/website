@@ -1,4 +1,4 @@
-<header class="site-header" [class.home]="home">
+<header class="site-header">
   <div class="ids-container">
     <a class="logo" routerLink="/">
       <svg xmlns="http://www.w3.org/2000/svg" width="51" height="46" viewBox="0 0 51 46">
@@ -34,15 +34,66 @@
     <ng-content></ng-content>
     <ng-container>
       <nav class="main-nav">
-        <a *ngFor="let navItem of navItems" class="main-nav__item" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+        <ng-container *ngFor="let navItem of navItems">
+          <a
+            *ngIf="!navItem.trigger"
+            class="ids-btn ids-btn--link"
+            id="{{navItem.id}}"
+            routerLinkActive="main-nav__item--current"
+            [routerLink]="['', navItem.meta.slug]">
+              {{navItem.title}}
+          </a>
+          <span *ngIf="navItem.trigger" class="main-nav__item--trigger">
+            <a
+              #trigger
+              type="button"
+              class="ids-btn ids-btn--link"
+              id="{{navItem.id}}"
+              routerLinkActive="main-nav__item--current"
+              >
+                {{navItem.title}}
+              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+                <use xlink:href="#icon_expand"></use>
+              </svg>
+            </a>
+            <span class="main-nav__popupmenu top" [hidden]="!popupmenuToggle">
+              <ul>
+                <li><a (click)="handleDropdownLink('/code/ids-web/latest')">IDS Web</a></li>
+                <li><a (click)="handleDropdownLink('/code/ids-pendo/latest')">IDS Pendo</a></li>
+              </ul>
+              <div class="arrow"></div>
+            </span>
+          </span>
+        </ng-container>
       </nav>
     </ng-container>
     <button class="ids-btn btn--custom btn--custom--small--inverted btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'" (click)="toggleNav()" >Menu</button>
   </div>
 </header>
 
-<nav #mainNavMobile (click)="closeNav()" class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'">
-  <a *ngFor="let navItem of navItems" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+<nav #mainNavMobile class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'">
+  <ng-container *ngFor="let navItem of navItems">
+    <a *ngIf="!navItem.trigger" (click)="closeNav()" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+    <span *ngIf="navItem.trigger">
+      <a
+        #mobileTrigger
+        type="button"
+        class="main-nav--mobile--item ids-btn ids-btn--link"
+        [class.active]="popupmenuToggle"
+        id="{{navItem.id}}">
+          {{navItem.title}}
+        <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+          <use xlink:href="#icon_expand"></use>
+        </svg>
+      </a>
+      <span class="main-nav__popupmenu--mobile" [class.open]="popupmenuToggle" (click)="closeNav()">
+        <ul class="ids-list">
+          <li><a class="ids-list--item" (click)="handleDropdownLink('/code/ids-web/latest')">IDS Web</a></li>
+          <li><a class="ids-list--item" (click)="handleDropdownLink('/code/ids-pendo/latest')">IDS Pendo</a></li>
+        </ul>
+      </span>
+    </span>
+  </ng-container>
 </nav>
 
 <div class="overlay--mobile-nav"></div>

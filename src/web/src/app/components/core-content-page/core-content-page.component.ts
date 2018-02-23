@@ -4,6 +4,7 @@ import { PagesService } from '../../shared/pages.service';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 
+
 @Component({
   selector: 'app-core-content-page',
   templateUrl: './core-content-page.component.html',

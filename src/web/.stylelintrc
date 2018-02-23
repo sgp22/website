@@ -150,6 +150,7 @@
     "selector-list-comma-space-before": "never",
     "selector-max-compound-selectors": 4,
     "selector-max-empty-lines": 0,
+    "selector-max-id": 1,
     "selector-pseudo-class-case": "lower",
     "selector-pseudo-class-no-unknown": true,
     "selector-pseudo-class-parentheses-space-inside": "never",
@@ -163,14 +164,7 @@
     "string-quotes": "single",
     "unit-case": "lower",
     "unit-no-unknown": true,
-    "unit-whitelist": [
-      "rem",
-      "px",
-      "%",
-      "s",
-      "deg",
-      "ms"
-    ],
+    "unit-whitelist": ["rem", "px", "%", "s", "deg", "ms", "vh"],
     "value-keyword-case": "lower",
     "value-list-comma-newline-after": "always-multi-line",
     "value-list-comma-space-after": "always-single-line",

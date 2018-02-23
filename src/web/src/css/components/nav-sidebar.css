@@ -1,0 +1,54 @@
+/*
+ * Sidebar nav
+ */
+
+.sidebar-nav-comp {
+  padding-top: 48px;
+
+  @media (--viewport-sm) {
+    height: 100vh;
+    overflow: scroll;
+    padding-bottom: 150px;
+    position: fixed;
+  }
+}
+
+.sidebar--code {
+  padding-right: 0;
+  padding-top: 48px;
+
+  @media (--viewport-sm) {
+    height: 100vh;
+    overflow: scroll;
+    padding-bottom: 150px;
+    position: fixed;
+  }
+}
+
+.library-select-group {
+  @media (--viewport-sm) {
+    padding-right: 24px;
+  }
+}
+
+.ids-list--expandable {
+  display: none;
+
+  &.ids-list--expanded {
+    display: block;
+  }
+}
+
+.ids-list--heading {
+  cursor: pointer;
+
+  & .ids-icon {
+    transform: rotate(-90deg);
+  }
+
+  &.ids-list--heading--active {
+    & .ids-icon {
+      transform: rotate(0);
+    }
+  }
+}

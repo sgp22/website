@@ -1,47 +1,29 @@
-<ng-template #sidebar>
-  <sidebar-nav class="ids-row--col-sm-3"
-    [sidebarData]="sidebarNav"
-    [section]="section"
-    [hasGrandchildren]="hasGrandchildren">
-  </sidebar-nav>
-</ng-template>
-
-<app-component-loader></app-component-loader>
+<main class="page-content">
+  <app-component-loader></app-component-loader>
+</main>
 
 <ng-template #homeTemplate>
-  <app-home [page]="page" class="home"></app-home>
+  <app-home [page]="page"></app-home>
 </ng-template>
 
 <ng-template #landingTemplate>
-  <div class="ids-row--gutter ids-container">
-    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
-    <app-landing-page class="ids-row--col-sm-9" [page]="page" [sidebar]="true"></app-landing-page>
-  </div>
+  <app-landing-page [page]="page"></app-landing-page>
 </ng-template>
 
 <ng-template #docsLandingTemplate>
-  <app-landing-page [page]="page" [sidebar]="false"></app-landing-page>
+  <app-landing-page [page]="page"></app-landing-page>
 </ng-template>
 
 <ng-template #coreTemplate>
-  <div class="ids-row--gutter ids-container">
-    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
-    <app-core-content-page class="ids-row--col-sm-9" [page]="page"></app-core-content-page>
-  </div>
+  <app-core-content-page [page]="page"></app-core-content-page>
 </ng-template>
 
 <ng-template #elementsTemplate>
-  <div class="ids-row--gutter ids-container">
-    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
-    <app-element-page class="ids-row--col-sm-9" [page]="page"></app-element-page>
-  </div>
+  <app-element-page [page]="page"></app-element-page>
 </ng-template>
 
 <ng-template #blockTemplate>
-  <div class="ids-row--gutter ids-container">
-    <ng-container #sidebarPlaceholder [ngTemplateOutlet]="sidebar"></ng-container>
-    <app-block-page class="ids-row--col-sm-9" [page]="page"></app-block-page>
-  </div>
+  <app-block-page [page]="page"></app-block-page>
 </ng-template>
 
 <ng-template #docsTemplate>
@@ -49,7 +31,5 @@
 </ng-template>
 
 <ng-template #notFoundTemplate>
-  <div class="ids-row--gutter ids-container">
-    <app-page-not-found></app-page-not-found>
-  </div>
+  <app-page-not-found></app-page-not-found>
 </ng-template>

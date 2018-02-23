@@ -1,4 +1,3 @@
-<div class="ids-container">
 
   <div class="ids-banner ids-banner--top-full-width" [hidden]="!showWarning">
     <div class="ids-banner-content">
@@ -6,11 +5,20 @@
     </div>
   </div>
 
-  <div class="ids-row--gutter">
+  <div class="container--code ids-container ids-row">
 
-    <aside class="ids-row--col-sm-3 ids-row--col-md-2 sidebar" *ngIf="sidebar">
+    <aside class="sidebar sidebar--code ids-row--col-sm-3" *ngIf="sidebar">
 
-      <div class="ids-form-group">
+      <div class="ids-form-group library-select-group">
+        <label for="select-library">Library</label>
+        <select #library (change)="onLibraryChange(library.value)" id="select-library" class="ids-form-control">
+          <option *ngFor="let library of libraryPaths" value="/{{section}}/{{library.path}}/latest" [selected]="library.path == selectedLibrary">
+            {{library.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="ids-form-group library-select-group">
         <label for="select-version">Version</label>
         <select #option (change)="onVersionChange(option.value)" id="select-version" class="ids-form-control">
           <option *ngFor="let version of versionPaths" value="/{{section}}{{version.full}}{{element}}" [selected]="version.full == selectedVersion">
@@ -19,15 +27,22 @@
         </select>
       </div>
 
+      <ng-container *ngFor="let library of libraryPaths">
+        <h1 class="ids-list--heading" *ngIf="library.path == selectedLibrary">{{library.name}}</h1>
+      </ng-container>
+
       <nav class="sidebar-nav">
-        <ul class="ids-list--plain">
-          <li class="sidebar-nav__group" *ngFor="let child of sidebarNav">
-            <span class="sidebar-nav__child-item">
-              {{child.name}}<br>
+        <ul class="ids-list ids-list--hover">
+          <li *ngFor="let child of sidebarNav; let i = index;">
+            <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading" [class.ids-list--heading--active]="!expandedLevel1[i]">
+              {{child.name}}
+              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+                <use xlink:href="#icon_expand"></use>
+              </svg>
             </span>
-            <ul class="ids-list--plain" *ngIf="child.pages">
+            <ul *ngIf="child.pages" class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
               <li *ngFor="let grandChild of child.pages">
-                <a class="sidebar-nav__grandchild-item" routerLinkActive="sidebar-nav__item--current" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
+                <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{grandChild.slug}}">
                   {{grandChild.name}}
                 </a>
               </li>
@@ -40,83 +55,86 @@
 
     <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
-    <div class="ids-row--col-sm-9 ids-row--col-md-9" *ngIf="!notFound">
+    <main class="ids-row--col-sm-7 ids-row--offset-sm-4">
 
-      <header class="page-header">
-        <h1>{{docs?.title}}</h1>
-        <a *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}">View Live Demo</a>
-        <a class="ids-btn btn--custom btn--custom--ghost" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
-          <div class="ids-btn--inner">
-            <span title="icon_information icon">
-              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
-            </span>
-            View More Information
-          </div>
-        </a>
-      </header>
+      <div class="page-content--code" *ngIf="!notFound">
+
+        <header class="page-header">
+          <h1>{{docs?.title}}</h1>
+          <a *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">View Live Demo</a>
+          <a class="ids-btn ids-btn--link btn--custom--crosslink" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
+            <div class="ids-btn--inner">
+              <span title="icon_information icon">
+                <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
+              </span>
+              View More Information
+            </div>
+          </a>
+        </header>
 
 
-      <div *ngIf="docs?.specs">
-        <h2>Specifications</h2>
-        <table>
-          <thead>
-            <th>Description</th>
-            <th>Value</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let spec of docs.specs">
-              <td>
-                {{spec.title}}
-              </td>
-              <td>
-                <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="spec.value && {'background-color': ''+ spec.value +'' }" title="{{spec.value}}"></span>
-                <span *ngIf="spec.valueType">{{spec.value}}</span>
-              </td>
-              <td>
-                <code class="site-spec--code">var({{spec.originalDeclaration}})</code>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div *ngFor="let element of elements">
-        <h2>Class {{element.name}}</h2>
-        <div *ngFor="let constructorTag of element.constructorTags">
-          <span>Constructor</span>
-          <code>new {{element.name}}({{constructorTag.name}}({{constructorTag.type.name}}): {{constructorTag.description}})</code>
+        <div *ngIf="docs?.specs">
+          <h2>Specifications</h2>
+          <table>
+            <thead>
+              <th>Description</th>
+              <th>Value</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let spec of docs.specs">
+                <td>
+                  {{spec.title}}
+                </td>
+                <td>
+                  <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="spec.value && {'background-color': ''+ spec.value +'' }" title="{{spec.value}}"></span>
+                  <span *ngIf="spec.valueType">{{spec.value}}</span>
+                </td>
+                <td>
+                  <code class="site-spec--code">var({{spec.originalDeclaration}})</code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <table>
-          <thead>
-            <th>Name</th>
-            <th>Description</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let method of element.methods">
-              <td>
-                <div *ngIf="method.params.length; then thenTemplateName; else elseTemplateName">
-                  your Content ignored
-                </div>
-              </td>
-              <ng-template #thenTemplateName>
+
+        <div *ngFor="let element of elements">
+          <h2>Class {{element.name}}</h2>
+          <div *ngFor="let constructorTag of element.constructorTags">
+            <span>Constructor</span>
+            <code>new {{element.name}}({{constructorTag.name}}({{constructorTag.type.name}}): {{constructorTag.description}})</code>
+          </div>
+          <table>
+            <thead>
+              <th>Name</th>
+              <th>Description</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let method of element.methods">
                 <td>
-                  {{method.name}}&#40;<span *ngFor="let param of method.params; let isLast=last">{{param.paramName}} = {{param.paramDescription}}{{isLast ? '' : ', '}}</span>&#41;
+                  <div *ngIf="method.params.length; then thenTemplateName; else elseTemplateName">
+                    your Content ignored
+                  </div>
                 </td>
-              </ng-template>
-              <ng-template #elseTemplateName>
+                <ng-template #thenTemplateName>
+                  <td>
+                    {{method.name}}&#40;<span *ngFor="let param of method.params; let isLast=last">{{param.paramName}} = {{param.paramDescription}}{{isLast ? '' : ', '}}</span>&#41;
+                  </td>
+                </ng-template>
+                <ng-template #elseTemplateName>
+                  <td>
+                    {{method.name}}
+                  </td>
+                </ng-template>
                 <td>
-                  {{method.name}}
+                  {{method.info}}
                 </td>
-              </ng-template>
-              <td>
-                {{method.info}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="!loading" #link [innerHTML]="docs?.trustedHtml" (click)="relativeLinks(link)"></div>
       </div>
-      <div *ngIf="!loading" #link [innerHTML]="docs?.trustedHtml" (click)="relativeLinks(link)"></div>
-    </div>
+
+    </main>
 
   </div>
-</div>

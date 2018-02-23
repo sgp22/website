@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -7,7 +7,7 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './landing-page.component.html',
   providers: [PagesService]
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, OnDestroy {
   @Input() page;
   @Input() sidebar;
   public pageContent: any;
@@ -24,6 +24,11 @@ export class LandingPageComponent implements OnInit {
       this.pageContent = this.page;
       this.hasSidebar = this.sidebar;
     }
+  }
+
+  ngOnDestroy() {
+    this.pageContent = '';
+    this.hasSidebar = !this.sidebar;
   }
 
 }

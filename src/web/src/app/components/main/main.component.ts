@@ -1,7 +1,8 @@
-import { Component, AfterContentInit, ViewChild, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, AfterContentInit, ViewChild, OnInit, ViewContainerRef, HostBinding } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { PagesService } from '../../shared/pages.service';
+
 
 @Component({
   selector: 'app-main',
@@ -19,6 +20,8 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
+  @HostBinding('class.ids-row--col-sm-7')
+  @HostBinding('class.ids-row--offset-sm-4') useGrid: boolean = true;
   public page;
   public section;
   public sidebarNav;
@@ -50,6 +53,7 @@ export class MainComponent implements AfterContentInit, OnInit {
     if(params.slug !== 'code') {
       switch (keys.length) {
         case 0:
+          this.useGrid = false;
           this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
           break;
         case 1:
@@ -62,26 +66,18 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.pagesService.getAll().subscribe(data => {
 
             if (this.pageExists(data['items'], params.grandChildSlug)) {
+              this.switchPageType(data['items'], params.grandChildSlug);
+            } else {
+              this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
+            }
 
-              this.getSideBar(data);
+          });
+          break;
+        case 4:
+          this.pagesService.getAll().subscribe(data => {
 
-              data['items'].filter(page => {
-                const slug = page.meta.slug;
-                if (slug === params.grandChildSlug) {
-                  switch (page.meta.type) {
-                    case 'home.CoreContentPage':
-                      this.getPageContent(page, this.coreTemplate);
-                      break;
-                    case 'home.BlocksPage':
-                      this.getPageContent(page, this.blockTemplate);
-                      break;
-                    default:
-                      this.getPageContent(page, this.elementsTemplate);
-                      break;
-                  }
-                }
-              });
-
+            if (this.pageExists(data['items'], params.greatGrandChildSlug)) {
+              this.switchPageType(data['items'], params.greatGrandChildSlug);
             } else {
               this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
             }
@@ -99,7 +95,7 @@ export class MainComponent implements AfterContentInit, OnInit {
     if (params.slug === 'code') {
       switch (keys.length) {
         case 1:
-          this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, false);
+          this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, true);
           break;
         case 2:
           this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
@@ -203,6 +199,25 @@ export class MainComponent implements AfterContentInit, OnInit {
         }
       );
 
+  }
+
+  switchPageType(data, params) {
+    data.filter(page => {
+      const slug = page.meta.slug;
+      if (slug === params) {
+        switch (page.meta.type) {
+          case 'home.CoreContentPage':
+            this.getPageContent(page, this.coreTemplate);
+            break;
+          case 'home.BlocksPage':
+            this.getPageContent(page, this.blockTemplate);
+            break;
+          default:
+            this.getPageContent(page, this.elementsTemplate);
+            break;
+        }
+      }
+    });
   }
 
   private stopRefreshing() {

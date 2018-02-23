@@ -11,11 +11,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
-const postcssUrl = require('postcss-url');
 const cssnano = require('cssnano');
 const atImport = require("postcss-import");
 const postcssCssnext = require('postcss-cssnext');
-const stylelint = require("stylelint");
+const postcssAtRulesVars = require('postcss-at-rules-variables');
 
 // Plugins
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
@@ -32,6 +31,8 @@ const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
 
+const cssExtract = new ExtractTextPlugin("assets/site/css/site.css");
+
 const postcssPlugins = function () {
   // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193
   const importantCommentRe = /@preserve|@license|[@#]\s*source(?:Mapping)?URL|^!/i;
@@ -43,35 +44,12 @@ const postcssPlugins = function () {
   };
   return [
     postcss([
-      postcssUrl({
-        url: (URL) => {
-
-          // Only convert root relative URLs, which CSS-Loader won't process into require().
-          if (!URL.startsWith('/') || URL.startsWith('//')) {
-            return URL;
-          }
-
-          // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
-          if (deployUrl.match(/:\/\//)) {
-            return `${deployUrl.replace(/\/$/, '')}${URL}`;
-
-          } else if (baseHref.match(/:\/\//)) {
-            // If baseHref contains a scheme, include it as is.
-            return baseHref.replace(/\/$/, '') + `/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-
-          } else {
-            // Join together base-href, deploy-url and the original URL.
-            // Also dedupe multiple slashes into single ones.
-            return `/${baseHref}/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-          }
-        }
-      }),
-      atImport({
-        plugins: [ stylelint() ]
-      }),
-      postcssCssnext()
+      atImport(),
+      postcssAtRulesVars(),
+      postcssCssnext(),
+      cssnano(minimizeOptions)
     ]),
-  ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
+  ]
 };
 
 // Variables
@@ -86,19 +64,19 @@ module.exports = {
       ".js"
     ],
     "modules": [
-      "./node_modules"
+      nodeModules
     ],
     "symlinks": true
   },
   "resolveLoader": {
     "modules": [
-      "./node_modules"
+      nodeModules
     ]
   },
   "entry": {
     "main": [
       "./src/main.ts",
-      "./src/styles.css"
+      "./src/css/site.css"
     ],
     "polyfills": [
       "./src/polyfills.ts"
@@ -117,7 +95,7 @@ module.exports = {
         "test": /\.js$/,
         "loader": "source-map-loader",
         "exclude": [
-          /(\\|\/)node_modules(\\|\/)/
+          nodeModules
         ]
       },
       {
@@ -146,7 +124,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/styles.css")
+          path.join(process.cwd(), "src/css/site.css")
         ],
         test: /\.css$/,
         use: [
@@ -155,10 +133,10 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/styles.css")
+          path.join(process.cwd(), "src/css/site.css")
         ],
         "test": /\.css$/,
-        "use": ExtractTextPlugin.extract({
+        "use": cssExtract.extract({
           "fallback": "style-loader",
           "use": [
             {
@@ -219,38 +197,28 @@ module.exports = {
       },
       {
         "context": "src/",
-        "to": "assets/ids/svgs",
-        "from": "../node_modules/@infor/ids-web/dist/ids-icons.svg"
+        "to": "assets/ids-web/svgs",
+        "from": `${nodeModules}/@infor/ids-web/dist/ids-icons.svg`
       },
       {
         "context": "src/",
-        "to": "assets/ids/css",
-        "from": "../node_modules/@infor/ids-web/dist/ids-reset.min.css"
+        "to": "assets/ids-web/css",
+        "from": `${nodeModules}/@infor/ids-web/dist/ids-reset.min.css`
       },
       {
         "context": "src/",
-        "to": "assets/ids/css",
-        "from": "../node_modules/@infor/ids-web/dist/ids-reset.min.css.map"
+        "to": "assets/ids-web/css",
+        "from": `${nodeModules}/@infor/ids-web/dist/ids-reset.min.css.map`
       },
       {
         "context": "src/",
-        "to": "assets/ids/css",
-        "from": "../node_modules/@infor/ids-web/dist/ids-web.min.css"
+        "to": "assets/ids-web/css",
+        "from": `${nodeModules}/@infor/ids-web/dist/ids-web.min.css`
       },
       {
         "context": "src/",
-        "to": "assets/ids/css",
-        "from": "../node_modules/@infor/ids-web/dist/ids-web.min.css.map"
-      },
-      {
-        "context": "src/",
-        "to": "assets/documentation-css/css",
-        "from": "../node_modules/@infor/documentation-css/dist/documentation.min.css"
-      },
-      {
-        "context": "src/",
-        "to": "assets/documentation-css/css",
-        "from": "../node_modules/@infor/documentation-css/dist/documentation.min.css.map"
+        "to": "assets/ids-web/css",
+        "from": `${nodeModules}/@infor/ids-web/dist/ids-web.min.css.map`
       }
     ], {
       "ignore": [
@@ -260,7 +228,7 @@ module.exports = {
     }),
     new ProgressPlugin(),
     new CircularDependencyPlugin({
-      "exclude": /(\\|\/)node_modules(\\|\/)/,
+      "exclude": nodeModules,
       "failOnError": false
     }),
     new NamedLazyChunksWebpackPlugin(),
@@ -294,14 +262,14 @@ module.exports = {
     }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
-        "assets/ids/css/ids-reset.min.css",
-        "assets/ids/css/ids-web.min.css",
-        "assets/documentation-css/css/documentation.min.css"
+        "assets/ids-web/css/ids-reset.min.css",
+        "assets/ids-web/css/ids-web.min.css",
+        "assets/site/css/site.css"
       ],
       append: false,
       publicPath: true
     }),
-    new ExtractTextPlugin("styles.css"),
+    cssExtract,
     new BaseHrefWebpackPlugin({}),
     new CommonsChunkPlugin({
       "name": [
