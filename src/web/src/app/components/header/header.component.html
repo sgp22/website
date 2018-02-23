@@ -58,7 +58,6 @@
             </a>
             <span class="main-nav__popupmenu top" [hidden]="!popupmenuToggle">
               <ul>
-                <!-- <li><a href="/code/4.0/latest">Soho 4.0</a></li> -->
                 <li><a (click)="handleDropdownLink('/code/ids-web/latest')">IDS Web</a></li>
                 <li><a (click)="handleDropdownLink('/code/ids-pendo/latest')">IDS Pendo</a></li>
               </ul>
@@ -72,10 +71,28 @@
   </div>
 </header>
 
-<nav #mainNavMobile (click)="closeNav()" class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'">
+<nav #mainNavMobile class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'">
   <ng-container *ngFor="let navItem of navItems">
-    <a *ngIf="!navItem.trigger" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
-    <a *ngIf="navItem.trigger" class="main-nav--mobile--item" id="{{navItem.id}}">{{navItem.title}}</a>
+    <a *ngIf="!navItem.trigger" (click)="closeNav()" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+    <span *ngIf="navItem.trigger">
+      <a
+        #mobileTrigger
+        type="button"
+        class="main-nav--mobile--item ids-btn ids-btn--link"
+        [class.active]="popupmenuToggle"
+        id="{{navItem.id}}">
+          {{navItem.title}}
+        <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+          <use xlink:href="#icon_expand"></use>
+        </svg>
+      </a>
+      <span class="main-nav__popupmenu--mobile" [class.open]="popupmenuToggle" (click)="closeNav()">
+        <ul class="ids-list">
+          <li><a class="ids-list--item" (click)="handleDropdownLink('/code/ids-web/latest')">IDS Web</a></li>
+          <li><a class="ids-list--item" (click)="handleDropdownLink('/code/ids-pendo/latest')">IDS Pendo</a></li>
+        </ul>
+      </span>
+    </span>
   </ng-container>
 </nav>
 

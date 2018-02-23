@@ -109,6 +109,36 @@
   &.main-nav--mobile--item--current {
     text-decoration: underline;
   }
+
+  &.ids-btn {
+    color: inherit;
+    padding: 0;
+    text-align: left;
+  }
+
+  & .ids-icon {
+    transform: rotate(-90deg);
+    vertical-align: middle;
+  }
+
+  &.active {
+    & .ids-icon {
+      transform: rotate(0);
+    }
+  }
+
+  &:visited {
+    color: var(--link-color-custom-dark);
+  }
+}
+
+.main-nav__popupmenu--mobile {
+  display: none;
+  margin-bottom: 24px;
+
+  &.open {
+    display: block;
+  }
 }
 
 .overlay--mobile-nav {
