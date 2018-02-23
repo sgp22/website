@@ -37,7 +37,7 @@
         <ng-container *ngFor="let navItem of navItems">
           <a
             *ngIf="!navItem.trigger"
-            class="main-nav__item"
+            class="ids-btn ids-btn--link"
             id="{{navItem.id}}"
             routerLinkActive="main-nav__item--current"
             [routerLink]="['', navItem.meta.slug]">
@@ -47,7 +47,7 @@
             <a
               #trigger
               type="button"
-              class="main-nav__item ids-btn ids-btn--link"
+              class="ids-btn ids-btn--link"
               id="{{navItem.id}}"
               routerLinkActive="main-nav__item--current"
               >
