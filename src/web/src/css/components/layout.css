@@ -29,18 +29,6 @@
   }
 }
 
-.sidebar--code {
-  padding-right: 24px;
-  padding-top: 48px;
-
-  @media (--viewport-sm) {
-    height: 100vh;
-    overflow: scroll;
-    padding-bottom: 150px;
-    position: fixed;
-  }
-}
-
 .page-content--code {
   padding-top: 48px;
 }

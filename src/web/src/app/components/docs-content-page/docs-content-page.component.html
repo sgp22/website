@@ -9,7 +9,7 @@
 
     <aside class="sidebar sidebar--code ids-row--col-sm-3" *ngIf="sidebar">
 
-      <div class="ids-form-group">
+      <div class="ids-form-group library-select-group">
         <label for="select-library">Library</label>
         <select #library (change)="onLibraryChange(library.value)" id="select-library" class="ids-form-control">
           <option *ngFor="let library of libraryPaths" value="/{{section}}/{{library.path}}/latest" [selected]="library.path == selectedLibrary">
@@ -18,7 +18,7 @@
         </select>
       </div>
 
-      <div class="ids-form-group">
+      <div class="ids-form-group library-select-group">
         <label for="select-version">Version</label>
         <select #option (change)="onVersionChange(option.value)" id="select-version" class="ids-form-control">
           <option *ngFor="let version of versionPaths" value="/{{section}}{{version.full}}{{element}}" [selected]="version.full == selectedVersion">
