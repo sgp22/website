@@ -29,10 +29,10 @@
 .page-header {
   position: relative;
 
-  & .btn--custom--ghost {
+  & .btn--custom--crosslink {
     position: absolute;
     right: 0;
-    top: 0;
+    top: calc(var(--spacing) * 1);
   }
 }
 

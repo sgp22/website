@@ -21,6 +21,10 @@
     align-items: center;
     display: flex;
   }
+
+  & a.logo {
+    text-decoration: none;
+  }
 }
 
 .logo {

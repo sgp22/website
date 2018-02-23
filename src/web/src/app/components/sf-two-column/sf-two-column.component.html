@@ -29,7 +29,7 @@
         <img class="hero-image" *ngIf="col2HeroImage" src="{{col2HeroImage}}" alt="{{col2HeroImageTitle}}">
         <h1 class="page-section-title" [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}">{{col2Title}}</h1>
         <p [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}" [innerHTML]="col2Content"></p>
-        <a class="btn btn--custom" [ngClass]="col2InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col2CtaText"
+        <a class="ids-btn btn--custom" [ngClass]="col2InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col2CtaText"
           routerLink="{{col2CtaLink}}">{{col2CtaText}}</a>
       </div>
 

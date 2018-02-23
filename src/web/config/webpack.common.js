@@ -31,7 +31,7 @@ const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
 
-const cssExtract = new ExtractTextPlugin("assets/site/css/styles.css");
+const cssExtract = new ExtractTextPlugin("assets/site/css/site.css");
 
 const postcssPlugins = function () {
   // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193

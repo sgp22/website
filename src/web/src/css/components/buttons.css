@@ -49,31 +49,6 @@
   }
 }
 
-.btn--custom--ghost {
-  border: 1px solid var(--black);
-  color: var(--black);
-  padding-left: calc(var(--spacing) * 3);
-  padding-right: calc(var(--spacing) * 3);
-
-  & svg {
-    fill: var(--black);
-    margin-right: var(--spacing);
-  }
-
-  &:hover,
-  &:visited {
-    color: var(--black);
-  }
-
-  &:hover {
-    opacity: 1;
-
-    & > * {
-      opacity: 0.75;
-    }
-  }
-}
-
 .ids-btn--inner {
   align-items: center;
   display: flex;
