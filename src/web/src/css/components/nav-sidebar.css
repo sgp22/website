@@ -6,20 +6,22 @@
   padding-top: 48px;
 
   @media (--viewport-sm) {
+    border-right: 1px solid var(--input-readonly-bg-color);
     height: 100vh;
-    overflow: scroll;
+    overflow: auto;
     padding-bottom: 150px;
     position: fixed;
   }
 }
 
 .sidebar--code {
+  border-right: 1px solid var(--input-readonly-bg-color);
   padding-right: 0;
   padding-top: 48px;
 
   @media (--viewport-sm) {
     height: 100vh;
-    overflow: scroll;
+    overflow: auto;
     padding-bottom: 150px;
     position: fixed;
   }
@@ -45,7 +47,7 @@
 
   & .ids-icon {
     position: absolute;
-    right: 16px;
+    right: 24px;
     top: 50%;
     transform: rotate(-180deg) translateY(50%);
   }
