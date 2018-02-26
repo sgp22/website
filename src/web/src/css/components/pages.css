@@ -34,6 +34,10 @@
     position: absolute;
     right: 0;
     top: calc(var(--spacing) * 1);
+
+    & svg {
+      fill: #fff;
+    }
   }
 }
 
