@@ -154,6 +154,14 @@
 .main-nav__item--trigger {
   display: inline-block;
   position: relative;
+
+  & .ids-btn {
+    color: var(--black);
+
+    & .ids-icon {
+      fill: var(--black);
+    }
+  }
 }
 
 .main-nav__popupmenu {
