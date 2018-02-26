@@ -41,14 +41,18 @@
 
 .ids-list--heading {
   cursor: pointer;
+  position: relative;
 
   & .ids-icon {
-    transform: rotate(-90deg);
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: rotate(-180deg) translateY(50%);
   }
 
   &.ids-list--heading--active {
     & .ids-icon {
-      transform: rotate(0);
+      transform: rotate(0deg) translateY(-50%);
     }
   }
 }
