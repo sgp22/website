@@ -23,16 +23,6 @@
   }
 }
 
-.btn--custom--solid {
-  background-color: var(--brand-blue);
-  color: var(--white);
-}
-
-.btn--custom--inverted {
-  border: 1px solid var(--white);
-  color: var(--white);
-}
-
 .ids-btn--inner {
   align-items: center;
   display: flex;
