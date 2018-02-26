@@ -10,11 +10,15 @@ body {
 
 body {
   background-color: var(--white);
-  padding-top: 94px;
+  padding-top: 78px;
 }
 
 .ids-container {
   margin: 0 auto;
+}
+
+.site-container {
+  padding-top: 0;
 }
 
 img {
