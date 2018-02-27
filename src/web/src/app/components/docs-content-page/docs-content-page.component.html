@@ -28,7 +28,7 @@
       <nav class="sidebar-nav">
         <ul class="ids-list ids-list--hover">
           <li *ngFor="let child of sidebarNav; let i = index;">
-            <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading" [class.ids-list--heading--active]="!expandedLevel1[i]">
+            <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
               {{child.name}}
               <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                 <use xlink:href="#icon_expand"></use>
@@ -39,7 +39,7 @@
                 <a *ngIf="!level_2.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{level_2.slug}}">
                   {{level_2.name}}
                 </a>
-                <span *ngIf="level_2.pages" (click)="expandedLevel2[i] = !expandedLevel2[i]" class="ids-list--item ids-list--heading" [class.ids-list--heading--active]="!expandedLevel2[i]">
+                <span *ngIf="level_2.pages" (click)="expandedLevel2[i] = !expandedLevel2[i]" class="ids-list--item ids-list--heading-accordion" [class.ids-list--heading-accordion--active]="!expandedLevel2[i]">
                   {{level_2.name}}
                   <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                     <use xlink:href="#icon_expand"></use>
@@ -74,7 +74,7 @@
         <header class="page-header">
           <h1 class="page-title">{{docs?.title}}</h1>
           <a *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">View Live Demo</a>
-          <a class="ids-btn ids-btn--link btn--custom--crosslink" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
+          <a class="ids-btn ids-btn--primary btn--custom--crosslink" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
             <div class="ids-btn--inner">
               <span title="icon_information icon">
                 <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
