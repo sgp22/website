@@ -6,20 +6,22 @@
   padding-top: 48px;
 
   @media (--viewport-sm) {
+    border-right: 1px solid var(--input-readonly-bg-color);
     height: 100vh;
-    overflow: scroll;
+    overflow: auto;
     padding-bottom: 150px;
     position: fixed;
   }
 }
 
 .sidebar--code {
+  border-right: 1px solid var(--input-readonly-bg-color);
   padding-right: 0;
   padding-top: 48px;
 
   @media (--viewport-sm) {
     height: 100vh;
-    overflow: scroll;
+    overflow: auto;
     padding-bottom: 150px;
     position: fixed;
   }
@@ -27,7 +29,7 @@
 
 .library-select-group {
   @media (--viewport-sm) {
-    padding-right: 24px;
+    padding: calc(var(--spacing) * 1);
   }
 }
 
@@ -39,16 +41,25 @@
   }
 }
 
-.ids-list--heading {
-  cursor: pointer;
+.ids-list--heading-accordion {
+  position: relative;
 
   & .ids-icon {
-    transform: rotate(-90deg);
+    fill: var(--text-color-info);
+    position: absolute;
+    right: calc(var(--spacing) * 3);
+    transform: rotate(0deg) translateY(50%);
   }
 
-  &.ids-list--heading--active {
+  &:hover {
     & .ids-icon {
-      transform: rotate(0);
+      fill: var(--text-color);
+    }
+  }
+
+  &.ids-list--heading-accordion--active {
+    & .ids-icon {
+      transform: rotate(-180deg) translateY(-50%);
     }
   }
 }
