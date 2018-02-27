@@ -28,9 +28,7 @@
 }
 
 .library-select-group {
-  @media (--viewport-sm) {
-    padding: calc(var(--spacing) * 1);
-  }
+  padding: calc(var(--spacing) * 1);
 }
 
 .ids-list--expandable {
