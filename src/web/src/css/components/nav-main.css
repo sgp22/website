@@ -154,14 +154,6 @@
 .main-nav__item--trigger {
   display: inline-block;
   position: relative;
-
-  & .ids-btn {
-    color: var(--black);
-
-    & .ids-icon {
-      fill: var(--black);
-    }
-  }
 }
 
 .main-nav__popupmenu {
@@ -194,6 +186,7 @@
   }
 
   & a {
+    color: var(--black);
     display: block;
     font-size: 1.4rem;
     line-height: 32px;
@@ -202,7 +195,7 @@
     white-space: nowrap;
 
     &:hover {
-      background-color: #d8d8d8;
+      background-color: var(--list-hover-color);
     }
   }
 
