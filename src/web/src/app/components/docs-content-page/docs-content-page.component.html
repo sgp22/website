@@ -75,12 +75,8 @@
           <h1 class="page-title">{{docs?.title}}</h1>
           <a *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">View Live Demo</a>
           <a class="ids-btn ids-btn--primary btn--custom--crosslink" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
-            <div class="ids-btn--inner">
-              <span title="icon_information icon">
-                <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
-              </span>
-              View More Information
-            </div>
+            <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
+            <span>View More Information</span>
           </a>
         </header>
 
