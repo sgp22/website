@@ -28,7 +28,7 @@
 }
 
 .library-select-group {
-  padding: calc(var(--spacing) * 1);
+  padding: 0 calc(var(--spacing) * 2);
 }
 
 .ids-list--expandable {
@@ -63,6 +63,6 @@
   }
 }
 
-.ids-list--heading--level-2 {
-  cursor: pointer;
+.ids-list--heading--level-1 {
+  padding-left: calc(var(--spacing) * 2);
 }

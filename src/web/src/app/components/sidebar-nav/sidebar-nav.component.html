@@ -8,14 +8,14 @@
 
         <li *ngIf="level_2">
 
-          <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
+          <span *ngIf="child.children.length > 0" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
               <use xlink:href="#icon_expand"></use>
             </svg>
           </span>
 
-          <a *ngIf="child.children.length <= 0" class="ids-list--item" routerLink="{{section}}/{{child.slug}}">{{child.title}}</a>
+          <a *ngIf="child.children.length <= 0" class="ids-list--item" routerLink="{{section}}/{{child.slug}}" routerLinkActive="ids-list--item--selected">{{child.title}}</a>
 
           <ul class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
             <li *ngFor="let level_2 of child.children; let i = index">
@@ -24,7 +24,7 @@
                 {{level_2.title}}
               </a>
 
-              <span *ngIf="level_2.children.length > 0" class="ids-list--item ids-list--heading-accordion ids-list--heading-accordion--active">
+              <span *ngIf="level_2.children.length > 0" class="ids-list--item ids-list--heading ids-list--heading-accordion--active">
                 {{level_2.title}}
               </span>
 

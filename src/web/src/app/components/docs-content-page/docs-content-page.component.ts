@@ -185,7 +185,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       .subscribe(
         (sidebar) => {
           this.sidebarNav = sidebar['sections'];
-          console.log(this.sidebarNav);
         }
       );
 

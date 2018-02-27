@@ -3,6 +3,17 @@
  * Layout
  */
 
+.site:not(.home, .code-section) {
+
+  & .page-content {
+    padding: 48px 16px;
+
+    @media (--viewport-md) {
+      padding: 48px 0;
+    }
+  }
+}
+
 .home {
   & .page-content {
     margin: 0;
