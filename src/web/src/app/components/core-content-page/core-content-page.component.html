@@ -1,6 +1,6 @@
 <ng-container>
 
-    <h1>{{pageContent?.title}}</h1>
+    <h1 class="page-title">{{pageContent?.title}}</h1>
     <section class="page-section" *ngIf="pageContent">
       <ng-container *ngFor="let streamfield of pageContent.body">
         <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
