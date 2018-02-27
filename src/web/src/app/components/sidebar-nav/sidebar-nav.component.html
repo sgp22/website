@@ -2,14 +2,14 @@
   <nav class="sidebar-nav-list">
 
     <span class="ids-list--heading">
-      {{sectionTitle}}
+      <a routerLink="{{section}}">{{sectionTitle}}</a>
     </span>
 
     <ul class="ids-list ids-list--hover">
       <ng-container *ngFor="let child of sidebarNav; let i = index">
 
         <li *ngIf="level_2">
-          <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading ids-list--heading--active" [class.ids-list--heading--active]="!expandedLevel1[i]">
+          <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
               <use xlink:href="#icon_expand"></use>
@@ -20,7 +20,7 @@
               <a *ngIf="level_2.children.length <= 0" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{level_2.relative_url}}">
                 {{level_2.title}}
               </a>
-              <span (click)="expandedLevel2[i] = !expandedLevel2[i]" *ngIf="level_2.children.length > 0" class="ids-list--item ids-list--heading ids-list--heading--active" [class.ids-list--heading--active]="!expandedLevel2[i]">
+              <span (click)="expandedLevel2[i] = !expandedLevel2[i]" *ngIf="level_2.children.length > 0" class="ids-list--item ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel2[i]">
                 {{level_2.title}}
                 <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                   <use xlink:href="#icon_expand"></use>

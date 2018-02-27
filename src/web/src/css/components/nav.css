@@ -2,9 +2,3 @@
  * Nav
  */
 
-.main-nav {
-  & a,
-  & a:visited {
-    color: var(--black);
-  }
-}

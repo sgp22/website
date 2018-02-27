@@ -78,7 +78,7 @@
   display: none;
   padding: calc(var(--spacing) * 2);
   position: fixed;
-  top: 95px;
+  top: 78px;
   width: 100%;
   z-index: 3;
 
@@ -186,6 +186,7 @@
   }
 
   & a {
+    color: var(--black);
     display: block;
     font-size: 1.4rem;
     line-height: 32px;
@@ -194,7 +195,7 @@
     white-space: nowrap;
 
     &:hover {
-      background-color: #d8d8d8;
+      background-color: var(--list-hover-color);
     }
   }
 

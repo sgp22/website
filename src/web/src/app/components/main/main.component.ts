@@ -122,10 +122,6 @@ export class MainComponent implements AfterContentInit, OnInit {
     this.pagesService.getAll().subscribe(
       (d) => {
 
-        if (sidebar === true) {
-          this.getSideBar(d);
-        }
-
         if (this.pageExists(d['items'], paramsSlug)) {
           d['items'].filter(page => {
             const slug = page.meta.slug;
