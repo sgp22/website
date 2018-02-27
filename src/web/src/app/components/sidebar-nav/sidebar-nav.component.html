@@ -8,7 +8,7 @@
 
         <li *ngIf="level_2">
 
-          <span *ngIf="child.children.length > 0" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading ids-list--heading--level-2 ids-list--heading--active" [class.ids-list--heading--active]="!expandedLevel1[i]">
+          <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
               <use xlink:href="#icon_expand"></use>
@@ -24,7 +24,7 @@
                 {{level_2.title}}
               </a>
 
-              <span *ngIf="level_2.children.length > 0" class="ids-list--item ids-list--heading">
+              <span *ngIf="level_2.children.length > 0" class="ids-list--item ids-list--heading-accordion ids-list--heading-accordion--active">
                 {{level_2.title}}
               </span>
 

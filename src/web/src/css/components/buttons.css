@@ -23,32 +23,6 @@
   }
 }
 
-.btn--custom--solid {
-  background-color: var(--brand-blue);
-  color: var(--white);
-}
-
-.btn--custom--inverted {
-  border: 1px solid var(--white);
-  color: var(--white);
-}
-
-.btn--custom--small--inverted {
-  border: 1px solid var(--graphite055);
-  color: var(--graphite055);
-  padding: var(--spacing) 20px;
-
-  &:hover,
-  &:visited {
-    color: var(--graphite055);
-  }
-
-  &.btn--custom--small--active {
-    background-color: var(--graphite055);
-    color: var(--white);
-  }
-}
-
 .ids-btn--inner {
   align-items: center;
   display: flex;

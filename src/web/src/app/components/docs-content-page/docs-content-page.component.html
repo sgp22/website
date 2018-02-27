@@ -1,5 +1,5 @@
 
-  <div class="container--code ids-container ids-row site-container">
+  <div class="container--code ids-row">
 
     <aside class="sidebar sidebar--code ids-row--col-sm-3" *ngIf="sidebar">
 
@@ -26,10 +26,14 @@
         <ul class="ids-list ids-list--hover">
 
           <li *ngFor="let child of sidebarNav; let i = index;">
+<<<<<<< HEAD
 
             <a *ngIf="!child.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">{{child.name}}</a>
 
             <span *ngIf="child.pages" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading ids-list--heading--level-2" [class.ids-list--heading--active]="!expandedLevel1[i]">
+=======
+            <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
+>>>>>>> develop
               {{child.name}}
               <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                 <use xlink:href="#icon_expand"></use>
@@ -44,7 +48,7 @@
                   {{level_2.name}}
                 </a>
 
-                <span *ngIf="level_2.pages" class="ids-list--item ids-list--heading ids-list--heading--active">
+                <span *ngIf="level_2.pages" class="ids-list--item ids-list--heading-accordion">
                   {{level_2.name}}
                 </span>
 
@@ -81,13 +85,9 @@
         <header class="page-header">
           <h1 class="page-title">{{docs?.title}}</h1>
           <a *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">View Live Demo</a>
-          <a class="ids-btn ids-btn--link btn--custom--crosslink" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
-            <div class="ids-btn--inner">
-              <span title="icon_information icon">
-                <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
-              </span>
-              View More Information
-            </div>
+          <a class="ids-btn ids-btn--primary btn--custom--crosslink" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
+            <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation"><use xlink:href="#icon_information"/></svg>
+            <span>View More Information</span>
           </a>
         </header>
 
