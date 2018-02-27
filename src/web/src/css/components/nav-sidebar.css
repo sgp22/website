@@ -28,7 +28,7 @@
 }
 
 .library-select-group {
-  padding: calc(var(--spacing) * 1);
+  padding: 0 calc(var(--spacing) * 2);
 }
 
 .ids-list--expandable {
@@ -38,6 +38,7 @@
     display: block;
   }
 }
+
 
 .ids-list--heading-accordion {
   position: relative;
@@ -60,4 +61,8 @@
       transform: rotate(-180deg) translateY(-50%);
     }
   }
+}
+
+.ids-list--heading--level-1 {
+  padding-left: calc(var(--spacing) * 2);
 }

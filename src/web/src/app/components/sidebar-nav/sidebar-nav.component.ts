@@ -47,7 +47,7 @@ export class SidebarNavComponent implements OnInit {
                   item.meta.children.children.map(child => {
                     child.children.length <= 0 ? this.level_2 = false : this.level_2 = true;
                     child.children.sort((thisGrandChild, nextGrandchild) => {
-                      return thisGrandChild.title > nextGrandchild.title ? 1 : -1;
+                      return thisGrandChild.menu_order > nextGrandchild.menu_order ? 1 : -1;
                     });
                     child.children
                       .filter(child => {

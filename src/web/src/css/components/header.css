@@ -7,7 +7,6 @@
   background-color: #fff;
   box-shadow: 1px 1px 2px var(--input-readonly-bg-color);
   display: block;
-  padding: calc(var(--spacing) * 2) 0;
   position: fixed;
   top: 0;
   width: 100%;
@@ -17,11 +16,10 @@
     margin-bottom: 0;
   }
 
-  & .ids-container {
+  & .side-header__inner {
     align-items: center;
     display: flex;
-    padding-bottom: 0;
-    padding-top: 0;
+    padding: calc(var(--spacing) * 2);
   }
 
   & a.logo {

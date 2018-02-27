@@ -21,39 +21,45 @@
         </select>
       </div>
 
-      <ng-container *ngFor="let library of libraryPaths">
-        <h1 class="ids-list--heading" *ngIf="library.path == selectedLibrary">{{library.name}}</h1>
-      </ng-container>
-
       <nav class="sidebar-nav">
+
         <ul class="ids-list ids-list--hover">
+
           <li *ngFor="let child of sidebarNav; let i = index;">
-            <span (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
+
+            <a *ngIf="!child.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">{{child.name}}</a>
+            <span *ngIf="child.pages" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
               {{child.name}}
               <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                 <use xlink:href="#icon_expand"></use>
               </svg>
             </span>
+
             <ul *ngIf="child.pages" class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
+
               <li *ngFor="let level_2 of child.pages; let i = index;">
+
                 <a *ngIf="!level_2.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{level_2.slug}}">
                   {{level_2.name}}
                 </a>
-                <span *ngIf="level_2.pages" (click)="expandedLevel2[i] = !expandedLevel2[i]" class="ids-list--item ids-list--heading-accordion" [class.ids-list--heading-accordion--active]="!expandedLevel2[i]">
+
+                <span *ngIf="level_2.pages" class="ids-list--item ids-list--heading">
                   {{level_2.name}}
-                  <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
-                    <use xlink:href="#icon_expand"></use>
-                  </svg>
                 </span>
-                <ul *ngIf="level_2.pages" class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel2[i]">
+
+                <ul *ngIf="level_2.pages" class="ids-list ids-list--expandable ids-list--expanded">
                   <li *ngFor="let level_3 of level_2.pages">
                     <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{level_3.slug}}">{{level_3.name}}</a>
                   </li>
                 </ul>
+
               </li>
+
             </ul>
+
           </li>
         </ul>
+
       </nav>
 
     </aside>

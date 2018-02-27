@@ -2,10 +2,6 @@
  * Page specific styles
  */
 
-.page-content {
-  padding-top: 48px;
-}
-
 .page-hero {
   background: linear-gradient(var(--blue-gradient));
   color: var(--white);
