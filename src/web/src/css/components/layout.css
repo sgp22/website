@@ -41,5 +41,9 @@
 }
 
 .page-content--code {
-  padding-top: 48px;
+  padding: 48px 16px;
+
+  @media (--viewport-md) {
+    padding: 48px 0;
+  }
 }
