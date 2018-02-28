@@ -62,7 +62,3 @@
     }
   }
 }
-
-.ids-list--heading--level-1 {
-  padding-left: calc(var(--spacing) * 2);
-}
