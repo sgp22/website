@@ -190,8 +190,15 @@ class CoreContentPage(PageBase):
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
 
+    cross_link = models.CharField(
+        verbose_name="Cross Link",
+        max_length=255,
+        blank=True
+    )
+
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
+        FieldPanel('cross_link'),
         FieldPanel('description', classname="full"),
     ]
 
@@ -203,6 +210,7 @@ class CoreContentPage(PageBase):
         APIField('menu_order'),
         APIField('title'),
         APIField('body'),
+        APIField('cross_link'),
         APIField('description'),
     ]
 
