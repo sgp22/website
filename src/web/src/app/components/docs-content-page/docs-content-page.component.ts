@@ -10,10 +10,13 @@ import { UrlFetcher } from '../../shared/urlFetcher.service';
 import { JsDocumentation } from '../../shared/js-documentation.service';
 import * as semver from 'semver';
 
+import { Token } from '../../shared/token';
+import { TokenService } from '../../shared/token.service';
+
 @Component({
   selector: 'app-docs-content-page',
   templateUrl: './docs-content-page.component.html',
-  providers: [UrlParser, UrlMapper, UrlFetcher, JsDocumentation]
+  providers: [UrlParser, UrlMapper, UrlFetcher, JsDocumentation, TokenService]
 })
 export class DocsContentPageComponent implements OnInit, OnDestroy {
   public path = '';
@@ -41,6 +44,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public expandedLevel1: any = [];
   public expandedLevel2: any = [];
 
+  public idsTokenProperties: {};
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -49,7 +54,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     private urlMapper: UrlMapper,
     private urlFetcher: UrlFetcher,
     private comments: JsDocumentation,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private TokenService: TokenService
   ) {}
 
   ngOnInit() {
@@ -87,6 +93,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
           this.createVersionPaths(res, urlSegment);
           this.handleSidebar(urlSegment);
+          this.getIDSTokenProperties(this.domainPath, this.library, this.currentVersion);
 
           this.urlFetcher
             .getDocs(`${this.domainPath}/${this.mapPath}`)
@@ -107,13 +114,11 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 window.scrollTo(0, 0);
               }
             );
-
         });
     });
   }
 
   handleRelativeLinks(docs) {
-
     // Relative Link support.
     // tempNode needs to be created in order to convert
     // the fragment back to a string
@@ -187,7 +192,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
           this.sidebarNav = sidebar['sections'];
         }
       );
-
   }
 
   createVersionPaths(res, urlSegment) {
@@ -222,16 +226,14 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     } else {
       this.showWarning = false;
     }
-
   }
 
   createLibraryPaths() {
-
-    this.urlFetcher.getDocs(`${this.domainPath}/static/libraries.json`)
+    this.urlFetcher
+      .getDocs(`${this.domainPath}/static/libraries.json`)
       .subscribe(res => {
         this.libraryPaths = res;
-      })
-
+      });
   }
 
   onVersionChange(version) {
@@ -262,4 +264,11 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     this.loading = false;
   }
 
+  private getIDSTokenProperties(domain: string, library: string, version:string = 'latest') {
+    this.TokenService
+      .getTokenData(domain, library, version)
+      .subscribe(res => {
+        this.idsTokenProperties = this.TokenService.groupTokensByCategory(res);
+      });
+  }
 }

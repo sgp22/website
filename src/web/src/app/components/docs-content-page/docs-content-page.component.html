@@ -86,25 +86,25 @@
           </a>
         </header>
 
-
-        <div *ngIf="docs?.specs">
-          <h2>Specifications</h2>
+        <div *ngIf="!loading && docs?.tokensCategory && idsTokenProperties && idsTokenProperties[docs.tokensCategory]">
+          <h2>Specifications- {{docs.tokensCategory}}</h2>
           <table>
             <thead>
               <th>Description</th>
+              <th>Token</th>
+              <th>Color</th>
               <th>Value</th>
             </thead>
             <tbody>
-              <tr *ngFor="let spec of docs.specs">
+              <tr *ngFor="let token of idsTokenProperties[docs.tokensCategory]">
+                <td>{{token.description}}</td>
+                <td><code>{{token.name}}</code></td>
                 <td>
-                  {{spec.title}}
+                  <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }" title="{{token.value}}"></div>
                 </td>
                 <td>
-                  <span class="site-spec--color" *ngIf="!spec.valueType" [ngStyle]="spec.value && {'background-color': ''+ spec.value +'' }" title="{{spec.value}}"></span>
-                  <span *ngIf="spec.valueType">{{spec.value}}</span>
-                </td>
-                <td>
-                  <code class="site-spec--code">var({{spec.originalDeclaration}})</code>
+                  <code *ngIf="token.type === 'color'">{{token.originalValue}}</code>
+                  <code *ngIf="token.type !== 'color'">{{token.value}}</code>
                 </td>
               </tr>
             </tbody>

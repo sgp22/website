@@ -1,23 +1,10 @@
 /*
  * Specification styles
  */
-.site-spec--code {
-  background-color: #f9fafc;
-  border: solid 1px #dedede;
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 1.1rem;
-  padding: 3px 30px;
-}
-
 .site-spec--color {
   border: 1px solid #bdbdbd;
   border-radius: 24px;
-  display: inline-block;
   height: 24px;
-  margin-right: 25px;
-  position: relative;
-  top: 3px;
   width: 24px;
 }
 
