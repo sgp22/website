@@ -1,14 +1,14 @@
 <aside class="sidebar sidebar--guidelines">
   <nav class="sidebar-nav-list">
 
-    <a class="ids-list--heading ids-list--heading--level-1" routerLink="{{section}}">{{sectionTitle}}</a>
+    <a class="ids-list--heading" routerLink="{{section}}">{{sectionTitle}}</a>
 
     <ul class="ids-list ids-list--hover">
       <ng-container *ngFor="let child of sidebarNav; let i = index">
 
         <li *ngIf="level_2">
 
-          <span *ngIf="child.children.length > 0" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
+          <span *ngIf="child.children.length > 0" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
               <use xlink:href="#icon_expand"></use>
