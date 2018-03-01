@@ -4,11 +4,12 @@
 
 .sidebar-nav-comp {
   padding-top: 48px;
+  outline: 0;
 
   @media (--viewport-sm) {
     border-right: 1px solid var(--input-readonly-bg-color);
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-bottom: 150px;
     position: fixed;
   }
@@ -18,10 +19,11 @@
   border-right: 1px solid var(--input-readonly-bg-color);
   padding-right: 0;
   padding-top: 48px;
+  outline: 0;
 
   @media (--viewport-sm) {
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-bottom: 150px;
     position: fixed;
   }
