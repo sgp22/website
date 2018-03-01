@@ -42,5 +42,5 @@ img {
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 10px;
-	background: var(--graphite03);
+	background: var(--color-default);
 }
