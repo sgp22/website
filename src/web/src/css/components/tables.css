@@ -19,7 +19,6 @@ table {
   & th,
   & td {
     padding: calc(var(--spacing) * 3) var(--spacing);
-    white-space: pre-line;
 
     &:first-child {
       padding-left: 0;

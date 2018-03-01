@@ -98,13 +98,13 @@
             <tbody>
               <tr *ngFor="let token of idsTokenProperties[docs.tokensCategory]">
                 <td>{{token.description}}</td>
-                <td>{{token.name}}</td>
+                <td><code>{{token.name}}</code></td>
                 <td>
                   <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }" title="{{token.value}}"></div>
                 </td>
                 <td>
-                  <code *ngIf="token.type === 'color'" class="site-spec--code">{{token.originalValue}}</code>
-                  <code *ngIf="token.type !== 'color'" class="site-spec--code">{{token.value}}</code>
+                  <code *ngIf="token.type === 'color'">{{token.originalValue}}</code>
+                  <code *ngIf="token.type !== 'color'">{{token.value}}</code>
                 </td>
               </tr>
             </tbody>

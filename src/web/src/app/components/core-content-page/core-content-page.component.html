@@ -27,12 +27,12 @@
             </ng-container>
             <ng-template #thBlock>
               <thead>
-                <th *ngFor="let head of streamfield?.value.data[0]">{{ head }}</th>
+                <th *ngFor="let head of streamfield?.value.data[0]" [innerHTML]="head"></th>
               </thead>
               <tbody>
                 <tr *ngFor="let row of streamfield?.value.data; let first=first;">
                   <ng-container *ngIf="!first">
-                    <td *ngFor="let data of row">{{ data }}</td>
+                    <td *ngFor="let data of row" [innerHTML]="data"></td>
                   </ng-container>
                 </tr>
               </tbody>
@@ -40,7 +40,7 @@
             <ng-template #tdBlock>
               <tbody>
                 <tr *ngFor="let row of streamfield?.value.data;">
-                  <td *ngFor="let data of row">{{ data }}</td>
+                  <td *ngFor="let data of row" [innerHTML]="data"></td>
                 </tr>
               </tbody>
             </ng-template>
