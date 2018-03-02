@@ -31,7 +31,8 @@ const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
 
-const cssExtract = ("production" === process.env.NODE_ENV) ? new ExtractTextPlugin("assets/site/css/site-[hash:6].css") : new ExtractTextPlugin("assets/site/css/site.css");
+const cssBundle = ("production" === process.env.NODE_ENV) ? "assets/site/css/site-[hash:6].css" : "assets/site/css/site.css";
+const cssExtract = new ExtractTextPlugin(cssBundle);
 
 const postcssPlugins = function () {
   // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193

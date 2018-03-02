@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:prod": "webpack --optimize-minimize --config config/webpack.prod.js",
-    "build:dev": "webpack --config config/webpack.dev.js",
+    "build:prod": "rm -rf dist/* && webpack --optimize-minimize --config config/webpack.prod.js",
+    "build:dev": "rm -rf dist/* && webpack --config config/webpack.dev.js",
     "e2e:setup": "webdriver-manager update --standalone false --gecko false --quiet",
     "e2e:prod": "npm run e2e:setup && protractor ./protractor.conf.js --baseUrl=\"http://localhost:3000\"",
     "e2e:dev": "npm run e2e:setup && protractor ./protractor.conf.js",
