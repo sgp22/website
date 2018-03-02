@@ -87,17 +87,16 @@
         </header>
 
         <div *ngIf="!loading && docs?.tokensCategory && idsTokenProperties && idsTokenProperties[docs.tokensCategory]">
-          <h2>Specifications- {{docs.tokensCategory}}</h2>
           <table>
             <thead>
-              <th>Description</th>
-              <th>Token</th>
+              <th>
+                Design Token &nbsp; <a class="table-header--description" href="https://github.com/infor-design/design-system/blob/0.x/design-tokens/readme.md" target="_blank">Learn More</a>
+              </th>
               <th>Color</th>
               <th>Value</th>
             </thead>
             <tbody>
               <tr *ngFor="let token of idsTokenProperties[docs.tokensCategory]">
-                <td>{{token.description}}</td>
                 <td><code>{{token.name}}</code></td>
                 <td>
                   <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }" title="{{token.value}}"></div>
