@@ -267,7 +267,8 @@ module.exports = {
         "assets/ids-web/css/ids-web.min.css",
       ],
       append: false,
-      publicPath: true
+      publicPath: true,
+      hash: true
     }),
     cssExtract,
     new BaseHrefWebpackPlugin({}),
