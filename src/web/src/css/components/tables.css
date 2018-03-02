@@ -49,4 +49,9 @@ table {
       max-width: 100%;
     }
   }
+
+  & .table-header--description {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+  }
 }
