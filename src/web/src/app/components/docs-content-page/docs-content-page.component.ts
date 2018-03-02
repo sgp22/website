@@ -6,17 +6,20 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
-import { UrlFetcher } from '../../shared/urlFetcher.service';
 import { JsDocumentation } from '../../shared/js-documentation.service';
 import * as semver from 'semver';
 
 import { Token } from '../../shared/token';
 import { TokenService } from '../../shared/token.service';
 
+import { DocService } from '../../shared/doc.service';
+import { LibraryService } from '../../shared/library.service';
+import { SitemapService } from '../../shared/sitemap.service';
+
 @Component({
   selector: 'app-docs-content-page',
   templateUrl: './docs-content-page.component.html',
-  providers: [UrlParser, UrlMapper, UrlFetcher, JsDocumentation, TokenService]
+  providers: [UrlParser, UrlMapper, JsDocumentation, TokenService, DocService, LibraryService, SitemapService]
 })
 export class DocsContentPageComponent implements OnInit, OnDestroy {
   public path = '';
@@ -52,10 +55,12 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private urlParser: UrlParser,
     private urlMapper: UrlMapper,
-    private urlFetcher: UrlFetcher,
     private comments: JsDocumentation,
     private sanitizer: DomSanitizer,
-    private TokenService: TokenService
+    private tokenService: TokenService,
+    private docService: DocService,
+    private libraryService: LibraryService,
+    private sitemapService: SitemapService
   ) {}
 
   ngOnInit() {
@@ -87,16 +92,16 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
       this.absolutePath = `/${this.basePath}`;
 
-      this.urlFetcher
-        .getDocs(`${this.domainPath}/api/docs/${this.library}/`)
+      this.libraryService
+        .getAllLibraryVersionPaths(this.library)
         .subscribe(res => {
 
           this.createVersionPaths(res, urlSegment);
           this.handleSidebar(urlSegment);
           this.getIDSTokenProperties(this.domainPath, this.library, this.currentVersion);
 
-          this.urlFetcher
-            .getDocs(`${this.domainPath}/${this.mapPath}`)
+          this.docService
+            .getDoc(urlSegment[3],`${this.domainPath}/${this.mapPath}`)
             .subscribe(
               (docs: any) => {
 
@@ -185,8 +190,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
     this.selectedLibrary = urlSegment[1];
     this.selectedVersion = `/${this.sidebarPath}/`;
-    this.urlFetcher
-      .getDocs(`${this.domainPath}/api/docs/${this.sidebarPath}/sitemap.json`)
+    this.sitemapService
+      .getSitemap(this.sidebarPath)
       .subscribe(
         (sidebar) => {
           this.sidebarNav = sidebar['sections'];
@@ -229,8 +234,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   }
 
   createLibraryPaths() {
-    this.urlFetcher
-      .getDocs(`${this.domainPath}/static/libraries.json`)
+    this.libraryService
+      .getAllLibraries()
       .subscribe(res => {
         this.libraryPaths = res;
       });
@@ -265,10 +270,10 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   }
 
   private getIDSTokenProperties(domain: string, library: string, version:string = 'latest') {
-    this.TokenService
+    this.tokenService
       .getTokenData(domain, library, version)
       .subscribe(res => {
-        this.idsTokenProperties = this.TokenService.groupTokensByCategory(res);
+        this.idsTokenProperties = this.tokenService.groupTokensByCategory(res);
       });
   }
 }
