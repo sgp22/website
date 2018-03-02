@@ -265,7 +265,6 @@ module.exports = {
       assets: [
         "assets/ids-web/css/ids-reset.min.css",
         "assets/ids-web/css/ids-web.min.css",
-        cssBundle
       ],
       append: false,
       publicPath: true
