@@ -31,7 +31,8 @@ const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
 
-const cssExtract = new ExtractTextPlugin("assets/site/css/site.css");
+const cssBundle = ("production" === process.env.NODE_ENV) ? "assets/site/css/site-[hash:6].css" : "assets/site/css/site.css";
+const cssExtract = new ExtractTextPlugin(cssBundle);
 
 const postcssPlugins = function () {
   // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193
@@ -85,7 +86,7 @@ module.exports = {
   "output": {
     "path": path.join(process.cwd(), "dist"),
     "publicPath": appDomain,
-    "filename": "[name].bundle.js",
+    "filename": ("production" === process.env.NODE_ENV) ? "[name]-[hash:6].bundle.js" : "[name].bundle.js",
     "chunkFilename": "[id].chunk.js"
   },
   "module": {
@@ -264,7 +265,6 @@ module.exports = {
       assets: [
         "assets/ids-web/css/ids-reset.min.css",
         "assets/ids-web/css/ids-web.min.css",
-        "assets/site/css/site.css"
       ],
       append: false,
       publicPath: true
