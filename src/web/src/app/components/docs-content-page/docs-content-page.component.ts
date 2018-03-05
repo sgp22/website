@@ -272,8 +272,12 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   private getIDSTokenProperties(domain: string, library: string, version:string = 'latest') {
     this.tokenService
       .getTokenData(domain, library, version)
-      .subscribe(res => {
-        this.idsTokenProperties = this.tokenService.groupTokensByCategory(res);
-      });
+      .subscribe(
+        res => { this.idsTokenProperties = this.tokenService.groupTokensByCategory(res) },
+        err => {
+          console.log(`No tokens found: ${err}`);
+          this.idsTokenProperties = [];
+        }
+      );
   }
 }
