@@ -6,8 +6,7 @@
     <ul class="ids-list ids-list--hover">
       <ng-container *ngFor="let child of sidebarNav; let i = index">
 
-        <li *ngIf="level_2">
-
+        <li>
           <span *ngIf="child.children.length > 0" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
@@ -36,12 +35,6 @@
 
             </li>
           </ul>
-        </li>
-
-        <li *ngIf="!level_2">
-          <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{child.relative_url}}">
-            {{child.title}}
-          </a>
         </li>
 
       </ng-container>

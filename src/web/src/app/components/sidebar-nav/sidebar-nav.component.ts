@@ -41,7 +41,7 @@ export class SidebarNavComponent implements OnInit {
             res['items'].filter((item) => {
               if (item.meta.slug === this.section) {
                 if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count == 0) {
-                  this.level_2 = false
+                  this.level_2 = false;
                 }
                 this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
                   item.meta.children.children.map(child => {
