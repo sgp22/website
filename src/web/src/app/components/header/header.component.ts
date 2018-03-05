@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { LibraryService } from '../../shared/library.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  providers: [PagesService]
+  providers: [PagesService, LibraryService]
 })
 export class HeaderComponent implements OnInit {
 
@@ -18,12 +19,14 @@ export class HeaderComponent implements OnInit {
   public domain: string = DOMAIN;
   public navToggle = false;
   public popupmenuToggle = false;
+  public libraries: any;
 
   constructor(
     private pagesService: PagesService,
     private router: Router,
     private route: ActivatedRoute,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private libraryService: LibraryService
   ) { }
 
   ngOnInit() {
@@ -40,6 +43,13 @@ export class HeaderComponent implements OnInit {
           });
         }
       );
+
+    this.libraryService.getAllLibraries()
+      .subscribe(
+        (res: any) => {
+          this.libraries = res;
+        }
+      )
   }
 
   toggleNav() {
@@ -59,7 +69,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  handleDropdownLink(link) {
+  handleDropdownLink(path) {
+    const link = `code/${path}/latest`;
     this.router.navigate([link]);
   }
 
