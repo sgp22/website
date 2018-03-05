@@ -14,17 +14,17 @@ export class DocService {
 
   constructor(private http: HttpClient) {}
 
-  getDoc(docName: string, url: string) {
-    if (this._dataStore.hasOwnProperty(docName)) {
+  getDoc(url: string) {
+    if (this._dataStore.hasOwnProperty(url)) {
       console.log(`service store doc`);
-      return Observable.of(this._dataStore[docName]);
+      return Observable.of(this._dataStore[url]);
 
     } else {
       return this.http
         .get(url)
         .pipe(tap(res => {
           console.log('http doc');
-          this.store(docName, res);
+          this.store(url, res);
         }))
         .first();
     }

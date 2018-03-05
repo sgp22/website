@@ -101,7 +101,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
           this.getIDSTokenProperties(this.domainPath, this.library, this.currentVersion);
 
           this.docService
-            .getDoc(urlSegment[3],`${this.domainPath}/${this.mapPath}`)
+            .getDoc(`${this.domainPath}/${this.mapPath}`)
             .subscribe(
               (docs: any) => {
 
