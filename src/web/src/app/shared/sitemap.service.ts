@@ -15,18 +15,16 @@ export class SitemapService {
   constructor(private http: HttpClient) {}
 
   getSitemap(sidebarPath: string) {
-    const key = 'sitemap';
-
-    if (this._dataStore.hasOwnProperty(key)) {
-      console.log(`service store ${key}`);
-      return Observable.of(this._dataStore[key]);
+    if (this._dataStore.hasOwnProperty(sidebarPath)) {
+      console.log(`service store '${sidebarPath}'`);
+      return Observable.of(this._dataStore[sidebarPath]);
 
     } else {
       return this.http
         .get(`${DOMAIN_DOCS_API}/api/docs/${sidebarPath}/sitemap.json`)
         .pipe(tap(res => {
-          console.log(`http ${key}`);
-          this.store(key, res);
+          console.log(`http '${sidebarPath}'`);
+          this.store(sidebarPath, res);
         }))
         .first();
     }
