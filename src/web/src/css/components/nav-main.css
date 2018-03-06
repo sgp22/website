@@ -112,6 +112,7 @@
 
   &.ids-btn {
     color: inherit;
+    height: auto;
     padding: 0;
     text-align: left;
   }

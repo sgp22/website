@@ -32,15 +32,16 @@ img {
  */
 
 ::-webkit-scrollbar-track {
-	background-color: transparent;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar {
-	width: 5px;
-	background-color: transparent;
+  height: 5px;
+  width: 5px;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	background: var(--color-default);
+  border-radius: 10px;
+  background: var(--color-default);
 }

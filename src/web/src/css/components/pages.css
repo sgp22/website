@@ -24,12 +24,28 @@
 }
 
 .page-header {
+  display: flex;
+  flex-direction: column;
   position: relative;
 
-  & .btn--custom--crosslink {
-    position: absolute;
-    right: 0;
-    top: calc(var(--spacing) * 1);
+  @media (--viewport-md) {
+    flex-direction: row;
+  }
+}
+
+.page-header__buttons {
+  margin-left: 0;
+
+  @media (--viewport-md) {
+    margin-left: auto;
+  }
+
+  & .ids-btn {
+    width: 100%;
+
+    @media (--viewport-sm) {
+      width: auto;
+    }
   }
 }
 
