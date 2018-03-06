@@ -41,18 +41,10 @@
   }
 
   & .ids-btn {
-    width: 49%;
-
-    & .ids-icon {
-      display: none;
-    }
+    width: 100%;
 
     @media (--viewport-sm) {
       width: auto;
-
-      & .ids-icon {
-        display: inline-block;
-      }
     }
   }
 }
