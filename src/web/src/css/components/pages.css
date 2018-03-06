@@ -39,6 +39,22 @@
   @media (--viewport-md) {
     margin-left: auto;
   }
+
+  & .ids-btn {
+    width: 49%;
+
+    & .ids-icon {
+      display: none;
+    }
+
+    @media (--viewport-sm) {
+      width: auto;
+
+      & .ids-icon {
+        display: inline-block;
+      }
+    }
+  }
 }
 
 .page-section {
