@@ -193,13 +193,15 @@ class CoreContentPage(PageBase):
     cross_link = models.CharField(
         verbose_name="Cross Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. button"
     )
 
     demo_link = models.CharField(
         verbose_name="Demo Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. code/ids-web/latest/demo/ids-button/index.html"
     )
 
     content_panels = Page.content_panels + [
@@ -274,13 +276,15 @@ class ElementsPage(PageBase):
     cross_link = models.CharField(
         verbose_name="Cross Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. button"
     )
 
     demo_link = models.CharField(
         verbose_name="Demo Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. code/ids-web/latest/demo/ids-button/index.html"
     )
 
     fka = models.CharField(
@@ -391,13 +395,15 @@ class BlocksPage(PageBase):
     cross_link = models.CharField(
         verbose_name="Cross Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. button"
     )
 
     demo_link = models.CharField(
         verbose_name="Demo Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. code/ids-web/latest/demo/ids-button/index.html"
     )
 
     fka = models.CharField(
