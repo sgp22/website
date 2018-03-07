@@ -193,12 +193,21 @@ class CoreContentPage(PageBase):
     cross_link = models.CharField(
         verbose_name="Cross Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. button"
+    )
+
+    demo_link = models.CharField(
+        verbose_name="Demo Link",
+        max_length=255,
+        blank=True,
+        help_text="i.e. code/ids-web/latest/demo/ids-button/index.html"
     )
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('body'),
         FieldPanel('cross_link'),
+        FieldPanel('demo_link'),
         FieldPanel('description', classname="full"),
     ]
 
@@ -211,6 +220,7 @@ class CoreContentPage(PageBase):
         APIField('title'),
         APIField('body'),
         APIField('cross_link'),
+        APIField('demo_link'),
         APIField('description'),
     ]
 
@@ -266,7 +276,15 @@ class ElementsPage(PageBase):
     cross_link = models.CharField(
         verbose_name="Cross Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. button"
+    )
+
+    demo_link = models.CharField(
+        verbose_name="Demo Link",
+        max_length=255,
+        blank=True,
+        help_text="i.e. code/ids-web/latest/demo/ids-button/index.html"
     )
 
     fka = models.CharField(
@@ -309,6 +327,7 @@ class ElementsPage(PageBase):
     content_panels = Page.content_panels + [
         FieldPanel('fka'),
         FieldPanel('cross_link'),
+        FieldPanel('demo_link'),
         MultiFieldPanel([
             SnippetChooserPanel('what_it_does'),
             SnippetChooserPanel('what_user_can_do'),
@@ -324,6 +343,7 @@ class ElementsPage(PageBase):
         APIField('title'),
         APIField('fka'),
         APIField('cross_link'),
+        APIField('demo_link'),
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('options'),
@@ -375,7 +395,15 @@ class BlocksPage(PageBase):
     cross_link = models.CharField(
         verbose_name="Cross Link",
         max_length=255,
-        blank=True
+        blank=True,
+        help_text="i.e. button"
+    )
+
+    demo_link = models.CharField(
+        verbose_name="Demo Link",
+        max_length=255,
+        blank=True,
+        help_text="i.e. code/ids-web/latest/demo/ids-button/index.html"
     )
 
     fka = models.CharField(
@@ -413,6 +441,7 @@ class BlocksPage(PageBase):
     content_panels = Page.content_panels + [
         FieldPanel('fka'),
         FieldPanel('cross_link'),
+        FieldPanel('demo_link'),
         MultiFieldPanel([
             SnippetChooserPanel('what_it_does'),
             SnippetChooserPanel('what_user_can_do'),
@@ -427,6 +456,7 @@ class BlocksPage(PageBase):
         APIField('title'),
         APIField('fka'),
         APIField('cross_link'),
+        APIField('demo_link'),
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('options'),
