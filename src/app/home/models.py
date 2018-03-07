@@ -308,7 +308,8 @@ class ElementsPage(PageBase):
     options = StreamField([
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
-            ('detail', blocks.CharBlock(required=True))
+            ('detail', blocks.CharBlock(required=True)),
+            ('token', blocks.CharBlock(required=False))
         ]))
     ], null=True, blank=True, verbose_name="Modifiers")
 
@@ -428,7 +429,8 @@ class BlocksPage(PageBase):
     options = StreamField([
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
-            ('detail', blocks.CharBlock(required=True))
+            ('detail', blocks.CharBlock(required=True)),
+            ('token', blocks.CharBlock(required=False))
         ]))
     ], null=True, blank=True, verbose_name="Modifiers")
 
