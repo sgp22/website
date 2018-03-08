@@ -310,8 +310,8 @@ class ElementsPage(PageBase):
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True)),
             ('token', blocks.CharBlock(required=False))
-        ]))
-    ], null=True, blank=True, verbose_name="Modifiers")
+        ], label='Modifiers'))
+    ], null=True, blank=True, verbose_name='Modifiers')
 
     states = StreamField([
         ('states', blocks.StructBlock([
@@ -431,8 +431,8 @@ class BlocksPage(PageBase):
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True)),
             ('token', blocks.CharBlock(required=False))
-        ]))
-    ], null=True, blank=True, verbose_name="Modifiers")
+        ], label='Modifiers' ))
+    ], null=True, blank=True, verbose_name='Modifiers')
 
     body = StreamField([
         ('image', APIImageChooserBlock()),
