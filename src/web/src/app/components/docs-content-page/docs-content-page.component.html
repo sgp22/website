@@ -120,39 +120,58 @@
         </div>
 
         <div *ngFor="let element of elements">
-          <h2>Class {{element.name}}</h2>
-          <div *ngFor="let constructorTag of element.constructorTags">
-            <span>Constructor</span>
-            <code>new {{element.name}}({{constructorTag.name}}({{constructorTag.type.name}}): {{constructorTag.description}})</code>
+          <div *ngIf="element.settings">
+            <h2>Settings</h2>
+            <table>
+              <thead>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let setting of element.settings">
+                  <td>
+                    <code>{{setting.name}}</code>
+                  </td>
+                  <td>
+                    <code>{{setting.type}}</code>
+                  </td>
+                  <td>
+                    {{setting.info}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <table>
-            <thead>
-              <th>Name</th>
-              <th>Description</th>
-            </thead>
-            <tbody>
-              <tr *ngFor="let method of element.methods">
-                <td>
-                  <div *ngIf="method.params.length; then thenTemplateName; else elseTemplateName">
-                    your Content ignored
-                  </div>
-                </td>
-                <ng-template #thenTemplateName>
+
+          <div *ngIf="element.methods">
+            <h2>Methods</h2>
+            <div *ngFor="let constructorTag of element.constructorTags">
+              <span>Constructor</span>
+              <code>new {{element.name}}({{constructorTag.name}}({{constructorTag.type.name}}): {{constructorTag.description}})</code>
+            </div>
+            <table>
+              <thead>
+                <th>Name</th>
+                <th>Parameters</th>
+                <th>Description</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let method of element.methods">
                   <td>
-                    {{method.name}}&#40;<span *ngFor="let param of method.params; let isLast=last">{{param.paramName}} = {{param.paramDescription}}{{isLast ? '' : ', '}}</span>&#41;
+                    <code>{{method.name}}</code>
                   </td>
-                </ng-template>
-                <ng-template #elseTemplateName>
                   <td>
-                    {{method.name}}
+                    <div *ngFor="let param of method.params"><code>{{param.paramName}}</code> &ndash; {{param.paramDescription}}</div>
+                    <div *ngIf="!method.params"><code>None</code></div>
                   </td>
-                </ng-template>
-                <td>
-                  {{method.info}}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <td>
+                    {{method.info}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div *ngIf="!loading" #link [innerHTML]="docs?.trustedHtml" (click)="relativeLinks(link)"></div>
       </div>

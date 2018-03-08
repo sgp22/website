@@ -1,5 +1,9 @@
 [
   {
+    "name": "IDS Enterprise (SoHo)",
+    "path": "ids-jquery"
+  },
+  {
     "name": "IDS Web Components",
     "path": "ids-web"
   },

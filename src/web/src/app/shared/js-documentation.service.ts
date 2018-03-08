@@ -42,6 +42,36 @@ export class JsDocumentation {
         });
 
       }
+
+      // Parse first level
+      if (jsDocumentation.properties.length) {
+
+        docObj['settings'] = jsDocumentation.properties.map(data => {
+          const settings = {
+            name: data.name,
+            info: data.description.children[0].children[0].value,
+            type: data.description.children[0].children[0].type
+          };
+
+          return settings;
+        });
+
+      }
+
+      // Parse first level
+      if (jsDocumentation.properties.length) {
+
+        docObj['settings'] = jsDocumentation.properties.map(data => {
+          const settings = {
+            name: data.name,
+            info: data.description.children[0].children[0].value,
+            type: data.description.children[0].children[0].type
+          };
+
+          return settings;
+        });
+
+      }
     }
     return docObj;
   }

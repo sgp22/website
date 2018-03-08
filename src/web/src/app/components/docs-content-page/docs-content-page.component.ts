@@ -169,7 +169,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       if (navigate) {
         const relativeLink = el.getAttribute(attr);
         this.router.navigate([`${relativeLink}`]);
-      } else {
+      } else if (el.getAttribute(attr)) {
         const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
         el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
       }
