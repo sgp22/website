@@ -305,7 +305,7 @@ class ElementsPage(PageBase):
         ]))
     ], null=True, blank=True)
 
-    options = StreamField([
+    modifiers = StreamField([
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True)),
@@ -335,7 +335,7 @@ class ElementsPage(PageBase):
             SnippetChooserPanel('when_to_use_it')
         ]),
         StreamFieldPanel('types'),
-        StreamFieldPanel('options'),
+        StreamFieldPanel('modifiers'),
         StreamFieldPanel('states'),
         StreamFieldPanel('body')
     ]
@@ -347,7 +347,7 @@ class ElementsPage(PageBase):
         APIField('demo_link'),
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
-        APIField('options'),
+        APIField('modifiers'),
         APIField('states'),
         APIField('body')
     ]
@@ -426,7 +426,7 @@ class BlocksPage(PageBase):
         ]))
     ], null=True, blank=True)
 
-    options = StreamField([
+    modifiers = StreamField([
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True)),
@@ -450,7 +450,7 @@ class BlocksPage(PageBase):
             SnippetChooserPanel('when_to_use_it')
         ]),
         StreamFieldPanel('types'),
-        StreamFieldPanel('options'),
+        StreamFieldPanel('modifiers'),
         StreamFieldPanel('body')
     ]
 
@@ -461,6 +461,6 @@ class BlocksPage(PageBase):
         APIField('demo_link'),
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
-        APIField('options'),
+        APIField('modifiers'),
         APIField('body')
     ]
