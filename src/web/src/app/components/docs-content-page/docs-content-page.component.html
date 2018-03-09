@@ -163,7 +163,7 @@
                   </td>
                   <td>
                     <div *ngFor="let param of method.params"><code>{{param.paramName}}</code> &ndash; {{param.paramDescription}}</div>
-                    <div *ngIf="!method.params"><code>None</code></div>
+                    <div *ngIf="!method.params.length"><code>None</code></div>
                   </td>
                   <td>
                     {{method.info}}
