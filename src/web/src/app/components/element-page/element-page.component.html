@@ -66,20 +66,20 @@
 
       </section>
 
-      <section *ngIf="pageContent.options.length > 0" class="page-section page-section--options">
+      <section *ngIf="pageContent.modifiers.length > 0" class="page-section page-section--options">
 
-        <h1 class="h2">Options</h1>
-        <p>Options can be added to configure a component. Many options can be added to a component and all options can be used for all types, unless where specifically noted.</p>
+        <h1 class="h2">Modifiers</h1>
+        <p>Modifiers can be added to configure a component. Many modifiers can be added to a component and all modifiers can be used for all types, unless where specifically noted.</p>
 
         <table>
           <thead>
-            <th>Option</th>
+            <th>Modifier</th>
             <th>Details</th>
           </thead>
           <tbody>
-            <tr *ngFor="let option of pageContent.options">
-              <td><strong>{{option.value.name}}</strong></td>
-              <td>{{option.value.detail}}</td>
+            <tr *ngFor="let modifier of pageContent.modifiers">
+              <td><strong>{{modifier.value.name}}</strong></td>
+              <td>{{modifier.value.detail}}</td>
             </tr>
           </tbody>
         </table>
