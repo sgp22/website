@@ -306,6 +306,8 @@ class ElementsPage(PageBase):
     ], null=True, blank=True)
 
     modifiers = StreamField([
+        # @TODO: Figure out how to rename structblock
+        #        from `options` to `modifiers`
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True)),
@@ -426,6 +428,8 @@ class BlocksPage(PageBase):
     ], null=True, blank=True)
 
     modifiers = StreamField([
+        # @TODO: Figure out how to rename structblock
+        #        from `options` to `modifiers`
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True))
