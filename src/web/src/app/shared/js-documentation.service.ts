@@ -45,19 +45,14 @@ export class JsDocumentation {
 
       // Parse first level
       if (jsDocumentation.properties.length) {
-
         docObj['settings'] = jsDocumentation.properties.map(data => {
-          const settings = {
+          return {
             name: data.name,
             info: data.description.children[0].children[0].value,
             type: data.type.name
           };
-
-          return settings;
         });
-
       }
-
     }
     return docObj;
   }
