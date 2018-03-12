@@ -53,6 +53,17 @@ export class JsDocumentation {
           };
         });
       }
+
+      if (jsDocumentation.kind == 'event') {
+        docObj['events'] = jsDocumentation.properties.map(data => {
+          return {
+            name: data.name,
+            value: data.description.children[0].children[0].value,
+            type: data.type.name
+          };
+        });
+        console.log(docObj['events']);
+      }
     }
     return docObj;
   }
