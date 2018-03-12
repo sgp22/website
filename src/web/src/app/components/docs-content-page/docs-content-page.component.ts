@@ -165,13 +165,15 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   createRelativePath(el, attr, navigate = false) {
     const absolute = /^((http|https|ftp):\/\/)/;
-    if (!absolute.test(el.getAttribute(attr))) {
-      if (navigate) {
-        const relativeLink = el.getAttribute(attr);
-        this.router.navigate([`${relativeLink}`]);
-      } else if (el.getAttribute(attr)) {
-        const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
-        el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
+    if (el.getAttribute(attr)) {
+      if (!absolute.test(el.getAttribute(attr))) {
+        if (navigate) {
+          const relativeLink = el.getAttribute(attr);
+          this.router.navigate([`${relativeLink}`]);
+        } else {
+          const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
+          el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
+        }
       }
     }
   }
