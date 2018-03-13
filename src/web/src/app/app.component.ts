@@ -16,6 +16,7 @@ export class AppComponent {
   public codeSection;
   public section;
   public sidebarNav;
+  public footerNav;
 
   constructor(
     private router: Router,
@@ -65,6 +66,20 @@ export class AppComponent {
 
       }
     });
+
+    this.pagesService.getGlobalNav()
+      .subscribe(
+        (res: any) => {
+
+          const addTrigger = res.items.filter((item) => {
+            (item.meta.slug === 'code') ? item.trigger = true : item.trigger = false;
+            return item;
+          });
+          this.footerNav = addTrigger.sort((a, b) => {
+            return a.meta.menu_order > b.meta.menu_order ? 1 : -1;
+          });
+        }
+      );
 
   }
 

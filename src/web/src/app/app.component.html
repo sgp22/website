@@ -12,3 +12,15 @@
   </div>
 
 </div>
+
+<footer class="site-footer">
+  <div class="ids-container">
+    <p class="site-footer--title">The Infor Design System</p>
+    <nav class="site-footer--nav">
+      <a *ngFor="let navItem of footerNav" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
+    </nav>
+    <p class="site-footer--soho-link">
+      <a href="">Looking for SohoXi?</a>
+    </p>
+  </div>
+</footer>

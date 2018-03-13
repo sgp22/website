@@ -1,108 +1,198 @@
+<header class="banner banner--home">
+  <div class="ids-container ids-row">
+    <div class="ids-row--col-sm-10 ids-row--offset-sm-1">
 
-<header class="page-hero">
+      <div class="ids-row--col-sm-5 banner--content">
+        <h1>The Infor Design System</h1>
+        <p>It's a set of use-case driven design practices, development tools, and support documentation to create a cohesive user experience across all Infor CloudSuite applications.</p>
+        <a class="ids-btn ids-btn--default ids-btn--light" routerLink="/guidelines">Learn More</a>
+      </div>
 
-  <h1>The Infor Design System</h1>
-  <p class="sub-headline">It's a set of use-case driven design practices, development tools,
-    <br>and support documentation to create a cohesive user experience
-    <br>across all Infor CloudSuite applications.</p>
+      <div class="banner--bg"></div>
 
+    </div>
+  </div>
 </header>
 
-<section class="page-section-intro">
+<section class="section section--1">
+  <div class="ids-container ids-row">
+    <div class="ids-row--col-sm-10 ids-row--offset-sm-1">
 
-  <header>
-    <h1 class="page-section-title">Our Principles</h1>
-    <p class="sub-headline" style="color: #9B9B9B; text-align: center;">What we believe in</p>
-  </header>
+      <div class="ids-row--col-md-4 ids-row--offset-md-4 text-align-center section--1--top">
+        <h2 class="section-headline">Who is it for?</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente aliquid eius quam, deleniti dolorem sit.</p>
+      </div>
 
-  <div class="ids-row ids-row--gutter ids-container">
+      <div class="ids-row section--1--mid">
 
-    <div class="ids-row--col-sm-4 ids-row--offset-sm-1">
-      <h2>Approachable</h2>
-      <p>To earn a user's trust, business software needs to offer visual elegance without sacrificing functional depth. With
-        its emphasis on legibility and clarity, Infor software draws in new users with a distinct visual and interactive
-        identity.</p>
-      <br>
-      <h2>Relevant</h2>
-      <p>No two businesses are alike. Infor software aims to present the most relevant, actionable information to every user.
-        </p>
+        <div class="ids-row--col-sm-5 ids-row--col-lg-4 text-align-center">
+          <img src="/assets/site/assets/design.svg" alt="">
+          <h2 class="section-headline">Design Guidelines</h2>
+          <p>Guidelines covers general usage information and educational content about individual components.</p>
+          <a class="ids-btn ids-btn--default ids-btn--light" routerLink="/guidelines">Learn More</a>
+        </div>
+
+        <div class="ids-row--col-sm-5 ids-row--offset-sm-2 ids-row--col-lg-4 ids-row--offset-lg-4 text-align-center col--border">
+          <img src="/assets/site/assets/code.svg" alt="">
+          <h2 class="section-headline">Code Docs</h2>
+          <p>Code Docs provides technical details, code snippets and APIs to implement the components.</p>
+          <a class="ids-btn ids-btn--default ids-btn--light" routerLink="/code/ids-web/latest">Learn More</a>
+        </div>
+
+      </div>
+
+      <div class="ids-row">
+
+        <div class="ids-row--col-md-4 ids-row--offset-md-4 text-align-center">
+          <h2 class="section-headline">Design Principles</h2>
+          <p>The Infor Design System has 4 principles that help create a shared mission, one that informs the best in class user experience.</p>
+        </div>
+
+      </div>
+
+      <div class="ids-row section--1--btm">
+        <div class="ids-row--col-md-10 ids-row--offset-md-1 section--1--btm--inner">
+
+          <div>
+            <img src="/assets/site/assets/square.svg" alt="Approachable">
+            <span>Approachable</span>
+          </div>
+
+          <div>
+            <img src="/assets/site/assets/circle.svg" alt="Focused">
+            <span>Focused</span>
+          </div>
+
+          <div>
+            <img src="/assets/site/assets/triangle.svg" alt="Relevant">
+            <span>Relevant</span>
+          </div>
+
+          <div>
+            <img src="/assets/site/assets/trapezoid.svg" alt="Perceptive">
+            <span>Perceptive</span>
+          </div>
+
+        </div>
+      </div>
+
     </div>
-
-    <div class="ids-row--col-sm-4 ids-row--offset-sm-2">
-      <h2>Focused</h2>
-      <p>In enterprise software, where every interaction holds meaning, no inefficiency is insignificant. Infor Design System
-        paves the way for smooth, efficient workflows by shortening steps to completion and minimizing potential distractions.</p>
-      <br>
-      <h2>Perceptive</h2>
-      <p>Information works best when it’s placed in a greater context. Infor software elevates data with contextual insights
-        and predictions.</p>
-    </div>
-
   </div>
-
 </section>
 
-  <ng-container *ngIf="pageContent">
+<section class="section section--2">
+  <div class="ids-container ids-row">
+    <div class="ids-row--col-sm-10 ids-row--offset-sm-1">
 
-    <ng-container *ngFor="let section of pageContent.content">
-
-      <sf-full-width *ngIf="section.type === 'fullWidth'"
-        [title]="section.value.title"
-        [content]="section.value.content"
-        [textAlign]="section.value.text_align"
-        [invertTextColor]="section.value.invert_text_color"
-        [heroImage]="section.value.hero_image?.file"
-        [heroImageTitle]="section.value.hero_image?.title"
-        [backgroundImage]="section.value.background_image?.file"
-        [backgroundColor]="section.value.background_color"
-        [ctaText]="section.value.cta_text"
-        [ctaLink]="section.value.cta_link"></sf-full-width>
-
-      <sf-two-column *ngIf="section.type === 'twoColumn'"
-        [col1Title]="section.value.column_1_title"
-        [col1Content]="section.value.column_1_content"
-        [col1TextAlign]="section.value.column_1_text_align"
-        [col1InvertTextColor]="section.value.column_1_invert_text_color"
-        [col1HeroImage]="section.value.column_1_hero_image?.file"
-        [col1HeroImageTitle]="section.value.column_1_hero_image?.title"
-        [col1BackgroundImage]="section.value.column_1_background_image?.file"
-        [col1BackgroundColor]="section.value.column_1_background_color"
-        [col1CtaText]="section.value.column_1_cta_text"
-        [col1CtaLink]="section.value.column_1_cta_link"
-        [col2Title]="section.value.column_2_title"
-        [col2Content]="section.value.column_2_content"
-        [col2TextAlign]="section.value.column_2_text_align"
-        [col2InvertTextColor]="section.value.column_2_invert_text_color"
-        [col2HeroImage]="section.value.column_2_hero_image?.file"
-        [col2HeroImageTitle]="section.value.column_2_hero_image?.title"
-        [col2BackgroundImage]="section.value.column_2_background_image?.file"
-        [col2BackgroundColor]="section.value.column_2_background_color"
-        [col2CtaText]="section.value.column_2_cta_text"
-        [col2CtaLink]="section.value.column_2_cta_link"
-      ></sf-two-column>
-
-      <sf-two-col-text-image *ngIf="section.type === 'twoColTextImage'"
-        [title]="section.value.title"
-        [content]="section.value.content"
-        [ctaText]="section.value.cta_text"
-        [ctaLink]="section.value.cta_link"
-        [image]="section.value.image?.file"
-        [imageTitle]="section.value.image?.title"
-        [imageAlign]="section.value.image_align"
-        [backgroundImage]="section.value.background_image?.file"
-        [backgroundColor]="section.value.background_color"
-        [invertTextColor]="section.value.invert_text_color"
-      ></sf-two-col-text-image>
-
-      <div *ngIf="section.type === 'markdown'" class="ids-row ids-container">
-        <div class="ids-row--col-md-9 ids-row--offset-md-1" [innerHTML]="section.value"></div>
+      <div class="ids-row--col-md-4 ids-row--offset-md-4 text-align-center section--2--top">
+        <h2 class="section-headline">The Components</h2>
+        <p>The Infor Design System components are the building blocks, and when assembled correctly, they create a cohesive and structured design.</p>
       </div>
 
-      <div *ngIf="section.type === 'rawHtml'">
-        <div [innerHTML]="section.value | safeHtml"></div>
+      <div class="section--2--mid"><img src="/assets/site/assets/components.svg" alt=""></div>
+
+      <div class="ids-row section--2--btm">
+
+        <div class="ids-row--col-sm-5 ids-row--col-lg-4 text-align-center">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic atque recusandae, voluptates fuga quidem veritatis?</p>
+          <a class="ids-btn ids-btn--primary ids-btn--dark" routerLink="#">See how to build</a>
+        </div>
+
+        <div class="ids-row--col-sm-5 ids-row--offset-sm-2 ids-row--col-lg-4 ids-row--offset-lg-4 text-align-center">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic atque recusandae, voluptates fuga quidem veritatis?</p>
+          <a class="ids-btn ids-btn--primary ids-btn--dark" routerLink="#">See what you can build</a>
+        </div>
+
       </div>
 
-    </ng-container>
+    </div>
+  </div>
+</section>
 
-  </ng-container>
+<section class="section section--3">
+  <div class="ids-container ids-row">
+    <div class="ids-row--col-sm-10 ids-row--offset-sm-1">
 
+      <div class="ids-row--col-md-4 ids-row--offset-md-4 text-align-center section--3--top">
+        <h2 class="section-headline">Just for developers</h2>
+        <p>The Infor Design System components are the building blocks, and when assembled correctly, they create a cohesive and structured design.</p>
+      </div>
+
+      <div class="ids-row ids-row--gutter section--3--btm">
+        <div class="ids-row--col-sm-4 section--block">
+          <h3 class="section--block--headline">Pendo</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis, suscipit!</p>
+          <a routerLink="#0">Learn More</a>
+        </div>
+        <div class="ids-row--col-sm-4 section--block">
+          <h3 class="section--block--headline">IDS</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae, deleniti.</p>
+          <a routerLink="#0">Learn More</a>
+        </div>
+        <div class="ids-row--col-sm-4 section--block">
+          <h3 class="section--block--headline">Soho</h3>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae, deleniti.</p>
+          <a routerLink="#0">Learn More</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section--4">
+  <div class="ids-container ids-row">
+    <div class="ids-row--col-sm-10 ids-row--offset-sm-1">
+
+      <div class="ids-row--col-md-4 ids-row--offset-md-4 text-align-center section--4--top">
+        <h2 class="section-headline">Tools and resources</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, adipisci?</p>
+      </div>
+
+      <div class="ids-row ids-row--gutter section--4--btm">
+        <div class="ids-row--col-sm-4 text-align-center">
+          <img src="/assets/site/assets/github-resource.svg" alt="">
+          <h2 class="section-headline">GitHub</h2>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet!</p>
+          <a class="ids-btn ids-btn--primary ids-btn--dark" routerLink="#0">Follow Us</a>
+        </div>
+        <div class="ids-row--col-sm-4 ids-row--offset-sm-4 text-align-center col--border">
+          <img src="/assets/site/assets/sketch-file.svg" alt="">
+          <h2 class="section-headline">Sketch File</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi.</p>
+          <a class="ids-btn ids-btn--primary ids-btn--dark" routerLink="#0">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section--5">
+  <div class="ids-container ids-row">
+    <div class="ids-row--col-sm-10 ids-row--offset-sm-1">
+
+      <div class="ids-row--col-md-4 ids-row--offset-md-4 text-align-center section--5--top">
+        <h2 class="section-headline">FAQ's</h2>
+        <p>Questions about the Infor Design System? See our FAQ page for more questions and answers.</p>
+      </div>
+
+      <div class="ids-row section--5--mid">
+        <div class="ids-row--col-5">
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, quas?</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, quas?</p>
+        </div>
+
+        <div class="ids-row--col-5 ids-row--offset-2">
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, quas?</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis, quas?</p>
+        </div>
+      </div>
+
+      <div class="section--5--btm text-align-center">
+        <a class="ids-btn ids-btn--default ids-btn--light" routerLink="#0">Learn More</a>
+      </div>
+
+    </div>
+  </div>
+</section>

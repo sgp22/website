@@ -184,14 +184,6 @@ module.exports = {
         "context": "src/",
         "to": "",
         "from": {
-          "glob": "assets/**/*",
-          "dot": true
-        }
-      },
-      {
-        "context": "src/",
-        "to": "",
-        "from": {
           "glob": "favicon.ico",
           "dot": true
         }
@@ -220,6 +212,14 @@ module.exports = {
         "context": "src/",
         "to": "assets/ids-web/css",
         "from": `${nodeModules}/@infor/ids-web/dist/ids-web.min.css.map`
+      },
+      {
+        "context": "src/",
+        "to": "assets/site/",
+        "from": {
+          "glob": "assets/*",
+          "dot": false
+        }
       }
     ], {
       "ignore": [

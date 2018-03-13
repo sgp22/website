@@ -1,0 +1,13 @@
+.text-align-center {
+  text-align: center;
+}
+
+.col--border {
+  position: relative;
+  &:before {
+    display: block;
+    content: " ";
+    height: 100%;
+    position: absolute;
+  }
+}
