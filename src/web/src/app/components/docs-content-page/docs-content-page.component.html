@@ -95,6 +95,12 @@
           </div>
         </header>
 
+        <ul *ngIf="docs?.demo?.pages">
+          <li *ngFor="let demo of docs.demo.pages">
+            <a href="http://sohobeta.infor.com/{{selectedVersionNumber}}/components/{{element}}/{{demo.slug}}" target="_blank">{{demo.name}}</a>
+          </li>
+        </ul>
+
         <div *ngIf="!loading && docs?.tokensCategory && idsTokenProperties && idsTokenProperties[docs.tokensCategory]">
           <table>
             <thead>

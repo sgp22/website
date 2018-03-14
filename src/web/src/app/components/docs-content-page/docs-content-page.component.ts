@@ -37,6 +37,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public versionPaths: any;
   public libraryPaths: any;
   public currentVersion: any;
+  public selectedVersionNumber: any;
   public library = '';
   public selectedVersion = '';
   public selectedLibrary = '';
@@ -227,6 +228,11 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     this.path = urlSegment.join('/');
     this.currentVersion = urlSegment[2];
     this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
+    if (this.currentVersion == 'latest') {
+      this.selectedVersionNumber =  latestVersion;
+    } else {
+      this.selectedVersionNumber = this.currentVersion;
+    }
 
     if (this.currentVersion < latestVersion) {
       this.showWarning = true;

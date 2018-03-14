@@ -62,7 +62,6 @@ export class JsDocumentation {
             type: data.type.name
           };
         });
-        console.log(docObj['events']);
       }
     }
     return docObj;
