@@ -3,7 +3,7 @@
 // ************************************************
 
 // Set all node environment variables
-process.env.NODE_ENV = process.env.ENV = "development";
+process.env.NODE_ENV = process.env.ENV;
 
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
