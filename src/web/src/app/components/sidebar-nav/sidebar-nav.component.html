@@ -1,10 +1,8 @@
 <aside class="sidebar sidebar--guidelines">
   <nav class="sidebar-nav-list">
 
-    <a class="ids-list--heading" routerLink="{{section}}">{{sectionTitle}}</a>
-
     <ul class="ids-list ids-list--hover">
-
+      <li><a class="ids-list--item" routerLink="{{section}}" routerLinkActive="ids-list--item--selected" [routerLinkActiveOptions]="{exact: true}">{{sectionTitle}}</a></li>
       <ng-container *ngFor="let child of sidebarNav; let i = index">
 
         <li>
