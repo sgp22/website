@@ -17,6 +17,8 @@ export class AppComponent {
   public section;
   public sidebarNav;
   public footerNav;
+  public is_production = IS_PRODUCTION;
+  public showSplashPage: boolean;
 
   constructor(
     private router: Router,
@@ -27,6 +29,7 @@ export class AppComponent {
 
     router.events.subscribe( (event) => {
       if (event instanceof NavigationEnd) {
+
         const url = router.routerState.snapshot.url;
         const title = url.replace(/^\//g, '').replace(/\//g, ' / ').replace(/-/g, ' ');
         if (url === '/') {
@@ -35,6 +38,12 @@ export class AppComponent {
         } else {
           this.home = false;
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
+        }
+
+        if (url === '/' && this.is_production) {
+          this.showSplashPage = true;
+        } else {
+          this.showSplashPage = false;
         }
 
         const urlSegments = event.url.split('/');
