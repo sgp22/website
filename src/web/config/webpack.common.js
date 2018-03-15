@@ -31,7 +31,7 @@ const minimizeCss = false;
 const baseHref = "";
 const deployUrl = "";
 
-const cssBundle = ("production" === process.env.NODE_ENV) ? "assets/site/css/site-[hash:6].css" : "assets/site/css/site.css";
+const cssBundle = "assets/site/css/site-[hash:6].css";
 const cssExtract = new ExtractTextPlugin(cssBundle);
 
 const postcssPlugins = function () {
@@ -86,7 +86,7 @@ module.exports = {
   "output": {
     "path": path.join(process.cwd(), "dist"),
     "publicPath": appDomain,
-    "filename": ("production" === process.env.NODE_ENV) ? "[name]-[hash:6].bundle.js" : "[name].bundle.js",
+    "filename": "[name]-[hash:6].bundle.js",
     "chunkFilename": "[id].chunk.js"
   },
   "module": {
@@ -184,14 +184,6 @@ module.exports = {
         "context": "src/",
         "to": "",
         "from": {
-          "glob": "assets/**/*",
-          "dot": true
-        }
-      },
-      {
-        "context": "src/",
-        "to": "",
-        "from": {
           "glob": "favicon.ico",
           "dot": true
         }
@@ -220,6 +212,14 @@ module.exports = {
         "context": "src/",
         "to": "assets/ids-web/css",
         "from": `${nodeModules}/@infor/ids-web/dist/ids-web.min.css.map`
+      },
+      {
+        "context": "src/",
+        "to": "assets/site/",
+        "from": {
+          "glob": "assets/*",
+          "dot": false
+        }
       }
     ], {
       "ignore": [
