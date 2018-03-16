@@ -34,7 +34,7 @@ export class LibraryService {
   }
 
   getAllLibraryVersionPaths(library: string) {
-    let key = 'getAllLibraryVersionPaths';
+    let key = `getAllLibraryVersionPaths-${library}`;
 
     if (this._dataStore.hasOwnProperty(key)) {
       console.log(`service store ${key}`);
