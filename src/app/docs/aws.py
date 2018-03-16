@@ -101,7 +101,7 @@ def get(request):
 
         if version == 'latest':
             all_versions_paths = get_filtered_result(bucket_name, library_path + "/")
-            all_versions = [s.strip(library_path) for s in all_versions_paths]
+            all_versions = [s.lstrip(library_path).rstrip('/') for s in all_versions_paths]
             latest_version = '0.0.0'
 
             if len(all_versions) > 1:

@@ -37,6 +37,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public versionPaths: any;
   public libraryPaths: any;
   public currentVersion: any;
+  public selectedVersionNumber: any;
   public library = '';
   public selectedVersion = '';
   public selectedLibrary = '';
@@ -165,13 +166,15 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   createRelativePath(el, attr, navigate = false) {
     const absolute = /^((http|https|ftp):\/\/)/;
-    if (!absolute.test(el.getAttribute(attr))) {
-      if (navigate) {
-        const relativeLink = el.getAttribute(attr);
-        this.router.navigate([`${relativeLink}`]);
-      } else {
-        const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
-        el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
+    if (el.getAttribute(attr)) {
+      if (!absolute.test(el.getAttribute(attr))) {
+        if (navigate) {
+          const relativeLink = el.getAttribute(attr);
+          this.router.navigate([`${relativeLink}`]);
+        } else {
+          const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
+          el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
+        }
       }
     }
   }
@@ -225,6 +228,11 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     this.path = urlSegment.join('/');
     this.currentVersion = urlSegment[2];
     this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
+    if (this.currentVersion == 'latest') {
+      this.selectedVersionNumber =  latestVersion;
+    } else {
+      this.selectedVersionNumber = this.currentVersion;
+    }
 
     if (this.currentVersion < latestVersion) {
       this.showWarning = true;
