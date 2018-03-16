@@ -23,7 +23,7 @@ export class JsDocumentation {
         docObj['methods'] = jsDocumentation.members.instance.map(data => {
           const methods = {
             name: data.name,
-            info: data.description.children[0].children[0].value
+            info: (data.description.children) ? data.description.children[0].children[0].value : null,
           };
 
           if (data.tags) {
@@ -48,7 +48,7 @@ export class JsDocumentation {
         docObj['settings'] = jsDocumentation.properties.map(data => {
           return {
             name: data.name,
-            info: data.description.children[0].children[0].value,
+            info: (data.description.children) ? data.description.children[0].children[0].value : null,
             type: data.type.name
           };
         });
