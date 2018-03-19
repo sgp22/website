@@ -186,7 +186,12 @@ class CoreContentPage(PageBase):
         ('heading', blocks.CharBlock(classname="full title")),
         ('image', APIImageChooserBlock()),
         ('table', TableBlock()),
-        ('markdown', APIMarkDownBlock())
+        ('markdown', APIMarkDownBlock()),
+        ('tokens', blocks.StructBlock([
+            ('design_token', blocks.CharBlock()),
+            ('color', blocks.CharBlock(required=False)),
+            ('value', blocks.CharBlock())
+        ]))
     ], null=True, blank=True)
     description = models.CharField(max_length=255)
 
@@ -311,6 +316,15 @@ class ElementsPage(PageBase):
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True)),
+            ('token', blocks.CharBlock(required=False))
+        ]))
+    ], null=True, blank=True )
+
+    tokens = StreamField([
+        ('tokens', blocks.StructBlock([
+            ('design_token', blocks.CharBlock()),
+            ('color', blocks.CharBlock(required=False)),
+            ('value', blocks.CharBlock())
         ]))
     ], null=True, blank=True )
 
@@ -337,6 +351,7 @@ class ElementsPage(PageBase):
         ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('modifiers'),
+        StreamFieldPanel('tokens'),
         StreamFieldPanel('states'),
         StreamFieldPanel('body')
     ]
@@ -349,6 +364,7 @@ class ElementsPage(PageBase):
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('modifiers'),
+        APIField('tokens'),
         APIField('states'),
         APIField('body')
     ]
@@ -432,9 +448,18 @@ class BlocksPage(PageBase):
         #        from `options` to `modifiers`
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
-            ('detail', blocks.CharBlock(required=True))
+            ('detail', blocks.CharBlock(required=True)),
+            ('token', blocks.CharBlock(required=False))
         ]))
     ], null=True, blank=True)
+
+    tokens = StreamField([
+        ('tokens', blocks.StructBlock([
+            ('design_token', blocks.CharBlock()),
+            ('color', blocks.CharBlock(required=False)),
+            ('value', blocks.CharBlock())
+        ]))
+    ], null=True, blank=True )
 
     body = StreamField([
         ('image', APIImageChooserBlock()),
@@ -453,6 +478,7 @@ class BlocksPage(PageBase):
         ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('modifiers'),
+        StreamFieldPanel('tokens'),
         StreamFieldPanel('body')
     ]
 
@@ -464,5 +490,6 @@ class BlocksPage(PageBase):
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('modifiers'),
+        APIField('tokens'),
         APIField('body')
     ]
