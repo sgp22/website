@@ -302,12 +302,10 @@
     margin-bottom: 20px;
   }
 
-  /* Make list align beside float
-   * https://stackoverflow.com/a/11293198
-  */
   & ul,
   & ol {
-    display: table;
+    overflow: hidden;
+    position: relative;
   }
 
   & img.inline-image--left-half {
@@ -349,9 +347,13 @@
     margin-bottom: calc(var(--spacing) * 4);
   }
 
+  & p + ul {
+    margin-top: calc(-var(--spacing) * 4);
+  }
+
   & li {
     list-style-position: outside;
-    margin-left: 1.5rem;
+    margin-left: calc(var(--spacing) * 2);
   }
 }
 
