@@ -83,7 +83,7 @@
                 <strong>{{modifier.value.name}}</strong>
               </td>
               <td>{{modifier.value.detail}}</td>
-              <td>{{modifier.value.token}}</td>
+              <td><code *ngIf="modifier.value.token">{{modifier.value.token}}</code></td>
             </tr>
           </tbody>
         </table>
