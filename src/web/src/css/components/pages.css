@@ -58,6 +58,7 @@
 
 .section--block {
   background-color: var(--white);
+  border-radius: 2px;
   margin-bottom: calc(var(--spacing-base) * 2);
   padding: calc(var(--spacing-base) * 3);
 
