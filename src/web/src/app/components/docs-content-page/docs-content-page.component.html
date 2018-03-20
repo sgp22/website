@@ -1,187 +1,91 @@
 
-  <div class="container--code ids-row">
+<app-page-not-found *ngIf="notFound"></app-page-not-found>
 
-    <aside class="sidebar sidebar--code ids-row--col-sm-3 ids-row--col-xl-2" *ngIf="sidebar">
-
-      <div class="ids-form-group library-select-group">
-        <label for="select-library">Library</label>
-        <select #library (change)="onLibraryChange(library.value)" id="select-library" class="ids-form-control">
-          <option *ngFor="let library of libraryPaths" value="/{{section}}/{{library.path}}/latest" [selected]="library.path == selectedLibrary">
-            {{library.name}}
-          </option>
-        </select>
-      </div>
-
-      <div class="ids-form-group library-select-group">
-        <label for="select-version">Version</label>
-        <select #option (change)="onVersionChange(option.value)" id="select-version" class="ids-form-control">
-          <option *ngFor="let version of versionPaths" value="/{{section}}{{version.full}}{{element}}" [selected]="version.full == selectedVersion">
-            {{ version.label }}
-          </option>
-        </select>
-      </div>
-
-      <nav class="sidebar-nav">
-
-        <ul class="ids-list ids-list--hover">
-
-          <li *ngFor="let child of sidebarNav; let i = index;">
-
-            <a *ngIf="!child.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">{{child.name}}</a>
-            <span *ngIf="child.pages" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
-              {{child.name}}
-              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
-                <use xlink:href="#icon_expand"></use>
-              </svg>
-            </span>
-
-            <ul *ngIf="child.pages" class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
-
-              <li *ngFor="let level_2 of child.pages; let i = index;">
-
-                <a *ngIf="!level_2.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{level_2.slug}}">
-                  {{level_2.name}}
-                </a>
-
-                <span *ngIf="level_2.pages" class="ids-list--item ids-list--heading">
-                  {{level_2.name}}
-                </span>
-
-                <ul *ngIf="level_2.pages" class="ids-list ids-list--expandable ids-list--expanded">
-                  <li *ngFor="let level_3 of level_2.pages">
-                    <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{level_3.slug}}">{{level_3.name}}</a>
-                  </li>
-                </ul>
-
-              </li>
-
-            </ul>
-
-          </li>
-        </ul>
-
-      </nav>
-
-    </aside>
-
-    <app-page-not-found *ngIf="notFound"></app-page-not-found>
-
-    <main class="ids-row--col-sm-7 ids-row--col-xl-6 ids-row--offset-sm-4 ids-row--offset-xl-3">
-
-      <div class="ids-banner ids-banner--top-full-width" [hidden]="!showWarning">
-        <div class="ids-banner-content">
-          <strong>Warning:</strong> You are not on the latest version of this library.
-          <a routerLink="/{{section}}/{{library}}/latest/{{element}}">Go to latest version</a>.
-        </div>
-      </div>
-
-      <div class="page-content--code" *ngIf="!notFound">
-
-        <header class="page-header">
-          <div class="page-header__intro">
-            <h1 class="page-title">{{docs?.title}}</h1>
-          </div>
-          <div class="page-header__buttons">
-            <a class="ids-btn ids-btn--default" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
-              <span>View Guidelines</span>
-            </a>
-            <a class="ids-btn ids-btn--link" *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">
-              <svg class="ids-icon">
-                <path d="M6.293 11.707c.391.391 1.023.391 1.414 0l6.293-6.293v3.586c0 .552.447 1 1 1 .553 0 1-.448 1-1v-6c0-.552-.447-1-1-1h-6c-.553 0-1 .448-1 1s.447 1 1 1h3.586l-6.293 6.293c-.391.391-.391 1.023 0 1.414zm8.717.293c-.547 0-.991.447-.991 1v.599c0 .389-.445.401-.496.401h-9.046c-.051 0-.495-.012-.495-.401v-9.099c0-.275.221-.5.495-.5h.533c.547 0 .99-.447.99-1 0-.553-.443-1-.99-1h-.533c-1.366 0-2.477 1.121-2.477 2.5v9.099c0 1.346 1.088 2.401 2.477 2.401h9.046c1.389 0 2.477-1.055 2.477-2.401v-.599c0-.553-.443-1-.99-1z"
-                  sketch:type="MSShapeGroup" />
-              </svg>
-              <span>View Demo</span>
-            </a>
-          </div>
-        </header>
-
-        <ul *ngIf="docs?.demo?.pages">
-          <li *ngFor="let demo of docs.demo.pages">
-            <a href="http://sohobeta.infor.com/{{selectedVersionNumber}}/components/{{element}}/{{demo.slug}}" target="_blank">{{demo.name}}</a>
-          </li>
-        </ul>
-
-        <div *ngIf="!loading && docs?.tokensCategory && idsTokenProperties && idsTokenProperties[docs.tokensCategory]">
-          <table>
-            <thead>
-              <th>
-                Design Token &nbsp; <a class="table-header--description" href="https://github.com/infor-design/design-system/blob/0.x/design-tokens/readme.md" target="_blank">Learn More</a>
-              </th>
-              <th>Color</th>
-              <th>Value</th>
-            </thead>
-            <tbody>
-              <tr *ngFor="let token of idsTokenProperties[docs.tokensCategory]">
-                <td><code>{{token.name}}</code></td>
-                <td>
-                  <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }" title="{{token.value}}"></div>
-                </td>
-                <td>
-                  <code *ngIf="token.type === 'color'">{{token.originalValue}}</code>
-                  <code *ngIf="token.type !== 'color'">{{token.value}}</code>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngFor="let element of elements">
-          <div *ngIf="element.settings">
-            <h2>Settings</h2>
-            <table>
-              <thead>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let setting of element.settings">
-                  <td>
-                    <code>{{setting.name}}</code>
-                  </td>
-                  <td>
-                    <code>{{setting.type}}</code>
-                  </td>
-                  <td>
-                    {{setting.info}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div *ngIf="element.methods">
-            <h2>Methods</h2>
-            <div *ngFor="let constructorTag of element.constructorTags">
-              <span>Constructor</span>
-              <code>new {{element.name}}({{constructorTag.name}}({{constructorTag.type.name}}): {{constructorTag.description}})</code>
-            </div>
-            <table>
-              <thead>
-                <th>Name</th>
-                <th>Parameters</th>
-                <th>Description</th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let method of element.methods">
-                  <td>
-                    <code>{{method.name}}</code>
-                  </td>
-                  <td>
-                    <div *ngFor="let param of method.params"><code>{{param.paramName}}</code> &ndash; {{param.paramDescription}}</div>
-                    <div *ngIf="!method.params.length"><code>None</code></div>
-                  </td>
-                  <td>
-                    {{method.info}}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div *ngIf="!loading" #link [innerHTML]="docs?.trustedHtml" (click)="relativeLinks(link)"></div>
-      </div>
-
-    </main>
-
+<div class="ids-banner ids-banner--top-full-width" [hidden]="!showWarning">
+  <div class="ids-banner-content">
+    <strong>Warning:</strong> You are not on the latest version of this library.
+    <a routerLink="/{{section}}/{{library}}/latest/{{element}}">Go to latest version</a>.
   </div>
+</div>
+
+<div class="page-content--code" *ngIf="!notFound">
+
+  <header class="page-header">
+    <div class="page-header__intro">
+      <h1 class="page-title">{{docs?.title}}</h1>
+    </div>
+    <div class="page-header__buttons">
+      <a class="ids-btn ids-btn--default" *ngIf="docs?.system" routerLink="/guidelines/{{docs?.system.category}}/{{docs?.system.name}}">
+        <span>View Guidelines</span>
+      </a>
+      <a class="ids-btn ids-btn--link" *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">
+        <svg class="ids-icon">
+          <path d="M6.293 11.707c.391.391 1.023.391 1.414 0l6.293-6.293v3.586c0 .552.447 1 1 1 .553 0 1-.448 1-1v-6c0-.552-.447-1-1-1h-6c-.553 0-1 .448-1 1s.447 1 1 1h3.586l-6.293 6.293c-.391.391-.391 1.023 0 1.414zm8.717.293c-.547 0-.991.447-.991 1v.599c0 .389-.445.401-.496.401h-9.046c-.051 0-.495-.012-.495-.401v-9.099c0-.275.221-.5.495-.5h.533c.547 0 .99-.447.99-1 0-.553-.443-1-.99-1h-.533c-1.366 0-2.477 1.121-2.477 2.5v9.099c0 1.346 1.088 2.401 2.477 2.401h9.046c1.389 0 2.477-1.055 2.477-2.401v-.599c0-.553-.443-1-.99-1z"
+            sketch:type="MSShapeGroup" />
+        </svg>
+        <span>View Demo</span>
+      </a>
+    </div>
+  </header>
+
+  <div *ngIf="!loading && docs?.tokensCategory && idsTokenProperties && idsTokenProperties[docs.tokensCategory]">
+    <table>
+      <thead>
+        <th>
+          Design Token &nbsp; <a class="table-header--description" href="https://github.com/infor-design/design-system/blob/0.x/design-tokens/readme.md" target="_blank">Learn More</a>
+        </th>
+        <th>Color</th>
+        <th>Value</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let token of idsTokenProperties[docs.tokensCategory]">
+          <td><code>{{token.name}}</code></td>
+          <td>
+            <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }" title="{{token.value}}"></div>
+          </td>
+          <td>
+            <code *ngIf="token.type === 'color'">{{token.originalValue}}</code>
+            <code *ngIf="token.type !== 'color'">{{token.value}}</code>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngFor="let element of elements">
+    <h2>Class {{element.name}}</h2>
+    <div *ngFor="let constructorTag of element.constructorTags">
+      <span>Constructor</span>
+      <code>new {{element.name}}({{constructorTag.name}}({{constructorTag.type.name}}): {{constructorTag.description}})</code>
+    </div>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Description</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let method of element.methods">
+          <td>
+            <div *ngIf="method.params.length; then thenTemplateName; else elseTemplateName">
+              your Content ignored
+            </div>
+          </td>
+          <ng-template #thenTemplateName>
+            <td>
+              {{method.name}}&#40;<span *ngFor="let param of method.params; let isLast=last">{{param.paramName}} = {{param.paramDescription}}{{isLast ? '' : ', '}}</span>&#41;
+            </td>
+          </ng-template>
+          <ng-template #elseTemplateName>
+            <td>
+              {{method.name}}
+            </td>
+          </ng-template>
+          <td>
+            {{method.info}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!loading" #link [innerHTML]="docs?.trustedHtml" (click)="relativeLinks(link)"></div>
+</div>

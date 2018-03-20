@@ -48,7 +48,7 @@ export class AppComponent {
 
         const urlSegments = event.url.split('/');
         (urlSegments[1] === 'code') ? this.codeSection = true : this.codeSection = false;
-        (urlSegments[1] === 'code' || url === '/') ? this.useGrid = false : this.useGrid = true;
+        (url === '/') ? this.useGrid = false : this.useGrid = true;
 
         // Initialize Pendo on page change
         pendo.initialize({

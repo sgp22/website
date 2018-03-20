@@ -47,7 +47,8 @@ export class LibraryService {
         console.log(`http ${key}`);
         this.store(key, res);
       }))
-      .first()
+      .first();
+
     }
   }
 

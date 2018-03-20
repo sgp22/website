@@ -31,22 +31,16 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public trustedHtml: any;
   public section: any;
   public element: any;
-  public sidebar: any = true;
-  public sidebarPath = '';
   public sidebarNav: any;
   public versionPaths: any;
   public libraryPaths: any;
   public currentVersion: any;
   public selectedVersionNumber: any;
   public library = '';
-  public selectedVersion = '';
-  public selectedLibrary = '';
   public loading = true;
   public notFound = false;
   public showWarning = false;
   public elements = [];
-  public expandedLevel1: any = [];
-  public expandedLevel2: any = [];
 
   public idsTokenProperties: {};
 
@@ -67,7 +61,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     const urlSegment = [];
-    this.createLibraryPaths();
 
     this.route.url.subscribe(segment => {
 
@@ -80,6 +73,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         this.library = segment.slice(-2)[0].path;
         this.element = null;
       }
+
 
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
@@ -98,7 +92,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         .subscribe(res => {
 
           this.createVersionPaths(res, urlSegment);
-          this.handleSidebar(urlSegment);
           this.getIDSTokenProperties(this.domainPath, this.library, this.currentVersion);
 
           this.docService
@@ -121,6 +114,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
               }
             );
         });
+
     });
   }
 
@@ -179,29 +173,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleSidebar(urlSegment) {
-
-    if (urlSegment[2] === 'latest') {
-      this.sidebarPath = urlSegment.slice(1, 3).join('/');
-    } else {
-      if (urlSegment.length === 4) {
-        this.sidebarPath = urlSegment.slice(1, -1).join('/');
-      } else {
-        this.sidebarPath = urlSegment.slice(1, 3).join('/');
-      }
-    }
-
-    this.selectedLibrary = urlSegment[1];
-    this.selectedVersion = `/${this.sidebarPath}/`;
-    this.sitemapService
-      .getSitemap(this.sidebarPath)
-      .subscribe(
-        (sidebar) => {
-          this.sidebarNav = sidebar['sections'];
-        }
-      );
-  }
-
   createVersionPaths(res, urlSegment) {
 
     let latestVersion = '';
@@ -224,37 +195,19 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     });
 
     latestVersion = this.versionPaths[1]['label'];
-
     this.path = urlSegment.join('/');
     this.currentVersion = urlSegment[2];
     this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
-    if (this.currentVersion == 'latest') {
-      this.selectedVersionNumber =  latestVersion;
-    } else {
-      this.selectedVersionNumber = this.currentVersion;
-    }
+    this.versionShowWarning(this.currentVersion, latestVersion);
 
-    if (this.currentVersion < latestVersion) {
+  }
+
+  versionShowWarning(currentVersion, latestVersion) {
+    if (currentVersion < latestVersion) {
       this.showWarning = true;
     } else {
       this.showWarning = false;
     }
-  }
-
-  createLibraryPaths() {
-    this.libraryService
-      .getAllLibraries()
-      .subscribe(res => {
-        this.libraryPaths = res;
-      });
-  }
-
-  onVersionChange(version) {
-    this.router.navigate([version]);
-  }
-
-  onLibraryChange(library) {
-    this.router.navigate([library]);
   }
 
   relativeLinks(link) {

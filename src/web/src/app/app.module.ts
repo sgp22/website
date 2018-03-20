@@ -12,6 +12,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { SidebarNavComponent } from './components/sidebar-nav/sidebar-nav.component';
+import { SidebarNavCodeComponent } from './components/sidebar-nav-code/sidebar-nav-code.component';
 import { HeaderComponent } from './components/header/header.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FullWidthComponent } from './components/sf-full-width/sf-full-width.component';
@@ -36,6 +37,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     CoreContentPageComponent,
     DocsContentPageComponent,
     SidebarNavComponent,
+    SidebarNavCodeComponent,
     HeaderComponent,
     PageNotFoundComponent,
     FullWidthComponent,
