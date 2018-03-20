@@ -8,7 +8,8 @@ import { TokenService } from '../../shared/token.service';
   providers: [TokenService]
 })
 export class TokenTableComponent implements OnInit {
-  @Input() page;
+  @Input() tokenCategory;
+  @Input() sectionClassName;
   public domainPath = DOMAIN_DOCS_API;
   public idsTokenProperties = {};
 

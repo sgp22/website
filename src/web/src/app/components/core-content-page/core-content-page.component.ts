@@ -31,6 +31,7 @@ export class CoreContentPageComponent implements OnInit {
     });
 
     this.pageContent = this.page;
+    console.log(this.pageContent);
 
   }
 
