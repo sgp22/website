@@ -77,6 +77,7 @@
           <thead>
             <th>Modifier</th>
             <th>Details</th>
+            <th *ngIf="tokens.length > 0">Token</th>
           </thead>
           <tbody>
             <tr *ngFor="let modifier of pageContent.modifiers">
@@ -84,6 +85,7 @@
                 <strong>{{modifier.value.name}}</strong>
               </td>
               <td>{{modifier.value.detail}}</td>
+              <td>{{modifier.value.token}}</td>
             </tr>
           </tbody>
         </table>
