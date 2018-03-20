@@ -186,8 +186,10 @@ class CoreContentPage(PageBase):
         ('heading', blocks.CharBlock(classname="full title")),
         ('image', APIImageChooserBlock()),
         ('table', TableBlock()),
-        ('markdown', APIMarkDownBlock())
+        ('markdown', APIMarkDownBlock()),
+        ('tokenCategory', blocks.CharBlock())
     ], null=True, blank=True)
+
     description = models.CharField(max_length=255)
 
     cross_link = models.CharField(
@@ -311,8 +313,15 @@ class ElementsPage(PageBase):
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
             ('detail', blocks.CharBlock(required=True)),
+            ('token', blocks.CharBlock(required=False))
         ]))
     ], null=True, blank=True )
+
+    tokenCategory = models.CharField(
+        verbose_name="Token Category",
+        max_length=255,
+        blank=True,
+    )
 
     states = StreamField([
         ('states', blocks.StructBlock([
@@ -337,6 +346,7 @@ class ElementsPage(PageBase):
         ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('modifiers'),
+        FieldPanel('tokenCategory'),
         StreamFieldPanel('states'),
         StreamFieldPanel('body')
     ]
@@ -349,6 +359,7 @@ class ElementsPage(PageBase):
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('modifiers'),
+        APIField('tokenCategory'),
         APIField('states'),
         APIField('body')
     ]
@@ -432,9 +443,16 @@ class BlocksPage(PageBase):
         #        from `options` to `modifiers`
         ('options', blocks.StructBlock([
             ('name', blocks.CharBlock(required=True)),
-            ('detail', blocks.CharBlock(required=True))
+            ('detail', blocks.CharBlock(required=True)),
+            ('token', blocks.CharBlock(required=False))
         ]))
     ], null=True, blank=True)
+
+    tokenCategory = models.CharField(
+        verbose_name="Token Category",
+        max_length=255,
+        blank=True,
+    )
 
     body = StreamField([
         ('image', APIImageChooserBlock()),
@@ -453,6 +471,7 @@ class BlocksPage(PageBase):
         ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('modifiers'),
+        FieldPanel('tokenCategory'),
         StreamFieldPanel('body')
     ]
 
@@ -464,5 +483,6 @@ class BlocksPage(PageBase):
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('modifiers'),
+        APIField('tokenCategory'),
         APIField('body')
     ]

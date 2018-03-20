@@ -13,6 +13,7 @@ import 'rxjs/add/operator/switchMap';
 
 export class CoreContentPageComponent implements OnInit {
   @Input() page;
+  @Input() loading;
   public pageContent: any;
 
   constructor(

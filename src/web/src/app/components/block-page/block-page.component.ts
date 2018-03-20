@@ -10,7 +10,9 @@ import { PagesService } from '../../shared/pages.service';
 
 export class BlockPageComponent implements OnInit {
   @Input() page;
+  @Input() loading;
   public pageContent;
+  public tokens;
 
   constructor(
     private router: Router,
@@ -21,7 +23,12 @@ export class BlockPageComponent implements OnInit {
   ngOnInit() {
 
     this.pageContent = this.page;
+    this.checkModifierTokens();
 
+  }
+
+  private checkModifierTokens() {
+    this.tokens = this.pageContent.modifiers.filter(modifier => modifier.value.token === "" ? null : true);
   }
 
 }

@@ -15,15 +15,15 @@
 </ng-template>
 
 <ng-template #coreTemplate>
-  <app-core-content-page [page]="page"></app-core-content-page>
+  <app-core-content-page [page]="page" [loading]="loading"></app-core-content-page>
 </ng-template>
 
 <ng-template #elementsTemplate>
-  <app-element-page [page]="page"></app-element-page>
+  <app-element-page [page]="page" [loading]="loading"></app-element-page>
 </ng-template>
 
 <ng-template #blockTemplate>
-  <app-block-page [page]="page"></app-block-page>
+  <app-block-page [page]="page" [loading]="loading"></app-block-page>
 </ng-template>
 
 <ng-template #docsTemplate>

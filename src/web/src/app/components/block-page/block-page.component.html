@@ -68,6 +68,8 @@
 
       </section>
 
+      <token-table [tokenCategory]="pageContent?.tokenCategory" [sectionClassName]="true" [loading]="loading"></token-table>
+
       <section *ngIf="pageContent.modifiers.length > 0" class="page-section page-section--options">
 
         <h1 class="h2">Modifiers</h1>
@@ -77,6 +79,7 @@
           <thead>
             <th>Modifier</th>
             <th>Details</th>
+            <th *ngIf="tokens.length > 0">Token</th>
           </thead>
           <tbody>
             <tr *ngFor="let modifier of pageContent.modifiers">
@@ -84,6 +87,7 @@
                 <strong>{{modifier.value.name}}</strong>
               </td>
               <td>{{modifier.value.detail}}</td>
+              <td>{{modifier.value.token}}</td>
             </tr>
           </tbody>
         </table>
