@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { FullWidthComponent } from './components/sf-full-width/sf-full-width.component';
 import { TwoColumnComponent } from './components/sf-two-column/sf-two-column.component';
 import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-two-col-text-image.component';
+import { TokenTableComponent } from './components/token-table/token-table.component';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 
@@ -45,6 +46,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     ComponentLoaderComponent,
     ContainerComponent,
     MainComponent,
+    TokenTableComponent
   ],
   imports: [
     BrowserModule,

@@ -22,8 +22,12 @@ export class BlockPageComponent implements OnInit {
   ngOnInit() {
 
     this.pageContent = this.page;
-    this.tokens = this.pageContent.modifiers.filter(modifier => modifier.value.token === "" ? false : true);
+    this.checkModifierTokens();
 
+  }
+
+  private checkModifierTokens() {
+    this.tokens = this.pageContent.modifiers.filter(modifier => modifier.value.token === "" ? null : true);
   }
 
 }

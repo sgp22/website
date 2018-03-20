@@ -1,0 +1,32 @@
+<section *ngIf="page?.tokenCategory && idsTokenProperties && idsTokenProperties[page?.tokenCategory]" class="page-section">
+
+  <h1 class="h2">Design Tokens</h1>
+
+  <table>
+    <thead>
+      <th>
+        Design Token &nbsp;
+        <a class="table-header--description" href="https://github.com/infor-design/design-system/blob/0.x/design-tokens/readme.md"
+          target="_blank">Learn More</a>
+      </th>
+      <th>Color</th>
+      <th>Value</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let token of idsTokenProperties[page?.tokenCategory]">
+        <td>
+          <code>{{token.name}}</code>
+        </td>
+        <td>
+          <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }"
+            title="{{token.value}}"></div>
+        </td>
+        <td>
+          <code *ngIf="token.type === 'color'">{{token.originalValue}}</code>
+          <code *ngIf="token.type !== 'color'">{{token.value}}</code>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
