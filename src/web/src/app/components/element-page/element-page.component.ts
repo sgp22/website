@@ -10,10 +10,12 @@ import { PagesService } from '../../shared/pages.service';
 
 export class ElementPageComponent implements OnInit {
   @Input() page;
+  @Input() loading;
+  @Input() idsTokenProperties;
+  @Input() tokenCategory;
   public pageContent;
   public domainPath = DOMAIN_DOCS_API;
   public tokens;
-  public idsTokenProperties: {};
 
   constructor(
     private router: Router,

@@ -3,7 +3,6 @@ import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { PagesService } from '../../shared/pages.service';
 
-
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -25,6 +24,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   @HostBinding('class.ids-row--offset-xl-3')
   @HostBinding('class.ids-row--offset-sm-4') useGrid: boolean = true;
   public page;
+  public tokenCategory;
   public section;
   public sidebarNav;
   public hasGrandchildren: boolean;

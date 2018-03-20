@@ -1,6 +1,4 @@
-<section *ngIf="tokenCategory && idsTokenProperties && idsTokenProperties[tokenCategory]" [ngClass]="{'page-section': sectionClassName}">
-
-  <h1 class="h2">Design Tokens</h1>
+<section *ngIf="!loading && tokenCategory && idsTokenProperties && idsTokenProperties[tokenCategory]" [ngClass]="{'page-section': sectionClassName}">
 
   <table>
     <thead>

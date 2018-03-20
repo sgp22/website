@@ -10,6 +10,7 @@ import { PagesService } from '../../shared/pages.service';
 
 export class BlockPageComponent implements OnInit {
   @Input() page;
+  @Input() loading;
   public pageContent;
   public tokens;
 

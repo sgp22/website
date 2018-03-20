@@ -8,10 +8,11 @@ import { TokenService } from '../../shared/token.service';
   providers: [TokenService]
 })
 export class TokenTableComponent implements OnInit {
+  @Input() idsTokenProperties;
   @Input() tokenCategory;
   @Input() sectionClassName;
+  @Input() loading;
   public domainPath = DOMAIN_DOCS_API;
-  public idsTokenProperties = {};
 
   constructor(
     private tokenService: TokenService
@@ -25,7 +26,7 @@ export class TokenTableComponent implements OnInit {
     this.tokenService
       .getTokenData(domain, library, version)
       .subscribe(
-        res => { this.idsTokenProperties = this.tokenService.groupTokensByCategory(res) },
+        res => { this.idsTokenProperties = this.tokenService.groupTokensByCategory(res); this.loading = false; },
         err => {
           console.log(`No tokens found: ${err}`);
           this.idsTokenProperties = [];
