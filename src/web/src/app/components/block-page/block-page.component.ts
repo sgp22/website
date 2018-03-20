@@ -28,7 +28,7 @@ export class BlockPageComponent implements OnInit {
   }
 
   private checkModifierTokens() {
-    this.tokens = this.pageContent.modifiers.filter(modifier => modifier.value.token === "" ? null : true);
+    this.tokens = this.pageContent.modifiers.filter(modifier => modifier.value.token === null ? false : true);
   }
 
 }

@@ -42,8 +42,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public showWarning = false;
   public elements = [];
 
-  public idsTokenProperties: {};
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -92,7 +90,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         .subscribe(res => {
 
           this.createVersionPaths(res, urlSegment);
-          this.getIDSTokenProperties(this.domainPath, this.library, this.currentVersion);
 
           this.docService
             .getDoc(`${this.domainPath}/${this.mapPath}`)
@@ -228,17 +225,5 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   private stopRefreshing() {
     this.loading = false;
-  }
-
-  private getIDSTokenProperties(domain: string, library: string, version:string = 'latest') {
-    this.tokenService
-      .getTokenData(domain, library, version)
-      .subscribe(
-        res => { this.idsTokenProperties = this.tokenService.groupTokensByCategory(res) },
-        err => {
-          console.log(`No tokens found: ${err}`);
-          this.idsTokenProperties = [];
-        }
-      );
   }
 }
