@@ -354,6 +354,11 @@
       max-width: 25%;
     }
   }
+
+  & img.image-row--inline {
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 .page-section,
