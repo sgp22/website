@@ -58,29 +58,7 @@
 
       </section>
 
-      <section *ngIf="pageContent.modifiers.length > 0" class="page-section page-section--options">
-
-        <h2>Modifiers</h2>
-        <p>Modifiers can be added to configure a component. Many modifiers can be added to a component and all modifiers can be used for all types, unless where specifically noted.</p>
-
-        <table>
-          <thead>
-            <th>Modifier</th>
-            <th>Details</th>
-            <th *ngIf="tokens.length > 0">Token</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let modifier of pageContent.modifiers">
-              <td>
-                <strong>{{modifier.value.name}}</strong>
-              </td>
-              <td>{{modifier.value.detail}}</td>
-              <td><code *ngIf="modifier.value.token">{{modifier.value.token}}</code></td>
-            </tr>
-          </tbody>
-        </table>
-
-      </section>
+      <modifiers-table [modifiers]="pageContent.modifiers"></modifiers-table>
 
       <token-table [tokensCategory]="pageContent?.tokensCategory" [sectionClassName]="true" [version]="'latest'"></token-table>
 

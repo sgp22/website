@@ -12,7 +12,6 @@ export class BlockPageComponent implements OnInit {
   @Input() page;
   @Input() loading;
   public pageContent;
-  public tokens;
 
   constructor(
     private router: Router,
@@ -21,14 +20,7 @@ export class BlockPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.pageContent = this.page;
-    this.checkModifierTokens();
-
+    console.log(this.pageContent);
   }
-
-  private checkModifierTokens() {
-    this.tokens = this.pageContent.modifiers.filter(modifier => modifier.value.token === null ? false : true);
-  }
-
 }
