@@ -48,8 +48,8 @@
         </div>
         <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
         <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
-        <ng-container *ngIf="streamfield.type === 'tokenCategory'">
-          <token-table [tokenCategory]="streamfield?.value" [loading]="loading"></token-table>
+        <ng-container *ngIf="streamfield.type === 'tokensCategory'">
+          <token-table [tokensCategory]="streamfield?.value" [loading]="loading" [version]="'latest'"></token-table>
         </ng-container>
       </ng-container>
     </section>

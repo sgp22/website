@@ -27,7 +27,7 @@
     "@angular/platform-browser-dynamic": "^5.2.4",
     "@angular/router": "^5.2.4",
     "@infor/ids-tokens": "^1.0.0-beta.2",
-    "@infor/ids-web": "^1.0.0-beta.4",
+    "@infor/ids-web": "^1.0.0-beta.5",
     "@ngx-loading-bar/http-client": "1.1.0",
     "core-js": "^2.5.3",
     "ng-inline-svg": "^5.1.4",

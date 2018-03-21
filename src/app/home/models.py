@@ -187,7 +187,7 @@ class CoreContentPage(PageBase):
         ('image', APIImageChooserBlock()),
         ('table', TableBlock()),
         ('markdown', APIMarkDownBlock()),
-        ('tokenCategory', blocks.CharBlock())
+        ('tokensCategory', blocks.CharBlock())
     ], null=True, blank=True)
 
     description = models.CharField(max_length=255)
@@ -317,8 +317,8 @@ class ElementsPage(PageBase):
         ]))
     ], null=True, blank=True )
 
-    tokenCategory = models.CharField(
-        verbose_name="Token Category",
+    tokensCategory = models.CharField(
+        verbose_name="Tokens Category",
         max_length=255,
         blank=True,
     )
@@ -346,7 +346,7 @@ class ElementsPage(PageBase):
         ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('modifiers'),
-        FieldPanel('tokenCategory'),
+        FieldPanel('tokensCategory'),
         StreamFieldPanel('states'),
         StreamFieldPanel('body')
     ]
@@ -359,7 +359,7 @@ class ElementsPage(PageBase):
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('modifiers'),
-        APIField('tokenCategory'),
+        APIField('tokensCategory'),
         APIField('states'),
         APIField('body')
     ]
@@ -448,8 +448,8 @@ class BlocksPage(PageBase):
         ]))
     ], null=True, blank=True)
 
-    tokenCategory = models.CharField(
-        verbose_name="Token Category",
+    tokensCategory = models.CharField(
+        verbose_name="Tokens Category",
         max_length=255,
         blank=True,
     )
@@ -471,7 +471,7 @@ class BlocksPage(PageBase):
         ]),
         StreamFieldPanel('types'),
         StreamFieldPanel('modifiers'),
-        FieldPanel('tokenCategory'),
+        FieldPanel('tokensCategory'),
         StreamFieldPanel('body')
     ]
 
@@ -483,6 +483,6 @@ class BlocksPage(PageBase):
         APIField('descriptors', serializer=ElementDescriptorSerializer()),
         APIField('types'),
         APIField('modifiers'),
-        APIField('tokenCategory'),
+        APIField('tokensCategory'),
         APIField('body')
     ]

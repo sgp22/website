@@ -37,38 +37,30 @@
 
       <section *ngIf="pageContent.types.length > 0" class="page-section page-section--types">
 
-        <h1 class="h2">Types</h1>
-        <p>A type extends or alters a component's definition.</p>
+        <div *ngFor="let type of pageContent.types">
+          <h2>{{type.value.name}}</h2>
+          <ng-template [ngIf]="type.value.image_type === 'inline'" [ngIfElse]="fullWidth">
+            <div class="ids-row">
+              <div class="ids-row--col-md-7">
+                <p>{{type.value.detail}}</p>
+              </div>
+              <div class="ids-row--col-md-5"*ngIf="type.value.image_type === 'inline'">
+                <p><img class="image-row--inline" src="{{type.value.image.file}}" alt="{{type.value.image.title}}"></p>
+              </div>
+            </div>
+          </ng-template>
 
-        <table>
-          <thead>
-            <th>Type</th>
-            <th>When to use it</th>
-            <th>Example</th>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let type of pageContent.types">
-              <tr [ngClass]="(type.value.image_type === 'full-width') ? 'row--full-image' : ''">
-                <td><strong>{{type.value.name}}</strong></td>
-                <td>{{type.value.detail}}</td>
-                <td *ngIf="type.value.image_type === 'inline'">
-                  <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
-                </td>
-              </tr>
-              <tr *ngIf="type.value.image_type === 'full-width'" class="image-row--full">
-                <td colspan="3">
-                  <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
+          <ng-template #fullWidth>
+            <p>{{type.value.detail}}</p>
+            <p><img src="{{type.value.image.file}}" alt="{{type.value.image.title}}"></p>
+          </ng-template>
+        </div>
 
       </section>
 
       <section *ngIf="pageContent.modifiers.length > 0" class="page-section page-section--options">
 
-        <h1 class="h2">Modifiers</h1>
+        <h2>Modifiers</h2>
         <p>Modifiers can be added to configure a component. Many modifiers can be added to a component and all modifiers can be used for all types, unless where specifically noted.</p>
 
         <table>
@@ -90,7 +82,7 @@
 
       </section>
 
-      <token-table [tokenCategory]="pageContent?.tokenCategory" [sectionClassName]="true"></token-table>
+      <token-table [tokensCategory]="pageContent?.tokensCategory" [sectionClassName]="true" [version]="'latest'"></token-table>
 
       <section *ngIf="pageContent.states.length > 0" class="page-section page-section--states">
 

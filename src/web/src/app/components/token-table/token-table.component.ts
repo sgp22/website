@@ -9,8 +9,9 @@ import { TokenService } from '../../shared/token.service';
 })
 export class TokenTableComponent implements OnInit {
   @Input() idsTokenProperties;
-  @Input() tokenCategory;
+  @Input() tokensCategory;
   @Input() sectionClassName;
+  @Input() version;
   @Input() loading;
   public domainPath = DOMAIN_DOCS_API;
 
@@ -19,7 +20,7 @@ export class TokenTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getIDSTokenProperties(this.domainPath, 'ids-web');
+    this.getIDSTokenProperties(this.domainPath, 'ids-web', this.version);
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
