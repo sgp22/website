@@ -26,7 +26,7 @@ import { SafeHtmlPipe } from './shared/safeHtml.pipe';
 import { ComponentLoaderComponent } from './components/component-loader/component-loader.component';
 import { ContainerComponent } from './components/container/container.component';
 import { MainComponent } from './components/main/main.component';
-import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     HttpClientModule,
     InlineSVGModule,
     routing,
-    LoadingBarHttpClientModule
+    LoadingBarModule.forRoot()
   ],
   entryComponents: [
     ContainerComponent

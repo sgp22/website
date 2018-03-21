@@ -2,6 +2,7 @@ import { Component, AfterContentInit, ViewChild, OnInit, ViewContainerRef, HostB
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { ComponentLoaderComponent } from '../component-loader/component-loader.component';
 import { PagesService } from '../../shared/pages.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-main',
@@ -34,7 +35,8 @@ export class MainComponent implements AfterContentInit, OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private pagesService: PagesService
+    private pagesService: PagesService,
+    private loadingBar: LoadingBarService
   ) { }
 
   ngOnInit() {}
@@ -180,6 +182,7 @@ export class MainComponent implements AfterContentInit, OnInit {
     preview ? requestParam = previewId : requestParam = page.id;
 
     this.loading = true;
+    this.loadingBar.start();
 
     this.pagesService
       .getPage(requestParam)
@@ -192,6 +195,7 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.stopRefreshing()
         },
         () => {
+          this.loadingBar.complete();
           this.stopRefreshing();
           window.scrollTo(0, 0);
         }
