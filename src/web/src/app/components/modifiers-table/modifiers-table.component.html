@@ -17,7 +17,7 @@
         </td>
         <td>{{modifier.value.detail}}</td>
         <td style="display: flex;">
-          <div *ngIf="modifier.value.token && modifiersTokens[modifier.value.token].type === 'color'" class="site-spec--color" [ngStyle]="modifiersTokens[modifier.value.token].value && {'background-color': ''+ modifiersTokens[modifier.value.token].value +'' }"
+          <div *ngIf="modifier.value.token && modifiersTokens[modifier.value.token] && modifiersTokens[modifier.value.token].type === 'color'" class="site-spec--color" [ngStyle]="modifiersTokens[modifier.value.token].value && {'background-color': ''+ modifiersTokens[modifier.value.token].value +'' }"
             style="margin-right: 10px;"></div>
           <code *ngIf="modifier.value.token" style="white-space: nowrap;">
             {{modifier.value.token}}
