@@ -1,4 +1,4 @@
-<section *ngIf="!loading && tokenCategory && idsTokenProperties && idsTokenProperties[tokenCategory]" [ngClass]="{'page-section': sectionClassName}">
+<section *ngIf="!loading && tokensCategory && idsTokenProperties && idsTokenProperties[tokensCategory]" [ngClass]="{'page-section': sectionClassName}">
 
   <table>
     <thead>
@@ -11,7 +11,7 @@
       <th>Value</th>
     </thead>
     <tbody>
-      <tr *ngFor="let token of idsTokenProperties[tokenCategory]">
+      <tr *ngFor="let token of idsTokenProperties[tokensCategory]">
         <td>
           <code>{{token.name}}</code>
         </td>

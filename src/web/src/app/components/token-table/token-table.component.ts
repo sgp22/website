@@ -9,7 +9,7 @@ import { TokenService } from '../../shared/token.service';
 })
 export class TokenTableComponent implements OnInit {
   @Input() idsTokenProperties;
-  @Input() tokenCategory;
+  @Input() tokensCategory;
   @Input() sectionClassName;
   @Input() version;
   @Input() loading;
