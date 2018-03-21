@@ -15,6 +15,7 @@ import { TokenService } from '../../shared/token.service';
 import { DocService } from '../../shared/doc.service';
 import { LibraryService } from '../../shared/library.service';
 import { SitemapService } from '../../shared/sitemap.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-docs-content-page',
@@ -53,7 +54,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     private tokenService: TokenService,
     private docService: DocService,
     private libraryService: LibraryService,
-    private sitemapService: SitemapService
+    private sitemapService: SitemapService,
+    private loadingBar: LoadingBarService
   ) {}
 
   ngOnInit() {
@@ -85,6 +87,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
       this.absolutePath = `/${this.basePath}`;
 
+      this.loadingBar.start();
+
       this.libraryService
         .getAllLibraryVersionPaths(this.library)
         .subscribe(res => {
@@ -106,6 +110,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 this.stopRefreshing();
               },
               () => {
+                this.loadingBar.complete();
                 this.stopRefreshing();
                 window.scrollTo(0, 0);
               }
