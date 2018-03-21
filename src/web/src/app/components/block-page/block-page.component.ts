@@ -21,6 +21,5 @@ export class BlockPageComponent implements OnInit {
 
   ngOnInit() {
     this.pageContent = this.page;
-    console.log(this.pageContent);
   }
 }
