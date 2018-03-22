@@ -10,12 +10,7 @@ import { PagesService } from '../../shared/pages.service';
 
 export class ElementPageComponent implements OnInit {
   @Input() page;
-  @Input() loading;
-  @Input() idsTokenProperties;
-  @Input() tokenCategory;
   public pageContent;
-  public domainPath = DOMAIN_DOCS_API;
-  public tokens;
 
   constructor(
     private router: Router,
@@ -24,14 +19,7 @@ export class ElementPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.pageContent = this.page;
-    this.checkModifierTokens();
-
-  }
-
-  private checkModifierTokens() {
-    this.tokens = this.pageContent.modifiers.filter(modifier => modifier.value.token === null ? false : true);
   }
 
 }

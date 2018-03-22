@@ -1,0 +1,30 @@
+<section *ngIf="modifiers.length > 0" class="page-section page-section--options">
+
+  <h2>Modifiers</h2>
+  <p>Modifiers can be added to configure a component. Many modifiers can be added to a component and all modifiers can be used
+    for all types, unless where specifically noted.</p>
+
+  <table>
+    <thead>
+      <th>Modifier</th>
+      <th>Details</th>
+      <th *ngIf="tokens.length > 0">Token</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let modifier of modifiers">
+        <td>
+          <strong>{{modifier.value.name}}</strong>
+        </td>
+        <td>{{modifier.value.detail}}</td>
+        <td style="display: flex;">
+          <div *ngIf="modifier.value.token && modifiersTokens[modifier.value.token] && modifiersTokens[modifier.value.token].type === 'color'" class="site-spec--color" [ngStyle]="modifiersTokens[modifier.value.token].value && {'background-color': ''+ modifiersTokens[modifier.value.token].value +'' }"
+            style="margin-right: 10px;"></div>
+          <code *ngIf="modifier.value.token" style="white-space: nowrap;">
+            {{modifier.value.token}}
+          </code>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
