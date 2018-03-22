@@ -19,3 +19,4 @@ export ENV=""
 export DOMAIN=""
 export DOMAIN_VERSION="v2"
 export DOMAIN_DOCS_API=""
+export DOCS_API_KEY=$DOCS_API_KEY
