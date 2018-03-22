@@ -6,7 +6,6 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
 import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
-import { JsDocumentation } from '../../shared/js-documentation.service';
 import * as semver from 'semver';
 
 import { Token } from '../../shared/token';
@@ -20,7 +19,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 @Component({
   selector: 'app-docs-content-page',
   templateUrl: './docs-content-page.component.html',
-  providers: [UrlParser, UrlMapper, JsDocumentation, TokenService, DocService, LibraryService, SitemapService]
+  providers: [UrlParser, UrlMapper, TokenService, DocService, LibraryService, SitemapService]
 })
 export class DocsContentPageComponent implements OnInit, OnDestroy {
   public path = '';
@@ -29,7 +28,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public absolutePath = '';
   public domainPath = DOMAIN_DOCS_API;
   public docs: any;
-  public trustedHtml: any;
   public section: any;
   public element: any;
   public sidebarNav: any;
@@ -41,7 +39,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public loading = true;
   public notFound = false;
   public showWarning = false;
-  public elements = [];
 
   constructor(
     private router: Router,
@@ -49,7 +46,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private urlParser: UrlParser,
     private urlMapper: UrlMapper,
-    private comments: JsDocumentation,
     private sanitizer: DomSanitizer,
     private tokenService: TokenService,
     private docService: DocService,
@@ -99,12 +95,12 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
             .getDoc(`${this.domainPath}/${this.mapPath}`)
             .subscribe(
               (docs: any) => {
-
-                this.elements = [];
-                this.docs = docs;
                 this.notFound = false;
+                this.docs = docs;
+                if (docs.api) {
+                  this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
+                }
                 this.handleRelativeLinks(docs);
-
               },
               () => {
                 this.stopRefreshing();
@@ -147,17 +143,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     // Append the modified fragment to the tempNode
     // and assign the innerHTML to the template var
     tempNode.appendChild(bodyFragments);
-    this.docs.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(tempNode.innerHTML);
-
-    // API portion of docs json which is output of DocumentationJS
-    if (this.docs.api) {
-      for (const i in this.docs.api) {
-        if (this.docs.api[i]) {
-          this.elements.push(this.comments.parse(this.docs.api[i]));
-        }
-      }
-    }
-
+    this.docs.bodyTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(tempNode.innerHTML);
   }
 
   createRelativePath(el, attr, navigate = false) {
