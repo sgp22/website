@@ -33,7 +33,7 @@
     </li>
   </ul>
 
-  <token-table *ngIf="!loading" [tokenCategory]="docs?.tokensCategory" [sectionClassName]="true" [version]="currentVersion"></token-table>
+  <token-table [loading]="loading" [tokensCategory]="docs?.tokensCategory" [sectionClassName]="true" [version]="currentVersion"></token-table>
 
   <div *ngFor="let element of elements">
     <div *ngIf="element.settings">
