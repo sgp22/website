@@ -146,8 +146,13 @@
   }
 
   & > div {
+    align-self: flex-end;
     margin-bottom: calc(var(--spacing-base) * 4);
     width: 50%;
+
+    &:nth-child(3) {
+      margin-bottom: 0;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -157,6 +162,11 @@
       margin-bottom: 0;
       width: auto;
     }
+  }
+
+  & span {
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
   }
 
   & img {
