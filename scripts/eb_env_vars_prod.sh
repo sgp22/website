@@ -10,4 +10,5 @@ eb setenv AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
     DB_HOST="$DB_HOST" \
     DB_PASS="$DB_PASS" \
     RDS_TRUE="False" \
-    S3_STORAGE="True"
+    S3_STORAGE="True" \
+    DOCS_API_KEY="$DOCS_API_KEY"
