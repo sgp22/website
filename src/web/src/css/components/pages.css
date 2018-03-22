@@ -31,15 +31,34 @@
 }
 
 .banner--bg {
-  background-image: url(/assets/site/assets/white-dot-grid.svg);
+  /* background-image: url(/assets/site/assets/white-dot-grid.svg); */
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
+  overflow: visible;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   right: 0;
   width: 30%;
+
+  & .white-dot-pattern {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+
+    & path {
+      position: relative;
+      transition: all 2.3s ease;
+    }
+
+    &.white-dot-pattern--loaded {
+
+      & path {
+        transform: translate(0, 0) !important;
+      }
+    }
+  }
 
   @media (--viewport-md) {
     width: 50%;

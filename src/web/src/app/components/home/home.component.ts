@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -9,6 +9,7 @@ import { PagesService } from '../../shared/pages.service';
 })
 export class HomeComponent implements AfterViewInit {
   @Input() page;
+  @ViewChild('whiteDotPattern') whiteDotPattern:ElementRef;
   public pageContent: any;
   public loading = true;
 
@@ -27,6 +28,16 @@ export class HomeComponent implements AfterViewInit {
       preview ? this.getPreviewContent(preview) : this.getPageContent();
 
     });
+
+    const dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
+
+    for (let i = 0; i < dotPatternPaths.length; i++) {
+      dotPatternPaths[i].style.transform = `translate(-${Math.floor(Math.random() * 100)}px, ${Math.floor(Math.random() * 100)}px)`;
+    }
+
+    setTimeout(() => {
+      this.whiteDotPattern.nativeElement.classList.add('white-dot-pattern--loaded');
+    }, 100);
 
   }
 
