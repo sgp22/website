@@ -39,21 +39,8 @@
 
         <div *ngFor="let type of pageContent.types">
           <h2>{{type.value.name}}</h2>
-          <ng-template [ngIf]="type.value.image_type === 'inline'" [ngIfElse]="fullWidth">
-            <div class="ids-row">
-              <div class="ids-row--col-md-7">
-                <p>{{type.value.detail}}</p>
-              </div>
-              <div class="ids-row--col-md-5"*ngIf="type.value.image_type === 'inline'">
-                <p><img class="image-row--inline" src="{{type.value.image.file}}" alt="{{type.value.image.title}}"></p>
-              </div>
-            </div>
-          </ng-template>
-
-          <ng-template #fullWidth>
-            <p>{{type.value.detail}}</p>
-            <p><img src="{{type.value.image.file}}" alt="{{type.value.image.title}}"></p>
-          </ng-template>
+          <p>{{type.value.detail}}</p>
+          <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
         </div>
 
       </section>
