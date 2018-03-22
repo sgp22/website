@@ -37,7 +37,7 @@
 
       <section *ngIf="pageContent.types.length > 0" class="page-section page-section--types">
 
-        <h1 class="h2">Types</h1>
+        <h2>Types</h2>
         <p>A type extends or alters a component's definition.</p>
 
         <table>
@@ -68,6 +68,7 @@
 
       </section>
 
+      <h2 *ngIf="pageContent?.tokensCategory">Design Tokens</h2>
       <token-table [tokensCategory]="pageContent?.tokensCategory" [sectionClassName]="true" [loading]="loading" [version]="'latest'"></token-table>
 
       <modifiers-table [modifiers]="pageContent.modifiers"></modifiers-table>
