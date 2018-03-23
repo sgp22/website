@@ -2,11 +2,10 @@
  * JsDocumentation Section Styles
  */
 
-
 .jsdoc-section--heading {
+  color: var(--text-color-muted);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-normal);
-  color: var(--text-color-muted);
 }
 
 .jsdoc-signature {
