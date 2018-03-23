@@ -7,6 +7,11 @@ table {
   margin-bottom: 32px;
   width: 100%;
 
+  & caption {
+    font-size: var(--font-size-md);
+    text-align: left;
+  }
+
   & thead {
     border-bottom: 1px solid var(--graphite055);
     text-align: left;
