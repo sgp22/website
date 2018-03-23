@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, QueryList, ViewChild, ViewChildren, HostListener } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -10,7 +10,9 @@ import { PagesService } from '../../shared/pages.service';
 export class HomeComponent implements AfterViewInit {
   @Input() page;
   @ViewChild('whiteDotPattern') whiteDotPattern:ElementRef;
+  @ViewChildren('section') section: QueryList<any>;
   public dotPatternPaths;
+  public hpSections;
   public pageContent: any;
   public loading = true;
 
@@ -100,4 +102,9 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
+  @HostListener('window:scroll', ['$event'])
+  private slideInAnimation() {
+  }
+
 }
+
