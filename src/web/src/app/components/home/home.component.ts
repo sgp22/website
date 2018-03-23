@@ -34,12 +34,7 @@ export class HomeComponent implements AfterViewInit {
 
     this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
     this.animateDots(this.dotPatternPaths);
-
-    const slideInAt = (window.innerHeight) - this.section1.nativeElement.offsetHeight / 2;
-    const isHalfShown = slideInAt > this.section1.nativeElement.offsetTop;
-    if (isHalfShown) {
-      this.section1.nativeElement.classList.add('section--visible');
-    }
+    this.checkFirstSection();
 
   }
 
@@ -108,6 +103,14 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
+  private checkFirstSection() {
+    const slideInAt = (window.innerHeight) - this.section1.nativeElement.offsetHeight / 2;
+    const isHalfShown = slideInAt > this.section1.nativeElement.offsetTop;
+    if (isHalfShown) {
+      this.section1.nativeElement.classList.add('section--visible');
+    }
+  }
+
   @HostListener('window:scroll', ['$event'])
   private scrollAnimations(){
     this.checkSection();
@@ -117,8 +120,8 @@ export class HomeComponent implements AfterViewInit {
     const sections = document.querySelectorAll('section');
     [].slice.call(sections).forEach((section) => {
       const slideInAt = (window.scrollY + window.innerHeight) - section.offsetHeight / 5;
-      const isHalfShown = slideInAt > section.offsetTop;
-      if (isHalfShown) {
+      const isShown = slideInAt > section.offsetTop;
+      if (isShown) {
         section.classList.add('section--visible');
       }
     });
