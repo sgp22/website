@@ -31,7 +31,6 @@
 }
 
 .banner--bg {
-  /* background-image: url(/assets/site/assets/white-dot-grid.svg); */
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -49,19 +48,29 @@
 
     & path {
       position: relative;
+      stroke: var(--white);
       transition: all 2.3s ease;
     }
 
-    &.white-dot-pattern--loaded {
+    &.white-dot-pattern--settled {
 
-      & path {
-        transform: translate(0, 0) !important;
+      & .dot--pulse {
+        animation: pulse 1s ease alternate infinite;
       }
     }
   }
 
   @media (--viewport-md) {
     width: 50%;
+  }
+}
+
+@keyframes pulse {
+  from {
+    stroke-width: 1;
+  }
+  to {
+    stroke-width: 5;
   }
 }
 
