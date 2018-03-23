@@ -1,10 +1,8 @@
-
 /*
  * Layout
  */
 
 .site:not(.home, .code-section) {
-
   & .page-content {
     padding: 48px 16px;
 
@@ -48,19 +46,18 @@
   }
 }
 
-
 /*
   Site Footer
 */
 
 .site-footer {
-  display: none;
   background-color: #133c59;
+  display: none;
   position: relative;
 
   & a {
-    display: inline-block;
     color: var(--white);
+    display: inline-block;
     text-decoration: none;
   }
 }
@@ -85,8 +82,8 @@
 
 .site-footer--soho-link {
   bottom: calc(var(--spacing-base) * 2);
-  right: calc(var(--spacing-base) * 2);
   position: absolute;
+  right: calc(var(--spacing-base) * 2);
 
   @media (--viewport-md) {
     bottom: calc(var(--spacing-base) * 4);
