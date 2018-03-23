@@ -10,7 +10,7 @@ import { PagesService } from '../../shared/pages.service';
 export class HomeComponent implements AfterViewInit {
   @Input() page;
   @ViewChild('whiteDotPattern') whiteDotPattern:ElementRef;
-  @ViewChildren('section') section: QueryList<any>;
+  @ViewChild('section1') section1:ElementRef;
   public dotPatternPaths;
   public hpSections;
   public pageContent: any;
@@ -34,6 +34,12 @@ export class HomeComponent implements AfterViewInit {
 
     this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
     this.animateDots(this.dotPatternPaths);
+
+    const slideInAt = (window.innerHeight) - this.section1.nativeElement.offsetHeight / 2;
+    const isHalfShown = slideInAt > this.section1.nativeElement.offsetTop;
+    if (isHalfShown) {
+      this.section1.nativeElement.classList.add('section--visible');
+    }
 
   }
 
@@ -103,7 +109,19 @@ export class HomeComponent implements AfterViewInit {
   }
 
   @HostListener('window:scroll', ['$event'])
-  private slideInAnimation() {
+  private scrollAnimations(){
+    this.checkSection();
+  }
+
+  private checkSection() {
+    const sections = document.querySelectorAll('section');
+    [].slice.call(sections).forEach((section) => {
+      const slideInAt = (window.scrollY + window.innerHeight) - section.offsetHeight / 5;
+      const isHalfShown = slideInAt > section.offsetTop;
+      if (isHalfShown) {
+        section.classList.add('section--visible');
+      }
+    });
   }
 
 }
