@@ -16,7 +16,6 @@ img {
   max-width: 100%;
 }
 
-
 /*
  * Scrollbars
  */
@@ -26,12 +25,12 @@ img {
 }
 
 ::-webkit-scrollbar {
+  background-color: transparent;
   height: 5px;
   width: 5px;
-  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
   background: var(--color-default);
+  border-radius: 10px;
 }

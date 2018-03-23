@@ -4,9 +4,10 @@
 
 .col--border {
   position: relative;
-  &:before {
+
+  &::before {
+    content: ' ';
     display: block;
-    content: " ";
     height: 100%;
     position: absolute;
   }

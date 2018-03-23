@@ -6,7 +6,7 @@
   background: #133c59;
   color: var(--white);
   overflow: hidden;
-  padding: calc( 85px - 24px ) 0;
+  padding: calc(85px - 24px) 0;
   position: relative;
 
   & h1,
@@ -36,15 +36,15 @@
   height: 100%;
   overflow: visible;
   position: absolute;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
-  right: 0;
   width: 30%;
 
   & .white-dot-pattern {
-    width: 100%;
     height: 100%;
     overflow: visible;
+    width: 100%;
 
     & path {
       position: relative;
@@ -53,7 +53,6 @@
     }
 
     &.white-dot-pattern--settled {
-
       & .dot--pulse {
         animation: pulse 1s ease alternate infinite;
       }
@@ -69,6 +68,7 @@
   from {
     stroke-width: 1;
   }
+
   to {
     stroke-width: 5;
   }
@@ -86,12 +86,9 @@
       transform: translateY(0);
     }
 
-    & .section--1--mid,
-    & .section--4--btm {
-      & .col--border {
-        &:before {
-          max-height: 1000px;
-        }
+    & .col--border {
+      &::before {
+        max-height: 1000px;
       }
     }
   }
@@ -101,8 +98,8 @@
 .section--mid,
 .section--btm,
 .section--subsection {
-  position: relative;
   opacity: 0;
+  position: relative;
   transform: translateY(100px);
   transition: transform 0.7s ease, opacity 0.7s ease;
 }
@@ -112,11 +109,11 @@
 }
 
 .section--mid {
-  transition-delay: 1.2s
+  transition-delay: 1.2s;
 }
 
 .section--btm {
-  transition-delay: 1.3s
+  transition-delay: 1.3s;
 }
 
 .section--subsection {
@@ -182,8 +179,7 @@
   }
 
   & .col--border {
-    &:before {
-      content: ' ';
+    &::before {
       background-color: #979797;
       left: -20%;
       max-height: 0;
@@ -200,6 +196,7 @@
 
 .section--1--btm {
   margin-top: calc(var(--spacing-base) * 3.5);
+
   @media (--viewport-md) {
     margin-top: calc(var(--spacing-base) * 7);
   }
@@ -305,7 +302,6 @@
 }
 
 .section--4--btm {
-
   & > div {
     margin-bottom: calc(var(--spacing-base) * 10);
 
@@ -323,12 +319,12 @@
   }
 
   & .col--border {
-    &:before {
+    &::before {
       background-color: #979797;
       left: -20%;
       max-height: 0;
-      transition: max-height 1.5s ease 1.5s;
       transform: translateX(-7px);
+      transition: max-height 1.5s ease 1.5s;
       width: 2px;
 
       @media (--viewport-sm) {
@@ -402,18 +398,18 @@
   & img.inline-image--left-half {
     @media (--viewport-md) {
       float: left;
-      margin-top: var(--spacing);
-      margin-bottom:var(--spacing);
+      margin-bottom: var(--spacing);
       margin-right: calc(var(--spacing) * 4);
+      margin-top: var(--spacing);
       max-width: 50%;
     }
   }
 
   & img.inline-image--left-quarter {
     float: left;
-    margin-top: var(--spacing);
     margin-bottom: var(--spacing);
     margin-right: calc(var(--spacing) * 3);
+    margin-top: var(--spacing);
     max-width: 50%;
 
     @media (--viewport-md) {
@@ -425,18 +421,18 @@
   & img.inline-image--right-half {
     @media (--viewport-md) {
       float: right;
-      margin-top: var(--spacing);
       margin-bottom: var(--spacing);
       margin-left: calc(var(--spacing) * 4);
+      margin-top: var(--spacing);
       max-width: 50%;
     }
   }
 
   & img.inline-image--right-quarter {
     float: right;
-    margin-top: var(--spacing);
     margin-bottom: var(--spacing);
     margin-left: calc(var(--spacing) * 3);
+    margin-top: var(--spacing);
     max-width: 50%;
 
     @media (--viewport-md) {
@@ -458,7 +454,7 @@
   }
 
   & p + ul {
-    margin-top: calc(-var(--spacing) * 4);
+    margin-top: calc(var(--spacing) * 4);
   }
 
   & li {
@@ -470,8 +466,6 @@
 .page-section-intro {
   padding: 80px 0;
 }
-
-.page-section-title {}
 
 /*
  * Flexible streamfield components
