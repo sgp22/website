@@ -154,8 +154,14 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
           const relativeLink = el.getAttribute(attr);
           this.router.navigate([`${relativeLink}`]);
         } else {
-          const relativeHref = el.getAttribute(attr).replace(/(^\.\/|^\/|.html$)/g, '');
-          el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
+          const relativeHref = el.getAttribute(attr).replace(/(^\.\/|.html$)/g, '');
+          if (relativeHref.substring(0,1) == '/') {
+            // Relative to the root of the domain
+            el.setAttribute(attr, `${relativeHref}`);
+          } else {
+            // Relative to the current path
+            el.setAttribute(attr, `${this.absolutePath}/${relativeHref}`);
+          }
         }
       }
     }
@@ -187,6 +193,12 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     this.currentVersion = urlSegment[2];
     this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
     this.versionShowWarning(this.currentVersion, latestVersion);
+
+    if (this.currentVersion == 'latest') {
+      this.selectedVersionNumber =  latestVersion;
+    } else {
+      this.selectedVersionNumber = this.currentVersion;
+    }
 
   }
 

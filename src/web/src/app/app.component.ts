@@ -94,7 +94,8 @@ export class AppComponent {
 
   public capitalizeTitle(str) {
     return str.replace(/\w\S*/g, function(txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      const title = txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      return title.replace('Ids', 'IDS');
     });
   }
 
