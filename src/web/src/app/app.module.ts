@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 
 import { routing } from './app.routing';
+import { CacheService } from './shared/cache.service';
 import { HomeComponent } from './components/home/home.component';
 import { ElementPageComponent } from './components/element-page/element-page.component';
 import { BlockPageComponent } from './components/block-page/block-page.component';
@@ -61,7 +62,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
   entryComponents: [
     ContainerComponent
   ],
-  providers: [],
+  providers: [CacheService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })
