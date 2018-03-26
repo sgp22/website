@@ -445,6 +445,14 @@
     display: block;
     margin: 0 auto;
   }
+
+  /* Float logos from code docs
+   * https://stackoverflow.com/a/22683624
+   */
+  & img[src$='#logo-float-right'] {
+    float:right;
+    margin: calc(var(--spacing) * 2);
+  }
 }
 
 .page-section,
