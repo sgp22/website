@@ -3,13 +3,13 @@
  */
 
 .site:not(.home, .code-section) {
-  & .page-content {
+  /* & .page-content {
     padding: 48px 16px;
 
     @media (--viewport-md) {
       padding: 48px 0;
     }
-  }
+  } */
 }
 
 .home {
@@ -22,6 +22,32 @@
   & .sidebar-nav-comp {
     display: none;
   }
+}
+
+/*
+ * Page Hero
+ */
+
+.page-hero {
+  padding: calc(var(--spacing-base) * 11) calc(var(--spacing-base) * 5);
+  position: relative;
+  margin-bottom: calc(var(--spacing-base) * 12);
+}
+
+.page-hero--title {
+  font-weight: var(--font-weight-bold);
+  margin-top: 0;
+}
+
+.page-hero--text {
+  margin-bottom: 0;
+}
+
+.page-hero--image {
+  position: absolute;
+  right: calc(var(--spacing-base) * 4);
+  bottom: -50px;
+  width: 320px;
 }
 
 /*
