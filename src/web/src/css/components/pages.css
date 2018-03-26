@@ -395,6 +395,11 @@
     position: relative;
   }
 
+  /* Remove mysterious padding */
+  & pre {
+      margin-bottom: calc(-var(--spacing) * 3);
+  }
+
   & img.inline-image--left-half {
     @media (--viewport-md) {
       float: left;
@@ -450,8 +455,17 @@
    * https://stackoverflow.com/a/22683624
    */
   & img[src$='#logo-float-right'] {
-    float:right;
-    margin: calc(var(--spacing) * 2);
+    @media (--viewport-md) {
+      float:right;
+      margin-bottom: calc(var(--spacing) * 2);
+      margin-left: calc(var(--spacing) * 2);
+    }
+
+    @media (--viewport-xl) {
+      position: absolute;
+      right: 36px;
+      top: 132px;
+    }
   }
 }
 
