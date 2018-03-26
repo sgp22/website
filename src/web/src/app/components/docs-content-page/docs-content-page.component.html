@@ -35,31 +35,7 @@
 
   <token-table [loading]="loading" [tokensCategory]="docs?.tokensCategory" [sectionClassName]="true" [version]="currentVersion"></token-table>
 
-  <div *ngFor="let element of elements">
-    <div *ngIf="element.settings">
-      <h2>Settings</h2>
-      <table>
-        <thead>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let setting of element.settings">
-            <td>
-              <code>{{setting.name}}</code>
-            </td>
-            <td>
-              <code>{{setting.type}}</code>
-            </td>
-            <td>
-              {{setting.info}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <div *ngIf="!loading" #link [innerHTML]="docs?.apiTrustedHtml" (click)="relativeLinks(link)"></div>
 
-  <div *ngIf="!loading" #link [innerHTML]="docs?.trustedHtml" (click)="relativeLinks(link)"></div>
+  <div *ngIf="!loading" #link [innerHTML]="docs?.bodyTrustedHtml" (click)="relativeLinks(link)"></div>
 </div>

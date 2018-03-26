@@ -46,8 +46,15 @@ def get_filtered_result(bucket_name, path):
     return filtered_result
 
 def post(request):
+    post_auth_key = request.POST.get('post_auth_key')
+    DOCS_API_KEY = os.getenv('DOCS_API_KEY', "")
     root_path = request.POST.get('root_path', '').strip('/')
     uploaded_file = request.FILES.get('file')
+
+    if post_auth_key is None:
+        return Response({'post_auth_key': 'required. Use DOCS_API_KEY env var'}, status=400)
+    elif post_auth_key != DOCS_API_KEY:
+        return Response({'post_auth_key': 'DOCS_API_KEY required'}, status=401)
 
     if uploaded_file and uploaded_file.name.endswith('.zip'):
         zipf = zipfile.ZipFile(uploaded_file)

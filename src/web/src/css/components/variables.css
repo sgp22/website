@@ -18,6 +18,7 @@
   --spacing: 8px;
 
   /* TODO: REPLACE WITH IDS TOKENS */
+  --graphite01: #f0f0f0;
   --graphite03: #bdbdbd;
 
   /* Media definitions using IDS breakpoints */
