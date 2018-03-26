@@ -1,3 +1,8 @@
+/**
+ * Due credit to
+ * https://hackernoon.com/angular-simple-in-memory-cache-service-on-the-ui-with-rxjs-77f167387e39
+ */
+
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Rx';
 
