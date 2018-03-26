@@ -1,45 +1,33 @@
+import { CacheService } from './cache.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-
-import { tap } from 'rxjs/operators';
-import 'rxjs/add/observable/throw';
-
 import { Token } from './token';
+
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class TokenService {
-  private _dataStore: any = {};
 
   constructor(
+    private cacheService: CacheService,
     private http: HttpClient
   ) { }
 
   getTokenData(domain: string, library: string, version: string) {
     let url = `${domain}/api/docs/${library}/${version}/ids-tokens/theme-default.raw.json`;
 
-    if (this._dataStore.hasOwnProperty(url)) {
-      console.log(`service store '${url}'`);
-      return Observable.of(this._dataStore[url]);
-
-    } else {
-      return this.http
-        .get(url)
-        .pipe(tap(res => {
-          console.log(`http '${url}'`);
-          this.store(url, res);
-        }))
-        .catch((err: Response) => {
-          if (err.status === 400) {
-            console.log('Err: No tokens found for this version.');
-            return JSON.stringify([]);
-          } else {
-            return Observable.throw(new Error(`${ err.status } ${ err.statusText }`));
-          }
-        })
-        .first();
-    }
+   return this.cacheService.get(url, this.http
+    .get(url)
+    .catch((err: Response) => {
+      if (err.status === 400) {
+        console.log('Err: No tokens found for this version.');
+        return JSON.stringify([]);
+      } else {
+        return Observable.throw(new Error(`${ err.status } ${ err.statusText }`));
+      }
+    }));
   }
 
   groupTokensByCategory(tokenData) {
@@ -74,9 +62,5 @@ export class TokenService {
 
   private toTitleCase(str: string): string {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-  }
-
-  private store(key: string, data: any) {
-    this._dataStore[key] = data;
   }
 }
