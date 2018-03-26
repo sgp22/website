@@ -6,7 +6,7 @@
   background: #133c59;
   color: var(--white);
   overflow: hidden;
-  padding: calc( 85px - 24px ) 0;
+  padding: calc(85px - 24px) 0;
   position: relative;
 
   & h1,
@@ -31,23 +31,93 @@
 }
 
 .banner--bg {
-  background-image: url(/assets/site/assets/white-dot-grid.svg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
+  overflow: visible;
   position: absolute;
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
-  right: 0;
   width: 30%;
+
+  & .white-dot-pattern {
+    height: 100%;
+    overflow: visible;
+    width: 100%;
+
+    & path {
+      position: relative;
+      stroke: var(--white);
+      transition: all 2.3s ease;
+    }
+
+    &.white-dot-pattern--settled {
+      & .dot--pulse {
+        animation: pulse 1s ease alternate infinite;
+      }
+    }
+  }
 
   @media (--viewport-md) {
     width: 50%;
   }
 }
 
+@keyframes pulse {
+  from {
+    stroke-width: 1;
+  }
+
+  to {
+    stroke-width: 5;
+  }
+}
+
 .section {
   padding: calc(var(--spacing-base) * 10) 0;
+
+  &.section--visible {
+    & .section--top,
+    & .section--mid,
+    & .section--btm,
+    & .section--subsection {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    & .col--border {
+      &::before {
+        max-height: 1000px;
+      }
+    }
+  }
+}
+
+.section--top,
+.section--mid,
+.section--btm,
+.section--subsection {
+  opacity: 0;
+  position: relative;
+  transform: translateY(100px);
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.section--top {
+  transition-delay: 1s;
+}
+
+.section--mid {
+  transition-delay: 1.2s;
+}
+
+.section--btm {
+  transition-delay: 1.3s;
+}
+
+.section--subsection {
+  transition-delay: 1.4s;
 }
 
 .section-headline {
@@ -105,15 +175,16 @@
 
     @media (--viewport-sm) {
       margin-bottom: 0;
-      padding-bottom: calc(var(--spacing-base) * 10);
     }
   }
 
   & .col--border {
-    &:before {
+    &::before {
       background-color: #979797;
       left: -20%;
+      max-height: 0;
       transform: translateX(2px);
+      transition: max-height 1.5s ease 1.5s;
       width: 2px;
 
       @media (--viewport-lg) {
@@ -124,7 +195,11 @@
 }
 
 .section--1--btm {
-  margin-top: calc(var(--spacing-base) * 7);
+  margin-top: calc(var(--spacing-base) * 3.5);
+
+  @media (--viewport-md) {
+    margin-top: calc(var(--spacing-base) * 7);
+  }
 }
 
 .section--1--btm--inner {
@@ -144,8 +219,13 @@
   }
 
   & > div {
+    align-self: flex-end;
     margin-bottom: calc(var(--spacing-base) * 4);
     width: 50%;
+
+    &:nth-child(3) {
+      margin-bottom: 0;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -155,6 +235,11 @@
       margin-bottom: 0;
       width: auto;
     }
+  }
+
+  & span {
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
   }
 
   & img {
@@ -217,7 +302,6 @@
 }
 
 .section--4--btm {
-
   & > div {
     margin-bottom: calc(var(--spacing-base) * 10);
 
@@ -225,7 +309,7 @@
       margin-bottom: 0;
     }
 
-    @media (--viewport-md) {
+    @media (--viewport-sm) {
       margin-bottom: 0;
     }
   }
@@ -235,10 +319,12 @@
   }
 
   & .col--border {
-    &:before {
+    &::before {
       background-color: #979797;
       left: -20%;
+      max-height: 0;
       transform: translateX(-7px);
+      transition: max-height 1.5s ease 1.5s;
       width: 2px;
 
       @media (--viewport-sm) {
@@ -312,18 +398,18 @@
   & img.inline-image--left-half {
     @media (--viewport-md) {
       float: left;
-      margin-top: var(--spacing);
-      margin-bottom:var(--spacing);
+      margin-bottom: var(--spacing);
       margin-right: calc(var(--spacing) * 4);
+      margin-top: var(--spacing);
       max-width: 50%;
     }
   }
 
   & img.inline-image--left-quarter {
     float: left;
-    margin-top: var(--spacing);
     margin-bottom: var(--spacing);
     margin-right: calc(var(--spacing) * 3);
+    margin-top: var(--spacing);
     max-width: 50%;
 
     @media (--viewport-md) {
@@ -335,18 +421,18 @@
   & img.inline-image--right-half {
     @media (--viewport-md) {
       float: right;
-      margin-top: var(--spacing);
       margin-bottom: var(--spacing);
       margin-left: calc(var(--spacing) * 4);
+      margin-top: var(--spacing);
       max-width: 50%;
     }
   }
 
   & img.inline-image--right-quarter {
     float: right;
-    margin-top: var(--spacing);
     margin-bottom: var(--spacing);
     margin-left: calc(var(--spacing) * 3);
+    margin-top: var(--spacing);
     max-width: 50%;
 
     @media (--viewport-md) {
@@ -368,7 +454,7 @@
   }
 
   & p + ul {
-    margin-top: calc(-var(--spacing) * 4);
+    margin-top: calc(var(--spacing) * 4);
   }
 
   & li {
@@ -380,8 +466,6 @@
 .page-section-intro {
   padding: 80px 0;
 }
-
-.page-section-title {}
 
 /*
  * Flexible streamfield components

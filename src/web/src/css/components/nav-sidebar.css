@@ -3,8 +3,8 @@
  */
 
 .sidebar-nav-comp {
-  padding-top: 48px;
   outline: 0;
+  padding-top: 48px;
 
   @media (--viewport-sm) {
     border-right: 1px solid var(--input-readonly-bg-color);
