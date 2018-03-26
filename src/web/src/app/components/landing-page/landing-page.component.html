@@ -1,6 +1,23 @@
 
   <ng-container *ngIf="pageContent">
 
+    <section
+      *ngIf="pageContent.page_hero.length > 0"
+      class="page-hero"
+      [ngStyle]="{'background-color': '#'+pageContent.page_hero[0].value.background_color+'', 'color': '#'+pageContent.page_hero[0].value.text_color}"
+      >
+
+      <div class="page-hero--content">
+        <h1>{{pageContent.page_hero[0].value.heading}}</h1>
+        <p>{{pageContent.page_hero[0].value.text}}</p>
+      </div>
+
+      <div class="page-hero--image">
+        <img src="{{pageContent.page_hero[0].value.image.file}}" alt="{{pageContent.page_hero[0].value.image.title}}">
+      </div>
+
+    </section>
+
     <ng-container *ngFor="let section of pageContent.content">
 
       <sf-full-width *ngIf="section.type === 'fullWidth'"
