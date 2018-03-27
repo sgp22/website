@@ -1,7 +1,7 @@
 {
   "name": "docs-site",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "build:prod": "rm -rf dist/* && webpack --optimize-minimize --config config/webpack.prod.js",
     "build:dev": "rm -rf dist/* && webpack --config config/webpack.dev.js",
