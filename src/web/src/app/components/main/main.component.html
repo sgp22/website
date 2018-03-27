@@ -15,19 +15,43 @@
 </ng-template>
 
 <ng-template #coreTemplate>
-  <app-core-content-page [page]="page" [loading]="loading"></app-core-content-page>
+  <div class="ids-row">
+    <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
+      <div class="ids-container">
+        <app-core-content-page [page]="page" [loading]="loading"></app-core-content-page>
+      </div>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #elementsTemplate>
-  <app-element-page [page]="page" [loading]="loading"></app-element-page>
+  <div class="ids-row">
+    <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
+      <div class="ids-container">
+        <app-element-page [page]="page" [loading]="loading"></app-element-page>
+      </div>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #blockTemplate>
-  <app-block-page [page]="page" [loading]="loading"></app-block-page>
+  <div class="ids-row">
+    <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
+      <div class="ids-container">
+        <app-block-page [page]="page" [loading]="loading"></app-block-page>
+      </div>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #docsTemplate>
-  <app-docs-content-page></app-docs-content-page>
+  <div class="ids-row">
+    <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
+      <div class="ids-container">
+        <app-docs-content-page></app-docs-content-page>
+      </div>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #notFoundTemplate>

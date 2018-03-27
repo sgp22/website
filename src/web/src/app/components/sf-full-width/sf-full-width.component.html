@@ -1,13 +1,13 @@
-<section class="flexible-content full-width" [ngStyle]="backgroundColor && { 'background-color': '#' + backgroundColor + '' }">
+<section class="flexible-content full-width page-section" [ngStyle]="backgroundColor && { 'background-color': '#' + backgroundColor + '' }">
 
   <div class="bg-image" [ngStyle]="backgroundImage && {'background-image': 'url(' + backgroundImage + ')'}"></div>
 
-  <div class="ids-row ids-container">
-    <div [ngClass]="{ 'ids-row--col-md-8 ids-row--offset-md-2' : !hasSidebar, 'ids-row--col-md-12' : hasSidebar }"  [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
-      <img class="hero-image" *ngIf="heroImage" src="{{heroImage}}" alt="{{heroImageTitle}}">
-      <h1 class="page-section-title" [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
+  <div class="ids-row">
+    <div [ngClass]="{ 'ids-row--col-sm-10' : !hasSidebar, 'ids-row--col-md-12' : hasSidebar }"  [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
+      <h2 class="full-width--title" [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h2>
       <p [ngStyle]="invertTextColor && {'color': '#ffffff'}" [innerHTML]="content"></p>
-      <a class="ids-btn btn--custom" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
+      <img class="full-width--hero-image" *ngIf="heroImage" src="{{heroImage}}" alt="{{heroImageTitle}}">
+      <a class="ids-btn ids-btn--default" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>
     </div>
   </div>
 

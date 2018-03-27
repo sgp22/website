@@ -20,10 +20,10 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
-  @HostBinding('class.ids-row--col-sm-7')
-  @HostBinding('class.ids-row--col-xl-6')
-  @HostBinding('class.ids-row--offset-xl-3')
-  @HostBinding('class.ids-row--offset-sm-4') useGrid: boolean = true;
+  @HostBinding('class.ids-row--offset-xl-2')
+  @HostBinding('class.ids-row--offset-sm-3')
+  @HostBinding('class.ids-row--col-sm-9')
+  @HostBinding('class.ids-row--col-xl-10') useGrid: boolean = true;
   public page;
   public tokenCategory;
   public section;
@@ -102,9 +102,13 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, true);
           break;
         case 2:
+          // this.useGrid = false;
+          // this.codeSection = true;
           this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
           break;
         default:
+          // this.useGrid = false;
+          // this.codeSection = true;
           this.componentLoader.loadComponent(null, null, this.docsTemplate, {});
           break;
       }

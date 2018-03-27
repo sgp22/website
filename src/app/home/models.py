@@ -13,9 +13,11 @@ from wagtail.api import APIField
 from wagtail.wagtailsnippets.blocks import SnippetChooserBlock as DefaultSnippetChooserBlock
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
+    FieldRowPanel,
     StreamFieldPanel,
     MultiFieldPanel
 )
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.contrib.table_block.blocks import TableBlock
 
@@ -157,6 +159,17 @@ class PageBase(Page):
 
 class LandingPage(PageBase):
     menu_order = models.IntegerField(default=0)
+
+    page_hero = StreamField([
+        ('page_hero', blocks.StructBlock([
+            ('heading', blocks.CharBlock(required=True)),
+            ('text', blocks.CharBlock(required=True)),
+            ('image', APIImageChooserBlock(required=True)),
+            ('text_color', blocks.CharBlock(required=True, help_text="enter hex code without #")),
+            ('background_color', blocks.CharBlock(required=True, help_text="enter hex code without #")),
+        ]))
+    ], null=True, blank=True)
+
     content = StreamField([
         ('fullWidth', FullWidthStreamField()),
         ('twoColumn', TwoColumnStreamField()),
@@ -166,6 +179,7 @@ class LandingPage(PageBase):
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
+        StreamFieldPanel('page_hero'),
         StreamFieldPanel('content')
     ]
 
@@ -176,6 +190,7 @@ class LandingPage(PageBase):
     api_fields = [
         APIField('menu_order'),
         APIField('title'),
+        APIField('page_hero'),
         APIField('content')
     ]
 
