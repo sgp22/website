@@ -21,11 +21,9 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
   @HostBinding('class.ids-row--offset-xl-2')
-  @HostBinding('class.ids-row--offset-sm-3') useGrid: boolean = true;
-  // @HostBinding('class.ids-row--offset-xl-3')
-  // @HostBinding('class.ids-row--offset-sm-4')
-  // @HostBinding('class.ids-row--col-sm-7')
-  // @HostBinding('class.ids-row--col-xl-6') codeSection: boolean = false;
+  @HostBinding('class.ids-row--offset-sm-3')
+  @HostBinding('class.ids-row--col-sm-9')
+  @HostBinding('class.ids-row--col-xl-10') useGrid: boolean = true;
   public page;
   public tokenCategory;
   public section;
