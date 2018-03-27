@@ -146,6 +146,12 @@ class CoreContentSnippetChooserBlock(DefaultSnippetChooserBlock):
             }
 
 
+class GridBlock(blocks.StreamBlock):
+    image = APIImageChooserBlock()
+    title = blocks.CharBlock()
+    text = blocks.TextBlock()
+
+
 class PageBase(Page):
     is_creatable = False
 
@@ -178,9 +184,18 @@ class LandingPage(PageBase):
         ('rawHtml', blocks.RawHTMLBlock()),
     ], null=True, blank=True)
 
+    grid_blocks = StreamField([
+        ('grid_blocks', blocks.StructBlock([
+            ('image', APIImageChooserBlock(required=True)),
+            ('title', blocks.CharBlock(required=True)),
+            ('text', blocks.CharBlock(required=True))
+        ]))
+    ], null=True, blank=True)
+
     content_panels = Page.content_panels + [
         StreamFieldPanel('page_hero'),
-        StreamFieldPanel('content')
+        StreamFieldPanel('content'),
+        StreamFieldPanel('grid_blocks')
     ]
 
     promote_panels = Page.promote_panels + [
@@ -191,7 +206,8 @@ class LandingPage(PageBase):
         APIField('menu_order'),
         APIField('title'),
         APIField('page_hero'),
-        APIField('content')
+        APIField('content'),
+        APIField('grid_blocks')
     ]
 
 
