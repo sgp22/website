@@ -27,16 +27,17 @@
 .page-hero {
   margin-bottom: calc(var(--spacing-base) * 12);
   margin-top: calc(var(--spacing-base) * 3);
-  padding: calc(var(--spacing-base) * 11) calc(var(--spacing-base) * 2);
+  padding-bottom: calc(var(--spacing-base) * 11);
+  padding-top: calc(var(--spacing-base) * 11);
   position: relative;
 
   @media (--viewport-sm) {
     margin-top: -32px;
-    padding: calc(var(--spacing-base) * 11) calc(var(--spacing-base) * 5);
   }
 }
 
 .page-hero--title {
+  font-size: 4.8rem;
   font-weight: var(--font-weight-bold);
   margin-top: 0;
 }

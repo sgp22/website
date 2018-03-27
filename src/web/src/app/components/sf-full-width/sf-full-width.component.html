@@ -4,7 +4,7 @@
 
   <div class="ids-row">
     <div [ngClass]="{ 'ids-row--col-sm-10' : !hasSidebar, 'ids-row--col-md-12' : hasSidebar }"  [ngStyle]="textAlign && {'text-align': ''+ textAlign +'' }">
-      <h1 class="full-width--title" [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h1>
+      <h2 class="full-width--title" [ngStyle]="invertTextColor && {'color': '#ffffff'}">{{title}}</h2>
       <p [ngStyle]="invertTextColor && {'color': '#ffffff'}" [innerHTML]="content"></p>
       <img class="full-width--hero-image" *ngIf="heroImage" src="{{heroImage}}" alt="{{heroImageTitle}}">
       <a class="ids-btn ids-btn--default" [ngClass]="invertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="ctaText" routerLink="{{ctaLink}}">{{ctaText}}</a>

@@ -507,6 +507,7 @@
 }
 
 .full-width--title {
+  font-weight: var(--font-weight-bold);
   margin-top: 0;
 }
 
@@ -552,6 +553,7 @@
   }
 
   & .two-column--title {
+    font-weight: var(--font-weight-bold);
     margin-top: calc(var(--spacing-base) * 6);
   }
 }
