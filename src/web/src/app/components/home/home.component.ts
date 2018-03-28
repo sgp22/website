@@ -104,7 +104,7 @@ export class HomeComponent implements AfterViewInit {
   }
 
   private checkFirstSection() {
-    const slideInAt = (window.innerHeight) - this.section1.nativeElement.offsetHeight / 25;
+    const slideInAt = (window.innerHeight) - this.section1.nativeElement.offsetHeight / 20;
     const isHalfShown = slideInAt > this.section1.nativeElement.offsetTop;
     if (isHalfShown) {
       this.section1.nativeElement.classList.add('section--visible');
@@ -119,9 +119,9 @@ export class HomeComponent implements AfterViewInit {
   private checkSection() {
     const sections = document.querySelectorAll('section');
     [].slice.call(sections).forEach((section) => {
-      const slideInAt = (window.scrollY + window.innerHeight) - section.offsetHeight / 20;
-      const isShown = slideInAt > section.offsetTop;
-      if (isShown) {
+      const slideInAt = (window.scrollY + window.innerHeight) - section.offsetHeight / 2;
+      const isHalfShown = slideInAt > section.offsetTop;
+      if (isHalfShown) {
         section.classList.add('section--visible');
       }
     });

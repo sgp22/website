@@ -91,6 +91,13 @@
         max-height: 1000px;
       }
     }
+
+    & .comp-img--1,
+    & .comp-img--2,
+    & .comp-img--3 {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
@@ -105,19 +112,19 @@
 }
 
 .section--top {
-  transition-delay: 1s;
+  transition-delay: 0s;
 }
 
 .section--mid {
-  transition-delay: 1.2s;
+  transition-delay: 0.2s;
 }
 
 .section--btm {
-  transition-delay: 1.3s;
+  transition-delay: 0.3s;
 }
 
 .section--subsection {
-  transition-delay: 1.4s;
+  transition-delay: 0.4s;
 }
 
 .section-headline {
@@ -184,7 +191,7 @@
       left: -20%;
       max-height: 0;
       transform: translateX(2px);
-      transition: max-height 1.5s ease 1.5s;
+      transition: max-height 1.5s ease 0.5s;
       width: 2px;
 
       @media (--viewport-lg) {
@@ -261,9 +268,49 @@
 }
 
 .section--2--mid {
+  position: relative;
+  width: 100%;
+  padding-top: 70%;
+
   & img {
     display: block;
     margin: 0 auto;
+  }
+
+  & .comp-img {
+    box-shadow: 0px 0px 2px rgba(0,0,0,.3);
+    background-color: var(--white);
+    position: absolute;
+    top: 0;
+  }
+
+  & .comp-img--1,
+  & .comp-img--2,
+  & .comp-img--3 {
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
+    transform: translateY(100px);
+  }
+
+  & .comp-img--1 {
+    top: calc(var(--spacing-base) * 3);
+    left: calc(var(--spacing-base) * 3);
+    margin-right: calc(var(--spacing-base) * 3);
+    transition-delay: 1s;
+  }
+
+  & .comp-img--2 {
+    top: calc(var(--spacing-base) * 6);
+    left: calc(var(--spacing-base) * 6);
+    margin-right: calc(var(--spacing-base) * 6);
+    transition-delay: 2s;
+  }
+
+  & .comp-img--3 {
+    top: calc(var(--spacing-base) * 9);
+    left: calc(var(--spacing-base) * 9);
+    margin-right: calc(var(--spacing-base) * 9);
+    transition-delay: 3s;
   }
 }
 
@@ -315,7 +362,8 @@
   }
 
   & img {
-    margin-bottom: calc(var(--spacing-base) * 6);
+    margin-bottom: calc(var(--spacing-base) * 3);
+    max-width: 50px;
   }
 
   & .col--border {
@@ -324,7 +372,7 @@
       left: -20%;
       max-height: 0;
       transform: translateX(-7px);
-      transition: max-height 1.5s ease 1.5s;
+      transition: max-height 1.5s ease 0.5s;
       width: 2px;
 
       @media (--viewport-sm) {
