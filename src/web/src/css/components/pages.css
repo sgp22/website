@@ -397,7 +397,7 @@
 
   /* Remove mysterious padding */
   & pre {
-      margin-bottom: calc(-var(--spacing) * 3);
+    margin-bottom: calc(-var(--spacing) * 3);
   }
 
   & img.inline-image--left-half {
@@ -456,7 +456,7 @@
    */
   & img[src$='#logo-float-right'] {
     @media (--viewport-md) {
-      float:right;
+      float: right;
       margin-bottom: calc(var(--spacing) * 2);
       margin-left: calc(var(--spacing) * 2);
     }
@@ -602,4 +602,22 @@
     max-width: 100%;
     width: 100%;
   }
+}
+
+.grid-block {
+  margin-bottom: calc(var(--spacing-base) * 7);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.grid-block--image {
+  margin-bottom: calc(var(--spacing-base) * 2);
+}
+
+.grid-block--title {
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
 }
