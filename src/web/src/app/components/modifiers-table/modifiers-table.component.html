@@ -1,4 +1,4 @@
-<section *ngIf="modifiers.length > 0" class="page-section page-section--options">
+<section *ngIf="modifiers && modifiers.length > 0" class="page-section page-section--options">
 
   <h2>Modifiers</h2>
   <p>Modifiers can be added to configure a component. Many modifiers can be added to a component and all modifiers can be used
@@ -8,7 +8,7 @@
     <thead>
       <th>Modifier</th>
       <th>Details</th>
-      <th *ngIf="tokens.length > 0">Token</th>
+      <th *ngIf="tokens && tokens.length > 0">Token</th>
     </thead>
     <tbody>
       <tr *ngFor="let modifier of modifiers">

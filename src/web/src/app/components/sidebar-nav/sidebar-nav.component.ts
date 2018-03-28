@@ -51,7 +51,7 @@ export class SidebarNavComponent implements OnInit {
                     });
                     child.children
                       .filter(child => {
-                        if (child.children.length > 0){
+                        if (child.children && child.children.length > 0){
                           child.children.sort((thisChild, nextChild) =>{
                             return thisChild.title > nextChild.title ? 1 : -1;
                           });

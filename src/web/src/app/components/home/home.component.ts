@@ -32,9 +32,9 @@ export class HomeComponent implements AfterViewInit {
 
     });
 
-    this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
-    this.animateDots(this.dotPatternPaths);
-    this.checkFirstSection();
+    // this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
+    // this.animateDots(this.dotPatternPaths);
+    // this.checkFirstSection();
 
   }
 
