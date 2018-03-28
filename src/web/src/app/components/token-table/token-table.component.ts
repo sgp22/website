@@ -20,7 +20,7 @@ export class TokenTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getIDSTokenProperties(this.domainPath, 'ids-web', this.version);
+    this.getIDSTokenProperties(this.domainPath, 'ids-css', this.version);
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
