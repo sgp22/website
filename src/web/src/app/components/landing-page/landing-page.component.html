@@ -84,6 +84,17 @@
           </div>
 
         </ng-container>
+
+        <section *ngIf="pageContent.grid_blocks.length > 0" class="page-section ids-row">
+
+          <div *ngFor="let block of pageContent.grid_blocks; let isOdd = odd" class="ids-row--col-sm-5 grid-block" [class.ids-row--offset-sm-2]="isOdd">
+            <img class="grid-block--image" src="{{block.value.image.file}}" alt="{{block.value.image.title}}">
+            <h3 class="grid-block--title">{{block.value.title}}</h3>
+            <p>{{block.value.text}}</p>
+          </div>
+
+        </section>
+
       </div>
     </div>
 
