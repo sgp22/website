@@ -48,7 +48,8 @@
 
 .page-hero--image {
   bottom: -50px;
-  position: absolute;
+  position: relative;
+  margin-left: auto;
   right: calc(var(--spacing-base) * 4);
   width: 122px;
 
@@ -57,6 +58,11 @@
   }
 
   @media (--viewport-md) {
+    width: 225px;
+    position: absolute;
+  }
+
+  @media (--viewport-lg) {
     width: 320px;
   }
 }
