@@ -23,7 +23,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     if (this.page) {
       this.pageContent = this.page;
       this.hasSidebar = this.sidebar;
-      console.log(this.pageContent);
     }
   }
 
