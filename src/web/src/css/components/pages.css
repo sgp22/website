@@ -15,7 +15,6 @@
   }
 
   & h1 {
-    font-size: 48px;
     font-weight: var(--font-weight-bold);
     margin-bottom: calc(var(--spacing-base) * 3);
     margin-top: 0;
@@ -570,7 +569,6 @@
   }
 
   & .two-column--title {
-    font-weight: var(--font-weight-bold);
     margin-top: calc(var(--spacing-base) * 6);
   }
 }
