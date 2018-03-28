@@ -18,7 +18,7 @@ export class ModifiersTableComponent implements OnInit {
   ){}
 
   ngOnInit() {
-    this.getIDSTokenProperties(this.domainPath, 'ids-web');
+    this.getIDSTokenProperties(this.domainPath, 'ids-css');
     this.checkModifierTokens();
   }
 

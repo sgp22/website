@@ -395,11 +395,6 @@
     position: relative;
   }
 
-  /* Remove mysterious padding */
-  & pre {
-    margin-bottom: calc(-var(--spacing) * 3);
-  }
-
   & img.inline-image--left-half {
     @media (--viewport-md) {
       float: left;

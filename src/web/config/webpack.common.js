@@ -190,28 +190,28 @@ module.exports = {
       },
       {
         "context": "src/",
-        "to": "assets/ids-web/svgs",
-        "from": `${nodeModules}/@infor/ids-web/dist/ids-icons.svg`
+        "to": "assets/ids-css/svgs",
+        "from": `${nodeModules}/@infor/ids-css/dist/ids-icons.svg`
       },
       {
         "context": "src/",
-        "to": "assets/ids-web/css",
-        "from": `${nodeModules}/@infor/ids-web/dist/ids-reset.min.css`
+        "to": "assets/ids-css/css",
+        "from": `${nodeModules}/@infor/ids-css/dist/ids-reset.min.css`
       },
       {
         "context": "src/",
-        "to": "assets/ids-web/css",
-        "from": `${nodeModules}/@infor/ids-web/dist/ids-reset.min.css.map`
+        "to": "assets/ids-css/css",
+        "from": `${nodeModules}/@infor/ids-css/dist/ids-reset.min.css.map`
       },
       {
         "context": "src/",
-        "to": "assets/ids-web/css",
-        "from": `${nodeModules}/@infor/ids-web/dist/ids-web.min.css`
+        "to": "assets/ids-css/css",
+        "from": `${nodeModules}/@infor/ids-css/dist/ids-css.min.css`
       },
       {
         "context": "src/",
-        "to": "assets/ids-web/css",
-        "from": `${nodeModules}/@infor/ids-web/dist/ids-web.min.css.map`
+        "to": "assets/ids-css/css",
+        "from": `${nodeModules}/@infor/ids-css/dist/ids-css.min.css.map`
       },
       {
         "context": "src/",
@@ -263,8 +263,8 @@ module.exports = {
     }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
-        "assets/ids-web/css/ids-reset.min.css",
-        "assets/ids-web/css/ids-web.min.css",
+        "assets/ids-css/css/ids-reset.min.css",
+        "assets/ids-css/css/ids-css.min.css",
       ],
       append: false,
       publicPath: true,
