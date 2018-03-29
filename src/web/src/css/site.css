@@ -1,5 +1,5 @@
 /* IDS-Tokens */
-@import '../../node_modules/@infor/ids-tokens/platforms/web/theme-default.custom-properties.css';
+@import '../../node_modules/ids-identity/dist/tokens/web/theme-default.custom-properties.css';
 
 /* Variables */
 @import './components/variables';
