@@ -1,10 +1,6 @@
 <ngx-loading-bar [color]="'#3770ff'" [includeSpinner]="false"></ngx-loading-bar>
 
-<div *ngIf="showSplashPage" style="display: flex; justify-content: center; align-items: center; height: 100vh; margin-top: -78px;">
-  <h1 style="margin: 0;">Coming soon...</h1>
-</div>
-
-<div class="site" [class.home]="home" [class.code-section]="codeSection" *ngIf="!showSplashPage">
+<div class="site" [class.home]="home" [class.code-section]="codeSection">
 
   <div class="ids-visuallyhidden" [inlineSVG]="'/assets/ids-css/svgs/ids-icons.svg'"></div>
 
