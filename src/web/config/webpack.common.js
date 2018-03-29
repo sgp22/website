@@ -191,27 +191,27 @@ module.exports = {
       {
         "context": "src/",
         "to": "assets/ids-css/svgs",
-        "from": `${nodeModules}/@infor/ids-css/dist/ids-icons.svg`
+        "from": `${nodeModules}/ids-css/dist/ids-icons.svg`
       },
       {
         "context": "src/",
         "to": "assets/ids-css/css",
-        "from": `${nodeModules}/@infor/ids-css/dist/ids-reset.min.css`
+        "from": `${nodeModules}/ids-css/dist/ids-reset.min.css`
       },
       {
         "context": "src/",
         "to": "assets/ids-css/css",
-        "from": `${nodeModules}/@infor/ids-css/dist/ids-reset.min.css.map`
+        "from": `${nodeModules}/ids-css/dist/ids-reset.min.css.map`
       },
       {
         "context": "src/",
         "to": "assets/ids-css/css",
-        "from": `${nodeModules}/@infor/ids-css/dist/ids-css.min.css`
+        "from": `${nodeModules}/ids-css/dist/ids-css.min.css`
       },
       {
         "context": "src/",
         "to": "assets/ids-css/css",
-        "from": `${nodeModules}/@infor/ids-css/dist/ids-css.min.css.map`
+        "from": `${nodeModules}/ids-css/dist/ids-css.min.css.map`
       },
       {
         "context": "src/",
