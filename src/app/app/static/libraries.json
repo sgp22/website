@@ -1,11 +1,11 @@
 [
   {
     "name": "IDS Enterprise (SoHo)",
-    "path": "ids-jquery"
+    "path": "ids-enterprise"
   },
   {
-    "name": "IDS Web Components",
-    "path": "ids-web"
+    "name": "IDS CSS Library",
+    "path": "ids-css"
   },
   {
     "name": "IDS Pendo Styles",
