@@ -16,7 +16,9 @@ export class TokenService {
   ) { }
 
   getTokenData(domain: string, library: string, version: string) {
-    let url = `${domain}/api/docs/${library}/${version}/ids-identity/dist/tokens/web/theme-default.raw.json`;
+    // Note that the following url route is for a dist file
+    // and not referring to the ids-identity packing in node_modules
+    let url = `${domain}/api/docs/${library}/${version}/ids-identity/theme-default.raw.json`;
 
    return this.cacheService.get(url, this.http
     .get(url)
