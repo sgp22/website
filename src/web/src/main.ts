@@ -4,6 +4,9 @@ import { AppModule } from './app/app.module';
 
 if (IS_PRODUCTION) {
   enableProdMode();
+  if(window){
+    window.console.log=function(){};
+  }
 }
 
 platformBrowserDynamic()
