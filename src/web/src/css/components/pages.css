@@ -498,6 +498,10 @@
     position: relative;
   }
 
+  & li {
+    padding-bottom: var(--spacing);
+  }
+
   & img.inline-image--left-half {
     @media (--viewport-md) {
       float: left;
