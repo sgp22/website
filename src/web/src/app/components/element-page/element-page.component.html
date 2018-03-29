@@ -35,7 +35,7 @@
 
       </section>
 
-      <section *ngIf="pageContent.types.length > 0" class="page-section page-section--types">
+      <section *ngIf="pageContent.types && pageContent.types.length > 0" class="page-section page-section--types">
 
         <div *ngFor="let type of pageContent.types">
           <h2>{{type.value.name}}</h2>

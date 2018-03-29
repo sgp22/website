@@ -32,8 +32,10 @@ export class HomeComponent implements AfterViewInit {
 
     });
 
-    this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
-    this.animateDots(this.dotPatternPaths);
+    if (this.getIEVersion() === 0 && this.getIEVersion() !== 'edge') {
+      this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
+      this.animateDots(this.dotPatternPaths);
+    }
     this.checkFirstSection();
 
   }
@@ -119,12 +121,32 @@ export class HomeComponent implements AfterViewInit {
   private checkSection() {
     const sections = document.querySelectorAll('section');
     [].slice.call(sections).forEach((section) => {
-      const slideInAt = (window.scrollY + window.innerHeight) - section.offsetHeight / 2;
+      const slideInAt = (window.pageYOffset + window.innerHeight) - section.offsetHeight / 2;
       const isHalfShown = slideInAt > section.offsetTop;
       if (isHalfShown) {
         section.classList.add('section--visible');
       }
     });
+  }
+
+  private getIEVersion() {
+    const sAgent = window.navigator.userAgent;
+    const Idx = sAgent.indexOf("MSIE");
+
+    // If IE, return version number.
+    if (Idx > 0)
+      return parseInt(sAgent.substring(Idx + 5, sAgent.indexOf(".", Idx)));
+
+    // If IE 11 then look for Updated user agent string.
+    else if (!!navigator.userAgent.match(/Trident\/7\./))
+      return 11;
+
+    else if (/Edge\/\d./i.test(navigator.userAgent)) {
+      return 'edge';
+    }
+
+    else
+      return 0; //It is not IE
   }
 
 }
