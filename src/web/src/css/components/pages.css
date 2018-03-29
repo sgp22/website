@@ -417,6 +417,7 @@
   }
 
   & img {
+    height: auto;
     margin-bottom: calc(var(--spacing-base) * 3);
     max-width: 50px;
   }

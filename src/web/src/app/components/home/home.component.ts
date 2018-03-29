@@ -32,7 +32,7 @@ export class HomeComponent implements AfterViewInit {
 
     });
 
-    if (this.getIEVersion() === 0 || this.getIEVersion() !== 'edge') {
+    if (this.getIEVersion() === 0 && this.getIEVersion() !== 'edge') {
       this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
       this.animateDots(this.dotPatternPaths);
     }
