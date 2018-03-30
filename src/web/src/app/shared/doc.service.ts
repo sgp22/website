@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/first';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class DocService {
@@ -14,6 +15,15 @@ export class DocService {
   ) {}
 
   getDoc(url: string) {
-    return this.cacheService.get(url, this.http.get(url).first());
+    return this.cacheService.get(url, this.http
+      .get(url)).first()
+      .catch((err: Response) => {
+        if (err.status === 400) {
+          console.error(`${err.status}`)
+          return JSON.stringify(0);
+        } else {
+          return Observable.throw(new Error(`${err.status} ${err.statusText}`));
+        }
+    });
   }
 }

@@ -95,6 +95,10 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
             .getDoc(`${this.domainPath}/${this.mapPath}`)
             .subscribe(
               (docs: any) => {
+                if(docs == 0) {
+                  this.notFound = true;
+                  return;
+                }
                 this.notFound = false;
                 this.docs = docs;
                 if (docs.api) {
@@ -102,7 +106,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 }
                 this.handleRelativeLinks(docs);
               },
-              () => {
+              (err) => {
                 this.stopRefreshing();
               },
               () => {
