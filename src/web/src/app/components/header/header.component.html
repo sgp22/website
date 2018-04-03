@@ -47,7 +47,7 @@
             <a
               #trigger
               type="button"
-              class="ids-btn ids-btn--link"
+              class="ids-btn ids-btn--link dropdown-trigger--code"
               id="{{navItem.id}}"
               routerLinkActive="main-nav__item--current"
               >
@@ -58,7 +58,7 @@
             </a>
             <span class="main-nav__popupmenu top" [hidden]="!popupmenuToggle">
               <ul>
-                <li *ngFor="let lib of libraries"><a (click)="handleDropdownLink(lib.path)">{{lib.name}}</a></li>
+                <li *ngFor="let lib of libraries"><a (click)="handleDropdownLink(lib.path)" routerLinkActive="main-nav__item--current">{{lib.name}}</a></li>
               </ul>
               <div class="arrow"></div>
             </span>

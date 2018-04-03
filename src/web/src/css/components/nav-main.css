@@ -6,8 +6,39 @@
   display: none;
   margin-left: auto;
 
+  & .ids-btn {
+    position: relative;
+
+    &::after {
+      background-color: var(--black);
+      bottom: 0;
+      content: ' ';
+      display: block;
+      height: 2px;
+      left: 50%;
+      opacity: 0;
+      position: absolute;
+      transform: translateX(-50%);
+      width: 100%;
+    }
+
+    &.main-nav__item--current {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
   @media (--viewport-md) {
     display: block;
+  }
+}
+
+.code-section {
+  & .dropdown-trigger--code {
+    &::after {
+      opacity: 1;
+    }
   }
 }
 
