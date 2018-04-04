@@ -69,9 +69,4 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  handleDropdownLink(path) {
-    const link = `code/${path}/latest`;
-    this.router.navigate([link]);
-  }
-
 }
