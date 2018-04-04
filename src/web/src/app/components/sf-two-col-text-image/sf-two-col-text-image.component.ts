@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import * as validUrl from 'valid-url';
 
 @Component({
   selector: 'sf-two-col-text-image',
@@ -17,10 +18,15 @@ export class TwoColTextImageComponent implements OnInit {
   @Input() imageAlign: string;
   @Input() sidebar: boolean;
   public hasSidebar: boolean;
+  public ctaIsExternalUrl: boolean;
 
   constructor() {}
 
   ngOnInit() {
     this.hasSidebar = this.sidebar;
+
+    if (validUrl.isUri(this.ctaLink)){
+        this.ctaIsExternalUrl = true;
+    }
   }
 }

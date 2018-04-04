@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import * as validUrl from 'valid-url';
 
 @Component({
   selector: 'sf-full-width',
@@ -18,11 +19,16 @@ export class FullWidthComponent implements OnInit, AfterViewInit {
   @Input() textAlign: string;
   @Input() sidebar: boolean;
   public hasSidebar: boolean;
+  public ctaIsExternalUrl: boolean;
 
   constructor() {}
 
   ngOnInit() {
     this.hasSidebar = this.sidebar;
+
+    if (validUrl.isUri(this.ctaLink)){
+        this.ctaIsExternalUrl = true;
+    }
   }
 
   ngAfterViewInit() {}

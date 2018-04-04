@@ -17,8 +17,24 @@
         <img class="two-column--hero-image" *ngIf="col1HeroImage" src="{{col1HeroImage}}" alt="{{col1HeroImageTitle}}">
         <h3 class="two-column--title" [ngStyle]="col1InvertTextColor && {'color': '#ffffff'}" [innerHTML]="col1Title"></h3>
         <p [ngStyle]="col1InvertTextColor && {'color': '#ffffff'}" [innerHTML]="col1Content"></p>
-        <a class="ids-btn ids-btn--default" [ngClass]="col1InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col1CtaText"
-          routerLink="{{col1CtaLink}}">{{col1CtaText}}</a>
+        <ng-template [ngIf]="col1CtaIsExternalUrl">
+            <a class="ids-btn ids-btn--default"
+               *ngIf="col1CtaText"
+               [ngClass]="col1InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'"
+               [href]="col1CtaLink"
+               target="_blank">
+                {{col1CtaText}}
+            </a>
+        </ng-template>
+
+        <ng-template [ngIf]="!col1CtaIsExternalUrl">
+            <a class="ids-btn ids-btn--default"
+               *ngIf="col1CtaText"
+               [ngClass]="col1InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'"
+               routerLink="{{col1CtaLink}}">
+                {{col1CtaText}}
+            </a>
+        </ng-template>
       </div>
 
     </div>
@@ -29,8 +45,24 @@
         <img class="two-column--hero-image" *ngIf="col2HeroImage" src="{{col2HeroImage}}" alt="{{col2HeroImageTitle}}">
         <h3 class="two-column--title" [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}" [innerHTML]="col2Title"></h3>
         <p [ngStyle]="col2InvertTextColor && {'color': '#ffffff'}" [innerHTML]="col2Content"></p>
-        <a class="ids-btn ids-btn--default" [ngClass]="col2InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'" *ngIf="col2CtaText"
-          routerLink="{{col2CtaLink}}">{{col2CtaText}}</a>
+        <ng-template [ngIf]="col2CtaIsExternalUrl">
+            <a class="ids-btn ids-btn--default"
+               *ngIf="col2CtaText"
+               [ngClass]="col1InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'"
+               [href]="col2CtaLink"
+               target="_blank">
+                {{col2CtaText}}
+            </a>
+        </ng-template>
+
+        <ng-template [ngIf]="!col2CtaIsExternalUrl">
+            <a class="ids-btn ids-btn--default"
+               *ngIf="col2CtaText"
+               [ngClass]="col2InvertTextColor ? 'btn--custom--inverted' : 'btn--custom--solid'"
+               routerLink="{{col2CtaLink}}">
+                {{col2CtaText}}
+            </a>
+        </ng-template>
       </div>
 
     </div>
