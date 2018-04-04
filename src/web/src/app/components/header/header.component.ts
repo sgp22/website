@@ -13,8 +13,6 @@ export class HeaderComponent implements OnInit {
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
   @ViewChild('trigger') trigger: ElementRef;
   @ViewChild('mobileTrigger') mobileTrigger: ElementRef;
-  @Input() globalNav;
-  @Input() home;
   public navItems: any;
   public domain: string = DOMAIN;
   public navToggle = false;
@@ -30,6 +28,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.pagesService.getGlobalNav()
       .subscribe(
         (res: any) => {
@@ -50,6 +49,7 @@ export class HeaderComponent implements OnInit {
           this.libraries = res;
         }
       )
+
   }
 
   toggleNav() {
@@ -67,11 +67,6 @@ export class HeaderComponent implements OnInit {
     } else {
       this.popupmenuToggle = false;
     }
-  }
-
-  handleDropdownLink(path) {
-    const link = `code/${path}/latest`;
-    this.router.navigate([link]);
   }
 
 }
