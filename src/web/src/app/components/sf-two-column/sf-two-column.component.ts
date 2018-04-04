@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import * as validUrl from 'valid-url';
 
 @Component({
   selector: 'sf-two-column',
@@ -27,10 +28,20 @@ export class TwoColumnComponent implements OnInit {
   @Input() col2TextAlign: string;
   @Input() sidebar: boolean;
   public hasSidebar: boolean;
+  public col1CtaIsExternalUrl: boolean;
+  public col2CtaIsExternalUrl: boolean;
 
   constructor() {}
 
   ngOnInit() {
     this.hasSidebar = this.sidebar;
+
+    if (validUrl.isUri(this.col1CtaLink)){
+        this.col1CtaIsExternalUrl = true;
+    }
+
+    if (validUrl.isUri(this.col2CtaLink)){
+        this.col2CtaIsExternalUrl = true;
+    }
   }
 }
