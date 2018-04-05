@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 import home.models
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -18,11 +18,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blockspage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('richText', home.models.APIRichTextBlock()), ('image', home.models.APIImageChooserBlock()), ('heading', wagtail.wagtailcore.blocks.CharBlock(classname='full title')), ('markdown', home.models.APIMarkDownBlock())), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('richText', home.models.APIRichTextBlock()), ('image', home.models.APIImageChooserBlock()), ('heading', wagtail.core.blocks.CharBlock(classname='full title')), ('markdown', home.models.APIMarkDownBlock())), blank=True, null=True),
         ),
         migrations.AlterField(
             model_name='elementspage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('richText', home.models.APIRichTextBlock()), ('markdown', home.models.APIMarkDownBlock()), ('heading', wagtail.wagtailcore.blocks.CharBlock(classname='full title')), ('image', home.models.APIImageChooserBlock())), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('richText', home.models.APIRichTextBlock()), ('markdown', home.models.APIMarkDownBlock()), ('heading', wagtail.core.blocks.CharBlock(classname='full title')), ('image', home.models.APIImageChooserBlock())), blank=True, null=True),
         ),
     ]

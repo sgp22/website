@@ -5,8 +5,8 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import home.models
 import wagtail.contrib.table_block.blocks
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -29,16 +29,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blockspage',
             name='modifiers',
-            field=wagtail.wagtailcore.fields.StreamField((('options', wagtail.wagtailcore.blocks.StructBlock((('name', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('detail', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('token', wagtail.wagtailcore.blocks.CharBlock(required=False))))),), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('options', wagtail.core.blocks.StructBlock((('name', wagtail.core.blocks.CharBlock(required=True)), ('detail', wagtail.core.blocks.CharBlock(required=True)), ('token', wagtail.core.blocks.CharBlock(required=False))))),), blank=True, null=True),
         ),
         migrations.AlterField(
             model_name='corecontentpage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('heading', wagtail.wagtailcore.blocks.CharBlock(classname='full title')), ('image', home.models.APIImageChooserBlock()), ('table', wagtail.contrib.table_block.blocks.TableBlock()), ('markdown', home.models.APIMarkDownBlock()), ('tokensCategory', wagtail.wagtailcore.blocks.CharBlock())), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('heading', wagtail.core.blocks.CharBlock(classname='full title')), ('image', home.models.APIImageChooserBlock()), ('table', wagtail.contrib.table_block.blocks.TableBlock()), ('markdown', home.models.APIMarkDownBlock()), ('tokensCategory', wagtail.core.blocks.CharBlock())), blank=True, null=True),
         ),
         migrations.AlterField(
             model_name='elementspage',
             name='modifiers',
-            field=wagtail.wagtailcore.fields.StreamField((('options', wagtail.wagtailcore.blocks.StructBlock((('name', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('detail', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('token', wagtail.wagtailcore.blocks.CharBlock(required=False))))),), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('options', wagtail.core.blocks.StructBlock((('name', wagtail.core.blocks.CharBlock(required=True)), ('detail', wagtail.core.blocks.CharBlock(required=True)), ('token', wagtail.core.blocks.CharBlock(required=False))))),), blank=True, null=True),
         ),
     ]

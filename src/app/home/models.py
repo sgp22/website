@@ -3,22 +3,23 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 from rest_framework import serializers
 
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import (
-    StreamField
+from wagtail.core.models import Page
+from wagtail.core.fields import (
+    StreamField,
+    RichTextField
 )
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.core import blocks
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.api import APIField
-from wagtail.wagtailsnippets.blocks import SnippetChooserBlock as DefaultSnippetChooserBlock
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.snippets.blocks import SnippetChooserBlock as DefaultSnippetChooserBlock
+from wagtail.admin.edit_handlers import (
     FieldPanel,
     FieldRowPanel,
     StreamFieldPanel,
     MultiFieldPanel
 )
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.contrib.table_block.blocks import TableBlock
 
 from home import relationships
@@ -29,7 +30,7 @@ from home.serializers import (
 )
 
 import markdown
-from wagtailmarkdownblock.blocks import MarkdownBlock
+from wagtailmarkdown.blocks import MarkdownBlock
 
 class APIImageChooserBlock(ImageChooserBlock):
     def get_api_representation(self, value, context=None):
@@ -49,10 +50,6 @@ class APIMarkDownBlock(MarkdownBlock):
     def get_api_representation(self, value, context=None):
         if value:
             return markdown_filter(value)
-
-# @todo: Remove APIRichTextBlock class
-# Currently removing it breaks migrations
-# @url: https://github.com/infor-design/design.infor.com/issues/345
 
 class APIRichTextBlock(blocks.RichTextBlock):
     # By overriding this function, we get the raw data value
@@ -182,6 +179,7 @@ class LandingPage(PageBase):
         ('twoColTextImage', TwoColTextImageStreamField()),
         ('markdown', APIMarkDownBlock()),
         ('rawHtml', blocks.RawHTMLBlock()),
+        ('richText', APIRichTextBlock())
     ], null=True, blank=True)
 
     grid_blocks = StreamField([
@@ -218,6 +216,7 @@ class CoreContentPage(PageBase):
         ('image', APIImageChooserBlock()),
         ('table', TableBlock()),
         ('markdown', APIMarkDownBlock()),
+        ('richText', APIRichTextBlock()),
         ('tokensCategory', blocks.CharBlock())
     ], null=True, blank=True)
 
@@ -362,6 +361,7 @@ class ElementsPage(PageBase):
 
     body = StreamField([
         ('markdown', APIMarkDownBlock()),
+        ('richText', APIRichTextBlock()),
         ('heading', blocks.CharBlock(classname="full title")),
         ('image', APIImageChooserBlock())
     ], null=True, blank=True)
@@ -488,6 +488,7 @@ class BlocksPage(PageBase):
     body = StreamField([
         ('image', APIImageChooserBlock()),
         ('heading', blocks.CharBlock(classname="full title")),
+        ('richText', APIRichTextBlock()),
         ('markdown', APIMarkDownBlock())
     ], null=True, blank=True)
 

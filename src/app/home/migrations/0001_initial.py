@@ -8,9 +8,9 @@ import home.models
 import home.snippets
 import modelcluster.fields
 import wagtail.contrib.table_block.blocks
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             name='CoreContentPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('content', wagtail.wagtailcore.fields.StreamField((('list_block_cornerstone_snippet', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.StructBlock((('name', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('description', wagtail.wagtailcore.blocks.CharBlock()), ('snippet', home.models.CoreContentSnippetChooserBlock(home.snippets.Cornerstone)))))),), blank=True, null=True)),
+                ('content', wagtail.core.fields.StreamField((('list_block_cornerstone_snippet', wagtail.core.blocks.ListBlock(wagtail.core.blocks.StructBlock((('name', wagtail.core.blocks.CharBlock(required=True)), ('description', wagtail.core.blocks.CharBlock()), ('snippet', home.models.CoreContentSnippetChooserBlock(home.snippets.Cornerstone)))))),), blank=True, null=True)),
                 ('description', models.CharField(max_length=255)),
             ],
             options={
@@ -71,8 +71,8 @@ class Migration(migrations.Migration):
             name='ElementsPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('types', wagtail.wagtailcore.fields.StreamField((('Types', wagtail.contrib.table_block.blocks.TableBlock()),), blank=True, null=True)),
-                ('attributes', wagtail.wagtailcore.fields.StreamField((('Attributes', wagtail.contrib.table_block.blocks.TableBlock()),), blank=True, null=True)),
+                ('types', wagtail.core.fields.StreamField((('Types', wagtail.contrib.table_block.blocks.TableBlock()),), blank=True, null=True)),
+                ('attributes', wagtail.core.fields.StreamField((('Attributes', wagtail.contrib.table_block.blocks.TableBlock()),), blank=True, null=True)),
                 ('states', models.CharField(blank=True, max_length=255, null=True)),
             ],
             options={
@@ -103,7 +103,7 @@ class Migration(migrations.Migration):
             name='LandingPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('content', wagtail.wagtailcore.fields.StreamField((('ContentBanner', wagtail.wagtailcore.blocks.StructBlock((('image', wagtail.wagtailimages.blocks.ImageChooserBlock(required=False)), ('header', wagtail.wagtailcore.blocks.CharBlock()), ('page', wagtail.wagtailcore.blocks.PageChooserBlock()), ('copy', wagtail.wagtailcore.blocks.TextBlock()), ('button', wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('link', wagtail.wagtailcore.blocks.CharBlock(required=True))))), ('stream', wagtail.wagtailcore.blocks.StreamBlock((('h2', wagtail.wagtailcore.blocks.CharBlock(classname='title', icon='title')), ('h3', wagtail.wagtailcore.blocks.CharBlock(classname='title', icon='title')), ('h4', wagtail.wagtailcore.blocks.CharBlock(classname='title', icon='title')), ('intro', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow')), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='pilcrow')))))), label='Content Banner')), ('OneColumnBanner', wagtail.wagtailcore.blocks.StructBlock((('header', wagtail.wagtailcore.blocks.CharBlock()), ('intro', wagtail.wagtailcore.blocks.TextBlock()), ('image', wagtail.wagtailimages.blocks.ImageChooserBlock(required=False))), label='One Column Banner')), ('test_list_block', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.StructBlock((('name', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('description', wagtail.wagtailcore.blocks.CharBlock())))))), blank=True, null=True)),
+                ('content', wagtail.core.fields.StreamField((('ContentBanner', wagtail.core.blocks.StructBlock((('image', wagtail.images.blocks.ImageChooserBlock(required=False)), ('header', wagtail.core.blocks.CharBlock()), ('page', wagtail.core.blocks.PageChooserBlock()), ('copy', wagtail.core.blocks.TextBlock()), ('button', wagtail.core.blocks.StructBlock((('label', wagtail.core.blocks.CharBlock(required=True)), ('link', wagtail.core.blocks.CharBlock(required=True))))), ('stream', wagtail.core.blocks.StreamBlock((('h2', wagtail.core.blocks.CharBlock(classname='title', icon='title')), ('h3', wagtail.core.blocks.CharBlock(classname='title', icon='title')), ('h4', wagtail.core.blocks.CharBlock(classname='title', icon='title')), ('intro', wagtail.core.blocks.RichTextBlock(icon='pilcrow')), ('paragraph', wagtail.core.blocks.RichTextBlock(icon='pilcrow')))))), label='Content Banner')), ('OneColumnBanner', wagtail.core.blocks.StructBlock((('header', wagtail.core.blocks.CharBlock()), ('intro', wagtail.core.blocks.TextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock(required=False))), label='One Column Banner')), ('test_list_block', wagtail.core.blocks.ListBlock(wagtail.core.blocks.StructBlock((('name', wagtail.core.blocks.CharBlock(required=True)), ('description', wagtail.core.blocks.CharBlock())))))), blank=True, null=True)),
             ],
             options={
                 'abstract': False,

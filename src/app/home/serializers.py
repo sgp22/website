@@ -15,7 +15,7 @@ from wagtail.api.v2.serializers import (
     Field,
     get_serializer_class
 )
-from wagtail.wagtailimages.models import Image as WagtailImage
+from wagtail.images.models import Image as WagtailImage
 
 
 def get_page_serializer_class(value):

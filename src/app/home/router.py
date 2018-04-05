@@ -13,7 +13,7 @@ from wagtail.api.v2.filters import (
     ChildOfFilter, DescendantOfFilter, FieldsFilter, OrderingFilter, SearchFilter)
 from wagtail.api.v2.utils import (
     BadRequestError, filter_page_type, page_models_from_string)
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 
 from .filters import HasChildrenFilter
