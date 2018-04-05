@@ -27,18 +27,6 @@ def get_page_serializer_class(value):
     )
 
 
-def build_relative_path(path):
-    """Strip out the root url path."""
-    root_url = settings.ROOT_URL_PATH
-
-    if root_url:
-        root_url += '/'
-    else:
-        root_url = ''
-
-    return path.replace(root_url, '')
-
-
 def get_children_hirarchy(obj):
     """Recursively generate the children hirarchy."""
     children_list = []
@@ -58,7 +46,7 @@ def get_children_hirarchy(obj):
         ('slug', obj.slug),
         ('url', obj.url),
         ('url_path', obj.url_path),
-        ('relative_url', build_relative_path(obj.url)),
+        ('relative_url', obj.url),
         ('children_count', children_count),
         ('children', children_list),
         ('menu_order', menu_order),

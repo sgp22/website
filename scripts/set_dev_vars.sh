@@ -14,7 +14,6 @@ export AWS_STORAGE_BUCKET_NAME="ids-com-staging"
 export S3_STORAGE=$S3_STORAGE
 
 export DEBUG="True"
-export ROOT_URL_PATH=""
 export ENV=""
 export DOMAIN=""
 export DOMAIN_VERSION="v2"
