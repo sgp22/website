@@ -3,7 +3,6 @@
 ```shell
 export DOMAIN=<DOMAIN>
 export ENV=<ENV>
-export ROOT_URL_PATH=<ROOT_URL_PATH>
 ```
 
 - `. ./deploy-pool/scripts/predeploy_env_vars.sh`

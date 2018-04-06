@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 import home.models
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='landingpage',
             name='page_hero',
-            field=wagtail.wagtailcore.fields.StreamField((('page_hero', wagtail.wagtailcore.blocks.StructBlock((('heading', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('text', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('image', home.models.APIImageChooserBlock(required=True)), ('text_color', wagtail.wagtailcore.blocks.CharBlock(help_text='enter hex code without #', required=True)), ('background_color', wagtail.wagtailcore.blocks.CharBlock(help_text='enter hex code without #', required=True))))),), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('page_hero', wagtail.core.blocks.StructBlock((('heading', wagtail.core.blocks.CharBlock(required=True)), ('text', wagtail.core.blocks.CharBlock(required=True)), ('image', home.models.APIImageChooserBlock(required=True)), ('text_color', wagtail.core.blocks.CharBlock(help_text='enter hex code without #', required=True)), ('background_color', wagtail.core.blocks.CharBlock(help_text='enter hex code without #', required=True))))),), blank=True, null=True),
         ),
     ]

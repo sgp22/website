@@ -63,6 +63,7 @@
         <h2 class="page-section" *ngIf="body.type === 'heading'">{{body?.value}}</h2>
         <img class="page-section" *ngIf="body.type === 'image'" src="{{body?.value.file}}" alt="{{streamfield?.value.title}}">
         <section class="page-section" *ngIf="body.type === 'markdown'" [innerHTML]="body?.value"></section>
+        <section class="page-section" *ngIf="body.type === 'richText'" [innerHTML]="body?.value"></section>
       </ng-container>
 
 </ng-container>

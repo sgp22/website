@@ -6,7 +6,7 @@ from django.db import migrations, models
 import django.db.models.deletion
 import home.models
 import modelcluster.fields
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='blockspage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('richText', home.models.APIRichTextBlock()), ('markdown', home.models.APIMarkDownBlock())), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('richText', home.models.APIRichTextBlock()), ('markdown', home.models.APIMarkDownBlock())), blank=True, null=True),
         ),
         migrations.AddField(
             model_name='blockspage',

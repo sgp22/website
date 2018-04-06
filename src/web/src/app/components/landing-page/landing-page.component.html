@@ -79,6 +79,10 @@
             <div [innerHTML]="section.value"></div>
           </div>
 
+          <div *ngIf="section.type === 'richText'" class="page-section">
+            <div [innerHTML]="section.value"></div>
+          </div>
+
           <div *ngIf="section.type === 'rawHtml'">
             <div [innerHTML]="section.value | safeHtml"></div>
           </div>

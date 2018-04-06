@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 import home.models
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -18,11 +18,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blockspage',
             name='types',
-            field=wagtail.wagtailcore.fields.StreamField((('types', wagtail.wagtailcore.blocks.StructBlock((('name', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('detail', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('image', home.models.APIImageChooserBlock(required=False)), ('image_type', wagtail.wagtailcore.blocks.ChoiceBlock(choices=[('full-width', 'Full Width'), ('inline', 'Inline')], required=False))))),), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('types', wagtail.core.blocks.StructBlock((('name', wagtail.core.blocks.CharBlock(required=True)), ('detail', wagtail.core.blocks.CharBlock(required=True)), ('image', home.models.APIImageChooserBlock(required=False)), ('image_type', wagtail.core.blocks.ChoiceBlock(choices=[('full-width', 'Full Width'), ('inline', 'Inline')], required=False))))),), blank=True, null=True),
         ),
         migrations.AlterField(
             model_name='elementspage',
             name='types',
-            field=wagtail.wagtailcore.fields.StreamField((('types', wagtail.wagtailcore.blocks.StructBlock((('name', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('detail', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('image', home.models.APIImageChooserBlock(required=False)), ('image_type', wagtail.wagtailcore.blocks.ChoiceBlock(choices=[('full-width', 'Full Width'), ('inline', 'Inline')], required=False))))),), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('types', wagtail.core.blocks.StructBlock((('name', wagtail.core.blocks.CharBlock(required=True)), ('detail', wagtail.core.blocks.CharBlock(required=True)), ('image', home.models.APIImageChooserBlock(required=False)), ('image_type', wagtail.core.blocks.ChoiceBlock(choices=[('full-width', 'Full Width'), ('inline', 'Inline')], required=False))))),), blank=True, null=True),
         ),
     ]

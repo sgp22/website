@@ -60,12 +60,8 @@ def get(request):
     try:
         request_path_segments = request.path_info.lower().split('/')
 
-        if os.environ['ROOT_URL_PATH']:
-            # remove the leading '/ROOT_URL_PATH/api/docs/'
-            requested_file = '/'.join(request_path_segments[4:])
-        else:
-            # just remove '/api/docs/'
-            requested_file = '/'.join(request_path_segments[3:])
+        # remove '/api/docs/'
+        requested_file = '/'.join(request_path_segments[3:])
 
         path = os.path.join(*(
             settings.MEDIA_ROOT,

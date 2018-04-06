@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 import home.models
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='elementspage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('richText', home.models.APIRichTextBlock()), ('markdown', home.models.APIMarkDownBlock())), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('richText', home.models.APIRichTextBlock()), ('markdown', home.models.APIMarkDownBlock())), blank=True, null=True),
         ),
     ]
