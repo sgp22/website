@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 import home.models
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='landingpage',
             name='grid_blocks',
-            field=wagtail.wagtailcore.fields.StreamField((('grid_blocks', wagtail.wagtailcore.blocks.StructBlock((('image', home.models.APIImageChooserBlock(required=True)), ('title', wagtail.wagtailcore.blocks.CharBlock(required=True)), ('text', wagtail.wagtailcore.blocks.CharBlock(required=True))))),), blank=True, null=True),
+            field=wagtail.core.fields.StreamField((('grid_blocks', wagtail.core.blocks.StructBlock((('image', home.models.APIImageChooserBlock(required=True)), ('title', wagtail.core.blocks.CharBlock(required=True)), ('text', wagtail.core.blocks.CharBlock(required=True))))),), blank=True, null=True),
         ),
     ]

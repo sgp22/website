@@ -4,9 +4,9 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from wagtail.wagtailadmin import urls as wagtailadmin_urls
-from wagtail.wagtailcore import urls as wagtail_urls
-from wagtail.wagtaildocs import urls as wagtaildocs_urls
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.core import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
 
 from .api import api_router
 
@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^api/v2/', api_router.urls),
 
     # Django default admin.
-    url(r'^dj_default_admin/', include(admin.site.urls)),
+    url(r'^dj_default_admin/', admin.site.urls),
 
     # Wagtail admin, documents, and search.
     url(r'^admin/', include(wagtailadmin_urls)),

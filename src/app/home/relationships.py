@@ -2,8 +2,8 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailcore.models import Orderable
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.core.models import Orderable
 
 from modelcluster.fields import ParentalKey
 
@@ -19,6 +19,7 @@ class ElementsPageElementDescriptorsRelationship(Orderable, models.Model):
 
     element_descriptor = models.ForeignKey(
         'ElementDescriptor',
+        on_delete=models.CASCADE,
         related_name="+"
     )
 
@@ -35,6 +36,7 @@ class BlocksPageElementDescriptorsRelationship(Orderable, models.Model):
 
     element_descriptor = models.ForeignKey(
         'ElementDescriptor',
+        on_delete=models.CASCADE,
         related_name="+"
     )
 
@@ -53,6 +55,7 @@ class CoreContentPageCornerstoneRelationship(Orderable, models.Model):
 
     cornerstone = models.ForeignKey(
         'Cornerstone',
+        on_delete=models.CASCADE,
         related_name="+"
     )
 
@@ -72,6 +75,7 @@ class LandingPageCornerstoneRelationship(Orderable, models.Model):
 
     cornerstone = models.ForeignKey(
         'Cornerstone',
+        on_delete=models.CASCADE,
         related_name="+"
     )
 
