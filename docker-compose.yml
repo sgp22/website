@@ -24,7 +24,7 @@ services:
 
   backend:
     build: ./docker/docs-backend
-    image: docker.infor.com/hookandloop/docs-backend:1.0.3
+    image: hookandloop/docs-backend:1.0.3
     container_name: 'docssite_backend'
     depends_on:
       - postgres
