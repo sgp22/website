@@ -1,5 +1,31 @@
 <section *ngIf="types && types.length > 0" class="page-section page-section--types">
 
+  <ng-container *ngFor="let type of types; let index=index; let even = even;">
+
+    <div *ngIf="even" class="ids-row"><!-- ROW 1-->
+
+      <!--GROUP 1 -->
+      <div class="ids-row--col-md-5">
+        <h3>{{types[index].value.name}}</h3>
+        <p>{{types[index].value.detail}}</p>
+      </div>
+      <div class="ids-row--col-md-5 ids-row--offset-md-2">
+        <h3>{{types[index + 1].value.name}}</h3>
+        <p>{{types[index + 1].value.detail}}</p>
+      </div>
+
+      <!--GROUP 2 -->
+      <div class="ids-row--col-md-5">
+        <img src="{{types[index].value.image.file}}" alt="{{types[index].value.image.title}}">
+      </div>
+      <div class="ids-row--col-md-5 ids-row--offset-md-2">
+        <img src="{{types[index + 1].value.image.file}}" alt="{{types[index + 1].value.image.title}}">
+      </div>
+
+    </div>
+
+  </ng-container>
+
   <div *ngFor="let type of types" class="types-card">
     <div class="types-card--top">
       <h2>{{type.value.name}}</h2>
@@ -10,7 +36,7 @@
     </div>
   </div>
 
-  <table *ngFor="let type of types" class="types-table">
+  <table class="types-table">
     <tr>
       <td *ngFor="let type of types">
         <h2>{{type.value.name}}</h2>
