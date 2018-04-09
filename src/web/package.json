@@ -12,6 +12,7 @@
     "lint:css": "./node_modules/stylelint-cli/bin/stylelint src/css/components/*.css; exit 0;",
     "lint:ng": "ng lint",
     "test": "karma start ./karma.conf.js",
+    "test:once": "karma start ./karma.conf.js --single-run",
     "start": "npm run build:dev"
   },
   "private": true,
