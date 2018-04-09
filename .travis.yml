@@ -8,5 +8,6 @@ before_script:
   - cd src/web
   - npm install
   - npm run lint
+  - npm run test:once
 script:
-  - npx karma start ./karma.conf.js --single-run
+  - npm run build:prod
