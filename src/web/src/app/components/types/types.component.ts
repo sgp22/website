@@ -8,7 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TypesComponent implements OnInit {
   @Input() types;
 
-  constructor(){}
+  constructor() {}
+
   ngOnInit() {
     console.log(this.types);
   }

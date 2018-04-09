@@ -28,7 +28,7 @@ export class CoreContentPageComponent implements OnInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     });
 
     this.pageContent = this.page;

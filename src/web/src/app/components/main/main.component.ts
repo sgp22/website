@@ -23,14 +23,14 @@ export class MainComponent implements AfterContentInit, OnInit {
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')
-  @HostBinding('class.ids-row--col-xl-10') useGrid: boolean = true;
+  @HostBinding('class.ids-row--col-xl-10') useGrid = true;
   public page;
   public tokenCategory;
   public section;
   public sidebarNav;
   public hasGrandchildren: boolean;
   public globalNav;
-  public loading: boolean = true;
+  public loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,7 +54,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   }
 
   cmsComponents(keys, params) {
-    if(params.slug !== 'code') {
+    if (params.slug !== 'code') {
       switch (keys.length) {
         case 0:
           this.useGrid = false;
@@ -156,8 +156,8 @@ export class MainComponent implements AfterContentInit, OnInit {
 
     res['items'].filter((item) => {
       if (item.meta.slug === this.section) {
-        if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count == 0) {
-          this.hasGrandchildren = false
+        if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count === 0) {
+          this.hasGrandchildren = false;
         }
         this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
           item.meta.children.children.map(child => {
@@ -196,7 +196,7 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.componentLoader.loadComponent(page.meta.type, page.meta.slug, template, this.page);
         },
         () => {
-          this.stopRefreshing()
+          this.stopRefreshing();
         },
         () => {
           this.loadingBar.complete();
