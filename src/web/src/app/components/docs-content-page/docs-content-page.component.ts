@@ -95,7 +95,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
             .getDoc(`${this.domainPath}/${this.mapPath}`)
             .subscribe(
               (docs: any) => {
-                if(docs == 0) {
+                if (docs === '0') {
                   this.notFound = true;
                   return;
                 }
@@ -159,7 +159,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
           this.router.navigate([`${relativeLink}`]);
         } else {
           const relativeHref = el.getAttribute(attr).replace(/(^\.\/|.html$)/g, '');
-          if (relativeHref.substring(0,1) == '/') {
+          if (relativeHref.substring(0, 1) === '/') {
             // Relative to the root of the domain
             el.setAttribute(attr, `${relativeHref}`);
           } else {
@@ -198,7 +198,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     this.mapPath = this.urlMapper.map(this.urlParser.parse(this.path));
     this.versionShowWarning(this.currentVersion, latestVersion);
 
-    if (this.currentVersion == 'latest') {
+    if (this.currentVersion === 'latest') {
       this.selectedVersionNumber =  latestVersion;
     } else {
       this.selectedVersionNumber = this.currentVersion;

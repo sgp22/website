@@ -132,3 +132,22 @@
     right: calc(var(--spacing-base) * 4);
   }
 }
+
+.types--mobile {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: calc(var(--spacing-base) * 6);
+
+  @media (--viewport-md) {
+    display: none;
+  }
+}
+
+.types--desktop {
+  display: none;
+
+  @media (--viewport-md) {
+    display: flex;
+    margin-bottom: calc(var(--spacing-base) * 6);
+  }
+}

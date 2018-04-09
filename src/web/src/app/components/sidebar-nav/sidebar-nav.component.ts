@@ -7,7 +7,7 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './sidebar-nav.component.html',
   providers: [PagesService]
 })
-export class SidebarNavComponent implements OnInit {
+export class SidebarNavComponent implements OnInit, AfterViewInit {
 
   @Input() sidebarData;
   @Input() section;
@@ -40,7 +40,7 @@ export class SidebarNavComponent implements OnInit {
           (res) => {
             res['items'].filter((item) => {
               if (item.meta.slug === this.section) {
-                if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count == 0) {
+                if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count === 0) {
                   this.level_2 = false;
                 }
                 this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
@@ -50,10 +50,10 @@ export class SidebarNavComponent implements OnInit {
                       return thisGrandChild.menu_order > nextGrandchild.menu_order ? 1 : -1;
                     });
                     child.children
-                      .filter(child => {
-                        if (child.children && child.children.length > 0){
-                          child.children.sort((thisChild, nextChild) =>{
-                            return thisChild.title > nextChild.title ? 1 : -1;
+                      .filter(child_level_3 => {
+                        if (child_level_3.children && child_level_3.children.length > 0) {
+                          child_level_3.children.sort((thisChild_level_3, nextChild_level_3) => {
+                            return thisChild_level_3.title > nextChild_level_3.title ? 1 : -1;
                           });
                         }
                       });
@@ -70,21 +70,9 @@ export class SidebarNavComponent implements OnInit {
           () => {
             this.loading = false;
           }
-        )
+        );
       }
     });
-
-    const checkViewport = (viewport) => {
-      if(viewport.matches) {
-        // console.log('remove accordion classes');
-      } else {
-        // console.log('add accordion classes');
-      }
-    }
-
-    let viewport = window.matchMedia('(min-width: 600px)');
-    checkViewport(viewport);
-    viewport.addListener(checkViewport);
 
   }
 
