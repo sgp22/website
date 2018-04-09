@@ -1,24 +1,34 @@
 <section *ngIf="types && types.length > 0" class="page-section page-section--types">
 
-  <ng-container *ngFor="let type of types; let index=index; let even = even;">
+  <ng-container *ngFor="let type of types; let index = index; let even = even;">
 
-    <div *ngIf="even" class="ids-row"><!-- ROW 1-->
+    <div *ngIf="even" class="ids-row types--desktop"><!-- ROW 1-->
 
       <!--GROUP 1 -->
       <div class="ids-row--col-md-5">
-        <h3>{{types[index].value.name}}</h3>
+        <h2>{{types[index].value.name}}</h2>
         <p>{{types[index].value.detail}}</p>
       </div>
-      <div class="ids-row--col-md-5 ids-row--offset-md-2">
-        <h3>{{types[index + 1].value.name}}</h3>
+      <div *ngIf="types[index + 1]" class="ids-row--col-md-5 ids-row--offset-md-2">
+        <h2>{{types[index + 1].value.name}}</h2>
         <p>{{types[index + 1].value.detail}}</p>
       </div>
 
       <!--GROUP 2 -->
-      <div class="ids-row--col-md-5">
-        <img src="{{types[index].value.image.file}}" alt="{{types[index].value.image.title}}">
-      </div>
-      <div class="ids-row--col-md-5 ids-row--offset-md-2">
+      <ng-container *ngIf="!types[index + 1]">
+        <div class="ids-row--col-md-12">
+          <div class="ids-row--col-md-5">
+            <img src="{{types[index].value.image.file}}" alt="{{types[index].value.image.title}}">
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="types[index + 1]">
+        <div class="ids-row--col-md-5">
+          <img src="{{types[index].value.image.file}}" alt="{{types[index].value.image.title}}">
+        </div>
+      </ng-container>
+
+      <div *ngIf="types[index + 1]" class="ids-row--col-md-5 ids-row--offset-md-2">
         <img src="{{types[index + 1].value.image.file}}" alt="{{types[index + 1].value.image.title}}">
       </div>
 
@@ -26,33 +36,14 @@
 
   </ng-container>
 
-  <div *ngFor="let type of types" class="types-card">
-    <div class="types-card--top">
+  <div *ngFor="let type of types" class="types--mobile">
+    <div class="types--mobile--top">
       <h2>{{type.value.name}}</h2>
       <p>{{type.value.detail}}</p>
     </div>
-    <div class="types-card--btm">
+    <div class="types--mobile--btm">
       <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
     </div>
   </div>
-
-  <table class="types-table">
-    <tr>
-      <td *ngFor="let type of types">
-        <h2>{{type.value.name}}</h2>
-      </td>
-    </tr>
-    <tr>
-      <td *ngFor="let type of types">
-        <p>{{type.value.detail}}</p>
-      </td>
-    </tr>
-    <tr>
-      <td *ngFor="let type of types">
-        <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
-      </td>
-    </tr>
-    <tr *ngIf="types"></tr>
-  </table>
 
 </section>

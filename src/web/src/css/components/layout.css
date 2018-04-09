@@ -133,7 +133,7 @@
   }
 }
 
-.types-card {
+.types--mobile {
   display: flex;
   flex-direction: column;
   margin-bottom: calc(var(--spacing-base) * 6);
@@ -143,24 +143,11 @@
   }
 }
 
-.types-card--top {
-  min-height: 200px;
-}
-
-.types-table {
+.types--desktop {
   display: none;
 
-  & tr {
-    border-bottom: none;
-  }
-
-  & td {
-    padding: 0 var(--spacing-base);
-    vertical-align: top;
-    width: 50%;
-  }
-
   @media (--viewport-md) {
-    display: block;
+    display: flex;
+    margin-bottom: calc(var(--spacing-base) * 6);
   }
 }
