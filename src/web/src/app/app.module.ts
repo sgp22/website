@@ -21,6 +21,7 @@ import { TwoColumnComponent } from './components/sf-two-column/sf-two-column.com
 import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-two-col-text-image.component';
 import { TokenTableComponent } from './components/token-table/token-table.component';
 import { ModifiersTableComponent } from './components/modifiers-table/modifiers-table.component';
+import { TypesComponent } from './components/types/types.component';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
@@ -50,7 +51,8 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     ContainerComponent,
     MainComponent,
     TokenTableComponent,
-    ModifiersTableComponent
+    ModifiersTableComponent,
+    TypesComponent
   ],
   imports: [
     BrowserModule,

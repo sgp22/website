@@ -1,0 +1,32 @@
+<section *ngIf="types && types.length > 0" class="page-section page-section--types">
+
+  <div *ngFor="let type of types" class="types-card">
+    <div class="types-card--top">
+      <h2>{{type.value.name}}</h2>
+      <p>{{type.value.detail}}</p>
+    </div>
+    <div class="types-card--btm">
+      <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
+    </div>
+  </div>
+
+  <table *ngFor="let type of types" class="types-table">
+    <tr>
+      <td *ngFor="let type of types">
+        <h2>{{type.value.name}}</h2>
+      </td>
+    </tr>
+    <tr>
+      <td *ngFor="let type of types">
+        <p>{{type.value.detail}}</p>
+      </td>
+    </tr>
+    <tr>
+      <td *ngFor="let type of types">
+        <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
+      </td>
+    </tr>
+    <tr *ngIf="types"></tr>
+  </table>
+
+</section>

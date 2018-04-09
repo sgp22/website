@@ -132,3 +132,35 @@
     right: calc(var(--spacing-base) * 4);
   }
 }
+
+.types-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: calc(var(--spacing-base) * 6);
+
+  @media (--viewport-md) {
+    display: none;
+  }
+}
+
+.types-card--top {
+  min-height: 200px;
+}
+
+.types-table {
+  display: none;
+
+  & tr {
+    border-bottom: none;
+  }
+
+  & td {
+    padding: 0 var(--spacing-base);
+    vertical-align: top;
+    width: 50%;
+  }
+
+  @media (--viewport-md) {
+    display: block;
+  }
+}

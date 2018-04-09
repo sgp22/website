@@ -35,15 +35,7 @@
 
       </section>
 
-      <section *ngIf="pageContent.types && pageContent.types.length > 0" class="page-section page-section--types">
-
-        <div *ngFor="let type of pageContent.types">
-          <h2>{{type.value.name}}</h2>
-          <p>{{type.value.detail}}</p>
-          <img src="{{type.value.image.file}}" alt="{{type.value.image.title}}">
-        </div>
-
-      </section>
+      <types [types]="pageContent.types"></types>
 
       <h2 *ngIf="pageContent?.tokensCategory">Design Tokens</h2>
       <token-table [tokensCategory]="pageContent?.tokensCategory" [sectionClassName]="true" [loading]="loading" [version]="'latest'"></token-table>
