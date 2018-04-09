@@ -47,7 +47,9 @@ export class SidebarNavCodeComponent implements OnInit {
         const urlSegments = event.url.split('/');
         this.section = urlSegments[1];
 
-        if (this.section !== 'code') return;
+        if (this.section !== 'code') {
+          return;
+        }
 
         if (urlSegments.length === 5) {
           this.library = urlSegments[2];
@@ -97,7 +99,7 @@ export class SidebarNavCodeComponent implements OnInit {
 
   createVersionPaths(res, urlSegments) {
 
-    let latestVersion = '';
+    const latestVersion = '';
 
     this.versionPaths = res['files']
       .map(file => {

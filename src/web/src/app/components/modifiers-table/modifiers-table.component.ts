@@ -15,7 +15,7 @@ export class ModifiersTableComponent implements OnInit {
 
   constructor(
     private tokenService: TokenService
-  ){}
+  ) {}
 
   ngOnInit() {
     this.getIDSTokenProperties(this.domainPath, 'ids-css');
@@ -23,7 +23,7 @@ export class ModifiersTableComponent implements OnInit {
   }
 
   private checkModifierTokens() {
-    this.tokens = this.modifiers.filter(modifier => modifier.value.token === "" || modifier.value.token === null ? false : true);
+    this.tokens = this.modifiers.filter(modifier => modifier.value.token === '' || modifier.value.token === null ? false : true);
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
@@ -35,7 +35,7 @@ export class ModifiersTableComponent implements OnInit {
           console.log(`No tokens found: ${err}`);
           this.modifiersTokens = [];
         }
-      )
+      );
   }
 
 }

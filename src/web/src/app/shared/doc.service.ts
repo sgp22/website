@@ -19,7 +19,7 @@ export class DocService {
       .get(url)).first()
       .catch((err: Response) => {
         if (err.status === 400) {
-          console.error(`${err.status}`)
+          console.error(`${err.status}`);
           return JSON.stringify(0);
         } else {
           return Observable.throw(new Error(`${err.status} ${err.statusText}`));
