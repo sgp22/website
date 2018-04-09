@@ -18,7 +18,7 @@ export class TokenService {
   getTokenData(domain: string, library: string, version: string) {
     // Note that the following url route is for a dist file
     // and not referring to the ids-identity packing in node_modules
-    let url = `${domain}/api/docs/${library}/${version}/ids-identity/theme-default.raw.json`;
+    const url = `${domain}/api/docs/${library}/${version}/ids-identity/theme-default.raw.json`;
 
    return this.cacheService.get(url, this.http
     .get(url)
@@ -33,18 +33,20 @@ export class TokenService {
   }
 
   groupTokensByCategory(tokenData) {
-    let grouped = {};
-    let props: Array<Token> = tokenData.props;
+    const grouped = {};
+    const props: Array<Token> = tokenData.props;
 
-    for (let key in props) {
-      let curCategory = props[key].category;
+    for (const key in props) {
+      if (props.hasOwnProperty(key)) {
+        const curCategory = props[key].category;
 
-      props[key].description = this.humanReadable(props[key].name);
+        props[key].description = this.humanReadable(props[key].name);
 
-      if (!grouped.hasOwnProperty(curCategory)) {
-        grouped[curCategory] = new Array<Token>();
+        if (!grouped.hasOwnProperty(curCategory)) {
+          grouped[curCategory] = new Array<Token>();
+        }
+        grouped[curCategory].push(props[key]);
       }
-      grouped[curCategory].push(props[key]);
     }
     return grouped;
   }
@@ -59,10 +61,10 @@ export class TokenService {
   }
 
   private dashesToSpaces(str: string): string {
-    return str.replace(/-/g, ' ')
+    return str.replace(/-/g, ' ');
   }
 
   private toTitleCase(str: string): string {
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
   }
 }

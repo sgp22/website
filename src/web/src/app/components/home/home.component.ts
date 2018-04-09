@@ -9,8 +9,8 @@ import { PagesService } from '../../shared/pages.service';
 })
 export class HomeComponent implements AfterViewInit {
   @Input() page;
-  @ViewChild('whiteDotPattern') whiteDotPattern:ElementRef;
-  @ViewChild('section1') section1:ElementRef;
+  @ViewChild('whiteDotPattern') whiteDotPattern: ElementRef;
+  @ViewChild('section1') section1: ElementRef;
   public dotPatternPaths;
   public hpSections;
   public pageContent: any;
@@ -92,12 +92,12 @@ export class HomeComponent implements AfterViewInit {
     }, 2300);
 
     setInterval(() => {
-      setPulseClass()
+      setPulseClass();
     }, 2000);
 
     function setPulseClass() {
       const numberOfDots = pattern.length;
-      let random = Math.floor((Math.random() * 279) + 1);
+      const random = Math.floor((Math.random() * 279) + 1);
       [].slice.call(pattern).forEach(el => {
         el.classList.remove('dot--pulse');
       });
@@ -114,7 +114,7 @@ export class HomeComponent implements AfterViewInit {
   }
 
   @HostListener('window:scroll', ['$event'])
-  private scrollAnimations(){
+  private scrollAnimations() {
     this.checkSection();
   }
 
@@ -131,22 +131,17 @@ export class HomeComponent implements AfterViewInit {
 
   private getIEVersion() {
     const sAgent = window.navigator.userAgent;
-    const Idx = sAgent.indexOf("MSIE");
+    const Idx = sAgent.indexOf('MSIE');
 
-    // If IE, return version number.
-    if (Idx > 0)
-      return parseInt(sAgent.substring(Idx + 5, sAgent.indexOf(".", Idx)));
-
-    // If IE 11 then look for Updated user agent string.
-    else if (!!navigator.userAgent.match(/Trident\/7\./))
-      return 11;
-
-    else if (/Edge\/\d./i.test(navigator.userAgent)) {
+    if (Idx > 0) {
+      return parseInt(sAgent.substring(Idx + 5, sAgent.indexOf('.', Idx)), 10); // If IE, return version number.
+    } else if (!!navigator.userAgent.match(/Trident\/7\./)) {
+      return 11; // If IE 11 then look for Updated user agent string.
+    } else if (/Edge\/\d./i.test(navigator.userAgent)) {
       return 'edge';
+    } else {
+      return 0; // It is not IE
     }
-
-    else
-      return 0; //It is not IE
   }
 
 }

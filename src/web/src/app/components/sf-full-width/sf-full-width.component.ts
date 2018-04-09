@@ -26,7 +26,7 @@ export class FullWidthComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.hasSidebar = this.sidebar;
 
-    if (validUrl.isUri(this.ctaLink)){
+    if (validUrl.isUri(this.ctaLink)) {
         this.ctaIsExternalUrl = true;
     }
   }

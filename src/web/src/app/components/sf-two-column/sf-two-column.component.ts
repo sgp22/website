@@ -36,11 +36,11 @@ export class TwoColumnComponent implements OnInit {
   ngOnInit() {
     this.hasSidebar = this.sidebar;
 
-    if (validUrl.isUri(this.col1CtaLink)){
+    if (validUrl.isUri(this.col1CtaLink)) {
         this.col1CtaIsExternalUrl = true;
     }
 
-    if (validUrl.isUri(this.col2CtaLink)){
+    if (validUrl.isUri(this.col2CtaLink)) {
         this.col2CtaIsExternalUrl = true;
     }
   }
