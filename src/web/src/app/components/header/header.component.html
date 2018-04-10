@@ -87,7 +87,7 @@
       </a>
       <span class="main-nav__popupmenu--mobile" [class.open]="popupmenuToggle" (click)="closeNav()">
         <ul class="ids-list">
-          <li *ngFor="let lib of libraries"><a class="ids-list--item" (click)="handleDropdownLink(lib.path)">{{lib.name}}</a></li>
+          <li *ngFor="let lib of libraries"><a class="ids-list--item" routerLink="/code/{{lib.path}}/latest">{{lib.name}}</a></li>
         </ul>
       </span>
     </span>
