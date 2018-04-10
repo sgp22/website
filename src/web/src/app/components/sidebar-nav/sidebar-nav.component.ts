@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ElementRef} from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ElementRef, ViewChildren, QueryList} from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -8,7 +8,7 @@ import { PagesService } from '../../shared/pages.service';
   providers: [PagesService]
 })
 export class SidebarNavComponent implements OnInit, AfterViewInit {
-
+  @ViewChildren('expandableList') expandableList: QueryList<any>;
   @Input() sidebarData;
   @Input() section;
   public sidebarNav: any;
@@ -73,6 +73,29 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
         );
       }
     });
+
+    this.closeAccordionsMobile();
+
+  }
+
+  private handleAccordion(i) {
+    this.expandedLevel1[i] = !this.expandedLevel1[i];
+  }
+
+  private closeAccordionsMobile() {
+
+    const checkViewport = (vp) => {
+      if (!vp.matches) {
+        this.expandableList.changes.subscribe(item => {
+          setTimeout(() => {
+            this.expandedLevel1 = item._results.map(i => true);
+          });
+        });
+      };
+    };
+
+    let viewport = window.matchMedia('(min-width: 600px)');
+    checkViewport(viewport);
 
   }
 

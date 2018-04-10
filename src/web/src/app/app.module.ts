@@ -22,6 +22,7 @@ import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-
 import { TokenTableComponent } from './components/token-table/token-table.component';
 import { ModifiersTableComponent } from './components/modifiers-table/modifiers-table.component';
 import { TypesComponent } from './components/types/types.component';
+import { PanelComponent } from './components/panel/panel.component';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
@@ -52,7 +53,8 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     MainComponent,
     TokenTableComponent,
     ModifiersTableComponent,
-    TypesComponent
+    TypesComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,

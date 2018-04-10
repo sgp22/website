@@ -1,0 +1,21 @@
+<ul *ngIf="pages" class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1">
+
+  <li *ngFor="let level_2 of pages; let i = index;">
+
+    <a *ngIf="!level_2.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{level_2.slug}}">
+      {{level_2.name}}
+    </a>
+
+    <span *ngIf="level_2.pages" class="ids-list--item ids-list--heading">
+      {{level_2.name}}
+    </span>
+
+    <ul *ngIf="level_2.pages" class="ids-list ids-list--expandable ids-list--expanded">
+      <li *ngFor="let level_3 of level_2.pages">
+        <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{level_3.slug}}">{{level_3.name}}</a>
+      </li>
+    </ul>
+
+  </li>
+
+</ul>

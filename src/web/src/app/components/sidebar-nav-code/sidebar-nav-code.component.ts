@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, AfterViewInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ElementRef, ViewChildren, QueryList, ContentChildren, AfterContentInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import * as semver from 'semver';
 
@@ -7,12 +7,16 @@ import { UrlMapper } from '../../shared/urlMapper.service';
 import { SitemapService } from '../../shared/sitemap.service';
 import { LibraryService } from '../../shared/library.service';
 
+import { PanelComponent } from '../panel/panel.component';
+
 @Component({
   selector: 'sidebar-nav-code',
   templateUrl: './sidebar-nav-code.component.html',
   providers: [SitemapService, LibraryService, UrlMapper, UrlParser]
 })
-export class SidebarNavCodeComponent implements OnInit {
+export class SidebarNavCodeComponent implements OnInit, AfterViewInit, AfterContentInit {
+  @ViewChildren('expandableList') expandableList: QueryList<any>;
+  @ContentChildren(PanelComponent) panels: QueryList<PanelComponent>;
   public path = '';
   public basePath = '';
   public mapPath = '';
@@ -76,6 +80,10 @@ export class SidebarNavCodeComponent implements OnInit {
 
   }
 
+  ngAfterViewInit() {
+    this.closeAccordionsMobile();
+  }
+
   handleSidebar(urlSegments) {
 
     if (urlSegments.length === 5) {
@@ -134,6 +142,28 @@ export class SidebarNavCodeComponent implements OnInit {
 
   onLibraryChange(library) {
     this.router.navigate([library]);
+  }
+
+  private closeAccordionsMobile() {
+
+    const checkViewport = (vp) => {
+      if (!vp.matches) {
+        this.expandableList.changes.subscribe(item => {
+          setTimeout(() => {
+            this.expandedLevel1 = item._results.map(i => true);
+          });
+        });
+      };
+    };
+
+    let viewport = window.matchMedia('(min-width: 600px)');
+    checkViewport(viewport);
+
+  }
+
+  openPanel(panel: PanelComponent) {
+    this.panels.toArray().forEach(p => p.expandedLevel1 = false);
+    panel.expandedLevel1 = true;
   }
 
 }
