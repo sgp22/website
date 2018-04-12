@@ -14,7 +14,7 @@ import { PanelComponent } from '../panel/panel.component';
   templateUrl: './sidebar-nav-code.component.html',
   providers: [SitemapService, LibraryService, UrlMapper, UrlParser]
 })
-export class SidebarNavCodeComponent implements OnInit, AfterViewInit, AfterContentInit {
+export class SidebarNavCodeComponent implements OnInit, AfterViewInit {
   @ViewChildren('expandableList') expandableList: QueryList<any>;
   @ContentChildren(PanelComponent) panels: QueryList<PanelComponent>;
   public path = '';
