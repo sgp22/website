@@ -75,4 +75,4 @@ describe('DocService', () => {
       req.flush(emsg, { status: 404, statusText: 'Not Found' });
     });
   });
-})
+});

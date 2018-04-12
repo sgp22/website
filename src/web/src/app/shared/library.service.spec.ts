@@ -5,7 +5,6 @@ import { TestBed } from '@angular/core/testing';
 import { CacheService } from './cache.service';
 import { LibraryService } from './library.service';
 
-const DOMAIN_DOCS_API = 'domain';
 
 fdescribe('LibraryService', () => {
   let httpClient: HttpClient;
