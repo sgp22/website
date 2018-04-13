@@ -115,22 +115,22 @@ describe('TokenService', () => {
     });
 
     it('should derive a "description" property from the "name" property', () => {
-      for (let category in results) {
-        for (let token of results[category]) {
+      for (const category of Object.keys(results)) {
+        for (const token of results[category]) {
           expect(token['description']).toBeDefined();
         }
       }
     });
 
     it('should Title Case the "description" and remove dashes', () => {
-      for (let category in results) {
-        for (let token of results[category]) {
+      for (const category of Object.keys(results)) {
+        for (const token of results[category]) {
           expect(token['description']).toBeDefined();
           expect(token['description'].indexOf('-')).toBe(-1);
 
           // Now Check title case
-          let theDesc = token['description'];
-          let capitalDesc = theDesc.toUpperCase();
+          const theDesc = token['description'];
+          const capitalDesc = theDesc.toUpperCase();
 
           // Compare the first character of each string
           expect(theDesc.substr(0, 1)).toBe(capitalDesc.substr(0, 1));
