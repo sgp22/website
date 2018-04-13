@@ -37,7 +37,7 @@ describe('DocService', () => {
       httpTestingController.verify();
     });
 
-    it('can GET the document data', () => {
+    it('should GET the document data', () => {
       docService
         .getDoc(testUrl)
         .subscribe(data =>
@@ -49,7 +49,7 @@ describe('DocService', () => {
       req.flush(testData);
     });
 
-    it('can handle 400 and return \'0\'', () => {
+    it('should handle 400 statuses and return "0"', () => {
       const emsg = 'deliberate 404 error';
 
       docService.getDoc(testUrl).subscribe(
@@ -61,7 +61,7 @@ describe('DocService', () => {
       req.flush(emsg, { status: 400, statusText: '0' });
     });
 
-    it('can handle non-404 errors and throw error', () => {
+    it('should handle non-404 statuses and throw an error', () => {
       const emsg = 'deliberate 404 error';
 
       docService.getDoc(testUrl).subscribe(

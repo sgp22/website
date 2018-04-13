@@ -15,7 +15,7 @@ describe('PageNotFoundComponent', () => {
     h1 = fixture.nativeElement.querySelector('h1');
   });
 
-  it('should display 404', () => {
+  it('should display a 404 message', () => {
     expect(h1.textContent).toBe('404 Page Not Found');
   });
 });

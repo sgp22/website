@@ -39,7 +39,7 @@ describe('PagesService', () => {
     httpTestingController.verify();
   });
 
-  it('#getAll', () => {
+  it('#getAll should GET the data', () => {
     const testUrl = `${appSettingsSpy.domain}/api/${appSettingsSpy.domainVersion}/pages/?&limit=200`;
     const testData = { title: 'Test' };
 
@@ -54,7 +54,7 @@ describe('PagesService', () => {
   });
 
 
-  it('#getPage', () => {
+  it('#getPage should GET the data', () => {
     const testId = 1;
     const testUrl = `${appSettingsSpy.domain}/api/${appSettingsSpy.domainVersion}/pages/${testId}/`;
     const testData = { title: 'Test' };
@@ -69,7 +69,7 @@ describe('PagesService', () => {
     req.flush(testData);
   });
 
-  it('#getGlobalNav', () => {
+  it('#getGlobalNav should GET the data', () => {
     const testUrl = `${appSettingsSpy.domain}/api/${appSettingsSpy.domainVersion}/pages/?format=json&show_in_menus=true`;
     const testData = { title: 'Test' };
 

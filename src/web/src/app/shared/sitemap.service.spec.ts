@@ -35,7 +35,7 @@ describe('SitemapService', () => {
     httpTestingController.verify();
   });
 
-  it('#getSitemap should get data', () => {
+  it('#getSitemap should GET data', () => {
     const testPath = 'sidebar';
     const testUrl = `${appSettingsSpy.domainDocsApi}/api/docs/${testPath}/sitemap.json`;
     const testData = { title: 'Test' };

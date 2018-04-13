@@ -6,8 +6,7 @@ import { CacheService } from './cache.service';
 import { TokenService } from './token.service';
 import { Token } from './token';
 
-
-fdescribe('TokenService', () => {
+describe('TokenService', () => {
   let tokenService: TokenService;
 
   beforeEach(() => {
@@ -41,7 +40,7 @@ fdescribe('TokenService', () => {
       httpTestingController.verify();
     });
 
-    it('should get data', () => {
+    it('should GET the data', () => {
       tokenService.getTokenData(testDomain, testLibrary, testVersion)
         .subscribe(data =>
           expect(data).toEqual(testData)
@@ -52,7 +51,7 @@ fdescribe('TokenService', () => {
       req.flush(testData);
     });
 
-    it('can handle 400 and return an empty array[]', () => {
+    it('should handle 400 statuses and return "[]"', () => {
       const emsg = 'deliberate 404 error';
 
       tokenService.getTokenData(testDomain, testLibrary, testVersion).subscribe(
@@ -61,10 +60,10 @@ fdescribe('TokenService', () => {
         }
       );
       const req = httpTestingController.expectOne(testUrl);
-      req.flush(emsg, { status: 400, statusText: '0' });
+      req.flush(emsg, { status: 400, statusText: '[]' });
     });
 
-    it('can handle non-404 errors and throw error', () => {
+    it('should handle non-404 statuses and throw an error', () => {
       const emsg = 'deliberate 404 error';
 
       tokenService.getTokenData(testDomain, testLibrary, testVersion).subscribe(
@@ -123,7 +122,7 @@ fdescribe('TokenService', () => {
       }
     });
 
-    it('should title case the "description" and remove dashes', () => {
+    it('should Title Case the "description" and remove dashes', () => {
       for (let category in results) {
         for (let token of results[category]) {
           expect(token['description']).toBeDefined();
