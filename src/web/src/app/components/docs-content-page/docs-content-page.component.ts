@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
+
+import { AppSettings } from '../../app.settings';
+
 import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
 import * as semver from 'semver';
@@ -19,14 +22,13 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 @Component({
   selector: 'app-docs-content-page',
   templateUrl: './docs-content-page.component.html',
-  providers: [UrlParser, UrlMapper, TokenService, DocService, LibraryService, SitemapService]
+  providers: [AppSettings, UrlParser, UrlMapper, TokenService, DocService, LibraryService, SitemapService]
 })
 export class DocsContentPageComponent implements OnInit, OnDestroy {
   public path = '';
   public basePath = '';
   public mapPath = '';
   public absolutePath = '';
-  public domainPath = DOMAIN_DOCS_API;
   public docs: any;
   public section: any;
   public element: any;
@@ -44,6 +46,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
+    private appSettings: AppSettings,
     private urlParser: UrlParser,
     private urlMapper: UrlMapper,
     private sanitizer: DomSanitizer,
@@ -92,7 +95,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
           this.createVersionPaths(res, urlSegment);
 
           this.docService
-            .getDoc(`${this.domainPath}/${this.mapPath}`)
+            .getDoc(`${this.appSettings.domainDocsApi}/${this.mapPath}`)
             .subscribe(
               (docs: any) => {
                 if (docs === '0') {

@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AppSettings } from '../../app.settings';
 import { Token } from '../../shared/token';
 import { TokenService } from '../../shared/token.service';
 
 @Component({
   selector: 'token-table',
   templateUrl: './token-table.component.html',
-  providers: [TokenService]
+  providers: [AppSettings, TokenService]
 })
 export class TokenTableComponent implements OnInit {
   @Input() idsTokenProperties;
@@ -13,14 +14,14 @@ export class TokenTableComponent implements OnInit {
   @Input() sectionClassName;
   @Input() version;
   @Input() loading;
-  public domainPath = DOMAIN_DOCS_API;
 
   constructor(
+    private appSettings: AppSettings,
     private tokenService: TokenService
   ) {}
 
   ngOnInit() {
-    this.getIDSTokenProperties(this.domainPath, 'ids-css', this.version);
+    this.getIDSTokenProperties(this.appSettings.domainDocsApi, 'ids-css', this.version);
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {

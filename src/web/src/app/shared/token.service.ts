@@ -24,7 +24,6 @@ export class TokenService {
     .get(url)
     .catch((err: Response) => {
       if (err.status === 400) {
-        console.log('Err: No tokens found for this version.');
         return JSON.stringify([]);
       } else {
         return Observable.throw(new Error(`${ err.status } ${ err.statusText }`));
@@ -51,11 +50,6 @@ export class TokenService {
     return grouped;
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
-  }
-
   private humanReadable(str: string) {
     return this.toTitleCase(this.dashesToSpaces(str));
   }
@@ -65,6 +59,8 @@ export class TokenService {
   }
 
   private toTitleCase(str: string): string {
-    return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    return str.replace(/\w\S*/g, (txt) => {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
   }
 }
