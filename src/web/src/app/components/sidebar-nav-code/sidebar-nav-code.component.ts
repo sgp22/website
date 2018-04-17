@@ -7,8 +7,6 @@ import { UrlMapper } from '../../shared/urlMapper.service';
 import { SitemapService } from '../../shared/sitemap.service';
 import { LibraryService } from '../../shared/library.service';
 
-import { PanelComponent } from '../panel/panel.component';
-
 @Component({
   selector: 'sidebar-nav-code',
   templateUrl: './sidebar-nav-code.component.html',
@@ -16,7 +14,6 @@ import { PanelComponent } from '../panel/panel.component';
 })
 export class SidebarNavCodeComponent implements OnInit, AfterViewInit {
   @ViewChildren('expandableList') expandableList: QueryList<any>;
-  @ContentChildren(PanelComponent) panels: QueryList<PanelComponent>;
   public path = '';
   public basePath = '';
   public mapPath = '';
@@ -159,11 +156,6 @@ export class SidebarNavCodeComponent implements OnInit, AfterViewInit {
     let viewport = window.matchMedia('(min-width: 600px)');
     checkViewport(viewport);
 
-  }
-
-  openPanel(panel: PanelComponent) {
-    this.panels.toArray().forEach(p => p.expandedLevel1 = false);
-    panel.expandedLevel1 = true;
   }
 
 }

@@ -25,17 +25,15 @@
       <li *ngFor="let child of sidebarNav; let i = index;">
 
         <a *ngIf="!child.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">{{child.name}}</a>
-        <span *ngIf="child.pages" (toggle)="expandedLevel1 = !expandedLevel1" class="ids-list--item ids-list--heading-accordion"
-          [class.ids-list--heading-accordion--active]="!expandedLevel1">
+        <span *ngIf="child.pages" (click)="expandedLevel1[i] = !expandedLevel1[i]" class="ids-list--item ids-list--heading-accordion"
+          [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
           {{child.name}}
           <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
             <use xlink:href="#icon_expand"></use>
           </svg>
         </span>
 
-        <panel [pages]="child.pages" [section]="section" [sidebarPath]="sidebarPath" [expandedLevel1]="expandedLevel1"></panel>
-
-        <!-- <ul #expandableList *ngIf="child.pages" class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
+        <ul #expandableList *ngIf="child.pages" class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
 
           <li *ngFor="let level_2 of child.pages; let i = index;">
 
@@ -55,7 +53,7 @@
 
           </li>
 
-        </ul> -->
+        </ul>
 
       </li>
     </ul>
