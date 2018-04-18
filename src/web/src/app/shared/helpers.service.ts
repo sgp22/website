@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
 export class HelpersService {
 
   public closeAccordionsMobile(sidebarNav) {
-    let panels = sidebarNav.map(i => true);
+    const panels = sidebarNav.map(i => true);
     return panels;
   }
 
   public checkViewport(vpw) {
-    let vp = window.matchMedia(vpw);
-    if(!vp.matches) {
+    const vp = window.matchMedia(vpw);
+    if (!vp.matches) {
       return true;
     }
   }
