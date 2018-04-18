@@ -77,6 +77,10 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
 
   }
 
+  private toggleAccordion(i) {
+    this.expandedLevel1[i] = !this.expandedLevel1[i];
+  }
+
   private closeAccordionsMobile(sidebarNav) {
 
     const checkViewport = (vp) => {
