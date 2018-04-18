@@ -61,6 +61,7 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
                   this.sectionTitle = item.title;
                   return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
                 });
+                this.closeAccordionsMobile(this.sidebarNav);
               }
             });
           },
@@ -74,19 +75,15 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.closeAccordionsMobile();
-
   }
 
-  private closeAccordionsMobile() {
+  private closeAccordionsMobile(sidebarNav) {
 
     const checkViewport = (vp) => {
       if (!vp.matches) {
-        this.expandableList.changes.subscribe(item => {
           setTimeout(() => {
-            this.expandedLevel1 = item._results.map(i => true);
+            this.expandedLevel1 = sidebarNav.map(i => true);
           });
-        });
       };
     };
 

@@ -12,7 +12,7 @@ import { LibraryService } from '../../shared/library.service';
   templateUrl: './sidebar-nav-code.component.html',
   providers: [SitemapService, LibraryService, UrlMapper, UrlParser]
 })
-export class SidebarNavCodeComponent implements OnInit, AfterViewInit {
+export class SidebarNavCodeComponent implements OnInit {
   @ViewChildren('expandableList') expandableList: QueryList<any>;
   public path = '';
   public basePath = '';
@@ -28,6 +28,7 @@ export class SidebarNavCodeComponent implements OnInit, AfterViewInit {
   public section: any;
   public element: any;
   public expandedLevel1: any = [];
+  public expandableListAllClosed: boolean;
 
   constructor(
     private router: Router,
@@ -77,10 +78,6 @@ export class SidebarNavCodeComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit() {
-    this.closeAccordionsMobile();
-  }
-
   handleSidebar(urlSegments) {
 
     if (urlSegments.length === 5) {
@@ -97,6 +94,7 @@ export class SidebarNavCodeComponent implements OnInit, AfterViewInit {
       .subscribe(
         (sidebar) => {
           this.sidebarNav = sidebar['sections'];
+          this.closeAccordionsMobile(this.sidebarNav);
         }
       );
 
@@ -141,14 +139,16 @@ export class SidebarNavCodeComponent implements OnInit, AfterViewInit {
     this.router.navigate([library]);
   }
 
-  private closeAccordionsMobile() {
+  private toggleAccordion(i) {
+    this.expandedLevel1[i] = !this.expandedLevel1[i];
+  }
+
+  private closeAccordionsMobile(sidebarNav) {
 
     const checkViewport = (vp) => {
       if (!vp.matches) {
-        this.expandableList.changes.subscribe(item => {
           setTimeout(() => {
-            this.expandedLevel1 = item._results.map(i => true);
-          });
+            this.expandedLevel1 = sidebarNav.map(i => true);
         });
       };
     };
