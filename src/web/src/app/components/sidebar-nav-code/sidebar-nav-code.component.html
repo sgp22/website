@@ -33,7 +33,7 @@
           </svg>
         </span>
 
-        <ul #expandableList *ngIf="child.pages" class="ids-list ids-list--expandable" [ngClass]="{ 'ids-list--expanded' : !expandedLevel1[i] }">
+        <ul *ngIf="child.pages" class="ids-list ids-list--expandable" [ngClass]="{ 'ids-list--expanded' : !expandedLevel1[i] }">
 
           <li *ngFor="let level_2 of child.pages; let i = index;">
 

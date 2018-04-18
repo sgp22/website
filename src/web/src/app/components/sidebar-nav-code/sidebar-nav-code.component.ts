@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ElementRef, ViewChildren, QueryList, ContentChildren, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ElementRef, ContentChildren, AfterContentInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import * as semver from 'semver';
 
@@ -13,7 +13,6 @@ import { LibraryService } from '../../shared/library.service';
   providers: [SitemapService, LibraryService, UrlMapper, UrlParser]
 })
 export class SidebarNavCodeComponent implements OnInit {
-  @ViewChildren('expandableList') expandableList: QueryList<any>;
   public path = '';
   public basePath = '';
   public mapPath = '';
@@ -28,7 +27,6 @@ export class SidebarNavCodeComponent implements OnInit {
   public section: any;
   public element: any;
   public expandedLevel1: any = [];
-  public expandableListAllClosed: boolean;
 
   constructor(
     private router: Router,

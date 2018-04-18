@@ -15,7 +15,7 @@
 
           <a *ngIf="child.children.length <= 0" class="ids-list--item" routerLink="{{section}}/{{child.slug}}" routerLinkActive="ids-list--item--selected">{{child.title}}</a>
 
-          <ul #expandableList class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
+          <ul class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
             <li *ngFor="let level_2 of child.children; let i = index">
 
               <a *ngIf="level_2.children.length <= 0" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{level_2.relative_url}}">
