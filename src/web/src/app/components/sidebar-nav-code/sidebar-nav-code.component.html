@@ -25,7 +25,7 @@
       <li *ngFor="let child of sidebarNav; let i = index;">
 
         <a *ngIf="!child.pages" class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="/{{section}}/{{sidebarPath}}/{{child.slug}}">{{child.name}}</a>
-        <span *ngIf="child.pages" (click)="toggleAccordion(i)" class="ids-list--item ids-list--heading-accordion"
+        <span *ngIf="child.pages" (click)="helpers.toggleAccordion(i, expandedLevel1)" class="ids-list--item ids-list--heading-accordion"
           [ngClass]="{ 'ids-list--heading-accordion--active' : !expandedLevel1[i] }">
           {{child.name}}
           <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">

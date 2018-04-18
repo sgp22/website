@@ -6,7 +6,7 @@
       <ng-container *ngFor="let child of sidebarNav; let i = index">
 
         <li>
-          <span *ngIf="child.children && child.children.length > 0" (click)="toggleAccordion(i)" class="ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
+          <span *ngIf="child.children && child.children.length > 0" (click)="helpers.toggleAccordion(i, expandedLevel1)" class="ids-list--heading-accordion ids-list--heading-accordion--active" [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
             {{child.title}}
             <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
               <use xlink:href="#icon_expand"></use>
