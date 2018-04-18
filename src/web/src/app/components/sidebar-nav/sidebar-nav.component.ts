@@ -84,8 +84,4 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
 
   }
 
-  // private toggleAccordion(i) {
-  //   this.expandedLevel1[i] = !this.expandedLevel1[i];
-  // }
-
 }
