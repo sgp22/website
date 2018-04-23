@@ -17,6 +17,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('blockTemplate') blockTemplate;
   @ViewChild('docsTemplate') docsTemplate;
   @ViewChild('docsLandingTemplate') docsLandingTemplate;
+  @ViewChild('blogLandingTemplate') blogLandingTemplate;
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
@@ -61,6 +62,12 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
           break;
         case 1:
+          if (params.slug === 'blog') {
+            this.useGrid = false;
+            this.fetchData(params.slug, 'home.BlogLandingPage', this.blogLandingTemplate, {}, false);
+            return false;
+          }
+          this.useGrid = true;
           this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate, {}, true);
           break;
         case 2:
