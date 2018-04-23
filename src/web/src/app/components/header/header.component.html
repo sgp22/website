@@ -36,14 +36,14 @@
       <nav class="main-nav">
         <ng-container *ngFor="let navItem of navItems">
           <a
-            *ngIf="!navItem.trigger"
+            *ngIf="!navItem?.trigger"
             class="ids-btn ids-btn--link"
             id="{{navItem.id}}"
             routerLinkActive="main-nav__item--current"
             [routerLink]="['', navItem.meta.slug]">
               {{navItem.title}}
           </a>
-          <span *ngIf="navItem.trigger" class="main-nav__item--trigger">
+          <span *ngIf="navItem?.trigger" class="main-nav__item--trigger">
             <a
               #trigger
               type="button"

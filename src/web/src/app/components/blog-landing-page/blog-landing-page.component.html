@@ -1,1 +1,43 @@
-<h1>{{pageContent.title}}</h1>
+<div class="blog-posts">
+
+  <article *ngFor="let post of posts" class="blog-post">
+
+    <header class="blog-post--header">
+      <time datetime="{{post.meta.first_published_at}}">{{post.meta.first_published_at | date : "MMMM d, yyyy"}}</time>
+      <h2>{{post.title}}</h2>
+      <span>By {{post.author}}</span>
+    </header>
+
+    <div class="blog-post--content">
+      <ng-container *ngFor="let content of post.content">
+        <div *ngIf="content.type === 'richText'" [innerHTML]="content?.value"></div>
+        <div *ngIf="content.type === 'markdown'" [innerHTML]="content?.value"></div>
+        <ng-container *ngIf="content.type === 'table'">
+          <table>
+            <ng-container *ngIf="content.value.first_row_is_table_header; then thBlock; else tdBlock;"></ng-container>
+            <ng-template #thBlock>
+              <thead>
+                <th *ngFor="let head of content?.value.data[0]" [innerHTML]="head"></th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of content?.value.data; let first=first;">
+                  <ng-container *ngIf="!first">
+                    <td *ngFor="let data of row" [innerHTML]="data"></td>
+                  </ng-container>
+                </tr>
+              </tbody>
+            </ng-template>
+            <ng-template #tdBlock>
+              <tbody>
+                <tr *ngFor="let row of content?.value.data;">
+                  <td *ngFor="let data of row" [innerHTML]="data"></td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+        </ng-container>
+      </ng-container>
+    </div>
+
+  </article>
+</div>
