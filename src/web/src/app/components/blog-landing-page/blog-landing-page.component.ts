@@ -22,9 +22,11 @@ export class BlogLandingPageComponent implements OnInit {
 
     this.pageContent.meta.children.children.map((post) => {
       this.pagesService.getPage(post.id)
-        .subscribe((res) => {
+        .subscribe(res => {
           this.posts.push(res);
-          console.log(this.posts);
+          this.posts.sort((a, b) => {
+            return a.meta.first_published_at > b.meta.first_published_at ? -1 : 1;
+          });
         });
     });
 

@@ -2,7 +2,7 @@
  * Layout
  */
 
-.site:not(.home, .code-section) {
+.site:not(.home, .code-section, .blog) {
   & .page-content {
     padding: 32px 0;
   }
