@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PagesService } from '../../shared/pages.service'
+import { PagesService } from '../../shared/pages.service';
 
 @Component({
   selector: 'blog-landing-page',
