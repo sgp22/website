@@ -369,22 +369,6 @@
   }
 }
 
-.section--2--btm {
-  margin-top: calc(var(--spacing-base) * 10);
-
-  & > div {
-    margin-bottom: calc(var(--spacing-base) * 3);
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    @media (--viewport-sm) {
-      margin-bottom: 0;
-    }
-  }
-}
-
 .section--3 {
   background-color: #8cb6e7;
 }
