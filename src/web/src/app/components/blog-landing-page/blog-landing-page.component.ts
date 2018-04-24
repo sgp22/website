@@ -26,7 +26,6 @@ export class BlogLandingPageComponent implements OnInit {
         .subscribe(
           (res) => {
             this.posts.push(res);
-            console.log(this.posts);
             this.posts.sort((a, b) => {
               return a.meta.first_published_at > b.meta.first_published_at ? -1 : 1;
             });
