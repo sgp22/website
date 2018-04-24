@@ -18,6 +18,7 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('docsTemplate') docsTemplate;
   @ViewChild('docsLandingTemplate') docsLandingTemplate;
   @ViewChild('blogLandingTemplate') blogLandingTemplate;
+  @ViewChild('blogPostTemplate') blogPostTemplate;
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
@@ -74,6 +75,13 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate, {}, true);
           break;
         case 2:
+          if (params.slug === 'blog') {
+            this.fullWidth = true;
+            this.twoCol = false;
+            this.fetchData(params.childSlug, 'home.BlogPostPage', this.blogPostTemplate, {}, false);
+            return false;
+          }
+          this.twoCol = true;
           this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate, {}, true);
           break;
         case 3:

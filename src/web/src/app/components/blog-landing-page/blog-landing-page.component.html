@@ -6,7 +6,7 @@
 
       <header class="blog-post--header">
         <time class="blog-post--date" datetime="{{post.meta.first_published_at}}">{{post.meta.first_published_at | date : "MMMM d, yyyy"}}</time>
-        <h1 class="blog-post--title">{{post.title}}</h1>
+        <h1 class="blog-post--title"><a routerLink="{{post.meta.slug}}">{{post.title}}</a></h1>
         <span class="blog-post--author">By {{post.author}}</span>
       </header>
 
