@@ -121,9 +121,9 @@ export class HomeComponent implements AfterViewInit {
   private checkSection() {
     const sections = document.querySelectorAll('section');
     [].slice.call(sections).forEach((section) => {
-      const slideInAt = (window.pageYOffset + window.innerHeight) - section.offsetHeight / 2;
-      const isHalfShown = slideInAt > section.offsetTop;
-      if (isHalfShown) {
+      const slideInAt = (window.pageYOffset + window.innerHeight) - section.offsetHeight / 3;
+      const isThirdShown = slideInAt > section.offsetTop;
+      if (isThirdShown) {
         section.classList.add('section--visible');
       }
     });
