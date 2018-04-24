@@ -46,3 +46,7 @@
     font-size: var(--font-size-md);
   }
 }
+
+.newsletter-signup--form-container {
+  margin-top: calc(var(--spacing-base) * 6);
+}
