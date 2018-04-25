@@ -22,6 +22,9 @@ import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-
 import { TokenTableComponent } from './components/token-table/token-table.component';
 import { ModifiersTableComponent } from './components/modifiers-table/modifiers-table.component';
 import { TypesComponent } from './components/types/types.component';
+import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';
+import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
+import { AppSettings } from './app.settings';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
@@ -52,7 +55,9 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     MainComponent,
     TokenTableComponent,
     ModifiersTableComponent,
-    TypesComponent
+    TypesComponent,
+    BlogLandingPageComponent,
+    BlogPostPageComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
   entryComponents: [
     ContainerComponent
   ],
-  providers: [CacheService],
+  providers: [CacheService, AppSettings],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, AfterViewInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ElementRef, ContentChildren, AfterContentInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import * as semver from 'semver';
 
@@ -6,11 +6,12 @@ import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
 import { SitemapService } from '../../shared/sitemap.service';
 import { LibraryService } from '../../shared/library.service';
+import { HelpersService } from '../../shared/helpers.service';
 
 @Component({
   selector: 'sidebar-nav-code',
   templateUrl: './sidebar-nav-code.component.html',
-  providers: [SitemapService, LibraryService, UrlMapper, UrlParser]
+  providers: [SitemapService, LibraryService, UrlMapper, UrlParser, HelpersService]
 })
 export class SidebarNavCodeComponent implements OnInit {
   public path = '';
@@ -34,7 +35,8 @@ export class SidebarNavCodeComponent implements OnInit {
     private sitemapService: SitemapService,
     private libraryService: LibraryService,
     private urlMapper: UrlMapper,
-    private urlParser: UrlParser
+    private urlParser: UrlParser,
+    private helpers: HelpersService
   ) {}
 
 
@@ -92,6 +94,11 @@ export class SidebarNavCodeComponent implements OnInit {
       .subscribe(
         (sidebar) => {
           this.sidebarNav = sidebar['sections'];
+          if (this.helpers.checkViewport('(min-width: 600px)')) {
+            setTimeout(() => {
+              this.expandedLevel1 = this.helpers.closeAccordionsMobile(this.sidebarNav);
+            });
+          }
         }
       );
 

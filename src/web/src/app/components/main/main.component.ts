@@ -17,13 +17,16 @@ export class MainComponent implements AfterContentInit, OnInit {
   @ViewChild('blockTemplate') blockTemplate;
   @ViewChild('docsTemplate') docsTemplate;
   @ViewChild('docsLandingTemplate') docsLandingTemplate;
+  @ViewChild('blogLandingTemplate') blogLandingTemplate;
+  @ViewChild('blogPostTemplate') blogPostTemplate;
   @ViewChild('notFoundTemplate') notFoundTemplate;
   @ViewChild('sidebarPlaceholder', { read: ViewContainerRef }) sidebarPlaceholder: ViewContainerRef;
   @ViewChild(ComponentLoaderComponent) componentLoader: ComponentLoaderComponent;
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')
-  @HostBinding('class.ids-row--col-xl-10') useGrid = true;
+  @HostBinding('class.ids-row--col-xl-10') twoCol = true;
+  @HostBinding('class.ids-row--col-12') fullWidth: boolean;
   public page;
   public tokenCategory;
   public section;
@@ -45,6 +48,7 @@ export class MainComponent implements AfterContentInit, OnInit {
 
     this.route.params.subscribe(params => {
 
+      this.fullWidth = false;
       const keys = Object.keys(params);
       this.docsComponents(keys, params);
       this.cmsComponents(keys, params);
@@ -57,13 +61,27 @@ export class MainComponent implements AfterContentInit, OnInit {
     if (params.slug !== 'code') {
       switch (keys.length) {
         case 0:
-          this.useGrid = false;
+          this.twoCol = false;
           this.fetchData('homepage', 'home.LandingPage', this.homeTemplate);
           break;
         case 1:
+          if (params.slug === 'blog') {
+            this.fullWidth = true;
+            this.twoCol = false;
+            this.fetchData(params.slug, 'home.BlogLandingPage', this.blogLandingTemplate, {}, false);
+            return false;
+          }
+          this.twoCol = true;
           this.fetchData(params.slug, 'home.LandingPage', this.landingTemplate, {}, true);
           break;
         case 2:
+          if (params.slug === 'blog') {
+            this.fullWidth = true;
+            this.twoCol = false;
+            this.fetchData(params.childSlug, 'home.BlogPostPage', this.blogPostTemplate, {}, false);
+            return false;
+          }
+          this.twoCol = true;
           this.fetchData(params.childSlug, 'home.CoreContentPage', this.coreTemplate, {}, true);
           break;
         case 3:
@@ -102,13 +120,9 @@ export class MainComponent implements AfterContentInit, OnInit {
           this.fetchData(params.slug, 'home.LandingPage', this.docsLandingTemplate, {}, true);
           break;
         case 2:
-          // this.useGrid = false;
-          // this.codeSection = true;
           this.componentLoader.loadComponent(null, null, this.notFoundTemplate, {});
           break;
         default:
-          // this.useGrid = false;
-          // this.codeSection = true;
           this.componentLoader.loadComponent(null, null, this.docsTemplate, {});
           break;
       }

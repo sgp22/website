@@ -14,6 +14,7 @@ export class AppComponent {
   public home;
   public useGrid;
   public codeSection;
+  public blog;
   public section;
   public sidebarNav;
   public footerNav;
@@ -41,6 +42,7 @@ export class AppComponent {
         const urlSegments = event.url.split('/');
         (urlSegments[1] === 'code') ? this.codeSection = true : this.codeSection = false;
         (url === '/') ? this.useGrid = false : this.useGrid = true;
+        (urlSegments[1] === 'blog') ? this.blog = true : this.blog = false;
 
         // Initialize Pendo on page change
         pendo.initialize({
