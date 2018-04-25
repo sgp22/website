@@ -1,14 +1,14 @@
 [
   {
-    "name": "IDS Enterprise (SoHo)",
+    "name": "Enterprise (SoHo)",
     "path": "ids-enterprise"
   },
   {
-    "name": "IDS CSS Library",
+    "name": "CSS Library",
     "path": "ids-css"
   },
   {
-    "name": "IDS Pendo Styles",
+    "name": "Pendo Styles",
     "path": "ids-pendo"
   }
 ]
