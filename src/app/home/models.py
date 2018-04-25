@@ -518,3 +518,44 @@ class BlocksPage(PageBase):
         APIField('tokensCategory'),
         APIField('body')
     ]
+
+class BlogLandingPage(PageBase):
+    menu_order = models.IntegerField(default=0)
+
+    description = models.CharField(max_length=255)
+
+    promote_panels = Page.promote_panels + [
+        FieldPanel('menu_order', classname="full"),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('description')
+    ]
+
+    api_fields = [
+        APIField('description')
+    ]
+
+class BlogPostPage(PageBase):
+
+    author = models.CharField(
+        verbose_name="Author",
+        max_length=255,
+        blank=True,
+    )
+
+    content = StreamField([
+        ('markdown', APIMarkDownBlock()),
+        ('richText', APIRichTextBlock()),
+        ('table', TableBlock())
+    ], null=True, blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('author'),
+        StreamFieldPanel('content')
+    ]
+
+    api_fields = [
+        APIField('author'),
+        APIField('content')
+    ]

@@ -22,6 +22,8 @@ import { TwoColTextImageComponent } from './components/sf-two-col-text-image/sf-
 import { TokenTableComponent } from './components/token-table/token-table.component';
 import { ModifiersTableComponent } from './components/modifiers-table/modifiers-table.component';
 import { TypesComponent } from './components/types/types.component';
+import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';
+import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 import { AppSettings } from './app.settings';
 
 import { InlineSVGModule } from 'ng-inline-svg';
@@ -54,6 +56,8 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     TokenTableComponent,
     ModifiersTableComponent,
     TypesComponent,
+    BlogLandingPageComponent,
+    BlogPostPageComponent
   ],
   imports: [
     BrowserModule,

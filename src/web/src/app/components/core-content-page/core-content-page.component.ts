@@ -1,14 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd} from '@angular/router';
-import { PagesService } from '../../shared/pages.service';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/switchMap';
-
 
 @Component({
   selector: 'app-core-content-page',
-  templateUrl: './core-content-page.component.html',
-  providers: [PagesService]
+  templateUrl: './core-content-page.component.html'
 })
 
 export class CoreContentPageComponent implements OnInit {
@@ -19,7 +14,6 @@ export class CoreContentPageComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pagesService: PagesService
   ) {}
 
   ngOnInit() {
