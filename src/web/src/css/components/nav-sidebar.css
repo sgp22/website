@@ -35,7 +35,7 @@
     fill: var(--text-color-info);
     position: absolute;
     right: calc(var(--spacing) * 3);
-    transform: rotate(0deg) translateY(50%);
+    transform: rotate(0deg) translateY(30%);
   }
 
   &:hover {
@@ -46,7 +46,7 @@
 
   &.ids-list--heading-accordion--active {
     & .ids-icon {
-      transform: rotate(-180deg) translateY(-50%);
+      transform: rotate(-180deg) translateY(-30%);
     }
   }
 }
