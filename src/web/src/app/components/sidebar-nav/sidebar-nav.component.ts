@@ -1,14 +1,14 @@
 import { Component, OnInit, AfterViewInit, Input, ElementRef} from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { HelpersService } from '../../shared/helpers.service';
 
 @Component({
   selector: 'sidebar-nav',
   templateUrl: './sidebar-nav.component.html',
-  providers: [PagesService]
+  providers: [PagesService, HelpersService]
 })
 export class SidebarNavComponent implements OnInit, AfterViewInit {
-
   @Input() sidebarData;
   @Input() section;
   public sidebarNav: any;
@@ -16,13 +16,14 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
   public level_2: boolean;
   public loading: boolean;
   public expandedLevel1: any = [];
-  public expandedLevel2: any = [];
+  public halp: any = [];
 
   constructor(
     private pagesService: PagesService,
     private router: Router,
     private route: ActivatedRoute,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private helpers: HelpersService
   ) {}
 
   ngOnInit() {}
@@ -61,11 +62,18 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
                   this.sectionTitle = item.title;
                   return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
                 });
+                if (this.helpers.checkViewport('(min-width: 600px)')) {
+                  setTimeout(() => {
+                    this.expandedLevel1 = this.helpers.closeAccordionsMobile(this.sidebarNav);
+                  });
+                }
+
               }
             });
           },
-          () => {
+          (err) => {
             this.loading = false;
+            console.error(err);
           },
           () => {
             this.loading = false;
