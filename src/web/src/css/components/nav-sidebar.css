@@ -28,7 +28,18 @@
   }
 }
 
+.ids-list {
+  & li {
+    &:last-child {
+      & .ids-list--heading-accordion {
+        border-bottom: 1px solid var(--input-readonly-bg-color);
+      }
+    }
+  }
+}
+
 .ids-list--heading-accordion {
+  border-bottom: none;
   position: relative;
 
   & .ids-icon {
@@ -45,6 +56,8 @@
   }
 
   &.ids-list--heading-accordion--active {
+    border-bottom: 1px solid var(--input-readonly-bg-color);
+
     & .ids-icon {
       transform: rotate(-180deg) translateY(-30%);
     }
