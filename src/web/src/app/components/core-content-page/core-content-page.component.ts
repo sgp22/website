@@ -1,32 +1,40 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd} from '@angular/router';
+import { Component, Input, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { PagesService } from '../../shared/pages.service';
 
 @Component({
   selector: 'app-core-content-page',
-  templateUrl: './core-content-page.component.html'
+  templateUrl: './core-content-page.component.html',
+  providers: [PagesService]
 })
 
-export class CoreContentPageComponent implements OnInit {
-  @Input() page;
-  @Input() loading;
+export class CoreContentPageComponent implements AfterViewInit {
   public pageContent: any;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private pagesService: PagesService
   ) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
 
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
+    this.renderPage();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.renderPage();
       }
-      window.scrollTo(0, 0);
     });
 
-    this.pageContent = this.page;
+  }
 
+  private renderPage() {
+    this.pagesService.createPage(this.router.url)
+      .subscribe(
+        res => {
+          this.pageContent = res;
+        }
+      )
   }
 
 }

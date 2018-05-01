@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, Input, OnDestroy, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
 @Component({
@@ -7,11 +7,8 @@ import { PagesService } from '../../shared/pages.service';
   templateUrl: './landing-page.component.html',
   providers: [PagesService]
 })
-export class LandingPageComponent implements OnInit, OnDestroy {
-  @Input() page;
-  @Input() sidebar;
+export class LandingPageComponent implements AfterViewInit {
   public pageContent: any;
-  public hasSidebar: boolean;
 
   constructor(
     private router: Router,
@@ -19,16 +16,24 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     private pagesService: PagesService,
   ) { }
 
-  ngOnInit() {
-    if (this.page) {
-      this.pageContent = this.page;
-      this.hasSidebar = this.sidebar;
-    }
+  ngAfterViewInit() {
+
+    this.renderPage();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.renderPage();
+      }
+    });
+
   }
 
-  ngOnDestroy() {
-    this.pageContent = '';
-    this.hasSidebar = !this.sidebar;
+  private renderPage() {
+    this.pagesService.createPage(this.router.url)
+      .subscribe(
+        res => {
+          this.pageContent = res;
+        }
+      )
   }
 
 }

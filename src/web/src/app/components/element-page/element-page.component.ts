@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -8,8 +8,7 @@ import { PagesService } from '../../shared/pages.service';
   providers: [PagesService]
 })
 
-export class ElementPageComponent implements OnInit {
-  @Input() page;
+export class ElementPageComponent implements AfterViewInit {
   public pageContent;
 
   constructor(
@@ -18,8 +17,24 @@ export class ElementPageComponent implements OnInit {
     private pagesService: PagesService,
   ) {}
 
-  ngOnInit() {
-    this.pageContent = this.page;
+  ngAfterViewInit() {
+
+    this.renderPage();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.renderPage();
+      }
+    });
+
+  }
+
+  private renderPage() {
+    this.pagesService.createPage(this.router.url)
+      .subscribe(
+        res => {
+          this.pageContent = res;
+        }
+      )
   }
 
 }
