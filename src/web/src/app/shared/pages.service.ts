@@ -47,8 +47,7 @@ export class PagesService {
 
     const url = route;
     const urlSegments = url.split('/');
-    const slug = urlSegments.slice(-1)[0];
-
+    const slug = urlSegments.slice(-1)[0] !== '' ? urlSegments.slice(-1)[0] : 'homepage';
     return this.getCurrentPage(slug).first();
 
   }

@@ -9,11 +9,12 @@ import { ElementPageComponent } from './components/element-page/element-page.com
 import { BlockPageComponent } from './components/block-page/block-page.component';
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: MainComponent
+    component: HomeComponent
   },
   {
     path: 'guidelines',
@@ -71,13 +72,9 @@ const appRoutes: Routes = [
     path: 'code/:library/:version/:component',
     component: DocsContentPageComponent
   },
-  {
-    path: '**',
-    component: PageNotFoundComponent
-  }
   // {
-  //   path: ':slug/:library/:version/:component',
-  //   component: MainComponent
+  //   path: '**',
+  //   component: PageNotFoundComponent
   // }
 ];
 
