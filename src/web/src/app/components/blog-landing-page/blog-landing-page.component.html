@@ -1,6 +1,8 @@
-<div class="ids-container">
+<div class="ids-container blog-container" *ngIf="!loading">
 
   <div class="blog-posts ids-row--col-md-6 ids-row--offset-md-3 ids-row--col-sm-8 ids-row--offset-sm-2">
+
+    <div class="page-inner">
 
     <article *ngFor="let post of posts" class="blog-post">
 

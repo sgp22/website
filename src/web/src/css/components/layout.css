@@ -21,6 +21,10 @@
   }
 }
 
+.page-inner {
+  padding-top: calc(var(--spacing-base) * 6);
+}
+
 /*
  * Page Hero
  */

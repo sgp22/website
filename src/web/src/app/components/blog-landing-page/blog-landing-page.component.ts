@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';

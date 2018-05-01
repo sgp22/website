@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, HostBinding } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
@@ -11,6 +11,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 
 export class BlogPostPageComponent implements AfterViewInit {
   public pageContent: any;
+  public loading = true;
 
   constructor(
     private router: Router,
@@ -41,6 +42,7 @@ export class BlogPostPageComponent implements AfterViewInit {
         },
         () => {
           this.loadingBar.complete();
+          this.loading = false;
         }
       )
   }

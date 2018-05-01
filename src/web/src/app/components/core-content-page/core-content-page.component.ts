@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, HostBinding } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
@@ -11,6 +11,11 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 
 export class CoreContentPageComponent implements AfterViewInit {
   public pageContent: any;
+  public loading = true;
+  @HostBinding('class.ids-row--offset-xl-2')
+  @HostBinding('class.ids-row--offset-sm-3')
+  @HostBinding('class.ids-row--col-sm-9')
+  @HostBinding('class.ids-row--col-xl-10') grid = true;
 
   constructor(
     private router: Router,
@@ -41,6 +46,7 @@ export class CoreContentPageComponent implements AfterViewInit {
         },
         () =>{
           this.loadingBar.complete();
+          this.loading = false;
         }
       )
   }
