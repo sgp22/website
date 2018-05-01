@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-element-page',
@@ -13,8 +14,8 @@ export class ElementPageComponent implements AfterViewInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private pagesService: PagesService,
+    private loadingBar: LoadingBarService
   ) {}
 
   ngAfterViewInit() {
@@ -29,10 +30,17 @@ export class ElementPageComponent implements AfterViewInit {
   }
 
   private renderPage() {
+    this.loadingBar.start();
     this.pagesService.createPage(this.router.url)
       .subscribe(
         res => {
           this.pageContent = res;
+        },
+        err => {
+          console.error(err);
+        },
+        () => {
+          this.loadingBar.complete();
         }
       )
   }

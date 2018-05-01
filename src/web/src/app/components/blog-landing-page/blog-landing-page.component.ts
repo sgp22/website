@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'blog-landing-page',
@@ -15,37 +16,45 @@ export class BlogLandingPageComponent implements AfterViewInit {
 
   constructor(
     private router: Router,
-    private pagesService: PagesService
+    private pagesService: PagesService,
+    private loadingBar: LoadingBarService
   ) {}
 
   ngAfterViewInit() {
 
-    const url = this.router.url;
-    const urlSegments = url.split('/');
-    const slug = urlSegments.slice(-1)[0];
+    this.renderPage();
 
-    this.pagesService.getCurrentPage(slug)
-      .subscribe(res => {
-        this.pageContent = res
-        this.pageContent.meta.children.children.map((post) => {
-          this.pagesService.getPage(post.id)
-            .subscribe(
-              (res) => {
-                this.posts.push(res);
-                this.posts.sort((a, b) => {
-                  return a.meta.first_published_at > b.meta.first_published_at ? -1 : 1;
-                });
-              },
-              (err) => {
-                console.error(err);
-              },
-              () => {
-                this.loading = false;
-              }
-            );
-        });
-      });
+  }
 
+  private renderPage() {
+    this.loadingBar.start();
+    this.pagesService.createPage(this.router.url)
+      .subscribe(
+        res => {
+          this.pageContent = res
+          this.pageContent.meta.children.children.map((post) => {
+            this.pagesService.getPage(post.id)
+              .subscribe(
+                (res) => {
+                  this.posts.push(res);
+                  this.posts.sort((a, b) => {
+                    return a.meta.first_published_at > b.meta.first_published_at ? -1 : 1;
+                  });
+                },
+                (err) => {
+                  console.error(err);
+                }
+              );
+          });
+        },
+        err => {
+          console.error(err);
+        },
+        () => {
+          this.loadingBar.complete();
+          this.loading = false;
+        }
+      )
   }
 
 }

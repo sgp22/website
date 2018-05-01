@@ -1,20 +1,48 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { PagesService } from '../../shared/pages.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'blog-post-page',
   templateUrl: './blog-post-page.component.html',
+  providers: [PagesService]
 })
 
-export class BlogPostPageComponent implements OnInit {
-  @Input() page;
+export class BlogPostPageComponent implements AfterViewInit {
   public pageContent: any;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private pagesService: PagesService,
+    private loadingBar: LoadingBarService
+  ) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
 
-    this.pageContent = this.page;
+    this.renderPage();
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.renderPage();
+      }
+    });
 
+  }
+
+  private renderPage() {
+    this.loadingBar.start();
+    this.pagesService.createPage(this.router.url)
+      .subscribe(
+        res => {
+          this.pageContent = res;
+        },
+        err => {
+          console.error(err);
+        },
+        () => {
+          this.loadingBar.complete();
+        }
+      )
   }
 
 }

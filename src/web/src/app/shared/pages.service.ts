@@ -17,7 +17,7 @@ export class PagesService {
   constructor(
     private appSettings: AppSettings,
     private cacheService: CacheService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   getAll() {

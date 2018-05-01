@@ -5,15 +5,15 @@
     <article class="blog-post">
 
       <header class="blog-post--header">
-        <time class="blog-post--date" datetime="{{pageContent.meta.first_published_at}}">{{pageContent.meta.first_published_at | date : "MMMM d, yyyy"}}</time>
+        <time class="blog-post--date" datetime="{{pageContent?.meta.first_published_at}}">{{pageContent?.meta.first_published_at | date : "MMMM d, yyyy"}}</time>
         <h1 class="blog-post--title">
-          {{pageContent.title}}
+          {{pageContent?.title}}
         </h1>
-        <span class="blog-post--author">By {{pageContent.author}}</span>
+        <span class="blog-post--author">By {{pageContent?.author}}</span>
       </header>
 
       <div class="blog-post--content">
-        <ng-container *ngFor="let content of pageContent.content">
+        <ng-container *ngFor="let content of pageContent?.content">
           <div *ngIf="content.type === 'richText'" [innerHTML]="content?.value"></div>
           <div *ngIf="content.type === 'markdown'" [innerHTML]="content?.value"></div>
           <ng-container *ngIf="content.type === 'table'">

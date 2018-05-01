@@ -7,6 +7,7 @@ import { BlogLandingPageComponent } from './components/blog-landing-page/blog-la
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { ElementPageComponent } from './components/element-page/element-page.component';
 import { BlockPageComponent } from './components/block-page/block-page.component';
+import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 
 const appRoutes: Routes = [
   {
@@ -56,6 +57,10 @@ const appRoutes: Routes = [
   {
     path: 'blog',
     component: BlogLandingPageComponent
+  },
+  {
+    path: 'blog/:slug',
+    component: BlogPostPageComponent
   }
   // {
   //   path: ':slug/:library/:version/:component',
