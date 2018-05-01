@@ -8,6 +8,7 @@ import { CoreContentPageComponent } from './components/core-content-page/core-co
 import { ElementPageComponent } from './components/element-page/element-page.component';
 import { BlockPageComponent } from './components/block-page/block-page.component';
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
+import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 
 const appRoutes: Routes = [
   {
@@ -61,6 +62,18 @@ const appRoutes: Routes = [
   {
     path: 'blog/:slug',
     component: BlogPostPageComponent
+  },
+  {
+    path: 'code/:library/:version',
+    component: DocsContentPageComponent
+  },
+  {
+    path: 'code/:library/:version/:component',
+    component: DocsContentPageComponent
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
   // {
   //   path: ':slug/:library/:version/:component',
