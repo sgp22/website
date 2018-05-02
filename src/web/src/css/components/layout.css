@@ -85,14 +85,6 @@
   }
 }
 
-.page-content--code {
-  padding: 32px 0;
-
-  @media (--viewport-md) {
-    padding: 24px 0;
-  }
-}
-
 /*
   Site Footer
 */

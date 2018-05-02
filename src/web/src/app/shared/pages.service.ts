@@ -43,8 +43,7 @@ export class PagesService {
       .first();
   }
 
-  public createPage(route) {
-
+  createPage(route) {
     const url = route;
     const urlSegments = url.split('/');
     const slug = urlSegments.slice(-1)[0] !== '' ? urlSegments.slice(-1)[0] : 'homepage';
@@ -56,6 +55,5 @@ export class PagesService {
     } else {
       return this.getCurrentPage(slug).first();
     }
-
   }
 }
