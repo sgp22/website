@@ -28,14 +28,6 @@ export class HomeComponent implements AfterViewInit {
 
     this.renderPage();
 
-    // this.route.params.subscribe(params => {
-
-    //   const url = this.router.routerState.snapshot.url;
-    //   const preview = url.match(/id=\d{1,10}/g);
-    //   preview ? this.getPreviewContent(preview) : this.getPageContent();
-
-    // });
-
     if (this.getIEVersion() === 0 && this.getIEVersion() !== 'edge') {
       this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
       this.animateDots(this.dotPatternPaths);
@@ -54,47 +46,12 @@ export class HomeComponent implements AfterViewInit {
         err => {
           this.loadingBar.complete();
           this.loading = false;
-          console.error(err);
         },
         () => {
           this.loadingBar.complete();
           this.loading = false;
         }
       )
-  }
-
-  getPreviewContent(preview) {
-
-    const id = `${this.page.id}/?preview=true`;
-
-    this.pagesService
-      .getPage(id)
-      .subscribe(
-        (res: any) => {
-          this.pageContent = res;
-          this.loading = false;
-        },
-        (err) => {
-          console.log(err);
-        }
-    );
-
-  }
-
-  getPageContent() {
-
-    this.pagesService
-      .getPage(this.page.id)
-      .subscribe(
-        (res: any) => {
-          this.pageContent = res;
-          this.loading = false;
-        },
-        (err) => {
-          console.log(err);
-        }
-    );
-
   }
 
   private animateDots(pattern) {
