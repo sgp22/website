@@ -18,7 +18,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'guidelines',
-    component: LandingPageComponent
+    component: LandingPageComponent,
+    pathMatch: 'full'
   },
   {
     path: 'guidelines/:slug',
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'examples',
-    component: LandingPageComponent
+    component: LandingPageComponent,
+    pathMatch: 'full'
   },
   {
     path: 'examples/:slug',
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'resources',
-    component: LandingPageComponent
+    component: LandingPageComponent,
+    pathMatch: 'full'
   },
   {
     path: 'resources/:slug',
@@ -58,7 +61,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'blog',
-    component: BlogLandingPageComponent
+    component: BlogLandingPageComponent,
+    pathMatch: 'full'
   },
   {
     path: 'blog/:slug',
@@ -66,11 +70,13 @@ const appRoutes: Routes = [
   },
   {
     path: 'code/:library/:version',
-    component: DocsContentPageComponent
+    component: DocsContentPageComponent,
+    pathMatch: 'full'
   },
   {
     path: 'code/:library/:version/:component',
-    component: DocsContentPageComponent
+    component: DocsContentPageComponent,
+    pathMatch: 'full'
   },
   // {
   //   path: '**',

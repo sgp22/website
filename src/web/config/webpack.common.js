@@ -118,7 +118,7 @@ module.exports = {
           {
             "loader": "@angular-devkit/build-optimizer/webpack-loader",
             "options": {
-              "sourceMap": true
+              "sourceMap": false
             }
           }
         ]
@@ -162,7 +162,7 @@ module.exports = {
           {
             "loader": "@angular-devkit/build-optimizer/webpack-loader",
             "options": {
-              "sourceMap": true
+              "sourceMap": false
             }
           },
           "@ngtools/webpack"

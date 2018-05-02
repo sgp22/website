@@ -34,7 +34,9 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
       if (event instanceof NavigationEnd) {
 
         const urlSegments = event.url.split('/');
-        this.section = urlSegments[1];
+        const preview = urlSegments[1].match(/id=\d{1,10}/g);
+        const previewSlug = urlSegments[1].split('?');
+        preview ? this.section = previewSlug[0] : this.section = urlSegments[1];
 
         this.loading = true;
         this.pagesService.getAll().subscribe(

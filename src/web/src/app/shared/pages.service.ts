@@ -33,14 +33,14 @@ export class PagesService {
     return this.http.get(`${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/?format=json&show_in_menus=true`).first();
   }
 
-  getCurrentPage(slug) {
+  getCurrentPage(slug, preview = false) {
     return this.getAll()
       .map(
         res => {
           this.page = res.items.filter(res => res.meta.slug === slug);
         })
-        .switchMap(res => this.getPage(this.page[0].id))
-        .first();
+      .switchMap(res => preview ? this.getPage(`${this.page[0].id}/?preview=true`) : this.getPage(`${this.page[0].id}`))
+      .first();
   }
 
   public createPage(route) {
@@ -48,7 +48,14 @@ export class PagesService {
     const url = route;
     const urlSegments = url.split('/');
     const slug = urlSegments.slice(-1)[0] !== '' ? urlSegments.slice(-1)[0] : 'homepage';
-    return this.getCurrentPage(slug).first();
+    const preview = url.match(/id=\d{1,10}/g);
+    const previewSlug = slug.split('?');
+
+    if (preview) {
+      return this.getCurrentPage(previewSlug[0], true).first();
+    } else {
+      return this.getCurrentPage(slug).first();
+    }
 
   }
 }
