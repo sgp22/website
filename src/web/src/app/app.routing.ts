@@ -1,6 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './components/main/main.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';

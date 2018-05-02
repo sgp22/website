@@ -10,7 +10,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 })
 
 export class BlockPageComponent implements AfterViewInit {
-  public pageContent;
+  public pageContent: any;
   public notFound = false;
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
