@@ -1,11 +1,11 @@
-<app-page-not-found *ngIf="notFound"></app-page-not-found>
-
-<ng-container *ngIf="!loading">
+<ng-container>
 
   <div class="ids-row">
     <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
 
       <div class="page-inner">
+
+        <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
         <header class="page-header">
           <div class="page-header__intro">

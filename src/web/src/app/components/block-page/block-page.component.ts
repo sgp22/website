@@ -11,6 +11,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 
 export class BlockPageComponent implements AfterViewInit {
   public pageContent;
+  public notFound = false;
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')
@@ -41,7 +42,8 @@ export class BlockPageComponent implements AfterViewInit {
           this.pageContent = res;
         },
         err => {
-          console.error(err);
+          this.loadingBar.complete();
+          this.notFound = true;
         },
         () => {
           this.loadingBar.complete();

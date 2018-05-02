@@ -1,18 +1,19 @@
-<ng-container *ngIf="pageContent">
+
+<ng-container>
 
   <header
-    *ngIf="pageContent.page_hero && pageContent.page_hero.length > 0"
+    *ngIf="pageContent?.page_hero && pageContent?.page_hero.length > 0"
     class="page-hero ids-container"
-    [ngStyle]="{'background-color': '#'+pageContent.page_hero[0].value.background_color+'', 'color': '#'+pageContent.page_hero[0].value.text_color}"
+    [ngStyle]="{'background-color': '#'+pageContent?.page_hero[0].value.background_color+'', 'color': '#'+pageContent?.page_hero[0].value.text_color}"
     >
 
     <div class="page-hero--content ids-row--col-sm-9 ids-row--col-md-6 ids-row--col-xl-5 ids-row--offset-sm-1">
-      <h1 class="page-hero--title">{{pageContent.page_hero[0].value.heading}}</h1>
-      <p class="page-hero--text">{{pageContent.page_hero[0].value.text}}</p>
+      <h1 class="page-hero--title">{{pageContent?.page_hero[0].value.heading}}</h1>
+      <p class="page-hero--text">{{pageContent?.page_hero[0].value.text}}</p>
     </div>
 
     <div class="page-hero--image">
-      <img src="{{pageContent.page_hero[0].value.image.file}}" alt="{{pageContent.page_hero[0].value.image.title}}">
+      <img src="{{pageContent?.page_hero[0].value.image.file}}" alt="{{pageContent?.page_hero[0].value.image.title}}">
     </div>
 
   </header>
@@ -20,7 +21,7 @@
   <div class="ids-container">
     <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
 
-      <ng-container *ngFor="let section of pageContent.content">
+      <ng-container *ngFor="let section of pageContent?.content">
 
         <sf-full-width *ngIf="section.type === 'fullWidth'"
           [title]="section.value.title"
@@ -88,7 +89,7 @@
 
       </ng-container>
 
-      <section *ngIf="pageContent.grid_blocks && pageContent.grid_blocks.length > 0" class="page-section ids-row">
+      <section *ngIf="pageContent?.grid_blocks && pageContent?.grid_blocks.length > 0" class="page-section ids-row">
 
         <div *ngFor="let block of pageContent.grid_blocks; let isOdd = odd" class="ids-row--col-sm-5 grid-block" [class.ids-row--offset-sm-2]="isOdd">
           <img class="grid-block--image" src="{{block.value.image.file}}" alt="{{block.value.image.title}}">

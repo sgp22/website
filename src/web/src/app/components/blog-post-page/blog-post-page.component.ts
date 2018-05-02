@@ -11,7 +11,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 
 export class BlogPostPageComponent implements AfterViewInit {
   public pageContent: any;
-  public loading = true;
+  public notFound = false;
 
   constructor(
     private router: Router,
@@ -38,11 +38,11 @@ export class BlogPostPageComponent implements AfterViewInit {
           this.pageContent = res;
         },
         err => {
-          console.error(err);
+          this.loadingBar.complete();
+          this.notFound = true;
         },
         () => {
           this.loadingBar.complete();
-          this.loading = false;
         }
       )
   }

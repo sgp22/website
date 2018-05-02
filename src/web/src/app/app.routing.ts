@@ -78,10 +78,10 @@ const appRoutes: Routes = [
     component: DocsContentPageComponent,
     pathMatch: 'full'
   },
-  // {
-  //   path: '**',
-  //   component: PageNotFoundComponent
-  // }
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

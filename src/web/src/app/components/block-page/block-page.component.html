@@ -5,6 +5,8 @@
 
       <div class="page-inner">
 
+        <app-page-not-found *ngIf="notFound"></app-page-not-found>
+
         <header class="page-header">
           <div class="page-header__intro">
             <h1 class="page-title">{{pageContent?.title}}</h1>

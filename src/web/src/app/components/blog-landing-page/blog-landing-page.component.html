@@ -1,8 +1,10 @@
-<div class="ids-container blog-container" *ngIf="!loading">
+<div class="ids-container blog-container">
 
   <div class="blog-posts ids-row--col-md-6 ids-row--offset-md-3 ids-row--col-sm-8 ids-row--offset-sm-2">
 
     <div class="page-inner">
+
+    <app-page-not-found *ngIf="notFound"></app-page-not-found>
 
     <article *ngFor="let post of posts" class="blog-post">
 
@@ -49,7 +51,7 @@
 
 </div>
 
-<section class="newsletter-signup" *ngIf="!loading">
+<section class="newsletter-signup">
 
   <div class="ids-container">
 
