@@ -51,7 +51,7 @@ export class HomeComponent implements AfterViewInit {
           this.loadingBar.complete();
           this.loading = false;
         }
-      )
+      );
   }
 
   private animateDots(pattern) {

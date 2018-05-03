@@ -40,7 +40,7 @@ export class LandingPageComponent implements AfterViewInit {
           () => {
             this.loadingBar.complete();
           }
-        )
+        );
     });
 
   }

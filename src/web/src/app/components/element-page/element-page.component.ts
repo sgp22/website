@@ -40,7 +40,7 @@ export class ElementPageComponent implements AfterViewInit {
           () => {
             this.loadingBar.complete();
           }
-        )
+        );
     });
 
   }

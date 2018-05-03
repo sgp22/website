@@ -39,7 +39,7 @@ export class BlogPostPageComponent implements AfterViewInit {
             this.loadingBar.complete();
             this.loading = false;
           }
-        )
+        );
     });
 
   }

@@ -35,8 +35,8 @@ export class BlogLandingPageComponent implements AfterViewInit {
           this.pageContent.meta.children.children.map((post) => {
             this.pagesService.getPage(post.id)
               .subscribe(
-                (res) => {
-                  this.posts.push(res);
+                (posts) => {
+                  this.posts.push(posts);
                   this.posts.sort((a, b) => {
                     return a.meta.first_published_at > b.meta.first_published_at ? -1 : 1;
                   });
@@ -54,7 +54,7 @@ export class BlogLandingPageComponent implements AfterViewInit {
         () => {
           this.loadingBar.complete();
         }
-      )
+      );
   }
 
 }

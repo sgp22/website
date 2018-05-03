@@ -40,7 +40,7 @@ export class BlockPageComponent implements AfterViewInit {
           () => {
             this.loadingBar.complete();
           }
-        )
+        );
     });
 
   }

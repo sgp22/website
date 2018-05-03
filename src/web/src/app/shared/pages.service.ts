@@ -30,16 +30,16 @@ export class PagesService {
   }
 
   getGlobalNav() {
-    return this.http.get(`${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/?format=json&show_in_menus=true`).pipe(share()).first();
+    return this.http.get(`${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/?format=json&show_in_menus=true`).first();
   }
 
   getCurrentPage(slug, preview = false) {
     return this.getAll()
       .map(
         res => {
-          this.page = res.items.filter(res => res.meta.slug === slug);
+          this.page = res.items.filter(pages => pages.meta.slug === slug);
         })
-      .switchMap(res => preview ? this.getPage(`${this.page[0].id}/?preview=true`) : this.getPage(`${this.page[0].id}`));
+      .switchMap(page => preview ? this.getPage(`${this.page[0].id}/?preview=true`) : this.getPage(`${this.page[0].id}`));
   }
 
   createPage(route) {

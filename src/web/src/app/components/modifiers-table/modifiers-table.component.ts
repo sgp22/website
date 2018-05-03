@@ -24,7 +24,7 @@ export class ModifiersTableComponent implements OnInit {
   }
 
   private checkModifierTokens() {
-    if(this.modifiers) {
+    if (this.modifiers) {
       this.tokens = this.modifiers.filter(modifier => modifier.value.token === '' || modifier.value.token === null ? false : true);
     }
   }
