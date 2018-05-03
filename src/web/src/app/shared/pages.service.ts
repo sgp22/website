@@ -3,7 +3,7 @@ import { CacheService } from './cache.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-
+import { share } from 'rxjs/operators';
 import { switchMap } from 'rxjs/operators';
 
 interface CacheContent {
@@ -22,15 +22,15 @@ export class PagesService {
 
   getAll() {
     const url = `${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/?&limit=200`;
-    return this.cacheService.get(url, this.http.get(url).first());
+    return this.cacheService.get(url, this.http.get(url).pipe(share()).first());
   }
 
   getPage(id) {
-    return this.http.get(`${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/${id}/`).first();
+    return this.http.get(`${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/${id}/`).pipe(share()).first();
   }
 
   getGlobalNav() {
-    return this.http.get(`${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/?format=json&show_in_menus=true`).first();
+    return this.http.get(`${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/?format=json&show_in_menus=true`).pipe(share()).first();
   }
 
   getCurrentPage(slug, preview = false) {
@@ -39,8 +39,7 @@ export class PagesService {
         res => {
           this.page = res.items.filter(res => res.meta.slug === slug);
         })
-      .switchMap(res => preview ? this.getPage(`${this.page[0].id}/?preview=true`) : this.getPage(`${this.page[0].id}`))
-      .first();
+      .switchMap(res => preview ? this.getPage(`${this.page[0].id}/?preview=true`) : this.getPage(`${this.page[0].id}`));
   }
 
   createPage(route) {
@@ -51,9 +50,9 @@ export class PagesService {
     const previewSlug = slug.split('?');
 
     if (preview) {
-      return this.getCurrentPage(previewSlug[0], true).first();
+      return this.getCurrentPage(previewSlug[0], true);
     } else {
-      return this.getCurrentPage(slug).first();
+      return this.getCurrentPage(slug);
     }
   }
 }
