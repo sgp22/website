@@ -31,7 +31,7 @@ export class BlogLandingPageComponent implements AfterViewInit {
     this.pagesService.createPage(this.router.url)
       .subscribe(
         res => {
-          this.pageContent = res
+          this.pageContent = res;
           this.pageContent.meta.children.children.map((post) => {
             this.pagesService.getPage(post.id)
               .subscribe(

@@ -39,7 +39,7 @@ export class PagesService {
         res => {
           this.page = res.items.filter(res => res.meta.slug === slug);
         })
-      .switchMap(res => preview ? this.getPage(`${this.page[0].id}/?preview=true`) : this.getPage(`${this.page[0].id}`));
+      .switchMap(res => preview ? this.getPage(`${this.page[0].id}/?preview=true`) : this.getPage(`${this.page[0].id}`)).pipe(share()).first();
   }
 
   createPage(route) {

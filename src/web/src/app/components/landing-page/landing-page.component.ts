@@ -1,7 +1,8 @@
 import { Component, AfterViewInit, HostBinding } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { AstVisitor } from '@angular/compiler';
 
 @Component({
   selector: 'app-landing-page',
@@ -18,36 +19,30 @@ export class LandingPageComponent implements AfterViewInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private pagesService: PagesService,
     private loadingBar: LoadingBarService
   ) { }
 
   ngAfterViewInit() {
 
-    this.renderPage();
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.renderPage();
-      }
+    this.route.url.subscribe(urlSegment => {
+      this.loadingBar.start();
+      this.pagesService.createPage(this.router.url)
+        .subscribe(
+          res => {
+            this.pageContent = res;
+          },
+          err => {
+            this.loadingBar.complete();
+            this.notFound = true;
+          },
+          () => {
+            this.loadingBar.complete();
+          }
+        )
     });
 
-  }
-
-  private renderPage() {
-    this.loadingBar.start();
-    this.pagesService.createPage(this.router.url)
-      .subscribe(
-        res => {
-          this.pageContent = res;
-        },
-        err => {
-          this.loadingBar.complete();
-          this.notFound = true;
-        },
-        () => {
-          this.loadingBar.complete();
-        }
-      )
   }
 
 }
