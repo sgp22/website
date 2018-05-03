@@ -67,6 +67,10 @@ export class AppComponent {
           }
         });
 
+        // Google Analytics
+        (<any>window).ga('set', 'page', event.urlAfterRedirects);
+        (<any>window).ga('send', 'pageview');
+
       }
     });
 
