@@ -31,4 +31,4 @@ export S3_STORAGE=<S3_STORAGE>
 
 - Crontab for auto renew.
 - `crontab -e`
-- `0 12 1 * * /usr/local/bin/cert_renew.sh >> /var/log/cronjob.log 2>&1`
+- `0 1 * * 4 /usr/local/bin/cert_renew.sh >> /var/log/cronjob.log 2>&1`
