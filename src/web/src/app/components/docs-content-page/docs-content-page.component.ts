@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -41,6 +41,10 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public loading = true;
   public notFound = false;
   public showWarning = false;
+  @HostBinding('class.ids-row--offset-xl-2')
+  @HostBinding('class.ids-row--offset-sm-3')
+  @HostBinding('class.ids-row--col-sm-9')
+  @HostBinding('class.ids-row--col-xl-10') grid = true;
 
   constructor(
     private router: Router,

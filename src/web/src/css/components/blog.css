@@ -1,8 +1,9 @@
-.blog {
-  & .page-content {
-    border-top: 16px solid #fbe9bf;
-    padding-top: calc(var(--spacing-base) * 8);
-  }
+/* .blog-container {
+  border-top: 16px solid #fbe9bf;
+} */
+
+.blog-posts {
+  min-height: 1500px;
 }
 
 .blog-post {

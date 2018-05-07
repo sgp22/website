@@ -24,7 +24,9 @@ export class ModifiersTableComponent implements OnInit {
   }
 
   private checkModifierTokens() {
-    this.tokens = this.modifiers.filter(modifier => modifier.value.token === '' || modifier.value.token === null ? false : true);
+    if (this.modifiers) {
+      this.tokens = this.modifiers.filter(modifier => modifier.value.token === '' || modifier.value.token === null ? false : true);
+    }
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
