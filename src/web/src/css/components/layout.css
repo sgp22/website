@@ -21,6 +21,10 @@
   }
 }
 
+.page-inner {
+  padding-top: calc(var(--spacing-base) * 6);
+}
+
 /*
  * Page Hero
  */
@@ -78,14 +82,6 @@
 
   & .page-content {
     padding-top: 0;
-  }
-}
-
-.page-content--code {
-  padding: 32px 0;
-
-  @media (--viewport-md) {
-    padding: 24px 0;
   }
 }
 

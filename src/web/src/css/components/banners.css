@@ -12,7 +12,7 @@
   &.ids-banner--top-full-width {
     background-color: #c8e9f4; /* TODO: Change to correct token, originally azure01 */
     border: solid 1px var(--color-primary);
-    margin-top: calc(var(--spacing-base) * 6);
+    margin-bottom: calc(var(--spacing-base) * 6);
     text-align: center;
     width: 100%;
     z-index: 4;

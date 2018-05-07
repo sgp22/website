@@ -1,6 +1,7 @@
 import { Component, Input, AfterViewInit, ElementRef, QueryList, ViewChild, ViewChildren, HostListener } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-home',
@@ -20,17 +21,12 @@ export class HomeComponent implements AfterViewInit {
     private route: ActivatedRoute,
     private pagesService: PagesService,
     private router: Router,
+    private loadingBar: LoadingBarService
   ) {}
 
   ngAfterViewInit() {
 
-    this.route.params.subscribe(params => {
-
-      const url = this.router.routerState.snapshot.url;
-      const preview = url.match(/id=\d{1,10}/g);
-      preview ? this.getPreviewContent(preview) : this.getPageContent();
-
-    });
+    this.renderPage();
 
     if (this.getIEVersion() === 0 && this.getIEVersion() !== 'edge') {
       this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
@@ -40,38 +36,22 @@ export class HomeComponent implements AfterViewInit {
 
   }
 
-  getPreviewContent(preview) {
-
-    const id = `${this.page.id}/?preview=true`;
-
-    this.pagesService
-      .getPage(id)
+  private renderPage() {
+    this.loadingBar.start();
+    this.pagesService.createPage(this.router.url)
       .subscribe(
-        (res: any) => {
+        res => {
           this.pageContent = res;
+        },
+        err => {
+          this.loadingBar.complete();
           this.loading = false;
         },
-        (err) => {
-          console.log(err);
-        }
-    );
-
-  }
-
-  getPageContent() {
-
-    this.pagesService
-      .getPage(this.page.id)
-      .subscribe(
-        (res: any) => {
-          this.pageContent = res;
+        () => {
+          this.loadingBar.complete();
           this.loading = false;
-        },
-        (err) => {
-          console.log(err);
         }
-    );
-
+      );
   }
 
   private animateDots(pattern) {

@@ -28,9 +28,6 @@ import { AppSettings } from './app.settings';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
-import { ComponentLoaderComponent } from './components/component-loader/component-loader.component';
-import { ContainerComponent } from './components/container/container.component';
-import { MainComponent } from './components/main/main.component';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 @NgModule({
@@ -50,9 +47,6 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     TwoColumnComponent,
     TwoColTextImageComponent,
     SafeHtmlPipe,
-    ComponentLoaderComponent,
-    ContainerComponent,
-    MainComponent,
     TokenTableComponent,
     ModifiersTableComponent,
     TypesComponent,
@@ -66,9 +60,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     routing,
     LoadingBarModule.forRoot()
   ],
-  entryComponents: [
-    ContainerComponent
-  ],
+  entryComponents: [],
   providers: [CacheService, AppSettings],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
