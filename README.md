@@ -22,6 +22,13 @@ export S3_STORAGE=<S3_STORAGE>
 
 ## Generate a certificate for prod
 
-- stop nginx first
+- Stop nginx first.
 - `sudo certbot certonly -d design.infor.com`
 - `sudo certbot certonly -d staging.design.infor.com`
+
+- To renew.
+- `sudo certbot renew`
+
+- Crontab for auto renew.
+- `crontab -e`
+- `0 1 * * 4 /usr/local/bin/cert_renew.sh >> /var/log/cronjob.log 2>&1`
