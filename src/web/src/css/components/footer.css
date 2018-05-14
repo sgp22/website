@@ -1,0 +1,13 @@
+.site-footer {
+  background-color: #f0f0f0;
+  padding: calc(var(--spacing-base) * 4);
+}
+
+.site-footer--nav {
+  text-align: right;
+  align-self: flex-end;
+}
+
+.site-footer--newsletter-cta {
+  margin-top: 0;
+}
