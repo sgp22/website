@@ -4,10 +4,18 @@
 }
 
 .site-footer--nav {
-  text-align: right;
   align-self: flex-end;
+  text-align: right;
+
+  & nav {
+    & a {
+      display: inline-block;
+      margin-left: calc(var(--spacing-base) * 2);
+    }
+  }
 }
 
 .site-footer--newsletter-cta {
+  font-weight: var(--font-weight-bold);
   margin-top: 0;
 }
