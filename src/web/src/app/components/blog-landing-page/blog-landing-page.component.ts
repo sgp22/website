@@ -11,6 +11,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 
 export class BlogLandingPageComponent implements AfterViewInit {
   public pageContent: any;
+  public loading = true;
   public notFound = false;
   public posts: any = [];
 
@@ -50,9 +51,11 @@ export class BlogLandingPageComponent implements AfterViewInit {
         err => {
           this.loadingBar.complete();
           this.notFound = true;
+          this.loading = false;
         },
         () => {
           this.loadingBar.complete();
+          this.loading = false;
         }
       );
   }
