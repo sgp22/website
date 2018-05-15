@@ -13,6 +13,7 @@ export class BlogPostPageComponent implements AfterViewInit {
   public pageContent: any;
   public loading = true;
   public notFound = false;
+  @HostBinding('class.blog-post--container') blog = true;
 
   constructor(
     private router: Router,

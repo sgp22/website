@@ -16,6 +16,11 @@
   }
 }
 
+
+.blog-post--container {
+  width: 100%;
+}
+
 .blog-post--header {
   margin-bottom: calc(var(--spacing-base) * 7);
 }

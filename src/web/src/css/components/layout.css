@@ -2,23 +2,15 @@
  * Layout
  */
 
-.site:not(.home, .code-section, .blog) {
-  & .page-content {
-    padding: 32px 0;
-  }
-}
-
 .home,
 .blog {
-  & .page-content {
-    margin: 0;
-    padding-top: 0;
-    width: 100%;
-  }
-
   & .sidebar-nav-comp {
     display: none;
   }
+}
+
+.page-content {
+  min-height: calc(100vh - 208px); /* 100vh - height of footer */
 }
 
 .page-inner {
