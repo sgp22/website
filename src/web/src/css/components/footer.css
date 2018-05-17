@@ -6,16 +6,16 @@
 .site-footer--newsletter-cta {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
-  margin-top: 0;
-  margin-bottom: calc(var(--spacing-base) * 5);
-  text-align: center;
   line-height: 1.6;
+  margin-bottom: calc(var(--spacing-base) * 5);
+  margin-top: 0;
+  text-align: center;
 }
 
 .site-footer--btm {
   align-items: center;
+  background-color: #5c5c5c;
   color: #fff;
-  background-color: #5C5C5C;
   display: flex;
   flex-direction: column;
   padding: calc(var(--spacing-base) * 4) calc(var(--spacing-base) * 3);
