@@ -49,6 +49,10 @@
   margin-bottom: 0;
   margin-top: 0;
 
+  & a {
+    margin-left: var(--spacing-base);
+  }
+
   @media (--viewport-md) {
     margin-left: auto;
   }
