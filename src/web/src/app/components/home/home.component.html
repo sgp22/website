@@ -792,16 +792,4 @@
   </div>
 </section>
 
-<section class="section section--5">
-  <div class="ids-container ids-row">
-    <div class="ids-row--col-sm-10 ids-row--offset-sm-1">
-
-      <div class="ids-row--col-md-6 ids-row--offset-md-3 text-align-center section--top section--5--top">
-        <h2 class="section-headline">FAQ's</h2>
-        <p>Still looking for something?</p>
-        <p>Visit our <a routerLink="/resources/faq">Frequently Asked Questions</a> to learn more about the Infor Design System.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
+<app-footer *ngIf="!loading"></app-footer>

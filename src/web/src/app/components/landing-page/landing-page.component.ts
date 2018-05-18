@@ -11,6 +11,7 @@ import { AstVisitor } from '@angular/compiler';
 })
 export class LandingPageComponent implements AfterViewInit {
   public pageContent: any;
+  public loading = true;
   public notFound = false;
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
@@ -28,6 +29,7 @@ export class LandingPageComponent implements AfterViewInit {
 
     this.route.url.subscribe(urlSegment => {
       this.loadingBar.start();
+      window.scroll(0, 0);
       this.pagesService.createPage(this.router.url)
         .subscribe(
           res => {
@@ -36,9 +38,11 @@ export class LandingPageComponent implements AfterViewInit {
           err => {
             this.loadingBar.complete();
             this.notFound = true;
+            this.loading = false;
           },
           () => {
             this.loadingBar.complete();
+            this.loading = false;
           }
         );
     });

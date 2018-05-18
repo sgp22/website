@@ -1,6 +1,6 @@
 <ng-container>
 
-  <div class="ids-row">
+  <div class="ids-row ids-container page-content">
     <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
 
       <div class="page-inner">
@@ -66,5 +66,7 @@
 
     </div>
   </div>
+
+  <app-footer *ngIf="!loading"></app-footer>
 
 </ng-container>

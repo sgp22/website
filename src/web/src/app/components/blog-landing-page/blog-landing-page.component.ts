@@ -11,13 +11,14 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 
 export class BlogLandingPageComponent implements AfterViewInit {
   public pageContent: any;
+  public loading = true;
   public notFound = false;
   public posts: any = [];
 
   constructor(
     private router: Router,
     private pagesService: PagesService,
-    private loadingBar: LoadingBarService
+    private loadingBar: LoadingBarService,
   ) {}
 
   ngAfterViewInit() {
@@ -28,6 +29,7 @@ export class BlogLandingPageComponent implements AfterViewInit {
 
   private renderPage() {
     this.loadingBar.start();
+    window.scroll(0, 0);
     this.pagesService.createPage(this.router.url)
       .subscribe(
         res => {
@@ -50,9 +52,11 @@ export class BlogLandingPageComponent implements AfterViewInit {
         err => {
           this.loadingBar.complete();
           this.notFound = true;
+          this.loading = false;
         },
         () => {
           this.loadingBar.complete();
+          this.loading = false;
         }
       );
   }

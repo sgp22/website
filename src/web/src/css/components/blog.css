@@ -16,6 +16,10 @@
   }
 }
 
+.blog-post--container {
+  width: 100%;
+}
+
 .blog-post--header {
   margin-bottom: calc(var(--spacing-base) * 7);
 }
@@ -35,19 +39,3 @@
   font-size: var(--font-size-sm);
 }
 
-.newsletter-signup {
-  background-color: #fbe9bf;
-  padding: calc(var(--spacing-base) * 8) 0;
-
-  & h1 {
-    margin-top: 0;
-  }
-
-  & h2 {
-    font-size: var(--font-size-md);
-  }
-}
-
-.newsletter-signup--form-container {
-  margin-top: calc(var(--spacing-base) * 6);
-}
