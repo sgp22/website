@@ -29,9 +29,7 @@ export class BlogLandingPageComponent implements AfterViewInit {
 
   private renderPage() {
     this.loadingBar.start();
-
     window.scroll(0, 0);
-
     this.pagesService.createPage(this.router.url)
       .subscribe(
         res => {

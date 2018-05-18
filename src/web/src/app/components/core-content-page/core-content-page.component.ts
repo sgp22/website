@@ -29,6 +29,7 @@ export class CoreContentPageComponent implements AfterViewInit {
 
     this.route.url.subscribe(urlSegment => {
       this.loadingBar.start();
+      window.scroll(0, 0);
       this.pagesService.createPage(this.router.url)
         .subscribe(
           res => {
