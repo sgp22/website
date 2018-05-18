@@ -22,7 +22,7 @@ export class LandingPageComponent implements AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private loadingBar: LoadingBarService
+    private loadingBar: LoadingBarService,
   ) { }
 
   ngAfterViewInit() {

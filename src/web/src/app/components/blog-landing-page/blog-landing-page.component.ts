@@ -18,7 +18,7 @@ export class BlogLandingPageComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private pagesService: PagesService,
-    private loadingBar: LoadingBarService
+    private loadingBar: LoadingBarService,
   ) {}
 
   ngAfterViewInit() {
@@ -29,6 +29,8 @@ export class BlogLandingPageComponent implements AfterViewInit {
 
   private renderPage() {
     this.loadingBar.start();
+    window.scroll(0,0);
+
     this.pagesService.createPage(this.router.url)
       .subscribe(
         res => {

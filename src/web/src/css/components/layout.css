@@ -10,7 +10,7 @@
 }
 
 .page-content {
-  min-height: calc(100vh - 208px); /* 100vh - height of footer */
+  min-height: calc(100vh - 440px); /* 100vh - height of footer */
 }
 
 .page-inner {
