@@ -19,7 +19,7 @@
   & .side-header__inner {
     align-items: center;
     display: flex;
-    padding: calc(var(--spacing) * 2);
+    padding: var(--spacing);
   }
 
   & a.logo {

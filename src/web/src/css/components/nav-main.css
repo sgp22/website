@@ -10,7 +10,7 @@
     position: relative;
 
     &::after {
-      background-color: var(--black);
+      background-color: var(--color-default-alt);
       bottom: 0;
       content: ' ';
       display: block;
