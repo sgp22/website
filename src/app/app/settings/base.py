@@ -15,6 +15,7 @@ from __future__ import absolute_import, unicode_literals
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -155,11 +156,17 @@ USE_TZ = True
 
 # AWS
 
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', None)
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', 'ids-com-staging')
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', None)
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', None)
+AWS_REGION = os.getenv('AWS_REGION', 'us-east-1')
 AWS_QUERYSTRING_AUTH = os.getenv('AWS_QUERYSTRING_AUTH', 'false').lower() == 'true'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_ES_CLUSTER = os.getenv('AWS_ES_CLUSTER', 'vpc-ids-com-search-flrxfj3pd63bduyhkeubo4x3ea')
+AWS_ES_INDEX = os.getenv('AWS_ES_INDEX', 'dev')
+AWS_ES_HOST = 'http://34.206.224.94:9200'
+
+ES_HOST = ('{0}.{1}.es.amazonaws.com').format(AWS_ES_CLUSTER, AWS_REGION)
 
 
 # Static files (CSS, JavaScript, Images)
@@ -198,8 +205,18 @@ WAGTAIL_SITE_NAME = "app"
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://localhost'
 
-
 WAGTAILAPI_LIMIT_MAX = 200
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch5',
+        'URLS': [AWS_ES_HOST],
+        'INDEX': AWS_ES_INDEX,
+        'TIMEOUT': 5,
+        'OPTIONS': {},
+        'INDEX_SETTINGS': {},
+    }
+}
 
 # Logging.
 

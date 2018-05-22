@@ -4,7 +4,6 @@
 # Default env var state.
 export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-export AWS_STORAGE_BUCKET_NAME="ids-com-staging"
 
 # TODO: On initial deploy, will throw:
 #       PermissionError at /admin/images/1/
