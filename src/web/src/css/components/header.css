@@ -20,6 +20,7 @@
     align-items: center;
     display: flex;
     padding: var(--spacing);
+    padding-left: calc(var(--spacing) * 2);
   }
 
   & a.logo {
