@@ -19,7 +19,8 @@
   & .side-header__inner {
     align-items: center;
     display: flex;
-    padding: calc(var(--spacing) * 2);
+    padding: var(--spacing);
+    padding-left: calc(var(--spacing) * 2);
   }
 
   & a.logo {
