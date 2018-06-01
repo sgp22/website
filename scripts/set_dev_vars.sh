@@ -11,6 +11,7 @@ export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 #       If its set to False
 #       Need to set proper permissions to the volumes.
 export S3_STORAGE=$S3_STORAGE
+export AWS_STORAGE_BUCKET_NAME="ids-com-dev"
 
 export DEBUG="True"
 export ENV=""

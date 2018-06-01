@@ -10,8 +10,6 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from .api import api_router
 
-from search import views as search_views
-
 
 urlpatterns = [
     # Wagtail API.
@@ -23,7 +21,7 @@ urlpatterns = [
     # Wagtail admin, documents, and search.
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-    url(r'^search/$', search_views.search, name='search'),
+    url(r'^search/', include('search.urls')),
 
     # Deployed docs API.
     url(r'^api/docs/', include('docs.urls')),
