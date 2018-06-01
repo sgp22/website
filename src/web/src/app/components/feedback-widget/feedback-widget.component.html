@@ -1,0 +1,25 @@
+
+<div class="feedback-widget">
+  <fieldset class="ids-form-group">
+    <legend>Was this helpful?</legend>
+    <div class="ids-form-radio">
+      <input #thumbsUp type="radio" name="thumb" id="thumbs-up" value="thumbs-up" (change)="submitThumb(thumbsUp.value)">
+      <label for="thumbs-up">Thumbs Up</label>
+    </div>
+    <div class="ids-form-radio">
+      <input #thumbsDown type="radio" name="thumb" id="thumbs-down" value="thumbs-down" (change)="submitThumb(thumbsDown.value)">
+      <label for="thumbs-down">Thumbs Down</label>
+    </div>
+  </fieldset>
+
+  <div class="feedback-widget--additional">
+    <p>Thanks! Any additional comments or suggestions?</p>
+    <form #feedbackForm (submit)="submitFeedback($event, typeComment.value)">
+      <div class="ids-form-group">
+        <textarea #typeComment id="type-comment" class="ids-form-control" placeholder="Type comment here" rows="3" aria-label="Type comment here"></textarea>
+        <p id="helpBlock" class="ids-info-block">1500 characters remaining</p>
+      </div>
+      <button type="submit" class="ids-btn ids-btn--primary">Submit</button>
+    </form>
+  </div>
+</div>
