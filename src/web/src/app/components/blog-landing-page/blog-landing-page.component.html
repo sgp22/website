@@ -16,8 +16,8 @@
 
       <div class="blog-post--content">
         <ng-container *ngFor="let content of post.content">
-          <div *ngIf="content.type === 'richText'" [innerHTML]="content?.value"></div>
-          <div *ngIf="content.type === 'markdown'" [innerHTML]="content?.value"></div>
+          <div *ngIf="content.type === 'richText'" [innerHTML]="content?.value.substring(0, 170).concat('...')"></div>
+          <div *ngIf="content.type === 'markdown'" [innerHTML]="content?.value.substring(0, 170).concat('...')"></div>
           <ng-container *ngIf="content.type === 'table'">
             <table>
               <ng-container *ngIf="content.value.first_row_is_table_header; then thBlock; else tdBlock;"></ng-container>
