@@ -164,9 +164,10 @@ AWS_QUERYSTRING_AUTH = os.getenv('AWS_QUERYSTRING_AUTH', 'false').lower() == 'tr
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_ES_CLUSTER = os.getenv('AWS_ES_CLUSTER', 'vpc-ids-com-search-flrxfj3pd63bduyhkeubo4x3ea')
 AWS_ES_INDEX = os.getenv('AWS_ES_INDEX', 'dev')
-AWS_ES_HOST = 'http://34.206.224.94:9200'
+ES_HOST = os.getenv('ES_HOST', 'elasticsearch')
 
-ES_HOST = ('{0}.{1}.es.amazonaws.com').format(AWS_ES_CLUSTER, AWS_REGION)
+# Secure or not secure?
+ES_HOST_URL = "http://{0}:9200".format(ES_HOST)
 
 
 # Static files (CSS, JavaScript, Images)
@@ -210,7 +211,7 @@ WAGTAILAPI_LIMIT_MAX = 200
 WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.search.backends.elasticsearch5',
-        'URLS': [AWS_ES_HOST],
+        'URLS': [ES_HOST_URL],
         'INDEX': AWS_ES_INDEX,
         'TIMEOUT': 5,
         'OPTIONS': {},

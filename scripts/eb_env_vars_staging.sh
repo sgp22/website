@@ -7,4 +7,5 @@ eb setenv AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID" \
     DJANGO_SETTINGS_MODULE="app.settings.staging" \
     RDS_TRUE="False" \
     S3_STORAGE="True" \
-    DOCS_API_KEY="$DOCS_API_KEY"
+    DOCS_API_KEY="$DOCS_API_KEY" \
+    ES_HOST="search.design.infor.com"

@@ -17,6 +17,9 @@ If you want to connect to S3 for read and write make sure the environment is don
 export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
 export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
 export S3_STORAGE=<S3_STORAGE>
+
+# Ror local development its "elasticsearch".
+export ES_HOST=elasticsearch
 ```
 
 ## Generate a certificate for prod
