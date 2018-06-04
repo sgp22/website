@@ -6,6 +6,8 @@ import { Component, AfterViewInit } from '@angular/core';
 })
 export class RoleWidgetComponent implements AfterViewInit {
   public rolesOpen = false;
+  public fabStateActive = false;
+  public fabIcon;
 
   constructor() { }
 
@@ -13,6 +15,7 @@ export class RoleWidgetComponent implements AfterViewInit {
 
   toggleRoles() {
     this.rolesOpen = !this.rolesOpen;
+    this.fabStateActive = !this.fabStateActive;
   }
 
 }

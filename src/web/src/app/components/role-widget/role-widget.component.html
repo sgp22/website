@@ -40,6 +40,17 @@
     </form>
     </div>
   </div>
-  <button class="ids-btn ids-btn--primary ids-btn--toggle-roles" (click)="toggleRoles()">?</button>
+  <button class="ids-btn ids-btn--primary ids-btn--toggle-roles" (click)="toggleRoles()" title="Icon button">
+    <ng-container *ngIf="!fabStateActive">
+      <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+        <use xlink:href="#icon_information"></use>
+      </svg>
+    </ng-container>
+    <ng-container *ngIf="fabStateActive">
+      <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+        <use xlink:href="#icon_close"></use>
+      </svg>
+    </ng-container>
+  </button>
 </div>
 
