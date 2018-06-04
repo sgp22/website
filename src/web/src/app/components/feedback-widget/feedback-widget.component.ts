@@ -7,6 +7,8 @@ import { Component, AfterViewInit } from '@angular/core';
 export class FeedbackWidgetComponent implements AfterViewInit {
   public maxLength = 1500;
   public charactersLeft = this.maxLength;
+  public showAdditional = false;
+  public commentSubmitted = false;
 
   constructor() {}
 
@@ -19,11 +21,14 @@ export class FeedbackWidgetComponent implements AfterViewInit {
     if (value === 'thumbs-down') {
       (<any>window).ga('send', 'event', 'feedback', 'clickthumbsdown', 'wasthishelpful');
     }
+    this.showAdditional = true;
   }
 
   submitFeedback(e, comment: String) {
     e.preventDefault();
     (<any>window).ga('send', 'event', 'feedback', 'providedfeedback - thumbsup', comment);
+    this.showAdditional = false;
+    this.commentSubmitted = true;
   }
 
   characterCounter(comment) {
