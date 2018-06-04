@@ -32,7 +32,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   }
 
   characterCounter(comment) {
-    if(this.maxLength >= comment.length) {
+    if (this.maxLength >= comment.length) {
       this.charactersLeft = (this.maxLength) - (comment.length);
     }
   }

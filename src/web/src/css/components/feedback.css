@@ -21,11 +21,11 @@
     margin-right: calc(var(--spacing-base) * 2);
     overflow: hidden;
     text-indent: 100%;
-    width: 18px;
     white-space: nowrap;
+    width: 18px;
 
     &:hover {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
