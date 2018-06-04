@@ -16,8 +16,8 @@
     <p>Thanks! Any additional comments or suggestions?</p>
     <form #feedbackForm (submit)="submitFeedback($event, typeComment.value)">
       <div class="ids-form-group">
-        <textarea #typeComment id="type-comment" class="ids-form-control" placeholder="Type comment here" rows="3" aria-label="Type comment here"></textarea>
-        <p id="helpBlock" class="ids-info-block">1500 characters remaining</p>
+        <textarea #typeComment id="type-comment" class="ids-form-control" placeholder="Type comment here" rows="3" aria-label="Type comment here" (keyup)="characterCounter(typeComment.value)"  maxlength="1500"></textarea>
+        <p id="helpBlock" class="ids-info-block">{{charactersLeft}} characters remaining</p>
       </div>
       <button type="submit" class="ids-btn ids-btn--primary">Submit</button>
     </form>

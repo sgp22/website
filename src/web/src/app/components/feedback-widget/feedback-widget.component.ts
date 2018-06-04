@@ -5,6 +5,9 @@ import { Component, AfterViewInit } from '@angular/core';
   templateUrl: './feedback-widget.component.html',
 })
 export class FeedbackWidgetComponent implements AfterViewInit {
+  public maxLength = 1500;
+  public charactersLeft = this.maxLength;
+
   constructor() {}
 
   ngAfterViewInit() {}
@@ -21,5 +24,11 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   submitFeedback(e, comment: String) {
     e.preventDefault();
     (<any>window).ga('send', 'event', 'feedback', 'providedfeedback - thumbsup', comment);
+  }
+
+  characterCounter(comment) {
+    if(this.maxLength >= comment.length) {
+      this.charactersLeft = (this.maxLength) - (comment.length);
+    }
   }
 }
