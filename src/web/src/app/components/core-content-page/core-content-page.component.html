@@ -63,8 +63,12 @@
 
 
     </div>
+
+    <role-widget #roleWidget *ngIf="!loading"></role-widget>
+
   </div>
 
-  <app-footer *ngIf="!loading"></app-footer>
+
+  <app-footer #footer *ngIf="!loading"></app-footer>
 
 </ng-container>

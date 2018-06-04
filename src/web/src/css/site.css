@@ -19,6 +19,8 @@
 @import './components/layout';
 @import './components/blog.css';
 @import './components/footer.css';
+@import './components/popover.css';
+@import './components/roles.css';
 
 /* Granular styles */
 @import './components/tables';

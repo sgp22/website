@@ -1,0 +1,45 @@
+<div class="role-widget">
+  <div [hidden]="!rolesOpen" class="roles popover">
+    <div class="popover--inner">
+    <p>Help us serve you better!</p>
+    <form>
+      <fieldset class="ids-form-group">
+        <legend>What is your primary role?</legend>
+        <div class="ids-form-radio">
+          <input type="radio" name="role" id="role-designer" value="designer">
+          <label for="role-designer">
+            Designer
+          </label>
+        </div>
+        <div class="ids-form-radio">
+          <input type="radio" name="role" id="role-developer" value="developer">
+          <label for="role-developer">
+            Developer
+          </label>
+        </div>
+        <div class="ids-form-radio">
+          <input type="radio" name="role" id="role-business-analyst" value="business-analyst">
+          <label for="role-business-analyst">
+            Business Analyst
+          </label>
+        </div>
+        <div class="ids-form-radio">
+          <input type="radio" name="role" id="role-product-manager" value="product-manager">
+          <label for="role-product-manager">
+            Product Manager
+          </label>
+        </div>
+        <div class="ids-form-radio">
+          <input type="radio" name="role" id="role-other" value="other">
+          <label for="role-other">
+            Other
+          </label>
+        </div>
+      </fieldset>
+      <button type="submit" class="ids-btn ids-btn--primary">Submit</button>
+    </form>
+    </div>
+  </div>
+  <button class="ids-btn ids-btn--primary ids-btn--toggle-roles" (click)="toggleRoles()">?</button>
+</div>
+
