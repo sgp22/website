@@ -44,7 +44,6 @@ export class CoreContentPageComponent implements AfterViewInit {
         () => {
           this.loadingBar.complete();
           this.loading = false;
-          console.log(this.footer);
         }
       );
     });

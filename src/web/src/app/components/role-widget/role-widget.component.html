@@ -1,36 +1,44 @@
-<div class="role-widget">
-  <div [hidden]="!rolesOpen" class="roles popover">
+<ng-container *ngIf="!removeRoleThankyou">
+  <div *ngIf="roleSubmitted" class="question-widget--thank-you">
+    <p>Thank You!</p>
+    <p>Sign up for our newsletter to recieve news and updates!</p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!roleSubmitted">
+
+  <div [hidden]="!rolesOpen" class="roles-widget popover">
     <div class="popover--inner">
     <p>Help us serve you better!</p>
-    <form>
+    <form #form (submit)="submitRole($event)">
       <fieldset class="ids-form-group">
         <legend>What is your primary role?</legend>
         <div class="ids-form-radio">
-          <input type="radio" name="role" id="role-designer" value="designer">
+          <input #roleDesigner (change)="selectRole(roleDesigner.value)" type="radio" name="role" id="role-designer" value="designer">
           <label for="role-designer">
             Designer
           </label>
         </div>
         <div class="ids-form-radio">
-          <input type="radio" name="role" id="role-developer" value="developer">
+          <input #roleDeveloper (change)="selectRole(roleDeveloper.value)" type="radio" name="role" id="role-developer" value="developer">
           <label for="role-developer">
             Developer
           </label>
         </div>
         <div class="ids-form-radio">
-          <input type="radio" name="role" id="role-business-analyst" value="business-analyst">
+          <input #roleBizAnalyst (change)="selectRole(roleBizAnalyst.value)" type="radio" name="role" id="role-business-analyst" value="business-analyst">
           <label for="role-business-analyst">
             Business Analyst
           </label>
         </div>
         <div class="ids-form-radio">
-          <input type="radio" name="role" id="role-product-manager" value="product-manager">
+          <input #roleProdManager (change)="selectRole(roleProdManager.value)" type="radio" name="role" id="role-product-manager" value="product-manager">
           <label for="role-product-manager">
             Product Manager
           </label>
         </div>
         <div class="ids-form-radio">
-          <input type="radio" name="role" id="role-other" value="other">
+          <input #roleOther (change)="selectRole(roleOther.value)" type="radio" name="role" id="role-other" value="other">
           <label for="role-other">
             Other
           </label>
@@ -40,6 +48,7 @@
     </form>
     </div>
   </div>
+
   <button class="ids-btn ids-btn--primary ids-btn--toggle-roles" (click)="toggleRoles()" title="Icon button">
     <ng-container *ngIf="!fabStateActive">
       <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
@@ -52,5 +61,5 @@
       </svg>
     </ng-container>
   </button>
-</div>
 
+</ng-container>

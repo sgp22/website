@@ -20,7 +20,7 @@
 @import './components/blog.css';
 @import './components/footer.css';
 @import './components/popover.css';
-@import './components/roles.css';
+@import './components/questions.css';
 
 /* Granular styles */
 @import './components/tables';
