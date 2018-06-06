@@ -25,7 +25,7 @@ export class RoleWidgetComponent implements AfterViewInit {
   }
 
   selectRole(role: String) {
-    this.selectedRole = role
+    this.selectedRole = role;
   }
 
   submitRole(e) {
