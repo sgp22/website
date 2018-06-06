@@ -64,8 +64,11 @@
       <feedback-widget *ngIf="!loading"></feedback-widget>
 
     </div>
+
+    <question-widget *ngIf="!loading"></question-widget>
+
   </div>
 
-  <app-footer *ngIf="!loading"></app-footer>
+  <app-footer #footer *ngIf="!loading"></app-footer>
 
 </ng-container>
