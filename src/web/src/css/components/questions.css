@@ -1,10 +1,10 @@
 .question-widget {
-  display: none;
   bottom: calc(var(--spacing-base) * 3);
+  display: none;
   position: fixed;
   right: calc(var(--spacing-base) * 3);
 
-  @media(--viewport-lg) {
+  @media (--viewport-lg) {
     display: block;
   }
 
