@@ -36,6 +36,13 @@ export class RoleWidgetComponent implements AfterViewInit {
     setTimeout(() => {
       this.removeRoleThankyou = true;
       localStorage.setItem('removeRoleThankyou', JSON.stringify(this.removeRoleThankyou));
-    }, 1000);
+    }, 3000);
+  }
+
+  scrollToFooter() {
+    const footer = document.querySelector('.site-footer');
+    if (footer) {
+      footer.scrollIntoView();
+    }
   }
 }
