@@ -58,7 +58,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     BlogPostPageComponent,
     FooterComponent,
     QuestionWidgetComponent,
-    RoleWidgetComponent
+    RoleWidgetComponent,
     FeedbackWidgetComponent
   ],
   imports: [
