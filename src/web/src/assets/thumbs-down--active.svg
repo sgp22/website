@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/extended-set/thumbs-down</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="6.-Designer-Workspace" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Annotated-1440px---XL-Copy-6" transform="translate(-560.000000, -587.000000)" fill="#E84F4F">
+            <g id="icon/extended-set/thumbs-down-red" transform="translate(560.000000, 587.000000)">
+                <path d="M3,0 C3.55,0 4,0.45 4,1 L4,12 C4,12.55 3.55,13 3,13 L1,13 C0.45,13 0,12.55 0,12 L0,1 C0,0.45 0.45,0 1,0 L3,0 Z M12,12 L12.984,16 C13.192,17.459 11.391,18.313 10.394,17.227 L6.175,11.566 C6.065,11.405 6,11.21 6,11 L6,1 C6,0.448 6.448,0 7,0 L14,0 C14.442,0 14.831,0.29 14.958,0.713 L17.241,9.433 C17.62,10.715 16.66,12 15.323,12 L12,12 Z" id="thumbs-down"></path>
+            </g>
+        </g>
+    </g>
+</svg>
