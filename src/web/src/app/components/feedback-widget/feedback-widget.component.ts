@@ -1,32 +1,48 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'feedback-widget',
   templateUrl: './feedback-widget.component.html',
 })
 export class FeedbackWidgetComponent implements AfterViewInit {
+  @ViewChild('thumbsDown') thumbsDown: ElementRef;
+  @ViewChild('thumbsUp') thumbsUp: ElementRef;
+  public thumbValue;
   public maxLength = 1500;
   public charactersLeft = this.maxLength;
   public showAdditional = false;
   public commentSubmitted = false;
+  public url;
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.route.url.subscribe(urlSegment => {
+      this.thumbsDown.nativeElement.checked = false;
+      this.thumbsUp.nativeElement.checked = false;
+      this.showAdditional = false;
+      this.url = this.router.routerState.snapshot.url;
+    });
+  }
 
   submitThumb(value: String) {
-    if (value === 'thumbs-up') {
-      (<any>window).ga('send', 'event', 'feedback', 'clickthumbsup', 'wasthishelpful');
+    this.thumbValue = value;
+    if (this.thumbValue === 'thumbs-up') {
+      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
     }
-    if (value === 'thumbs-down') {
-      (<any>window).ga('send', 'event', 'feedback', 'clickthumbsdown', 'wasthishelpful');
+    if (this.thumbValue === 'thumbs-down') {
+      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsdown', this.url);
     }
     this.showAdditional = true;
   }
 
   submitFeedback(e, comment: String) {
     e.preventDefault();
-    (<any>window).ga('send', 'event', 'feedback', 'providedfeedback - thumbsup', comment);
+    (<any>window).ga('send', 'event', 'feedback-providedfeedback', `providedfeedback - ${this.thumbValue}`, comment);
     this.showAdditional = false;
     this.commentSubmitted = true;
   }
