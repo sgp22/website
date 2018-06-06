@@ -17,7 +17,7 @@ export class QuestionWidgetComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.route.url.subscribe(urlSegment => {
       this.widgetHovered = false;
-    })
+    });
   }
 
   captureHover(event) {
