@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 export class FeedbackWidgetComponent implements AfterViewInit {
   @ViewChild('thumbsDown') thumbsDown: ElementRef;
   @ViewChild('thumbsUp') thumbsUp: ElementRef;
+  public widgetHovered = false;
   public thumbValue;
   public maxLength = 1500;
   public charactersLeft = this.maxLength;
@@ -25,8 +26,14 @@ export class FeedbackWidgetComponent implements AfterViewInit {
       this.thumbsDown.nativeElement.checked = false;
       this.thumbsUp.nativeElement.checked = false;
       this.showAdditional = false;
+      this.widgetHovered = false;
       this.url = this.router.routerState.snapshot.url;
     });
+  }
+
+  captureHover(e) {
+    (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'uniquehover', this.url);
+    this.widgetHovered = true;
   }
 
   submitThumb(value: String) {
@@ -42,7 +49,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   submitFeedback(e, comment: String) {
     e.preventDefault();
-    (<any>window).ga('send', 'event', 'feedback-providedfeedback', `providedfeedback - ${this.thumbValue}`, comment);
+    (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, comment);
     this.showAdditional = false;
     this.commentSubmitted = true;
   }

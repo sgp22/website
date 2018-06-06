@@ -1,5 +1,5 @@
 
-<div class="feedback-widget">
+<div (mouseenter)="!widgetHovered ? captureHover($event) : null" class="feedback-widget">
   <fieldset class="ids-form-group ids-form-group--feedback">
     <div class="ids-form-group--feedback-container">
       <legend>Was this helpful?</legend>
