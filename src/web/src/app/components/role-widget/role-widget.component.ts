@@ -35,7 +35,7 @@ export class RoleWidgetComponent implements AfterViewInit {
     localStorage.setItem('roleSubmitted', JSON.stringify(this.roleSubmitted));
     setTimeout(() => {
       this.removeRoleThankyou = true;
-      localStorage.setItem('removeThankyou', JSON.stringify(this.removeRoleThankyou));
+      localStorage.setItem('removeRoleThankyou', JSON.stringify(this.removeRoleThankyou));
     }, 1000);
   }
 }
