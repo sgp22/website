@@ -11,6 +11,7 @@ volumes:
     driver: local
     name: design_infor_com_postgres_data
   elasticsearch-data:
+    name: design_infor_com_elasticsearch_data
     driver: local
 
 services:
@@ -30,7 +31,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.9
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     ports:

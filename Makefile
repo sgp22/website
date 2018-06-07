@@ -37,6 +37,7 @@ down_clean : down
 	-docker volume rm design_infor_com_static_data
 	-docker volume rm design_infor_com_media_data
 	-docker volume rm design_infor_com_postgres_data
+	-docker volume rm design_infor_com_elasticsearch_data
 
 restart :
 	docker-compose restart

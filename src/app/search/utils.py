@@ -3,8 +3,9 @@ import os
 
 def form_es_query_body(es_query_body, fields, filters=False):
     """Structure the elastic search query body."""
-    for field in fields:
-        es_query_body['query']['multi_match']['fields'].append(field)
+    if fields:
+        for field in fields:
+            es_query_body['query']['multi_match']['fields'].append(field)
 
     if filters:
         filters_list = filters.split(',')
@@ -17,6 +18,8 @@ def form_es_query_body(es_query_body, fields, filters=False):
             }
 
             es_query_body['filter']['bool']['must'].append(filter_obj)
+
+    print(es_query_body)
 
 
 def get_elastic_body(filters=False):

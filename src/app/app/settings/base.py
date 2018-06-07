@@ -163,7 +163,7 @@ AWS_REGION = os.getenv('AWS_REGION', 'us-east-1')
 AWS_QUERYSTRING_AUTH = os.getenv('AWS_QUERYSTRING_AUTH', 'false').lower() == 'true'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_ES_CLUSTER = os.getenv('AWS_ES_CLUSTER', 'vpc-ids-com-search-flrxfj3pd63bduyhkeubo4x3ea')
-AWS_ES_INDEX = os.getenv('AWS_ES_INDEX', 'dev')
+ES_INDEX_PREFIX = os.getenv('ES_INDEX_PREFIX', 'dev')
 ES_HOST = os.getenv('ES_HOST', 'elasticsearch')
 
 # Secure or not secure?
@@ -212,7 +212,7 @@ WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.search.backends.elasticsearch5',
         'URLS': [ES_HOST_URL],
-        'INDEX': AWS_ES_INDEX,
+        'INDEX': ES_INDEX_PREFIX,
         'TIMEOUT': 5,
         'OPTIONS': {},
         'INDEX_SETTINGS': {},
