@@ -46,6 +46,12 @@ export class CoreContentPageComponent implements AfterViewInit {
           this.loading = false;
         }
       );
+
+      (<any>window).ga('set', {
+        'dimension2': `${urlSegment[2].path}`,
+        'dimension3': `${urlSegment[1].path}`,
+        'dimension4': 'design'
+      });
     });
 
   }
