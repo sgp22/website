@@ -72,7 +72,7 @@ export class AppComponent {
         (<any>window).ga('send', 'pageview');
 
         const clientID = this.getClientID();
-        (<any>window).gtag('set', { 'user_id': `${clientID}` });
+        (<any>window).ga('set', { 'user_id': `${clientID}` });
         (<any>window).ga('set', { 'dimension7': `${clientID}`});
 
       }
