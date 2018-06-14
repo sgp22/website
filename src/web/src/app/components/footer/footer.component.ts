@@ -9,6 +9,8 @@ export class FooterComponent implements AfterViewInit {
 
   constructor() {}
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+
+  }
 
 }

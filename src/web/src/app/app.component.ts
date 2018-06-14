@@ -71,6 +71,10 @@ export class AppComponent {
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
         (<any>window).ga('send', 'pageview');
 
+        const clientID = this.getClientID();
+        (<any>window).gtag('set', { 'user_id': `${clientID}` });
+        (<any>window).ga('set', { 'dimension7': `${clientID}`});
+
       }
     });
 
@@ -95,6 +99,19 @@ export class AppComponent {
       const title = txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       return title.replace('Ids', 'IDS');
     });
+  }
+
+  public getClientID() {
+    try {
+      const trackers = (<any>window).ga.getAll();
+      let i, len;
+      for (i = 0, len = trackers.length; i < len; i += 1) {
+        if (trackers[i].get('trackingId') === 'UA-40840710-5') {
+          return trackers[i].get('clientId');
+        }
+      }
+    } catch (e) { }
+    return 'false';
   }
 
 }
