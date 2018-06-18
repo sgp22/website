@@ -11,6 +11,7 @@
     "lint": "npm run lint:ng && npm run lint:css",
     "lint:css": "./node_modules/stylelint-cli/bin/stylelint src/css/components/*.css; exit 0;",
     "lint:ng": "npx ng lint",
+    "lint:md": "npx markdownlint ./README.md && npx markdownlint docs/**/*.md",
     "test": "npx karma start ./karma.conf.js",
     "test:once": "npx karma start ./karma.conf.js --single-run",
     "start": "npm run build:dev"
@@ -64,6 +65,7 @@
     "karma-jasmine": "^1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-mocha-reporter": "2.2.5",
+    "markdownlint-cli": "^0.10.0",
     "postcss": "6.0.14",
     "postcss-at-rules-variables": "^0.1.4",
     "postcss-cssnext": "^3.1.0",
