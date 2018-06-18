@@ -84,7 +84,7 @@ This task backs up the prod database to AWS S3.
 1. Enter in the parameters from below:
 
     ```text
-    DB_HOST : 34.196.44.70
+    DB_HOST : {IP}
     DB_USER : {USER}
     DB_PASS : {PASSWORD}
     DB_NAME : {DB_NAME}
@@ -101,7 +101,7 @@ If the backup task is successful, you'll need the filename it generates in the n
 ### Restore Prod to Stage
 
 ```text
-DB_HOST : 35.168.252.1
+DB_HOST : {IP}
 DB_USER : {USER}
 DB_PASS : {PASSWORD}
 DB_NAME : {DB_NAME}
