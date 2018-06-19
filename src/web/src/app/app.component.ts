@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { PagesService } from './shared/pages.service';
 declare let pendo;
@@ -67,16 +67,19 @@ export class AppComponent {
           }
         });
 
-        // Google Analytics
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
-        (<any>window).ga('send', 'pageview');
 
         const clientID = this.getClientID();
-        (<any>window).ga('set', { 'user_id': `${clientID}` });
-        (<any>window).ga('set', { 'dimension7': `${clientID}`});
+        if (clientID !== 'false') {
+          (<any>window).ga('set', { 'user_id': `${clientID}` });
+          (<any>window).ga('set', { 'dimension7': `${clientID}` });
+        }
 
       }
-    });
+
+    }
+
+  );
 
     this.pagesService.getGlobalNav()
       .subscribe(
