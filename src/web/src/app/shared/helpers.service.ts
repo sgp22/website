@@ -18,5 +18,4 @@ export class HelpersService {
   public toggleAccordion(i, panels) {
     panels[i] = !panels[i];
   }
-
 }

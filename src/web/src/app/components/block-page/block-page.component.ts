@@ -51,6 +51,7 @@ export class BlockPageComponent implements AfterViewInit {
         'dimension3': `${urlSegment[2].path}`,
         'dimension4': 'design'
       });
+      (<any>window).ga('send', 'pageview');
     });
 
   }

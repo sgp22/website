@@ -52,8 +52,22 @@ export class CoreContentPageComponent implements AfterViewInit {
         'dimension3': `${urlSegment[1].path}`,
         'dimension4': 'design'
       });
+      (<any>window).ga('send', 'pageview');
     });
 
+  }
+
+  public getClientID() {
+    try {
+      const trackers = (<any>window).ga.getAll();
+      let i, len;
+      for (i = 0, len = trackers.length; i < len; i += 1) {
+        if (trackers[i].get('trackingId') === 'UA-40840710-5') {
+          return trackers[i].get('clientId');
+        }
+      }
+    } catch (e) { }
+    return 'false';
   }
 
 }
