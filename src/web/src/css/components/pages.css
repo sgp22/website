@@ -620,6 +620,22 @@
   margin-bottom: calc(var(--spacing-base) * 6);
 }
 
+.two-column--desktop {
+  display: none;
+
+  @media (--viewport-md) {
+    display: block;
+  }
+}
+
+.two-column--mobile {
+  display: block;
+
+  @media (--viewport-md) {
+    display: none;
+  }
+}
+
 .two-column {
   & .faux-columns {
     display: flex;
