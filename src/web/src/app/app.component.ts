@@ -67,6 +67,7 @@ export class AppComponent {
           }
         });
 
+        // Google analytics
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
 
         const clientID = this.getClientID();
