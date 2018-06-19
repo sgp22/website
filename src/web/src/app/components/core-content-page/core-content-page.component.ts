@@ -48,9 +48,9 @@ export class CoreContentPageComponent implements AfterViewInit {
       );
 
       (<any>window).ga('set', {
-        'dimension2': `${urlSegment[2].path}`,
+        'dimension2': (urlSegment[2] ? `${urlSegment[2].path}` : 'n/a'),
         'dimension3': `${urlSegment[1].path}`,
-        'dimension4': 'design'
+        'dimension4': `${urlSegment[0].path}`
       });
       (<any>window).ga('send', 'pageview');
     });
