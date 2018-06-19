@@ -12,7 +12,7 @@
   <div class="two-column--desktop">
     <div class="ids-row">
 
-      <div [ngClass]="( (!hasSidebar ? 'ids-row--col-sm-5' : 'ids-row--col-sm-5') )">
+      <div class="ids-row--col-sm-5">
 
         <div class="two-column--content" [ngStyle]="col1TextAlign && {'text-align': ''+ col1TextAlign +'' }">
           <img class="two-column--hero-image" *ngIf="col1HeroImage" src="{{col1HeroImage}}" alt="{{col1HeroImageTitle}}">
@@ -22,7 +22,7 @@
 
       </div>
 
-      <div [ngClass]="( (!hasSidebar ? 'ids-row--col-sm-5 ids-row--offset-sm-2' : 'ids-row--col-sm-5 ids-row--offset-sm-2') )">
+      <div class="ids-row--col-sm-5 ids-row--offset-sm-2">
 
         <div class="two-column--content" [ngStyle]="col2TextAlign && {'text-align': ''+ col2TextAlign +'' }">
           <img class="two-column--hero-image" *ngIf="col2HeroImage" src="{{col2HeroImage}}" alt="{{col2HeroImageTitle}}">
@@ -69,7 +69,7 @@
 
   <div class="two-column--mobile">
     <div class="ids-row">
-      <div [ngClass]="( (!hasSidebar ? 'ids-row--col-sm-12' : 'ids-row--col-sm-12') )">
+      <div class="ids-row--col-sm-12">
 
         <div class="two-column--content" [ngStyle]="col1TextAlign && {'text-align': ''+ col1TextAlign +'' }">
           <img class="two-column--hero-image" *ngIf="col1HeroImage" src="{{col1HeroImage}}" alt="{{col1HeroImageTitle}}">
@@ -92,7 +92,7 @@
 
       </div>
 
-      <div [ngClass]="( (!hasSidebar ? 'ids-row--col-sm-12' : 'ids-row--col-sm-12') )">
+      <div class="ids-row--col-sm-12">
 
         <div class="two-column--content" [ngStyle]="col2TextAlign && {'text-align': ''+ col2TextAlign +'' }">
           <img class="two-column--hero-image" *ngIf="col2HeroImage" src="{{col2HeroImage}}" alt="{{col2HeroImageTitle}}">
