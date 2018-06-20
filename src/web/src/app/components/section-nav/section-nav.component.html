@@ -1,0 +1,7 @@
+<nav class="section-nav">
+  <ul>
+    <li *ngFor="let navItem of sectionNavItems">
+      <a (click)="scrollToSection(navItem.id)">{{navItem.label}}</a>
+    </li>
+  </ul>
+</nav>
