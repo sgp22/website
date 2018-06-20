@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SectionNavComponent implements AfterViewInit {
   public sectionNavItems = [];
+  public fragment;
 
   constructor(
     private route: ActivatedRoute
@@ -24,10 +25,21 @@ export class SectionNavComponent implements AfterViewInit {
         });
       }, 1000);
     });
+
   }
 
-  scrollToSection(id) {
-    console.log(id);
+  scrollToSection() {
+    this.route.fragment.subscribe(f => {
+      const section = document.querySelector("#" + f)
+      if (section) {
+        section.scrollIntoView(true);
+        const scrolledY = window.scrollY;
+        if (scrolledY) {
+          window.scroll(0, scrolledY - 90);
+        }
+      }
+    });
+
   }
 
 }

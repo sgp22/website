@@ -1,0 +1,5 @@
+.section-nav {
+  position: fixed;
+  right: calc(var(--spacing-base) * 2);
+  top: 56px;
+}
