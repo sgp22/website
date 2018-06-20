@@ -125,7 +125,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         });
 
       (<any>window).ga('set', {
-        'dimension2': `${segment[3].path}`,
+        'dimension2': (segment[3] ? segment[3].path : 'n/a'),
         'dimension4': `${segment[1].path}`,
         'dimension5': `${segment[2].path}`,
         'dimension6': (segment[2].path === 'latest' ? 'yes' : 'no'),
