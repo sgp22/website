@@ -2,9 +2,6 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.1.
 
-
-
-
 ## Development server
 
 Run `npm start` for a webpack dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -21,7 +18,6 @@ Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github
 
 Run `npm e2e:dev` or `npm e2e:prod` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `npm start` (locahost:4200) or `npm build` (localhost) respectively.
-
 
 ## For Angluar CLI help
 

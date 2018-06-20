@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -26,6 +27,9 @@ import { BlogLandingPageComponent } from './components/blog-landing-page/blog-la
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 import { AppSettings } from './app.settings';
 import { FooterComponent } from './components/footer/footer.component';
+import { QuestionWidgetComponent } from './components/question-widget/question-widget.component';
+import { RoleWidgetComponent } from './components/role-widget/role-widget.component';
+import { FeedbackWidgetComponent } from './components/feedback-widget/feedback-widget.component';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
@@ -53,10 +57,14 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     TypesComponent,
     BlogLandingPageComponent,
     BlogPostPageComponent,
-    FooterComponent
+    FooterComponent,
+    QuestionWidgetComponent,
+    RoleWidgetComponent,
+    FeedbackWidgetComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     InlineSVGModule,
     routing,

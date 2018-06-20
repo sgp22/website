@@ -55,7 +55,12 @@
 
       </div>
 
+      <feedback-widget *ngIf="!loading"></feedback-widget>
+
     </div>
+
+    <question-widget *ngIf="!loading"></question-widget>
+
   </div>
 
   <app-footer *ngIf="!loading"></app-footer>

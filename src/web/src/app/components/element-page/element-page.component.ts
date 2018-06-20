@@ -45,6 +45,12 @@ export class ElementPageComponent implements AfterViewInit {
             this.loading = false;
           }
         );
+        (<any>window).ga('set', {
+          'dimension2': `${urlSegment[3].path}`,
+          'dimension3': `${urlSegment[2].path}`,
+          'dimension4': 'design'
+        });
+        (<any>window).ga('send', 'pageview');
     });
 
   }

@@ -14,6 +14,7 @@ export class BlogLandingPageComponent implements AfterViewInit {
   public loading = true;
   public notFound = false;
   public posts: any = [];
+  @HostBinding('class.blog-landing-page') landing = true;
 
   constructor(
     private router: Router,

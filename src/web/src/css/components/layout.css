@@ -77,6 +77,10 @@
   }
 }
 
+.example {
+  margin-bottom: calc(var(--spacing-base) * 2);
+}
+
 .types--mobile {
   display: flex;
   flex-direction: column;

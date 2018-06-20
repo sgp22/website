@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { PagesService } from './shared/pages.service';
 declare let pendo;
@@ -67,12 +67,20 @@ export class AppComponent {
           }
         });
 
-        // Google Analytics
+        // Google analytics
         (<any>window).ga('set', 'page', event.urlAfterRedirects);
-        (<any>window).ga('send', 'pageview');
+
+        const clientID = this.getClientID();
+        if (clientID !== 'false') {
+          (<any>window).ga('set', { 'user_id': `${clientID}` });
+          (<any>window).ga('set', { 'dimension7': `${clientID}` });
+        }
 
       }
-    });
+
+    }
+
+  );
 
     this.pagesService.getGlobalNav()
       .subscribe(
@@ -95,6 +103,19 @@ export class AppComponent {
       const title = txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       return title.replace('Ids', 'IDS');
     });
+  }
+
+  public getClientID() {
+    try {
+      const trackers = (<any>window).ga.getAll();
+      let i, len;
+      for (i = 0, len = trackers.length; i < len; i += 1) {
+        if (trackers[i].get('trackingId') === 'UA-40840710-5') {
+          return trackers[i].get('clientId');
+        }
+      }
+    } catch (e) { }
+    return 'false';
   }
 
 }

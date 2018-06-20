@@ -54,7 +54,11 @@
   margin-top: 0;
 
   & a {
-    margin-left: var(--spacing-base);
+    margin: var(--spacing-base);
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   @media (--viewport-md) {

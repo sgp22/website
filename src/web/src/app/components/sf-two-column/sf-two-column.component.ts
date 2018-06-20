@@ -27,6 +27,7 @@ export class TwoColumnComponent implements OnInit {
   @Input() col2InvertTextColor: string;
   @Input() col2TextAlign: string;
   @Input() sidebar: boolean;
+  @Input() index: number;
   public hasSidebar: boolean;
   public col1CtaIsExternalUrl: boolean;
   public col2CtaIsExternalUrl: boolean;
