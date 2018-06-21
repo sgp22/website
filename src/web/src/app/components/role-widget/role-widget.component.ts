@@ -1,5 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import {
   trigger,
   state,

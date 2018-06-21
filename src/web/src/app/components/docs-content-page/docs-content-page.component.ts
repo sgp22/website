@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
@@ -11,7 +11,6 @@ import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
 import * as semver from 'semver';
 
-import { Token } from '../../shared/token';
 import { TokenService } from '../../shared/token.service';
 
 import { DocService } from '../../shared/doc.service';
@@ -58,7 +57,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     private docService: DocService,
     private libraryService: LibraryService,
     private sitemapService: SitemapService,
-    private loadingBar: LoadingBarService
+    private loadingBar: LoadingBarService,
   ) {}
 
   ngOnInit() {

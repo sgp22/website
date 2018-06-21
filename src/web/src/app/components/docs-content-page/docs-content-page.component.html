@@ -49,8 +49,10 @@
 
   </div>
 
-  <question-widget *ngIf="!loading"></question-widget>
-
 </div>
+
+<toc *ngIf="!loading" [loading]="loading"></toc>
+
+<question-widget *ngIf="!loading"></question-widget>
 
 <app-footer></app-footer>
