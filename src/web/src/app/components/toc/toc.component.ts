@@ -1,17 +1,17 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-interface NavItems {
+interface TocItems {
   label: string;
   id: string;
 }
 
 @Component({
-  selector: 'section-nav',
-  templateUrl: './section-nav.component.html'
+  selector: 'toc',
+  templateUrl: './toc.component.html'
 })
-export class SectionNavComponent implements AfterViewInit {
-  public sectionNavItems: NavItems[] = [];
+export class TocComponent implements AfterViewInit {
+  public tocItems: TocItems[] = [];
   public landingPage;
   @Input() loading;
 
@@ -24,7 +24,7 @@ export class SectionNavComponent implements AfterViewInit {
 
     this.route.url.subscribe(urlSegment => {
 
-      this.sectionNavItems = [];
+      this.tocItems = [];
 
       const lastSegment = urlSegment.slice(-1)[0].path;
       if (lastSegment === 'latest' || lastSegment === 'index') {
@@ -37,7 +37,7 @@ export class SectionNavComponent implements AfterViewInit {
         setTimeout(() => {
           const titles = [].slice.call(document.querySelectorAll('h2'));
           titles.map((item) => {
-            this.sectionNavItems.push({
+            this.tocItems.push({
               label: item.innerText,
               id: item.id
             });

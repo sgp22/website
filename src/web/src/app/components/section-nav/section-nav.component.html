@@ -1,7 +1,0 @@
-<nav *ngIf="sectionNavItems.length >= 3 && !landingPage" class="section-nav">
-  <ul class="ids-list ids-list--hover">
-    <li *ngFor="let navItem of sectionNavItems">
-      <a class="ids-list--item" [routerLink]="['.']" fragment="{{navItem.id}}" (click)="clickToSection()">{{navItem.label}}</a>
-    </li>
-  </ul>
-</nav>

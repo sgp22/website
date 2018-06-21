@@ -30,7 +30,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { QuestionWidgetComponent } from './components/question-widget/question-widget.component';
 import { RoleWidgetComponent } from './components/role-widget/role-widget.component';
 import { FeedbackWidgetComponent } from './components/feedback-widget/feedback-widget.component';
-import { SectionNavComponent } from './components/section-nav/section-nav.component';
+import { TocComponent } from './components/toc/toc.component';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
@@ -62,7 +62,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     QuestionWidgetComponent,
     RoleWidgetComponent,
     FeedbackWidgetComponent,
-    SectionNavComponent
+    TocComponent
   ],
   imports: [
     BrowserModule,
