@@ -51,7 +51,7 @@
 
 </div>
 
-<section-nav></section-nav>
+<section-nav *ngIf="!loading" [loading]="loading"></section-nav>
 
 <question-widget *ngIf="!loading"></question-widget>
 

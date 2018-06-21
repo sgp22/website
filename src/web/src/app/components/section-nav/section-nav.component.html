@@ -1,7 +1,7 @@
 <nav class="section-nav">
-  <ul>
+  <ul class="ids-list ids-list--hover">
     <li *ngFor="let navItem of sectionNavItems">
-      <a [routerLink]="" fragment="{{navItem.id}}" (click)="scrollToSection()">{{navItem.label}}</a>
+      <a class="ids-list--item" [routerLink]="['.']" fragment="{{navItem.id}}" (click)="clickToScroll()">{{navItem.label}}</a>
     </li>
   </ul>
 </nav>
