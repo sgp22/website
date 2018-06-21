@@ -210,7 +210,7 @@ WAGTAILAPI_LIMIT_MAX = 200
 
 WAGTAILSEARCH_BACKENDS = {
     'default': {
-        'BACKEND': 'wagtail.search.backends.elasticsearch5',
+        'BACKEND': 'wagtail.search.backends.elasticsearch6',
         'URLS': [ES_HOST_URL],
         'INDEX': ES_INDEX_PREFIX,
         'TIMEOUT': 5,

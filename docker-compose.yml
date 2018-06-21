@@ -32,6 +32,7 @@ services:
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+    container_name: 'docssite_elasticsearch'
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     ports:
@@ -47,6 +48,7 @@ services:
 
   kibana:
     image: kibana
+    container_name: 'docssite_kibana'
     ports:
       - "5601:5601"
     depends_on:
