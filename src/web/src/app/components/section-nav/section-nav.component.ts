@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-interface navItems {
+interface NavItems {
   label: string;
   id: string;
 }
@@ -11,7 +11,7 @@ interface navItems {
   templateUrl: './section-nav.component.html'
 })
 export class SectionNavComponent implements AfterViewInit {
-  public sectionNavItems: navItems[] = [];
+  public sectionNavItems: NavItems[] = [];
   public landingPage;
   @Input() loading;
 
@@ -28,7 +28,7 @@ export class SectionNavComponent implements AfterViewInit {
 
       const lastSegment = urlSegment.slice(-1)[0].path;
       if (lastSegment === 'latest' || lastSegment === 'index') {
-        this.landingPage = true
+        this.landingPage = true;
       } else {
         this.landingPage = false;
       }
