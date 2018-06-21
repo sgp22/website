@@ -7,7 +7,7 @@
   right: calc(var(--spacing-base) * 2);
   top: calc(var(--spacing-base) * 6 + 56px);
 
-  @media (--viewport-lg) {
+  @media (--viewport-xl) {
     display: block;
   }
 }

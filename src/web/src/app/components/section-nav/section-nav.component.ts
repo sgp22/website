@@ -27,10 +27,10 @@ export class SectionNavComponent implements AfterViewInit {
             this.sectionNavItems.push({
               label: item.innerText,
               id: item.id
-            })
+            });
           });
           this.pageLoadScroll();
-        });
+        }, 200);
       }
 
     });
@@ -49,7 +49,7 @@ export class SectionNavComponent implements AfterViewInit {
   }
 
   scrollToSection(fragment) {
-    const section = document.querySelector("#" + fragment)
+    const section = document.querySelector('#' + fragment);
     if (section) {
       section.scrollIntoView(true);
       const scrolledY = window.scrollY;
