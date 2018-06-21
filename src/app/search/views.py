@@ -24,6 +24,11 @@ from wagtail.core.models import Page
 from wagtail.images.models import Image
 from wagtail.search.models import Query
 
+from .serializers import (
+    SearchPageSerializer,
+    SearchImageSerializer,
+)
+
 
 ES_INDEX_PREFIX = settings.ES_INDEX_PREFIX
 ES_HOST = settings.ES_HOST
@@ -32,7 +37,7 @@ ES_HOST = settings.ES_HOST
 def search(request):
     search_query = request.GET.get('query', None)
     page = request.GET.get('page', 1)
-    search_results = search_wagtail_pages(search_query)
+    search_results = search_wagtail(search_query)
     paginator = Paginator(search_results, 10)
 
     try:
@@ -48,36 +53,43 @@ def search(request):
     })
 
 
-def search_wagtail_pages(search_query):
-    search_results = []
+def search_wagtail(search_query, search_for='pages', fields=[]):
+    """
+    Searches wagtail image and page data, combines the results.
+
+    Inspect the result object in search_results like so dir(result)
+    to populate the serializers with the fields that are needed
+    for the frontend.
+    """
+    results = []
 
     if search_query:
-        search_results = Page.objects.search(search_query)
-        query = Query.get(search_query)
+        if search_for == 'pages':
+            search_results = Page.objects.live().search(
+                search_query,
+                fields=fields).annotate_score('_score')
 
-        query.add_hit()
+            for result in search_results:
+                serializer = SearchPageSerializer(result)
+                results.append(serializer.data)
+        
+        if search_for == 'images':
+            search_results = Image.objects.search(search_query).annotate_score('_score')
 
-        search_results = query.id
+            for result in search_results:
+                serializer = SearchImageSerializer(result)
+                results.append(serializer.data)
+
     else:
-        search_results = Page.objects.none()
+        if search_for == 'pages':
+            search_results = Page.objects.none()
 
-    return search_results
+        if search_for == 'images':
+            search_results = Image.objects.none()
 
+        print(search_results)
 
-def search_wagtail_images(search_query):
-    search_results = []
-
-    if search_query:
-        search_results = Image.objects.search(search_query)
-        query = Query.get(search_query)
-
-        query.add_hit()
-
-        search_results = query.id
-    else:
-        search_results = Image.objects.none()
-
-    return search_results
+    return results
 
 
 def search_docs(search_query, search_fields):
@@ -125,47 +137,58 @@ def search_docs(search_query, search_fields):
 class ElasticSearchView(APIView):
     """
     General search request.
-    ex. ?search_query=Components&search_for=pages,images
+    ex. ?search_query=Components&search_in=pages,images,docs
     """
     def get(self, request, **kwargs):
         search_results = []
-        search_query = request.GET.get('search_query').lower()
-        search_for = request.GET.get('search_for', None)
+        search_query = request.GET.get('search_query', None)
+        search_in = request.GET.get('search_in', None)
 
         # Used only for wagtail.
-        search_fields = request.GET.get('search_fields', 'title')
+        search_fields = request.GET.get('search_fields', [])
 
         return_data = {
             'results': {}
         }
 
-        if search_for and search_query:
-            search_for = search_for.split(',')
+        if search_in and search_query:
+            search_in = search_in.split(',')
+            search_query = search_query.lower()
         else:
             return Response(
                 status=status.HTTP_404_NOT_FOUND)
 
-        for search_for_item in search_for:
-            if search_for_item == 'pages':
-                search_results = search_wagtail_pages(search_query)
+        for search_in_item in search_in:
+            if search_in_item == 'pages':
+                search_results = search_wagtail(
+                    search_query,
+                    fields=search_fields.split(','))
+
+                return_data['results'][search_in_item] = {
+                    'results': search_results
+                }
             
-            if search_for_item == 'images':
-                search_results = search_wagtail_images(search_query)
+            if search_in_item == 'images':
+                search_results = search_wagtail(search_query, search_for='images')
+
+                return_data['results'][search_in_item] = {
+                    'results': search_results
+                }
 
             try:
-                if search_for_item == 'docs':
+                if search_in_item == 'docs':
                     search_results = search_docs(
                         search_query,
                         search_fields.split(','))
             except RequestError:
-                return_data['results'][search_for_item] = {
+                return_data['results'][search_in_item] = {
                     'results': search_results,
                     'error': 1,
                     'error_message': 'Request error!',
                 }
 
             except NotFoundError:
-                return_data['results'][search_for_item] = {
+                return_data['results'][search_in_item] = {
                     'results': search_results,
                     'error': 1,
                     'error_message': 'Index not found!',
@@ -173,10 +196,6 @@ class ElasticSearchView(APIView):
 
             except ValueError:
                 pass
-
-            return_data['results'][search_for_item] = {
-                'results': search_results
-            }
 
             continue
 
