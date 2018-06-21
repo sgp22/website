@@ -29,7 +29,7 @@ export class SectionNavComponent implements AfterViewInit {
               id: item.id
             });
           });
-          this.pageLoadScroll();
+          this.pageLoadToSection();
         }, 200);
       }
 
@@ -37,14 +37,14 @@ export class SectionNavComponent implements AfterViewInit {
 
   }
 
-  pageLoadScroll() {
+  pageLoadToSection() {
     const tree = this.router.parseUrl(this.router.url);
     if (tree.fragment) {
       this.scrollToSection(tree.fragment);
     }
   }
 
-  clickToScroll() {
+  clickToSection() {
     this.route.fragment.subscribe(fragment => this.scrollToSection(fragment));
   }
 
