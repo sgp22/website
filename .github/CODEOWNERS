@@ -2,3 +2,11 @@
 
 # Default owners for the repo:
 *       @jmacaluso711 @clepore
+
+# Code owners for the docs directory
+.ebextensions/ @corpulent
+deploy-aws/    @corpulent
+deploy-pool/   @corpulent
+docker/        @corpulent
+src/app/config @corpulent
+docker-*.yml   @corpulent

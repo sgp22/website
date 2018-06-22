@@ -56,18 +56,4 @@ export class CoreContentPageComponent implements AfterViewInit {
     });
 
   }
-
-  public getClientID() {
-    try {
-      const trackers = (<any>window).ga.getAll();
-      let i, len;
-      for (i = 0, len = trackers.length; i < len; i += 1) {
-        if (trackers[i].get('trackingId') === 'UA-40840710-5') {
-          return trackers[i].get('clientId');
-        }
-      }
-    } catch (e) { }
-    return 'false';
-  }
-
 }
