@@ -89,6 +89,9 @@ tail_backend_python :
 dev_backend :
 	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/manage.py runserver 0.0.0.0:9002
 
+index_backend :
+	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/manage.py update_index
+
 build_backend :
 	cd docker/docs-backend && \
 		make build
