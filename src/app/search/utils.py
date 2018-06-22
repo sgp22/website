@@ -1,33 +1,133 @@
 import os
+import hashlib
+import copy
+
+from elasticsearch import (
+    Elasticsearch,
+    NotFoundError,
+    RequestError
+)
 
 
-def form_es_query_body(es_query_body, fields, filters=False):
-    """Structure the elastic search query body."""
-    if fields:
-        for field in fields:
-            es_query_body['query']['multi_match']['fields'].append(field)
+DOCS_QUERY_BODY = {
+    'size': 50,
+    'query': {
+        'multi_match': {
+            'query': '',
+            'fields': []
+        }
+    }
+}
 
-    if filters:
-        filters_list = filters.split(',')
 
-        for filters_item in filters_list:
-            filter_obj = {
-                'term': {
-                    'filters': filters_item,
+INDEX_STRUCTURE = {
+    "settings" : {
+        "number_of_shards": 1,
+        "number_of_replicas": 1
+    },
+    'mappings': {
+        'doc': {
+            'properties': {
+                'content': {
+                    'type': 'text'
+                },
+                'path': {
+                    'type': 'text'
+                },
+                "created":  {
+                    "type":   "date", 
+                    "format": "strict_date_optional_time||epoch_millis"
                 }
             }
+        }
+    }
+}
 
-            es_query_body['filter']['bool']['must'].append(filter_obj)
 
-    print(es_query_body)
+class WrongFieldsTypeError(Exception):
+    def __init__(self, expression, message):
+        self.expression = expression
+        self.message = message
 
 
-def get_elastic_body(filters=False):
-    body = {}
-    body['filters'] = []
+def form_es_query_body(es_query_body, fields=[]):
+    """Structure the elasticsearch query body."""
+    body = es_query_body
 
-    if filters:
-        for filter_item in filters:
-            body['filters'].append(filter_item)
+    if fields and type(fields) is list:
+        for field in fields:
+            body['query']['multi_match']['fields'].append(field)
 
     return body
+
+
+class DocsIndexer:
+    def __init__(self, es_host, es_index, es_index_prefix):
+        self.es_host = es_host
+        self.es_index = es_index
+        self.es_index_prefix = es_index_prefix
+        self.es_index_name = "{0}__{1}".format(es_index_prefix, es_index)
+        self.es = Elasticsearch(es_host)
+
+    def _create_index(self):
+        """Create ES index."""
+        self.es.indices.create(
+            index=self.es_index_name,
+            body=INDEX_STRUCTURE)
+
+    def _generate_hash(self, string):
+        """MD5 hash."""
+        string = string.encode('utf-8')
+        hash_object = hashlib.md5(string)
+
+        return hash_object.hexdigest()
+
+    def search(self, raw_query, search_fields=[]):
+        # Format and structure the
+        # elastic search query further.
+        search_results = {
+            'ids': [],
+            'results': []
+        }
+        es_query_body = copy.deepcopy(DOCS_QUERY_BODY)
+        es_query_body['query']['multi_match']['query'] = raw_query
+
+        if search_fields and type(search_fields) is not list:
+            raise WrongFieldsTypeError(
+                'wrong type',
+                'field search_fields is of type {},'
+                'should be list'.format(type(search_fields)))
+
+        for field in search_fields:
+            es_query_body['query']['multi_match']['fields'].append(field)
+
+        if not self.es.indices.exists(self.es_index_name):
+            raise NotFoundError(
+                "{} index does not exist!".format(self.es_index_name))
+
+        res = self.es.search(
+            index=self.es_index_name,
+            body=es_query_body
+        )
+
+        for hit in res['hits']['hits']:
+            try:
+                pk = hit['_id']
+                search_results['ids'].append(pk)
+                search_results['results'].append(hit)
+            except ValueError:
+                pass
+
+        return search_results
+
+    def index_doc(self, doc):
+        _id = self._generate_hash(doc['path'])
+
+        if not self.es.indices.exists(index=self.es_index_name):
+            self._create_index()
+
+        res = self.es.index(
+            id=_id,
+            index=self.es_index_name,
+            doc_type='doc',
+            body=doc)

@@ -8,6 +8,7 @@ import boto3
 import markdown
 import itertools
 import semver
+import hashlib
 
 
 from django.core.files.storage import default_storage
@@ -18,9 +19,15 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework import status
 
+from search.utils import DocsIndexer
+
 from . import matching_s3_objects
 
 logger = logging.getLogger('debug')
+
+
+ES_INDEX_PREFIX = settings.ES_INDEX_PREFIX
+ES_HOST = settings.ES_HOST
 
 
 class UniqueDict(dict):
@@ -65,6 +72,15 @@ def post(request):
                 root_path,
                 zipped_file.lower()))
             content = ContentFile(zipf.read(zipped_file))
+            read_contents_bytes = content.read()
+            read_contents_str = read_contents_bytes.decode('utf-8')
+            indexer = DocsIndexer(ES_HOST, 'docs', ES_INDEX_PREFIX)
+            doc = {
+                "content": read_contents_str,
+                "path": path
+            }
+
+            indexer.index_doc(doc)
             default_storage.save(path, content)
     else:
         return Response(
