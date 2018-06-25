@@ -1,1 +1,6 @@
 <h1>Search</h1>
+
+  <div class="ids-form-group">
+    <label for="searchInput">Email address</label>
+    <input #searchInput (keyup.enter)="onEnter(searchInput.value)" type="text" class="ids-form-control" id="searchInput" name="searchInput" placeholder="Search">
+  </div>

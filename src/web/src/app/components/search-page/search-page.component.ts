@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './search-page.component.html'
 })
 export class SearchPageComponent implements AfterViewInit {
-  @Input() loading;
+  public searchQuery = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -14,5 +14,9 @@ export class SearchPageComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {}
+
+  onEnter(value: string) {
+    console.log(value);
+  }
 }
 
