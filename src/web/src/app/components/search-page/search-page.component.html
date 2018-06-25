@@ -4,3 +4,27 @@
     <label for="searchInput">Email address</label>
     <input #searchInput (keyup.enter)="onEnter(searchInput.value)" type="text" class="ids-form-control" id="searchInput" name="searchInput" placeholder="Search">
   </div>
+
+
+  <ul>
+    <ng-container *ngIf="docsResults">
+      <li *ngFor="let result of docResults">
+        <p><small>Docs:</small></p>
+        <small>Title:</small> {{result.title}} / <small>Score:</small> {{result._score}} / <small>pk:</small> {{result.pk}}
+      </li>
+    </ng-container>
+    <ng-container *ngIf="imagesResults">
+      <li *ngFor="let result of imagesResults">
+        <p><small>Images:</small></p>
+        <small>Title:</small> {{result.title}} / <small>Score:</small> {{result._score}} / <small>pk:</small> {{result.pk}}
+      </li>
+    </ng-container>
+    <ng-container *ngIf="pagesResults">
+      <li *ngFor="let result of pagesResults">
+        <p><small>Pages:</small></p>
+        <a [routerLink]="['', result.meta.slug]">
+          {{result.title}}
+        </a>
+      </li>
+    </ng-container>
+  </ul>

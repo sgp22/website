@@ -2,7 +2,6 @@ import { Component, AfterViewInit, HostBinding, ViewChild, ElementRef } from '@a
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-core-content-page',

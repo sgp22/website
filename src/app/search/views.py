@@ -72,7 +72,7 @@ def search_wagtail(search_query, search_for='pages', fields=[]):
             for result in search_results:
                 serializer = SearchPageSerializer(result)
                 results.append(serializer.data)
-        
+
         if search_for == 'images':
             search_results = Image.objects.search(search_query).annotate_score('_score')
 
@@ -137,7 +137,7 @@ class ElasticSearchView(APIView):
                 return_data['results'][search_in_item] = {
                     'results': search_results
                 }
-            
+
             if search_in_item == 'images':
                 search_results = search_wagtail(search_query, search_for='images')
 
