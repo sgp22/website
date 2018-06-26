@@ -4,4 +4,265 @@
  * Copyright (c) 2016 Rob Flaherty (@robflaherty)
  * Licensed under the MIT license
  */
-!function (e, n) { "function" == typeof define && define.amd ? define([], n) : "object" == typeof module && module.exports ? module.exports = n() : e.riveted = n() }(this, function () { return function () { var e, n, t, o, i, a = !1, r = !1, u = !1, c = 0, l = new Date, d = null, f = null; function s(e, n) { var t, o, i, a = null, r = 0, u = function () { r = new Date, a = null, i = e.apply(t, o) }; return function () { var c = new Date; r || (r = c); var l = n - (c - r); return t = this, o = arguments, l <= 0 ? (clearTimeout(a), a = null, r = c, i = e.apply(t, o)) : a || (a = setTimeout(u, l)), i } } function v(e, n, t) { e.addEventListener ? e.addEventListener(n, t, !1) : e.attachEvent ? e.attachEvent("on" + n, t) : e["on" + n] = t } function m() { clearTimeout(f), r = !0, clearInterval(d) } function p() { (document.hidden || document.webkitHidden) && m() } function y() { (c += 1) > 0 && c % t == 0 && e(c) } function g() { var e; u || (a || (e = new Date, a = !0, n(e - l), d = setInterval(y, 1e3)), r && (r = !1, clearInterval(d), d = setInterval(y, 1e3)), clearTimeout(f), f = setTimeout(m, 1e3 * o + 100)) } return n = function (e) { ga("send", "event", "timeevent", t, t, { metric1: "reportInterval", nonInteraction: !0 }) }, e = function (e) { ga("send", "event", "timeevent", t, t, { metric1: "reportInterval", nonInteraction: !0 }) }, { init: function (a) { a = a || {}, t = parseInt(a.reportInterval, 10) || 5, o = parseInt(a.idleTimeout, 10) || 30, i = a.gaGlobal || "ga", "function" == typeof window[i] && !0, "undefined" != typeof _gaq && "function" == typeof _gaq.push && !0, "undefined" != typeof dataLayer && "function" == typeof dataLayer.push && !0, "gaTracker" in a && "string" == typeof a.gaTracker ? a.gaTracker + ".send" : "send", "function" == typeof a.eventHandler && (e = a.eventHandler), "function" == typeof a.userTimingHandler && (n = a.userTimingHandler), !("nonInteraction" in a) || !1 !== a.nonInteraction && "false" !== a.nonInteraction, v(document, "keydown", g), v(document, "click", g), v(window, "mousemove", s(g, 500)), v(window, "scroll", s(g, 500)), v(document, "visibilitychange", p), v(document, "webkitvisibilitychange", p) }, trigger: g, setIdle: m, on: function () { u = !1 }, off: function () { m(), u = !0 }, reset: function () { l = new Date, c = 0, a = !1, r = !1, clearInterval(d), clearTimeout(f) } } }() });
+
+/* Universal module definition */
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define([], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS
+    module.exports = factory();
+  } else {
+    // Browser global
+    root.riveted = factory();
+  }
+}(this, function () {
+
+/* Riveted */
+
+var riveted = (function() {
+
+  var started = false,
+    stopped = false,
+    turnedOff = false,
+    clockTime = 0,
+    startTime = new Date(),
+    clockTimer = null,
+    idleTimer = null,
+    sendEvent,
+    sendUserTiming,
+    reportInterval,
+    idleTimeout,
+    nonInteraction,
+    universalGA,
+    classicGA,
+    universalSendCommand,
+    googleTagManager,
+    gaGlobal;
+
+    function init(options) {
+
+      // Set up options and defaults
+      options = options || {};
+      reportInterval = parseInt(options.reportInterval, 10) || 5;
+      idleTimeout = parseInt(options.idleTimeout, 10) || 30;
+      gaGlobal = options.gaGlobal || 'ga';
+
+      /*
+       * Determine which version of GA is being used
+       * "ga", "_gaq", and "dataLayer" are the possible globals
+       */
+
+      if (typeof window[gaGlobal] === "function") {
+        universalGA = true;
+      }
+
+      if (typeof _gaq !== "undefined" && typeof _gaq.push === "function") {
+        classicGA = true;
+      }
+
+      if (typeof dataLayer !== "undefined" && typeof dataLayer.push === "function") {
+        googleTagManager = true;
+      }
+
+      if ('gaTracker' in options && typeof options.gaTracker === 'string') {
+        universalSendCommand = options.gaTracker + '.send';
+      } else {
+        universalSendCommand = 'send';
+      }
+
+      if (typeof options.eventHandler == 'function') {
+        sendEvent = options.eventHandler;
+      }
+
+      if (typeof options.userTimingHandler == 'function') {
+        sendUserTiming = options.userTimingHandler;
+      }
+
+      if ('nonInteraction' in options && (options.nonInteraction === false || options.nonInteraction === 'false')) {
+        nonInteraction = false;
+      } else {
+        nonInteraction = true;
+      }
+
+      // Basic activity event listeners
+      addListener(document, 'keydown', trigger);
+      addListener(document, 'click', trigger);
+      addListener(window, 'mousemove', throttle(trigger, 500));
+      addListener(window, 'scroll', throttle(trigger, 500));
+
+      // Page visibility listeners
+      addListener(document, 'visibilitychange', visibilityChange);
+      addListener(document, 'webkitvisibilitychange', visibilityChange);
+    }
+
+
+    /*
+     * Throttle function borrowed from:
+     * Underscore.js 1.5.2
+     * http://underscorejs.org
+     * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+     * Underscore may be freely distributed under the MIT license.
+     */
+
+    function throttle(func, wait) {
+      var context, args, result;
+      var timeout = null;
+      var previous = 0;
+      var later = function() {
+        previous = new Date;
+        timeout = null;
+        result = func.apply(context, args);
+      };
+      return function() {
+        var now = new Date;
+        if (!previous) previous = now;
+        var remaining = wait - (now - previous);
+        context = this;
+        args = arguments;
+        if (remaining <= 0) {
+          clearTimeout(timeout);
+          timeout = null;
+          previous = now;
+          result = func.apply(context, args);
+        } else if (!timeout) {
+          timeout = setTimeout(later, remaining);
+        }
+        return result;
+      };
+    }
+
+    /*
+     * Cross-browser event listening
+     */
+
+    function addListener(element, eventName, handler) {
+      if (element.addEventListener) {
+        element.addEventListener(eventName, handler, false);
+      }
+      else if (element.attachEvent) {
+        element.attachEvent('on' + eventName, handler);
+      }
+      else {
+        element['on' + eventName] = handler;
+      }
+    }
+
+  /*
+     * Function for logging User Timing event on initial interaction
+     */
+  sendUserTiming = function (timingValue) {
+
+    ga('send', 'event', 'timeevent', 15, 15 , {metric1: 15, nonInteraction:true} );
+
+  };
+
+  /*
+   * Function for logging ping events
+   */
+
+  sendEvent = function (time) {
+
+    ga('send', 'event', 'timeevent', 15, 15 , {metric1: 15, nonInteraction:true} );
+
+  };
+
+    function setIdle() {
+      clearTimeout(idleTimer);
+      stopClock();
+    }
+
+    function visibilityChange() {
+      if (document.hidden || document.webkitHidden) {
+        setIdle();
+      }
+    }
+
+    function clock() {
+      clockTime += 1;
+      if (clockTime > 0 && (clockTime % reportInterval === 0)) {
+        sendEvent(clockTime);
+      }
+
+    }
+
+    function stopClock() {
+      stopped = true;
+      clearInterval(clockTimer);
+    }
+
+    function turnOff() {
+      setIdle();
+      turnedOff = true;
+    }
+
+    function turnOn() {
+      turnedOff = false;
+    }
+
+    function restartClock() {
+      stopped = false;
+      clearInterval(clockTimer);
+      clockTimer = setInterval(clock, 1000);
+    }
+
+    function startRiveted() {
+
+      // Calculate seconds from start to first interaction
+      var currentTime = new Date();
+      var diff = currentTime - startTime;
+
+      // Set global
+      started = true;
+
+      // Send User Timing Event
+      sendUserTiming(diff);
+
+      // Start clock
+      clockTimer = setInterval(clock, 1000);
+
+    }
+
+    function resetRiveted() {
+      startTime = new Date();
+      clockTime = 0;
+      started = false;
+      stopped = false;
+      clearInterval(clockTimer);
+      clearTimeout(idleTimer);
+    }
+
+    function trigger() {
+
+      if (turnedOff) {
+        return;
+      }
+
+      if (!started) {
+        startRiveted();
+      }
+
+      if (stopped) {
+        restartClock();
+      }
+
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(setIdle, idleTimeout * 1000 + 100);
+    }
+
+    return {
+      init: init,
+      trigger: trigger,
+      setIdle: setIdle,
+      on: turnOn,
+      off: turnOff,
+      reset: resetRiveted
+    };
+
+  })();
+
+  return riveted;
+
+}));
