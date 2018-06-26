@@ -84,8 +84,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'search',
-    redirectTo: 'site/search',
-    pathMatch: 'full'
+    redirectTo: 'site/search'
   },
   {
     path: '**',
