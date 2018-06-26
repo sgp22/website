@@ -24,18 +24,19 @@ export class SearchPageComponent implements AfterViewInit {
   ngAfterViewInit() {}
 
   onEnter(value: string) {
+    if (value === '') {
+      this.docsResults = [];
+      this.imagesResults = [];
+      this.pagesResults = [];
+      return;
+    }
     this.searchService.getSearch(value)
       .subscribe(
         res => {
           const { docs, images, pages } = res.results;
           this.docsResults = docs.results.results;
           this.imagesResults = images.results;
-          pages.results.map(result => {
-            const url = `${this.appSettings.domain}/api/${this.appSettings.domainVersion}/pages/${result.pk}`;
-            this.cacheService.get(url, this.http.get(url).first()).subscribe(res => {
-              this.pagesResults.push(res);
-            });
-          });
+          this.pagesResults = pages.results;
         },
         err => {
           console.error(err);
