@@ -48,6 +48,9 @@ export class RoleWidgetComponent implements AfterViewInit {
 
   submitRole(e) {
     e.preventDefault();
+    if (this.selectedRole === undefined) {
+      return;
+    }
     (<any>window).ga('send', 'event', 'feedback', 'submittedrole' , 'whatisyourrole', {'dimension8': this.selectedRole});
     this.roleSubmitted = true;
     this.removeRoleThankyou = false;
