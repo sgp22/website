@@ -72,7 +72,7 @@ export class AppComponent {
 
         const clientID = this.getClientID();
         if (clientID !== 'false') {
-          (<any>window).ga('set', { 'user_id': `${clientID}` });
+          (<any>window).ga('set', { 'userId': `${clientID}` });
           (<any>window).ga('set', { 'dimension7': `${clientID}` });
         }
 
