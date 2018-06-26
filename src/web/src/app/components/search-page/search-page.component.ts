@@ -1,8 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
-import { AppSettings } from '../../app.settings';
-import { CacheService } from '../../shared/cache.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'search-page',
@@ -15,10 +12,7 @@ export class SearchPageComponent implements AfterViewInit {
   public pagesResults: any = [];
 
   constructor(
-    private appSettings: AppSettings,
     private searchService: SearchService,
-    private http: HttpClient,
-    private cacheService: CacheService
   ) { }
 
   ngAfterViewInit() {}
