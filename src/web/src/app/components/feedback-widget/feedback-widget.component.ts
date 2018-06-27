@@ -49,6 +49,9 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   submitFeedback(e, comment: String) {
     e.preventDefault();
+    if (comment === '') {
+      return;
+    }
     (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, comment);
     this.showAdditional = false;
     this.commentSubmitted = true;
