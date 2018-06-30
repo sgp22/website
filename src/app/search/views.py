@@ -23,6 +23,22 @@ from .utils import DocsIndexer
 from wagtail.core.models import Page
 from wagtail.images.models import Image
 from wagtail.search.models import Query
+from wagtail.api.v2.serializers import (
+    StreamField
+)
+
+from home.serializers import (
+    get_page_serializer_class,
+    CustomPageSerializer,
+    PageStatusField,
+    PageSerializer,
+    PageMenuOrderField,
+)
+
+from home.models import (
+    LandingPage,
+    CoreContentPage,
+)
 
 from .serializers import (
     SearchPageSerializer,
@@ -53,7 +69,55 @@ def search(request):
     })
 
 
-def search_wagtail(search_query, search_for='pages', fields=[]):
+class LandingPageSerializer(CustomPageSerializer):
+    meta_fields = ['type', 'detail_url', 'html_url']
+
+    class Meta:
+        model = LandingPage
+        fields = (
+            'id',
+            'title',
+            'page_hero',
+            'content',
+            'status',
+            'menu_order'
+        )
+
+
+class CoreContentPageSerializer(CustomPageSerializer):
+    meta_fields = ['type', 'detail_url', 'html_url']
+
+    class Meta:
+        model = CoreContentPage
+        fields = (
+            'id',
+            'title',
+            'body',
+            'cross_link',
+            'demo_link',
+            'description',
+            'status',
+            'menu_order'
+        )
+
+
+def serialize_by_page_type(model_class_name, pk):
+    if model_class_name == 'LandingPage':
+        obj = LandingPage.objects.get(pk=pk)
+        serializer = LandingPageSerializer
+
+        return serializer(obj)
+
+    if model_class_name == 'CoreContentPage':
+        obj = CoreContentPage.objects.get(pk=pk)
+        serializer = CoreContentPageSerializer
+
+        return serializer(obj)
+
+    return None
+
+
+def search_wagtail(search_query, search_for='pages', fill_data=False, fields=[]):
     """
     Searches wagtail image and page data, combines the results.
 
@@ -70,9 +134,12 @@ def search_wagtail(search_query, search_for='pages', fields=[]):
                 fields=fields).annotate_score('_score')
 
             for result in search_results:
-                serializer = SearchPageSerializer(result)
-                results.append(serializer.data)
-        
+                page_class_name = result.specific.__class__.__name__
+                page_serializer = serialize_by_page_type(page_class_name, result.pk)
+
+                if page_serializer != None:
+                    results.append(page_serializer.data)
+
         if search_for == 'images':
             search_results = Image.objects.search(search_query).annotate_score('_score')
 
@@ -137,7 +204,7 @@ class ElasticSearchView(APIView):
                 return_data['results'][search_in_item] = {
                     'results': search_results
                 }
-            
+
             if search_in_item == 'images':
                 search_results = search_wagtail(search_query, search_for='images')
 

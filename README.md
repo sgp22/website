@@ -2,11 +2,23 @@
 
 ## Basic local dev setup
 
+If you want to connect to S3 to same wagtail media, and uploaded docs, run the below exports.  Notice the `export S3_STORAGE=True`, if you want to upload to the local host, then set it to `False`.
+
+```bash
+export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+export AWS_STORAGE_BUCKET_NAME=ids-com-dev
+export S3_STORAGE=True
+```
+
+then...
+
 ```bash
 . ./scripts/set_dev_vars.sh
 make up
 make syncdb
-make run_dev
+make run_dev #for frontend dev
+make dev_backend #for backend dev
 ```
 
 And finally, `make shell_backend` and `chown uwsgi:uwsgi -R /home/app/media/`, if you are working with media files locally.
