@@ -1,0 +1,33 @@
+<div class="search-page">
+  <div class="ids-row ids-container">
+    <div class="ids-row--col-md-6 ids-row--offset-md-3">
+
+      <div class="ids-form-group">
+        <label for="searchInput">Search</label>
+        <input #searchInput (keyup.enter)="onEnter(searchInput.value)" type="text" class="ids-form-control" id="searchInput" name="searchInput" placeholder="Search">
+      </div>
+
+      <ul>
+        <ng-container *ngIf="docsResults">
+          <li *ngFor="let result of docResults">
+            <p><small>Result in Docs:</small></p>
+            <small>Title:</small> {{result.title}} / <small>Score:</small> {{result._score}} / <small>pk:</small> {{result.pk}}
+          </li>
+        </ng-container>
+        <ng-container *ngIf="imagesResults">
+          <li *ngFor="let result of imagesResults">
+            <p><small>Result in Images:</small></p>
+            <small>Title:</small> {{result.title}} / <small>Score:</small> {{result._score}} / <small>pk:</small> {{result.pk}}
+          </li>
+        </ng-container>
+        <ng-container *ngIf="pagesResults">
+          <li *ngFor="let result of pagesResults">
+            <p><small>Result in Pages:</small></p>
+            <small>Title:</small> {{result.title}} / <small>Score:</small> {{result._score}} / <small>pk:</small> {{result.pk}}
+          </li>
+        </ng-container>
+      </ul>
+
+    </div>
+  </div>
+</div>
