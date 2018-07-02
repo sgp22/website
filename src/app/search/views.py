@@ -165,7 +165,6 @@ class ElasticSearchView(APIView):
         &docs_search_fields=path,content
     """
     def get(self, request, **kwargs):
-        search_results = []
         search_query = request.GET.get('search_query', None)
         search_in = request.GET.get('search_in', None)
 
@@ -192,6 +191,8 @@ class ElasticSearchView(APIView):
 
         for search_in_item in search_in_list:
             if search_in_item == 'pages':
+                search_results = []
+
                 if wt_search_fields is not None:
                     wt_search_fields = wt_search_fields.split(',')
                     search_results = search_wagtail(
@@ -214,6 +215,7 @@ class ElasticSearchView(APIView):
 
             try:
                 if search_in_item == 'docs':
+                    search_results = []
                     docs_search = DocsIndexer(
                         ES_HOST,
                         'docs',
