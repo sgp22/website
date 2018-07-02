@@ -38,6 +38,9 @@ from home.serializers import (
 from home.models import (
     LandingPage,
     CoreContentPage,
+    ElementsPage,
+    BlocksPage,
+    BlogPostPage
 )
 
 from .serializers import (
@@ -100,6 +103,52 @@ class CoreContentPageSerializer(CustomPageSerializer):
             'menu_order'
         )
 
+class ElementsPageSerializer(CustomPageSerializer):
+    meta_fields = ['type', 'detail_url', 'html_url']
+
+    class Meta:
+        model = ElementsPage
+        fields = (
+            'id',
+            'title',
+            'cross_link',
+            'demo_link',
+            'fka',
+            'types',
+            'modifiers',
+            'tokensCategory',
+            'states',
+            'body'
+        )
+
+class BlocksPageSerializer(CustomPageSerializer):
+    meta_fields = ['type', 'detail_url', 'html_url']
+
+    class Meta:
+        model = BlocksPage
+        fields = (
+            'id',
+            'title',
+            'cross_link',
+            'demo_link',
+            'fka',
+            'types',
+            'modifiers',
+            'tokensCategory',
+            'body'
+        )
+
+class BlogPostPageSerializer(CustomPageSerializer):
+    meta_fields = ['type', 'detail_url', 'html_url']
+
+    class Meta:
+        model = BlogPostPage
+        fields = (
+            'id',
+            'title',
+            'author',
+            'content'
+        )
 
 def serialize_by_page_type(model_class_name, pk):
     if model_class_name == 'LandingPage':
@@ -111,6 +160,24 @@ def serialize_by_page_type(model_class_name, pk):
     if model_class_name == 'CoreContentPage':
         obj = CoreContentPage.objects.get(pk=pk)
         serializer = CoreContentPageSerializer
+
+        return serializer(obj)
+
+    if model_class_name == 'ElementsPage':
+        obj = ElementsPage.objects.get(pk=pk)
+        serializer = ElementsPageSerializer
+
+        return serializer(obj)
+
+    if model_class_name == 'BlocksPage':
+        obj = BlocksPage.objects.get(pk=pk)
+        serializer = BlocksPageSerializer
+
+        return serializer(obj)
+
+    if model_class_name == 'BlogPostPage':
+        obj = BlogPostPage.objects.get(pk=pk)
+        serializer = BlogPostPageSerializer
 
         return serializer(obj)
 
