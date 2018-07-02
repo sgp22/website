@@ -10,6 +10,8 @@ export class SearchPageComponent implements AfterViewInit {
   public docsResults: any = [];
   public imagesResults: any = [];
   public pagesResults: any = [];
+  public noResults = false;
+  public relativeUrl;
 
   constructor(
     private searchService: SearchService,
@@ -31,6 +33,22 @@ export class SearchPageComponent implements AfterViewInit {
           this.docsResults = docs.results.results;
           this.imagesResults = images.results;
           this.pagesResults = pages.results;
+          this.noResults = false;
+          if (this.pagesResults) {
+            this.pagesResults.map((page, i) => {
+              this.pagesResults[i]['relativeUrl'] = page.meta.html_url.split('/').slice(3, -1).join('/');
+            });
+          }
+
+          console.log(res);
+
+          if (
+            this.docsResults === undefined &&
+            this.imagesResults.length === 0 &&
+            this.pagesResults.length === 0
+          ) {
+            this.noResults = true;
+          }
         },
         err => {
           console.error(err);
@@ -38,7 +56,7 @@ export class SearchPageComponent implements AfterViewInit {
         () => {
           console.log('done');
         }
-      )
+      );
   }
 }
 

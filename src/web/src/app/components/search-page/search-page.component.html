@@ -7,24 +7,29 @@
         <input #searchInput (keyup.enter)="onEnter(searchInput.value)" type="text" class="ids-form-control" id="searchInput" name="searchInput" placeholder="Search">
       </div>
 
-      <ul>
+      <ul class="ids-list">
+        <ng-container *ngIf="pagesResults">
+          <li class="ids-list--item" *ngFor="let result of pagesResults">
+            <p>
+              <a [routerLink]="['/'].concat(result.relativeUrl.split('/')).concat('').slice(0, -1)">{{result.title}}</a>
+            </p>
+            <small>Found In: Pages</small>
+          </li>
+        </ng-container>
         <ng-container *ngIf="docsResults">
-          <li *ngFor="let result of docResults">
-            <p><small>Result in Docs:</small></p>
-            <small>Title:</small> {{result.title}} / <small>Score:</small> {{result._score}} / <small>pk:</small> {{result.pk}}
+          <li class="ids-list--item" *ngFor="let result of docResults">
+            <p>{{result.title}}</p>
+            <small>Found In: Code</small>
           </li>
         </ng-container>
         <ng-container *ngIf="imagesResults">
-          <li *ngFor="let result of imagesResults">
-            <p><small>Result in Images:</small></p>
-            <small>Title:</small> {{result.title}} / <small>Score:</small> {{result._score}} / <small>pk:</small> {{result.pk}}
+          <li class="ids-list--item" *ngFor="let result of imagesResults">
+            <p>{{result.title}}</p>
+            <small>Found In: Images</small>
           </li>
         </ng-container>
-        <ng-container *ngIf="pagesResults">
-          <li *ngFor="let result of pagesResults">
-            <p><small>Result in Pages:</small></p>
-            <small>Title:</small> {{result.title}} / <small>Score:</small> {{result._score}} / <small>pk:</small> {{result.pk}}
-          </li>
+        <ng-container *ngIf="noResults">
+          <p>No Results Found.</p>
         </ng-container>
       </ul>
 

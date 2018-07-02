@@ -79,6 +79,7 @@ class LandingPageSerializer(CustomPageSerializer):
         model = LandingPage
         fields = (
             'id',
+            'html_url',
             'title',
             'page_hero',
             'content',
@@ -94,6 +95,7 @@ class CoreContentPageSerializer(CustomPageSerializer):
         model = CoreContentPage
         fields = (
             'id',
+            'html_url',
             'title',
             'body',
             'cross_link',
@@ -110,6 +112,7 @@ class ElementsPageSerializer(CustomPageSerializer):
         model = ElementsPage
         fields = (
             'id',
+            'html_url',
             'title',
             'cross_link',
             'demo_link',
@@ -128,6 +131,7 @@ class BlocksPageSerializer(CustomPageSerializer):
         model = BlocksPage
         fields = (
             'id',
+            'html_url',
             'title',
             'cross_link',
             'demo_link',
