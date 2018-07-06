@@ -40,8 +40,6 @@ export class SearchPageComponent implements AfterViewInit {
             });
           }
 
-          console.log(res);
-
           if (
             this.docsResults === undefined &&
             this.imagesResults.length === 0 &&

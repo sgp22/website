@@ -80,6 +80,7 @@ class LandingPageSerializer(CustomPageSerializer):
         fields = (
             'id',
             'html_url',
+            'search_description',
             'title',
             'page_hero',
             'content',
@@ -96,6 +97,7 @@ class CoreContentPageSerializer(CustomPageSerializer):
         fields = (
             'id',
             'html_url',
+            'search_description',
             'title',
             'body',
             'cross_link',
@@ -113,6 +115,7 @@ class ElementsPageSerializer(CustomPageSerializer):
         fields = (
             'id',
             'html_url',
+            'search_description',
             'title',
             'cross_link',
             'demo_link',
@@ -132,6 +135,7 @@ class BlocksPageSerializer(CustomPageSerializer):
         fields = (
             'id',
             'html_url',
+            'search_description',
             'title',
             'cross_link',
             'demo_link',
@@ -150,6 +154,7 @@ class BlogPostPageSerializer(CustomPageSerializer):
         fields = (
             'id',
             'title',
+            'search_description',
             'author',
             'content'
         )

@@ -16,7 +16,7 @@ export class SearchService {
   ) { }
 
   getSearch(query) {
-    const url = `${this.appSettings.domain}/search/es/?search_query=${query}&search_in=images,pages,docs&docs_search_fields=path`;
+    const url = `${this.appSettings.domain}/search/es/?search_query=${query}&search_in=images,pages,docs&docs_search_fields=path,content&wt_search_fields=title`;
     return this.cacheService.get(url, this.http.get(url).first());
   }
 }

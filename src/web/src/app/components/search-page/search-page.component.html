@@ -13,12 +13,13 @@
             <p>
               <a [routerLink]="['/'].concat(result.relativeUrl.split('/')).concat('').slice(0, -1)">{{result.title}}</a>
             </p>
-            <small>Found In: Pages</small>
+            <p *ngIf="result.search_description">{{result.search_description}}</p>
+            <small>Found In: Design</small>
           </li>
         </ng-container>
         <ng-container *ngIf="docsResults">
-          <li class="ids-list--item" *ngFor="let result of docResults">
-            <p>{{result.title}}</p>
+          <li class="ids-list--item" *ngFor="let result of docsResults">
+            <p>{{result._source.content}}</p>
             <small>Found In: Code</small>
           </li>
         </ng-container>
