@@ -55,9 +55,7 @@
 
       </div>
 
-      <ng-container *ngIf="!notFound">
-        <feedback-widget *ngIf="!loading"></feedback-widget>
-      </ng-container>
+      <feedback-widget *ngIf="!loading" [notFound]="notFound"></feedback-widget>
 
     </div>
 

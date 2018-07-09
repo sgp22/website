@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 export class FeedbackWidgetComponent implements AfterViewInit {
   @ViewChild('thumbsDown') thumbsDown: ElementRef;
   @ViewChild('thumbsUp') thumbsUp: ElementRef;
+  @Input() notFound;
   public widgetHovered = false;
   public thumbValue;
   public maxLength = 1500;
