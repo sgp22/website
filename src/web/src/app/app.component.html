@@ -13,3 +13,15 @@
   </div>
 
 </div>
+
+<div *ngIf="sohoModalVisible" class="modal modal--soho-redirect">
+  <button (click)="closeSohoModal()" type="button" class="ids-btn ids-btn--link modal--close" title="Star icon beside text button">
+    <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+      <use xlink:href="#icon_close"></use>
+    </svg>
+  </button>
+  <h2>What Happened to soho?</h2>
+  <p>Don't worry. We're not depreating the 4.x controls. Instead, we have defined a system of improved guidelines and documentation for the usage of the Enterprise controls (SoHo controls) called the Infor Design System, A.K.A IDS. Now, you can find everything you were looking for on soho.infor.com (and more) right here.</p>
+</div>
+
+<div *ngIf="sohoModalVisible" class="modal-overlay"></div>
