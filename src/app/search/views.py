@@ -306,9 +306,7 @@ class ElasticSearchView(APIView):
                         search_results = docs_search.search(
                             search_query)
 
-                return_data['results'][search_in_item] = {
-                    'results': search_results
-                }
+                return_data['results'][search_in_item] = search_results
             except RequestError:
                 return_data['results'][search_in_item] = {
                     'results': search_results,

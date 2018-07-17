@@ -1,6 +1,7 @@
 import os
 import hashlib
 import copy
+import json
 
 from elasticsearch import (
     Elasticsearch,
@@ -35,7 +36,7 @@ INDEX_STRUCTURE = {
                     'type': 'text'
                 },
                 "created":  {
-                    "type":   "date", 
+                    "type":   "date",
                     "format": "strict_date_optional_time||epoch_millis"
                 }
             }
@@ -87,7 +88,7 @@ class DocsIndexer:
         # elastic search query further.
         search_results = {
             'ids': [],
-            'results': []
+            'hits': []
         }
         es_query_body = copy.deepcopy(DOCS_QUERY_BODY)
         es_query_body['query']['multi_match']['query'] = raw_query
@@ -113,8 +114,21 @@ class DocsIndexer:
         for hit in res['hits']['hits']:
             try:
                 pk = hit['_id']
+                content = json.loads(hit['_source']['content'])
+                structured_result = {
+                    '_id': pk,
+                    '_index': hit['_index'],
+                    '_type': hit['_type'],
+                    '_score': hit['_score'],
+                    '_source': hit['_source'],
+                    'title': content['title'],
+                    'description': content['description'],
+                    'api': content['api'],
+                    'body': content['body'],
+                    'relativeUrl': hit['_source']['path'],
+                }
                 search_results['ids'].append(pk)
-                search_results['results'].append(hit)
+                search_results['hits'].append(structured_result)
             except ValueError:
                 pass
 
