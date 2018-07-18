@@ -7,14 +7,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class QuestionWidgetComponent implements AfterViewInit {
   public widgetHovered = false;
+  public url;
 
   constructor(
     private route: ActivatedRoute
   ) { }
 
   ngAfterViewInit() {
-    console.log(this.route.url);
-    this.route.url.subscribe(urlSegment => {
+    this.url = this.route.url;
+    this.url.subscribe(urlSegment => {
       this.widgetHovered = false;
     });
   }

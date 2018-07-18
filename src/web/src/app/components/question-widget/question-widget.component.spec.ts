@@ -1,26 +1,27 @@
 import { QuestionWidgetComponent } from "./question-widget.component";
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from "../../../../node_modules/@angular/router";
 import { Observable } from "../../../../node_modules/rxjs";
 
-class MockActivatedRoute {
-  url: '123';
-  data = {
-    fakeData: 'data'
-  };
-}
-
 describe('QuestionWidgetComponent', () => {
 
-  beforeEach(() => {
+  beforeEach(async() => {
+
     TestBed.configureTestingModule({
       providers: [
         QuestionWidgetComponent,
         {
           provide: ActivatedRoute,
-          useClass: MockActivatedRoute
+          useValue: {
+            params: {
+                subscribe: function() {
+                console.log('Subscribed.');
+                Observable.of({ id: 123 });
+              }
+            }
+          }
         }
-      ]
+      ],
     });
   });
 
@@ -31,9 +32,9 @@ describe('QuestionWidgetComponent', () => {
     expect(comp.widgetHovered).toBe(true, "after hovered");
   });
 
-  it('should set #widgetHovered to false on page change', () => {
+  it('should set #widgetHovered to false on page change after ngAfterViewInit', () => {
     const comp = TestBed.get(QuestionWidgetComponent);
-    // comp.ngAfterViewInit();
+    comp.ngAfterViewInit();
     expect(comp.widgetHovered).toBe(false, "on page change");
   });
 
