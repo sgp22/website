@@ -10,23 +10,18 @@
       <ul class="ids-list">
         <ng-container *ngIf="pagesResults">
           <li class="ids-list--item" *ngFor="let result of pagesResults">
-            <p>
+            <h3>
               <a [routerLink]="['/'].concat(result.relativeUrl.split('/')).concat('').slice(0, -1)">{{result.title}}</a>
-            </p>
+            </h3>
             <p *ngIf="result.search_description">{{result.search_description}}</p>
             <small>Found In: Design</small>
           </li>
         </ng-container>
         <ng-container *ngIf="docsResults">
           <li class="ids-list--item" *ngFor="let result of docsResults">
-            <p>{{result._source.content}}</p>
+            <h3>{{result.title}}</h3>
+            <p *ngIf="result.description">{{result.description}}</p>
             <small>Found In: Code</small>
-          </li>
-        </ng-container>
-        <ng-container *ngIf="imagesResults">
-          <li class="ids-list--item" *ngFor="let result of imagesResults">
-            <p>{{result.title}}</p>
-            <small>Found In: Images</small>
           </li>
         </ng-container>
         <ng-container *ngIf="noResults">

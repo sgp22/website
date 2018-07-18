@@ -154,6 +154,7 @@ class BlogPostPageSerializer(CustomPageSerializer):
         fields = (
             'id',
             'title',
+            'html_url',
             'search_description',
             'author',
             'content'
