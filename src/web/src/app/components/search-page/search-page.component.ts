@@ -42,6 +42,14 @@ export class SearchPageComponent implements AfterViewInit {
             });
           }
 
+          if (this.docsResults) {
+            this.docsResults.map((doc, i) => {
+              const regexp = /docs\/|.json/gi;
+              const relativeUrl = doc.relativeUrl.replace(regexp, '');
+              this.docsResults[i]['relativeUrl'] = relativeUrl;
+            })
+          }
+
           console.log(this.pagesResults);
           console.log(this.docsResults);
 

@@ -19,7 +19,9 @@
         </ng-container>
         <ng-container *ngIf="docsResults">
           <li class="ids-list--item" *ngFor="let result of docsResults">
-            <h3>{{result.title}}</h3>
+            <h3>
+              <a routerLink="/code/{{result.relativeUrl}}">{{result.title}}</a>
+            </h3>
             <p *ngIf="result.description">{{result.description}}</p>
             <small>Found In: Code</small>
           </li>
