@@ -18,6 +18,7 @@ export class AppComponent {
   public section;
   public sidebarNav;
   public footerNav;
+  public sohoModalVisible = false;
 
   constructor(
     private router: Router,
@@ -97,6 +98,8 @@ export class AppComponent {
         }
       );
 
+    this.showSohoModal();
+
   }
 
   public capitalizeTitle(str) {
@@ -117,6 +120,17 @@ export class AppComponent {
       }
     } catch (e) { }
     return 'false';
+  }
+
+  public showSohoModal() {
+    const referrer = document.referrer;
+    if (referrer === 'https://soho.infor.com/') {
+      this.sohoModalVisible = true;
+    }
+  }
+
+  public closeSohoModal() {
+    this.sohoModalVisible = false;
   }
 
 }
