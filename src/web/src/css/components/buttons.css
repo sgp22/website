@@ -26,3 +26,12 @@
     background-color: #133c59;
   }
 }
+
+.demo-link {
+  display: flex;
+  align-items: center;
+
+  & .ids-icon {
+    margin-left: var(--spacing-base);
+  }
+}
