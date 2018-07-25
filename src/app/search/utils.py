@@ -112,9 +112,14 @@ class DocsIndexer:
         )
 
         for hit in res['hits']['hits']:
+            pk = hit['_id']
+            content = json.loads(hit['_source']['content'])
+
+            # Inspecting a very strange object.
+            #if not 'description' in content.keys():
+            #    print(json.dumps(content))
+
             try:
-                pk = hit['_id']
-                content = json.loads(hit['_source']['content'])
                 structured_result = {
                     '_id': pk,
                     '_index': hit['_index'],
@@ -130,6 +135,8 @@ class DocsIndexer:
                 search_results['ids'].append(pk)
                 search_results['hits'].append(structured_result)
             except ValueError:
+                pass
+            except KeyError:
                 pass
 
         return search_results
