@@ -27,6 +27,8 @@ from wagtail.api.v2.serializers import (
     StreamField
 )
 
+from wagtail.search.backends.base import SearchFieldError
+
 from home.serializers import (
     get_page_serializer_class,
     CustomPageSerializer,
@@ -271,9 +273,13 @@ class ElasticSearchView(APIView):
 
                 if wt_search_fields is not None:
                     wt_search_fields = wt_search_fields.split(',')
-                    search_results = search_wagtail(
-                        search_query,
-                        fields=wt_search_fields)
+
+                    try:
+                        search_results = search_wagtail(
+                            search_query,
+                            fields=wt_search_fields)
+                    except SearchFieldError as err:
+                        pass
                 else:
                     search_results = search_wagtail(
                         search_query)

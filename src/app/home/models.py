@@ -21,6 +21,7 @@ from wagtail.admin.edit_handlers import (
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.search import index
 
 from home import relationships
 
