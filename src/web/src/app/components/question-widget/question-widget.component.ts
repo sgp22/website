@@ -23,7 +23,7 @@ export class QuestionWidgetComponent implements AfterViewInit {
   captureHover(event) {
     try {
       (<any>window).ga('send', 'event', 'feedback', 'hover', 'whatisyourrole');
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
     this.widgetHovered = true;

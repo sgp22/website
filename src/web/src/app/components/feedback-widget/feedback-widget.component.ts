@@ -23,7 +23,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    if(this.route.url) {
+    if (this.route.url) {
       this.route.url.subscribe(urlSegment => {
         this.thumbsDown.nativeElement.checked = false;
         this.thumbsUp.nativeElement.checked = false;
@@ -37,7 +37,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   captureHover(e) {
     try {
       (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'uniquehover', this.url);
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
     this.widgetHovered = true;
@@ -48,14 +48,14 @@ export class FeedbackWidgetComponent implements AfterViewInit {
     if (this.thumbValue === 'thumbs-up') {
       try {
         (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
     }
     if (this.thumbValue === 'thumbs-down') {
       try {
         (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsdown', this.url);
-      } catch(error) {
+      } catch (error) {
         console.error(error);
       }
     }
@@ -69,7 +69,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
     }
     try {
       (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, comment);
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
     this.showAdditional = false;

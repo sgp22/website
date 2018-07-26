@@ -1,4 +1,4 @@
-import { FeedbackWidgetComponent } from "./feedback-widget.component";
+import { FeedbackWidgetComponent } from './feedback-widget.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
@@ -23,7 +23,7 @@ describe('FeedbackWidgetComponent', () => {
         },
         {
           provide: ActivatedRoute,
-          useValue: { data: Observable.of({ data: 'Test' }) }
+          useValue: { data: Observable.of( { data: 'Test' } ) }
         }
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -42,15 +42,15 @@ describe('FeedbackWidgetComponent', () => {
   });
 
   it('#captureHover() should set #widgetHovered to true', () => {
-    expect(component.widgetHovered).toBe(false, "false at first");
+    expect(component.widgetHovered).toBe(false, 'false at first');
     component.captureHover(event);
-    expect(component.widgetHovered).toBe(true, "after hovered");
+    expect(component.widgetHovered).toBe(true, 'after hovered');
   });
 
   it('should set #widgetHovered and #showAdditional to false on page change after ngAfterViewInit', () => {
     component.ngAfterViewInit();
-    expect(component.widgetHovered).toBe(false, "after page change");
-    expect(component.showAdditional).toBe(false, "after page change");
+    expect(component.widgetHovered).toBe(false, 'after page change');
+    expect(component.showAdditional).toBe(false, 'after page change');
   });
 
   it('should set #thumbsup and #thumbsdown to unchecked on page change after ngAfterViewInit', () => {
@@ -66,14 +66,14 @@ describe('FeedbackWidgetComponent', () => {
   });
 
   it('#submitThumb() should set the value of #thumbValue', () => {
-    let value = 'test-value';
+    const value = 'test-value';
     component.submitThumb(value);
     expect(component.thumbValue).toEqual(value);
   });
 
   it('#submitFeedback should set #showAdditional to false and #commentSubmitted to true', () => {
-    let comment = 'test comment';
-    let e = { preventDefault: function () { } };
+    const comment = 'test comment';
+    const e = { preventDefault: function () { } };
     component.submitFeedback(e, comment);
     expect(component.showAdditional).toBe(false, 'after submit');
     expect(component.commentSubmitted).toBe(true, 'after submit');

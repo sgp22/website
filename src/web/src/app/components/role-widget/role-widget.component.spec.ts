@@ -3,10 +3,10 @@ import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '../../../../node_modules/@angular/core';
 
-describe(' RoleWidgetComponent ', () => {
+describe('RoleWidgetComponent', () => {
 
-  let component:  RoleWidgetComponent ;
-  let fixture: ComponentFixture< RoleWidgetComponent >
+  let component:  RoleWidgetComponent;
+  let fixture: ComponentFixture<RoleWidgetComponent>;
 
   beforeEach(async(() => {
 
@@ -15,7 +15,7 @@ describe(' RoleWidgetComponent ', () => {
       imports: [BrowserAnimationsModule],
       schemas: [NO_ERRORS_SCHEMA]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
@@ -29,13 +29,13 @@ describe(' RoleWidgetComponent ', () => {
   });
 
   it('#selectedRole() should set #selectedRole to role', () => {
-    let role = 'role';
+    const role = 'role';
     component.selectRole(role);
     expect(component.selectedRole).toEqual(role);
-  })
+  });
 
   it('#submitRole() should set #roleSubmitted to true and #removeRoleThankyou to false', () => {
-    let e = { preventDefault: function () { } };
+    const e = { preventDefault: function () { } };
     component.selectedRole = 'role';
     component.submitRole(e);
     expect(component.roleSubmitted).toBe(true, 'after submit');

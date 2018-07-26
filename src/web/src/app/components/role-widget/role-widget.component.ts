@@ -41,7 +41,7 @@ export class RoleWidgetComponent implements AfterViewInit {
     this.fabStateActive = !this.fabStateActive;
     try {
       (<any>window).ga('send', 'event', 'feedback', 'click', 'whatisyourrole');
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   }
@@ -59,7 +59,7 @@ export class RoleWidgetComponent implements AfterViewInit {
 
     try {
       (<any>window).ga('send', 'event', 'feedback', 'submittedrole' , 'whatisyourrole', {'dimension8': this.selectedRole});
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
 
