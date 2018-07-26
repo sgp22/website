@@ -39,7 +39,11 @@ export class RoleWidgetComponent implements AfterViewInit {
   toggleRoles() {
     this.rolesOpen = !this.rolesOpen;
     this.fabStateActive = !this.fabStateActive;
-    (<any>window).ga('send', 'event', 'feedback', 'click', 'whatisyourrole');
+    try {
+      (<any>window).ga('send', 'event', 'feedback', 'click', 'whatisyourrole');
+    } catch(error) {
+      console.error(error);
+    }
   }
 
   selectRole(role: String) {
@@ -48,13 +52,21 @@ export class RoleWidgetComponent implements AfterViewInit {
 
   submitRole(e) {
     e.preventDefault();
+
     if (this.selectedRole === undefined) {
       return;
     }
-    (<any>window).ga('send', 'event', 'feedback', 'submittedrole' , 'whatisyourrole', {'dimension8': this.selectedRole});
+
+    try {
+      (<any>window).ga('send', 'event', 'feedback', 'submittedrole' , 'whatisyourrole', {'dimension8': this.selectedRole});
+    } catch(error) {
+      console.error(error);
+    }
+
     this.roleSubmitted = true;
     this.removeRoleThankyou = false;
     localStorage.setItem('roleSubmitted', JSON.stringify(this.roleSubmitted));
+
     setTimeout(() => {
       this.removeRoleThankyou = true;
       localStorage.setItem('removeRoleThankyou', JSON.stringify(this.removeRoleThankyou));
