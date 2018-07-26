@@ -160,6 +160,13 @@ class PageBase(Page):
     class Meta:
         proxy = True
 
+    def content(self):
+        return ""
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+    ]
+
 
 class LandingPage(PageBase):
     menu_order = models.IntegerField(default=0)
@@ -209,6 +216,10 @@ class LandingPage(PageBase):
         APIField('grid_blocks')
     ]
 
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+    ]
+
 
 class CoreContentPage(PageBase):
     menu_order = models.IntegerField(default=0)
@@ -255,6 +266,13 @@ class CoreContentPage(PageBase):
         APIField('cross_link'),
         APIField('demo_link'),
         APIField('description'),
+    ]
+
+    def content(self):
+        return ""
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
     ]
 
 
@@ -396,6 +414,13 @@ class ElementsPage(PageBase):
         APIField('body')
     ]
 
+    def content(self):
+        return ""
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+    ]
+
 class BlocksPage(PageBase):
     @property
     def description(self):
@@ -520,6 +545,13 @@ class BlocksPage(PageBase):
         APIField('body')
     ]
 
+    def content(self):
+        return ""
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+    ]
+
 class BlogLandingPage(PageBase):
     menu_order = models.IntegerField(default=0)
 
@@ -537,8 +569,14 @@ class BlogLandingPage(PageBase):
         APIField('description')
     ]
 
-class BlogPostPage(PageBase):
+    def content(self):
+        return ""
 
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+    ]
+
+class BlogPostPage(PageBase):
     author = models.CharField(
         verbose_name="Author",
         max_length=255,
@@ -554,6 +592,10 @@ class BlogPostPage(PageBase):
     content_panels = Page.content_panels + [
         FieldPanel('author'),
         StreamFieldPanel('content')
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
     ]
 
     api_fields = [
