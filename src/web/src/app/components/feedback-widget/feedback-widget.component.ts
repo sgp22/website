@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, Input } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'feedback-widget',
@@ -23,27 +23,41 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    this.route.url.subscribe(urlSegment => {
-      this.thumbsDown.nativeElement.checked = false;
-      this.thumbsUp.nativeElement.checked = false;
-      this.showAdditional = false;
-      this.widgetHovered = false;
-      this.url = this.router.routerState.snapshot.url;
-    });
+    if(this.route.url) {
+      this.route.url.subscribe(urlSegment => {
+        this.thumbsDown.nativeElement.checked = false;
+        this.thumbsUp.nativeElement.checked = false;
+        this.showAdditional = false;
+        this.widgetHovered = false;
+        this.url = this.router.routerState.snapshot.url;
+      });
+    }
   }
 
   captureHover(e) {
-    (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'uniquehover', this.url);
+    try {
+      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'uniquehover', this.url);
+    } catch(error) {
+      console.error(error);
+    }
     this.widgetHovered = true;
   }
 
   submitThumb(value: String) {
     this.thumbValue = value;
     if (this.thumbValue === 'thumbs-up') {
-      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
+      try {
+        (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
+      } catch(error) {
+        console.error(error);
+      }
     }
     if (this.thumbValue === 'thumbs-down') {
-      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsdown', this.url);
+      try {
+        (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsdown', this.url);
+      } catch(error) {
+        console.error(error);
+      }
     }
     this.showAdditional = true;
   }
@@ -53,7 +67,11 @@ export class FeedbackWidgetComponent implements AfterViewInit {
     if (comment === '') {
       return;
     }
-    (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, comment);
+    try {
+      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, comment);
+    } catch(error) {
+      console.error(error);
+    }
     this.showAdditional = false;
     this.commentSubmitted = true;
   }
