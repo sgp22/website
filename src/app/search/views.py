@@ -38,11 +38,13 @@ from home.serializers import (
 )
 
 from home.models import (
+    PageBase,
     LandingPage,
     CoreContentPage,
     ElementsPage,
     BlocksPage,
-    BlogPostPage
+    BlogPostPage,
+    BlogLandingPage,
 )
 
 from .serializers import (
@@ -207,16 +209,27 @@ def search_wagtail(search_query, search_for='pages', fill_data=False, fields=[])
 
     if search_query:
         if search_for == 'pages':
-            search_results = Page.objects.live().search(
-                search_query,
-                fields=fields).annotate_score('_score')
+            page_models = [
+                'LandingPage',
+                'CoreContentPage',
+                'ElementsPage',
+                'BlocksPage',
+                'BlogLandingPage',
+                'BlogPostPage',
+            ]
 
-            for result in search_results:
-                page_class_name = result.specific.__class__.__name__
-                page_serializer = serialize_by_page_type(page_class_name, result.pk)
+            for page_model in page_models:
+                model = eval(page_model)
+                search_results = model.objects.all().search(
+                    search_query,
+                    fields=fields).annotate_score('_score')
 
-                if page_serializer != None:
-                    results.append(page_serializer.data)
+                for result in search_results:
+                    page_class_name = result.specific.__class__.__name__
+                    page_serializer = serialize_by_page_type(page_class_name, result.pk)
+
+                    if page_serializer != None:
+                        results.append(page_serializer.data)
 
         if search_for == 'images':
             search_results = Image.objects.search(search_query).annotate_score('_score')
@@ -273,13 +286,9 @@ class ElasticSearchView(APIView):
 
                 if wt_search_fields is not None:
                     wt_search_fields = wt_search_fields.split(',')
-
-                    try:
-                        search_results = search_wagtail(
-                            search_query,
-                            fields=wt_search_fields)
-                    except SearchFieldError as err:
-                        pass
+                    search_results = search_wagtail(
+                        search_query,
+                        fields=wt_search_fields)
                 else:
                     search_results = search_wagtail(
                         search_query)
