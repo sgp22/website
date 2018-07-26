@@ -30,7 +30,9 @@ export class SearchPageComponent implements AfterViewInit {
       .subscribe(
         res => {
           const { docs, pages } = res.results;
-          this.docsResults = docs.hits;
+          if (docs) {
+            this.docsResults = docs.hits;
+          }
           this.pagesResults = pages;
           this.noResults = false;
 
