@@ -50,9 +50,6 @@ export class SearchPageComponent implements AfterViewInit {
             })
           }
 
-          console.log(this.pagesResults);
-          console.log(this.docsResults);
-
           if (this.docsResults.length === 0 && this.pagesResults.length === 0) {
             this.noResults = true;
           }
