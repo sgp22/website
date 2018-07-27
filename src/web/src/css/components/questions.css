@@ -4,7 +4,7 @@
   position: fixed;
   right: calc(var(--spacing-base) * 3);
 
-  @media (--viewport-lg) {
+  @media (--viewport-md) {
     display: block;
   }
 
