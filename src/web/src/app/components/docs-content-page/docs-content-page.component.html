@@ -29,9 +29,15 @@
           </div>
         </header>
 
+        <h2 *ngIf="docs?.demo?.pages">Live Demos</h2>
         <ul *ngIf="docs?.demo?.pages">
           <li *ngFor="let demo of docs.demo.pages">
-            <a href="{{absolutePath}}/demo/{{element}}/{{demo.slug}}?font=source-sans" target="_blank">{{demo.name}}</a>
+            <a class="demo-link" href="{{absolutePath}}/demo/{{element}}/{{demo.slug}}?font=source-sans" target="_blank">
+              {{demo.name}}
+              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+                <use xlink:href="#icon_launch"></use>
+              </svg>
+            </a>
           </li>
         </ul>
 
