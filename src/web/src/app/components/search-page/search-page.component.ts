@@ -29,22 +29,30 @@ export class SearchPageComponent implements AfterViewInit {
     this.searchService.getSearch(value)
       .subscribe(
         res => {
-          const { docs, images, pages } = res.results;
-          this.docsResults = docs.results.results;
-          this.imagesResults = images.results;
-          this.pagesResults = pages.results;
+          const { docs, pages } = res.results;
+          if (docs) {
+            this.docsResults = docs.hits;
+          }
+          this.pagesResults = pages;
           this.noResults = false;
+
           if (this.pagesResults) {
             this.pagesResults.map((page, i) => {
-              this.pagesResults[i]['relativeUrl'] = page.meta.html_url.split('/').slice(3, -1).join('/');
+              if (page.meta) {
+                this.pagesResults[i]['relativeUrl'] = page.meta.html_url.split('/').slice(3, -1).join('/');
+              }
             });
           }
 
-          if (
-            this.docsResults === undefined &&
-            this.imagesResults.length === 0 &&
-            this.pagesResults.length === 0
-          ) {
+          if (this.docsResults) {
+            this.docsResults.map((doc, i) => {
+              const regexp = /docs\/|.json/gi;
+              const relativeUrl = doc.relativeUrl.replace(regexp, '');
+              this.docsResults[i]['relativeUrl'] = relativeUrl;
+            })
+          }
+
+          if (this.docsResults.length === 0 && this.pagesResults.length === 0) {
             this.noResults = true;
           }
         },
