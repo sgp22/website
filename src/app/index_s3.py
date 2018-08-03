@@ -33,16 +33,16 @@ def s3_sync(**kwargs):
     root_path = os.path.dirname(os.path.realpath(__file__))
     tmp_dir = "{}/tmp".format(root_path)
 
-    for i in paginate_and_yield(src_client, tmp_dir, src_bucket, download=True):
+    for s3_obj, i in paginate_and_yield(src_client, tmp_dir, src_bucket, download=True):
         read_contents_bytes = open(i, 'rb').read()
         mime_type = file_path_mime(read_contents_bytes)
         read_contents_str = read_contents_bytes.decode('utf-8')
         indexer = DocsIndexer(es_host, 'docs', es_index_prefix)
         s3_path = i.replace(tmp_dir, '')
+        s3_path = s3_path[1:]
 
         print("{} : {}".format(i, mime_type))
         print("s3 path: {}".format(s3_path))
-        print(read_contents_str)
 
         doc = {
             "content": read_contents_str,
@@ -57,9 +57,14 @@ def paginate_and_yield(client, local='/tmp/', bucket='tmp', download=False):
     # Create a paginator to pull 1000 objects at a time.
     paginator = client.get_paginator('list_objects')
 
+    operation_parameters = {
+        'Bucket': bucket,
+        'Prefix': 'docs/'
+    }
+
     # PageResponse Holds 1000 objects at a time and
     # will continue to repeat in chunks of 1000.
-    pageresponse = paginator.paginate(Bucket=bucket)
+    pageresponse = paginator.paginate(**operation_parameters)
 
     # Process 1000 at a time.
     for pageobject in pageresponse:
@@ -71,7 +76,7 @@ def paginate_and_yield(client, local='/tmp/', bucket='tmp', download=False):
             if not s3_obj.endswith('/'):
                 if download:
                     client.download_file(bucket, s3_obj, local_obj_path)
-                    yield local_obj_path
+                    yield s3_obj, local_obj_path
                 else:
                     yield obj
             else:
@@ -91,12 +96,12 @@ def getopts(argv):
 
 
 if __name__ == '__main__':
-    args = getopts(argv)
-
-    print(os.path.dirname(os.path.realpath(__file__)))
-    print(args)
-
     try:
+        args = getopts(argv)
+
+        print(os.path.dirname(os.path.realpath(__file__)))
+        print(args)
+
         kwargs = {
             'bucket_name': args['-bucket_name'],
             'aws_access_key_id': args['-aws_access_key_id'],
@@ -108,3 +113,5 @@ if __name__ == '__main__':
         s3_sync(**kwargs)
     except KeyError as err:
         print("You are missing a required parameter: {}".format(err))
+    except IndexError as err:
+        print("Missing required parameters: {}".format(err))
