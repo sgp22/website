@@ -115,3 +115,5 @@ if __name__ == '__main__':
         print("You are missing a required parameter: {}".format(err))
     except IndexError as err:
         print("Missing required parameters: {}".format(err))
+    except FileNotFoundError as err:
+        print("A file could not be found: {}".format(err))
