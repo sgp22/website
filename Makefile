@@ -92,6 +92,14 @@ dev_backend :
 index_backend :
 	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/manage.py update_index
 
+index_s3 :
+	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/index_s3.py \
+		-bucket_name $(AWS_STORAGE_BUCKET_NAME) \
+		-aws_access_key_id $(AWS_ACCESS_KEY_ID) \
+		-aws_secret_access_key $(AWS_SECRET_ACCESS_KEY) \
+		-es_index_prefix $(ES_INDEX_PREFIX) \
+		-es_host $(ES_HOST)
+
 build_backend :
 	cd docker/docs-backend && \
 		make build

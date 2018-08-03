@@ -9,6 +9,9 @@ export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
 export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
 export AWS_STORAGE_BUCKET_NAME=ids-com-dev
 export S3_STORAGE=True
+export ES_HOST=elasticsearch
+export ES_INDEX_PREFIX=dev
+export DOCS_API_KEY=<DOCS_API_KEY>
 ```
 
 then...
@@ -22,17 +25,6 @@ make dev_backend #for backend dev
 ```
 
 And finally, `make shell_backend` and `chown uwsgi:uwsgi -R /home/app/media/`, if you are working with media files locally.
-
-If you want to connect to S3 for read and write make sure the environment is done and run the below exports.
-
-```bash
-export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
-export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
-export S3_STORAGE=<S3_STORAGE>
-
-# Ror local development its "elasticsearch".
-export ES_HOST=elasticsearch
-```
 
 ## Generate a certificate for prod
 

@@ -86,6 +86,7 @@ services:
       AWS_QUERYSTRING_AUTH: ${AWS_QUERYSTRING_AUTH}
 
       ES_HOST: ${ES_HOST}
+      ES_INDEX_PREFIX: ${ES_INDEX_PREFIX}
 
   nginx:
     build: ./docker/docs-nginx

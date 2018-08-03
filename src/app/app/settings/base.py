@@ -163,8 +163,8 @@ AWS_REGION = os.getenv('AWS_REGION', 'us-east-1')
 AWS_QUERYSTRING_AUTH = os.getenv('AWS_QUERYSTRING_AUTH', 'false').lower() == 'true'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_ES_CLUSTER = os.getenv('AWS_ES_CLUSTER', 'vpc-ids-com-search-flrxfj3pd63bduyhkeubo4x3ea')
-ES_INDEX_PREFIX = os.getenv('ES_INDEX_PREFIX', 'dev')
-ES_HOST = os.getenv('ES_HOST', 'elasticsearch')
+ES_INDEX_PREFIX = os.getenv('ES_INDEX_PREFIX')
+ES_HOST = os.getenv('ES_HOST')
 
 # Secure or not secure?
 ES_HOST_URL = "http://{0}:9200".format(ES_HOST)
