@@ -45,8 +45,8 @@ def s3_sync(**kwargs):
         print("s3 path: {}".format(s3_path))
 
         doc = {
-            "content": read_contents_str,
-            "path": s3_path
+            'content': read_contents_str,
+            'path': s3_path
         }
 
         indexer.index_doc(doc)
