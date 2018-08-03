@@ -1,5 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'question-widget',
@@ -7,21 +7,25 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 })
 export class QuestionWidgetComponent implements AfterViewInit {
   public widgetHovered = false;
-  public url;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngAfterViewInit() {
-    this.route.url.subscribe(urlSegment => {
-      this.widgetHovered = false;
-    });
+    if (this.route.url) {
+      this.route.url.subscribe(url => {
+        this.widgetHovered = false;
+      });
+    }
   }
 
   captureHover(event) {
-    (<any>window).ga('send', 'event', 'feedback', 'hover', 'whatisyourrole');
+    try {
+      (<any>window).ga('send', 'event', 'feedback', 'hover', 'whatisyourrole');
+    } catch (error) {
+      console.error(error);
+    }
     this.widgetHovered = true;
   }
 }
