@@ -141,3 +141,9 @@ scripts/local_set_dev_vars.sh
 
 # Temp ignore until images are automated with dbsync
 /wagtail_images
+
+
+# Search Guard
+!src/config/elasticsearch/searchguard/ssl/
+src/config/elasticsearch/searchguard/ssl/*
+!src/config/elasticsearch/searchguard/ssl/etc/

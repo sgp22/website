@@ -31,20 +31,25 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+    image: khezen/elasticsearch:6.2.2
     container_name: 'docssite_elasticsearch'
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
+      - ./src/config/elasticsearch/elasticsearch.yml:/elasticsearch/config/elasticsearch.yml
+      - ./src/config/elasticsearch/log4j2.properties:/elasticsearch/config/log4j2.properties
+      - ./src/config/elasticsearch/searchguard:/elasticsearch/config/searchguard
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - xpack.monitoring.enabled=false
-      - xpack.ml.enabled=false
-      - xpack.graph.enabled=false
-      - xpack.watcher.enabled=false
+      ELASTIC_PWD: ${ES_PASS}
+      KIBANA_PWD: ${ES_PASS}
+      #- discovery.type=single-node
+      #- xpack.security.enabled=false
+      #- xpack.monitoring.enabled=false
+      #- xpack.ml.enabled=false
+      #- xpack.graph.enabled=false
+      #- xpack.watcher.enabled=false
 
   kibana:
     image: kibana
@@ -71,6 +76,7 @@ services:
 
       - ./src/config:/home/config
       - ./src/config/supervisor/backend.conf:/etc/supervisor/conf.d/backend.conf
+      - ./src/config/elasticsearch/searchguard:/elasticsearch/config/searchguard
 
       - static-data:/home/app/static/
       - media-data:/home/app/media/
@@ -87,6 +93,9 @@ services:
 
       ES_HOST: ${ES_HOST}
       ES_INDEX_PREFIX: ${ES_INDEX_PREFIX}
+
+      ES_USER: elastic
+      ES_PASS: ${ES_PASS}
 
   nginx:
     build: ./docker/docs-nginx

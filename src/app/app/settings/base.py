@@ -165,6 +165,8 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_ES_CLUSTER = os.getenv('AWS_ES_CLUSTER', 'vpc-ids-com-search-flrxfj3pd63bduyhkeubo4x3ea')
 ES_INDEX_PREFIX = os.getenv('ES_INDEX_PREFIX')
 ES_HOST = os.getenv('ES_HOST')
+ES_USER = os.getenv('ES_USER', 'elastic')
+ES_PASS = os.getenv('ES_PASS')
 
 # Secure or not secure?
 ES_HOST_URL = "http://{0}:9200".format(ES_HOST)

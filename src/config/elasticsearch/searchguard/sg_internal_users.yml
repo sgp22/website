@@ -1,0 +1,19 @@
+elastic:
+  hash: '$2y$12$s1M937tTFMf7dnS7GFl3LOYYyVjcTVKU2VQPsUTTrkH.90D/z5Sce' #elastic
+  roles:
+    - admin
+
+kibana:
+  hash: '$2y$12$kOqSyZI87q0qN5TmzfAYweeqV0kdiIo8ntef4SxtCyKC2wG54rste' #kibana
+  roles:
+    - kibana_user
+
+logstash:
+  hash: '$2y$12$JFxYFgnwyL.qAQt2XcDdyu0N3qbRdKCoBGZqMT0f7PtJNbfpY50MW' #logstash
+  roles:
+    - logstash_user
+
+beats:
+  hash: '$2y$12$FAb5IxfhoPHZeScdAjo.auzzbtNLg2E1aVuH0RJ9r6NhQINLdHXIW' #beats
+  roles:
+    - beats_user

@@ -2,13 +2,19 @@ import os
 import hashlib
 import copy
 import json
+import urllib3
 
 from elasticsearch import (
     Elasticsearch,
     NotFoundError,
-    RequestError
+    RequestError,
+    RequestsHttpConnection
 )
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+ES_USER = os.environ['ES_USER']
+ES_PASS = os.environ['ES_PASS']
 
 DOCS_QUERY_BODY = {
     'size': 50,
@@ -68,7 +74,14 @@ class DocsIndexer:
         self.es_index = es_index
         self.es_index_prefix = es_index_prefix
         self.es_index_name = "{0}__{1}".format(es_index_prefix, es_index)
-        self.es = Elasticsearch(es_host)
+        self.es = Elasticsearch(
+            es_host,
+            connection_class=RequestsHttpConnection,
+            use_ssl=True,
+            verify_certs=False,
+            http_auth=(ES_USER, ES_PASS))
+
+        print(self.es.info())
 
     def _create_index(self):
         """Create ES index."""
