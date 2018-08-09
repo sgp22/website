@@ -32,6 +32,6 @@ And finally, `make shell_backend` and `chown uwsgi:uwsgi -R /home/app/media/`, i
 - To renew.
 - `sudo certbot renew`
 
-- Crontab for auto renew.
+- Crontab for auto renew every 12 hours.
 - `crontab -e`
-- `0 1 * * 4 /usr/local/bin/cert_renew.sh >> /var/log/cronjob.log 2>&1`
+- `0 */24 * * * /usr/local/bin/cert_renew.sh >> /var/log/cronjob.log 2>&1`
