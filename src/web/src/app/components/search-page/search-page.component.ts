@@ -58,9 +58,6 @@ export class SearchPageComponent implements AfterViewInit {
         },
         err => {
           console.error(err);
-        },
-        () => {
-          console.log('done');
         }
       );
   }
