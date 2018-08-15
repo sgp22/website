@@ -15,6 +15,7 @@ from __future__ import absolute_import, unicode_literals
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from elasticsearch import RequestsHttpConnection
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -218,6 +219,13 @@ WAGTAILSEARCH_BACKENDS = {
         'TIMEOUT': 5,
         'OPTIONS': {},
         'INDEX_SETTINGS': {},
+        #'OPTIONS': {
+        #    'connection_class': RequestsHttpConnection,
+        #    'port': 443,
+        #    'use_ssl': True,
+        #    'verify_certs': False,
+        #    'http_auth': (ES_USER, ES_PASS),
+        #},
     }
 }
 
