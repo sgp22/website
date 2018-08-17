@@ -8,7 +8,7 @@ NGINX_CONTAINER_NAME=${1:-"nginx"}
 NGINX_CONTAINER=$(sudo docker ps -q --filter "name=$NGINX_CONTAINER_NAME")
 
 
-sudo docker exec -ti ${NGINX_CONTAINER} /bin/bash -c 'supervisorctl stop nginx \
+sudo docker exec ${NGINX_CONTAINER} /bin/bash -c 'supervisorctl stop nginx \
     && certbot renew \
     && supervisorctl start nginx'
 
