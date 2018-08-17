@@ -13,8 +13,8 @@
             <h3>
               <a [routerLink]="['/'].concat(result.relativeUrl.split('/')).concat('').slice(0, -1)">{{result.title}}</a>
             </h3>
-            <p *ngIf="result.search_description">{{result.search_description}}</p>
             <small>Found In: Design</small>
+            <p *ngIf="result.search_description">{{result.search_description}}</p>
           </li>
         </ng-container>
         <ng-container *ngIf="docsResults">
@@ -22,8 +22,8 @@
             <h3>
               <a routerLink="/code/{{result.relativeUrl}}">{{result.title}}</a>
             </h3>
+            <small>Found In: {{result.library}} &middot; {{result.libVersion}}</small>
             <p *ngIf="result.description">{{result.description}}</p>
-            <small>Found In: Code</small>
           </li>
         </ng-container>
         <ng-container *ngIf="noResults">

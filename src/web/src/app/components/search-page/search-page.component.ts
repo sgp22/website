@@ -12,6 +12,8 @@ export class SearchPageComponent implements AfterViewInit {
   public pagesResults: any = [];
   public noResults = false;
   public relativeUrl;
+  public library;
+  public libVersion;
 
   constructor(
     private searchService: SearchService,
@@ -30,9 +32,7 @@ export class SearchPageComponent implements AfterViewInit {
       .subscribe(
         res => {
           const { docs, pages } = res.results;
-          if (docs) {
-            this.docsResults = docs.hits;
-          }
+          docs ? this.docsResults = docs.hits : this.docsResults = [];
           this.pagesResults = pages;
           this.noResults = false;
 
@@ -45,11 +45,16 @@ export class SearchPageComponent implements AfterViewInit {
           }
 
           if (this.docsResults) {
+
             this.docsResults.map((doc, i) => {
               const regexp = /docs\/|.json/gi;
-              const relativeUrl = doc.relativeUrl.replace(regexp, '');
-              this.docsResults[i]['relativeUrl'] = relativeUrl;
-            })
+              this.relativeUrl = doc.relativeUrl.replace(regexp, '');
+              this.library = this.relativeUrl.split('/')[0];
+              this.libVersion = this.relativeUrl.split('/')[1];
+              this.docsResults[i]['relativeUrl'] = this.relativeUrl;
+              this.docsResults[i]['library'] = this.library;
+              this.docsResults[i]['libVersion'] = this.libVersion;
+            });
           }
 
           if (this.docsResults.length === 0 && this.pagesResults.length === 0) {
@@ -58,9 +63,6 @@ export class SearchPageComponent implements AfterViewInit {
         },
         err => {
           console.error(err);
-        },
-        () => {
-          console.log('done');
         }
       );
   }
