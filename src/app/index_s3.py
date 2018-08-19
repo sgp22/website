@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-# coding: utf8
-# env = LANG=en_US.UTF-8
-# env = LC_ALL=en_US.UTF-8
 
 from sys import argv
 import os
@@ -11,8 +8,13 @@ import magic
 from search.utils import DocsIndexer
 
 
-def file_path_mime(file_obj):
+def file_path_mime_from_buffer(file_obj):
 	mime = magic.from_buffer(file_obj, mime=True)
+
+	return mime
+
+def file_path_mime_from_file(file_path):
+	mime = magic.from_file(file_path, mime=True)
 
 	return mime
 
@@ -34,22 +36,32 @@ def s3_sync(**kwargs):
     tmp_dir = "{}/tmp".format(root_path)
 
     for s3_obj, i in paginate_and_yield(src_client, tmp_dir, src_bucket, download=True):
-        read_contents_bytes = open(i, 'rb').read()
-        mime_type = file_path_mime(read_contents_bytes)
-        read_contents_str = read_contents_bytes.decode('utf-8')
-        indexer = DocsIndexer(es_host, 'docs', es_index_prefix)
-        s3_path = i.replace(tmp_dir, '')
-        s3_path = s3_path[1:]
+        print("Reading file: {}".format(i))
+
+        mime_type = file_path_mime_from_file(i)
+        index_mime_types = [
+            'text/plain',
+            'text/html',
+        ]
 
         print("{} : {}".format(i, mime_type))
-        print("s3 path: {}".format(s3_path))
 
-        doc = {
-            'content': read_contents_str,
-            'path': s3_path
-        }
+        if mime_type in index_mime_types:
+            read_contents = open(i, 'rt', encoding='utf8').read()
+            read_contents_bytes = bytes(read_contents.strip(), 'utf8')
+            read_contents_str = read_contents_bytes.decode('utf-8')
+            indexer = DocsIndexer(es_host, 'docs', es_index_prefix)
+            s3_path = i.replace(tmp_dir, '')
+            s3_path = s3_path[1:]
+            doc = {
+                'content': read_contents_str,
+                'path': s3_path
+            }
 
-        indexer.index_doc(doc)
+            indexer.index_doc(doc)
+
+            print("Content for {} indexed.".format(i))
+
         os.remove(i)
 
 def paginate_and_yield(client, local='/tmp/', bucket='tmp', download=False):
@@ -98,9 +110,6 @@ def getopts(argv):
 if __name__ == '__main__':
     try:
         args = getopts(argv)
-
-        print(os.path.dirname(os.path.realpath(__file__)))
-        print(args)
 
         kwargs = {
             'bucket_name': args['-bucket_name'],

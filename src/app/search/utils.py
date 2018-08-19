@@ -87,8 +87,6 @@ class DocsIndexer:
             connection_class=RequestsHttpConnection,
         )
 
-        print(self.es.info())
-
     def _create_index(self):
         """Create ES index."""
         self.es.indices.create(
