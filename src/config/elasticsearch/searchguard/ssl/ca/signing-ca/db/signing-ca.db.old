@@ -1,0 +1,4 @@
+V	200813141112Z		01	unknown	/C=COM/OU=SSL/CN=NODE-1
+V	200813141115Z		02	unknown	/C=COM/OU=devops/CN=elastic
+V	200813141117Z		03	unknown	/C=COM/OU=devops/CN=kibana
+V	200813141120Z		04	unknown	/C=COM/OU=devops/CN=logstash

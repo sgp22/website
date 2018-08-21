@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -18,12 +18,17 @@ import { LibraryService } from '../../shared/library.service';
 import { SitemapService } from '../../shared/sitemap.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
+interface TocItems {
+  label: string;
+  id: string;
+}
+
 @Component({
   selector: 'app-docs-content-page',
   templateUrl: './docs-content-page.component.html',
   providers: [AppSettings, UrlParser, UrlMapper, TokenService, DocService, LibraryService, SitemapService]
 })
-export class DocsContentPageComponent implements OnInit, OnDestroy {
+export class DocsContentPageComponent implements OnInit, OnDestroy, AfterViewInit {
   public path = '';
   public basePath = '';
   public mapPath = '';
@@ -40,6 +45,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public loading = true;
   public notFound = false;
   public showWarning = false;
+  public component;
+  public tocItems: TocItems[] = [];
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')
@@ -123,6 +130,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
             );
         });
 
+
+
       (<any>window).ga('set', {
         'dimension2': (segment[3] ? segment[3].path : 'n/a'),
         'dimension4': `${segment[1].path}`,
@@ -130,6 +139,22 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         'dimension6': (segment[2].path === 'latest' ? 'yes' : 'no'),
       });
       (<any>window).ga('send', 'pageview');
+    });
+  }
+
+  ngAfterViewInit() {
+    this.route.url.subscribe(segment => {
+      this.tocItems = [];
+      this.component = segment.slice(-1)[0].path;
+      console.log(this.component);
+
+      const titles = [].slice.call(document.querySelectorAll('h2'));
+      titles.map((item) => {
+        this.tocItems.push({
+          label: item.innerText,
+          id: item.id
+        });
+      });
     });
   }
 

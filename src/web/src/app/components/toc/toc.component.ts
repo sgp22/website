@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 interface TocItems {
@@ -11,40 +11,40 @@ interface TocItems {
   templateUrl: './toc.component.html'
 })
 export class TocComponent implements AfterViewInit {
-  public tocItems: TocItems[] = [];
+  // public tocItems: TocItems[] = [];
   public landingPage;
   @Input() loading;
+  @Input() component;
+  @Input() tocItems;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
 
-    this.route.url.subscribe(urlSegment => {
+    const routeUrl = await this.route.url;
+    routeUrl.subscribe(urlSegment => {
 
-      this.tocItems = [];
+      console.log(this.tocItems);
+    //   // this.tocItems = [];
 
-      const lastSegment = urlSegment.slice(-1)[0].path;
-      if (lastSegment === 'latest' || lastSegment === 'index') {
-        this.landingPage = true;
-      } else {
-        this.landingPage = false;
-      }
+    //   const lastSegment = urlSegment.slice(-1)[0].path;
+    //   if (lastSegment === 'latest' || lastSegment === 'index') {
+    //     this.landingPage = true;
+    //   } else {
+    //     this.landingPage = false;
+    //   }
 
-      if (!this.loading) {
-        setTimeout(() => {
-          const titles = [].slice.call(document.querySelectorAll('h2'));
-          titles.map((item) => {
-            this.tocItems.push({
-              label: item.innerText,
-              id: item.id
-            });
-          });
-          this.pageLoadToSection();
-        }, 200);
-      }
+    //   const titles = [].slice.call(document.querySelectorAll('h2'));
+    //   titles.map((item) => {
+    //     this.tocItems.push({
+    //       label: item.innerText,
+    //       id: item.id
+    //     });
+    //   });
+    //   this.pageLoadToSection();
 
     });
 
