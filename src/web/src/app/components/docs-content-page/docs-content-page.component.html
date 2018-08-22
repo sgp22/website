@@ -29,7 +29,7 @@
           </div>
         </header>
 
-        <h2 *ngIf="docs?.demo?.pages">Live Demos</h2>
+        <h2 *ngIf="docs?.demo?.pages" id="live-demo">Live Demos</h2>
         <ul *ngIf="docs?.demo?.pages">
           <li *ngFor="let demo of docs.demo.pages">
             <a class="demo-link" href="{{absolutePath}}/demo/{{element}}/{{demo.slug}}?font=source-sans" target="_blank">
@@ -57,7 +57,7 @@
 
 </div>
 
-<toc *ngIf="!loading" [loading]="loading"></toc>
+<toc *ngIf="!loading" [loading]="loading" [component]="component" [tocItems]="tocItems"></toc>
 
 <question-widget *ngIf="!loading"></question-widget>
 

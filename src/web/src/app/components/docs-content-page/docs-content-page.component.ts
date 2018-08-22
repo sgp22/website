@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding, AfterViewInit, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -17,6 +17,11 @@ import { DocService } from '../../shared/doc.service';
 import { LibraryService } from '../../shared/library.service';
 import { SitemapService } from '../../shared/sitemap.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+
+interface TocItems {
+  label: string;
+  id: string;
+}
 
 @Component({
   selector: 'app-docs-content-page',
@@ -40,6 +45,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public loading = true;
   public notFound = false;
   public showWarning = false;
+  public component;
+  public tocItems: TocItems[] = [];
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')
@@ -58,6 +65,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     private libraryService: LibraryService,
     private sitemapService: SitemapService,
     private loadingBar: LoadingBarService,
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -111,6 +119,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }
                 this.handleRelativeLinks(docs);
+                this.buildToc();
               },
               (err) => {
                 this.stopRefreshing();
@@ -131,6 +140,34 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       });
       (<any>window).ga('send', 'pageview');
     });
+  }
+
+  createTocItems(item) {
+    const regexId = new RegExp(/id=(?:'|")(.*?)(?:'|")/g);
+    const regexLabel = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
+    const ids = item.match(regexId);
+    const id = ids[0].replace(/id=(?:'|")/g, '').replace(/(?:'|")$/, '');
+    const labels = item.match(regexLabel);
+    const label = labels[0].replace(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>))/, '').replace(/<\/h2>/, '');
+    this.tocItems.push({
+      label: label,
+      id: id
+    });
+  }
+
+  buildToc() {
+    this.tocItems = [];
+    const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
+    const bodyTitles = this.docs.body.match(regex);
+    const apiTitles = this.docs.api.match(regex);
+
+    if (apiTitles) {
+      apiTitles.map(item => this.createTocItems(item));
+    }
+
+    if (bodyTitles) {
+      bodyTitles.map(item => this.createTocItems(item));
+    }
   }
 
   handleRelativeLinks(docs) {
