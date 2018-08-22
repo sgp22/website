@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostBinding, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding, AfterViewInit, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -28,7 +28,7 @@ interface TocItems {
   templateUrl: './docs-content-page.component.html',
   providers: [AppSettings, UrlParser, UrlMapper, TokenService, DocService, LibraryService, SitemapService]
 })
-export class DocsContentPageComponent implements OnInit, OnDestroy, AfterViewInit {
+export class DocsContentPageComponent implements OnInit, OnDestroy {
   public path = '';
   public basePath = '';
   public mapPath = '';
@@ -65,6 +65,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     private libraryService: LibraryService,
     private sitemapService: SitemapService,
     private loadingBar: LoadingBarService,
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit() {
@@ -118,6 +119,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy, AfterViewIni
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }
                 this.handleRelativeLinks(docs);
+                this.buildToc();
               },
               (err) => {
                 this.stopRefreshing();
@@ -130,8 +132,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy, AfterViewIni
             );
         });
 
-
-
       (<any>window).ga('set', {
         'dimension2': (segment[3] ? segment[3].path : 'n/a'),
         'dimension4': `${segment[1].path}`,
@@ -142,20 +142,32 @@ export class DocsContentPageComponent implements OnInit, OnDestroy, AfterViewIni
     });
   }
 
-  ngAfterViewInit() {
-    this.route.url.subscribe(segment => {
-      this.tocItems = [];
-      this.component = segment.slice(-1)[0].path;
-      console.log(this.component);
-
-      const titles = [].slice.call(document.querySelectorAll('h2'));
-      titles.map((item) => {
-        this.tocItems.push({
-          label: item.innerText,
-          id: item.id
-        });
-      });
+  createTocItems(item) {
+    const regexId = new RegExp(/id=(?:'|")(.*?)(?:'|")/g);
+    const regexLabel = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
+    const ids = item.match(regexId);
+    const id = ids[0].replace(/id=(?:'|")/g, '').replace(/(?:'|")$/, '');
+    const labels = item.match(regexLabel);
+    const label = labels[0].replace(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>))/, '').replace(/<\/h2>/, '');
+    this.tocItems.push({
+      label: label,
+      id: id
     });
+  }
+
+  buildToc() {
+    this.tocItems = [];
+    const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
+    const bodyTitles = this.docs.body.match(regex);
+    const apiTitles = this.docs.api.match(regex);
+
+    if (apiTitles) {
+      apiTitles.map(item => this.createTocItems(item));
+    }
+
+    if (bodyTitles) {
+      bodyTitles.map(item => this.createTocItems(item));
+    }
   }
 
   handleRelativeLinks(docs) {
