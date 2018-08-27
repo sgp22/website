@@ -47,6 +47,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public showWarning = false;
   public component;
   public tocItems: TocItems[] = [];
+  public bodyTitles;
+  public apiTitles;
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')
@@ -158,15 +160,17 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   buildToc() {
     this.tocItems = [];
     const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
-    const bodyTitles = this.docs.body.match(regex);
-    const apiTitles = this.docs.api.match(regex);
-
-    if (apiTitles) {
-      apiTitles.map(item => this.createTocItems(item));
+    if (this.docs.body) {
+      this.bodyTitles = this.docs.body.match(regex);
     }
-
-    if (bodyTitles) {
-      bodyTitles.map(item => this.createTocItems(item));
+    if (this.docs.api) {
+      this.apiTitles = this.docs.api.match(regex);
+    }
+    if (this.apiTitles) {
+      this.apiTitles.map(item => this.createTocItems(item));
+    }
+    if (this.bodyTitles) {
+      this.bodyTitles.map(item => this.createTocItems(item));
     }
   }
 
