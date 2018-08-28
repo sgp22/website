@@ -72,9 +72,9 @@ describe('FeedbackWidgetComponent', () => {
   });
 
   it('#submitFeedback should set #showAdditional to false and #commentSubmitted to true', () => {
-    const comment = 'test comment';
+    const formValue = {comment: 'test comment', email: 'test@email.com'};
     const e = { preventDefault: function () { } };
-    component.submitFeedback(e, comment);
+    component.submitFeedback(formValue);
     expect(component.showAdditional).toBe(false, 'after submit');
     expect(component.commentSubmitted).toBe(true, 'after submit');
   });

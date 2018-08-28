@@ -15,13 +15,33 @@
   </fieldset>
 
   <div [hidden]="!showAdditional" class="feedback-widget--additional">
-    <form #feedbackForm (submit)="submitFeedback($event, typeComment.value)">
+    <form #feedbackForm="ngForm" (submit)="submitFeedback(feedbackForm.value)">
       <div class="ids-form-group">
         <label for="type-comment">Thanks! Any additional comments or suggestions?</label>
-        <textarea #typeComment id="type-comment" class="ids-form-control" placeholder="Type comment here" rows="3" aria-label="Type comment here" (keyup)="characterCounter(typeComment.value)"  maxlength="1500" required></textarea>
+        <textarea
+          #feedbackText
+          name="comment"
+          [(ngModel)]="comment"
+          (keyup)="characterCounter(feedbackText.value)"
+          id="type-comment"
+          class="ids-form-control"
+          placeholder="Type comment here"
+          rows="3"
+          aria-label="Type comment here"
+          maxlength="1500"
+          required></textarea>
         <p id="helpBlock" class="ids-info-block">{{charactersLeft}} characters remaining</p>
       </div>
-      <button type="submit" class="ids-btn ids-btn--primary">Submit</button>
+      <div class="ids-form-group">
+        <label for="feedback-email">Your Email (optional)</label>
+        <input
+          name="userEmail"
+          type="email"
+          [(ngModel)]="userEmail"
+          class="ids-form-control"
+          placeholder="Type email here" />
+      </div>
+      <button [disabled]="!feedbackForm.valid" type="submit" class="ids-btn ids-btn--primary">Submit</button>
     </form>
   </div>
 

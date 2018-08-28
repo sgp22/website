@@ -1,5 +1,11 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
+interface FeedbackForm {
+  comment: string,
+  userEmail: string
+}
 
 @Component({
   selector: 'feedback-widget',
@@ -8,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class FeedbackWidgetComponent implements AfterViewInit {
   @ViewChild('thumbsDown') thumbsDown: ElementRef;
   @ViewChild('thumbsUp') thumbsUp: ElementRef;
+  @ViewChild('feedbackForm') feedbackForm: NgForm;
   @Input() notFound;
   public widgetHovered = false;
   public thumbValue;
@@ -15,6 +22,8 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   public charactersLeft = this.maxLength;
   public showAdditional = false;
   public commentSubmitted = false;
+  public userEmail = '';
+  public comment = '';
   public url;
 
   constructor(
@@ -29,6 +38,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
         this.thumbsUp.nativeElement.checked = false;
         this.showAdditional = false;
         this.widgetHovered = false;
+        this.commentSubmitted = false;
         this.url = this.router.routerState.snapshot.url;
       });
     }
@@ -62,16 +72,16 @@ export class FeedbackWidgetComponent implements AfterViewInit {
     this.showAdditional = true;
   }
 
-  submitFeedback(e, comment: String) {
-    e.preventDefault();
-    if (comment === '') {
-      return;
-    }
+  submitFeedback(formValue: FeedbackForm) {
     try {
-      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, comment);
+      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, formValue.comment);
+      if (formValue.userEmail) {
+        (<any>window).ga('send', 'event', 'feedback - wasthishelpful', `providedemail - ${this.thumbValue}`, formValue.comment, { 'dimension9': formValue.userEmail });
+      }
     } catch (error) {
       console.error(error);
     }
+    this.feedbackForm.reset();
     this.showAdditional = false;
     this.commentSubmitted = true;
   }
