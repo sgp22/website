@@ -19,7 +19,7 @@
       <div class="ids-form-group">
         <label for="type-comment">Thanks! Any additional comments or suggestions?</label>
         <textarea
-          #feedbackText
+          #feedbackText="ngModel"
           name="comment"
           [(ngModel)]="comment"
           (keyup)="characterCounter(feedbackText.value)"
@@ -32,14 +32,20 @@
           required></textarea>
         <p id="helpBlock" class="ids-info-block">{{charactersLeft}} characters remaining</p>
       </div>
-      <div class="ids-form-group">
+      <div class="ids-form-group" [ngClass]="{'has-error': email.errors}">
         <label for="feedback-email">Your Email (optional)</label>
         <input
+          #email="ngModel"
           name="userEmail"
           type="email"
           [(ngModel)]="userEmail"
           class="ids-form-control"
-          placeholder="Type email here" />
+          placeholder="Type email here"
+          pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          >
+          <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+            <p *ngIf="email.errors" class="ids-info-block">Must provide valid email.</p>
+          </ng-container>
       </div>
       <button [disabled]="!feedbackForm.valid" type="submit" class="ids-btn ids-btn--primary">Submit</button>
     </form>

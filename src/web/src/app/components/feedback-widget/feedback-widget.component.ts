@@ -73,17 +73,19 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   }
 
   submitFeedback(formValue: FeedbackForm) {
-    try {
-      (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, formValue.comment);
-      if (formValue.userEmail) {
-        (<any>window).ga('send', 'event', 'feedback - wasthishelpful', `providedemail - ${this.thumbValue}`, formValue.comment, { 'dimension9': formValue.userEmail });
+    if (this.feedbackForm.valid) {
+      try {
+        (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, formValue.comment);
+        if (formValue.userEmail) {
+          (<any>window).ga('send', 'event', 'feedback - wasthishelpful', `providedemail - ${this.thumbValue}`, formValue.comment, { 'dimension9': formValue.userEmail });
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
+      this.feedbackForm.reset();
+      this.showAdditional = false;
+      this.commentSubmitted = true;
     }
-    this.feedbackForm.reset();
-    this.showAdditional = false;
-    this.commentSubmitted = true;
   }
 
   characterCounter(comment) {
