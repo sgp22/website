@@ -3,8 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 interface FeedbackForm {
-  comment: string,
-  userEmail: string
+  comment: string;
+  userEmail: string;
 }
 
 @Component({
@@ -75,9 +75,21 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   submitFeedback(formValue: FeedbackForm) {
     if (this.feedbackForm.valid) {
       try {
-        (<any>window).ga('send', 'event', 'feedback-wasthishelpful', `providedfeedback - ${this.thumbValue}`, formValue.comment);
+        (<any>window).ga(
+            'send',
+            'event', 'feedback-wasthishelpful',
+            `providedfeedback - ${this.thumbValue}`,
+            formValue.comment
+          );
         if (formValue.userEmail) {
-          (<any>window).ga('send', 'event', 'feedback - wasthishelpful', `providedemail - ${this.thumbValue}`, formValue.comment, { 'dimension9': formValue.userEmail });
+          (<any>window).ga(
+              'send',
+              'event',
+              'feedback - wasthishelpful',
+              `providedemail - ${this.thumbValue}`,
+              formValue.comment,
+              { 'dimension9': formValue.userEmail }
+            );
         }
       } catch (error) {
         console.error(error);
