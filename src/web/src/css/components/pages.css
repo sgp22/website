@@ -543,12 +543,6 @@
       margin-bottom: calc(var(--spacing) * 2);
       margin-left: calc(var(--spacing) * 2);
     }
-
-    @media (--viewport-xl) {
-      position: absolute;
-      right: 36px;
-      top: 132px;
-    }
   }
 }
 
