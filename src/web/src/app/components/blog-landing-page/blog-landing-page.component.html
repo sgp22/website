@@ -15,33 +15,9 @@
       </header>
 
       <div class="blog-post--content">
-        <ng-container *ngFor="let content of post.content">
-          <div *ngIf="content.type === 'richText'" [innerHTML]="content?.value.substring(0, 170).concat('...')"></div>
-          <div *ngIf="content.type === 'markdown'" [innerHTML]="content?.value.substring(0, 170).concat('...')"></div>
-          <ng-container *ngIf="content.type === 'table'">
-            <table>
-              <ng-container *ngIf="content.value.first_row_is_table_header; then thBlock; else tdBlock;"></ng-container>
-              <ng-template #thBlock>
-                <thead>
-                  <th *ngFor="let head of content?.value.data[0]" [innerHTML]="head"></th>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let row of content?.value.data; let first=first;">
-                    <ng-container *ngIf="!first">
-                      <td *ngFor="let data of row" [innerHTML]="data"></td>
-                    </ng-container>
-                  </tr>
-                </tbody>
-              </ng-template>
-              <ng-template #tdBlock>
-                <tbody>
-                  <tr *ngFor="let row of content?.value.data;">
-                    <td *ngFor="let data of row" [innerHTML]="data"></td>
-                  </tr>
-                </tbody>
-              </ng-template>
-            </table>
-          </ng-container>
+      <ng-container>
+        <div *ngIf="post.content[0].type === 'richText' || post.content[0].type === 'markdown'" [innerHTML]="post?.content[0].value.slice(0, post.content[0].value.indexOf('</p>'))"></div>
+        <a routerLink="{{post.meta.slug}}">Continue reading...</a>
         </ng-container>
       </div>
 
