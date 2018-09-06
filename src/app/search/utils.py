@@ -74,14 +74,6 @@ class DocsIndexer:
         self.es_index = es_index
         self.es_index_prefix = es_index_prefix
         self.es_index_name = "{0}__{1}".format(es_index_prefix, es_index)
-        '''
-        self.es = Elasticsearch(
-            es_host,
-            connection_class=RequestsHttpConnection,
-            use_ssl=True,
-            verify_certs=False,
-            http_auth=(ES_USER, ES_PASS))
-        '''
         self.es = Elasticsearch(
             es_host,
             connection_class=RequestsHttpConnection,

@@ -219,13 +219,6 @@ WAGTAILSEARCH_BACKENDS = {
         'TIMEOUT': 5,
         'OPTIONS': {},
         'INDEX_SETTINGS': {},
-        #'OPTIONS': {
-        #    'connection_class': RequestsHttpConnection,
-        #    'port': 443,
-        #    'use_ssl': True,
-        #    'verify_certs': False,
-        #    'http_auth': (ES_USER, ES_PASS),
-        #},
     }
 }
 
