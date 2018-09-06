@@ -28,8 +28,8 @@
 }
 
 .demo-link {
-  display: flex;
   align-items: center;
+  display: flex;
 
   & .ids-icon {
     margin-left: var(--spacing-base);

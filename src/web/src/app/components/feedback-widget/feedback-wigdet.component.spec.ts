@@ -1,9 +1,8 @@
 import { FeedbackWidgetComponent } from './feedback-widget.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { By } from '@angular/platform-browser';
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
-import { DebugElement, NO_ERRORS_SCHEMA } from '../../../../node_modules/@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NO_ERRORS_SCHEMA } from '../../../../node_modules/@angular/core';
 import { Observable } from '../../../../node_modules/rxjs';
 
 
@@ -16,7 +15,7 @@ describe('FeedbackWidgetComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [FeedbackWidgetComponent],
-      imports: [],
+      imports: [FormsModule],
       providers: [
         {
           provide: Router
@@ -72,9 +71,8 @@ describe('FeedbackWidgetComponent', () => {
   });
 
   it('#submitFeedback should set #showAdditional to false and #commentSubmitted to true', () => {
-    const comment = 'test comment';
-    const e = { preventDefault: function () { } };
-    component.submitFeedback(e, comment);
+    const formValue = {comment: 'test comment', userEmail: 'test@email.com'};
+    component.submitFeedback(formValue);
     expect(component.showAdditional).toBe(false, 'after submit');
     expect(component.commentSubmitted).toBe(true, 'after submit');
   });
