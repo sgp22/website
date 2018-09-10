@@ -35,9 +35,9 @@
         <ng-container *ngIf="docsResults">
           <li class="ids-list--item" *ngFor="let result of docsResults">
             <h3>
-              <a routerLink="/code/{{result.relativeUrl}}">{{result.title}} &middot; version {{result.libVersion}}</a>
+              <a routerLink="/code/{{result.relativeUrl}}">{{result.title}} &middot; Version {{result.libVersion}}</a>
             </h3>
-            <small><strong>Found In:</strong> {{result.library}} version {{result.libVersion}}</small>
+            <small><strong>Found In:</strong> <a routerLink="/code/{{result.relativeUrl}}">{{this.domain}}/{{result.relativeUrl}}</a></small>
             <p *ngIf="result.description">{{result.description}}</p>
           </li>
         </ng-container>

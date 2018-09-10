@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
 import { NgForm } from '@angular/forms';
+import { AppSettings } from '../../app.settings';
 
 interface Query {
   query: string
@@ -19,14 +20,18 @@ export class SearchPageComponent implements AfterViewInit {
   public relativeUrl;
   public library;
   public libVersion;
+  public domain = '';
   public query = '';
   @ViewChild('searchForm') searchForm: NgForm;
 
   constructor(
     private searchService: SearchService,
+    private appSettings: AppSettings,
   ) { }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.domain = this.appSettings.domain;
+  }
 
   submitSearch(searchForm: Query) {
     if (searchForm.query === '') {
