@@ -3,8 +3,23 @@
     <div class="ids-row--col-md-6 ids-row--offset-md-3">
 
       <div class="ids-form-group">
-        <label for="searchInput">Search</label>
-        <input #searchInput (keyup.enter)="onEnter(searchInput.value)" type="text" class="ids-form-control" id="searchInput" name="searchInput" placeholder="Search">
+        <form #searchForm="ngForm" (submit)="submitSearch(searchForm.value)">
+          <div class="ids-form-group">
+            <label for="searchInput">Search</label>
+            <div class="ids-form-controls--horizontal">
+              <input
+                #searchInput="ngModel"
+                [(ngModel)]="query"
+                name="query"
+                type="text"
+                class="ids-form-control"
+                id="searchInput"
+                placeholder="Search"
+              >
+              <button class="ids-btn ids-btn--primary">Search</button>
+            </div>
+          </div>
+        </form>
       </div>
 
       <ul class="ids-list">
@@ -20,9 +35,9 @@
         <ng-container *ngIf="docsResults">
           <li class="ids-list--item" *ngFor="let result of docsResults">
             <h3>
-              <a routerLink="/code/{{result.relativeUrl}}">{{result.title}}</a>
+              <a routerLink="/code/{{result.relativeUrl}}">{{result.title}} &middot; version {{result.libVersion}}</a>
             </h3>
-            <small>Found In: {{result.library}} &middot; {{result.libVersion}}</small>
+            <small><strong>Found In:</strong> {{result.library}} version {{result.libVersion}}</small>
             <p *ngIf="result.description">{{result.description}}</p>
           </li>
         </ng-container>

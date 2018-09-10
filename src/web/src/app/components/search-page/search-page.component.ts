@@ -1,5 +1,10 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
+import { NgForm } from '@angular/forms';
+
+interface Query {
+  query: string
+}
 
 @Component({
   selector: 'search-page',
@@ -14,6 +19,8 @@ export class SearchPageComponent implements AfterViewInit {
   public relativeUrl;
   public library;
   public libVersion;
+  public query = '';
+  @ViewChild('searchForm') searchForm: NgForm;
 
   constructor(
     private searchService: SearchService,
@@ -21,14 +28,14 @@ export class SearchPageComponent implements AfterViewInit {
 
   ngAfterViewInit() {}
 
-  onEnter(value: string) {
-    if (value === '') {
+  submitSearch(searchForm: Query) {
+    if (searchForm.query === '') {
       this.docsResults = [];
       this.imagesResults = [];
       this.pagesResults = [];
       return;
     }
-    this.searchService.getSearch(value)
+    this.searchService.getSearch(searchForm.query)
       .subscribe(
         res => {
           const { docs, pages } = res.results;
