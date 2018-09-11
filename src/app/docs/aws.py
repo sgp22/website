@@ -125,16 +125,7 @@ def get(request):
         if version == 'latest':
             all_versions_paths = get_filtered_result(bucket_name, library_path + "/")
             all_versions = [s.lstrip(library_path).rstrip('/') for s in all_versions_paths]
-            latest_version = '0.0.0'
-
-            if len(all_versions) > 1:
-                for a, b in itertools.combinations(all_versions, 2):
-                    highest_version = semver.max_ver(a, b)
-
-                    if highest_version > latest_version:
-                        latest_version = highest_version
-            else:
-                latest_version = all_versions[0]
+            latest_version = semver.rsort(all_versions, True)[0]
 
             latest_file_pointer = os.path.join(*(
                 library_path,

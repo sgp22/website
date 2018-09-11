@@ -10,6 +10,6 @@ whitenoise==4.0b4
 Markdown==2.6.9
 wagtail-markdown==0.5a3
 html5lib==0.999999999
-semver==2.7.9
+node-semver==0.3.0
 django-dbbackup==3.2.0
 python-magic==0.4.15
