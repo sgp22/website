@@ -73,6 +73,7 @@ __pycache__/
 src/app/static/
 env/
 build/
+tmp/
 develop-eggs/
 #dist/
 eggs/
