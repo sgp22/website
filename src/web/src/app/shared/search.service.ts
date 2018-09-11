@@ -15,7 +15,7 @@ export class SearchService {
     private http: HttpClient,
   ) { }
 
-  getSearch(query) {
+  getSearch(query: string) {
     const url = `${this.appSettings.domain}/search/es/?search_query=${query}&search_in=docs,pages&docs_search_fields=path,content&wt_search_fields=title,content`;
     return this.cacheService.get(url, this.http.get(url).first());
   }

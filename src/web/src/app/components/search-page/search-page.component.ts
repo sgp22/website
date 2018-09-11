@@ -1,19 +1,16 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
+import { Router, ActivatedRoute  } from "@angular/router";
 import { NgForm } from '@angular/forms';
 import { AppSettings } from '../../app.settings';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-
-interface Query {
-  query: string
-}
 
 @Component({
   selector: 'search-page',
   templateUrl: './search-page.component.html',
   providers: [SearchService]
 })
-export class SearchPageComponent implements AfterViewInit {
+export class SearchPageComponent implements OnInit {
   public docsResults: any = [];
   public imagesResults: any = [];
   public pagesResults: any = [];
@@ -28,24 +25,33 @@ export class SearchPageComponent implements AfterViewInit {
   constructor(
     private searchService: SearchService,
     private appSettings: AppSettings,
-    private loadingBar: LoadingBarService
+    private loadingBar: LoadingBarService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.domain = this.appSettings.domain;
+    this.route.queryParams.subscribe(params => {
+      this.search(params.q) });
   }
 
-  submitSearch(searchForm: Query) {
-    if (searchForm.query === '') {
+  handleQuery(searchForm) {
+    this.router.navigate(['site/search'], { queryParams: { q: `${searchForm.query.trim()}` } });
+  }
+
+  search(term) {
+    if (term === '' || term === undefined) {
       this.docsResults = [];
       this.imagesResults = [];
       this.pagesResults = [];
       return;
     }
     this.loadingBar.start();
-    this.searchService.getSearch(searchForm.query)
+    this.searchService.getSearch(term)
       .subscribe(
         res => {
+          console.log(res);
           const { docs, pages } = res.results;
           docs ? this.docsResults = docs.hits : this.docsResults = [];
           this.pagesResults = pages;
@@ -84,5 +90,5 @@ export class SearchPageComponent implements AfterViewInit {
         },
       );
   }
-}
 
+}

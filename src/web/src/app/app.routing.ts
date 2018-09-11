@@ -80,7 +80,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'site/search',
-    component: SearchPageComponent
+    component: SearchPageComponent,
   },
   {
     path: 'search',

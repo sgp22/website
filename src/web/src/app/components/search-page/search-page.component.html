@@ -3,7 +3,7 @@
     <div class="ids-row--col-md-6 ids-row--offset-md-3">
 
       <div class="ids-form-group">
-        <form #searchForm="ngForm" (submit)="submitSearch(searchForm.value)">
+        <form #searchForm="ngForm" (submit)="handleQuery(searchForm.value)">
           <div class="ids-form-group">
             <label for="searchInput">Search</label>
             <div class="ids-form-controls--horizontal">
