@@ -1,12 +1,41 @@
 #!/usr/bin/python3
 
+from html.parser import HTMLParser
 from sys import argv
+import html
+import json
 import os
 import boto3
 import magic
+import re
+from markdown import markdown
 
 from search.utils import DocsIndexer
 
+
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.strict = False
+        self.convert_charrefs= True
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
+
+def strip_tags(input_html):
+    s = MLStripper()
+    input_html = re.sub(r'(\n)', '', input_html)
+    lis = list(filter(None, input_html.split(" ")))
+    input_html = " ".join(lis)
+    input_html = re.sub(r'<pre>(.*?)</pre>', '', input_html)
+    input_html = re.sub(r'<code>(.*?)</code>', '', input_html)
+    s.feed(input_html)
+    clean = s.get_data()
+    clean = re.sub('\s\s+', ' ', clean)
+
+    return clean
 
 def file_path_mime_from_buffer(file_obj):
 	mime = magic.from_buffer(file_obj, mime=True)
@@ -40,8 +69,7 @@ def s3_sync(**kwargs):
 
         mime_type = file_path_mime_from_file(i)
         index_mime_types = [
-            'text/plain',
-            'text/html',
+            'text/plain'
         ]
 
         print("{} : {}".format(i, mime_type))
@@ -53,10 +81,23 @@ def s3_sync(**kwargs):
             indexer = DocsIndexer(es_host, 'docs', es_index_prefix)
             s3_path = i.replace(tmp_dir, '')
             s3_path = s3_path[1:]
+            s3_path_split = s3_path.split('/')
             doc = {
-                'content': read_contents_str,
                 'path': s3_path
             }
+
+            try:
+                content_obj = json.loads(read_contents_str)
+                doc['content'] = strip_tags(content_obj['body'])
+                doc['title'] = content_obj['title']
+                doc['library'] = s3_path_split[1]
+                doc['version'] = s3_path_split[2]
+            except ValueError as err:
+                print("ValueError exception... {}".format(err))
+                continue
+            except KeyError as err:
+                print("KeyError exception... {}".format(err))
+                continue
 
             indexer.index_doc(doc)
 
