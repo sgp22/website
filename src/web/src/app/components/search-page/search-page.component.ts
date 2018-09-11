@@ -1,5 +1,12 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
+import { NgForm } from '@angular/forms';
+import { AppSettings } from '../../app.settings';
+import { LoadingBarService } from '@ngx-loading-bar/core';
+
+interface Query {
+  query: string
+}
 
 @Component({
   selector: 'search-page',
@@ -14,21 +21,29 @@ export class SearchPageComponent implements AfterViewInit {
   public relativeUrl;
   public library;
   public libVersion;
+  public domain = '';
+  public query = '';
+  @ViewChild('searchForm') searchForm: NgForm;
 
   constructor(
     private searchService: SearchService,
+    private appSettings: AppSettings,
+    private loadingBar: LoadingBarService
   ) { }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.domain = this.appSettings.domain;
+  }
 
-  onEnter(value: string) {
-    if (value === '') {
+  submitSearch(searchForm: Query) {
+    if (searchForm.query === '') {
       this.docsResults = [];
       this.imagesResults = [];
       this.pagesResults = [];
       return;
     }
-    this.searchService.getSearch(value)
+    this.loadingBar.start();
+    this.searchService.getSearch(searchForm.query)
       .subscribe(
         res => {
           const { docs, pages } = res.results;
@@ -63,7 +78,10 @@ export class SearchPageComponent implements AfterViewInit {
         },
         err => {
           console.error(err);
-        }
+        },
+        () => {
+          this.loadingBar.complete();
+        },
       );
   }
 }
