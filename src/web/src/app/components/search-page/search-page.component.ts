@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
 import { NgForm } from '@angular/forms';
 import { AppSettings } from '../../app.settings';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 interface Query {
   query: string
@@ -27,6 +28,7 @@ export class SearchPageComponent implements AfterViewInit {
   constructor(
     private searchService: SearchService,
     private appSettings: AppSettings,
+    private loadingBar: LoadingBarService
   ) { }
 
   ngAfterViewInit() {
@@ -40,6 +42,7 @@ export class SearchPageComponent implements AfterViewInit {
       this.pagesResults = [];
       return;
     }
+    this.loadingBar.start();
     this.searchService.getSearch(searchForm.query)
       .subscribe(
         res => {
@@ -75,7 +78,10 @@ export class SearchPageComponent implements AfterViewInit {
         },
         err => {
           console.error(err);
-        }
+        },
+        () => {
+          this.loadingBar.complete();
+        },
       );
   }
 }
