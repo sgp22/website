@@ -4,6 +4,8 @@ import copy
 import json
 import urllib3
 
+from wagtail.core.models import Page
+
 from elasticsearch import (
     Elasticsearch,
     NotFoundError,
@@ -23,6 +25,13 @@ DOCS_QUERY_BODY = {
             'query': '',
             'fields': []
         }
+    },
+    "highlight" : {
+        "fields" : {
+            "content" : {},
+            "*__body" : {},
+        },
+        "fragment_size" : 200,
     }
 }
 
@@ -92,15 +101,18 @@ class DocsIndexer:
 
         return hash_object.hexdigest()
 
-    def search(self, raw_query, search_fields=[]):
+    def search(self, index_list, raw_query, search_fields=[]):
         # Format and structure the
         # elastic search query further.
         search_results = {
-            'ids': [],
             'hits': []
         }
         es_query_body = copy.deepcopy(DOCS_QUERY_BODY)
         es_query_body['query']['multi_match']['query'] = raw_query
+
+        for idx, val in enumerate(index_list):
+            index_list[idx] = ("{0}__{1}".format(self.es_index_prefix, val))
+        es_query_indexes = ",".join(index_list)
 
         if search_fields and type(search_fields) is not list:
             raise WrongFieldsTypeError(
@@ -116,37 +128,43 @@ class DocsIndexer:
                 "{} index does not exist!".format(self.es_index_name))
 
         res = self.es.search(
-            index=self.es_index_name,
+            index=es_query_indexes,
             body=es_query_body
         )
 
-        for hit in res['hits']['hits']:
-            pk = hit['_id']
-            content = json.loads(hit['_source']['content'])
-
-            # Inspecting a very strange object.
-            #if not 'description' in content.keys():
-            #    print(json.dumps(content))
-
-            try:
-                structured_result = {
-                    '_id': pk,
-                    '_index': hit['_index'],
-                    '_type': hit['_type'],
-                    '_score': hit['_score'],
-                    '_source': hit['_source'],
-                    'title': content['title'],
-                    'description': content['description'],
-                    'api': content['api'],
-                    'body': content['body'],
-                    'relativeUrl': hit['_source']['path'],
-                }
-                search_results['ids'].append(pk)
-                search_results['hits'].append(structured_result)
-            except ValueError:
-                pass
-            except KeyError:
-                pass
+        for h in res['hits']['hits']:
+            if h["_index"] == "%s__docs" % self.es_index_prefix:
+                try:
+                    result = {
+                        'type': 'doc',
+                        'title': h['_source']['title'],
+                        '_score': h['_score'],
+                        'highlight' : h['highlight']['content'][0],
+                        'library': h['_source']['library'],
+                        'version': h['_source']['version'],
+                        'url': "/code/{0}/{1}/{2}".format(h['_source']['library'], h['_source']['version'], h['_source']['slug'])
+                    }
+                    search_results['hits'].append(result)
+                except ValueError:
+                    pass
+                except KeyError:
+                    pass
+            elif h["_index"] == "%s__wagtailcore_page" % self.es_index_prefix:
+                p = Page.objects.get(id__exact=h["_id"])
+                highlight = next(iter(h['highlight'].values()))[0] if 'highlight' in h else []
+                try:
+                    result = {
+                        'type': 'page',
+                        'title': h['_source']['title'],
+                        '_score': h['_score'],
+                        'url': '/%s' % p.url_path.split('/', 2)[2],
+                        'highlight': highlight
+                    }
+                    search_results['hits'].append(result)
+                except ValueError:
+                    pass
+                except KeyError:
+                    pass
 
         return search_results
 
