@@ -47,6 +47,7 @@ export class SearchPageComponent implements OnInit {
       return;
     }
     this.loadingBar.start();
+    this.query = term;
     this.searchService.getSearch(term)
       .subscribe(
         res => {
