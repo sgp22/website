@@ -65,14 +65,20 @@ def s3_sync(**kwargs):
     for s3_obj, i in paginate_and_yield(src_client, tmp_dir, src_bucket, download=True):
         print("Reading file: {}".format(i))
 
+        f, ext = os.path.splitext(i)
+
         mime_type = file_path_mime_from_file(i)
         index_mime_types = [
             'text/plain'
         ]
 
+        index_ext_types = [
+            '.json',
+        ]
+
         print("{} : {}".format(i, mime_type))
 
-        if mime_type in index_mime_types:
+        if ext in index_ext_types:
             read_contents = open(i, 'rt', encoding='utf8').read()
             read_contents_bytes = bytes(read_contents.strip(), 'utf8')
             read_contents_str = read_contents_bytes.decode('utf-8')
