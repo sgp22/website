@@ -11,9 +11,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
   providers: [SearchService]
 })
 export class SearchPageComponent implements OnInit {
-  public docsResults: any = [];
-  public imagesResults: any = [];
-  public pagesResults: any = [];
+  public searchResults = [];
   public noResults = false;
   public relativeUrl;
   public library;
@@ -41,9 +39,7 @@ export class SearchPageComponent implements OnInit {
 
   search(term) {
     if (term === '' || term === undefined) {
-      this.docsResults = [];
-      this.imagesResults = [];
-      this.pagesResults = [];
+      this.searchResults = [];
       return;
     }
     this.loadingBar.start();
@@ -51,35 +47,8 @@ export class SearchPageComponent implements OnInit {
     this.searchService.getSearch(term)
       .subscribe(
         res => {
-          const { docs, pages } = res.results;
-          docs ? this.docsResults = docs.hits : this.docsResults = [];
-          this.pagesResults = pages;
-          this.noResults = false;
-
-          if (this.pagesResults) {
-            this.pagesResults.map((page, i) => {
-              if (page.meta) {
-                this.pagesResults[i]['relativeUrl'] = page.meta.html_url.split('/').slice(3, -1).join('/');
-              }
-            });
-          }
-
-          if (this.docsResults) {
-
-            this.docsResults.map((doc, i) => {
-              const regexp = /docs\/|.json/gi;
-              this.relativeUrl = doc.relativeUrl.replace(regexp, '');
-              this.library = this.relativeUrl.split('/')[0];
-              this.libVersion = this.relativeUrl.split('/')[1];
-              this.docsResults[i]['relativeUrl'] = this.relativeUrl;
-              this.docsResults[i]['library'] = this.library;
-              this.docsResults[i]['libVersion'] = this.libVersion;
-            });
-          }
-
-          if (this.docsResults.length === 0 && this.pagesResults.length === 0) {
-            this.noResults = true;
-          }
+          this.searchResults = res.results.hits;
+          this.searchResults.length === 0 ? this.noResults = true : this.noResults = false;
         },
         err => {
           console.error(err);

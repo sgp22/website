@@ -23,22 +23,13 @@
       </div>
 
       <ul class="ids-list">
-        <ng-container *ngIf="pagesResults">
-          <li class="ids-list--item" *ngFor="let result of pagesResults">
+        <ng-container *ngIf="searchResults">
+          <li class="ids-list--item" *ngFor="let result of searchResults">
             <h3>
-              <a [routerLink]="['/'].concat(result.relativeUrl.split('/')).concat('').slice(0, -1)">{{result.title}}</a>
+              <a routerLink="{{result.url}}">{{result.title}} {{ result.version && '&middot; Version ' + result.version }}</a>
             </h3>
-            <small>Found In: Design</small>
-            <p *ngIf="result.search_description">{{result.search_description}}</p>
-          </li>
-        </ng-container>
-        <ng-container *ngIf="docsResults">
-          <li class="ids-list--item" *ngFor="let result of docsResults">
-            <h3>
-              <a routerLink="/code/{{result.relativeUrl}}">{{result.title}} &middot; Version {{result.libVersion}}</a>
-            </h3>
-            <small><strong>Found In:</strong> <a routerLink="/code/{{result.relativeUrl}}">{{this.domain}}/{{result.relativeUrl}}</a></small>
-            <p *ngIf="result.description">{{result.description}}</p>
+            <small><strong>Found In:</strong> {{result.type === 'page' ? 'Design' : 'Code'}}</small>
+            <p *ngIf="result.highlight" [innerHTML]="result.highlight"></p>
           </li>
         </ng-container>
         <ng-container *ngIf="noResults">

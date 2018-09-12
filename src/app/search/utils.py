@@ -4,8 +4,6 @@ import copy
 import json
 import urllib3
 
-from wagtail.core.models import Page
-
 from elasticsearch import (
     Elasticsearch,
     NotFoundError,
@@ -150,6 +148,7 @@ class DocsIndexer:
                 except KeyError:
                     pass
             elif h["_index"] == "%s__wagtailcore_page" % self.es_index_prefix:
+                from wagtail.core.models import Page
                 p = Page.objects.get(id__exact=h["_id"])
                 highlight = next(iter(h['highlight'].values()))[0] if 'highlight' in h else []
                 try:
