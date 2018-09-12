@@ -272,7 +272,8 @@ class CoreContentPage(PageBase):
         return ""
 
     search_fields = Page.search_fields + [
-        index.SearchField('content'),
+        index.SearchField('body'),
+        index.SearchField('description'),
     ]
 
 
@@ -418,7 +419,14 @@ class ElementsPage(PageBase):
         return ""
 
     search_fields = Page.search_fields + [
-        index.SearchField('content'),
+        index.SearchField('body'),
+        index.SearchField('what_it_does'),
+        index.SearchField('what_user_can_do'),
+        index.SearchField('when_to_use_it'),
+        index.SearchField('fka'),
+        index.SearchField('types'),
+        index.SearchField('modifiers'),
+        index.SearchField('states'),
     ]
 
 class BlocksPage(PageBase):
@@ -549,7 +557,13 @@ class BlocksPage(PageBase):
         return ""
 
     search_fields = Page.search_fields + [
-        index.SearchField('content'),
+        index.SearchField('body'),
+        index.SearchField('what_it_does'),
+        index.SearchField('what_user_can_do'),
+        index.SearchField('when_to_use_it'),
+        index.SearchField('fka'),
+        index.SearchField('types'),
+        index.SearchField('modifiers'),
     ]
 
 class BlogLandingPage(PageBase):
