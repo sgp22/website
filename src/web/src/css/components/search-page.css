@@ -1,3 +1,11 @@
 .search-page {
   padding-top: calc(var(--spacing-base) * 15);
 }
+
+.search-highlight {
+  & em {
+    background: #CBEBF4;
+    display: inline-block;
+    font-style: normal;
+  }
+}
