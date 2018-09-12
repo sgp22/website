@@ -32,8 +32,7 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit() {
     this.domain = this.appSettings.domain;
-    this.route.queryParams.subscribe(params => {
-      this.search(params.q) });
+    this.route.queryParams.subscribe(params => this.search(params.q));
   }
 
   handleQuery(searchForm) {
@@ -48,10 +47,10 @@ export class SearchPageComponent implements OnInit {
       return;
     }
     this.loadingBar.start();
+    this.query = term;
     this.searchService.getSearch(term)
       .subscribe(
         res => {
-          console.log(res);
           const { docs, pages } = res.results;
           docs ? this.docsResults = docs.hits : this.docsResults = [];
           this.pagesResults = pages;
