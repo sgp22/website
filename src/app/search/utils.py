@@ -27,6 +27,7 @@ DOCS_QUERY_BODY = {
     "highlight" : {
         "fields" : {
             "content" : {},
+            "*__content" : {},
             "*__body" : {},
         },
         "fragment_size" : 200,
@@ -151,19 +152,20 @@ class DocsIndexer:
                 from wagtail.core.models import Page
                 p = Page.objects.get(id__exact=h["_id"])
                 highlight = next(iter(h['highlight'].values()))[0] if 'highlight' in h else []
-                try:
-                    result = {
-                        'type': 'page',
-                        'title': h['_source']['title'],
-                        '_score': h['_score'],
-                        'url': '/%s' % p.url_path.split('/', 2)[2],
-                        'highlight': highlight
-                    }
-                    search_results['hits'].append(result)
-                except ValueError:
-                    pass
-                except KeyError:
-                    pass
+                if p.live == True:
+                    try:
+                        result = {
+                            'type': 'page',
+                            'title': h['_source']['title'],
+                            '_score': h['_score'],
+                            'url': '/%s' % p.url_path.split('/', 2)[2],
+                            'highlight': highlight
+                        }
+                        search_results['hits'].append(result)
+                    except ValueError:
+                        pass
+                    except KeyError:
+                        pass
 
         return search_results
 

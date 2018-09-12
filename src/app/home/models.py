@@ -218,6 +218,8 @@ class LandingPage(PageBase):
 
     search_fields = Page.search_fields + [
         index.SearchField('content'),
+        index.SearchField('page_hero'),
+        index.SearchField('grid_blocks'),
     ]
 
 

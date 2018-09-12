@@ -26,11 +26,9 @@ class MLStripper(HTMLParser):
 
 def strip_tags(input_html):
     s = MLStripper()
-    input_html = re.sub(r'(\n)', '', input_html)
+    input_html = re.sub(r'(\n)', ' ', input_html)
     lis = list(filter(None, input_html.split(" ")))
     input_html = " ".join(lis)
-    input_html = re.sub(r'<pre>(.*?)</pre>', '', input_html)
-    input_html = re.sub(r'<code>(.*?)</code>', '', input_html)
     s.feed(input_html)
     clean = s.get_data()
     clean = re.sub('\s\s+', ' ', clean)

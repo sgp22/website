@@ -278,14 +278,14 @@ class ElasticSearchView(APIView):
 
             return_data['results'] = search_results
         except RequestError:
-            return_data['results'][search_in_item] = {
+            return_data['results'] = {
                 'results': search_results,
                 'error': 1,
                 'error_message': 'Request error!',
             }
 
         except NotFoundError:
-            return_data['results'][search_in_item] = {
+            return_data['results'] = {
                 'results': search_results,
                 'error': 1,
                 'error_message': 'Index not found!',
