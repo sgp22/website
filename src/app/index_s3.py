@@ -82,6 +82,8 @@ def s3_sync(**kwargs):
             s3_path = i.replace(tmp_dir, '')
             s3_path = s3_path[1:]
             s3_path_split = s3_path.split('/')
+            fname = s3_path_split[-1]
+            doc_slug = fname.split('.', 1)[0]
             doc = {
                 'path': s3_path
             }
@@ -92,6 +94,7 @@ def s3_sync(**kwargs):
                 doc['title'] = content_obj['title']
                 doc['library'] = s3_path_split[1]
                 doc['version'] = s3_path_split[2]
+                doc['slug'] = doc_slug
             except ValueError as err:
                 print("ValueError exception... {}".format(err))
                 continue
