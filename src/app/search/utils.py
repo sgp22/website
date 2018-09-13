@@ -152,6 +152,8 @@ class DocsIndexer:
 
             if h["_index"] == "%s__docs" % self.es_index_prefix:
                 version = 'latest' if h['_source']['version'] == library_versions[h['_source']['library']] else h['_source']['version']
+                if version != 'latest':
+                    continue
                 try:
                     result = {
                         'type': 'doc',
