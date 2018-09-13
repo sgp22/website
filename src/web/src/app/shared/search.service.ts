@@ -16,7 +16,7 @@ export class SearchService {
   ) { }
 
   getSearch(query: string) {
-    const url = `${this.appSettings.domain}/search/es/?search_query=${query}`;
+    const url = `${this.appSettings.domain}/search/es/?search_query=${query}&libraries=ids-enterprise:4.10.0,ids-css:1.3.0`;
     return this.cacheService.get(url, this.http.get(url).first());
   }
 }
