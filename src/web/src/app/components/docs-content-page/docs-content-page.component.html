@@ -17,6 +17,7 @@
         <header class="page-header">
           <div class="page-header__intro">
             <h1 class="page-title">{{docs?.title}}</h1>
+            <p *ngIf="docs?.description">{{docs?.description}}</p>
           </div>
           <div class="page-header__buttons">
             <a class="ids-btn ids-btn--link" *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">
@@ -29,10 +30,24 @@
           </div>
         </header>
 
-        <h2 *ngIf="docs?.demo?.pages" id="live-demo">Live Demos</h2>
+        <h2 *ngIf="docs?.demo?.pages" id="live-demo">Demos</h2>
+        <section *ngIf="docs?.demo?.pages">
+          <div *ngFor="let demo of docs.demo.pages" class="inline-demo">
+            <h4>{{demo.name}}
+              <a class="demo-link" href="{{demo.trustedSlug}}" target="_blank">
+                <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+                  <use xlink:href="#icon_launch"></use>
+                </svg>
+              </a>
+            </h4>
+            <iframe [src]="demo.trustedSlug" frameborder="1" height="300px" width="100%"></iframe>
+          </div>
+        </section>
+
+        <h2 *ngIf="docs?.demo?.pages" id="live-demo">More Live Demos</h2>
         <ul *ngIf="docs?.demo?.pages">
           <li *ngFor="let demo of docs.demo.pages">
-            <a class="demo-link" href="{{absolutePath}}/demo/{{element}}/{{demo.slug}}?font=source-sans" target="_blank">
+            <a class="demo-link" href="{{demo.trustedSlug}}" target="_blank">
               {{demo.name}}
               <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
                 <use xlink:href="#icon_launch"></use>

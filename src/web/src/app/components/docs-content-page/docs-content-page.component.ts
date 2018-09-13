@@ -49,6 +49,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public tocItems: TocItems[] = [];
   public bodyTitles;
   public apiTitles;
+  public testUrl: any;
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')
@@ -120,6 +121,12 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 if (docs.api) {
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }
+                let demoUrl = '';
+                docs.demo.pages.forEach(page => {
+                  demoUrl = `${this.absolutePath}/demo/${this.element}/${page.slug}?font=source-sans`;
+                  // demoUrl = `http://localhost:4000/components/${this.element}/${page.slug}?font=source-sans`;
+                  page.trustedSlug = this.sanitizer.bypassSecurityTrustResourceUrl(demoUrl);
+                });
                 this.handleRelativeLinks(docs);
                 this.buildToc();
               },

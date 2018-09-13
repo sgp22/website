@@ -1,0 +1,7 @@
+/*
+ * Inline examples (iframes)
+ */
+
+.inline-demo {
+  margin: calc(3 * var(--spacing)) 0;
+}
