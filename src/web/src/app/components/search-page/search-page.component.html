@@ -26,7 +26,9 @@
         <ng-container *ngIf="searchResults">
           <li class="ids-list--item" *ngFor="let result of searchResults">
             <h3>
-              <a routerLink="{{result.url}}">{{result.title}} {{ result.version && '&middot; Version ' + result.version }}</a>
+              <a routerLink="{{result.url}}">
+                {{result.title}} {{ result.version && '&middot; ' + result.library + ' ' + result.version }}
+              </a>
             </h3>
             <small><strong>Found In:</strong> <a routerLink="{{result.url}}">{{this.domain}}{{result.url}}</a></small>
             <p class="search-highlight" *ngIf="result.highlight" [innerHTML]="result.highlight"></p>
