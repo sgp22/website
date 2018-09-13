@@ -104,7 +104,7 @@ class DocsIndexer:
 
         return hash_object.hexdigest()
 
-    def search(self, index_list, raw_query, search_fields=[]):
+    def search(self, index_list, raw_query, search_fields=[], library_versions={}):
         # Format and structure the
         # elastic search query further.
         search_results = {
@@ -126,6 +126,12 @@ class DocsIndexer:
         for field in search_fields:
             es_query_body['query']['multi_match']['fields'].append(field)
 
+        if library_versions and type(library_versions) is not dict:
+            raise WrongFieldsTypeError(
+                'wrong type',
+                'field library_versions is of type {},'
+                'should be list'.format(type(library_versions)))
+
         if not self.es.indices.exists(self.es_index_name):
             raise NotFoundError(
                 "{} index does not exist!".format(self.es_index_name))
@@ -140,6 +146,7 @@ class DocsIndexer:
             highlight = next(iter(h['highlight'].values()))[0] if 'highlight' in h else []
 
             if h["_index"] == "%s__docs" % self.es_index_prefix:
+                version = 'latest' if h['_source']['version'] == library_versions[h['_source']['library']] else h['_source']['version']
                 try:
                     result = {
                         'type': 'doc',
@@ -147,8 +154,8 @@ class DocsIndexer:
                         '_score': h['_score'],
                         'highlight' : highlight,
                         'library': h['_source']['library'],
-                        'version': h['_source']['version'],
-                        'url': "/code/{0}/{1}/{2}".format(h['_source']['library'], h['_source']['version'], h['_source']['slug'])
+                        'version': version,
+                        'url': "/code/{0}/{1}/{2}".format(h['_source']['library'], version, h['_source']['slug'])
                     }
                     search_results['hits'].append(result)
                 except ValueError:

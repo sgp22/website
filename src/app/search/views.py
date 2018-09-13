@@ -253,7 +253,15 @@ class ElasticSearchView(APIView):
     """
     def get(self, request, **kwargs):
         search_query = request.GET.get('search_query', None)
+        libraries = request.GET.get('libraries', None)
         query_indexes = ['docs', 'wagtailcore_page']
+
+        libs = libraries.split(",")
+        library_versions = {}
+        for l in libs:
+            v = l.split(":")
+            version = {}
+            library_versions[v[0]] = v[1]
 
         return_data = {
             'results': {}
@@ -274,7 +282,9 @@ class ElasticSearchView(APIView):
 
             search_results = es_search.search(
                 query_indexes,
-                search_query)
+                search_query,
+                [],
+                library_versions)
 
             return_data['results'] = search_results
         except RequestError:
