@@ -31,7 +31,8 @@ DOCS_QUERY_BODY = {
             "*__content" : {},
             "*__body" : {},
         },
-        "fragment_size" : 200,
+        "fragment_size" : 100,
+        "encoder" : "html"
     }
 }
 
@@ -143,7 +144,11 @@ class DocsIndexer:
 
         for h in res['hits']['hits']:
             # Flatten highlights if they exist and take the first index
-            highlight = next(iter(h['highlight'].values()))[0] if 'highlight' in h else []
+            highlight = ""
+            if 'highlight' in h:
+                for k in h['highlight']:
+                    for hl in h['highlight'][k]:
+                        highlight += " %s" % hl
 
             if h["_index"] == "%s__docs" % self.es_index_prefix:
                 version = 'latest' if h['_source']['version'] == library_versions[h['_source']['library']] else h['_source']['version']
@@ -154,7 +159,7 @@ class DocsIndexer:
                         '_score': h['_score'],
                         'highlight' : highlight,
                         'library': h['_source']['library'],
-                        'version': version,
+                        'version': "%s (Latest)" % h['_source']['version'] if version == "latest" else version,
                         'url': "/code/{0}/{1}/{2}".format(h['_source']['library'], version, h['_source']['slug'])
                     }
                     search_results['hits'].append(result)
