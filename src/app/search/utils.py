@@ -27,6 +27,7 @@ DOCS_QUERY_BODY = {
     "highlight" : {
         "fields" : {
             "content" : {},
+            "api" : {},
             "*__content" : {},
             "*__body" : {},
         },
@@ -132,13 +133,16 @@ class DocsIndexer:
         )
 
         for h in res['hits']['hits']:
+            # Flatten highlights if they exist and take the first index
+            highlight = next(iter(h['highlight'].values()))[0] if 'highlight' in h else []
+
             if h["_index"] == "%s__docs" % self.es_index_prefix:
                 try:
                     result = {
                         'type': 'doc',
                         'title': h['_source']['title'],
                         '_score': h['_score'],
-                        'highlight' : h['highlight']['content'][0],
+                        'highlight' : highlight,
                         'library': h['_source']['library'],
                         'version': h['_source']['version'],
                         'url': "/code/{0}/{1}/{2}".format(h['_source']['library'], h['_source']['version'], h['_source']['slug'])
@@ -151,7 +155,6 @@ class DocsIndexer:
             elif h["_index"] == "%s__wagtailcore_page" % self.es_index_prefix:
                 from wagtail.core.models import Page
                 p = Page.objects.get(id__exact=h["_id"])
-                highlight = next(iter(h['highlight'].values()))[0] if 'highlight' in h else []
                 if p.live == True:
                     try:
                         result = {
