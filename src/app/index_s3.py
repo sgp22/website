@@ -95,6 +95,8 @@ def s3_sync(**kwargs):
             try:
                 content_obj = json.loads(read_contents_str)
                 doc['content'] = strip_tags(content_obj['body'])
+                if 'api' in content_obj:
+                    doc['api'] = strip_tags(content_obj['api'])
                 doc['title'] = content_obj['title']
                 doc['library'] = s3_path_split[1]
                 doc['version'] = s3_path_split[2]
