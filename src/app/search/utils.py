@@ -30,6 +30,8 @@ DOCS_QUERY_BODY = {
             "api" : {},
             "*__content" : {},
             "*__body" : {},
+            "home_elementspage__*" : {},
+            "home_blocksspage__*" : {},
         },
         "fragment_size" : 100,
         "encoder" : "html"
