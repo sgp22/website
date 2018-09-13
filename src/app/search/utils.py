@@ -46,6 +46,9 @@ INDEX_STRUCTURE = {
                 'content': {
                     'type': 'text'
                 },
+                'title': {
+                    'type': 'text'
+                },
                 'path': {
                     'type': 'text'
                 },
