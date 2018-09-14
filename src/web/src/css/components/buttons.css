@@ -27,11 +27,7 @@
   }
 }
 
-.demo-link {
-  align-items: center;
-  display: flex;
-
-  & .ids-icon {
-    margin-left: var(--spacing-base);
-  }
+.demo-link .ids-icon {
+  margin-left: var(--spacing-base);
+  margin-top: 5px;
 }
