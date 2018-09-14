@@ -9,6 +9,7 @@ table {
 
   & caption {
     font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-base);
     text-align: left;
   }
 
@@ -18,12 +19,12 @@ table {
   }
 
   & tr {
-    border-bottom: 1px solid var(--graphite055-light);
+    border-bottom: 1px solid var(--graphite01);
   }
 
   & th,
   & td {
-    padding: calc(var(--spacing-base) * 3) var(--spacing-base);
+    padding: var(--spacing-base);
 
     &:first-child {
       padding-left: 0;
@@ -35,6 +36,7 @@ table {
   }
 
   & th {
+    background-color: #fafafa;
     font-weight: var(--font-weight-bold);
   }
 

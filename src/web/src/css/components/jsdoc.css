@@ -11,18 +11,31 @@
 .jsdoc-signature {
   background-color: var(--graphite01);
   font-family: var(--font-family-monospace);
+  font-size: var(--font-size-sm);
+  margin-bottom: calc(var(--spacing-base) * 2) !important;
   padding: var(--spacing-base);
 }
 
-.jsdoc-functions {
-  & .jsdoc-function {
-    border-left: 3px solid var(--input-readonly-bg-color);
-    margin-bottom: calc(var(--spacing-base) * 4);
-    padding-left: calc(var(--spacing-base) * 2);
+.jsdoc-function {
+  margin-bottom: calc(var(--spacing-base) * 4);
 
-    & .jsdoc-function--heading {
-      font-family: var(--font-family-monospace);
-    }
+  & .jsdoc-function--heading {
+    background-color: var(--graphite03);
+    font-family: var(--font-family-monospace);
+    padding: var(--spacing-base);
+  }
+
+  & section {
+    border: solid 1px var(--graphite03);
+    padding: var(--spacing-base);
+  }
+
+  & p {
+    margin: var(--spacing-base) 0 calc(var(--spacing-base) * 2);
+  }
+
+  & table {
+    /* display: none; */
   }
 }
 
