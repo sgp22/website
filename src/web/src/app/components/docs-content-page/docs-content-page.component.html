@@ -30,7 +30,7 @@
           </div>
         </header>
 
-        <h2 *ngIf="docs?.demo?.pages" id="live-demo">Demos</h2>
+        <h2 *ngIf="docs?.demo?.pages" id="live-demo">Examples</h2>
         <section *ngIf="docs?.demo?.pages">
           <div *ngFor="let demo of docs.demo.pages" class="inline-demo">
             <h4>{{demo.name}}
@@ -44,7 +44,7 @@
           </div>
         </section>
 
-        <h2 *ngIf="docs?.demo?.pages" id="live-demo">More Live Demos</h2>
+        <h2 *ngIf="docs?.demo?.pages" id="live-demo">More Live Examples</h2>
         <ul *ngIf="docs?.demo?.pages">
           <li *ngFor="let demo of docs.demo.pages">
             <a class="demo-link" href="{{demo.trustedSlug}}" target="_blank">
