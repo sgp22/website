@@ -63,5 +63,6 @@
 
   @media (--viewport-md) {
     margin-left: auto;
+    margin-right: calc((var(--spacing-base) * 3) + 84px); /* 84px is feedback button width */
   }
 }
