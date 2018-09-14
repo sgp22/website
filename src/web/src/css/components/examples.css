@@ -3,5 +3,5 @@
  */
 
 .inline-demo {
-  margin: calc(3 * var(--spacing)) 0;
+  margin: calc(3 * var(--spacing-base)) 0;
 }

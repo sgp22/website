@@ -23,7 +23,7 @@ table {
 
   & th,
   & td {
-    padding: calc(var(--spacing) * 3) var(--spacing);
+    padding: calc(var(--spacing-base) * 3) var(--spacing-base);
 
     &:first-child {
       padding-left: 0;
