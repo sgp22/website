@@ -88,6 +88,8 @@ services:
 
       ES_HOST: ${ES_HOST}
       ES_INDEX_PREFIX: ${ES_INDEX_PREFIX}
+      ES_PORT: ${ES_PORT}
+      ES_SECURE: ${ES_SECURE}
 
       ES_USER: elastic
       ES_PASS: ${ES_PASS}

@@ -21,6 +21,7 @@ then...
 . ./scripts/set_dev_vars.sh
 make up
 make syncdb
+make migrate
 make index_backend
 make index_s3
 make run_dev #for frontend dev
