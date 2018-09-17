@@ -3,12 +3,12 @@ BACKEND_CONTAINER=docssite_backend
 POSTGRES_CONTAINER=docssite_postgres
 SOURCE_DB_HOST=35.168.252.1
 TARGET_DB_HOST=172.17.0.1
-ES_HTTP_PREFIX="http://"
+ES_HTTP_PREFIX=http://
 
-ifeq ($(ES_SECURE),"True")
-    ES_HTTP_PREFIX="https://"
+ifeq ($(ES_SECURE),True)
+    ES_HTTP_PREFIX=https://
 else
-    ES_HTTP_PREFIX="http://"
+    ES_HTTP_PREFIX=http://
 endif
 
 .PHONY: up

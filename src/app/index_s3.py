@@ -83,7 +83,7 @@ def s3_sync(**kwargs):
             read_contents = open(i, 'rt', encoding='utf8').read()
             read_contents_bytes = bytes(read_contents.strip(), 'utf8')
             read_contents_str = read_contents_bytes.decode('utf-8')
-            indexer = DocsIndexer(es_host, es_port, 'docs', es_index_prefix)
+            indexer = DocsIndexer(es_host, int(es_port), 'docs', es_index_prefix)
             s3_path = i.replace(tmp_dir, '')
             s3_path = s3_path[1:]
             s3_path_split = s3_path.split('/')
@@ -167,7 +167,8 @@ if __name__ == '__main__':
             'aws_access_key_id': args['-aws_access_key_id'],
             'aws_secret_access_key': args['-aws_secret_access_key'],
             'es_index_prefix': args['-es_index_prefix'],
-            'es_host': args['-es_host']
+            'es_host': args['-es_host'],
+            'es_port': args['-es_port']
         }
 
         s3_sync(**kwargs)
