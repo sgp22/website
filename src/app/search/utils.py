@@ -13,9 +13,6 @@ from elasticsearch import (
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-ES_USER = os.environ['ES_USER']
-ES_PASS = os.environ['ES_PASS']
-
 DOCS_QUERY_BODY = {
     'size': 50,
     'query': {
