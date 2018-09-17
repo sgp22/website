@@ -56,6 +56,7 @@ def s3_sync(**kwargs):
         'aws_secret_access_key': kwargs.get('aws_secret_access_key')
     }
     es_host = kwargs.get('es_host')
+    es_port = kwargs.get('es_port')
     es_index_prefix = kwargs.get('es_index_prefix')
     src_bucket = kwargs.get('bucket_name')
     src_client = boto3.client('s3', **src_conf)
@@ -82,7 +83,7 @@ def s3_sync(**kwargs):
             read_contents = open(i, 'rt', encoding='utf8').read()
             read_contents_bytes = bytes(read_contents.strip(), 'utf8')
             read_contents_str = read_contents_bytes.decode('utf-8')
-            indexer = DocsIndexer(es_host, 'docs', es_index_prefix)
+            indexer = DocsIndexer(es_host, es_port, 'docs', es_index_prefix)
             s3_path = i.replace(tmp_dir, '')
             s3_path = s3_path[1:]
             s3_path_split = s3_path.split('/')

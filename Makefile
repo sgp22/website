@@ -108,7 +108,8 @@ index_s3 :
 		-aws_access_key_id $(AWS_ACCESS_KEY_ID) \
 		-aws_secret_access_key $(AWS_SECRET_ACCESS_KEY) \
 		-es_index_prefix $(ES_INDEX_PREFIX) \
-		-es_host $(ES_HTTP_PREFIX)$(ES_HOST)
+		-es_host $(ES_HTTP_PREFIX)$(ES_HOST) \
+		-es_port $(ES_PORT)
 
 build_backend :
 	cd docker/docs-backend && \

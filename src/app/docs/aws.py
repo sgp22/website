@@ -27,7 +27,8 @@ logger = logging.getLogger('debug')
 
 
 ES_INDEX_PREFIX = settings.ES_INDEX_PREFIX
-ES_HOST = settings.ES_HOST
+ES_PORT = settings.ES_PORT
+ES_HOST_URL = settings.ES_HOST_URL
 
 
 class UniqueDict(dict):
@@ -74,7 +75,7 @@ def post(request):
             content = ContentFile(zipf.read(zipped_file))
             read_contents_bytes = content.read()
             read_contents_str = read_contents_bytes.decode('utf-8')
-            indexer = DocsIndexer(ES_HOST, 'docs', ES_INDEX_PREFIX)
+            indexer = DocsIndexer(ES_HOST_URL, ES_PORT, 'docs', ES_INDEX_PREFIX)
             doc = {
                 "content": read_contents_str,
                 "path": path
