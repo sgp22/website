@@ -38,6 +38,8 @@ import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 
+import { LibraryService } from './shared/library.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +79,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     LoadingBarModule.forRoot()
   ],
   entryComponents: [],
-  providers: [CacheService, AppSettings],
+  providers: [CacheService, AppSettings, LibraryService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })
