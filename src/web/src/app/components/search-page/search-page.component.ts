@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
-import { Router, ActivatedRoute  } from "@angular/router";
+import { Router, ActivatedRoute  } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AppSettings } from '../../app.settings';
 import { LoadingBarService } from '@ngx-loading-bar/core';

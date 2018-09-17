@@ -24,7 +24,7 @@
 
       <ul class="ids-list">
         <ng-container *ngIf="searchResults">
-          <li class="ids-list--item" *ngFor="let result of searchResults">
+          <li class="ids-list--item ids-list--item-search" *ngFor="let result of searchResults">
             <h3>
               <a routerLink="{{result.url}}">
                 {{result.title}} {{ result.version && '&middot; ' + result.library + ' ' + result.version }}
