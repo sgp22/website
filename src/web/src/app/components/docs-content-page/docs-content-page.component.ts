@@ -120,6 +120,20 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 if (docs.api) {
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }
+
+                if (docs.demo.pages) {
+                  docs.demo.pages.forEach(page => {
+                    page.url = this.createDemoPath(page.slug);
+                  });
+                }
+
+                if (docs.demo.embedded) {
+                  docs.demo.embedded.forEach(page => {
+                    page.url = this.createDemoPath(page.slug);
+                    page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url);
+                  });
+                }
+
                 this.handleRelativeLinks(docs);
                 this.buildToc();
               },
@@ -258,6 +272,10 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       this.selectedVersionNumber = this.currentVersion;
     }
 
+  }
+
+  createDemoPath(slug) {
+    return `${this.absolutePath}/demo/${this.element}/${slug}?font=source-sans`;
   }
 
   versionShowWarning(currentVersion, latestVersion) {

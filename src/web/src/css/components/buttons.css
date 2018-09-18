@@ -13,7 +13,7 @@
 
 .ids-btn--default {
   &.ids-btn--light {
-    background-color: var(--white);
+    background-color: var(--color-primary-contrast);
 
     &:hover {
       background-color: var(--input-readonly-bg-color);

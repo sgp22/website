@@ -3,42 +3,39 @@
  */
 
 table {
-  color: var(--graphite055);
+  border: 1px solid var(--graphite01);
+  font-size: var(--font-size-sm);
   margin-bottom: 32px;
+  margin-top: 0;
   width: 100%;
 
   & caption {
     font-size: var(--font-size-md);
+    margin-bottom: calc(var(--spacing-base) * 2);
+    margin-top: calc(var(--spacing-base) * 2);
     text-align: left;
   }
 
   & thead {
-    border-bottom: 1px solid var(--graphite055);
     text-align: left;
   }
 
   & tr {
-    border-bottom: 1px solid var(--graphite055-light);
+    border-bottom: 1px solid var(--graphite01);
   }
 
   & th,
   & td {
-    padding: calc(var(--spacing) * 3) var(--spacing);
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-right: 0;
-    }
+    padding: var(--spacing-base);
   }
 
   & th {
+    background-color: var(--graphite01);
     font-weight: var(--font-weight-bold);
   }
 
   & td {
+    color: var(--color-default-alt);
     line-height: 1.5;
     vertical-align: middle;
   }

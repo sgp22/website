@@ -22,7 +22,7 @@
 }
 
 .swatch-text {
-  background-color: var(--white);
+  background-color: var(--color-primary-contrast);
   bottom: 0;
   font-size: 1.4rem;
   left: 0;
