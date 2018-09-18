@@ -276,8 +276,12 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   }
 
-  createDemoPath(slug) {
-    return `${this.absolutePath}/demo/${this.element}/${slug}?font=source-sans`;
+  createDemoPath(slug, noFrillsDemo) {
+    let url = `${this.absolutePath}/demo/${this.element}/${slug}?font=source-sans`;
+    if (noFrillsDemo) {
+      url += '&nofrills=true';
+    }
+    return url;
   }
 
   versionShowWarning(currentVersion, latestVersion) {
