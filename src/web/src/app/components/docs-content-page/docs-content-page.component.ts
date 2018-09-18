@@ -130,7 +130,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
                   if (docs.demo.embedded) {
                     docs.demo.embedded.forEach(page => {
-                      page.url = this.createDemoPath(page.slug);
+                      page.url = this.createDemoPath(page.slug, true);
                       page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url);
                     });
                   }
@@ -276,7 +276,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   }
 
-  createDemoPath(slug, noFrillsDemo) {
+  createDemoPath(slug: string, noFrillsDemo: boolean = false) {
     let url = `${this.absolutePath}/demo/${this.element}/${slug}?font=source-sans`;
     if (noFrillsDemo) {
       url += '&nofrills=true';
