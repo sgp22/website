@@ -81,7 +81,10 @@ def form_es_query_body(es_query_body, fields=[]):
 
 
 class DocsIndexer:
-    def __init__(self, es_host, es_index, es_index_prefix):
+    def __init__(self, es_host, es_port, es_index, es_index_prefix):
+
+        print(es_host)
+
         self.es_host = es_host
         self.es_index = es_index
         self.es_index_prefix = es_index_prefix
@@ -89,6 +92,7 @@ class DocsIndexer:
         self.es = Elasticsearch(
             es_host,
             connection_class=RequestsHttpConnection,
+            port=es_port
         )
 
     def _create_index(self):

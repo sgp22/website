@@ -53,7 +53,8 @@ from .serializers import (
 
 
 ES_INDEX_PREFIX = settings.ES_INDEX_PREFIX
-ES_HOST = settings.ES_HOST
+ES_PORT = settings.ES_PORT
+ES_HOST_URL = settings.ES_HOST_URL
 
 
 def search(request):
@@ -276,7 +277,8 @@ class ElasticSearchView(APIView):
         try:
             search_results = []
             es_search = DocsIndexer(
-                ES_HOST,
+                ES_HOST_URL,
+                ES_PORT,
                 'docs',
                 ES_INDEX_PREFIX)
 
