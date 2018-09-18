@@ -3,7 +3,7 @@
  */
 
 body {
-  background-color: var(--white);
+  background-color: var(--color-primary-contrast);
   padding-top: 54px;
 }
 
