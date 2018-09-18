@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, HostBinding, AfterViewInit, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/switchMap';
@@ -11,11 +10,8 @@ import { UrlParser } from '../../shared/urlParser.service';
 import { UrlMapper } from '../../shared/urlMapper.service';
 import * as semver from 'semver';
 
-import { TokenService } from '../../shared/token.service';
-
 import { DocService } from '../../shared/doc.service';
 import { LibraryService } from '../../shared/library.service';
-import { SitemapService } from '../../shared/sitemap.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
 interface TocItems {
@@ -26,7 +22,7 @@ interface TocItems {
 @Component({
   selector: 'app-docs-content-page',
   templateUrl: './docs-content-page.component.html',
-  providers: [AppSettings, UrlParser, UrlMapper, TokenService, DocService, LibraryService, SitemapService]
+  providers: [AppSettings, UrlParser, UrlMapper, DocService, LibraryService]
 })
 export class DocsContentPageComponent implements OnInit, OnDestroy {
   public path = '';
@@ -57,17 +53,13 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient,
     private appSettings: AppSettings,
     private urlParser: UrlParser,
     private urlMapper: UrlMapper,
     private sanitizer: DomSanitizer,
-    private tokenService: TokenService,
     private docService: DocService,
     private libraryService: LibraryService,
-    private sitemapService: SitemapService,
-    private loadingBar: LoadingBarService,
-    private elementRef: ElementRef
+    private loadingBar: LoadingBarService
   ) {}
 
   ngOnInit() {
