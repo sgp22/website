@@ -52,10 +52,10 @@ export class SearchPageComponent implements OnInit {
     this.query = term;
 
     this.libraryService.getLatestLibraryVersions(['ids-enterprise', 'ids-css', 'ids-pendo'])
-      .then(res => {
-        const ep = res[0]['files'];
-        const css = res[1]['files'];
-        const pendo = res[2]['files'];
+      .then(r => {
+        const ep = r[0]['files'];
+        const css = r[1]['files'];
+        const pendo = r[2]['files'];
 
         this.latestEp = this.orderVersions(ep);
         this.latestCSS = this.orderVersions(css);
@@ -74,7 +74,7 @@ export class SearchPageComponent implements OnInit {
               this.loadingBar.complete();
             },
           );
-      })
+      });
   }
 
   orderVersions(array) {
@@ -86,7 +86,9 @@ export class SearchPageComponent implements OnInit {
   }
 
   truncateHighlight(string, limit, after) {
-    if (!string || !limit) return;
+    if (!string || !limit) {
+      return;
+    }
 
     let content = string;
     content = content.split(' ').slice(0, limit);
