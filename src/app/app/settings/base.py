@@ -174,7 +174,7 @@ ES_HOST_URL = ES_HOST
 if ES_SECURE is True:
     ES_HOST_URL = "https://{}".format(ES_HOST_URL)
 else:
-    ES_HOST_URL = "http://{}".format(ES_HOST_URL)
+    ES_HOST_URL = "http://{}:{}".format(ES_HOST_URL, ES_PORT)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
