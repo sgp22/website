@@ -20,8 +20,10 @@ export class SearchService {
     private http: HttpClient,
   ) { }
 
-  getSearch(query: string, latestEp: string, latestCSS:string, latestPendo: string) {
-    const url = `${this.appSettings.domain}/site-search/es/?search_query=${query}&libraries=ids-enterprise:${latestEp},ids-css:${latestCSS},ids-pendo:${latestPendo}`;
+  getSearch(query: string, latestEp: string, latestCSS: string, latestPendo: string) {
+    let url = `${this.appSettings.domain}/site-search/es/`;
+    url += `?search_query=${query}`;
+    url += `&libraries=ids-enterprise:${latestEp},ids-css:${latestCSS},ids-pendo:${latestPendo}`;
     return this.cacheService.get(url, this.http.get(url).first());
   }
 }
