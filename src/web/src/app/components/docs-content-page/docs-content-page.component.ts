@@ -120,6 +120,22 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 if (docs.api) {
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }
+
+                if (docs.demo) {
+                  if (docs.demo.pages) {
+                    docs.demo.pages.forEach(page => {
+                      page.url = this.createDemoPath(page.slug);
+                    });
+                  }
+
+                  if (docs.demo.embedded) {
+                    docs.demo.embedded.forEach(page => {
+                      page.url = this.createDemoPath(page.slug, true);
+                      page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url);
+                    });
+                  }
+                }
+
                 this.handleRelativeLinks(docs);
                 this.buildToc();
               },
@@ -258,6 +274,14 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       this.selectedVersionNumber = this.currentVersion;
     }
 
+  }
+
+  createDemoPath(slug: string, noFrillsDemo: boolean = false) {
+    let url = `${this.absolutePath}/demo/${this.element}/${slug}?font=source-sans`;
+    if (noFrillsDemo) {
+      url += '&nofrills=true';
+    }
+    return url;
   }
 
   versionShowWarning(currentVersion, latestVersion) {

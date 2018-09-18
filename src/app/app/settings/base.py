@@ -171,13 +171,10 @@ ES_PORT = os.getenv('ES_PORT', 9200)
 ES_SECURE = os.getenv('ES_SECURE', False)
 ES_HOST_URL = ES_HOST
 
-if ES_SECURE:
+if ES_SECURE is True:
     ES_HOST_URL = "https://{}".format(ES_HOST_URL)
 else:
     ES_HOST_URL = "http://{}".format(ES_HOST_URL)
-
-print(ES_HOST_URL)
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
