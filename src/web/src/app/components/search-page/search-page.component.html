@@ -31,7 +31,7 @@
               </a>
             </h3>
             <small><strong>Found In:</strong> <a routerLink="{{result.url}}">{{this.domain}}{{result.url}}</a></small>
-            <p class="search-highlight" *ngIf="result.highlight" [innerHTML]="result.highlight"></p>
+            <p class="search-highlight" *ngIf="result.highlight" [innerHTML]="truncateHighlight(result.highlight, 25, '...')"></p>
           </li>
         </ng-container>
         <ng-container *ngIf="noResults">

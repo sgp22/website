@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { AppSettings } from '../../app.settings';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LibraryService } from '../../shared/library.service';
+import * as semver from 'semver';
 
 @Component({
   selector: 'search-page',
@@ -19,7 +20,9 @@ export class SearchPageComponent implements OnInit {
   public libVersion;
   public domain = '';
   public query = '';
-  public latestEp = '';
+  public latestEp;
+  public latestCSS;
+  public latestPendo;
   @ViewChild('searchForm') searchForm: NgForm;
 
   constructor(
@@ -48,19 +51,47 @@ export class SearchPageComponent implements OnInit {
     this.loadingBar.start();
     this.query = term;
 
-    this.searchService.getSearch(term, '4.10.0', '1.3.0', '1.1.0')
-      .subscribe(
-        res => {
-          this.searchResults = res.results.hits;
-          this.searchResults.length === 0 ? this.noResults = true : this.noResults = false;
-        },
-        err => {
-          console.error(err);
-        },
-        () => {
-          this.loadingBar.complete();
-        },
-      );
+    this.libraryService.getLatestLibraryVersions(['ids-enterprise', 'ids-css', 'ids-pendo'])
+      .then(res => {
+        const ep = res[0]['files'];
+        const css = res[1]['files'];
+        const pendo = res[2]['files'];
+
+        this.latestEp = this.orderVersions(ep);
+        this.latestCSS = this.orderVersions(css);
+        this.latestPendo = this.orderVersions(pendo);
+
+        this.searchService.getSearch(term, this.latestEp[0], this.latestCSS[0], this.latestPendo[0])
+          .subscribe(
+            res => {
+              this.searchResults = res.results.hits;
+              this.searchResults.length === 0 ? this.noResults = true : this.noResults = false;
+            },
+            err => {
+              console.error(err);
+            },
+            () => {
+              this.loadingBar.complete();
+            },
+          );
+      })
+  }
+
+  orderVersions(array) {
+    return array.map(version => {
+      return version.split('/')[2];
+    }).sort((a, b) => {
+      return semver.compare(a, b);
+    }).reverse();
+  }
+
+  truncateHighlight(string, limit, after) {
+    if (!string || !limit) return;
+
+    let content = string;
+    content = content.split(' ').slice(0, limit);
+    content = content.join(' ') + (after ? after : '');
+    return content;
   }
 
 }

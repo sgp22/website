@@ -6,11 +6,11 @@
   color: var(--text-color-muted);
   display: block;
   font-size: var(--font-size-sm);
-  line-height: 1.65rem;
+  /* line-height: 1.65rem;
   max-height: calc(2 * 1.65rem);
   overflow: hidden;
   text-overflow: ellipsis;
-  word-wrap: break-word;
+  word-wrap: break-word; */
 
   & em {
     color: var(--text-color-info);
