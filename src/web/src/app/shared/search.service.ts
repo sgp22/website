@@ -21,7 +21,7 @@ export class SearchService {
   ) { }
 
   getSearch(query: string, latestEp: string, latestCSS:string, latestPendo: string) {
-    const url = `${this.appSettings.domain}/search/es/?search_query=${query}&libraries=ids-enterprise:${latestEp},ids-css:${latestCSS},ids-pendo:${latestPendo}`;
+    const url = `${this.appSettings.domain}/site-search/es/?search_query=${query}&libraries=ids-enterprise:${latestEp},ids-css:${latestCSS},ids-pendo:${latestPendo}`;
     return this.cacheService.get(url, this.http.get(url).first());
   }
 }

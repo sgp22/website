@@ -21,7 +21,7 @@ urlpatterns = [
     # Wagtail admin, documents, and search.
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-    url(r'^search/', include('search.urls')),
+    url(r'^site-search/', include('search.urls')),
 
     # Deployed docs API.
     url(r'^api/docs/', include('docs.urls')),

@@ -37,7 +37,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   handleQuery(searchForm) {
-    this.router.navigate(['site/search'], { queryParams: { q: `${searchForm.query.trim()}` } });
+    this.router.navigate(['/search'], { queryParams: { q: `${searchForm.query.trim()}` } });
   }
 
   search(term) {
