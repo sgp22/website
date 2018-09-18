@@ -121,17 +121,19 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }
 
-                if (docs.demo.pages) {
-                  docs.demo.pages.forEach(page => {
-                    page.url = this.createDemoPath(page.slug);
-                  });
-                }
+                if (docs.demo) {
+                  if (docs.demo.pages) {
+                    docs.demo.pages.forEach(page => {
+                      page.url = this.createDemoPath(page.slug);
+                    });
+                  }
 
-                if (docs.demo.embedded) {
-                  docs.demo.embedded.forEach(page => {
-                    page.url = this.createDemoPath(page.slug);
-                    page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url);
-                  });
+                  if (docs.demo.embedded) {
+                    docs.demo.embedded.forEach(page => {
+                      page.url = this.createDemoPath(page.slug);
+                      page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url);
+                    });
+                  }
                 }
 
                 this.handleRelativeLinks(docs);
