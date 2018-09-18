@@ -37,12 +37,17 @@ export class AppComponent {
           titleService.setTitle(`Infor Design System`);
         } else {
           this.home = false;
+          if (title.includes('search?q=')) {
+            const searchTitle = title.replace('search?q=', '');
+            titleService.setTitle(`Search / ${this.capitalizeTitle(searchTitle)} - Infor Design System`);
+            return;
+          }
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
         }
 
         const urlSegments = event.url.split('/');
         (urlSegments[1] === 'code') ? this.codeSection = true : this.codeSection = false;
-        (url === '/' || url === '/site/search' || url.includes('/site/search?')) ? this.useGrid = false : this.useGrid = true;
+        (url === '/' || url === '/search' || url.includes('/search?')) ? this.useGrid = false : this.useGrid = true;
         (urlSegments[1] === 'blog') ? this.blog = true : this.blog = false;
 
 

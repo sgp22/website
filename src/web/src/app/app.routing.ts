@@ -79,12 +79,8 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'site/search',
-    component: SearchPageComponent,
-  },
-  {
     path: 'search',
-    redirectTo: 'site/search'
+    component: SearchPageComponent,
   },
   {
     path: '**',
