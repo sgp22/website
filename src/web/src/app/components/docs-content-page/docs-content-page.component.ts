@@ -129,9 +129,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
                 if (docs.demo.embedded) {
                   docs.demo.embedded.forEach(page => {
-                    // page.url = this.createDemoPath(page.slug);
-                    page.url = `http://localhost:4000/components/${this.element}/${page.slug}?font=source-sans`;
-                    page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url)
+                    page.url = this.createDemoPath(page.slug);
+                    page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url);
                   });
                 }
 
