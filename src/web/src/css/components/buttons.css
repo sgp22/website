@@ -27,7 +27,20 @@
   }
 }
 
-.demo-link .ids-icon {
-  margin-left: var(--spacing-base);
-  margin-top: 5px;
+.demo-link,
+.demo-link:hover {
+  text-decoration: none;
 }
+
+.demo-link {
+  & .ids-icon {
+    height: 15px;
+    top: 5px;
+  }
+
+  & .icon-git {
+    height: 18px;
+    top: 3px;
+  }
+}
+

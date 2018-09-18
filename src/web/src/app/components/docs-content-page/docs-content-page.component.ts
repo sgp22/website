@@ -116,13 +116,15 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 if (docs.demo) {
                   if (docs.demo.pages) {
                     docs.demo.pages.forEach(page => {
-                      page.url = this.createDemoPath(page.slug);
+                      page.githubUrl = this.createGithubUrl(page.slug);
+                      page.url = this.createDemoUrl(page.slug);
                     });
                   }
 
                   if (docs.demo.embedded) {
                     docs.demo.embedded.forEach(page => {
-                      page.url = this.createDemoPath(page.slug, true);
+                      page.githubUrl = this.createGithubUrl(page.slug);
+                      page.url = this.createDemoUrl(page.slug, true);
                       page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url);
                     });
                   }
@@ -268,11 +270,18 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
 
   }
 
-  createDemoPath(slug: string, noFrillsDemo: boolean = false) {
+  createDemoUrl(slug: string, noFrillsDemo: boolean = false) {
     let url = `${this.absolutePath}/demo/${this.element}/${slug}?font=source-sans`;
     if (noFrillsDemo) {
       url += '&nofrills=true';
     }
+    return url;
+  }
+
+  createGithubUrl(slug: string) {
+    let repoName = this.library.replace('ids-', '');
+    let url = `https://github.com/infor-design/${repoName}/blob/`;
+    url += `${this.selectedVersionNumber}/app/views/components/${this.element}/${slug}.html`;
     return url;
   }
 
