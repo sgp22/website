@@ -4,6 +4,7 @@ import { Router, ActivatedRoute  } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AppSettings } from '../../app.settings';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { LibraryService } from '../../shared/library.service';
 
 @Component({
   selector: 'search-page',
@@ -14,10 +15,11 @@ export class SearchPageComponent implements OnInit {
   public searchResults = [];
   public noResults = false;
   public relativeUrl;
-  public library;
+  public libraries = ['ids-enterprise', 'ids-css', 'ids-pendo'];
   public libVersion;
   public domain = '';
   public query = '';
+  public latestEp = '';
   @ViewChild('searchForm') searchForm: NgForm;
 
   constructor(
@@ -25,7 +27,8 @@ export class SearchPageComponent implements OnInit {
     private appSettings: AppSettings,
     private loadingBar: LoadingBarService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private libraryService: LibraryService
   ) { }
 
   ngOnInit() {
@@ -44,7 +47,8 @@ export class SearchPageComponent implements OnInit {
     }
     this.loadingBar.start();
     this.query = term;
-    this.searchService.getSearch(term)
+
+    this.searchService.getSearch(term, '4.10.0', '1.3.0', '1.1.0')
       .subscribe(
         res => {
           this.searchResults = res.results.hits;
