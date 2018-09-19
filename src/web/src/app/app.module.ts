@@ -32,10 +32,13 @@ import { QuestionWidgetComponent } from './components/question-widget/question-w
 import { RoleWidgetComponent } from './components/role-widget/role-widget.component';
 import { FeedbackWidgetComponent } from './components/feedback-widget/feedback-widget.component';
 import { TocComponent } from './components/toc/toc.component';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+
+import { LibraryService } from './shared/library.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,8 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     QuestionWidgetComponent,
     RoleWidgetComponent,
     FeedbackWidgetComponent,
-    TocComponent
+    TocComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     LoadingBarModule.forRoot()
   ],
   entryComponents: [],
-  providers: [CacheService, AppSettings],
+  providers: [CacheService, AppSettings, LibraryService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

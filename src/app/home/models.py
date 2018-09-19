@@ -21,6 +21,7 @@ from wagtail.admin.edit_handlers import (
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.search import index
 
 from home import relationships
 
@@ -159,6 +160,13 @@ class PageBase(Page):
     class Meta:
         proxy = True
 
+    def content(self):
+        return ""
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+    ]
+
 
 class LandingPage(PageBase):
     menu_order = models.IntegerField(default=0)
@@ -208,6 +216,12 @@ class LandingPage(PageBase):
         APIField('grid_blocks')
     ]
 
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+        index.SearchField('page_hero'),
+        index.SearchField('grid_blocks'),
+    ]
+
 
 class CoreContentPage(PageBase):
     menu_order = models.IntegerField(default=0)
@@ -254,6 +268,14 @@ class CoreContentPage(PageBase):
         APIField('cross_link'),
         APIField('demo_link'),
         APIField('description'),
+    ]
+
+    def content(self):
+        return ""
+
+    search_fields = Page.search_fields + [
+        index.SearchField('body'),
+        index.SearchField('description'),
     ]
 
 
@@ -395,6 +417,20 @@ class ElementsPage(PageBase):
         APIField('body')
     ]
 
+    def content(self):
+        return ""
+
+    search_fields = Page.search_fields + [
+        index.SearchField('body'),
+        index.SearchField('what_it_does'),
+        index.SearchField('what_user_can_do'),
+        index.SearchField('when_to_use_it'),
+        index.SearchField('fka'),
+        index.SearchField('types'),
+        index.SearchField('modifiers'),
+        index.SearchField('states'),
+    ]
+
 class BlocksPage(PageBase):
     @property
     def description(self):
@@ -519,6 +555,19 @@ class BlocksPage(PageBase):
         APIField('body')
     ]
 
+    def content(self):
+        return ""
+
+    search_fields = Page.search_fields + [
+        index.SearchField('body'),
+        index.SearchField('what_it_does'),
+        index.SearchField('what_user_can_do'),
+        index.SearchField('when_to_use_it'),
+        index.SearchField('fka'),
+        index.SearchField('types'),
+        index.SearchField('modifiers'),
+    ]
+
 class BlogLandingPage(PageBase):
     menu_order = models.IntegerField(default=0)
 
@@ -536,8 +585,14 @@ class BlogLandingPage(PageBase):
         APIField('description')
     ]
 
-class BlogPostPage(PageBase):
+    def content(self):
+        return ""
 
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
+    ]
+
+class BlogPostPage(PageBase):
     author = models.CharField(
         verbose_name="Author",
         max_length=255,
@@ -553,6 +608,10 @@ class BlogPostPage(PageBase):
     content_panels = Page.content_panels + [
         FieldPanel('author'),
         StreamFieldPanel('content')
+    ]
+
+    search_fields = Page.search_fields + [
+        index.SearchField('content'),
     ]
 
     api_fields = [

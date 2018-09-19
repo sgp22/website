@@ -61,7 +61,7 @@ RUN pip3 install --upgrade pip \
 
 ADD ./requirements /home/app/requirements/
 
-RUN pip install -r /home/app/requirements/prod.txt
+RUN pip install -r /home/app/requirements/prod.txt --ignore-installed
 
 # TODO This group needs to be a general workers group, not root.
 # This does not even help with giving these users to write to

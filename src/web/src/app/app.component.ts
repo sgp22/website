@@ -29,21 +29,27 @@ export class AppComponent {
 
     router.events.subscribe( (event) => {
       if (event instanceof NavigationEnd) {
-
         const url = router.routerState.snapshot.url;
+
+        const urlSegments = event.url.split('/');
+        (urlSegments[1] === 'code') ? this.codeSection = true : this.codeSection = false;
+        (url === '/' || url === '/search' || url.includes('/search?q=')) ? this.useGrid = false : this.useGrid = true;
+        (urlSegments[1] === 'blog') ? this.blog = true : this.blog = false;
+
         const title = url.replace(/^\//g, '').replace(/\//g, ' / ').replace(/-/g, ' ');
         if (url === '/') {
           this.home = true;
           titleService.setTitle(`Infor Design System`);
         } else {
           this.home = false;
+          if (title.includes('search?q=')) {
+            const searchTitle = title.replace('search?q=', '');
+            titleService.setTitle(`Search / ${this.capitalizeTitle(searchTitle)} - Infor Design System`);
+            return;
+          }
           titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
         }
 
-        const urlSegments = event.url.split('/');
-        (urlSegments[1] === 'code') ? this.codeSection = true : this.codeSection = false;
-        (url === '/') ? this.useGrid = false : this.useGrid = true;
-        (urlSegments[1] === 'blog') ? this.blog = true : this.blog = false;
 
         // Initialize Pendo on page change
         pendo.initialize({

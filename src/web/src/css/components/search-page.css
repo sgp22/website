@@ -1,0 +1,16 @@
+.search-page {
+  padding-top: calc(var(--spacing-base) * 15);
+}
+
+.search-highlight {
+  color: var(--text-color-muted);
+  display: block;
+  font-size: var(--font-size-sm);
+
+  & em {
+    color: var(--text-color-info);
+    display: inline-block;
+    font-style: normal;
+    font-weight: var(--font-weight-bold);
+  }
+}

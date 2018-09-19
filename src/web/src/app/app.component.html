@@ -8,7 +8,7 @@
 
   <div [ngClass]="{'ids-row' : useGrid}">
     <sidebar-nav-code [hidden]="!codeSection" class="sidebar-nav-comp sidebar-nav-code ids-row--col-sm-3 ids-row--col-xl-2"></sidebar-nav-code>
-    <sidebar-nav [hidden]="codeSection" class="sidebar-nav-comp sidebar-nav-cms ids-row--col-sm-3 ids-row--col-xl-2" [sidebarData]="sidebarNav" [section]="section"></sidebar-nav>
+    <sidebar-nav [hidden]="codeSection || !useGrid" class="sidebar-nav-comp sidebar-nav-cms ids-row--col-sm-3 ids-row--col-xl-2" [sidebarData]="sidebarNav" [section]="section"></sidebar-nav>
     <router-outlet></router-outlet>
   </div>
 

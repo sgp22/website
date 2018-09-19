@@ -1,0 +1,26 @@
+/*
+ * Inline examples (iframes)
+ */
+
+.inline-demo {
+  margin: calc(3 * var(--spacing-base)) 0;
+  position: relative;
+
+  & h4 {
+    margin-bottom: var(--spacing-base);
+  }
+
+  & .inline-demo-links {
+    list-style: none;
+    margin: 0;
+    position: absolute;
+    right: 3px;
+    top: 0;
+
+    & li {
+      float: left;
+      margin: 0;
+      padding: 0 4px;
+    }
+  }
+}

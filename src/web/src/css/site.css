@@ -21,6 +21,7 @@
 @import './components/footer.css';
 @import './components/popover.css';
 @import './components/questions.css';
+@import './components/search-page.css';
 
 /* Granular styles */
 @import './components/tables';
@@ -32,3 +33,4 @@
 @import './components/feedback.css';
 @import './components/toc.css';
 @import './components/modal.css';
+@import './components/examples.css';

@@ -15,6 +15,8 @@ from __future__ import absolute_import, unicode_literals
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from elasticsearch import RequestsHttpConnection
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -155,12 +157,24 @@ USE_TZ = True
 
 # AWS
 
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', None)
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', 'ids-com-staging')
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID', None)
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', None)
+AWS_REGION = os.getenv('AWS_REGION', 'us-east-1')
 AWS_QUERYSTRING_AUTH = os.getenv('AWS_QUERYSTRING_AUTH', 'false').lower() == 'true'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+ES_INDEX_PREFIX = os.getenv('ES_INDEX_PREFIX')
+ES_HOST = os.getenv('ES_HOST')
+ES_USER = os.getenv('ES_USER', 'elastic')
+ES_PASS = os.getenv('ES_PASS')
+ES_PORT = os.getenv('ES_PORT', 9200)
+ES_SECURE = os.getenv('ES_SECURE', False)
+ES_HOST_URL = ES_HOST
 
+if ES_SECURE is True:
+    ES_HOST_URL = "https://{}".format(ES_HOST_URL)
+else:
+    ES_HOST_URL = "http://{}:{}".format(ES_HOST_URL, ES_PORT)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -198,8 +212,18 @@ WAGTAIL_SITE_NAME = "app"
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://localhost'
 
-
 WAGTAILAPI_LIMIT_MAX = 200
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.search.backends.elasticsearch6',
+        'URLS': [ES_HOST_URL],
+        'INDEX': ES_INDEX_PREFIX,
+        'TIMEOUT': 5,
+        'OPTIONS': {},
+        'INDEX_SETTINGS': {},
+    }
+}
 
 # Logging.
 

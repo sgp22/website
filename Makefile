@@ -3,6 +3,13 @@ BACKEND_CONTAINER=docssite_backend
 POSTGRES_CONTAINER=docssite_postgres
 SOURCE_DB_HOST=35.168.252.1
 TARGET_DB_HOST=172.17.0.1
+ES_HTTP_PREFIX=http://
+
+ifeq ($(ES_SECURE),True)
+    ES_HTTP_PREFIX=https://
+else
+    ES_HTTP_PREFIX=http://
+endif
 
 .PHONY: up
 
@@ -37,12 +44,16 @@ down_clean : down
 	-docker volume rm design_infor_com_static_data
 	-docker volume rm design_infor_com_media_data
 	-docker volume rm design_infor_com_postgres_data
+	-docker volume rm design_infor_com_elasticsearch_data
 
 restart :
 	docker-compose restart
 
 reset : down
 	make up
+
+migrate :
+	docker exec -ti $(BACKEND_CONTAINER) sh -c "echo yes | python3 /home/app/manage.py migrate"
 
 syncdb :
 	cd docker/docs-migrate-postgres && \
@@ -87,6 +98,18 @@ tail_backend_python :
 
 dev_backend :
 	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/manage.py runserver 0.0.0.0:9002
+
+index_backend :
+	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/manage.py update_index
+
+index_s3 :
+	docker exec -ti $(BACKEND_CONTAINER) python3 /home/app/index_s3.py \
+		-bucket_name $(AWS_STORAGE_BUCKET_NAME) \
+		-aws_access_key_id $(AWS_ACCESS_KEY_ID) \
+		-aws_secret_access_key $(AWS_SECRET_ACCESS_KEY) \
+		-es_index_prefix $(ES_INDEX_PREFIX) \
+		-es_host $(ES_HTTP_PREFIX)$(ES_HOST) \
+		-es_port $(ES_PORT)
 
 build_backend :
 	cd docker/docs-backend && \

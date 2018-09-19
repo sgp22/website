@@ -7,6 +7,7 @@ import zipfile
 import markdown
 import semver
 import itertools
+import hashlib
 
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
@@ -16,8 +17,14 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework import status
 
+from search.utils import DocsIndexer
+
 
 logger = logging.getLogger('debug')
+
+ES_INDEX_PREFIX = settings.ES_INDEX_PREFIX
+ES_PORT = settings.ES_PORT
+ES_HOST_URL = settings.ES_HOST_URL
 
 
 def post(request):
@@ -47,6 +54,15 @@ def post(request):
                     pass
             else:
                 content = ContentFile(zipf.read(zipped_file))
+                read_contents_bytes = content.read()
+                read_contents_str = read_contents_bytes.decode('utf-8')
+                indexer = DocsIndexer(ES_HOST_URL, ES_PORT, 'docs', ES_INDEX_PREFIX)
+                doc = {
+                    "content": read_contents_str,
+                    "path": path
+                }
+
+                indexer.index_doc(doc)
                 default_storage.save(path, content)
     else:
         return Response(

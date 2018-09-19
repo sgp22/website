@@ -9,6 +9,7 @@ import { BlockPageComponent } from './components/block-page/block-page.component
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { HomeComponent } from './components/home/home.component';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 const appRoutes: Routes = [
   {
@@ -76,6 +77,10 @@ const appRoutes: Routes = [
     path: 'code/:library/:version/:component',
     component: DocsContentPageComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'search',
+    component: SearchPageComponent,
   },
   {
     path: '**',

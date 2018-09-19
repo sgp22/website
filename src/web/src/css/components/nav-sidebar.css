@@ -51,7 +51,7 @@
   & .ids-icon {
     fill: var(--text-color-info);
     position: absolute;
-    right: calc(var(--spacing) * 3);
+    right: calc(var(--spacing-base) * 3);
     transform: rotate(0deg) translateY(30%);
   }
 

@@ -10,6 +10,8 @@ from django.conf import settings
 from rest_framework import serializers
 from rest_framework.fields import Field
 
+from wagtail.core.models import Page
+
 from wagtail.api.v2.serializers import (
     PageSerializer,
     Field,
