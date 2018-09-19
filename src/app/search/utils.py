@@ -152,8 +152,14 @@ class DocsIndexer:
                         highlight += " %s" % hl
 
             if h["_index"] == "%s__docs" % self.es_index_prefix:
-                version = 'latest' if h['_source']['version'] == library_versions[h['_source']['library']] else h['_source']['version']
-                if version != 'latest':
+                if h['_source']['library'] in library_versions:
+                    version = 'latest' if h['_source']['version'] == library_versions[h['_source']['library']] else h['_source']['version']
+                else:
+                    version = h['_source']['version']
+                if version != 'latest' and library_versions:
+                    # In case where `library_versions` is not empty
+                    # and the version is considered latest
+                    # throw away anything that isn't the latest version
                     continue
                 try:
                     result = {
