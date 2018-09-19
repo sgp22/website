@@ -256,13 +256,14 @@ class ElasticSearchView(APIView):
         search_query = request.GET.get('search_query', None)
         libraries = request.GET.get('libraries', None)
         query_indexes = ['docs', 'wagtailcore_page']
-
-        libs = libraries.split(",")
         library_versions = {}
-        for l in libs:
-            v = l.split(":")
-            version = {}
-            library_versions[v[0]] = v[1]
+
+        if libraries is not None:
+            libs = libraries.split(",")
+            for l in libs:
+                v = l.split(":")
+                version = {}
+                library_versions[v[0]] = v[1]
 
         return_data = {
             'results': {}
