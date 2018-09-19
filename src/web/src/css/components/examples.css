@@ -15,7 +15,7 @@
     margin: 0;
     position: absolute;
     right: 3px;
-    top: 0px;
+    top: 0;
 
     & li {
       float: left;

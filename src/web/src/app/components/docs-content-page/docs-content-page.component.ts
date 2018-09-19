@@ -279,7 +279,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   }
 
   createGithubUrl(slug: string) {
-    let repoName = this.library.replace('ids-', '');
+    const repoName = this.library.replace('ids-', '');
     let url = `https://github.com/infor-design/${repoName}/blob/`;
     url += `${this.selectedVersionNumber}/app/views/components/${this.element}/${slug}.html`;
     return url;
