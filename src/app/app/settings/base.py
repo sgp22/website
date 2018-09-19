@@ -168,7 +168,7 @@ ES_HOST = os.getenv('ES_HOST')
 ES_USER = os.getenv('ES_USER', 'elastic')
 ES_PASS = os.getenv('ES_PASS')
 ES_PORT = os.getenv('ES_PORT', 9200)
-ES_SECURE = os.getenv('ES_SECURE', False)
+ES_SECURE = os.getenv('ES_SECURE', 'false').lower() == 'true'
 ES_HOST_URL = ES_HOST
 
 if ES_SECURE is True:
