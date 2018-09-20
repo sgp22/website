@@ -9,6 +9,7 @@ import markdown
 import itertools
 import semver
 import hashlib
+from html.parser import HTMLParser
 
 
 from django.core.files.storage import default_storage
@@ -26,10 +27,27 @@ from . import matching_s3_objects
 logger = logging.getLogger('debug')
 
 
-ES_INDEX_PREFIX = settings.ES_INDEX_PREFIX
-ES_PORT = settings.ES_PORT
-ES_HOST_URL = settings.ES_HOST_URL
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.strict = False
+        self.convert_charrefs= True
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
 
+def strip_tags(input_html):
+    s = MLStripper()
+    input_html = re.sub(r'(\n)', ' ', input_html)
+    lis = list(filter(None, input_html.split(" ")))
+    input_html = " ".join(lis)
+    s.feed(input_html)
+    clean = s.get_data()
+    clean = re.sub('\s\s+', ' ', clean)
+
+    return clean
 
 class UniqueDict(dict):
     def __setitem__(self, key, value):
@@ -56,6 +74,10 @@ def get_filtered_result(bucket_name, path):
 def post(request):
     post_auth_key = request.POST.get('post_auth_key')
     DOCS_API_KEY = os.getenv('DOCS_API_KEY', "")
+    es_index_prefix = settings.ES_INDEX_PREFIX
+    es_port = settings.ES_PORT
+    es_host = settings.ES_HOST
+
     root_path = request.POST.get('root_path', '').strip('/')
     uploaded_file = request.FILES.get('file')
 
@@ -67,6 +89,10 @@ def post(request):
     if uploaded_file and uploaded_file.name.endswith('.zip'):
         zipf = zipfile.ZipFile(uploaded_file)
 
+        index_ext_types = [
+            '.json',
+        ]
+
         for zipped_file in zipf.namelist():
             path = os.path.join(*(
                 'docs',
@@ -75,13 +101,40 @@ def post(request):
             content = ContentFile(zipf.read(zipped_file))
             read_contents_bytes = content.read()
             read_contents_str = read_contents_bytes.decode('utf-8')
-            indexer = DocsIndexer(ES_HOST_URL, ES_PORT, 'docs', ES_INDEX_PREFIX)
-            doc = {
-                "content": read_contents_str,
-                "path": path
-            }
+            # Only index 'files'; based on whether
+            # they have an extension, not a dir
+            if "." in zipped_file:
+                f, ext = os.path.splitext(zipped_file)
+                indexer = DocsIndexer(es_host, es_port, 'docs', es_index_prefix)
+                doc = {}
+                path_split = path.split('/')
+                doc_slug = f.split('/', 1)[-1]
 
-            indexer.index_doc(doc)
+                if ext in index_ext_types:
+                    try:
+                        content_obj = json.loads(read_contents_str)
+                    except:
+                        print("Couldn't parse json string")
+                    try:
+                        # @NOTE: if you add any data to be indexed here
+                        # you also need to add it in `src/app/index_s3.py`
+                        doc['content'] = strip_tags(content_obj['body'])
+                        if 'api' in content_obj:
+                            doc['api'] = strip_tags(content_obj['api'])
+                        doc['title'] = content_obj['title']
+                        doc['library'] = path_split[1]
+                        doc['version'] = path_split[2]
+                        doc['slug'] = doc_slug
+                        doc['path'] = path
+                    except ValueError as err:
+                        print("ValueError exception... {}".format(err))
+                        continue
+                    except KeyError as err:
+                        print("KeyError exception... {}".format(err))
+                        continue
+
+                    indexer.index_doc(doc)
+
             default_storage.save(path, content)
     else:
         return Response(

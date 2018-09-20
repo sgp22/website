@@ -94,6 +94,8 @@ def s3_sync(**kwargs):
             }
 
             try:
+                # @NOTE: if you add any data to be indexed here
+                # you also need to add it in `src/app/docs/aws.py`
                 content_obj = json.loads(read_contents_str)
                 doc['content'] = strip_tags(content_obj['body'])
                 if 'api' in content_obj:
