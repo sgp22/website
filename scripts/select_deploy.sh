@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Immediately stop the 
+# Immediately stop the
 # script if a command fails.
 #set -e
 
@@ -41,7 +41,7 @@ NGINX_CONFIG_FILE_PATH="$ROOTDIR/src/config/nginx/frontend.conf"
 URLS_CONFIG_FILE_PATH="$ROOTDIR/src/app/app/urls.py"
 RED='\033[0;31m'
 NC='\033[0m'
-ERROR_STR=${RED}Error${NC}: 
+ERROR_STR=${RED}Error${NC}:
 
 if [ ! -d ${DIRECTORY} ]; then
     echo "Directory not found";
@@ -82,6 +82,8 @@ declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
                 "${ROOTDIR}/scripts/eb_deploy.sh"
                 "${ROOTDIR}/scripts/eb_env_vars.sh"
                 "${ROOTDIR}/scripts/pull_images.sh"
+                "${ROOTDIR}/scripts/eb_env_vars_staging.sh"
+                "${ROOTDIR}/scripts/eb_env_vars_prod.sh"
                 "${ROOTDIR}/staging-Dockerrun.aws.json"
                 "${ROOTDIR}/prod-Dockerrun.aws.json"
                 "${ROOTDIR}/Dockerfile"
