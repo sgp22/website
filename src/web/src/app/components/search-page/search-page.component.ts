@@ -37,6 +37,9 @@ export class SearchPageComponent implements OnInit {
   ngOnInit() {
     this.domain = this.appSettings.domain;
     this.route.queryParams.subscribe(params => this.search(params.q));
+    this.route.url.subscribe(urlSegment => {
+      (<any>window).ga('send', 'pageview');
+    });
   }
 
   handleQuery(searchForm) {
@@ -66,6 +69,7 @@ export class SearchPageComponent implements OnInit {
             res => {
               this.searchResults = res.results.hits;
               this.searchResults.length === 0 ? this.noResults = true : this.noResults = false;
+              (<any>window).ga('send', 'pageview', `/search?q=${term}`);
             },
             err => {
               console.error(err);
