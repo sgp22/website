@@ -125,6 +125,7 @@ couchdb-data/
 *.db
 *.iml
 collected
+data-mounts
 
 npm-debug.log*
 yarn-debug.log*

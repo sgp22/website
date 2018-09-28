@@ -12,6 +12,10 @@ deploy_staging : build_prod
 	eb use ids-com-staging && \
 	. scripts/eb_deploy.sh
 
+deploy_staging_a : build_prod
+	eb use ids-com-staging-a && \
+	. scripts/eb_deploy.sh
+
 deploy_prod : build_prod
 	eb use ids-com-prod && \
 	. scripts/eb_deploy.sh
