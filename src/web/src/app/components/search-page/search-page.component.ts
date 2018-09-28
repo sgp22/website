@@ -44,7 +44,6 @@ export class SearchPageComponent implements OnInit {
 
   handleQuery(searchForm) {
     this.router.navigate(['/search'], { queryParams: { q: `${searchForm.query.trim()}` } });
-    (<any>window).ga('send', 'pageview', `/search?q=${searchForm.query.trim()}`);
   }
 
   search(term) {
@@ -70,6 +69,7 @@ export class SearchPageComponent implements OnInit {
             res => {
               this.searchResults = res.results.hits;
               this.searchResults.length === 0 ? this.noResults = true : this.noResults = false;
+              (<any>window).ga('send', 'pageview', `/search?q=${term}`);
             },
             err => {
               console.error(err);
