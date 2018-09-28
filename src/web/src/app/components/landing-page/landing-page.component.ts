@@ -45,6 +45,7 @@ export class LandingPageComponent implements AfterViewInit {
             this.loading = false;
           }
         );
+      (<any>window).ga('send', 'pageview');
     });
 
   }

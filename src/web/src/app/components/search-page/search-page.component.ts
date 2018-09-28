@@ -37,6 +37,9 @@ export class SearchPageComponent implements OnInit {
   ngOnInit() {
     this.domain = this.appSettings.domain;
     this.route.queryParams.subscribe(params => this.search(params.q));
+    this.route.url.subscribe(urlSegment => {
+      (<any>window).ga('send', 'pageview');
+    })
   }
 
   handleQuery(searchForm) {
