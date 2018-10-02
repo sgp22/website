@@ -17,13 +17,10 @@ class Feedback(models.Model):
         null=False,
         default=''
     )
-    thumbs_up = models.SmallIntegerField(
+    thumb_type = models.CharField(
+        max_length=100,
         null=False,
-        default=0,
-    )
-    thumbs_down = models.SmallIntegerField(
-        null=False,
-        default=0,
+        default=''
     )
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)

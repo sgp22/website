@@ -3,16 +3,13 @@ import { CacheService } from './cache.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { catchError } from 'rxjs/operators';
-
-import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { _throw } from "rxjs/observable/throw";
-
+import { HttpHeaders } from '@angular/common/http';
 
 const headers = new HttpHeaders().set("Content-Type", "application/json");
 
 @Injectable()
 export class FeedbackService {
+  public baseUrl = `${this.appSettings.domain}/api/feedback/thumbs/`;
 
   constructor(
     private appSettings: AppSettings,
@@ -20,11 +17,11 @@ export class FeedbackService {
     private http: HttpClient,
   ) { }
 
-  getThumbsByPage(url: string, id: number) {
+  getThumbsByPage(id: number) {
     return this.cacheService
-      .get(`${this.appSettings.domain}/api/feedback/thumbs/${id}`,
+      .get(this.baseUrl,
         this.http
-          .get(url)
+          .get(this.baseUrl)
           .catch((err: Response) => {
             if (err.status === 400) {
               return JSON.stringify(0);
@@ -37,7 +34,7 @@ export class FeedbackService {
 
   addThumb(data: any) {
     return this.http
-      .post(`${this.appSettings.domain}/api/feedback/thumbs/`, data, {headers})
+      .post(this.baseUrl, data, {headers})
       .subscribe(
         val => {
           console.log("POST call successful value returned in body", val);

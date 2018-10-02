@@ -58,7 +58,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   submitThumb(value: String) {
     this.thumbValue = value;
-    this.feedbackSerice.addThumb({ "thumbs_up": 4, "thumbs_down": 4 })
+    this.addThumbs(this.thumbValue);
     if (this.thumbValue === 'thumbs-up') {
       try {
         (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
@@ -104,8 +104,17 @@ export class FeedbackWidgetComponent implements AfterViewInit {
     }
   }
 
-  displayFeedback() {
+  addThumbs(thumb_type) {
+    if (thumb_type === 'thumbs-up') {
+      this.feedbackSerice.addThumb({ relative_url: this.url, thumb_type: 'thumbs_up' });
+    }
+    if (thumb_type === 'thumbs-down') {
+      this.feedbackSerice.addThumb({ relative_url: this.url, thumb_type: 'thumbs_down' });
+    }
+  }
 
+  getThumbs(id: number) {
+    console.log(this.url);
   }
 
   characterCounter(comment) {
