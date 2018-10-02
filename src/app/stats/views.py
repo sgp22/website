@@ -21,8 +21,6 @@ class FeedbackThumbs(APIView):
         response["thumbs_down"] = thumbs_down
         response["total"] = thumbs_up + thumbs_down
 
-        print(response)
-
         return Response(response)
 
     def post(self, request, format=None):

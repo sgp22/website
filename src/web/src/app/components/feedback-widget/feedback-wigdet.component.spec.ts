@@ -4,12 +4,15 @@ import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router
 import { FormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '../../../../node_modules/@angular/core';
 import { Observable } from '../../../../node_modules/rxjs';
-
+import { FeedbackService } from '../../shared/feedback.service';
+import { AppSettings } from '../../app.settings';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('FeedbackWidgetComponent', () => {
 
   let component: FeedbackWidgetComponent;
   let fixture: ComponentFixture<FeedbackWidgetComponent>;
+  let feedbackService: FeedbackService;
 
   beforeEach(async(() => {
 
@@ -17,13 +20,18 @@ describe('FeedbackWidgetComponent', () => {
       declarations: [FeedbackWidgetComponent],
       imports: [FormsModule],
       providers: [
-        {
-          provide: Router
-        },
+        { provide: Router },
         {
           provide: ActivatedRoute,
-          useValue: { data: Observable.of( { data: 'Test' } ) }
-        }
+          useValue: { data: Observable.of({ data: 'Test' }) }
+        },
+        FeedbackService,
+        {
+          provide: AppSettings,
+          useValue: { data: Observable.of({ data: 'Test' }) }
+        },
+        HttpClient,
+        HttpHandler
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -33,6 +41,7 @@ describe('FeedbackWidgetComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FeedbackWidgetComponent);
     component = fixture.componentInstance;
+    feedbackService = TestBed.get(FeedbackService);
     fixture.detectChanges();
   });
 
