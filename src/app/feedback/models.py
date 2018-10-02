@@ -12,7 +12,7 @@ class Feedback(models.Model):
         blank=True,
         help_text='Json format'
     )
-    page_slug = models.CharField(
+    relative_url = models.CharField(
         max_length=100,
         null=False,
         default=''

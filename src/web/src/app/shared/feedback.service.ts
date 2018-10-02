@@ -20,23 +20,24 @@ export class FeedbackService {
     private http: HttpClient,
   ) { }
 
-  getThumbs(url: string) {
-    return this.cacheService.get(url,
-      this.http
-        .get(url)
-        .catch((err: Response) => {
-          if (err.status === 400) {
-            return JSON.stringify(0);
-          } else {
-            return Observable.throw(new Error(`${err.status} ${err.statusText}`));
-          }
-        })
-      )
+  getThumbsByPage(url: string, id: number) {
+    return this.cacheService
+      .get(`${this.appSettings.domain}/api/feedback/thumbs/${id}`,
+        this.http
+          .get(url)
+          .catch((err: Response) => {
+            if (err.status === 400) {
+              return JSON.stringify(0);
+            } else {
+              return Observable.throw(new Error(`${err.status} ${err.statusText}`));
+            }
+          })
+        )
   }
 
-  addThumb(page: string, data: any) {
+  addThumb(data: any) {
     return this.http
-      .post(`${this.appSettings.domain}/api/feedback/thumbs/${page}/2/`, data, {headers})
+      .post(`${this.appSettings.domain}/api/feedback/thumbs/`, data, {headers})
       .subscribe(
         val => {
           console.log("POST call successful value returned in body", val);

@@ -58,7 +58,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   submitThumb(value: String) {
     this.thumbValue = value;
-    this.feedbackSerice.addThumb('example-page', { "thumbs_up": 4, "thumbs_down": 4 })
+    this.feedbackSerice.addThumb({ "thumbs_up": 4, "thumbs_down": 4 })
     if (this.thumbValue === 'thumbs-up') {
       try {
         (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
