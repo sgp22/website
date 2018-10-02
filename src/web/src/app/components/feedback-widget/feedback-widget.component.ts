@@ -27,6 +27,9 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   public userEmail = '';
   public comment = '';
   public url;
+  public displayThumbsUp = '';
+  public displayThumbsDown = '';
+  public displayTotal = '';
 
   constructor(
     private router: Router,
@@ -43,6 +46,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
         this.widgetHovered = false;
         this.commentSubmitted = false;
         this.url = this.router.routerState.snapshot.url;
+        this.getThumbs(this.url);
       });
     }
   }
@@ -58,7 +62,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   submitThumb(value: String) {
     this.thumbValue = value;
-    this.addThumbs(this.thumbValue);
+    this.addThumbs(this.thumbValue)
     if (this.thumbValue === 'thumbs-up') {
       try {
         (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
@@ -106,15 +110,24 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   addThumbs(thumb_type) {
     if (thumb_type === 'thumbs-up') {
-      this.feedbackSerice.addThumb({ relative_url: this.url, thumb_type: 'thumbs_up' });
+      this.feedbackSerice
+        .addThumb({ relative_url: this.url, thumb_type: 'thumbs_up' })
+        .subscribe(val => { this.getThumbs(this.url); });
     }
     if (thumb_type === 'thumbs-down') {
-      this.feedbackSerice.addThumb({ relative_url: this.url, thumb_type: 'thumbs_down' });
+      this.feedbackSerice
+        .addThumb({ relative_url: this.url, thumb_type: 'thumbs_down' })
+        .subscribe(val => { this.getThumbs(this.url); });
     }
   }
 
-  getThumbs(id: number) {
-    console.log(this.url);
+  getThumbs(relative_url) {
+    this.feedbackSerice.getThumbsByPage(relative_url)
+      .subscribe(res => {
+        this.displayThumbsDown = res.thumbs_down;
+        this.displayThumbsUp = res.thumbs_up;
+        this.displayTotal = res.total;
+      })
   }
 
   characterCounter(comment) {

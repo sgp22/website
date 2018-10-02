@@ -26,7 +26,7 @@ class FeedbackThumbs(APIView):
         return Response(response)
 
     def post(self, request, format=None):
-        serializer = FeedbackSerializer(data=request.data)
+        serializer = ThumbsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
