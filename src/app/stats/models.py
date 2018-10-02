@@ -1,7 +1,7 @@
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 
-class Feedback(models.Model):
+class Thumbs(models.Model):
     doc_data = JSONField(
         default=dict,
         blank=True,

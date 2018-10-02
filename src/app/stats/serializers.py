@@ -1,13 +1,13 @@
 from rest_framework import serializers
-from .models import Feedback
+from .models import Thumbs
 
-class FeedbackSerializer(serializers.Serializer):
+class ThumbsSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     relative_url = serializers.CharField(required=True, allow_blank=True, max_length=100)
     thumb_type = serializers.CharField(required=True, allow_blank=True, max_length=100)
 
     def create(self, validated_data):
-        return Feedback.objects.create(**validated_data)
+        return Thumbs.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.relative_url = validated_data.get('relative_url', instance.relative_url)

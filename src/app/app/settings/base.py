@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'home',
     'search',
     'docs',
-    'feedback',
+    'stats',
 
     'wagtailmarkdown',
 
