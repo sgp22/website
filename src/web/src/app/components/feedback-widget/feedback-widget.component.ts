@@ -62,7 +62,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   submitThumb(value: String) {
     this.thumbValue = value;
-    this.addThumbs(this.thumbValue)
+    this.addThumbs(this.thumbValue);
     if (this.thumbValue === 'thumbs-up') {
       try {
         (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
@@ -127,7 +127,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
         this.displayThumbsDown = res.thumbs_down;
         this.displayThumbsUp = res.thumbs_up;
         this.displayTotal = res.total;
-      })
+      });
   }
 
   characterCounter(comment) {

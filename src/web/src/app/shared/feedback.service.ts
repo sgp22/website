@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHeaders } from '@angular/common/http';
 
-const headers = new HttpHeaders().set("Content-Type", "application/json");
+const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
 @Injectable()
 export class FeedbackService {
@@ -26,10 +26,10 @@ export class FeedbackService {
         } else {
           return Observable.throw(new Error(`${err.status} ${err.statusText}`));
         }
-      })
+      });
   }
 
   addThumb(data: any) {
-    return this.http.post(this.baseUrl, data, {headers})
+    return this.http.post(this.baseUrl, data, {headers});
   }
 }
