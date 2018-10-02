@@ -7,12 +7,18 @@ from .models import Feedback
 from .serializers import FeedbackSerializer
 
 class FeedbackThumbs(APIView):
-    def get(self, request, **kwargs):
+    def get_object(self, pk):
+        try:
+            return Feedback.objects.get(pk=pk)
+        except Feedback.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
         feedback = Feedback.objects.all()
         serializer = FeedbackSerializer(feedback, many=True)
         return Response(serializer.data)
 
-    def post(self, request, **kwargs):
+    def post(self, request, format=None):
         serializer = FeedbackSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

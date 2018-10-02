@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FeedbackService } from '../../shared/feedback.service';
 import { NgForm } from '@angular/forms';
 
 interface FeedbackForm {
@@ -10,6 +11,7 @@ interface FeedbackForm {
 @Component({
   selector: 'feedback-widget',
   templateUrl: './feedback-widget.component.html',
+  providers: [FeedbackService]
 })
 export class FeedbackWidgetComponent implements AfterViewInit {
   @ViewChild('thumbsDown') thumbsDown: ElementRef;
@@ -28,7 +30,8 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private feedbackSerice: FeedbackService
   ) {}
 
   ngAfterViewInit() {
@@ -55,6 +58,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   submitThumb(value: String) {
     this.thumbValue = value;
+    this.feedbackSerice.addThumb('example-page', { "thumbs_up": 4, "thumbs_down": 4 })
     if (this.thumbValue === 'thumbs-up') {
       try {
         (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
@@ -98,6 +102,10 @@ export class FeedbackWidgetComponent implements AfterViewInit {
       this.showAdditional = false;
       this.commentSubmitted = true;
     }
+  }
+
+  displayFeedback() {
+
   }
 
   characterCounter(comment) {
