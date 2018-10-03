@@ -26,6 +26,9 @@ urlpatterns = [
     # Deployed docs API.
     url(r'^api/docs/', include('docs.urls')),
 
+    # stats
+    url(r'^api/stats/', include('stats.urls')),
+
     # Wagtail pages.
     url(r'^', include(wagtail_urls)),
 ]

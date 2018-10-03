@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FeedbackService } from '../../shared/feedback.service';
 import { NgForm } from '@angular/forms';
 
 interface FeedbackForm {
@@ -10,6 +11,7 @@ interface FeedbackForm {
 @Component({
   selector: 'feedback-widget',
   templateUrl: './feedback-widget.component.html',
+  providers: [FeedbackService]
 })
 export class FeedbackWidgetComponent implements AfterViewInit {
   @ViewChild('thumbsDown') thumbsDown: ElementRef;
@@ -25,10 +27,14 @@ export class FeedbackWidgetComponent implements AfterViewInit {
   public userEmail = '';
   public comment = '';
   public url;
+  public displayThumbsUp = '';
+  public displayThumbsDown = '';
+  public displayTotal = '';
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private feedbackSerice: FeedbackService
   ) {}
 
   ngAfterViewInit() {
@@ -40,6 +46,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
         this.widgetHovered = false;
         this.commentSubmitted = false;
         this.url = this.router.routerState.snapshot.url;
+        this.getThumbs(this.url);
       });
     }
   }
@@ -55,6 +62,7 @@ export class FeedbackWidgetComponent implements AfterViewInit {
 
   submitThumb(value: String) {
     this.thumbValue = value;
+    this.addThumbs(this.thumbValue);
     if (this.thumbValue === 'thumbs-up') {
       try {
         (<any>window).ga('send', 'event', 'feedback-wasthishelpful', 'clickthumbsup', this.url);
@@ -98,6 +106,28 @@ export class FeedbackWidgetComponent implements AfterViewInit {
       this.showAdditional = false;
       this.commentSubmitted = true;
     }
+  }
+
+  addThumbs(thumb_type) {
+    if (thumb_type === 'thumbs-up') {
+      this.feedbackSerice
+        .addThumb({ relative_url: this.url, thumb_type: 'thumbs_up' })
+        .subscribe(val => { this.getThumbs(this.url); });
+    }
+    if (thumb_type === 'thumbs-down') {
+      this.feedbackSerice
+        .addThumb({ relative_url: this.url, thumb_type: 'thumbs_down' })
+        .subscribe(val => { this.getThumbs(this.url); });
+    }
+  }
+
+  getThumbs(relative_url) {
+    this.feedbackSerice.getThumbsByPage(relative_url)
+      .subscribe(res => {
+        this.displayThumbsDown = res.thumbs_down;
+        this.displayThumbsUp = res.thumbs_up;
+        this.displayTotal = res.total;
+      });
   }
 
   characterCounter(comment) {

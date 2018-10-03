@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from rest_framework import serializers
 
