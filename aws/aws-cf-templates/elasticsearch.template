@@ -1,0 +1,197 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "",
+	"Parameters": {
+			"VpcId": {
+			  "Description": "A VPC ID, such as vpc-a123baa3.",
+			  "Type": "AWS::EC2::VPC::Id"
+			},
+			"EsArn": {
+				"Description": "ElasticSearch Arn.",
+				"Type": "String"
+			  },
+			  "EsUserArn": {
+				"Description": "ElasticSearch User Arn.",
+				"Type": "String"
+			  },
+			  "IdsUserArn": {
+				"Description": "IDS User Arn.",
+				"Type": "String"
+			  },
+		"ElasticsearchVersion": {
+			"Description": "User defined Elasticsearch Version",
+			"Default": "6.2",
+			"AllowedValues": ["5.5", "5.6", "6", "6.1", "6.2", "6.3", "6.4"],
+			"Type": "String"
+		}
+	},
+	"Resources": {
+		"mySecurityGroup": {
+			"Type": "AWS::EC2::SecurityGroup",
+			"Properties": {
+				"GroupDescription": "ids-search security group",
+				"VpcId": {
+					"Ref": "VpcId"
+				},
+				"GroupName": "ids-search",
+				"SecurityGroupIngress": [{
+					"FromPort": "443",
+					"IpProtocol": "tcp",
+					"ToPort": "443",
+					"CidrIp": "0.0.0.0/0"
+				}, {
+					"FromPort": "22",
+					"IpProtocol": "tcp",
+					"ToPort": "22",
+					"CidrIp": "0.0.0.0/0"
+				}, {
+					"FromPort": "80",
+					"IpProtocol": "tcp",
+					"ToPort": "80",
+					"CidrIp": "0.0.0.0/0"
+				}, {
+					"FromPort": "9300",
+					"IpProtocol": "tcp",
+					"ToPort": "9300",
+					"CidrIp": "0.0.0.0/0"
+				}, {
+					"FromPort": "9200",
+					"IpProtocol": "tcp",
+					"ToPort": "9200",
+					"CidrIp": "0.0.0.0/0"
+				}]
+			}
+		},
+		"ElasticsearchDomain": {
+			"Type": "AWS::Elasticsearch::Domain",
+			"Properties": {
+				"DomainName": "ids-search",
+				"ElasticsearchVersion": {
+					"Ref": "ElasticsearchVersion"
+				},
+				"ElasticsearchClusterConfig": {
+					"DedicatedMasterEnabled": "true",
+					"InstanceCount": "2",
+					"ZoneAwarenessEnabled": "true",
+					"InstanceType": "m3.medium.elasticsearch",
+					"DedicatedMasterType": "m3.medium.elasticsearch",
+					"DedicatedMasterCount": "3"
+				},
+				"EBSOptions": {
+					"EBSEnabled": true,
+					"Iops": 0,
+					"VolumeSize": 35,
+					"VolumeType": "gp2"
+				},
+				"SnapshotOptions": {
+					"AutomatedSnapshotStartHour": "0"
+				},
+				"AccessPolicies": {
+					"Version": "2012-10-17",
+					"Statement": [{
+							"Effect": "Allow",
+							"Principal": {
+								"AWS": {"Ref": "EsUserArn"}
+							},
+							"Action": "es:*",
+							"Resource": {"Ref": "EsArn"}
+						},
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"AWS": {"Ref": "IdsUserArn"}
+							},
+							"Action": "es:*",
+							"Resource": {"Ref": "EsArn"}
+						},
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"AWS": "*"
+							},
+							"Action": "es:*",
+							"Resource": {"Ref": "EsArn"},
+							"Condition": {
+								"IpAddress": {
+									"aws:SourceIp": "xxx"
+								}
+							}
+						},
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"AWS": "*"
+							},
+							"Action": "es:*",
+							"Resource": {"Ref": "EsArn"},
+							"Condition": {
+								"IpAddress": {
+									"aws:SourceIp": "xxx"
+								}
+							}
+						},
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"AWS": "*"
+							},
+							"Action": "es:*",
+							"Resource": {"Ref": "EsArn"},
+							"Condition": {
+								"IpAddress": {
+									"aws:SourceIp": "xxx"
+								}
+							}
+						},
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"AWS": "*"
+							},
+							"Action": "es:*",
+							"Resource": {"Ref": "EsArn"},
+							"Condition": {
+								"IpAddress": {
+									"aws:SourceIp": "xxx"
+								}
+							}
+						},
+						{
+							"Effect": "Allow",
+							"Principal": {
+								"AWS": "*"
+							},
+							"Action": "es:*",
+							"Resource": {"Ref": "EsArn"},
+							"Condition": {
+								"IpAddress": {
+									"aws:SourceIp": "xxx"
+								}
+							}
+						}
+					]
+				},
+				"AdvancedOptions": {
+					"rest.action.multi.allow_explicit_index": "true"
+				}
+			}
+		}
+	},
+	"Outputs": {
+		"DomainArn": {
+			"Value": {
+				"Fn::GetAtt": ["ElasticsearchDomain", "DomainArn"]
+			}
+		},
+		"DomainEndpoint": {
+			"Value": {
+				"Fn::GetAtt": ["ElasticsearchDomain", "DomainEndpoint"]
+			}
+		},
+		"SecurityGroupId": {
+			"Value": {
+				"Ref": "mySecurityGroup"
+			}
+		}
+	}
+}
