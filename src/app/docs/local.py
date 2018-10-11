@@ -56,7 +56,11 @@ def post(request):
                 content = ContentFile(zipf.read(zipped_file))
                 read_contents_bytes = content.read()
                 read_contents_str = read_contents_bytes.decode('utf-8')
-                indexer = DocsIndexer(ES_HOST_URL, ES_PORT, 'docs', ES_INDEX_PREFIX)
+                indexer = DocsIndexer(
+                    ES_HOST_URL,
+                    ES_PORT,
+                    'docs',
+                    ES_INDEX_PREFIX)
                 doc = {
                     "content": read_contents_str,
                     "path": path
