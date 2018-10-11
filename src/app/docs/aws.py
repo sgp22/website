@@ -101,6 +101,12 @@ def post(request):
             content = ContentFile(zipf.read(zipped_file))
             read_contents_bytes = content.read()
             read_contents_str = read_contents_bytes.decode('utf-8')
+
+            # Store file in AWS
+            default_storage.save(path, content)
+
+            # Continue parsing files to index in ES
+
             # Only index 'files'; based on whether
             # they have an extension, not a dir
             if "." in zipped_file:
@@ -134,8 +140,6 @@ def post(request):
                         continue
 
                     indexer.index_doc(doc)
-
-            default_storage.save(path, content)
     else:
         return Response(
             {'file': 'ZIP file not found'},

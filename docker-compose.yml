@@ -47,7 +47,7 @@ services:
       - xpack.watcher.enabled=false
 
   kibana:
-    image: kibana
+    image: kibana:6.4.2
     container_name: 'docssite_kibana'
     ports:
       - "5601:5601"
