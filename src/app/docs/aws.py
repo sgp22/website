@@ -26,6 +26,10 @@ from . import matching_s3_objects
 
 logger = logging.getLogger('debug')
 
+ES_INDEX_PREFIX = settings.ES_INDEX_PREFIX
+ES_PORT = settings.ES_PORT
+ES_HOST_URL = settings.ES_HOST_URL
+
 
 class MLStripper(HTMLParser):
     def __init__(self):
@@ -75,8 +79,6 @@ def post(request):
     post_auth_key = request.POST.get('post_auth_key')
     DOCS_API_KEY = os.getenv('DOCS_API_KEY', "")
     es_index_prefix = settings.ES_INDEX_PREFIX
-    es_port = settings.ES_PORT
-    es_host = settings.ES_HOST
 
     root_path = request.POST.get('root_path', '').strip('/')
     uploaded_file = request.FILES.get('file')
@@ -111,7 +113,11 @@ def post(request):
             # they have an extension, not a dir
             if "." in zipped_file:
                 f, ext = os.path.splitext(zipped_file)
-                indexer = DocsIndexer(es_host, es_port, 'docs', es_index_prefix)
+                indexer = DocsIndexer(
+                    ES_HOST_URL,
+                    ES_PORT,
+                    'docs',
+                    ES_INDEX_PREFIX)
                 doc = {}
                 path_split = path.split('/')
                 doc_slug = f.split('/', 1)[-1]
