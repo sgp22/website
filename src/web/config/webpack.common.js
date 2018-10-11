@@ -10,7 +10,6 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const postcss = require('postcss');
-const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const atImport = require("postcss-import");
 const postcssCssnext = require('postcss-cssnext');
@@ -27,9 +26,6 @@ const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
 const genDirNodeModules = path.join(process.cwd(), 'src', '$$_gendir', 'node_modules');
 const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"];
-const minimizeCss = false;
-const baseHref = "";
-const deployUrl = "";
 
 const cssBundle = "assets/site/css/site-[hash:6].css";
 const cssExtract = new ExtractTextPlugin(cssBundle);
@@ -127,15 +123,6 @@ module.exports = {
         "include": [
           path.join(process.cwd(), "src/css/site.css")
         ],
-        test: /\.css$/,
-        use: [
-          { "loader": "raw-loader" }
-        ]
-      },
-      {
-        "include": [
-          path.join(process.cwd(), "src/css/site.css")
-        ],
         "test": /\.css$/,
         "use": cssExtract.extract({
           "fallback": "style-loader",
@@ -214,6 +201,11 @@ module.exports = {
       },
       {
         "context": "src/",
+        "to": "assets/highlight.js/css",
+        "from": `${nodeModules}/highlight.js/styles/github.css`
+      },
+      {
+        "context": "src/",
         "to": "assets/site/",
         "from": {
           "glob": "assets/*",
@@ -264,6 +256,7 @@ module.exports = {
       assets: [
         "assets/ids-css/css/ids-reset.min.css",
         "assets/ids-css/css/ids-css.min.css",
+        "assets/highlight.js/css/github.css"
       ],
       append: false,
       publicPath: true,
