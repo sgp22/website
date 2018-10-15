@@ -44,7 +44,7 @@ class MLStripper(HTMLParser):
 
 def strip_tags(input_html):
     s = MLStripper()
-    input_html = re.sub(r'(\n)', ' ', input_html)
+    input_html = re.sub(r'(\n)', ' ', str(input_html))
     lis = list(filter(None, input_html.split(" ")))
     input_html = " ".join(lis)
     s.feed(input_html)
@@ -141,10 +141,10 @@ def post(request):
                         doc['slug'] = doc_slug
                         doc['path'] = path
                     except ValueError as err:
-                        print("ValueError exception... {}".format(err))
+                        print("ValueError exception... {} on {}".format(err, path))
                         continue
                     except KeyError as err:
-                        print("KeyError exception... {}".format(err))
+                        print("KeyError exception... {} on {}".format(err, path))
                         continue
 
                     indexer.index_doc(doc)
