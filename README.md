@@ -30,6 +30,21 @@ make dev_backend #for backend dev
 
 And finally, `make shell_backend` and `chown uwsgi:uwsgi -R /home/app/media/`, if you are working with media files locally.
 
+## Building backend
+
+If you need to update python packages or make other changes to the docker image:
+
+* Update [requirements.txt](https://github.com/infor-design/website/blob/master/src/app/requirements.txt) and/or [prod.txt](https://github.com/infor-design/website/blob/master/docker/docs-backend/requirements/prod.txt)
+* Update references to `docs-backend` version number, as seen in this commit [`f8d57ba`](https://github.com/infor-design/website/commit/f8d57ba91a94607d835c84a712c31dcdd80b6a06)
+* Then build and push the docker container as follows, getting the docker credentials from an admin:
+
+```
+make build_backend
+docker login
+docker push hookandloop/docs-backend:1.0.6
+```
+Make sure to update the `push` command with the version number you just created.
+
 ## ElasticSearch
 
 To browse the indexes through the browser, navigate to here https://localhost:9200/_cat/indices?v
