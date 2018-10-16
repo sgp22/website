@@ -8,3 +8,6 @@ VERSION = 1.0.6
 
 build :
 	docker build -t $(ORGANIZATION)/$(CONTAINER):$(VERSION) .
+
+rebuild :
+	docker build --no-cache -t $(ORGANIZATION)/$(CONTAINER):$(VERSION) .
