@@ -79,8 +79,6 @@ def post(request):
     post_auth_key = request.POST.get('post_auth_key')
     DOCS_API_KEY = os.getenv('DOCS_API_KEY', "")
     es_index_prefix = settings.ES_INDEX_PREFIX
-    es_port = settings.ES_PORT
-    es_host = settings.ES_HOST
 
     root_path = request.POST.get('root_path', '').strip('/')
     uploaded_file = request.FILES.get('file')
