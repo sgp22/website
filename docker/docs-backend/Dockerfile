@@ -1,10 +1,13 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 MAINTAINER Hook & Loop Dev <hookandloopjenkins@gmail.com>
 
-RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
+RUN apt-get clean \
+    && apt-get -y update \
+    && apt-get install -y locales \
+    && locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 ENV TERM xterm
@@ -14,9 +17,10 @@ RUN apt-get update \
       software-properties-common \
       build-essential \
       wget \
-    && yes | add-apt-repository ppa:fkrull/deadsnakes \
-    && add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main"  \
-    && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    && sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' \
+    && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
     && apt-get install -y \
@@ -26,7 +30,7 @@ RUN apt-get update \
       python3 \
       python3-pip \
       python-setuptools \
-      python-software-properties \
+      software-properties-common \
       postgresql-contrib \
       postgresql-9.6 \
       memcached \
@@ -55,8 +59,7 @@ RUN apt-get update \
     && update-locale LANG=en_US.UTF-8 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install --upgrade pip \
-  && pip3 install --upgrade distribute \
+RUN python3 -m pip install --upgrade pip \
   && pip3 install --ignore-installed six
 
 ADD ./requirements /home/app/requirements/
