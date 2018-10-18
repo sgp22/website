@@ -8,5 +8,5 @@ export DOMAIN=<DOMAIN>
 export ENV=production
 ```
 
-- `. ./deploy-aws/scripts/predeploy_env_vars.sh`
-- Pool `. ./scripts/select_deploy.sh -f deploy-aws -c deploy`
+- `. ./deploy/aws/scripts/predeploy_env_vars.sh`
+- Pool `. ./scripts/select_deploy.sh -f deploy -c deploy`

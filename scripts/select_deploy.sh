@@ -87,6 +87,7 @@ declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
                 "${ROOTDIR}/staging-Dockerrun.aws.json"
                 "${ROOTDIR}/prod-Dockerrun.aws.json"
                 "${ROOTDIR}/Dockerfile"
+                "${ROOTDIR}/cloud-formation/elasticsearch.template"
                 )
 
 for i in "${to_delete[@]}"

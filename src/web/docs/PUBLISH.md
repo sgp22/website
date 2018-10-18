@@ -26,11 +26,11 @@ In the repo, make sure you're clean and everything you've changed is committed.
 Then run:
 
 ```sh
-mv deploy-aws/staging-Dockerrun.aws.json deploy-aws/Dockerrun.aws.json
+mv deploy/staging-Dockerrun.aws.json deploy/Dockerrun.aws.json
 export DOMAIN=https://staging.design.infor.com
 export ENV=staging
-bash ./scripts/select_deploy.sh -f deploy-aws -c deploy_staging
-mv deploy-aws/Dockerrun.aws.json deploy-aws/staging-Dockerrun.aws.json
+bash ./scripts/select_deploy.sh -f deploy -c deploy_staging
+mv deploy/Dockerrun.aws.json deploy/staging-Dockerrun.aws.json
 ```
 
 You might be dumped into a different bash prompt after. If so, just run `exit`.
@@ -40,11 +40,11 @@ You might be dumped into a different bash prompt after. If so, just run `exit`.
 Run:
 
 ```SH
-mv deploy-aws/prod-Dockerrun.aws.json deploy-aws/Dockerrun.aws.json
+mv deploy/prod-Dockerrun.aws.json deploy/Dockerrun.aws.json
 export DOMAIN=https://design.infor.com
 export ENV=production
-bash ./scripts/select_deploy.sh -f deploy-aws -c deploy_prod
-mv deploy-aws/Dockerrun.aws.json deploy-aws/prod-Dockerrun.aws.json
+bash ./scripts/select_deploy.sh -f deploy -c deploy_prod
+mv deploy/Dockerrun.aws.json deploy/prod-Dockerrun.aws.json
 ```
 
 You might be dumped into a different bash prompt after. If so, just run `exit`.
@@ -55,7 +55,7 @@ This isn't needed very often but if you're making a change to the site code whic
 Set vars locally using `export` and then run:
 
 ```sh
-eb use ids-com-prod && zsh deploy-aws/scripts/eb_env_vars_prod.sh
+eb use ids-com-prod && zsh deploy/scripts/eb_env_vars_prod.sh
 ```
 
 ## Jenkins Tasks
