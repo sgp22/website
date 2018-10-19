@@ -45,6 +45,7 @@ export class TokenService {
         grouped[curCategory].push(props[key]);
       }
     }
+    console.log(grouped);
     return grouped;
   }
 

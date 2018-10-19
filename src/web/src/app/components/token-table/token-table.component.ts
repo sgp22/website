@@ -11,12 +11,12 @@ import testTokenData from '../../shared/test.token.data';
 })
 export class TokenTableComponent implements OnInit {
   @Input() idsTokenProperties;
+  @Input() tokensCategory;
   @Input() sectionClassName;
   @Input() version;
   @Input() loading;
   @Input() library;
   @Input() element;
-  public tokensCategory = 'button';
 
   constructor(
     private appSettings: AppSettings,

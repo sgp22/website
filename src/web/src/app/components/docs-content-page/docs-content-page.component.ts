@@ -108,6 +108,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 }
                 this.notFound = false;
                 this.docs = docs;
+                console.log(this.docs);
                 if (docs.api) {
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }
