@@ -45,6 +45,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public tocItems: TocItems[] = [];
   public bodyTitles;
   public apiTitles;
+  public tokensCategory;
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')
@@ -78,6 +79,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         this.element = null;
       }
 
+      console.log(this.element);
+
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }
@@ -108,7 +111,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 }
                 this.notFound = false;
                 this.docs = docs;
-                console.log(this.docs);
+
                 if (docs.api) {
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }

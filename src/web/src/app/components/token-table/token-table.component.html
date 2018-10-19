@@ -1,5 +1,4 @@
-<section [ngClass]="{'page-section': sectionClassName}">
-  {{tokensCategory}}
+<section *ngIf="!loading && idsTokenProperties && idsTokenProperties[tokensCategory]"[ngClass]="{'page-section': sectionClassName}">
   <table>
     <thead>
       <th>
