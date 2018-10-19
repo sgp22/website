@@ -17,29 +17,27 @@ export class TokenService {
 
   getTokenData(domain: string, library: string, version: string) {
     // Note that the following url route is for a dist file
-    // and not referring to the ids-identity packing in node_modules
-    const url = `${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.raw.json`;
+    // and not referring to the ids-identity package in node_modules
+    const url = `${domain}/api/docs/${library}/${version}/ids-identity/theme-soho.simple.json`;
 
-   return this.cacheService.get(url, this.http
-    .get(url)
-    .catch((err: Response) => {
-      if (err.status === 400) {
-        return JSON.stringify([]);
-      } else {
-        return Observable.throw(new Error(`${ err.status } ${ err.statusText }`));
-      }
-    }));
+    return this.cacheService.get(url, this.http
+      .get(url)
+      .catch((err: Response) => {
+        if (err.status === 400) {
+          return JSON.stringify([]);
+        } else {
+          return Observable.throw(new Error(`${ err.status } ${ err.statusText }`));
+        }
+      }));
   }
 
   groupTokensByCategory(tokenData) {
     const grouped = {};
-    const props: Array<Token> = tokenData.props;
+    const props: Array<Token> = tokenData;
 
     for (const key in props) {
       if (props.hasOwnProperty(key)) {
         const curCategory = props[key].category;
-
-        props[key].description = this.humanReadable(props[key].name);
 
         if (!grouped.hasOwnProperty(curCategory)) {
           grouped[curCategory] = new Array<Token>();

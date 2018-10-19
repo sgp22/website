@@ -78,7 +78,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         this.element = null;
       }
 
-
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }
