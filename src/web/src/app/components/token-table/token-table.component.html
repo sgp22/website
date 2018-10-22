@@ -12,15 +12,14 @@
     <tbody>
       <tr *ngFor="let token of idsTokenProperties[tokensCategory]">
         <td>
-          <code>{{token.name}}</code>
+          <code>{{token.name.sass}}</code>
         </td>
         <td>
           <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }"
             title="{{token.value}}"></div>
         </td>
         <td>
-          <code *ngIf="token.type === 'color'">{{token.originalValue}}</code>
-          <code *ngIf="token.type !== 'color'">{{token.value}}</code>
+          <code>{{token.value}}</code>
         </td>
       </tr>
     </tbody>

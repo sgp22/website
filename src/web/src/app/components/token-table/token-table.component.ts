@@ -30,12 +30,12 @@ export class TokenTableComponent implements OnInit {
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
     this.idsTokenProperties = this.tokenService.groupTokensByCategory(testTokenData);
     this.loading = false;
-    console.log(this.idsTokenProperties);
+    // console.log(this.idsTokenProperties);
     // this.tokenService
     //   .getTokenData(domain, library, version)
     //   .subscribe(
     //     res => {
-    //       this.tokenService.groupTokensByCategory(testTokenData);
+    //       this.tokenService.groupTokensByCategory(res);
     //       this.loading = false;
     //     },
     //     err => {
