@@ -66,8 +66,12 @@ restart_vm :
 
 
 # Web
-run_dev :
-	cd src/web && npm install && npm run start
+node_modules : src/web/package.json
+	cd src/web && npm install
+	touch $@
+
+run_dev : node_modules
+	cd src/web && npm run start
 
 # This is mostly for testing locally.
 build_prod :
