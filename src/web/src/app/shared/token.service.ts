@@ -47,18 +47,4 @@ export class TokenService {
     }
     return grouped;
   }
-
-  private humanReadable(str: string) {
-    return this.toTitleCase(this.dashesToSpaces(str));
-  }
-
-  private dashesToSpaces(str: string): string {
-    return str.replace(/-/g, ' ');
-  }
-
-  private toTitleCase(str: string): string {
-    return str.replace(/\w\S*/g, (txt) => {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  }
 }
