@@ -97,5 +97,3 @@ done
 
 git fetch
 git checkout src Makefile
-
-exec bash
