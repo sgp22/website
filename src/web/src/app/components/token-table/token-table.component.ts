@@ -13,9 +13,7 @@ export class TokenTableComponent implements OnInit {
   @Input() idsTokenProperties;
   @Input() tokensCategory;
   @Input() sectionClassName;
-  @Input() version;
   @Input() loading;
-  @Input() library;
 
   constructor(
     private appSettings: AppSettings,
@@ -23,7 +21,7 @@ export class TokenTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getIDSTokenProperties(this.appSettings.domainDocsApi, this.library);
+    this.getIDSTokenProperties(this.appSettings.domainDocsApi, 'ids-identity');
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
