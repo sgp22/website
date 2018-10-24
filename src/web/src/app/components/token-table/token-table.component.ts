@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppSettings } from '../../app.settings';
-import { Token } from '../../shared/token';
 import { TokenService } from '../../shared/token.service';
-import testTokenData from '../../shared/test.token.data';
 
 @Component({
   selector: 'token-table',
