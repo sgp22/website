@@ -9,31 +9,15 @@ import boto3
 import magic
 import re
 from markdown import markdown
+from bs4 import BeautifulSoup
 
 from search.utils import DocsIndexer
 
 
-class MLStripper(HTMLParser):
-    def __init__(self):
-        self.reset()
-        self.strict = False
-        self.convert_charrefs= True
-        self.fed = []
-    def handle_data(self, d):
-        self.fed.append(d)
-    def get_data(self):
-        return ''.join(self.fed)
-
 def strip_tags(input_html):
-    s = MLStripper()
-    input_html = re.sub(r'(\n)', ' ', input_html)
-    lis = list(filter(None, input_html.split(" ")))
-    input_html = " ".join(lis)
-    s.feed(input_html)
-    clean = s.get_data()
-    clean = re.sub('\s\s+', ' ', clean)
+    soup = BeautifulSoup(input_html, 'html.parser')
 
-    return clean
+    return soup.get_text()
 
 def file_path_mime_from_buffer(file_obj):
 	mime = magic.from_buffer(file_obj, mime=True)
