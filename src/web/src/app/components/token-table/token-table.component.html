@@ -1,4 +1,4 @@
-<section *ngIf="!loading && idsTokenProperties && idsTokenProperties[tokensCategory]"[ngClass]="{'page-section': sectionClassName}">
+<section *ngIf="!loading && tokensCategory && idsTokenProperties && idsTokenProperties[tokensCategory]"[ngClass]="{'page-section': sectionClassName}">
   <table>
     <thead>
       <th>

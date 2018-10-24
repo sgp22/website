@@ -16,7 +16,6 @@ export class TokenTableComponent implements OnInit {
   @Input() version;
   @Input() loading;
   @Input() library;
-  @Input() element;
 
   constructor(
     private appSettings: AppSettings,
@@ -28,21 +27,18 @@ export class TokenTableComponent implements OnInit {
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
-    this.idsTokenProperties = this.tokenService.groupTokensByCategory(testTokenData);
-    this.loading = false;
-    // console.log(this.idsTokenProperties);
-    // this.tokenService
-    //   .getTokenData(domain, library, version)
-    //   .subscribe(
-    //     res => {
-    //       this.tokenService.groupTokensByCategory(res);
-    //       this.loading = false;
-    //     },
-    //     err => {
-    //       console.log(`No tokens found: ${err}`);
-    //       this.idsTokenProperties = [];
-    //     }
-    //   );
+    this.tokenService
+      .getTokenData(domain, library, version)
+      .subscribe(
+        res => {
+          this.idsTokenProperties = this.tokenService.groupTokensByCategory(res);
+          this.loading = false;
+        },
+        err => {
+          console.log(`No tokens found: ${err}`);
+          this.idsTokenProperties = [];
+        }
+      );
   }
 
 }
