@@ -79,7 +79,7 @@ describe('TokenService', () => {
   });
 
   describe('#groupTokensByCategory', () => {
-    const mockTokenData = [
+    const mockTokenData = {
       'token-one': {
         'category': 'categoryA',
         'name': {
@@ -119,7 +119,7 @@ describe('TokenService', () => {
           'value': 'original value'
         }
       },
-    ];
+    };
 
     let results: {};
 
