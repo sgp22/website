@@ -10,6 +10,7 @@ import itertools
 import semver
 import hashlib
 from html.parser import HTMLParser
+from bs4 import BeautifulSoup
 
 
 from django.core.files.storage import default_storage
@@ -31,27 +32,10 @@ ES_PORT = settings.ES_PORT
 ES_HOST_URL = settings.ES_HOST_URL
 
 
-class MLStripper(HTMLParser):
-    def __init__(self):
-        self.reset()
-        self.strict = False
-        self.convert_charrefs= True
-        self.fed = []
-    def handle_data(self, d):
-        self.fed.append(d)
-    def get_data(self):
-        return ''.join(self.fed)
-
 def strip_tags(input_html):
-    s = MLStripper()
-    input_html = re.sub(r'(\n)', ' ', str(input_html))
-    lis = list(filter(None, input_html.split(" ")))
-    input_html = " ".join(lis)
-    s.feed(input_html)
-    clean = s.get_data()
-    clean = re.sub('\s\s+', ' ', clean)
+    soup = BeautifulSoup(input_html, 'html.parser')
 
-    return clean
+    return soup.get_text()
 
 class UniqueDict(dict):
     def __setitem__(self, key, value):
@@ -95,6 +79,10 @@ def post(request):
             '.json',
         ]
 
+        index_dirs = [
+            'docs',
+        ]
+
         for zipped_file in zipf.namelist():
             path = os.path.join(*(
                 'docs',
@@ -120,9 +108,10 @@ def post(request):
                     ES_INDEX_PREFIX)
                 doc = {}
                 path_split = path.split('/')
+                dir_root = path_split[3]
                 doc_slug = f.split('/', 1)[-1]
 
-                if ext in index_ext_types:
+                if ext in index_ext_types and dir_root in index_dirs:
                     try:
                         content_obj = json.loads(read_contents_str)
                     except:
