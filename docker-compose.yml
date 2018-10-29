@@ -58,7 +58,7 @@ services:
 
   backend:
     build: ./docker/docs-backend
-    image: hookandloop/docs-backend:1.0.6
+    image: hookandloop/docs-backend:1.0.7
     container_name: 'docssite_backend'
     depends_on:
       - postgres
@@ -96,7 +96,7 @@ services:
 
   nginx:
     build: ./docker/docs-nginx
-    image: hookandloop/docs-nginx:1.0.0
+    image: hookandloop/docs-nginx:1.0.1
     container_name: 'docssite_nginx'
     depends_on:
       - backend

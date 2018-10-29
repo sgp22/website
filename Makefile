@@ -66,8 +66,12 @@ restart_vm :
 
 
 # Web
-run_dev :
-	cd src/web && npm install && npm run start
+node_modules : src/web/package.json
+	cd src/web && npm install
+	touch $@
+
+run_dev : node_modules
+	cd src/web && npm run start
 
 # This is mostly for testing locally.
 build_prod :
@@ -122,3 +126,19 @@ shell_postgres :
 
 tail_postgres :
 	docker logs -f $(POSTGRES_CONTAINER)
+
+# Deploy
+
+deploy_staging:
+	mv deploy/staging-Dockerrun.aws.json deploy/Dockerrun.aws.json
+	export DOMAIN=https://staging.design.infor.com
+	export ENV=staging
+	bash ./scripts/select_deploy.sh -f deploy -c deploy_staging_a
+	mv deploy/Dockerrun.aws.json deploy/staging-Dockerrun.aws.json
+
+deploy_prod:
+	mv deploy/prod-Dockerrun.aws.json deploy/Dockerrun.aws.json
+	export DOMAIN=https://design.infor.com
+	export ENV=prod
+	bash ./scripts/select_deploy.sh -f deploy -c deploy_prod
+	mv deploy/Dockerrun.aws.json deploy/prod-Dockerrun.aws.json
