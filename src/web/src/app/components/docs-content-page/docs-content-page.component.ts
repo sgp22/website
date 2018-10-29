@@ -45,7 +45,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   public tocItems: TocItems[] = [];
   public bodyTitles;
   public apiTitles;
-  public tokensCategory;
   @HostBinding('class.ids-row--offset-xl-2')
   @HostBinding('class.ids-row--offset-sm-3')
   @HostBinding('class.ids-row--col-sm-9')

@@ -118,7 +118,7 @@ describe('TokenService', () => {
         'orignal': {
           'value': 'original value'
         }
-      },
+      }
     };
 
     let results: {};
