@@ -17,6 +17,7 @@
         <header class="page-header">
           <div class="page-header__intro">
             <h1 class="page-title">{{docs?.title}}</h1>
+            <p *ngIf="docs?.description">{{docs.description}}</p>
           </div>
           <div class="page-header__buttons">
             <a class="ids-btn ids-btn--link" *ngIf="docs?.demo?.path" href="{{absolutePath}}/demo{{docs.demo.path}}" target="_blank">
