@@ -272,7 +272,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   }
 
   createDemoUrl(slug: string, noFrillsDemo: boolean = false) {
-    let url = `${this.absolutePath}/demo/${this.element}/${slug}?font=source-sans`;
+    let url = `${this.absolutePath}/demo/components/${this.element}/${slug}?font=source-sans`;
     if (noFrillsDemo) {
       url += '&nofrills=true';
     }
