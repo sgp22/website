@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, HostBinding } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 
@@ -36,6 +36,7 @@ export class ElementPageComponent implements AfterViewInit {
             this.pageContent = res;
           },
           err => {
+            console.error(err);
             this.loadingBar.complete();
             this.notFound = true;
             this.loading = false;
@@ -54,5 +55,4 @@ export class ElementPageComponent implements AfterViewInit {
     });
 
   }
-
 }

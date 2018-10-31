@@ -44,7 +44,7 @@
         <modifiers-table [modifiers]="pageContent?.modifiers"></modifiers-table>
 
         <h2 *ngIf="pageContent?.tokensCategory">Design Tokens</h2>
-        <token-table [cms]="true" [tokensCategory]="pageContent?.tokensCategory" [sectionClassName]="true" [version]="'latest'"></token-table>
+        <token-table *ngIf="!loading" [cms]="true" [tokensCategory]="pageContent?.tokensCategory" [sectionClassName]="true" [version]="'latest'"></token-table>
 
         <section *ngIf="pageContent?.states.length > 0" class="page-section page-section--states">
 

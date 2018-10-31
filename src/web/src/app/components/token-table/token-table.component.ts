@@ -28,11 +28,9 @@ export class TokenTableComponent implements OnInit {
         .getTokenData(domain, library, version)
         .subscribe(
           res => {
-            console.log(this.cms);
             if (this.cms) {
-              this.idsTokenProperties = this.tokenService.cmsTokens(res);
-              console.log(this.idsTokenProperties);
-            }else {
+              this.idsTokenProperties = this.tokenService.filterCmsTokens(res, this.tokensCategory);
+            } else {
               this.idsTokenProperties = this.tokenService.groupTokensByCategory(res);
             }
             this.loading = false;

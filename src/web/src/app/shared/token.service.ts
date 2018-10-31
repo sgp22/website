@@ -31,6 +31,10 @@ export class TokenService {
       }));
   }
 
+  /**
+   * Take the token data and group by tokenCategory for docs content pages
+   * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.simple.json
+   */
   groupTokensByCategory(tokenData) {
     const grouped = {};
     const props: Array<Token> = tokenData;
@@ -48,10 +52,15 @@ export class TokenService {
     return grouped;
   }
 
-  cmsTokens(tokenData) {
-    const output = tokenData.map(n => {
-      console.log(n);
+  /**
+   * For CMS pages filter by the tokensCategory dot notation string. (theme, theme.font, etc.)
+   * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.simple.json
+   * @param cmsInput input from tokensCategory field in the CMS.
+   */
+  filterCmsTokens(tokenData, cmsInput) {
+    const tokens = tokenData.filter(token => {
+      return token.name.javascript.includes(cmsInput)
     });
-    return output;
+    return tokens;
   }
 }
