@@ -38,7 +38,7 @@ export class TokenService {
    */
   filterCmsTokens(tokenData, cmsInput) {
     const tokens = tokenData.filter(token => {
-      return token.name.javascript.includes(cmsInput);
+      return token.name.javascript.startsWith(cmsInput);
     });
     return tokens;
   }
