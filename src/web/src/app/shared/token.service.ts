@@ -47,4 +47,11 @@ export class TokenService {
     }
     return grouped;
   }
+
+  cmsTokens(tokenData) {
+    const output = tokenData.map(n => {
+      console.log(n);
+    });
+    return output;
+  }
 }

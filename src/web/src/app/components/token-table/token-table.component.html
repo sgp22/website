@@ -1,28 +1,35 @@
-<section *ngIf="!loading && tokensCategory && idsTokenProperties && idsTokenProperties[tokensCategory]"[ngClass]="{'page-section': sectionClassName}">
-  <table>
-    <thead>
-      <th>
-        Design Token &nbsp;
-        <a class="table-header--description" href="https://github.com/infor-design/design-system/tree/master/design-tokens"
-          target="_blank">Learn More</a>
-      </th>
-      <th>Color</th>
-      <th>Value</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let token of idsTokenProperties[tokensCategory]">
-        <td>
-          <code>{{token.name.sass}}</code>
-        </td>
-        <td>
-          <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }"
-            title="{{token.value}}"></div>
-        </td>
-        <td>
-          <code>{{token.value}}</code>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<ng-container *ngIf="cms">
+  <section [ngClass]="{'page-section': sectionClassName}">
 
-</section>
+  </section>
+</ng-container>
+
+<ng-container *ngIf="!cms && !loading && tokensCategory && idsTokenProperties && idsTokenProperties[tokensCategory]">
+  <section  [ngClass]="{'page-section': sectionClassName}">
+    <table>
+      <thead>
+        <th>
+          Design Token &nbsp;
+          <a class="table-header--description" href="https://github.com/infor-design/design-system/tree/master/design-tokens"
+            target="_blank">Learn More</a>
+        </th>
+        <th>Color</th>
+        <th>Value</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let token of idsTokenProperties[tokensCategory]">
+          <td>
+            <code>{{token.name.sass}}</code>
+          </td>
+          <td>
+            <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }"
+              title="{{token.value}}"></div>
+          </td>
+          <td>
+            <code>{{token.value}}</code>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</ng-container>
