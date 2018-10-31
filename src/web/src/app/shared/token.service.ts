@@ -32,27 +32,6 @@ export class TokenService {
   }
 
   /**
-   * Take the token data and group by tokenCategory for docs content pages
-   * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.simple.json
-   */
-  groupTokensByCategory(tokenData) {
-    const grouped = {};
-    const props: Array<Token> = tokenData;
-
-    for (const key in props) {
-      if (props.hasOwnProperty(key)) {
-        const curCategory = props[key].category;
-
-        if (!grouped.hasOwnProperty(curCategory)) {
-          grouped[curCategory] = new Array<Token>();
-        }
-        grouped[curCategory].push(props[key]);
-      }
-    }
-    return grouped;
-  }
-
-  /**
    * For CMS pages filter by the tokensCategory dot notation string. (theme, theme.font, etc.)
    * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.simple.json
    * @param cmsInput input from tokensCategory field in the CMS.

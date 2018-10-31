@@ -12,7 +12,6 @@ export class TokenTableComponent implements OnInit {
   @Input() tokensCategory;
   @Input() sectionClassName;
   @Input() loading;
-  @Input() cms;
 
   constructor(
     private appSettings: AppSettings,
@@ -28,11 +27,7 @@ export class TokenTableComponent implements OnInit {
         .getTokenData(domain, library, version)
         .subscribe(
           res => {
-            if (this.cms) {
-              this.idsTokenProperties = this.tokenService.filterCmsTokens(res, this.tokensCategory);
-            } else {
-              this.idsTokenProperties = this.tokenService.groupTokensByCategory(res);
-            }
+            this.idsTokenProperties = this.tokenService.filterCmsTokens(res, this.tokensCategory);
             this.loading = false;
           },
           err => {

@@ -54,7 +54,7 @@
             <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
             <div *ngIf="streamfield.type === 'richText'" [innerHTML]="streamfield?.value"></div>
             <ng-container *ngIf="streamfield.type === 'tokensCategory'">
-              <token-table *ngIf="!loading" [cms]="true" [tokensCategory]="streamfield?.value" [loading]="loading" [version]="'latest'"></token-table>
+              <token-table *ngIf="!loading" [tokensCategory]="streamfield?.value" [loading]="loading" [version]="'latest'"></token-table>
             </ng-container>
           </ng-container>
         </section>
