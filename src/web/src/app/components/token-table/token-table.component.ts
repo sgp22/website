@@ -21,9 +21,7 @@ export class TokenTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.url.subscribe(segment => {
-      this.getIDSTokenProperties(this.appSettings.domainDocsApi, 'ids-identity');
-    });
+    this.getIDSTokenProperties(this.appSettings.domainDocsApi, 'ids-identity');
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
