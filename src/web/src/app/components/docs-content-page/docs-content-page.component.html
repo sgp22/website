@@ -66,11 +66,11 @@
           </li>
         </ul>
 
-        <token-table [loading]="loading" [tokensCategory]="docs?.tokensCategory" [sectionClassName]="true" [version]="currentVersion"></token-table>
-
         <div *ngIf="!loading" #link [innerHTML]="docs?.apiTrustedHtml" (click)="relativeLinks(link)"></div>
 
         <div *ngIf="!loading" #link [innerHTML]="docs?.bodyTrustedHtml" (click)="relativeLinks(link)"></div>
+
+        <token-table *ngIf="!loading" [heading]="'Design Tokens'" [loading]="loading" [sectionClassName]="true" [tokensCategory]="docs?.tokensCategory" [version]="currentVersion"></token-table>
 
       </div>
 

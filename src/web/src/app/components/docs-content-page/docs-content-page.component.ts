@@ -78,7 +78,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
         this.element = null;
       }
 
-
       for (let i = 0; i < segment.length; i++) {
         urlSegment[i] = segment[i].path;
       }
@@ -92,6 +91,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       this.absolutePath = `/${this.basePath}`;
 
       this.loadingBar.start();
+      this.loading = true;
 
       this.libraryService
         .getAllLibraryVersionPaths(this.library)
@@ -109,6 +109,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                 }
                 this.notFound = false;
                 this.docs = docs;
+
                 if (docs.api) {
                   this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(docs.api);
                 }

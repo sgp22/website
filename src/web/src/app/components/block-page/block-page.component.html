@@ -42,7 +42,7 @@
         <types [types]="pageContent?.types"></types>
 
         <h2 *ngIf="pageContent?.tokensCategory">Design Tokens</h2>
-        <token-table [tokensCategory]="pageContent?.tokensCategory" [sectionClassName]="true" [version]="'latest'"></token-table>
+        <token-table *ngIf="!loading" [tokensCategory]="pageContent?.tokensCategory" [sectionClassName]="true" [version]="'latest'"></token-table>
 
         <modifiers-table [modifiers]="pageContent?.modifiers"></modifiers-table>
 

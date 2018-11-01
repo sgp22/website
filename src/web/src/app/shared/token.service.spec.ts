@@ -27,7 +27,7 @@ describe('TokenService', () => {
     const testDomain = 'domain';
     const testLibrary = 'library';
     const testVersion = 'version';
-    const testUrl = `${testDomain}/api/docs/${testLibrary}/${testVersion}/tokens/web/theme-soho.raw.json`;
+    const testUrl = `${testDomain}/api/docs/${testLibrary}/${testVersion}/tokens/web/theme-soho.simple.json`;
     const testData = { title: 'Test' };
 
     beforeEach(() => {
@@ -78,70 +78,4 @@ describe('TokenService', () => {
     });
   });
 
-  describe('#groupTokensByCategory', () => {
-    const mockTokenData = {
-      'aliases': {
-        'ALIAS_A': {},
-        'ALIAS_B': {}
-      },
-      'props': {
-        'token-one': {
-          'category': 'categoryA',
-          'name': 'token-one'
-        },
-        'token-two': {
-          'category': 'categoryB',
-          'name': 'token-two'
-        },
-        'token-three': {
-          'category': 'categoryA',
-          'name': 'token-three'
-        }
-      }
-    };
-
-    let results: {};
-
-    beforeEach(() => {
-      results = tokenService.groupTokensByCategory(mockTokenData);
-    });
-
-    it('should group the "props" by their category', () => {
-      expect(Array.isArray(results['categoryA'])).toBeTruthy();
-      expect(results['categoryA'].length).toBe(2);
-
-      expect(Array.isArray(results['categoryB'])).toBeTruthy();
-      expect(results['categoryB'].length).toBe(1);
-    });
-
-    it('should derive a "description" property from the "name" property', () => {
-      for (const category of Object.keys(results)) {
-        for (const token of results[category]) {
-          expect(token['description']).toBeDefined();
-        }
-      }
-    });
-
-    it('should Title Case the "description" and remove dashes', () => {
-      for (const category of Object.keys(results)) {
-        for (const token of results[category]) {
-          expect(token['description']).toBeDefined();
-          expect(token['description'].indexOf('-')).toBe(-1);
-
-          // Now Check title case
-          const theDesc = token['description'];
-          const capitalDesc = theDesc.toUpperCase();
-
-          // Compare the first character of each string
-          expect(theDesc.substr(0, 1)).toBe(capitalDesc.substr(0, 1));
-
-          // Compare the character after the space for each string
-          const theCharAfterTheSpace = (str) => {
-            return str.substr(str.indexOf(' ') + 1, 1);
-          };
-          expect(theCharAfterTheSpace(theDesc)).toBe(theCharAfterTheSpace(capitalDesc));
-        }
-      }
-    });
-  });
 });
