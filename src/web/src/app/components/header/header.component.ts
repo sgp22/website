@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
       .subscribe(
         (res: any) => {
           const modifyCodeSlug = res.items.filter((item) => {
-            if (item.title === 'Code') {
+            if (item.title === 'Components') {
               item.meta.slug = 'code/ids-enterprise/latest/';
               console.log(item.meta.slug);
             }
