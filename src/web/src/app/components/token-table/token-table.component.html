@@ -1,4 +1,4 @@
-<ng-container *ngIf="!loading && tokensCategory && idsTokenProperties">
+<ng-container *ngIf="!loading && tokensCategory && idsTokenProperties?.length > 0">
   <section  [ngClass]="{'page-section': sectionClassName}">
     <table>
       <thead>
