@@ -29,6 +29,7 @@ export class ElementPageComponent implements AfterViewInit {
 
     this.route.url.subscribe(urlSegment => {
       this.loadingBar.start();
+      this.loading = true;
       window.scroll(0, 0);
       this.pagesService.createPage(this.router.url)
         .subscribe(
