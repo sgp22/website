@@ -32,12 +32,14 @@ export class HeaderComponent implements OnInit {
     this.pagesService.getGlobalNav()
       .subscribe(
         (res: any) => {
-
-          const addTrigger = res.items.filter((item) => {
-            (item.meta.slug === 'code') ? item.trigger = true : item.trigger = false;
+          const modifyCodeSlug = res.items.filter((item) => {
+            if (item.title === 'Code') {
+              item.meta.slug = 'code/ids-enterprise/latest/';
+              console.log(item.meta.slug);
+            }
             return item;
           });
-          this.navItems = addTrigger.sort((a, b) => {
+          this.navItems = modifyCodeSlug.sort((a, b) => {
             return a.meta.menu_order > b.meta.menu_order ? 1 : -1;
           });
         }
@@ -58,18 +60,6 @@ export class HeaderComponent implements OnInit {
 
   closeNav() {
     this.navToggle = false;
-  }
-
-  @HostListener('document:click', ['$event'])
-  dropdown(event) {
-    if (this.trigger) {
-      if ((this.trigger.nativeElement as HTMLElement).contains(event.target) ||
-          (this.mobileTrigger.nativeElement as HTMLElement).contains(event.target) ) {
-        this.popupmenuToggle = !this.popupmenuToggle;
-      } else {
-        this.popupmenuToggle = false;
-      }
-    }
   }
 
 }
