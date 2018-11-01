@@ -1,58 +1,29 @@
 <ng-container *ngIf="!loading && tokensCategory && idsTokenProperties">
   <section  [ngClass]="{'page-section': sectionClassName}">
-    <ng-container *ngIf="!cms && idsTokenProperties[tokensCategory]">
-      <table>
-        <thead>
-          <th>
-            Design Token &nbsp;
-            <a class="table-header--description" href="https://github.com/infor-design/design-system/tree/master/design-tokens"
-              target="_blank">Learn More</a>
-          </th>
-          <th>Color</th>
-          <th>Value</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let token of idsTokenProperties[tokensCategory]">
-            <td>
-              <code>{{token.name.sass}}</code>
-            </td>
-            <td>
-              <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }"
-                title="{{token.value}}"></div>
-            </td>
-            <td>
-              <code>{{token.value}}</code>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-container>
-    <ng-container *ngIf="cms && idsTokenProperties.length > 0">
-      <table>
-        <thead>
-          <th>
-            Design Token &nbsp;
-            <a class="table-header--description" href="https://github.com/infor-design/design-system/tree/master/design-tokens"
-              target="_blank">Learn More</a>
-          </th>
-          <th>Color</th>
-          <th>Value</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let token of idsTokenProperties">
-            <td>
-              <code>{{token.name.sass}}</code>
-            </td>
-            <td>
-              <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }"
-                title="{{token.value}}"></div>
-            </td>
-            <td>
-              <code>{{token.value}}</code>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </ng-container>
+    <table>
+      <thead>
+        <th>
+          Design Token &nbsp;
+          <a class="table-header--description" href="https://github.com/infor-design/design-system/tree/master/design-tokens"
+            target="_blank">Learn More</a>
+        </th>
+        <th>Color</th>
+        <th>Value</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let token of idsTokenProperties">
+          <td>
+            <code>{{token.name.sass}}</code>
+          </td>
+          <td>
+            <div *ngIf="token.type === 'color'" class="site-spec--color" [ngStyle]="token.value && {'background-color': ''+ token.value +'' }"
+              title="{{token.value}}"></div>
+          </td>
+          <td>
+            <code>{{token.value}}</code>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 </ng-container>

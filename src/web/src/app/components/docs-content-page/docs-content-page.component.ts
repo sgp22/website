@@ -91,6 +91,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       this.absolutePath = `/${this.basePath}`;
 
       this.loadingBar.start();
+      this.loading = true;
 
       this.libraryService
         .getAllLibraryVersionPaths(this.library)

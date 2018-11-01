@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { TokenService } from '../../shared/token.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'token-table',
@@ -15,11 +16,14 @@ export class TokenTableComponent implements OnInit {
 
   constructor(
     private appSettings: AppSettings,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.getIDSTokenProperties(this.appSettings.domainDocsApi, 'ids-identity');
+    this.route.url.subscribe(segment => {
+      this.getIDSTokenProperties(this.appSettings.domainDocsApi, 'ids-identity');
+    });
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
