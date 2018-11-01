@@ -1,5 +1,6 @@
 <ng-container *ngIf="!loading && tokensCategory && idsTokenProperties?.length > 0">
   <section  [ngClass]="{'page-section': sectionClassName}">
+    <h2 *ngIf="heading">{{heading}}</h2>
     <table>
       <thead>
         <th>

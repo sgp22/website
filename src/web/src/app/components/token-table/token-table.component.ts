@@ -12,6 +12,7 @@ export class TokenTableComponent implements OnInit {
   @Input() idsTokenProperties;
   @Input() tokensCategory;
   @Input() sectionClassName;
+  @Input() heading;
   @Input() loading;
 
   constructor(
