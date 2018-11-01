@@ -221,7 +221,12 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
       if (!absolute.test(el.getAttribute(attr))) {
         if (navigate) {
           const relativeLink = el.getAttribute(attr);
-          this.router.navigate([`${relativeLink}`]);
+          const pathArray = relativeLink.split('/');
+          if (pathArray[1] === 'code' && pathArray[4] === 'demo') {
+            window.open(`${window.location.origin}${relativeLink}`, '_blank');
+          } else {
+            this.router.navigate([`${relativeLink}`]);
+          }
         } else {
           const relativeHref = el.getAttribute(attr).replace(/(^\.\/|.html$)/g, '');
           if (relativeHref.substring(0, 1) === '/') {
