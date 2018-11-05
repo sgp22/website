@@ -19,8 +19,8 @@
   & .side-header__inner {
     align-items: center;
     display: flex;
-    padding: var(--spacing-base);
-    padding-left: calc(var(--spacing-base) * 2);
+    padding: var(--theme-number-spacing-base);
+    padding-left: calc(var(--theme-number-spacing-base) * 2);
   }
 
   & a.logo {
@@ -41,7 +41,7 @@
   & svg {
     display: flex;
     flex-shrink: 0;
-    margin-right: calc(var(--spacing-base) * 2);
+    margin-right: calc(var(--theme-number-spacing-base) * 2);
     width: 40px;
   }
 }
