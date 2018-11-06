@@ -7,7 +7,7 @@
     color: #1a1a1a;
     margin: 0;
     overflow: auto;
-    padding: calc(var(--spacing-base) * 5);
+    padding: calc(var(--theme-number-spacing-base) * 5);
     position: relative;
     text-align: left;
   }

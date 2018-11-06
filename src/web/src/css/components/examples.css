@@ -3,11 +3,11 @@
  */
 
 .inline-demo {
-  margin: calc(3 * var(--spacing-base)) 0;
+  margin: calc(3 * var(--theme-number-spacing-base)) 0;
   position: relative;
 
   & h4 {
-    margin-bottom: var(--spacing-base);
+    margin-bottom: var(--theme-number-spacing-base);
   }
 
   & .inline-demo-links {
