@@ -3,7 +3,7 @@
  */
 
 body {
-  background-color: var(--color-primary-contrast);
+  background-color: var(--theme-color-brand-primary-contrast);
   padding-top: 54px;
 }
 
@@ -32,6 +32,6 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-default);
+  background: var(--body-color-primary-background);
   border-radius: 10px;
 }

@@ -1,10 +1,10 @@
 
 .modal {
-  background-color: var(--color-primary-contrast);
+  background-color: var(--theme-color-brand-primary-contrast);
   left: 50%;
   max-width: 600px;
   min-width: 300px;
-  padding: calc(var(--spacing-base) * 10) calc(var(--spacing-base) * 5);
+  padding: calc(var(--theme-number-spacing-base) * 10) calc(var(--theme-number-spacing-base) * 5);
   position: fixed;
   text-align: center;
   top: 50%;

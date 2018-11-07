@@ -1,16 +1,16 @@
 .search-page {
-  padding-top: calc(var(--spacing-base) * 15);
+  padding-top: calc(var(--theme-number-spacing-base) * 15);
 }
 
 .search-highlight {
-  color: var(--text-color-muted);
+  color: var(--theme-color-font-muted);
   display: block;
-  font-size: var(--font-size-sm);
+  font-size: var(--theme-size-font-sm);
 
   & em {
-    color: var(--text-color-info);
+    color: var(--theme-color-font-info);
     display: inline-block;
     font-style: normal;
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--theme-number-font-weight-bold);
   }
 }

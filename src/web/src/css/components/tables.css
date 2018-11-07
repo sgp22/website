@@ -4,15 +4,15 @@
 
 table {
   border: 1px solid var(--graphite01);
-  font-size: var(--font-size-sm);
+  font-size: var(--theme-size-font-sm);
   margin-bottom: 32px;
   margin-top: 0;
   width: 100%;
 
   & caption {
-    font-size: var(--font-size-md);
-    margin-bottom: calc(var(--spacing-base) * 2);
-    margin-top: calc(var(--spacing-base) * 2);
+    font-size: var(--theme-size-font-md);
+    margin-bottom: calc(var(--theme-number-spacing-base) * 2);
+    margin-top: calc(var(--theme-number-spacing-base) * 2);
     text-align: left;
   }
 
@@ -26,16 +26,16 @@ table {
 
   & th,
   & td {
-    padding: var(--spacing-base);
+    padding: var(--theme-number-spacing-base);
   }
 
   & th {
     background-color: var(--graphite01);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--theme-number-font-weight-bold);
   }
 
   & td {
-    color: var(--color-default-alt);
+    color: var(--theme-color-font-muted);
     line-height: 1.5;
     vertical-align: middle;
   }
@@ -53,7 +53,7 @@ table {
   }
 
   & .table-header--description {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
+    font-size: var(--theme-size-font-sm);
+    font-weight: var(--theme-number-font-weight-base);
   }
 }

@@ -1,6 +1,6 @@
 .site-footer--top {
   background-color: #f0f0f0;
-  padding: calc(var(--spacing-base) * 7) 0;
+  padding: calc(var(--theme-number-spacing-base) * 7) 0;
 
   & input {
     background-color: #fff;
@@ -8,10 +8,10 @@
 }
 
 .site-footer--newsletter-cta {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--theme-size-font-md);
+  font-weight: var(--theme-number-font-weight-bold);
   line-height: 1.6;
-  margin-bottom: calc(var(--spacing-base) * 5);
+  margin-bottom: calc(var(--theme-number-spacing-base) * 5);
   margin-top: 0;
   text-align: center;
 }
@@ -19,7 +19,7 @@
 .site-footer--btm {
   background-color: #383838;
   color: #fff;
-  padding: calc(var(--spacing-base) * 4) calc(var(--spacing-base) * 3);
+  padding: calc(var(--theme-number-spacing-base) * 4) calc(var(--theme-number-spacing-base) * 3);
 
   & a {
     color: #fff;
@@ -27,7 +27,7 @@
 }
 
 .site-footer--nav {
-  margin-bottom: calc(var(--spacing-base) * 3);
+  margin-bottom: calc(var(--theme-number-spacing-base) * 3);
 
   & li {
     list-style: none;
@@ -35,8 +35,8 @@
 
   & a {
     display: inline-block;
-    font-size: var(--font-size-sm);
-    margin-right: calc(var(--spacing-base) * 3);
+    font-size: var(--theme-size-font-sm);
+    margin-right: calc(var(--theme-number-spacing-base) * 3);
   }
 
   @media (--viewport-md) {
@@ -45,13 +45,13 @@
 }
 
 .site-footer--copy {
-  font-size: var(--font-size-sm);
+  font-size: var(--theme-size-font-sm);
   margin-bottom: 0;
   margin-top: 0;
   text-align: center;
 
   & a {
-    margin: var(--spacing-base);
+    margin: var(--theme-number-spacing-base);
 
     &:last-child {
       margin-right: 0;
@@ -61,5 +61,9 @@
 }
 
 .site-footer--logo {
-  width: calc(var(--spacing-base) * 5);
+
+  @media (--viewport-md) {
+    margin-left: auto;
+    margin-right: calc((var(--theme-number-spacing-base) * 3) + 84px); /* 84px is feedback button width */
+  }
 }

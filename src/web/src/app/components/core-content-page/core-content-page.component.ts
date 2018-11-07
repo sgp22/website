@@ -29,6 +29,7 @@ export class CoreContentPageComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.route.url.subscribe(urlSegment => {
       this.loadingBar.start();
+      this.loading = true;
       window.scroll(0, 0);
       this.pagesService.createPage(this.router.url)
       .subscribe(
@@ -36,6 +37,7 @@ export class CoreContentPageComponent implements AfterViewInit {
           this.pageContent = res;
         },
         err => {
+          console.error(err);
           this.loadingBar.complete();
           this.notFound = true;
           this.loading = false;

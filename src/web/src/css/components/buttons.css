@@ -13,17 +13,11 @@
 
 .ids-btn--default {
   &.ids-btn--light {
-    background-color: var(--color-primary-contrast);
+    background-color: var(--theme-color-brand-primary-contrast);
 
     &:hover {
-      background-color: var(--input-readonly-bg-color);
+      background-color: var(--input-color-readonly-background);
     }
-  }
-}
-
-.ids-btn--primary {
-  &.ids-btn--dark {
-    background-color: #133c59;
   }
 }
 
