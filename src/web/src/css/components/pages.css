@@ -149,7 +149,7 @@
 }
 
 .section--1 {
-  background-color: #f0f0f0;
+  background-color: var(--body-color-secondary-background);
 }
 
 .section--1--top {
@@ -259,6 +259,7 @@
     url(/assets/site/assets/black-dot-grid.svg) center top -740px,
     url(/assets/site/assets/black-dot-grid.svg) center bottom -740px;
   background-repeat: no-repeat;
+  background-color: var(--body-color-primary-background);
   padding: calc(var(--theme-number-spacing-base) * 25) 0;
 }
 
