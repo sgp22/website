@@ -93,7 +93,7 @@ declare -a to_delete=("${ROOTDIR}/Dockerrun.aws.json"
 
 for i in "${to_delete[@]}"
 do
-   rm -f "$i"
+   rm -fr "$i"
 done
 
 git fetch
