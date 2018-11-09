@@ -50,7 +50,7 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
                   item.meta.children.children.map(child => {
                     child.children.length <= 0 ? this.level_2 = false : this.level_2 = true;
                     child.children.sort((thisGrandChild, nextGrandchild) => {
-                      if (thisGrandChild.menu_order == 0 && nextGrandchild.menu_order == 0) {
+                      if (thisGrandChild.menu_order === 0 && nextGrandchild.menu_order === 0) {
                         return thisGrandChild.title.toLowerCase() > nextGrandchild.title.toLowerCase() ? 1 : -1;
                       } else {
                         return thisGrandChild.menu_order > nextGrandchild.menu_order ? 1 : -1;
@@ -66,7 +66,7 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
                       });
                   });
                   this.sectionTitle = item.title;
-                  if (thisChild.menu_order == 0 && nextChild.menu_order == 0) {
+                  if (thisChild.menu_order === 0 && nextChild.menu_order === 0) {
                     return thisChild.title.toLowerCase() > nextChild.title.toLowerCase() ? 1 : -1;
                   } else {
                     return thisChild.menu_order > nextChild.menu_order ? 1 : -1;

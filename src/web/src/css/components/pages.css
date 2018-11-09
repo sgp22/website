@@ -258,8 +258,8 @@
   background:
     url(/assets/site/assets/black-dot-grid.svg) center top -740px,
     url(/assets/site/assets/black-dot-grid.svg) center bottom -740px;
-  background-repeat: no-repeat;
   background-color: var(--body-color-primary-background);
+  background-repeat: no-repeat;
   padding: calc(var(--theme-number-spacing-base) * 25) 0;
 }
 
