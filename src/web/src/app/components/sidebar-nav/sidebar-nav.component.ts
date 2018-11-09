@@ -50,7 +50,11 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
                   item.meta.children.children.map(child => {
                     child.children.length <= 0 ? this.level_2 = false : this.level_2 = true;
                     child.children.sort((thisGrandChild, nextGrandchild) => {
-                      return thisGrandChild.menu_order > nextGrandchild.menu_order ? 1 : -1;
+                      if (thisGrandChild.menu_order === 0 && nextGrandchild.menu_order === 0) {
+                        return thisGrandChild.title.toLowerCase() > nextGrandchild.title.toLowerCase() ? 1 : -1;
+                      } else {
+                        return thisGrandChild.menu_order > nextGrandchild.menu_order ? 1 : -1;
+                      }
                     });
                     child.children
                       .filter(child_level_3 => {
@@ -62,7 +66,11 @@ export class SidebarNavComponent implements OnInit, AfterViewInit {
                       });
                   });
                   this.sectionTitle = item.title;
-                  return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
+                  if (thisChild.menu_order === 0 && nextChild.menu_order === 0) {
+                    return thisChild.title.toLowerCase() > nextChild.title.toLowerCase() ? 1 : -1;
+                  } else {
+                    return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
+                  }
                 });
                 if (this.helpers.checkViewport('(min-width: 600px)')) {
                   setTimeout(() => {

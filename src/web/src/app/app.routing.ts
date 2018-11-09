@@ -34,12 +34,12 @@ const appRoutes: Routes = [
     component: CoreContentPageComponent
   },
   {
-    path: 'guidelines/components/elements/:slug',
-    component: ElementPageComponent
+    path: 'guidelines/patterns/:slug',
+    component: CoreContentPageComponent
   },
   {
-    path: 'guidelines/components/blocks/:slug',
-    component: BlockPageComponent
+    path: 'guidelines/platforms/:slug',
+    component: CoreContentPageComponent
   },
   {
     path: 'examples',

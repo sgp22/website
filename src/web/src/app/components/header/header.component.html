@@ -36,33 +36,12 @@
       <nav class="main-nav">
         <ng-container *ngFor="let navItem of navItems">
           <a
-            *ngIf="!navItem.trigger"
             class="ids-btn ids-btn--link"
             id="{{navItem.id}}"
             routerLinkActive="main-nav__item--current"
-            [routerLink]="['', navItem.meta.slug]">
+            routerLink="{{navItem.meta.slug}}">
               {{navItem.title}}
           </a>
-          <span *ngIf="navItem.trigger" class="main-nav__item--trigger">
-            <a
-              #trigger
-              type="button"
-              class="ids-btn ids-btn--link dropdown-trigger--code"
-              id="{{navItem.id}}"
-              routerLinkActive="main-nav__item--current"
-              >
-                {{navItem.title}}
-              <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
-                <use xlink:href="#icon_expand"></use>
-              </svg>
-            </a>
-            <span class="main-nav__popupmenu top" [hidden]="!popupmenuToggle">
-              <ul>
-                  <li *ngFor="let lib of libraries"><a routerLink="/code/{{lib.path}}/latest">{{lib.name}}</a></li>
-              </ul>
-              <div class="arrow"></div>
-            </span>
-          </span>
         </ng-container>
 
         <a routerLink="search" class="ids-btn ids-btn--link">
@@ -78,25 +57,7 @@
 
 <nav #mainNavMobile class="main-nav--mobile" [ngClass]="navToggle && 'main-nav--mobile--active'">
   <ng-container *ngFor="let navItem of navItems">
-    <a *ngIf="!navItem.trigger" (click)="closeNav()" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" [routerLink]="['', navItem.meta.slug]">{{navItem.title}}</a>
-    <span *ngIf="navItem.trigger">
-      <a
-        #mobileTrigger
-        type="button"
-        class="main-nav--mobile--item ids-btn ids-btn--link"
-        [class.active]="popupmenuToggle"
-        id="{{navItem.id}}">
-          {{navItem.title}}
-        <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
-          <use xlink:href="#icon_expand"></use>
-        </svg>
-      </a>
-      <span class="main-nav__popupmenu--mobile" [class.open]="popupmenuToggle" (click)="closeNav()">
-        <ul class="ids-list">
-          <li *ngFor="let lib of libraries"><a class="ids-list--item" routerLink="/code/{{lib.path}}/latest">{{lib.name}}</a></li>
-        </ul>
-      </span>
-    </span>
+    <a (click)="closeNav()" class="main-nav--mobile--item" id="{{navItem.id}}" routerLinkActive="main-nav--mobile--item--current" routerLink="{{navItem.meta.slug}}">{{navItem.title}}</a>
   </ng-container>
 </nav>
 

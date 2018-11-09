@@ -130,11 +130,11 @@ tail_postgres :
 # Deploy
 
 deploy_staging:
-	mv deploy/staging-Dockerrun.aws.json deploy/Dockerrun.aws.json
-	export DOMAIN=https://staging.design.infor.com
-	export ENV=staging
-	bash ./scripts/select_deploy.sh -f deploy -c deploy_staging_a
-	mv deploy/Dockerrun.aws.json deploy/staging-Dockerrun.aws.json
+	export DOMAIN=https://staging.design.infor.com \
+		&& export ENV=staging \
+		&& mv deploy/staging-Dockerrun.aws.json deploy/Dockerrun.aws.json \
+		&& bash ./scripts/select_deploy.sh -f deploy -c deploy_staging_a \
+		&& mv deploy/Dockerrun.aws.json deploy/staging-Dockerrun.aws.json \
 
 deploy_prod:
 	mv deploy/prod-Dockerrun.aws.json deploy/Dockerrun.aws.json
