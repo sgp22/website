@@ -33,6 +33,7 @@ import { RoleWidgetComponent } from './components/role-widget/role-widget.compon
 import { FeedbackWidgetComponent } from './components/feedback-widget/feedback-widget.component';
 import { TocComponent } from './components/toc/toc.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { InputFocusDirective } from './shared/input-focus.directive';
 
 import { InlineSVGModule } from 'ng-inline-svg';
 import { SafeHtmlPipe } from './shared/safeHtml.pipe';
@@ -67,7 +68,8 @@ import { LibraryService } from './shared/library.service';
     RoleWidgetComponent,
     FeedbackWidgetComponent,
     TocComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    InputFocusDirective
   ],
   imports: [
     BrowserModule,

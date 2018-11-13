@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
-import { Router, ActivatedRoute  } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd  } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AppSettings } from '../../app.settings';
 import { LoadingBarService } from '@ngx-loading-bar/core';
@@ -31,7 +31,7 @@ export class SearchPageComponent implements OnInit {
     private loadingBar: LoadingBarService,
     private router: Router,
     private route: ActivatedRoute,
-    private libraryService: LibraryService
+    private libraryService: LibraryService,
   ) { }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class SearchPageComponent implements OnInit {
     this.loadingBar.start();
     this.query = term;
 
-    this.libraryService.getLatestLibraryVersions(['ids-enterprise', 'ids-css', 'ids-pendo'])
+    this.libraryService.getLatestLibraryVersions(this.libraries)
       .then(r => {
         const ep = r[0]['files'];
         const css = r[1]['files'];
@@ -70,6 +70,7 @@ export class SearchPageComponent implements OnInit {
               this.searchResults = res.results.hits;
               this.searchResults.length === 0 ? this.noResults = true : this.noResults = false;
               (<any>window).ga('send', 'pageview', `/search?q=${term}`);
+              console.log(this.searchResults);
             },
             err => {
               console.error(err);
