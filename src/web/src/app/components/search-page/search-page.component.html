@@ -8,13 +8,14 @@
             <label for="searchInput">Search</label>
             <div class="ids-form-controls--horizontal">
               <input
-                #searchInput="ngModel"
+                #searchInput
                 [(ngModel)]="query"
                 name="query"
                 type="text"
                 class="ids-form-control"
                 id="searchInput"
                 placeholder="Search"
+                appInputAutoFocus
               >
               <button class="ids-btn ids-btn--primary">Search</button>
             </div>
