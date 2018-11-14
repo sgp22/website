@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { SearchService } from '../../shared/search.service';
-import { Router, ActivatedRoute, NavigationEnd  } from '@angular/router';
+import { Router, ActivatedRoute  } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AppSettings } from '../../app.settings';
 import { LoadingBarService } from '@ngx-loading-bar/core';
@@ -70,7 +70,6 @@ export class SearchPageComponent implements OnInit {
               this.searchResults = res.results.hits;
               this.searchResults.length === 0 ? this.noResults = true : this.noResults = false;
               (<any>window).ga('send', 'pageview', `/search?q=${term}`);
-              console.log(this.searchResults);
             },
             err => {
               console.error(err);
