@@ -37,7 +37,7 @@ export class CoreContentPageComponent implements AfterViewInit {
           this.pageContent = res;
         },
         err => {
-          // console.error(err);
+          console.error(err);
           this.loadingBar.complete();
           this.notFound = true;
           this.loading = false;
