@@ -31,7 +31,7 @@ export class SearchPageComponent implements OnInit {
     private loadingBar: LoadingBarService,
     private router: Router,
     private route: ActivatedRoute,
-    private libraryService: LibraryService,
+    private libraryService: LibraryService
   ) { }
 
   ngOnInit() {
