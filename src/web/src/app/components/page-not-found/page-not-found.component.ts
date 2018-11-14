@@ -9,6 +9,7 @@ export class PageNotFoundComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    (<any>window).ga('send', 'event', '404');
   }
 
 }

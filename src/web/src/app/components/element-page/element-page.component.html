@@ -64,7 +64,9 @@
 
       </div>
 
-      <feedback-widget *ngIf="!loading" [notFound]="notFound"></feedback-widget>
+      <ng-container *ngIf="!notFound">
+        <feedback-widget *ngIf="!loading" [notFound]="notFound"></feedback-widget>
+      </ng-container>
 
     </div>
 
