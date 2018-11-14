@@ -17,7 +17,7 @@ export class PageNotFoundComponent implements OnInit {
     this.route.url.subscribe(urlSegment => {
       this.url = this.router.routerState.snapshot.url;
       (<any>window).ga('send', 'event', 'Error', '404', this.url);
-    })
+    });
   }
 
 }
