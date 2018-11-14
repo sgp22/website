@@ -54,7 +54,7 @@ export class SearchPageComponent implements OnInit {
     this.loadingBar.start();
     this.query = term;
 
-    this.libraryService.getLatestLibraryVersions(['ids-enterprise', 'ids-css', 'ids-pendo'])
+    this.libraryService.getLatestLibraryVersions(this.libraries)
       .then(r => {
         const ep = r[0]['files'];
         const css = r[1]['files'];
