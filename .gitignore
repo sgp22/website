@@ -57,6 +57,9 @@ results
 npm-debug.log
 node_modules
 
+# Deprecated
+package-lock.json
+
 
 # https://github.com/github/gitignore/blob/master/Python.gitignore
 # Byte-compiled / optimized / DLL files
