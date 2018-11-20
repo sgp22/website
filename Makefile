@@ -137,8 +137,8 @@ deploy_staging:
 		&& mv deploy/Dockerrun.aws.json deploy/staging-Dockerrun.aws.json \
 
 deploy_prod:
-	mv deploy/prod-Dockerrun.aws.json deploy/Dockerrun.aws.json
-	export DOMAIN=https://design.infor.com
-	export ENV=prod
-	bash ./scripts/select_deploy.sh -f deploy -c deploy_prod
-	mv deploy/Dockerrun.aws.json deploy/prod-Dockerrun.aws.json
+	export DOMAIN=https://design.infor.com \
+		&& export ENV=prod \
+		&& mv deploy/prod-Dockerrun.aws.json deploy/Dockerrun.aws.json \
+		&& bash ./scripts/select_deploy.sh -f deploy -c deploy_prod \
+		&& mv deploy/Dockerrun.aws.json deploy/prod-Dockerrun.aws.json
