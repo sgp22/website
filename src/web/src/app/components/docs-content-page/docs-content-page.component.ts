@@ -125,8 +125,8 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
                   if (docs.demo.embedded) {
                     docs.demo.embedded.forEach(page => {
                       page.githubUrl = this.createGithubUrl(page.slug);
-                      page.url = this.createDemoUrl(page.slug, true);
-                      page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(page.url);
+                      page.url = this.createDemoUrl(page.slug);
+                      page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true));
                     });
                   }
                 }
