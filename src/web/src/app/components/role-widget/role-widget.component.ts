@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import {
   trigger,
   state,
@@ -31,6 +31,7 @@ export class RoleWidgetComponent implements AfterViewInit {
   public selectedRole;
   public roleSubmitted = JSON.parse(localStorage.getItem('roleSubmitted')) || false;
   public removeRoleThankyou = JSON.parse(localStorage.getItem('removeRoleThankyou')) || true;
+  @ViewChild('thankYou') thankYou;
 
   constructor() { }
 
@@ -77,6 +78,12 @@ export class RoleWidgetComponent implements AfterViewInit {
     const footer = document.querySelector('.site-footer');
     if (footer) {
       footer.scrollIntoView();
+    }
+  }
+
+  thankyouStateEnd(e) {
+    if (e.toState === true) {
+      this.thankYou.nativeElement.remove();
     }
   }
 }
