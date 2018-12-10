@@ -279,7 +279,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
   createDemoUrl(slug: string, embeddedLayout: boolean = false) {
     let url = `${this.absolutePath}/demo/components/${this.element}/${slug}?font=source-sans`;
     if (embeddedLayout) {
-      url += '&layout=embeddedLayout';
+      url += '&layout=embedded';
     }
     return url;
   }
