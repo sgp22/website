@@ -223,12 +223,17 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
           const relativeLink = el.getAttribute(attr);
           const pathArray = relativeLink.split('/');
           if (pathArray[1] === 'code' && pathArray[4] === 'demo') {
-            window.open(`${window.location.origin}${relativeLink}`, '_blank');
+            //pass, behave like normal following a click behavior
           } else {
+            event.preventDefault();
             this.router.navigate([`${relativeLink}`]);
           }
         } else {
           const relativeHref = el.getAttribute(attr).replace(/(^\.\/|.html$)/g, '');
+          const pathArray = relativeHref.split('/');
+          if (pathArray.includes('demo')) {
+            el.setAttribute('target', '_blank');
+          }
           if (relativeHref.substring(0, 1) === '/') {
             // Relative to the root of the domain
             el.setAttribute(attr, `${relativeHref}`);
@@ -304,7 +309,6 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
     const el = event.target as HTMLElement;
     const href = el.getAttribute('href');
     if (!absolute.test(href)) {
-      event.preventDefault();
       if (el.tagName.toLowerCase() === 'a') {
         this.createRelativePath(el, 'href', true);
       }
