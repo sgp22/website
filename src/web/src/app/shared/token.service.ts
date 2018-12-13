@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 import { Token } from './token';
 
 import 'rxjs/add/observable/throw';
@@ -31,6 +32,13 @@ export class TokenService {
       }));
   }
 
+  getAllTokenData(domain: string, library: string, version: string) {
+    const soho = this.http.get(`${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.simple.json`);
+    const dark = this.http.get(`${domain}/api/docs/${library}/${version}/tokens/web/theme-soho-dark.simple.json`);
+    const contrast = this.http.get(`${domain}/api/docs/${library}/${version}/tokens/web/theme-soho-contrast.simple.json`);
+    return forkJoin([soho, dark, contrast]);
+  }
+
   /**
    * For CMS pages filter by the tokensCategory dot notation string. (theme, theme.font, etc.)
    * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.simple.json
@@ -40,6 +48,39 @@ export class TokenService {
     const tokens = tokenData.filter(token => {
       return token.name.javascript.startsWith(cmsInput);
     });
+    return tokens;
+  }
+
+  /**
+   * Create custom object to display all tokens/themes in a table (only gets called if tokensCategory === *)
+   * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho-{theme}.simple.json
+   */
+  combineTokenData(tokenData: any) {
+    const soho = tokenData[0];
+    const dark = tokenData[1];
+    const contrast = tokenData[2];
+    const keys = soho.map(token => {
+      return token.name.sass;
+    });
+    const tokens = keys.reduce((obj, value, index) => {
+      if (!obj[value]) {
+        obj[value] = {
+          soho: {
+            value: soho[index].value,
+            type: soho[index].type
+          },
+          dark: {
+            value: dark[index].value,
+            type: dark[index].type
+          },
+          contrast: {
+            value: contrast[index].value,
+            type: contrast[index].type
+          }
+        };
+      }
+      return obj;
+    }, {});
     return tokens;
   }
 }

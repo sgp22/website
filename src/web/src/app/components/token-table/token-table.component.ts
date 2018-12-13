@@ -14,6 +14,8 @@ export class TokenTableComponent implements OnInit {
   @Input() sectionClassName;
   @Input() heading;
   @Input() loading;
+  public displayAllTokens = false;
+  public objectKeys = Object.keys;
 
   constructor(
     private appSettings: AppSettings,
@@ -26,18 +28,36 @@ export class TokenTableComponent implements OnInit {
   }
 
   private getIDSTokenProperties(domain: string, library: string, version: string = 'latest') {
-      this.tokenService
-        .getTokenData(domain, library, version)
-        .subscribe(
-          res => {
-            this.idsTokenProperties = this.tokenService.filterCmsTokens(res, this.tokensCategory);
-            this.loading = false;
-          },
-          err => {
-            console.log(`No tokens found: ${err}`);
-            this.idsTokenProperties = [];
-          }
-        );
+      if (this.tokensCategory === '*') {
+        this.displayAllTokens = true;
+        this.tokenService
+          .getAllTokenData(domain, library, version)
+          .subscribe(
+            res => {
+              this.idsTokenProperties = this.tokenService.combineTokenData(res);
+              this.loading = false;
+            },
+            err => {
+              console.log(`No tokens found: ${err}`);
+              this.idsTokenProperties = [];
+            }
+          );
+      } else {
+        this.displayAllTokens = false;
+        this.tokenService
+          .getTokenData(domain, library, version)
+          .subscribe(
+            res => {
+              this.idsTokenProperties = this.tokenService.filterCmsTokens(res, this.tokensCategory);
+              this.loading = false;
+            },
+            err => {
+              console.log(`No tokens found: ${err}`);
+              this.idsTokenProperties = [];
+            }
+          );
+      }
+      console.log(this.idsTokenProperties);
   }
 
 }
