@@ -223,7 +223,7 @@ export class DocsContentPageComponent implements OnInit, OnDestroy {
           const relativeLink = el.getAttribute(attr);
           const pathArray = relativeLink.split('/');
           if (pathArray[1] === 'code' && pathArray[4] === 'demo') {
-            //pass, behave like normal following a click behavior
+            // pass, behave like normal following a click behavior
           } else {
             event.preventDefault();
             this.router.navigate([`${relativeLink}`]);
