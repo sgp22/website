@@ -57,7 +57,6 @@ export class TokenTableComponent implements OnInit {
             }
           );
       }
-      console.log(this.idsTokenProperties);
   }
 
 }

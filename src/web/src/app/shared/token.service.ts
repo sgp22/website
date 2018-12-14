@@ -63,7 +63,7 @@ export class TokenService {
       return token.name.sass;
     });
     const tokens = keys.reduce((obj, value, index) => {
-      if (!obj[value]) {
+      if (!obj[value] && !value.startsWith('$theme-color-palette-')) {
         obj[value] = {
           soho: {
             value: soho[index].value,
