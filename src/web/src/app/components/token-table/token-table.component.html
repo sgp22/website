@@ -1,7 +1,8 @@
-<ng-container *ngIf="!loading && tokensCategory && idsTokenProperties?.length > 0">
-  <section  [ngClass]="{'page-section': sectionClassName}">
+<ng-container *ngIf="!loading && tokensCategory && idsTokenProperties">
+  <section [ngClass]="{'page-section': sectionClassName}">
     <h2 *ngIf="heading">{{heading}}</h2>
-    <table>
+
+    <table *ngIf="!displayAllTokens && idsTokenProperties?.length > 0">
       <thead>
         <th>
           Design Token &nbsp;
@@ -22,6 +23,61 @@
           </td>
           <td>
             <code>{{token.value}}</code>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table *ngIf="displayAllTokens" class="table--wide">
+      <colgroup span="2"></colgroup>
+      <colgroup span="2"></colgroup>
+      <colgroup span="2"></colgroup>
+      <thead>
+        <tr>
+          <th class="token-table--col-name">
+            Design Token &nbsp;
+            <a class="table-header--description" href="https://github.com/infor-design/design-system/tree/master/design-tokens"
+              target="_blank">Learn More</a>
+          </th>
+          <th colspan="2" scope="colgroup" class="token-table--col-grouped">Default Theme</th>
+          <th colspan="2" scope="colgroup" class="token-table--col-grouped">Dark Theme</th>
+          <th colspan="2" scope="colgroup" class="token-table--col-grouped">Contrast Theme</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th class="token-table--col-color token-table--col-grouped">Color</th>
+          <th class="token-table--col-value token-table--col-grouped">Value</th>
+          <th class="token-table--col-color token-table--col-grouped">Color</th>
+          <th class="token-table--col-value token-table--col-grouped">Value</th>
+          <th class="token-table--col-color token-table--col-grouped">Color</th>
+          <th class="token-table--col-value token-table--col-grouped">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let key of objectKeys(idsTokenProperties)">
+          <td>
+            <code>{{key}}</code>
+          </td>
+          <td>
+            <div *ngIf="idsTokenProperties[key].soho.type === 'color'" class="site-spec--color" [ngStyle]="idsTokenProperties[key].soho.value && {'background-color': ''+ idsTokenProperties[key].soho.value +'' }"
+              title="{{idsTokenProperties[key].soho.value}}"></div>
+          </td>
+          <td class="token-table--data-value">
+            <code>{{idsTokenProperties[key].soho.value}}</code>
+          </td>
+          <td>
+            <div *ngIf="idsTokenProperties[key].dark.type === 'color'" class="site-spec--color" [ngStyle]="idsTokenProperties[key].dark.value && {'background-color': ''+ idsTokenProperties[key].dark.value +'' }"
+              title="{{idsTokenProperties[key].dark.value}}"></div>
+          </td>
+          <td class="token-table--data-value">
+            <code>{{idsTokenProperties[key].dark.value}}</code>
+          </td>
+          <td>
+            <div *ngIf="idsTokenProperties[key].contrast.type === 'color'" class="site-spec--color" [ngStyle]="idsTokenProperties[key].contrast.value && {'background-color': ''+ idsTokenProperties[key].contrast.value +'' }"
+              title="{{idsTokenProperties[key].contrast.value}}"></div>
+          </td>
+          <td class="token-table--data-value">
+            <code>{{idsTokenProperties[key].contrast.value}}</code>
           </td>
         </tr>
       </tbody>
