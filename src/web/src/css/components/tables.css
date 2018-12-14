@@ -57,3 +57,37 @@ table {
     font-weight: var(--theme-number-font-weight-base);
   }
 }
+
+.table--wide {
+  table-layout: fixed;
+  width: 200%;
+
+  & th.token-table--col-grouped {
+    text-align: center;
+  }
+
+  & td {
+    white-space: nowrap;
+
+    &.token-table--data-value {
+      white-space: unset;
+    }
+  }
+
+  & th.token-table--col-name {
+    width: 50%;
+  }
+
+  & th.token-table--col-color {
+    width: 5%;
+  }
+
+  @media (--viewport-md) {
+    width: 150%;
+
+    & th.token-table--col-name {
+      width: 35%;
+    }
+  }
+}
+
