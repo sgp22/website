@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/ids-identity/dist/tokens/web/theme-uplift.custom-properties.css';
+@import '../node_modules/ids-css/dist/ids-css.css';
+
+
+body {
+  background-color: var(--theme-color-brand-primary-contrast);
+}
+
+.ids-container {
+  margin: 0 auto;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+ul {
+  padding: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--body-color-primary-background);
+  border-left: 1px solid #d8d8d8;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  height: 5px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-color-brand-secondary-base);
+  border-radius: 10px;
+}
