@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute }from '@angular/router';
 import { DocsService } from './docs.service';
+import { LibraryService } from '../../shared/library.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { trigger, transition, style, animate, query, group } from "@angular/animations";
+import * as semver from 'semver';
 
 @Component({
   selector: 'app-docs-content-page',
@@ -10,15 +11,18 @@ import { trigger, transition, style, animate, query, group } from "@angular/anim
   styleUrls: ['./docs-content-page.component.css']
 })
 export class DocsContentPageComponent implements OnInit {
-  public params;
-  public docs;
-  public absolutePath = '';
-  public library = '';
-  public component = '';
-  public loading;
+  public params: any;
+  public docs: any;
+  public absolutePath: string;
+  public library: string;
+  public component: string;
+  public currentVersion: string;
+  public versionPaths: any;
+  public loading: boolean;
 
   constructor(
     private docsService: DocsService,
+    private libraryService: LibraryService,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer
   ) { }
@@ -29,6 +33,7 @@ export class DocsContentPageComponent implements OnInit {
 
       this.absolutePath = `code/${params.library}/${params.version}`;
       this.library = `${params.library}`;
+      this.currentVersion = `${params.version}`;
 
       if (params.component) {
         this.params = `${params.library}/${params.version}/docs/${params.component}.json`;
@@ -36,6 +41,33 @@ export class DocsContentPageComponent implements OnInit {
       } else {
         this.params = `${params.library}/${params.version}/docs/index.json`;
       }
+
+      this.libraryService.loadAllLibraryVersions(this.library)
+        .subscribe(res => {
+          this.versionPaths = res['files']
+            .map(file => {
+              const versions = {};
+              versions['full'] = file.replace(/docs/, '');
+              versions['label'] = file.split('/').slice(-2, -1).join('');
+              return versions;
+            })
+            .sort((a, b) => {
+              return semver.compare(a.label, b.label);
+            })
+            .reverse();
+
+          this.versionPaths.unshift({
+            full: `/${this.library}/latest/`,
+            label: `Latest (${this.versionPaths[0]['label']})`
+          });
+
+          let latestVersion = this.versionPaths[1]['label'];
+          if (this.currentVersion === 'latest') {
+            this.currentVersion = latestVersion;
+          } else {
+            this.currentVersion = this.currentVersion;
+          }
+        })
 
       this.docsService.loadDocs(this.params)
         .subscribe(res => {
@@ -60,7 +92,8 @@ export class DocsContentPageComponent implements OnInit {
           }
 
           this.loading = false;
-        })
+        });
+
     })
   }
 
@@ -75,7 +108,7 @@ export class DocsContentPageComponent implements OnInit {
   createGithubUrl(slug: string) {
     const repoName = this.library.replace('ids-', '');
     let url = `https://github.com/infor-design/${repoName}/blob/`;
-    url += `latest/app/views/components/${this.component}/${slug}.html`;
+    url += `${this.currentVersion}/app/views/components/${this.component}/${slug}.html`;
     return url;
   }
 

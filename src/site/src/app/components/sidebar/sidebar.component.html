@@ -1,4 +1,23 @@
 <aside>
+
+  <div class="ids-form-group library-select-group">
+    <label for="select-library">Library</label>
+    <select #library (change)="onLibraryChange(library.value)" id="select-library" class="ids-form-control">
+      <option *ngFor="let library of libraries" value="/code//{{library.path}}/latest" [selected]="library.path == currentLibrary">
+        {{library.name}}
+      </option>
+    </select>
+  </div>
+
+  <div class="ids-form-group library-select-group">
+    <label for="select-version">Version</label>
+    <select #option (change)="onVersionChange(option.value)" id="select-version" class="ids-form-control">
+      <option *ngFor="let version of versionPaths" value="/code/{{version.full}}{{element}}" [selected]="version.label == currentVersion">
+        {{ version.label }}
+      </option>
+    </select>
+  </div>
+
   <nav class="sidebar-nav">
     <ul class="ids-list ids-list--hover">
       <li *ngFor="let section of sidebarNav; let i = index;">

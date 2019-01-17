@@ -30,3 +30,7 @@
 .ids-list--heading-accordion.ids-list--heading-accordion--active {
   border-bottom: 1px solid var(--input-color-readonly-background);
 }
+
+.library-select-group {
+    padding: 0 16px;
+}

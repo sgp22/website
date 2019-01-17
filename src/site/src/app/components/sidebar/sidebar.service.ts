@@ -6,29 +6,14 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class SidebarService {
-  apiUrl = environment.apiUrl;
-  libraryStore: {
-    libraries: any
-  }
-  siteMapStore: {
-    sitemap: any;
-  }
+  public apiUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient,
-  ) {
-    this.libraryStore = { libraries: [] };
-    this.siteMapStore = { sitemap: [] }
-  }
-
-  loadAllLibraries() {
-    return this.http.get(`${this.apiUrl}/static/libraries.json`)
-      .subscribe(res => {
-        this.libraryStore.libraries = res;
-      })
-  }
+  ) {}
 
   loadSitemap(sidebarPath) {
     return this.http.get(`${this.apiUrl}/api/docs/${sidebarPath}/sitemap.json`);
   }
+
 }

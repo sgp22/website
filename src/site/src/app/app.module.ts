@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { InlineSVGModule } from 'ng-inline-svg';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocsContentPageModule } from './components/docs-content-page/docs-content-page.module';
 import { AppComponent } from './app.component';
@@ -22,7 +23,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     AppRoutingModule,
     HttpClientModule,
     DocsContentPageModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    InlineSVGModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
