@@ -1,14 +1,23 @@
-<aside class="sidebar">
-  <nav class="sidebar-nav" [@moveIn]="loading">
+<aside>
+  <nav class="sidebar-nav">
     <ul class="ids-list ids-list--hover">
-      <li *ngFor="let section of sidebarNav">
+      <li *ngFor="let section of sidebarNav; let i = index;">
         <a *ngIf="!section.pages" class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{section.slug}}" routerLinkActive="ids-list--item--selected">{{section.name}}</a>
-        <span *ngIf="section.pages" class="ids-list--item ids-list--heading-accordion">{{section.name}}</span>
-        <ul *ngIf="section.pages" class="ids-list ids-list--expandable">
+        <span
+          *ngIf="section.pages"
+          class="ids-list--item ids-list--heading-accordion"
+          (click)="helpers.toggleAccordion(i, expandedLevel1)"
+          [ngClass]="{ 'ids-list--heading-accordion--active' : !expandedLevel1[i] }"
+        >{{section.name}}</span>
+        <ul
+          *ngIf="section.pages"
+          class="ids-list ids-list--expandable"
+          [ngClass]="{ 'ids-list--expanded' : !expandedLevel1[i] }"
+        >
           <li *ngFor="let child of section?.pages">
             <a *ngIf="!child.pages" class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{child.slug}}" routerLinkActive="ids-list--item--selected">{{child.name}}</a>
             <span *ngIf="child.pages" class="ids-list--item ids-list--heading">{{child.name}}</span>
-            <ul *ngIf="child.pages" class="ids-list ids-list--expandable">
+            <ul *ngIf="child.pages" class="ids-list ids-list--expandable ids-list--expanded">
               <li *ngFor="let childLevel2 of child.pages">
                 <a class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{childLevel2.slug}}" routerLinkActive="ids-list--item--selected">{{childLevel2.name}}</a>
               </li>

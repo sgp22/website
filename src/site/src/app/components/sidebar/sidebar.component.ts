@@ -2,28 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarService } from './sidebar.service';
 import { ActivatedRoute } from '@angular/router';
 import { trigger, transition, style, animate, query } from "@angular/animations";
+import { HelpersService } from '../../shared/helpers.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css'],
-  animations: [
-    trigger('moveIn', [
-      transition('* => *', [
-        query(':enter', style({ transform: 'translateX(-100%)' }), { optional: true }),
-        query(':enter', animate('200ms', style({ transform: 'translateX(0px)' })), { optional: true })
-      ])
-    ])
-  ]
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  sidebarPath: string;
-  sidebarNav: any;
-  loading: boolean;
+  public sidebarPath: string;
+  public sidebarNav: any;
+  public loading: boolean;
+  public expandedLevel1: any = [];
 
   constructor(
     private sidebarService: SidebarService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private helpers: HelpersService
   ) { }
 
   ngOnInit() {
@@ -32,7 +27,6 @@ export class SidebarComponent implements OnInit {
       this.sidebarPath = `${params.library}/${params.version}`;
       this.sidebarService.loadSitemap(this.sidebarPath).subscribe(res => {
         this.sidebarNav = res['sections'];
-        console.log(this.sidebarNav);
         this.loading = false;
       })
     })

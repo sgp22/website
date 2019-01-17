@@ -5,6 +5,8 @@
 
 body {
   background-color: var(--theme-color-brand-primary-contrast);
+  margin: 0;
+  padding: 0;
 }
 
 .ids-container {
