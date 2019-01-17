@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TocComponent } from './components/toc/toc.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DocsContentPageComponent,
-    SidebarComponent
+    SidebarComponent,
+    TocComponent
   ],
   imports: [
     BrowserModule,

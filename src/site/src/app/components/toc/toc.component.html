@@ -1,0 +1,7 @@
+<nav *ngIf="tocItems.length >= 3 && !landingPage" class="toc">
+  <ul class="ids-list ids-list--hover">
+    <li *ngFor="let tocItem of tocItems">
+      <a class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
+    </li>
+  </ul>
+</nav>

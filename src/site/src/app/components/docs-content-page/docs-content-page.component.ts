@@ -18,6 +18,9 @@ export class DocsContentPageComponent implements OnInit {
   public component: string;
   public currentVersion: string;
   public versionPaths: any;
+  public tocItems: any;
+  public bodyTitles: any;
+  public apiTitles: any;
   public loading: boolean;
 
   constructor(
@@ -75,6 +78,7 @@ export class DocsContentPageComponent implements OnInit {
 
           this.docs = res;
           this.handleRelativeLinks(this.docs);
+          this.buildToc();
 
           if (res['demo']) {
             if (res['demo'].pages) {
@@ -182,6 +186,36 @@ export class DocsContentPageComponent implements OnInit {
     let url = `https://github.com/infor-design/${repoName}/blob/`;
     url += `${this.currentVersion}/app/views/components/${this.component}/${slug}.html`;
     return url;
+  }
+
+  createTocItems(item) {
+    const regexId = new RegExp(/id=(?:'|")(.*?)(?:'|")/g);
+    const regexLabel = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
+    const ids = item.match(regexId);
+    const id = ids[0].replace(/id=(?:'|")/g, '').replace(/(?:'|")$/, '');
+    const labels = item.match(regexLabel);
+    const label = labels[0].replace(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>))/, '').replace(/<\/h2>/, '');
+    this.tocItems.push({
+      label: label,
+      id: id
+    });
+  }
+
+  buildToc() {
+    this.tocItems = [];
+    const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
+    if (this.docs.body) {
+      this.bodyTitles = this.docs.body.match(regex);
+    }
+    if (this.docs.api) {
+      this.apiTitles = this.docs.api.match(regex);
+    }
+    if (this.apiTitles) {
+      this.apiTitles.map(item => this.createTocItems(item));
+    }
+    if (this.bodyTitles) {
+      this.bodyTitles.map(item => this.createTocItems(item));
+    }
   }
 
 }
