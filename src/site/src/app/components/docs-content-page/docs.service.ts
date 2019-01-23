@@ -17,6 +17,6 @@ export class DocsService {
   }
 
   loadDocs(params) {
-    return this.http.get(`${this.apiUrl}/api/docs/${params}`)
+    return this.http.get(`${this.apiUrl}/api/docs/${params}`);
   }
 }
