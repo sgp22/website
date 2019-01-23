@@ -105,7 +105,14 @@ export class DocsContentPageComponent implements OnInit {
           }
         });
 
-    })
+      // (<any>window).ga('set', {
+      //   'dimension2': (this.component ? this.component : 'n/a'),
+      //   'dimension4': `${this.library}`,
+      //   'dimension5': `${this.currentVersion}`,
+      //   'dimension6': (this.currentVersion === 'latest' ? 'yes' : 'no'),
+      // });
+      // (<any>window).ga('send', 'pageview');
+    });
   }
 
   handleRelativeLinks(docs) {
