@@ -1,1 +1,23 @@
 
+.inline-demo {
+  margin: calc(3 * var(--theme-number-spacing-base)) 0;
+  position: relative;
+}
+
+.inline-demo h4 {
+  margin-bottom: var(--theme-number-spacing-base);
+}
+
+.inline-demo .inline-demo-links {
+  list-style: none;
+  margin: 0;
+  position: absolute;
+  right: 3px;
+  top: 0;
+}
+
+.inline-demo .inline-demo-links li {
+  float: left;
+    margin: 0;
+    padding: 0 4px;
+}
