@@ -97,6 +97,12 @@ export class DocsContentPageComponent implements OnInit {
           }
 
           this.loading = false;
+
+          if(!this.loading) {
+            setTimeout(() => {
+              this.pageLoadToSection();
+            }, 200);
+          }
         });
 
     })
@@ -215,6 +221,24 @@ export class DocsContentPageComponent implements OnInit {
     }
     if (this.bodyTitles) {
       this.bodyTitles.map(item => this.createTocItems(item));
+    }
+  }
+
+  pageLoadToSection() {
+    const tree = this.router.parseUrl(this.router.url);
+    if (tree.fragment) {
+      this.scrollToSection(tree.fragment);
+    }
+  }
+
+  scrollToSection(fragment) {
+    const section = document.querySelector('#' + fragment);
+    if (section) {
+      section.scrollIntoView(true);
+      const scrolledY = window.scrollY;
+      if (scrolledY) {
+        window.scroll(0, scrolledY - 90);
+      }
     }
   }
 

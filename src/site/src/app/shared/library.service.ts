@@ -20,6 +20,6 @@ export class LibraryService {
   }
 
   loadAllLibraryVersions(library: string) {
-    return this.http.get(`${this.apiUrl}/api/docs/${library}/`)
+    return this.http.get(`${this.apiUrl}/api/docs/${library}/`);
   }
 }
