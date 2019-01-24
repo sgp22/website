@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
     path: 'guidelines',
     component: LandingPageComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'guidelines/:slug',
+    component: CoreContentPageComponent
   },
   {
     path: 'examples',

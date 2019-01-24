@@ -18,6 +18,7 @@ import { SafeHtmlPipe } from './shared/safeHtml.pipe';
 import { SfFullWidthComponent } from './components/sf-full-width/sf-full-width.component';
 import { SfTwoColumnComponent } from './components/sf-two-column/sf-two-column.component';
 import { SfTwoColTextImageComponent } from './components/sf-two-col-text-image/sf-two-col-text-image.component';
+import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SfTwoColTextImageComponent } from './components/sf-two-col-text-image/s
     SafeHtmlPipe,
     SfFullWidthComponent,
     SfTwoColumnComponent,
-    SfTwoColTextImageComponent
+    SfTwoColTextImageComponent,
+    CoreContentPageComponent
   ],
   imports: [
     BrowserModule,
