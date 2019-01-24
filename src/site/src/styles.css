@@ -3,6 +3,7 @@
 @import '../node_modules/ids-css/dist/ids-reset.css';
 @import '../node_modules/ids-css/dist/ids-css.css';
 @import './assets/css/syntax-highlighting.css';
+@import './assets/css/tables.css';
 
 body {
   background-color: var(--theme-color-brand-primary-contrast);
@@ -37,4 +38,10 @@ ul {
 ::-webkit-scrollbar-thumb {
   background: var(--theme-color-brand-secondary-base);
   border-radius: 10px;
+}
+
+.page-section li {
+  list-style-position: outside;
+  margin-left: 32px;
+  margin-left: 2rem;
 }

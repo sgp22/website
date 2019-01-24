@@ -32,9 +32,9 @@ export class DocsContentPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
     this.route.params.subscribe(params => {
 
+      this.loading = true;
       this.absolutePath = `code/${params.library}/${params.version}`;
       this.library = `${params.library}`;
       this.currentVersion = `${params.version}`;
@@ -80,6 +80,11 @@ export class DocsContentPageComponent implements OnInit {
           this.handleRelativeLinks(this.docs);
           this.buildToc();
 
+
+          if (this.docs.api) {
+            this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.docs.api);
+          }
+
           if (res['demo']) {
             if (res['demo'].pages) {
               res['demo'].pages.forEach(page => {
@@ -91,6 +96,7 @@ export class DocsContentPageComponent implements OnInit {
             if (res['demo'].embedded) {
               res['demo'].embedded.forEach(page => {
                 page.githubUrl = this.createGithubUrl(page.slug);
+                page.url = this.createDemoUrl(page.slug);
                 page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true));
               });
             }
@@ -103,6 +109,7 @@ export class DocsContentPageComponent implements OnInit {
               this.pageLoadToSection();
             }, 200);
           }
+
         });
 
       // (<any>window).ga('set', {

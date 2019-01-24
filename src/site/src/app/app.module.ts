@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TocComponent } from './components/toc/toc.component';
+import { TokenTableComponent } from './components/token-table/token-table.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TocComponent } from './components/toc/toc.component';
     HomeComponent,
     DocsContentPageComponent,
     SidebarComponent,
-    TocComponent
+    TocComponent,
+    TokenTableComponent
   ],
   imports: [
     BrowserModule,

@@ -7,10 +7,13 @@ import { HttpClient } from "@angular/common/http";
 })
 export class DocsService {
   apiUrl = environment.apiUrl;
+  docsStore: {
+    docs: any
+  }
 
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {}
 
   loadAllDocs() {
     return this.http.get(`${this.apiUrl}/api/docs/ids-css/latest/docs/index.json`);
