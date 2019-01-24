@@ -5,6 +5,7 @@ import { DocsContentPageComponent } from './components/docs-content-page/docs-co
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
+import { CmsPageComponent } from './components/cms-page/cms-page.component';
 
 const routes: Routes = [
   {
@@ -23,22 +24,31 @@ const routes: Routes = [
   },
   {
     path: 'guidelines',
-    component: LandingPageComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'guidelines/:slug',
-    component: CoreContentPageComponent
+    component: CmsPageComponent,
+    children: [
+      { path: '', component: LandingPageComponent },
+      { path: ':slug', component: CoreContentPageComponent },
+      { path: 'identity/:slug', component: CoreContentPageComponent },
+      { path: 'layout/:slug', component: CoreContentPageComponent },
+      { path: 'patterns/:slug', component: CoreContentPageComponent },
+      { path: 'platforms/:slug', component: CoreContentPageComponent }
+    ]
   },
   {
     path: 'examples',
-    component: LandingPageComponent,
-    pathMatch: 'full'
+    component: CmsPageComponent,
+    children: [
+      { path: '', component: LandingPageComponent },
+      { path: ':slug', component: CoreContentPageComponent },
+    ]
   },
   {
     path: 'resources',
-    component: LandingPageComponent,
-    pathMatch: 'full'
+    component: CmsPageComponent,
+    children: [
+      { path: '', component: LandingPageComponent },
+      { path: ':slug', component: CoreContentPageComponent },
+    ]
   },
   {
     path: '**',

@@ -37,7 +37,7 @@ export class CoreContentPageComponent implements OnInit {
 
       (<any>window).ga('set', {
         'dimension2': (urlSegment[2] ? `${urlSegment[2].path}` : 'n/a'),
-        'dimension3': `${urlSegment[1].path}`,
+        'dimension3': (urlSegment[1] ? `${urlSegment[1].path}` : 'n/a'),
         'dimension4': `${urlSegment[0].path}`
       });
       (<any>window).ga('send', 'pageview');

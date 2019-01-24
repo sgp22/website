@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
 @Component({
-  selector: 'app-landing-page',
+  selector: 'landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css']
 })

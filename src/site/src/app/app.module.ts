@@ -19,6 +19,7 @@ import { SfFullWidthComponent } from './components/sf-full-width/sf-full-width.c
 import { SfTwoColumnComponent } from './components/sf-two-column/sf-two-column.component';
 import { SfTwoColTextImageComponent } from './components/sf-two-col-text-image/sf-two-col-text-image.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
+import { CmsPageComponent } from './components/cms-page/cms-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CoreContentPageComponent } from './components/core-content-page/core-co
     SfFullWidthComponent,
     SfTwoColumnComponent,
     SfTwoColTextImageComponent,
-    CoreContentPageComponent
+    CoreContentPageComponent,
+    CmsPageComponent
   ],
   imports: [
     BrowserModule,
