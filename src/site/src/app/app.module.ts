@@ -11,6 +11,7 @@ import { DocsContentPageComponent } from './components/docs-content-page/docs-co
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TocComponent } from './components/toc/toc.component';
 import { TokenTableComponent } from './components/token-table/token-table.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TokenTableComponent } from './components/token-table/token-table.compon
     DocsContentPageComponent,
     SidebarComponent,
     TocComponent,
-    TokenTableComponent
+    TokenTableComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -83,7 +83,6 @@ export class DocsContentPageComponent implements OnInit {
           this.handleRelativeLinks(this.docs);
           this.buildToc();
 
-
           if (this.docs.api) {
             this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.docs.api);
           }
@@ -113,6 +112,11 @@ export class DocsContentPageComponent implements OnInit {
             }, 200);
           }
 
+        },
+        err => {
+          if (err.error.error.code === '404') {
+            this.router.navigate(['/404']);
+          }
         });
 
       // (<any>window).ga('set', {
