@@ -18,7 +18,7 @@ export class DocsService {
   ) {}
 
   loadAllDocs() {
-    return this.http.get(`${this.apiUrl}/api/docs/ids-css/latest/docs/index.json`);
+    return this.http.get(`${this.apiUrl}/api/docs/ids-css/latest/docs/index.json`).pipe(first());
   }
 
   loadDocs(params) {
