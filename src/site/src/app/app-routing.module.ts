@@ -26,6 +26,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'examples',
+    component: LandingPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'resources',
+    component: LandingPageComponent,
+    pathMatch: 'full'
+  },
+  {
     path: '**',
     component: PageNotFoundComponent
   },
