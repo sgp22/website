@@ -12,6 +12,12 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TocComponent } from './components/toc/toc.component';
 import { TokenTableComponent } from './components/token-table/token-table.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { CacheService } from './shared/cache.service';
+import { SafeHtmlPipe } from './shared/safeHtml.pipe';
+import { SfFullWidthComponent } from './components/sf-full-width/sf-full-width.component';
+import { SfTwoColumnComponent } from './components/sf-two-column/sf-two-column.component';
+import { SfTwoColTextImageComponent } from './components/sf-two-col-text-image/sf-two-col-text-image.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +27,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     SidebarComponent,
     TocComponent,
     TokenTableComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LandingPageComponent,
+    SafeHtmlPipe,
+    SfFullWidthComponent,
+    SfTwoColumnComponent,
+    SfTwoColTextImageComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +42,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     BrowserAnimationsModule,
     InlineSVGModule.forRoot()
   ],
-  providers: [],
+  providers: [CacheService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
