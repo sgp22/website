@@ -20,6 +20,7 @@ import { SfTwoColumnComponent } from './components/sf-two-column/sf-two-column.c
 import { SfTwoColTextImageComponent } from './components/sf-two-col-text-image/sf-two-col-text-image.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { CmsPageComponent } from './components/cms-page/cms-page.component';
+import { SidebarCmsComponent } from './components/sidebar-cms/sidebar-cms.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CmsPageComponent } from './components/cms-page/cms-page.component';
     SfTwoColumnComponent,
     SfTwoColTextImageComponent,
     CoreContentPageComponent,
-    CmsPageComponent
+    CmsPageComponent,
+    SidebarCmsComponent
   ],
   imports: [
     BrowserModule,
