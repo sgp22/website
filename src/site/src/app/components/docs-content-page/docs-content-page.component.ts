@@ -22,6 +22,7 @@ export class DocsContentPageComponent implements OnInit {
   public bodyTitles: any;
   public apiTitles: any;
   public loading: boolean;
+  public showWarning: boolean;
 
   constructor(
     private docsService: DocsService,
@@ -71,6 +72,8 @@ export class DocsContentPageComponent implements OnInit {
           } else {
             this.currentVersion = this.currentVersion;
           }
+
+          this.versionShowWarning(this.currentVersion, latestVersion);
         })
 
       this.docsService.loadDocs(this.params)
@@ -256,4 +259,11 @@ export class DocsContentPageComponent implements OnInit {
     }
   }
 
+  versionShowWarning(currentVersion, latestVersion) {
+    if (currentVersion < latestVersion) {
+      this.showWarning = true;
+    } else {
+      this.showWarning = false;
+    }
+  }
 }
