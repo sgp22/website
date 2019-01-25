@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from "@angular/common/http";
-import { Observable, throwError as _throw } from 'rxjs';
-import { catchError, first } from 'rxjs/operators';
+import { throwError as _throw } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { CacheService } from '../../shared/cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class DocsService {
 
   constructor(
     private http: HttpClient,
+    private cacheService: CacheService
   ) {}
 
   loadAllDocs() {
@@ -22,6 +24,7 @@ export class DocsService {
   }
 
   loadDocs(params) {
-    return this.http.get(`${this.apiUrl}/api/docs/${params}`).pipe(first())
+    const url = `${this.apiUrl}/api/docs/${params}`;
+    return this.cacheService.get(url, this.http.get(url).pipe(first()))
   }
 }

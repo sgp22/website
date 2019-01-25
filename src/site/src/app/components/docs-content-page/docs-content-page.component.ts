@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router }from '@angular/router';
 import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
@@ -23,7 +23,6 @@ export class DocsContentPageComponent implements OnInit {
   public apiTitles: any;
   public loading: boolean;
   public showWarning: boolean;
-  @Output() libVersion: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private docsService: DocsService,
@@ -39,7 +38,6 @@ export class DocsContentPageComponent implements OnInit {
       this.absolutePath = `code/${params.library}/${params.version}`;
       this.library = `${params.library}`;
       this.currentVersion = `${params.version}`;
-      this.libVersion.emit(this.library);
 
       if (params.component) {
         this.params = `${params.library}/${params.version}/docs/${params.component}.json`;
