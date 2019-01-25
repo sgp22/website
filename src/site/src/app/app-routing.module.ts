@@ -21,16 +21,6 @@ const routes: Routes = [
       { path: ':library/:version/:component', component: DocsContentPageComponent }
     ]
   },
-  // {
-  //   path: 'code/:library/:version',
-  //   component: DocsContentPageComponent,
-  //   pathMatch: 'full'
-  // },
-  // {
-  //   path: 'code/:library/:version/:component',
-  //   component: DocsContentPageComponent,
-  //   pathMatch: 'full'
-  // },
   {
     path: 'guidelines',
     component: CmsPageComponent,
