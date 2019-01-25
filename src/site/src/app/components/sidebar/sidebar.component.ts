@@ -39,7 +39,9 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.updateNav(path, library, version);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   updateNav(path, lib, version) {
     this.sidebarPath = path;
@@ -49,6 +51,12 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.sidebarService.loadSitemap(path).subscribe(res => {
       this.sidebarNav = res['sections'];
       this.loading = false;
+
+      if (this.helpers.checkViewport('(min-width: 600px)')) {
+        setTimeout(() => {
+          this.expandedLevel1 = this.helpers.closeAccordionsMobile(this.sidebarNav);
+        });
+      }
     })
 
     this.libraryService.loadAllLibraries().subscribe(res => {
@@ -73,7 +81,7 @@ export class SidebarComponent implements OnInit, OnChanges {
           full: `/${this.currentLibrary}/latest/`,
           label: `Latest (${this.versionPaths[0]['label']})`
         });
-      })
+      });
   }
 
   onLibraryChange(library) {
