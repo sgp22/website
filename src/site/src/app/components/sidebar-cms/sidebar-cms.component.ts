@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { HelpersService } from '../../shared/helpers.service';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'sidebar-cms',
@@ -21,9 +20,7 @@ export class SidebarCmsComponent implements OnInit {
 
   constructor(
     private pagesService: PagesService,
-    private router: Router,
     private route: ActivatedRoute,
-    private elRef: ElementRef,
     private helpers: HelpersService
   ) { }
 

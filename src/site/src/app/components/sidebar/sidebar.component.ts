@@ -33,6 +33,10 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.urlSegments = this.route.snapshot['_urlSegment'].segments;
+    if (!this.urlSegments[1]) {
+      this.router.navigate(['404']);
+      return;
+    }
     const path = `${this.urlSegments[1].path}/${this.urlSegments[2].path}`;
     const library = `${this.urlSegments[1].path}`;
     const version = `${this.urlSegments[2].path}`;

@@ -23,11 +23,12 @@ export class PagesService {
   }
 
   getPage(id) {
-    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/${id}/`)
+    const url = `${this.apiUrl}/api/${this.domainVersion}/pages/${id}/`;
+    return this.cacheService.get(url, this.http.get(url)
       .pipe(
         share(),
         first()
-      );
+      ));
   }
 
   getCurrentPage(slug, preview = false) {

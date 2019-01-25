@@ -20,7 +20,8 @@ export class DocsService {
   ) {}
 
   loadAllDocs() {
-    return this.http.get(`${this.apiUrl}/api/docs/ids-css/latest/docs/index.json`).pipe(first());
+    const url = `${this.apiUrl}/api/docs/ids-css/latest/docs/index.json`;
+    return this.cacheService.get(url, this.http.get(url).pipe(first()));
   }
 
   loadDocs(params) {
