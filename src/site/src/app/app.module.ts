@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocsContentPageModule } from './components/docs-content-page/docs-content-page.module';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { DocsContentPageComponent } from './components/docs-content-page/docs-content-page.component';
@@ -22,6 +23,7 @@ import { CoreContentPageComponent } from './components/core-content-page/core-co
 import { CmsPageComponent } from './components/cms-page/cms-page.component';
 import { SidebarCmsComponent } from './components/sidebar-cms/sidebar-cms.component';
 import { CodePageComponent } from './components/code-page/code-page.component';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { CodePageComponent } from './components/code-page/code-page.component';
     CoreContentPageComponent,
     CmsPageComponent,
     SidebarCmsComponent,
-    CodePageComponent
+    CodePageComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { CodePageComponent } from './components/code-page/code-page.component';
     HttpClientModule,
     DocsContentPageModule,
     BrowserAnimationsModule,
-    InlineSVGModule.forRoot()
+    InlineSVGModule.forRoot(),
+    FormsModule
   ],
   providers: [CacheService],
   bootstrap: [AppComponent]

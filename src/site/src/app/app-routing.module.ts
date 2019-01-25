@@ -7,6 +7,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { CmsPageComponent } from './components/cms-page/cms-page.component';
 import { CodePageComponent } from './components/code-page/code-page.component';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
       { path: '', component: LandingPageComponent },
       { path: ':slug', component: CoreContentPageComponent },
     ]
+  },
+  {
+    path: 'search',
+    component: SearchPageComponent,
   },
   {
     path: '**',

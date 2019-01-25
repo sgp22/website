@@ -22,4 +22,14 @@ export class LibraryService {
   loadAllLibraryVersions(library: string) {
     return this.http.get(`${this.apiUrl}/api/docs/${library}/`);
   }
+
+  async getLatestLibraryVersions(libraries: any) {
+    const promises = libraries.map(
+      library => this.http.get(`${this.apiUrl}/api/docs/${library}/`)
+        .toPromise()
+        .then(res => res)
+    );
+    const libs = await Promise.all(promises);
+    return libs;
+  }
 }

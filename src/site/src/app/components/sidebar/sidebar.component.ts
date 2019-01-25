@@ -43,9 +43,7 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.updateNav(path, library, version);
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   updateNav(path, lib, version) {
     this.sidebarPath = path;
