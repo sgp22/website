@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })

@@ -21,6 +21,7 @@ import { SfTwoColTextImageComponent } from './components/sf-two-col-text-image/s
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { CmsPageComponent } from './components/cms-page/cms-page.component';
 import { SidebarCmsComponent } from './components/sidebar-cms/sidebar-cms.component';
+import { CodePageComponent } from './components/code-page/code-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SidebarCmsComponent } from './components/sidebar-cms/sidebar-cms.compon
     SfTwoColTextImageComponent,
     CoreContentPageComponent,
     CmsPageComponent,
-    SidebarCmsComponent
+    SidebarCmsComponent,
+    CodePageComponent
   ],
   imports: [
     BrowserModule,
