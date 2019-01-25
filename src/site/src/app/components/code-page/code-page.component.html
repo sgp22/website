@@ -1,3 +1,10 @@
-<p>
-  code-page works!
-</p>
+<div class="ids-row">
+  <sidebar
+    class="sidebar ids-row--col-sm-3 ids-row--col-xl-2"
+    [lib]="library"
+    [ver]="libVersion"
+  ></sidebar>
+  <div class="ids-row--offset-xl-2 ids-row--offset-sm-3 ids-row--col-sm-9 ids-row--col-xl-10 page-section">
+    <router-outlet></router-outlet>
+  </div>
+</div>

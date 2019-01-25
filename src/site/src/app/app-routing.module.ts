@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { CoreContentPageComponent } from './components/core-content-page/core-content-page.component';
 import { CmsPageComponent } from './components/cms-page/cms-page.component';
+import { CodePageComponent } from './components/code-page/code-page.component';
 
 const routes: Routes = [
   {
@@ -13,15 +14,23 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'code/:library/:version',
-    component: DocsContentPageComponent,
-    pathMatch: 'full'
+    path: 'code',
+    component: CodePageComponent,
+    children: [
+      { path: ':library/:version', component: DocsContentPageComponent },
+      { path: ':library/:version/:component', component: DocsContentPageComponent }
+    ]
   },
-  {
-    path: 'code/:library/:version/:component',
-    component: DocsContentPageComponent,
-    pathMatch: 'full'
-  },
+  // {
+  //   path: 'code/:library/:version',
+  //   component: DocsContentPageComponent,
+  //   pathMatch: 'full'
+  // },
+  // {
+  //   path: 'code/:library/:version/:component',
+  //   component: DocsContentPageComponent,
+  //   pathMatch: 'full'
+  // },
   {
     path: 'guidelines',
     component: CmsPageComponent,
