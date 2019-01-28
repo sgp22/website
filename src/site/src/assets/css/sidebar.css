@@ -26,10 +26,25 @@
   position: relative;
 }
 
+.ids-list--heading-accordion .ids-icon {
+  fill: var(--theme-color-font-info);
+  position: absolute;
+  right: calc(var(--theme-number-spacing-base) * 3);
+  transform: rotate(0deg) translateY(30%);
+}
+
+.ids-list--heading-accordion:hover .ids-icon {
+  fill: var(--theme-color-font-base);
+}
+
 .ids-list--heading-accordion.ids-list--heading-accordion--active {
   border-bottom: 1px solid var(--input-color-readonly-background);
 }
 
-.library-select-group {
-    padding: 0 16px;
+.ids-list--heading-accordion.ids-list--heading-accordion--active .ids-icon{
+  transform: rotate(-180deg) translateY(-30%);
+}
+
+.librpary-select-group {
+  padding: 0 16px;
 }

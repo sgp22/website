@@ -26,7 +26,12 @@
           class="ids-list--item ids-list--heading-accordion"
           (click)="helpers.toggleAccordion(i, expandedLevel1)"
           [ngClass]="{ 'ids-list--heading-accordion--active' : !expandedLevel1[i] }"
-        >{{section.name}}</span>
+        >
+          {{section.name}}
+          <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
+            <use xlink:href="#icon_expand"></use>
+          </svg>
+        </span>
         <ul
           *ngIf="section.pages"
           class="ids-list ids-list--expandable"
