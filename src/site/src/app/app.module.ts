@@ -25,7 +25,8 @@ import { SidebarCmsComponent } from './components/sidebar-cms/sidebar-cms.compon
 import { CodePageComponent } from './components/code-page/code-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { FeedbackWidgetModule } from './components/feedback-widget/feedback-widget.module';
-import { FeedbackWidgetComponent } from './components/feedback-widget/feedback-widget.component';
+import { QuestionWidgetComponent } from './components/question-widget/question-widget.component';
+import { RoleWidgetComponent } from './components/role-widget/role-widget.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { FeedbackWidgetComponent } from './components/feedback-widget/feedback-w
     CmsPageComponent,
     SidebarCmsComponent,
     CodePageComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    QuestionWidgetComponent,
+    RoleWidgetComponent
   ],
   imports: [
     BrowserModule,
