@@ -1,0 +1,47 @@
+.page-hero {
+  margin-bottom: calc(var(--theme-number-spacing-base) * 12);
+  margin-top: calc(var(--theme-number-spacing-base) * 3);
+  padding-bottom: calc(var(--theme-number-spacing-base) * 11);
+  padding-top: calc(var(--theme-number-spacing-base) * 11);
+  position: relative;
+}
+
+.page-hero--title {
+  font-weight: var(--theme-number-font-weight-bold);
+  margin-top: 0;
+}
+
+.page-hero--text {
+  margin-bottom: 0;
+}
+
+.page-hero--image {
+  bottom: -50px;
+  margin-left: auto;
+  position: relative;
+  right: calc(var(--theme-number-spacing-base) * 4);
+  width: 122px;
+}
+
+@media only screen and (min-width: 600px) {
+  .page-hero {
+    margin-top: -32px;
+  }
+  .page-hero--image {
+    width: 185px;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .page-hero--image {
+    position: absolute;
+    width: 225px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .page-hero--image {
+    width: 320px;
+  }
+}
+

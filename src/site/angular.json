@@ -134,7 +134,7 @@
   "defaultProject": "site",
   "schematics": {
     "@schematics/angular:component": {
-      "styleext": "scss"
+      "styleext": "css"
     }
   }
 }

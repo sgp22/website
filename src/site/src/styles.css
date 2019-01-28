@@ -2,8 +2,12 @@
 @import '../node_modules/ids-identity/dist/tokens/web/theme-uplift.custom-properties.css';
 @import '../node_modules/ids-css/dist/ids-reset.css';
 @import '../node_modules/ids-css/dist/ids-css.css';
+@import './assets/css/variables.css';
 @import './assets/css/base.css';
 @import './assets/css/syntax-highlighting.css';
 @import './assets/css/github.css';
 @import './assets/css/tables.css';
 @import './assets/css/sidebar.css';
+@import './assets/css/type.css';
+@import './assets/css/page-hero.css';
+@import './assets/css/page-content.css';

@@ -1,0 +1,34 @@
+/*
+ * Specification styles
+ */
+.site-spec--color {
+  border: 1px solid #bdbdbd;
+  border-radius: 24px;
+  height: 24px;
+  margin: 0 auto;
+  width: 24px;
+}
+
+/*
+ * Theme Specs
+ */
+.theme-spec--group {
+  padding: 10px 30px;
+}
+
+.theme-spec--block {
+  -webkit-font-smoothing: antialiased;
+  padding: 5px;
+}
+
+.theme-spec--swatch {
+  border: solid 1px transparent;
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+}
+
+.theme-spec--details {
+  font-size: 13px;
+  padding-top: 10px;
+}
