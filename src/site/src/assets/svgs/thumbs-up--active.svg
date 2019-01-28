@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/extended-set/thumbs-down copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="6.-Designer-Workspace" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Annotated-1440px---XL-Copy-5" transform="translate(-602.000000, -587.000000)" fill="#80CE4D">
+            <g id="icon/extended-set/thumbs-up-green" transform="translate(602.000000, 587.000000)">
+                <path d="M14.8235294,18 C14.2411765,18 13.7647059,17.55 13.7647059,17 L13.7647059,6 C13.7647059,5.45 14.2411765,5 14.8235294,5 L16.9411765,5 C17.5235294,5 18,5.45 18,6 L18,17 C18,17.55 17.5235294,18 16.9411765,18 L14.8235294,18 Z M5.63761583,5.71751397 L4.59573348,1.71751397 C4.37549818,0.258513975 6.28243936,-0.595486025 7.33808642,0.490513975 L11.8052629,6.15151397 C11.9217335,6.31251397 11.990557,6.50751397 11.990557,6.71751397 L11.990557,16.717514 C11.990557,17.269514 11.5162041,17.717514 10.9317335,17.717514 L3.51996877,17.717514 C3.05196877,17.717514 2.64008642,17.427514 2.50561583,17.004514 L0.0883217103,8.28451397 C-0.312972407,7.00251397 0.703498181,5.71751397 2.11914524,5.71751397 L5.63761583,5.71751397 Z" id="thumbs-up"></path>
+            </g>
+        </g>
+    </g>
+</svg>
