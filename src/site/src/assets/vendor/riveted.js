@@ -20,27 +20,27 @@
   }
 }(this, function () {
 
-/* Riveted */
+  /* Riveted */
 
-var riveted = (function() {
+  var riveted = (function () {
 
-  var started = false,
-    stopped = false,
-    turnedOff = false,
-    clockTime = 0,
-    startTime = new Date(),
-    clockTimer = null,
-    idleTimer = null,
-    sendEvent,
-    sendUserTiming,
-    reportInterval,
-    idleTimeout,
-    nonInteraction,
-    universalGA,
-    classicGA,
-    universalSendCommand,
-    googleTagManager,
-    gaGlobal;
+    var started = false,
+      stopped = false,
+      turnedOff = false,
+      clockTime = 0,
+      startTime = new Date(),
+      clockTimer = null,
+      idleTimer = null,
+      sendEvent,
+      sendUserTiming,
+      reportInterval,
+      idleTimeout,
+      nonInteraction,
+      universalGA,
+      classicGA,
+      universalSendCommand,
+      googleTagManager,
+      gaGlobal;
 
     function init(options) {
 
@@ -111,12 +111,12 @@ var riveted = (function() {
       var context, args, result;
       var timeout = null;
       var previous = 0;
-      var later = function() {
+      var later = function () {
         previous = new Date;
         timeout = null;
         result = func.apply(context, args);
       };
-      return function() {
+      return function () {
         var now = new Date;
         if (!previous) previous = now;
         var remaining = wait - (now - previous);
@@ -150,24 +150,24 @@ var riveted = (function() {
       }
     }
 
-  /*
-     * Function for logging User Timing event on initial interaction
+    /*
+       * Function for logging User Timing event on initial interaction
+       */
+    sendUserTiming = function (timingValue) {
+
+      ga('send', 'event', 'timeevent', 15, 15, { metric1: 15, nonInteraction: true });
+
+    };
+
+    /*
+     * Function for logging ping events
      */
-  sendUserTiming = function (timingValue) {
 
-    ga('send', 'event', 'timeevent', 15, 15 , {metric1: 15, nonInteraction:true} );
+    sendEvent = function (time) {
 
-  };
+      ga('send', 'event', 'timeevent', 15, 15, { metric1: 15, nonInteraction: true });
 
-  /*
-   * Function for logging ping events
-   */
-
-  sendEvent = function (time) {
-
-    ga('send', 'event', 'timeevent', 15, 15 , {metric1: 15, nonInteraction:true} );
-
-  };
+    };
 
     function setIdle() {
       clearTimeout(idleTimer);

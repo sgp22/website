@@ -24,6 +24,8 @@ import { CmsPageComponent } from './components/cms-page/cms-page.component';
 import { SidebarCmsComponent } from './components/sidebar-cms/sidebar-cms.component';
 import { CodePageComponent } from './components/code-page/code-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { FeedbackWidgetModule } from './components/feedback-widget/feedback-widget.module';
+import { FeedbackWidgetComponent } from './components/feedback-widget/feedback-widget.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { SearchPageComponent } from './components/search-page/search-page.compon
     DocsContentPageModule,
     BrowserAnimationsModule,
     InlineSVGModule.forRoot(),
-    FormsModule
+    FormsModule,
+    FeedbackWidgetModule
   ],
   providers: [CacheService],
   bootstrap: [AppComponent]
