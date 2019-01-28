@@ -64,9 +64,9 @@
         </li>
       </ul>
 
-      <div [innerHTML]="docs?.apiTrustedHtml" (click)="relativeLinks(link)"></div>
+      <div [innerHTML]="docs?.apiTrustedHtml" (click)="relativeLinks($event)"></div>
 
-      <div [innerHTML]="docs?.bodyTrustedHtml" (click)="relativeLinks(link)"></div>
+      <div [innerHTML]="docs?.bodyTrustedHtml" (click)="relativeLinks($event)"></div>
 
       <token-table *ngIf="!loading" [heading]="'Design Tokens'" [loading]="loading" [sectionClassName]="true"
         [tokensCategory]="docs?.tokensCategory"></token-table>
