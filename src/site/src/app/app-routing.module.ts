@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'code',
     component: CodePageComponent,
     children: [
-      { path: ':library/:version', component: DocsContentPageComponent },
+      { path: ':library/:version', component: DocsContentPageComponent, data: { title: ":library - :version" } },
       { path: ':library/:version/:component', component: DocsContentPageComponent }
     ]
   },
