@@ -29,7 +29,7 @@ export class AppComponent {
         const title = url.replace(/^\//g, '').replace(/\//g, ' / ').replace(/-/g, ' ');
 
         if (url === '/') {
-          this.titleService.setTitle(`Home - Infor Design System`);
+          this.titleService.setTitle(`Infor Design System`);
         } else {
           this.titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
         }
