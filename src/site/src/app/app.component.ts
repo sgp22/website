@@ -23,10 +23,16 @@ export class AppComponent {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(event => {
+
         // Set Page Title
         const url = this.router.routerState.snapshot.url;
         const title = url.replace(/^\//g, '').replace(/\//g, ' / ').replace(/-/g, ' ');
-        this.titleService.setTitle(this.capitalizeTitle(title) + ` - Infor Design System`);
+
+        if (url === '/') {
+          this.titleService.setTitle(`Home - Infor Design System`);
+        } else {
+          this.titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
+        }
 
         // Initialize Pendo on page change
         pendo.initialize({
@@ -59,7 +65,7 @@ export class AppComponent {
           (<any>window).ga('set', { 'userId': `${clientID}` });
           (<any>window).ga('set', { 'dimension7': `${clientID}` });
         }
-      })
+      });
   }
 
   public capitalizeTitle(str) {

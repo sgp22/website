@@ -14,13 +14,16 @@ import { BlogPostPageComponent } from './components/blog-post-page/blog-post-pag
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    data: {
+      title: 'Home'
+    }
   },
   {
     path: 'code',
     component: CodePageComponent,
     children: [
-      { path: ':library/:version', component: DocsContentPageComponent, data: { title: ":library - :version" } },
+      { path: ':library/:version', component: DocsContentPageComponent },
       { path: ':library/:version/:component', component: DocsContentPageComponent }
     ]
   },
