@@ -27,6 +27,8 @@ import { SearchPageComponent } from './components/search-page/search-page.compon
 import { FeedbackWidgetModule } from './components/feedback-widget/feedback-widget.module';
 import { QuestionWidgetComponent } from './components/question-widget/question-widget.component';
 import { RoleWidgetComponent } from './components/role-widget/role-widget.component';
+import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';
+import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { RoleWidgetComponent } from './components/role-widget/role-widget.compon
     CodePageComponent,
     SearchPageComponent,
     QuestionWidgetComponent,
-    RoleWidgetComponent
+    RoleWidgetComponent,
+    BlogLandingPageComponent,
+    BlogPostPageComponent
   ],
   imports: [
     BrowserModule,

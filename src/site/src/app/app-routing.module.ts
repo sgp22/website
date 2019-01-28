@@ -8,6 +8,8 @@ import { CoreContentPageComponent } from './components/core-content-page/core-co
 import { CmsPageComponent } from './components/cms-page/cms-page.component';
 import { CodePageComponent } from './components/code-page/code-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';
+import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 
 const routes: Routes = [
   {
@@ -53,6 +55,15 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchPageComponent,
+  },
+  {
+    path: 'blog',
+    component: BlogLandingPageComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'blog/:slug',
+    component: BlogPostPageComponent,
   },
   {
     path: '**',
