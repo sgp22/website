@@ -41,7 +41,7 @@
   border-bottom: 1px solid var(--input-color-readonly-background);
 }
 
-.ids-list--heading-accordion.ids-list--heading-accordion--active .ids-icon{
+.ids-list--heading-accordion.ids-list--heading-accordion--active .ids-icon {
   transform: rotate(-180deg) translateY(-30%);
 }
 
