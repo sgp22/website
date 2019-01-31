@@ -3,7 +3,7 @@
  * https://hackernoon.com/angular-simple-in-memory-cache-service-on-the-ui-with-rxjs-77f167387e39
  */
 
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, Subject, of, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 interface CacheContent {
@@ -15,7 +15,6 @@ interface CacheContent {
  * Cache Service is an observables based in-memory cache implementation
  * Keeps track of in-flight observables and sets a default expiry for cached values
  * @export
- * @class CacheService
  */
 export class CacheService {
   private cache: Map<string, CacheContent> = new Map<string, CacheContent>();
@@ -46,9 +45,9 @@ export class CacheService {
       console.log(`%c Calling api for ${key}`, 'color: purple');
       return fallback.pipe(
         tap((value) => { this.set(key, value, maxAge); })
-      )
+      );
     } else {
-      return Observable.throw('Requested key is not available in Cache');
+      return throwError('Requested key is not available in Cache');
     }
 
   }

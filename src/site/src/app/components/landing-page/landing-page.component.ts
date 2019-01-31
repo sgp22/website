@@ -9,7 +9,7 @@ import { PagesService } from '../../shared/pages.service';
 })
 export class LandingPageComponent implements OnInit {
   public pageContent: any;
-  public loading:boolean = true;
+  public loading = true;
 
   constructor(
     private router: Router,

@@ -6,7 +6,7 @@ import { HelpersService } from '../../shared/helpers.service';
 import * as semver from 'semver';
 
 @Component({
-  selector: 'sidebar',
+  selector: 'sidebar-code',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
@@ -59,7 +59,7 @@ export class SidebarComponent implements OnInit, OnChanges {
           this.expandedLevel1 = this.helpers.closeAccordionsMobile(this.sidebarNav);
         });
       }
-    })
+    });
 
     this.libraryService.loadAllLibraries().subscribe(res => {
       this.libraries = res;

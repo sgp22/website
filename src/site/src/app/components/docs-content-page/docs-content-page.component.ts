@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router }from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -65,7 +65,7 @@ export class DocsContentPageComponent implements OnInit {
             label: `Latest (${this.versionPaths[0]['label']})`
           });
 
-          let latestVersion = this.versionPaths[1]['label'];
+          const latestVersion = this.versionPaths[1]['label'];
           if (this.currentVersion === 'latest') {
             this.currentVersion = latestVersion;
           } else {
@@ -73,7 +73,7 @@ export class DocsContentPageComponent implements OnInit {
           }
 
           this.versionShowWarning(this.currentVersion, latestVersion);
-        })
+        });
 
       this.docsService.loadDocs(this.params)
         .subscribe(res => {
@@ -105,7 +105,7 @@ export class DocsContentPageComponent implements OnInit {
 
           this.loading = false;
 
-          if(!this.loading) {
+          if (!this.loading) {
             setTimeout(() => {
               this.pageLoadToSection();
             }, 200);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, forkJoin, throwError as _throw } from 'rxjs';
+import { Observable, forkJoin, throwError as _throw, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class TokenService {
           if (err.status === 400) {
             return JSON.stringify([]);
           } else {
-            return Observable.throw(new Error(`${err.status} ${err.statusText}`));
+            return throwError(new Error(`${err.status} ${err.statusText}`));
           }
         })
       );

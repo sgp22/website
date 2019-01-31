@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class LibraryService {
   public apiUrl = environment.apiUrl;
   public versionPaths: {
     versions: any
-  }
+  };
 
   constructor(
     private http: HttpClient

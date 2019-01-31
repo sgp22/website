@@ -19,7 +19,7 @@ export class PagesService {
 
   getAll() {
     const url = `${this.apiUrl}/api/${this.domainVersion}/pages/?&limit=200`;
-    return this.cacheService.get(url, this.http.get(url).pipe(share(),first()));
+    return this.cacheService.get(url, this.http.get(url).pipe(share(), first()));
   }
 
   getPage(id) {

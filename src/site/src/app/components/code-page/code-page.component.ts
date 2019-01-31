@@ -10,6 +10,7 @@ import { filter } from 'rxjs/operators';
 export class CodePageComponent implements OnInit {
   public library: string;
   public libVersion: string;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute
@@ -22,7 +23,7 @@ export class CodePageComponent implements OnInit {
         const urlSegments = res['url'].split('/');
         this.library = urlSegments[2];
         this.libVersion = urlSegments[3];
-      })
+      });
   }
 
 }

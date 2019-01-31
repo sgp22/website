@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -25,7 +25,7 @@ export class FeedbackWidgetService {
           if (err.status === 400) {
             return JSON.stringify(0);
           } else {
-            return Observable.throw(new Error(`${err.status} ${err.statusText}`));
+            return throwError(new Error(`${err.status} ${err.statusText}`));
           }
         })
       );

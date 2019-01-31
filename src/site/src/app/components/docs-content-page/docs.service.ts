@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 import { throwError as _throw } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { CacheService } from '../../shared/cache.service';
@@ -12,7 +12,7 @@ export class DocsService {
   apiUrl = environment.apiUrl;
   docsStore: {
     docs: any
-  }
+  };
 
   constructor(
     private http: HttpClient,
@@ -26,6 +26,6 @@ export class DocsService {
 
   loadDocs(params) {
     const url = `${this.apiUrl}/api/docs/${params}`;
-    return this.cacheService.get(url, this.http.get(url).pipe(first()))
+    return this.cacheService.get(url, this.http.get(url).pipe(first()));
   }
 }
