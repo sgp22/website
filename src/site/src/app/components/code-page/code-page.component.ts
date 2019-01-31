@@ -4,8 +4,7 @@ import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'code-page',
-  templateUrl: './code-page.component.html',
-  styleUrls: ['./code-page.component.css']
+  templateUrl: './code-page.component.html'
 })
 export class CodePageComponent implements OnInit {
   public library: string;

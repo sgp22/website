@@ -4,8 +4,7 @@ import { PagesService } from '../../shared/pages.service';
 
 @Component({
   selector: 'blog-landing-page',
-  templateUrl: './blog-landing-page.component.html',
-  styleUrls: ['./blog-landing-page.component.css']
+  templateUrl: './blog-landing-page.component.html'
 })
 export class BlogLandingPageComponent implements OnInit {
   public pageContent: any;

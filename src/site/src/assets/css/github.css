@@ -4,6 +4,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
+/* stylelint-disable */
 .hljs {
   display: block;
   overflow-x: auto;
@@ -97,3 +98,4 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-strong {
   font-weight: bold;
 }
+/* stylelint-enable */

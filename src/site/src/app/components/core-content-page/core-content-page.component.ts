@@ -4,8 +4,7 @@ import { PagesService } from '../../shared/pages.service';
 
 @Component({
   selector: 'core-content-page',
-  templateUrl: './core-content-page.component.html',
-  styleUrls: ['./core-content-page.component.css']
+  templateUrl: './core-content-page.component.html'
 })
 export class CoreContentPageComponent implements OnInit {
   public pageContent: any;

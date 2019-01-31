@@ -98,9 +98,9 @@
 }
 
 .flexible-content .ids-row {
-    position: relative;
-    z-index: 1;
-  }
+  position: relative;
+  z-index: 1;
+}
 
 .flexible-content .hero-image {
   margin-bottom: calc(var(--theme-number-spacing-base) * 4);
@@ -271,5 +271,3 @@
     display: none;
   }
 }
-
-@media only screen and (min-width: 1280px) {}

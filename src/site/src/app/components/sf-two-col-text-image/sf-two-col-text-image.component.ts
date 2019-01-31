@@ -3,8 +3,7 @@ import * as validUrl from 'valid-url';
 
 @Component({
   selector: 'sf-two-col-text-image',
-  templateUrl: './sf-two-col-text-image.component.html',
-  styleUrls: ['./sf-two-col-text-image.component.css']
+  templateUrl: './sf-two-col-text-image.component.html'
 })
 export class SfTwoColTextImageComponent implements OnInit {
   @Input() title: string;

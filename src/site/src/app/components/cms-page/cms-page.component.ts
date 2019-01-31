@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'cms-page',
-  templateUrl: './cms-page.component.html',
-  styleUrls: ['./cms-page.component.css']
+  templateUrl: './cms-page.component.html'
 })
 export class CmsPageComponent implements OnInit {
 

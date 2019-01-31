@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'token-table',
   templateUrl: './token-table.component.html',
-  styleUrls: ['./token-table.component.css'],
   providers: [TokenService]
 })
 export class TokenTableComponent implements OnInit {

@@ -9,7 +9,6 @@
   display: flex;
 }
 
-
 .ids-form-group--feedback-container legend {
   margin-right: calc(var(--theme-number-spacing-base) * 2);
 }

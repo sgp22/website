@@ -3,8 +3,7 @@ import * as validUrl from 'valid-url';
 
 @Component({
   selector: 'sf-two-column',
-  templateUrl: './sf-two-column.component.html',
-  styleUrls: ['./sf-two-column.component.css']
+  templateUrl: './sf-two-column.component.html'
 })
 export class SfTwoColumnComponent implements OnInit {
   @Input() col1Title: string;

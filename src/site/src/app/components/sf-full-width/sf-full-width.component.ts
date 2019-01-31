@@ -3,8 +3,7 @@ import * as validUrl from 'valid-url';
 
 @Component({
   selector: 'sf-full-width',
-  templateUrl: './sf-full-width.component.html',
-  styleUrls: ['./sf-full-width.component.css']
+  templateUrl: './sf-full-width.component.html'
 })
 export class SfFullWidthComponent implements OnInit {
   @Input() flexible_content: any;

@@ -5,8 +5,7 @@ import { HelpersService } from '../../shared/helpers.service';
 
 @Component({
   selector: 'sidebar-cms',
-  templateUrl: './sidebar-cms.component.html',
-  styleUrls: ['./sidebar-cms.component.css']
+  templateUrl: './sidebar-cms.component.html'
 })
 export class SidebarCmsComponent implements OnInit {
   @Input() sidebarData;
