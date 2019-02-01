@@ -89,14 +89,11 @@ def post(request):
                 root_path,
                 zipped_file.lower()))
             content = ContentFile(zipf.read(zipped_file))
-            read_contents_bytes = content.read()
-            read_contents_str = read_contents_bytes.decode('utf-8')
 
             # Store file in AWS
             default_storage.save(path, content)
 
             # Continue parsing files to index in ES
-
             # Only index 'files'; based on whether
             # they have an extension, not a dir
             if "." in zipped_file:
@@ -113,6 +110,8 @@ def post(request):
 
                 if ext in index_ext_types and dir_root in index_dirs:
                     try:
+                        read_contents_bytes = content.read()
+                        read_contents_str = read_contents_bytes.decode('utf-8')
                         content_obj = json.loads(read_contents_str)
                     except:
                         print("Couldn't parse json string")
