@@ -185,7 +185,7 @@ def get(request):
                 file_path))
             path = latest_file_pointer
 
-        if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,4}$', path):
+        if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,6}$', path):
             obj = s3_resource.Object(settings.AWS_STORAGE_BUCKET_NAME, path)
 
             # load() does a HEAD request for a single key,
@@ -215,6 +215,10 @@ def get(request):
                 return HttpResponse(content=content, content_type="image/jpeg")
             elif path.endswith('.css') or path.endswith('.css.map'):
                 return HttpResponse(content=content, content_type="text/css")
+            elif path.endswith('.rss'):
+                return HttpResponse(content=content, content_type="application/rss+xml")
+            elif path.endswith('.sketch'):
+                return HttpResponse(content=content, content_type="application/octet-stream")
             else:
                 return HttpResponse(content=content)
         else:
