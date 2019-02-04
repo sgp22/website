@@ -29,6 +29,7 @@ import { QuestionWidgetComponent } from './components/question-widget/question-w
 import { RoleWidgetComponent } from './components/role-widget/role-widget.component';
 import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { BlogPostPageComponent } from './components/blog-post-page/blog-post-pag
     QuestionWidgetComponent,
     RoleWidgetComponent,
     BlogLandingPageComponent,
-    BlogPostPageComponent
+    BlogPostPageComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

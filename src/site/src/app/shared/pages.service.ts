@@ -17,6 +17,10 @@ export class PagesService {
     private cacheService: CacheService
   ) { }
 
+  getGlobalNav() {
+    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&show_in_menus=true`).pipe(first());
+  }
+
   getAll() {
     const url = `${this.apiUrl}/api/${this.domainVersion}/pages/?&limit=200`;
     return this.cacheService.get(url, this.http.get(url).pipe(share(), first()));
