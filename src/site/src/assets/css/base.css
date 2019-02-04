@@ -53,3 +53,15 @@ ul {
   height: 100%;
   border: 0;
 }
+
+.text-align-center {
+  text-align: center;
+}
+
+.ids-btn--default.ids-btn--light {
+  background-color: var(--theme-color-brand-primary-contrast);
+}
+
+.ids-btn--default.ids-btn--light:hover {
+  background-color: var(--input-color-readonly-background);
+}
