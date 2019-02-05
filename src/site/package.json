@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "lint:css": "stylelint src/assets/css/*.css && stylelint src/app/components/**/*.css; exit 0;",
+    "lint:css": "stylelint src/assets/css/*.css && stylelint src/app/components/**/*.scss; exit 0;",
     "e2e": "ng e2e"
   },
   "private": true,
