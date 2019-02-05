@@ -10,15 +10,15 @@
   border-bottom: 1px solid #bdbdbd;
   margin-bottom: calc(var(--theme-number-spacing-base) * 8);
   padding-bottom: calc(var(--theme-number-spacing-base) * 6);
-}
 
-.blog-post:last-child {
-  border-bottom: none;
-}
+  &:last-child {
+    border-bottom: none;
+  }
 
-.blog-post li {
-  list-style-position: outside;
-  margin-left: 2rem;
+  li {
+    list-style-position: outside;
+    margin-left: 2rem;
+  }
 }
 
 .blog-post--container {

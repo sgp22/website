@@ -8,7 +8,7 @@ import * as semver from 'semver';
 @Component({
   selector: 'docs-content-page',
   templateUrl: './docs-content-page.component.html',
-  styleUrls: ['./docs-content-page.component.css']
+  styleUrls: ['./docs-content-page.component.scss']
 })
 export class DocsContentPageComponent implements OnInit {
   public params: any;

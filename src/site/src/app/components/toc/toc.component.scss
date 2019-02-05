@@ -1,4 +1,4 @@
-@import '../../../../node_modules/ids-identity/dist/tokens/web/theme-uplift.custom-properties.css';
+@import '../../../assets/css/breakpoints.scss';
 
 .toc {
   border-left: 1px solid var(--input-color-readonly-border);
@@ -8,10 +8,8 @@
   position: fixed;
   right: calc(var(--theme-number-spacing-base) * 2);
   top: calc(var(--theme-number-spacing-base) * 6 + 56px);
-}
 
-@media only screen and (min-width: 1440px) {
-  .toc {
+  @media screen and (min-width: $breakpoint-xl) {
     display: block;
   }
 }

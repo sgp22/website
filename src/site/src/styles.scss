@@ -2,14 +2,16 @@
 @import '../node_modules/ids-identity/dist/tokens/web/theme-uplift.custom-properties.css';
 @import '../node_modules/ids-css/dist/ids-reset.css';
 @import '../node_modules/ids-css/dist/ids-css.css';
+
+
 @import './assets/css/custom-properties.css';
 @import './assets/css/base.scss';
-@import './assets/css/syntax-highlighting.css';
-@import './assets/css/buttons.css';
-@import './assets/css/github.css';
-@import './assets/css/tables.css';
-@import './assets/css/sidebar.css';
-@import './assets/css/type.css';
-@import './assets/css/page-hero.css';
-@import './assets/css/page-content.css';
-@import './assets/css/blog.css';
+@import './assets/css/syntax-highlighting.scss';
+@import './assets/css/buttons.scss';
+@import './assets/css/github.scss';
+@import './assets/css/tables.scss';
+@import './assets/css/sidebar.scss';
+@import './assets/css/type.scss';
+@import './assets/css/page-hero.scss';
+@import './assets/css/page-content.scss';
+@import './assets/css/blog.scss';

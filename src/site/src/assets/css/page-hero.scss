@@ -1,9 +1,15 @@
+@import './breakpoints.scss';
+
 .page-hero {
   margin-bottom: calc(var(--theme-number-spacing-base) * 12);
   margin-top: calc(var(--theme-number-spacing-base) * 3);
   padding-bottom: calc(var(--theme-number-spacing-base) * 11);
   padding-top: calc(var(--theme-number-spacing-base) * 11);
   position: relative;
+
+  @media only screen and (min-width: $breakpoint-sm) {
+    margin-top: -32px;
+  }
 }
 
 .page-hero--title {
@@ -21,27 +27,17 @@
   position: relative;
   right: calc(var(--theme-number-spacing-base) * 4);
   width: 122px;
-}
 
-@media only screen and (min-width: 600px) {
-  .page-hero {
-    margin-top: -32px;
-  }
-
-  .page-hero--image {
+  @media only screen and (min-width: $breakpoint-sm) {
     width: 185px;
   }
-}
 
-@media only screen and (min-width: 840px) {
-  .page-hero--image {
+  @media only screen and (min-width: $breakpoint-md) {
     position: absolute;
     width: 225px;
   }
-}
 
-@media only screen and (min-width: 1280px) {
-  .page-hero--image {
+  @media only screen and (min-width: $breakpoint-lg) {
     width: 320px;
   }
 }

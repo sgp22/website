@@ -8,7 +8,7 @@ interface TocItems {
 @Component({
   selector: 'app-toc',
   templateUrl: './toc.component.html',
-  styleUrls: ['./toc.component.css']
+  styleUrls: ['./toc.component.scss']
 })
 export class TocComponent implements OnInit {
   public landingPage;

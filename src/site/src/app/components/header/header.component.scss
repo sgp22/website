@@ -1,6 +1,4 @@
-/*
- * Header
- */
+@import '../../../assets/css/breakpoints.scss';
 
 .site-header {
   align-items: center;
@@ -54,7 +52,7 @@
   display: none;
   margin-left: auto;
 
-  @media screen and (min-width: 840px) {
+  @media screen and (min-width: $breakpoint-md) {
     display: block;
   }
 
@@ -153,7 +151,7 @@
   display: block;
   margin-left: auto;
 
-  @media screen and (min-width: 840px) {
+  @media screen and (min-width: $breakpoint-md) {
     display: none;
   }
 }
@@ -171,14 +169,14 @@
   &.main-nav--mobile--active {
     display: block;
 
-    @media screen and (min-width: 840px) {
+    @media screen and (min-width: $breakpoint-md) {
       display: none;
     }
 
     ~ .overlay--mobile-nav {
       display: block;
 
-      @media screen and (min-width: 840px) {
+      @media screen and (min-width: $breakpoint-md) {
         display: none;
       }
     }

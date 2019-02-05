@@ -1,6 +1,4 @@
-/*
- * Tables
- */
+@import './breakpoints.scss';
 
 table {
   border: 1px solid var(--graphite01);
@@ -59,6 +57,10 @@ table .table-header--description {
 .table--wide {
   table-layout: fixed;
   width: 200%;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    width: 150%;
+  }
 }
 
 .table--wide th.token-table--col-grouped {
@@ -75,18 +77,12 @@ table .table-header--description {
 
 .table--wide th.token-table--col-name {
   width: 50%;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    width: 35%;
+  }
 }
 
 .table--wide th.token-table--col-color {
   width: 5%;
-}
-
-@media only screen and (min-width: 600px) {
-  .table--wide {
-    width: 150%;
-  }
-
-  .table--wide th.token-table--col-name {
-    width: 35%;
-  }
 }

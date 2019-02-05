@@ -11,7 +11,7 @@ interface FeedbackForm {
 @Component({
   selector: 'feedback-widget',
   templateUrl: './feedback-widget.component.html',
-  styleUrls: ['./feedback-widget.component.css']
+  styleUrls: ['./feedback-widget.component.scss']
 })
 export class FeedbackWidgetComponent implements OnInit {
   @ViewChild('thumbsDown') thumbsDown: ElementRef;
