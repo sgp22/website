@@ -9,6 +9,10 @@
   }
 }
 
+.sidebar--code {
+  padding: calc(var(--theme-number-spacing-base) * 6) 0;
+}
+
 .ids-list--expandable {
   display: none;
 }

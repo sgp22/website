@@ -33,12 +33,6 @@ ul {
   border-radius: 10px;
 }
 
-.page-section li {
-  list-style-position: outside;
-  margin-left: 32px;
-  margin-left: 2rem;
-}
-
 .iframe-wrapper {
   overflow: hidden;
   padding-top: 56.25%;

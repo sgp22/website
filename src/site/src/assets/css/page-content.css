@@ -20,6 +20,13 @@
 
 .page-content {
   min-height: 100vh;
+  padding: calc(var(--theme-number-spacing-base) * 6) 0;
+}
+
+.page-content li {
+  list-style-position: outside;
+  margin-left: 32px;
+  margin-left: 2rem;
 }
 
 .page-section {
