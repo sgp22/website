@@ -1,7 +1,7 @@
 @import './breakpoints.scss';
 
 table {
-  border: 1px solid var(--graphite01);
+  border: 1px solid var(--theme-color-palette-graphite-10);
   font-size: var(--theme-size-font-sm);
   margin-bottom: 32px;
   margin-top: 0;
@@ -20,7 +20,7 @@ table thead {
 }
 
 table tr {
-  border-bottom: 1px solid var(--graphite01);
+  border-bottom: 1px solid var(--theme-color-palette-graphite-10);
 }
 
 table th,
@@ -29,7 +29,7 @@ table td {
 }
 
 table th {
-  background-color: var(--graphite01);
+  background-color: var(--theme-color-palette-graphite-10);
   font-weight: var(--theme-number-font-weight-bold);
 }
 
