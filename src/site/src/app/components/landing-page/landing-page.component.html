@@ -1,4 +1,4 @@
-<div class="page-content">
+
   <header *ngIf="pageContent?.page_hero && pageContent?.page_hero.length > 0" class="page-hero ids-container" [ngStyle]="{'background-color': '#'+pageContent?.page_hero[0].value.background_color+'', 'color': '#'+pageContent?.page_hero[0].value.text_color}">
 
     <div class="page-hero--content ids-row--col-sm-9 ids-row--col-md-6 ids-row--col-xl-5 ids-row--offset-sm-1">
@@ -11,7 +11,7 @@
     </div>
   </header>
 
-  <div class="ids-container">
+  <div class="ids-container page-content">
     <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
 
       <ng-container *ngFor="let section of pageContent?.content; let index = index;">
@@ -93,4 +93,3 @@
 
     </div>
   </div>
-</div>
