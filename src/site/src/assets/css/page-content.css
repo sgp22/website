@@ -18,6 +18,10 @@
   width: 100%;
 }
 
+.page-content {
+  min-height: 100vh;
+}
+
 .page-section {
   margin-bottom: calc(var(--theme-number-spacing-base) * 12);
 }

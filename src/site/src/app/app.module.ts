@@ -30,6 +30,7 @@ import { RoleWidgetComponent } from './components/role-widget/role-widget.compon
 import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { HeaderComponent } from './components/header/header.component';
     RoleWidgetComponent,
     BlogLandingPageComponent,
     BlogPostPageComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
