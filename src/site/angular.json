@@ -64,11 +64,10 @@
               "sourceMap": true,
               "extractCss": false,
               "namedChunks": false,
-              "aot": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
-              "serviceWorker": true
+              "buildOptimizer": true
             }
           }
         },
