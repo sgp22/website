@@ -1,0 +1,12 @@
+:root {
+  --brand-blue: #3770ff;
+  --black: #000;
+  --blue-01: #497aff;
+  --blue-02: #77c8ff;
+  --blue-03: rgb(247, 252, 255);
+  --blue-gradient: var(--blue-01), var(--blue-02);
+  --graphite055: #606060;
+  --graphite055-light: rgba(96, 96, 96, 0.3);
+  --link-color-custom: #888;
+  --link-color-custom-dark: #1f1f1f;
+}

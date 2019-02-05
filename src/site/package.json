@@ -48,6 +48,7 @@
     "stylelint": "^9.10.1",
     "stylelint-cli": "^1.0.0",
     "stylelint-order": "^2.0.0",
+    "stylelint-scss": "3.5.2",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.6",
