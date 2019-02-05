@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://design.infor.com',
+  apiUrl: 'https://staging.design.infor.com',
   domainVersion: 'v2'
 };

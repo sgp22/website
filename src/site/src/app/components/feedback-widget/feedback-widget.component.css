@@ -1,5 +1,3 @@
-@import '../../../../node_modules/ids-identity/dist/tokens/web/theme-uplift.custom-properties.css';
-
 .feedback-widget {
   border-top: 1px solid var(--body-color-primary-background);
   padding: calc(var(--theme-number-spacing-base) * 4) 0;
