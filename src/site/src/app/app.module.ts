@@ -31,6 +31,7 @@ import { BlogLandingPageComponent } from './components/blog-landing-page/blog-la
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { IconLookupModule } from './components/icon-lookup/icon-lookup.module';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { FooterComponent } from './components/footer/footer.component';
     BrowserAnimationsModule,
     InlineSVGModule.forRoot(),
     FormsModule,
-    FeedbackWidgetModule
+    FeedbackWidgetModule,
+    IconLookupModule
   ],
   providers: [CacheService],
   bootstrap: [AppComponent]

@@ -23,7 +23,7 @@
     "@angular/router": "~7.1.0",
     "core-js": "^2.5.4",
     "ids-css": "1.4.1",
-    "ids-identity": "2.0.6",
+    "ids-identity": "2.1.1",
     "ng-inline-svg": "8.3.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
