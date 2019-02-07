@@ -1,3 +1,6 @@
+build_staging :
+	cd src/site && npm install && npm run build:staging
+
 build_prod :
 	cd src/web && npm install && npm run build:prod
 
@@ -8,11 +11,11 @@ setup_vars_staging :
 setup_vars_prod :
 	. eb_env_vars_staging.sh
 
-deploy_staging : build_prod
+deploy_staging : build_staging
 	eb use ids-com-staging && \
 	. scripts/eb_deploy.sh
 
-deploy_staging_a : build_prod
+deploy_staging_a : build_staging
 	eb use ids-com-staging-a && \
 	. scripts/eb_deploy.sh
 

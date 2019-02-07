@@ -3,8 +3,8 @@
 
 ROOTDIR="$( cd "$(dirname `dirname "${BASH_SOURCE[0]}"` )" && pwd )"
 
-line_old='src/web/dist'
-line_new='#src/web/dist'
+line_old='src/site/dist'
+line_new='#src/site/dist'
 sed -e "s%$line_old%$line_new%g" -i '' "$ROOTDIR/.gitignore"
 
 COMMIT_MSG=$(git log -1 --pretty=%B)

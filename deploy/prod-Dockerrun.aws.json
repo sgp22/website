@@ -11,9 +11,9 @@
 			"sourcePath": "/var/app/current/src/app"
 		}
 	}, {
-		"name": "web",
+		"name": "site",
 		"host": {
-			"sourcePath": "/var/app/current/src/web"
+			"sourcePath": "/var/app/current/src/site"
 		}
 	}, {
 		"name": "config",
@@ -109,8 +109,8 @@
 			"sourceVolume": "nginx-letsencrypt",
 			"containerPath": "/etc/letsencrypt/"
 		}, {
-			"sourceVolume": "web",
-			"containerPath": "/home/web"
+			"sourceVolume": "site",
+			"containerPath": "/home/site"
 		}, {
 			"sourceVolume": "config",
 			"containerPath": "/home/config"
