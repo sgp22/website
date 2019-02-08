@@ -24,8 +24,9 @@ export class DocsService {
     return this.cacheService.get(url, this.http.get(url).pipe(first()));
   }
 
-  loadDocs(params) {
+  loadDocs(params: string) {
     const url = `${this.apiUrl}/api/docs/${params}`;
+    console.log(params);
     return this.cacheService.get(url, this.http.get(url).pipe(first()));
   }
 }
