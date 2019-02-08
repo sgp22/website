@@ -10,7 +10,7 @@ describe('SidebarService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let sitemapService: SidebarService;
-  let mockSettings = environment.apiUrl;
+  const mockSettings = environment.apiUrl;
 
   beforeEach(() => {
 
