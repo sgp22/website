@@ -65,14 +65,6 @@ restart_vm :
 	docker-machine restart
 
 
-# Web
-node_modules : src/web/package.json
-	cd src/web && npm install
-	touch $@
-
-run_dev : node_modules
-	cd src/web && npm run start
-
 # Nginx
 shell_nginx :
 	docker exec -ti $(NGINX_CONTAINER) /bin/bash
