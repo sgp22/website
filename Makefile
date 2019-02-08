@@ -73,11 +73,6 @@ node_modules : src/web/package.json
 run_dev : node_modules
 	cd src/web && npm run start
 
-# This is mostly for testing locally.
-build_prod :
-	cd src/web && npm install && npm run build:prod
-
-
 # Nginx
 shell_nginx :
 	docker exec -ti $(NGINX_CONTAINER) /bin/bash
@@ -127,18 +122,28 @@ shell_postgres :
 tail_postgres :
 	docker logs -f $(POSTGRES_CONTAINER)
 
+
+# ElasticBeanstalk
+setup_vars_staging :
+	. deploy/scripts/eb_env_vars.sh -e staging
+
+setup_vars_prod :
+	. deploy/scripts/eb_env_vars.sh -e prod
+
+
+# Build
+build_staging :
+	cd src/site && npm install && npm run build:staging
+	@ ./deploy/build.sh -e staging
+
+build_prod :
+	cd src/web && npm install && npm run build:prod
+	@ ./deploy/build.sh -e prod
+
+
 # Deploy
+deploy_staging: build_staging
+	@ ./deploy/deploy.sh -e staging-a
 
-deploy_staging:
-	export DOMAIN=https://staging.design.infor.com \
-		&& export ENV=staging \
-		&& mv deploy/staging-Dockerrun.aws.json deploy/Dockerrun.aws.json \
-		&& bash ./scripts/select_deploy.sh -f deploy -c deploy_staging_a \
-		&& mv deploy/Dockerrun.aws.json deploy/staging-Dockerrun.aws.json \
-
-deploy_prod:
-	export DOMAIN=https://design.infor.com \
-		&& export ENV=prod \
-		&& mv deploy/prod-Dockerrun.aws.json deploy/Dockerrun.aws.json \
-		&& bash ./scripts/select_deploy.sh -f deploy -c deploy_prod \
-		&& mv deploy/Dockerrun.aws.json deploy/prod-Dockerrun.aws.json
+deploy_prod: build_prod
+	@ ./deploy/deploy.sh -e prod
