@@ -1,5 +1,8 @@
-<div>
-  <svg *ngFor="let icon of icons" class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
-    <use attr.xlink:href="#icon-{{icon}}"/>
-  </svg>
+<div class="icon-group">
+  <div class="icon-card" *ngFor="let icon of icons">
+    <svg focusable="false" aria-hidden="true" role="presentation">
+      <use attr.xlink:href="#icon-{{icon}}"/>
+    </svg>
+    <span>{{icon}}</span>
+  </div>
 </div>

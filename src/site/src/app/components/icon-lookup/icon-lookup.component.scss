@@ -1,10 +1,31 @@
-div {
+@import '../../../assets/css/breakpoints.scss';
+
+.icon-group {
   display: flex;
   flex-flow: wrap;
+  margin-left: -1rem;
+}
+
+.icon-card {
+  align-items: center;
+  border: 1px solid var(--theme-color-palette-graphite-20);
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  justify-content: center;
+  margin: 1rem;
+  padding: var(--theme-number-spacing-base);
+  width: 120px;
 
   svg {
-    width: 24px;
-    height: 24px;
-    margin: 1rem;
+    height: 32px;
+    width: 32px;
+  }
+
+  span {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 1rem;
+    text-align: center;
   }
 }
