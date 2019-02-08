@@ -11,9 +11,9 @@
 			"sourcePath": "/var/app/current/src/app"
 		}
 	}, {
-		"name": "web",
+		"name": "site",
 		"host": {
-			"sourcePath": "/var/app/current/src/web"
+			"sourcePath": "/var/app/current/src/site"
 		}
 	}, {
 		"name": "config",
@@ -36,9 +36,9 @@
 			"sourcePath": "/var/app/current/src/config/nginx/nginx.conf"
 		}
 	}, {
-		"name": "config-nginx-staging",
+		"name": "config-nginx-prod",
 		"host": {
-			"sourcePath": "/var/app/current/src/config/nginx/staging.conf"
+			"sourcePath": "/var/app/current/src/config/nginx/prod.conf"
 		}
 	}, {
 		"name": "config-supervisor-backend",
@@ -60,11 +60,6 @@
 		"host": {
 			"sourcePath": "/data/media"
 		}
-	}, {
-		"name": "postgres-data",
-		"host": {
-			"sourcePath": "/data/postgres"
-		}
 	}],
 	"containerDefinitions": [{
 		"name": "backend",
@@ -78,9 +73,7 @@
 			"hostPort": 9002,
 			"containerPort": 9002
 		}],
-		"links": [
-			"postgres"
-		],
+		"links": [],
 		"mountPoints": [{
 			"sourceVolume": "app",
 			"containerPath": "/home/app"
@@ -116,8 +109,8 @@
 			"sourceVolume": "nginx-letsencrypt",
 			"containerPath": "/etc/letsencrypt/"
 		}, {
-			"sourceVolume": "web",
-			"containerPath": "/home/web"
+			"sourceVolume": "site",
+			"containerPath": "/home/site"
 		}, {
 			"sourceVolume": "config",
 			"containerPath": "/home/config"
@@ -131,7 +124,7 @@
 			"sourceVolume": "config-nginx-nginx",
 			"containerPath": "/etc/nginx/nginx.conf"
 		}, {
-			"sourceVolume": "config-nginx-staging",
+			"sourceVolume": "config-nginx-prod",
 			"containerPath": "/etc/nginx/sites-available/default"
 		}, {
 			"sourceVolume": "static-data",
@@ -139,19 +132,6 @@
 		}, {
 			"sourceVolume": "media-data",
 			"containerPath": "/home/app/media/"
-		}]
-	}, {
-		"name": "postgres",
-		"image": "postgres:10.1",
-		"essential": true,
-		"memory": 512,
-		"portMappings": [{
-			"hostPort": 5432,
-			"containerPort": 5432
-		}],
-		"mountPoints": [{
-			"sourceVolume": "postgres-data",
-			"containerPath": "/var/lib/postgresql/data"
 		}]
 	}]
 }
