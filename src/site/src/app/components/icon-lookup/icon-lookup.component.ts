@@ -18,7 +18,6 @@ export class IconLookupComponent implements OnInit {
     this.iconLookup.loadIcons(this.iconType)
       .subscribe(res => {
         this.icons = res['categories'][0]['icons'];
-        console.log(this.icons);
       })
   }
 
