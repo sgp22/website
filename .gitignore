@@ -5,6 +5,8 @@ src/site/dist
 !src/site/dist/.gitkeep
 src/site/tmp
 src/site/out-tsc
+build
+build.zip
 
 # IDEs and editors
 /.idea

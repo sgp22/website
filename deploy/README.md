@@ -1,12 +1,10 @@
-# Deploy steps to ElasticBeanstalk (staging)
+# Deploy to ElasticBeanstalk
 
-```bash
-export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
-export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
-export AWS_STORAGE_BUCKET_NAME=<AWS_STORAGE_BUCKET_NAME>
-export DOMAIN=<DOMAIN>
-export ENV=production
+For an explicit implementation with improved control, we generate our own app bundle for deploy to ElasticBeanstalk. See [Makefile](../Makefile), [deploy/build.sh](./build.sh), and [deploy/deploy.sh](./deploy.sh).
+
+To use a custom app bundle, the following configuration is required in `.elasticbneanstalk/config.yml`:
+
+```yaml
+deploy:
+  artifact: build.zip
 ```
-
-- `. ./deploy/aws/scripts/predeploy_env_vars.sh`
-- Pool `. ./scripts/select_deploy.sh -f deploy -c deploy`
