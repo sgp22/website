@@ -1,5 +1,6 @@
+<input class="ids-form-control" [(ngModel)]="searchText" type="text" placeholder="Filter Icons">
 <div class="icon-group">
-  <div class="icon-card" *ngFor="let icon of icons">
+  <div class="icon-card" *ngFor="let icon of icons | filter : searchText">
     <svg focusable="false" aria-hidden="true" role="presentation">
       <use attr.xlink:href="#icon-{{icon}}"/>
     </svg>

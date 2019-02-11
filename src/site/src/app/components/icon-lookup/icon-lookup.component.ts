@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { IconLookupService } from './icon-lookup.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'icon-lookup',
@@ -8,6 +9,7 @@ import { IconLookupService } from './icon-lookup.service';
 })
 export class IconLookupComponent implements OnInit {
   @Input() iconType: string;
+  @ViewChild('searchText') searchText: NgForm;
   public icons: any;
 
   constructor(

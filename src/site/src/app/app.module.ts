@@ -32,6 +32,7 @@ import { BlogPostPageComponent } from './components/blog-post-page/blog-post-pag
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { IconLookupModule } from './components/icon-lookup/icon-lookup.module';
+import { FilterPipeModule } from './shared/filter.pipe.module';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { IconLookupModule } from './components/icon-lookup/icon-lookup.module';
     BlogLandingPageComponent,
     BlogPostPageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +69,8 @@ import { IconLookupModule } from './components/icon-lookup/icon-lookup.module';
     InlineSVGModule.forRoot(),
     FormsModule,
     FeedbackWidgetModule,
-    IconLookupModule
+    IconLookupModule,
+    FilterPipeModule.forRoot()
   ],
   providers: [CacheService],
   bootstrap: [AppComponent]
