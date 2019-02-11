@@ -3,6 +3,7 @@
 .icon-group {
   display: flex;
   flex-flow: wrap;
+  margin-bottom: calc(var(--theme-number-spacing-base) * 4);
   margin-left: -1rem;
 }
 
@@ -29,4 +30,8 @@
     margin-top: 1rem;
     text-align: center;
   }
+}
+
+.ids-form-control {
+  margin-bottom: calc(var(--theme-number-spacing-base) * 2);
 }
