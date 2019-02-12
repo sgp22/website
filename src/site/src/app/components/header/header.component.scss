@@ -1,5 +1,5 @@
 @import '../../../assets/css/breakpoints.scss';
-$blue: #0075E9;
+@import '../../../assets/css/variables.scss';
 
 .site-header {
   align-items: center;
@@ -104,7 +104,7 @@ $blue: #0075E9;
   }
 
   &:hover {
-    color: $blue;
+    color: $azure-base;
     text-decoration: none;
   }
 
@@ -126,7 +126,7 @@ $blue: #0075E9;
   }
 
   &.main-nav__item--current {
-    color: $blue;
+    color: $azure-base;
   }
 
   &.ids-btn.ids-btn--link {
