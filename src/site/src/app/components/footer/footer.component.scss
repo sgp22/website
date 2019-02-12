@@ -46,8 +46,8 @@
   }
 
   nav {
-    order: 1;
     margin-bottom: calc(var(--theme-number-spacing-base) * 3);
+    order: 1;
 
     @media screen and (min-width: $breakpoint-md) {
       margin-bottom: 0;
@@ -84,8 +84,8 @@
   }
 
   a {
-    display: inline-block;
     color: $slate-darker;
+    display: inline-block;
     font-size: var(--theme-size-font-sm);
     margin-right: calc(var(--theme-number-spacing-base) * 3);
     text-decoration: none;
@@ -129,7 +129,7 @@
     }
 
     &::placeholder {
-      color: $slate-base
+      color: $slate-base;
     }
   }
 }
