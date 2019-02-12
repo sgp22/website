@@ -12,7 +12,6 @@ import * as semver from 'semver';
 export class SidebarComponent implements OnInit, OnChanges {
   public sidebarPath: string;
   public sidebarNav: any;
-  public libraries: any;
   public versionPaths: any;
   public currentLibrary: string;
   public currentVersion: string;
@@ -60,10 +59,6 @@ export class SidebarComponent implements OnInit, OnChanges {
       }
     });
 
-    this.libraryService.loadAllLibraries().subscribe(res => {
-      this.libraries = res;
-    });
-
     this.libraryService.loadAllLibraryVersions(this.currentLibrary)
       .subscribe(res => {
         this.versionPaths = res['files']
@@ -83,10 +78,6 @@ export class SidebarComponent implements OnInit, OnChanges {
           label: `Latest (${this.versionPaths[0]['label']})`
         });
       });
-  }
-
-  onLibraryChange(library) {
-    this.router.navigate([library]);
   }
 
   onVersionChange(version) {
