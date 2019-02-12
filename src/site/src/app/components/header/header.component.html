@@ -37,14 +37,14 @@
     <ng-container>
       <nav class="main-nav">
         <ng-container *ngFor="let navItem of navItems">
-          <a class="ids-btn ids-btn--link" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" routerLink="{{navItem.meta.slug}}">
+          <a class="main-nav__item" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" routerLink="{{navItem.meta.slug}}">
             {{navItem.title}}
           </a>
         </ng-container>
 
         <a routerLink="search" class="ids-btn ids-btn--link">
           <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">
-            <use xlink:href="#icon_search"></use>
+            <use xlink:href="#icon-search"></use>
           </svg>
         </a>
       </nav>
