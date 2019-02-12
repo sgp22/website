@@ -1,0 +1,16 @@
+div {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: var(--theme-number-spacing-base);
+  width: 100%;
+
+  a {
+    display: block;
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    font-weight: var(--theme-number-font-weight-bold);
+  }
+}

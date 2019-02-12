@@ -51,6 +51,10 @@
           <ng-container *ngIf="streamfield.type === 'tokensCategory'">
             <token-table *ngIf="!loading" [tokensCategory]="streamfield?.value" [loading]="loading"></token-table>
           </ng-container>
+
+          <ng-container *ngIf="streamfield.type === 'iconType'">
+            <icon-lookup [iconType]="streamfield.value"></icon-lookup>
+          </ng-container>
         </ng-container>
       </section>
 
