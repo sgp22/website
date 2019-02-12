@@ -18,7 +18,7 @@
   .side-header__inner {
     align-items: center;
     display: flex;
-    padding: calc(var(--theme-number-spacing-base) * 4);
+    padding: calc(var(--theme-number-spacing-base) * 4) calc(var(--theme-number-spacing-base) * 6);
   }
 
   a.logo {
