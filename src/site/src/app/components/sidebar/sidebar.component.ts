@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SidebarService } from './sidebar.service';
 import { LibraryService } from '../../shared/library.service';
 import { HelpersService } from '../../shared/helpers.service';
+import { NgForm } from '@angular/forms';
 import * as semver from 'semver';
 
 @Component({
@@ -21,6 +22,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   public urlSegments: any;
   @Input() lib;
   @Input() ver;
+  @ViewChild('searchText') searchText: NgForm;
 
   constructor(
     private sidebarService: SidebarService,

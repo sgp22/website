@@ -25,7 +25,7 @@
   </header>
 
   <h2 *ngIf="docs?.demo?.embedded" id="embedded-examples">Examples</h2>
-  <section *ngIf="docs?.demo?.embedded">
+  <section class="row-section" *ngIf="docs?.demo?.embedded">
     <div *ngFor="let embedded of docs.demo.embedded" class="inline-demo">
       <h4>{{embedded.name}}</h4>
       <ul class="inline-demo-links">
@@ -49,7 +49,7 @@
     </div>
   </section>
 
-  <section *ngIf="docs?.demo?.pages">
+  <section class="row-section" *ngIf="docs?.demo?.pages">
     <h2 id="linked-examples">Usage Examples</h2>
     <ul class="example-list" *ngIf="docs?.demo?.pages">
       <li *ngFor="let demo of docs.demo.pages">
@@ -69,11 +69,11 @@
     </ul>
   </section>
 
-  <div [innerHTML]="docs?.apiTrustedHtml" (click)="relativeLinks($event)"></div>
+  <div class="row-section" [innerHTML]="docs?.apiTrustedHtml" (click)="relativeLinks($event)"></div>
 
-  <div [innerHTML]="docs?.bodyTrustedHtml" (click)="relativeLinks($event)"></div>
+  <div class="row-section" [innerHTML]="docs?.bodyTrustedHtml" (click)="relativeLinks($event)"></div>
 
-  <token-table *ngIf="!loading" [heading]="'Design Tokens'" [loading]="loading" [sectionClassName]="true"
+  <token-table class="row-section" *ngIf="!loading" [heading]="'Design Tokens'" [loading]="loading" [sectionClassName]="true"
     [tokensCategory]="docs?.tokensCategory"></token-table>
 
   <app-toc *ngIf="!loading" [component]="component" [tocItems]="tocItems"></app-toc>
