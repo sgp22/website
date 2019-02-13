@@ -1,7 +1,8 @@
 @import '../../../assets/css/breakpoints.scss';
+@import '../../../assets/css/variables.scss';
 
 .toc {
-  border-left: 1px solid var(--input-color-readonly-border);
+  border-left: 1px solid $graphite-lighest;
   display: none;
   font-size: 1.4rem;
   min-width: 200px;
@@ -11,5 +12,9 @@
 
   @media screen and (min-width: $breakpoint-xl) {
     display: block;
+  }
+
+  li {
+    margin-left: 0;
   }
 }

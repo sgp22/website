@@ -1,7 +1,9 @@
 @import './breakpoints.scss';
 
 .page-title {
-  margin-bottom: 20px;
+  font-size: 6rem;
+  font-weight: 300;
+  margin-bottom: calc(var(--theme-number-spacing-base) * 6);
   margin-top: 0;
 }
 
