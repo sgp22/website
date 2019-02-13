@@ -33,6 +33,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { IconLookupModule } from './components/icon-lookup/icon-lookup.module';
 import { FilterPipeModule } from './shared/filter.pipe.module';
+import { ScrollSpyDirective } from './shared/scroll-spy.directive';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { FilterPipeModule } from './shared/filter.pipe.module';
     BlogPostPageComponent,
     HeaderComponent,
     FooterComponent,
+    ScrollSpyDirective,
   ],
   imports: [
     BrowserModule,

@@ -269,4 +269,8 @@ export class DocsContentPageComponent implements OnInit {
       this.showWarning = false;
     }
   }
+
+  onSectionChange(sectionId: string) {
+    console.log(sectionId);
+  }
 }

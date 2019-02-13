@@ -24,7 +24,6 @@
     </div>
   </header>
 
-  <h2 *ngIf="docs?.demo?.embedded" id="embedded-examples">Examples</h2>
   <section class="row-section" *ngIf="docs?.demo?.embedded">
     <div *ngFor="let embedded of docs.demo.embedded" class="inline-demo">
       <h4>{{embedded.name}}</h4>
