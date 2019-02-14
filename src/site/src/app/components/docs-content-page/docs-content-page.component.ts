@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Host } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
@@ -28,13 +28,17 @@ export class DocsContentPageComponent implements OnInit {
   public apiTitles: any;
   public loading: boolean;
   public showWarning: boolean;
+  public currentSection: string;
+  public scrollOffset: number = 150;
+  @ViewChild('scrollSpy') scrollSpy;
 
   constructor(
     private docsService: DocsService,
     private libraryService: LibraryService,
     private route: ActivatedRoute,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private _el: ElementRef
   ) { }
 
   ngOnInit() {
@@ -279,6 +283,20 @@ export class DocsContentPageComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onSectionChange() {
-    // console.log(event);
+    let currentSection: string;
+    const sections = this._el.nativeElement.querySelectorAll('h2');
+    const scrollTop = event.target['scrollingElement']['scrollTop'];
+
+    for (let i = 0; i < sections.length; i++) {
+      const element = sections[i];
+      console.log(element.offsetTop);
+      if (element.offsetTop - this.scrollOffset <= scrollTop) {
+        currentSection = element.id;
+      }
+    }
+
+    if (currentSection !== this.currentSection) {
+      this.currentSection = currentSection;
+    }
   }
 }

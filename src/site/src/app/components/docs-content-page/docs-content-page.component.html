@@ -1,4 +1,4 @@
-<div class="ids-container">
+<div #scrollSpy class="ids-container">
 <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1 page-content page-section">
 
   <div class="ids-banner ids-banner--top-full-width" [hidden]="!showWarning">
@@ -75,7 +75,13 @@
   <token-table class="row-section" *ngIf="!loading" [heading]="'Design Tokens'" [loading]="loading" [sectionClassName]="true"
     [tokensCategory]="docs?.tokensCategory"></token-table>
 
-  <app-toc *ngIf="!loading" [component]="component" [tocItems]="tocItems"></app-toc>
+  <toc
+    *ngIf="!loading"
+    [component]="component"
+    [tocItems]="tocItems"
+    [currentSection]="currentSection"
+  >
+  </toc>
 
   <feedback-widget *ngIf="!loading"></feedback-widget>
 
