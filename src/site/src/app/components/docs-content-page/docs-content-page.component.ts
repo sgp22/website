@@ -5,6 +5,11 @@ import { LibraryService } from '../../shared/library.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as semver from 'semver';
 
+interface TocItems {
+  label: string;
+  id: string;
+}
+
 @Component({
   selector: 'docs-content-page',
   templateUrl: './docs-content-page.component.html',
@@ -18,7 +23,7 @@ export class DocsContentPageComponent implements OnInit {
   public component: string;
   public currentVersion: string;
   public versionPaths: any;
-  public tocItems: any;
+  public tocItems: TocItems[] = [];
   public bodyTitles: any;
   public apiTitles: any;
   public loading: boolean;
@@ -79,8 +84,6 @@ export class DocsContentPageComponent implements OnInit {
         .subscribe(res => {
 
           this.docs = res;
-          this.handleRelativeLinks(this.docs);
-          this.buildToc();
 
           if (this.docs.api) {
             this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.docs.api);
@@ -103,6 +106,8 @@ export class DocsContentPageComponent implements OnInit {
             }
           }
 
+          this.handleRelativeLinks(this.docs);
+          this.buildToc();
           this.loading = false;
 
           if (!this.loading) {
@@ -235,6 +240,8 @@ export class DocsContentPageComponent implements OnInit {
     }
     if (this.docs.api) {
       this.apiTitles = this.docs.api.match(regex);
+    } else {
+      this.apiTitles = null;
     }
     if (this.apiTitles) {
       this.apiTitles.map(item => this.createTocItems(item));
