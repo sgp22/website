@@ -4,7 +4,6 @@
 .toc {
   background-color: var(--theme-color-palette-white);
   border-left: 1px solid $graphite-lightest;
-  display: none;
   font-size: 1.4rem;
   margin-top: calc(var(--theme-number-spacing-base) * 6);
   min-width: 200px;
@@ -13,12 +12,26 @@
   top: calc(var(--theme-number-spacing-base) * 6 + 56px);
   z-index: 10000;
 
-  @media screen and (min-width: $breakpoint-xl) {
-    display: block;
-  }
-
   li {
     margin-left: 0;
+  }
+
+  &.toc--desktop {
+    display: none;
+
+    @media screen and (min-width: $breakpoint-xl) {
+      display: block;
+    }
+  }
+
+  &.toc--mobile {
+    top: calc(var(--theme-number-spacing-base) * 6 + 120px);
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+    right: 0;
+
+    @media screen and (min-width: $breakpoint-xl) {
+      display: none;
+    }
   }
 }
 
@@ -27,6 +40,7 @@
   border: none;
   border-radius: var(--theme-number-border-radius-sm) 0 0 var(--theme-number-border-radius-sm);
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
   display: block;
   margin-top: calc(var(--theme-number-spacing-base) * 6);
   padding: calc(var(--theme-number-spacing-base) * 2);

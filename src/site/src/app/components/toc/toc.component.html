@@ -1,15 +1,17 @@
-<button class="toc-toggle--mobile">
+<button class="toc-toggle--mobile" (click)="toggleToc()">
   <svg><use xlink:href="#icon-bullet-list" /></svg>
 </button>
 
-<nav *ngIf="tocItems.length >= 3 && !landingPage" class="toc">
+<nav *ngIf="tocItems.length >= 3 && !landingPage" class="toc toc--desktop">
   <ul class="ids-list ids-list--hover">
     <li *ngFor="let tocItem of tocItems">
       <a class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
     </li>
   </ul>
+</nav>
 
-  <ul class="ids-list ids-list--hover toc--mobile">
+<nav *ngIf="showToc" class="toc toc--mobile">
+  <ul class="ids-list ids-list--hover">
     <li *ngFor="let tocItem of tocItems">
       <a class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
     </li>

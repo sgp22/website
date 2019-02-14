@@ -279,6 +279,6 @@ export class DocsContentPageComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onSectionChange() {
-    console.log(event);
+    // console.log(event);
   }
 }

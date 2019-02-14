@@ -12,10 +12,15 @@ interface TocItems {
 })
 export class TocComponent implements OnInit {
   public landingPage;
+  public showToc = false;
   @Input() component: string;
   @Input() tocItems: any;
 
   constructor() { }
 
   ngOnInit() {}
+
+  toggleToc() {
+    this.showToc = !this.showToc;
+  }
 }
