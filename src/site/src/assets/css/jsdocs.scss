@@ -8,12 +8,12 @@
 
 .jsdoc-signature {
   background-color: var(--theme-color-palette-graphite-10);
+  border: 1px solid var(--theme-color-palette-graphite-20);
+  border-radius: var(--theme-number-border-radius-sm);
   font-family: var(--theme-font-family-monospace);
   font-size: var(--theme-size-font-sm);
   margin-bottom: calc(var(--theme-number-spacing-base) * 2) !important;
   padding: calc(var(--theme-number-spacing-base) * 2);
-  border-radius: var(--theme-number-border-radius-sm);
-  border: 1px solid var(--theme-color-palette-graphite-20);
 }
 
 .jsdoc-function {
@@ -32,9 +32,9 @@
     padding: calc(var(--theme-number-spacing-base) * 2) calc(var(--theme-number-spacing-base) * 3);
 
     li {
+      list-style-type: none;
       margin-bottom: calc(var(--theme-number-spacing-base) * 2);
       margin-left: 0;
-      list-style-type: none;
 
       &:last-child {
         margin-bottom: 0;
@@ -46,8 +46,8 @@
     }
 
     p {
-      margin-top: 0;
       margin-bottom: calc(var(--theme-number-spacing-base) * 2);
+      margin-top: 0;
     }
   }
 
