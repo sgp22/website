@@ -1,0 +1,88 @@
+@import './breakpoints.scss';
+
+table {
+  border: 1px solid var(--theme-color-palette-graphite-10);
+  font-size: var(--theme-size-font-sm);
+  margin-bottom: 32px;
+  margin-top: 0;
+  width: 100%;
+}
+
+table caption {
+  font-size: var(--theme-size-font-md);
+  margin-bottom: calc(var(--theme-number-spacing-base) * 2);
+  margin-top: calc(var(--theme-number-spacing-base) * 2);
+  text-align: left;
+}
+
+table thead {
+  text-align: left;
+}
+
+table tr {
+  border-bottom: 1px solid var(--theme-color-palette-graphite-10);
+}
+
+table th,
+table td {
+  padding: var(--theme-number-spacing-base);
+}
+
+table th {
+  background-color: var(--theme-color-palette-graphite-10);
+  font-weight: var(--theme-number-font-weight-bold);
+}
+
+table td {
+  color: var(--theme-color-font-muted);
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+table .row--full-image {
+  border-bottom: none;
+}
+
+table .image-row--full img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+table .table-header--description {
+  font-size: var(--theme-size-font-sm);
+  font-weight: var(--theme-number-font-weight-base);
+}
+
+.table--wide {
+  table-layout: fixed;
+  width: 200%;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    width: 150%;
+  }
+}
+
+.table--wide th.token-table--col-grouped {
+  text-align: center;
+}
+
+.table--wide td {
+  white-space: nowrap;
+}
+
+.table--wide td.token-table--data-value {
+  white-space: unset;
+}
+
+.table--wide th.token-table--col-name {
+  width: 50%;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    width: 35%;
+  }
+}
+
+.table--wide th.token-table--col-color {
+  width: 5%;
+}

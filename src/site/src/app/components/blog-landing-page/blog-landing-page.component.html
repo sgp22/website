@@ -1,0 +1,32 @@
+<div class="ids-row ids-container blog-container page-content">
+
+  <div class="blog-posts ids-row--col-md-6 ids-row--offset-md-3 ids-row--col-sm-8 ids-row--offset-sm-2">
+
+    <div class="page-inner">
+
+      <article *ngFor="let post of posts" class="blog-post">
+
+        <header class="blog-post--header">
+          <time class="blog-post--date">
+            {{post.meta.first_published_at | date: 'MMMM d, yyyy'}}
+          </time>
+          <h1 class="blog-post--title"><a routerLink="{{post.meta.slug}}">{{post.title}}</a></h1>
+          <span class="blog-post--author">By {{post.author}}</span>
+        </header>
+
+        <div class="blog-post--content">
+          <ng-container>
+            <div *ngIf="post.content[0].type === 'richText' || post.content[0].type === 'markdown'" [innerHTML]="post?.content[0].value.slice(0, post.content[0].value.indexOf('</p>'))"></div>
+            <a routerLink="{{post.meta.slug}}">Continue reading...</a>
+          </ng-container>
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</div>
+
+<site-footer></site-footer>

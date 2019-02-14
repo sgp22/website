@@ -89,14 +89,11 @@ def post(request):
                 root_path,
                 zipped_file.lower()))
             content = ContentFile(zipf.read(zipped_file))
-            read_contents_bytes = content.read()
-            read_contents_str = read_contents_bytes.decode('utf-8')
 
             # Store file in AWS
             default_storage.save(path, content)
 
             # Continue parsing files to index in ES
-
             # Only index 'files'; based on whether
             # they have an extension, not a dir
             if "." in zipped_file:
@@ -113,6 +110,8 @@ def post(request):
 
                 if ext in index_ext_types and dir_root in index_dirs:
                     try:
+                        read_contents_bytes = content.read()
+                        read_contents_str = read_contents_bytes.decode('utf-8')
                         content_obj = json.loads(read_contents_str)
                     except:
                         print("Couldn't parse json string")
@@ -186,7 +185,7 @@ def get(request):
                 file_path))
             path = latest_file_pointer
 
-        if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,4}$', path):
+        if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,6}$', path):
             obj = s3_resource.Object(settings.AWS_STORAGE_BUCKET_NAME, path)
 
             # load() does a HEAD request for a single key,
@@ -196,28 +195,37 @@ def get(request):
 
             content = obj.get()['Body'].read()
 
-            if path.endswith('.json'):
-                try:
-                    content = json.loads(content.decode('utf-8'))
-
-                    return Response(content)
-                except ValueError:
-                    return Response(
-                        {'error': 'JSON file cannot be decoded'},
-                        status=status.HTTP_400_BAD_REQUEST)
-            elif path.endswith('.md'):
-                content = markdown.markdown(
-                    content.decode('utf-8'), output_format='html5')
-
-                return HttpResponse(content=content)
-            elif path.endswith('.png'):
-                return HttpResponse(content=content, content_type="image/png")
-            elif path.endswith('.jpeg'):
-                return HttpResponse(content=content, content_type="image/jpeg")
-            elif path.endswith('.css') or path.endswith('.css.map'):
-                return HttpResponse(content=content, content_type="text/css")
+            if request.GET.get('download') == "true":
+                response = HttpResponse(content=content, content_type="application/octet-stream")
+                response['Content-Disposition'] = 'attachment; filename=%s' % requested_file_segments[-1]
+                return response
             else:
-                return HttpResponse(content=content)
+                if path.endswith('.json'):
+                    try:
+                        content = json.loads(content.decode('utf-8'))
+
+                        return Response(content)
+                    except ValueError:
+                        return Response(
+                            {'error': 'JSON file cannot be decoded'},
+                            status=status.HTTP_400_BAD_REQUEST)
+                elif path.endswith('.md'):
+                    content = markdown.markdown(
+                        content.decode('utf-8'), output_format='html5')
+
+                    return HttpResponse(content=content)
+                elif path.endswith('.png'):
+                    return HttpResponse(content=content, content_type="image/png")
+                elif path.endswith('.jpeg'):
+                    return HttpResponse(content=content, content_type="image/jpeg")
+                elif path.endswith('.css') or path.endswith('.css.map'):
+                    return HttpResponse(content=content, content_type="text/css")
+                elif path.endswith('.rss'):
+                    return HttpResponse(content=content, content_type="application/rss+xml")
+                elif path.endswith('.sketch'):
+                    return HttpResponse(content=content, content_type="application/octet-stream")
+                else:
+                    return HttpResponse(content=content)
         else:
             filtered_result = get_filtered_result(bucket_name, path)
             return Response({'files': filtered_result})

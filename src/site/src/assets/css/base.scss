@@ -1,0 +1,73 @@
+body {
+  background-color: var(--theme-color-brand-primary-contrast);
+  margin: 0;
+  padding-top: 56px;
+}
+
+.ids-container {
+  margin: 0 auto;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+ul {
+  padding: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--body-color-primary-background);
+  border-left: 1px solid #d8d8d8;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  height: 5px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-color-brand-secondary-base);
+  border-radius: 10px;
+}
+
+.iframe-wrapper {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+
+  iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.ids-banner {
+  border-radius: 2px;
+  color: var(--body-color-primary-font);
+
+  .ids-banner-content {
+    color: var(--body-color-primary-font);
+    font-size: 14px;
+    padding: 15px 0;
+  }
+
+  &.ids-banner--top-full-width {
+    background-color: #c8e9f4; /* TODO: Change to correct token, originally azure01 */
+    border: solid 1px var(--theme-color-brand-primary-base);
+    margin-bottom: calc(var(--theme-number-spacing-base) * 6);
+    text-align: center;
+    width: 100%;
+    z-index: 4;
+  }
+}

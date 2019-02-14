@@ -232,7 +232,8 @@ class CoreContentPage(PageBase):
         ('table', TableBlock()),
         ('markdown', APIMarkDownBlock()),
         ('richText', APIRichTextBlock()),
-        ('tokensCategory', blocks.CharBlock())
+        ('tokensCategory', blocks.CharBlock()),
+        ('iconType', blocks.CharBlock(label="Icon Type"))
     ], null=True, blank=True)
 
     description = models.CharField(max_length=255)

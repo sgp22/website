@@ -1,0 +1,73 @@
+<ng-container *ngIf="roleSubmitted">
+  <div #thankYou [@thankyouState]="removeRoleThankyou" (@thankyouState.done)="thankyouStateEnd($event)" class="question-widget--thank-you">
+    <p>Thank You!</p>
+    <p><a (click)="scrollToFooter()">Sign up for our newsletter</a> to recieve news and updates!</p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!roleSubmitted">
+
+  <div [hidden]="!rolesOpen" class="roles-widget popover">
+    <div class="popover--inner">
+      <p>Help us serve you better!</p>
+      <form #form (submit)="submitRole($event)">
+        <fieldset class="ids-form-group">
+          <legend>What is your primary role?</legend>
+          <div class="ids-form-radio">
+            <input #roleDesigner (change)="selectRole(roleDesigner.value)" type="radio" name="role" id="role-designer"
+              value="designer" required>
+            <label for="role-designer">
+              Designer
+            </label>
+          </div>
+          <div class="ids-form-radio">
+            <input #roleDeveloper (change)="selectRole(roleDeveloper.value)" type="radio" name="role" id="role-developer"
+              value="developer">
+            <label for="role-developer">
+              Developer
+            </label>
+          </div>
+          <div class="ids-form-radio">
+            <input #roleBizAnalyst (change)="selectRole(roleBizAnalyst.value)" type="radio" name="role" id="role-business-analyst"
+              value="business-analyst">
+            <label for="role-business-analyst">
+              Business Analyst
+            </label>
+          </div>
+          <div class="ids-form-radio">
+            <input #roleProdManager (change)="selectRole(roleProdManager.value)" type="radio" name="role" id="role-product-manager"
+              value="product-manager">
+            <label for="role-product-manager">
+              Product Manager
+            </label>
+          </div>
+          <div class="ids-form-radio">
+            <input #roleOther (change)="selectRole(roleOther.value)" type="radio" name="role" id="role-other" value="other">
+            <label for="role-other">
+              Other
+            </label>
+          </div>
+        </fieldset>
+        <button type="submit" class="ids-btn ids-btn--primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <button class="ids-btn ids-btn--primary ids-btn--toggle-roles" (click)="toggleRoles()" title="Icon button">
+    <ng-container *ngIf="!fabStateActive">
+      <!-- NOTE: add to css library inline svg -->
+      <svg class="ids-icon" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 1C6.243 1 4 3.243 4 6a1 1 0 0 0 2 0c0-1.654 1.346-3 3-3s3 1.346 3 3-1.346 3-3 3a1 1 0 0 0-1 1v2.5a1 1 0 0 0 2 0v-1.6A5.01 5.01 0 0 0 14 6c0-2.757-2.243-5-5-5m0 14a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+          fill="#fff" fill-rule="evenodd" />
+      </svg>
+    </ng-container>
+    <ng-container *ngIf="fabStateActive">
+      <!-- NOTE: add to css library inline svg -->
+      <svg class="ids-icon" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.414 9l5.293-5.293a.999.999 0 1 0-1.414-1.414L9 7.586 3.707 2.293a.999.999 0 1 0-1.414 1.414L7.586 9l-5.293 5.293a.999.999 0 1 0 1.414 1.414L9 10.414l5.293 5.293a.997.997 0 0 0 1.414 0 .999.999 0 0 0 0-1.414L10.414 9"
+          fill="#fff" fill-rule="evenodd" />
+      </svg>
+    </ng-container>
+  </button>
+
+</ng-container>
