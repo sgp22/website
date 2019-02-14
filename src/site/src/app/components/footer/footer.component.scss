@@ -3,7 +3,7 @@
 
 .site-footer--top {
   background-color: var(--theme-color-palette-white);
-  border-top: 1px solid $graphite-lighest;
+  border-top: 1px solid $graphite-lightest;
   padding: calc(var(--theme-number-spacing-base) * 7) 0;
 
   @media screen and (min-width: $breakpoint-sm) {
@@ -22,7 +22,7 @@
 .site-footer--btm {
   align-items: flex-start;
   background-color: $slate-lightest;
-  border-top: 1px solid $graphite-lighest;
+  border-top: 1px solid $graphite-lightest;
   color: $slate-darker;
   display: flex;
   flex-direction: column;
