@@ -190,6 +190,7 @@
 
 .two-column--desktop {
   display: none;
+  margin-bottom: calc(var(--theme-number-spacing-base) * 6);
 
   @media screen and (min-width: $breakpoint-md) {
     display: block;
