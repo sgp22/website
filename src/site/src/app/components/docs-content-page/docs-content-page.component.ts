@@ -289,7 +289,6 @@ export class DocsContentPageComponent implements OnInit {
 
     for (let i = 0; i < sections.length; i++) {
       const element = sections[i];
-      console.log(element.offsetTop);
       if (element.offsetTop - this.scrollOffset <= scrollTop) {
         currentSection = element.id;
       }

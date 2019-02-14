@@ -33,6 +33,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { IconLookupModule } from './components/icon-lookup/icon-lookup.module';
 import { FilterPipeModule } from './shared/filter.pipe.module';
+import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { FilterPipeModule } from './shared/filter.pipe.module';
     BlogPostPageComponent,
     HeaderComponent,
     FooterComponent,
+    BackToTopComponent,
   ],
   imports: [
     BrowserModule,

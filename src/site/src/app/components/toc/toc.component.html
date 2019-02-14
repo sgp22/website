@@ -7,6 +7,7 @@
       <a [ngClass]="{'ids-list--item--selected': currentSection === tocItem.id}" class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
     </li>
   </ul>
+  <back-to-top></back-to-top>
 </nav>
 
 <nav *ngIf="showToc" class="toc toc--mobile">
@@ -15,4 +16,6 @@
       <a [ngClass]="{'ids-list--item--selected': currentSection === tocItem.id}" class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
     </li>
   </ul>
+  <back-to-top></back-to-top>
 </nav>
+
