@@ -6,7 +6,7 @@ interface TocItems {
 }
 
 @Component({
-  selector: 'toc',
+  selector: 'toc-items',
   templateUrl: './toc.component.html',
   styleUrls: ['./toc.component.scss']
 })

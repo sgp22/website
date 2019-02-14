@@ -75,13 +75,13 @@
   <token-table class="row-section" *ngIf="!loading" [heading]="'Design Tokens'" [loading]="loading" [sectionClassName]="true"
     [tokensCategory]="docs?.tokensCategory"></token-table>
 
-  <toc
+  <toc-items
     *ngIf="!loading"
     [component]="component"
     [tocItems]="tocItems"
     [currentSection]="currentSection"
   >
-  </toc>
+  </toc-items>
 
   <feedback-widget *ngIf="!loading"></feedback-widget>
 
