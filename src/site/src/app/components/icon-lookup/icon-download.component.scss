@@ -1,16 +1,16 @@
 div {
-  display: flex;
-  position: absolute;
   bottom: 0;
+  display: flex;
   left: 0;
   margin-bottom: var(--theme-number-spacing-base);
+  position: absolute;
   width: 100%;
 
   a {
     display: block;
     flex: 1;
+    font-weight: var(--theme-number-font-weight-bold);
     text-align: center;
     text-decoration: none;
-    font-weight: var(--theme-number-font-weight-bold);
   }
 }
