@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, Host } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
@@ -277,7 +277,8 @@ export class DocsContentPageComponent implements OnInit {
     }
   }
 
-  onSectionChange(sectionId: string) {
-    console.log(sectionId);
+  @HostListener('window:scroll', ['$event'])
+  onSectionChange() {
+    console.log(event);
   }
 }
