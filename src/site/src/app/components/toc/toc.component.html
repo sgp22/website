@@ -10,7 +10,12 @@
   <back-to-top></back-to-top>
 </nav>
 
-<nav *ngIf="showToc" class="toc toc--mobile">
+<nav *ngIf="showToc" [@slideInOut] class="toc toc--mobile">
+  <button class="toc--mobile--close" (click)="toggleToc()">
+    <svg class="ids-icon">
+      <use xlink:href="#icon-close" />
+    </svg>
+  </button>
   <ul class="ids-list ids-list--hover">
     <li *ngFor="let tocItem of tocItems">
       <a [ngClass]="{'ids-list--item--selected': currentSection === tocItem.id}" class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
