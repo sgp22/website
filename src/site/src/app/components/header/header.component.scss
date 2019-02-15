@@ -156,6 +156,11 @@
   display: block;
   margin-left: auto;
 
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+
   @media screen and (min-width: $breakpoint-md) {
     display: none;
   }
