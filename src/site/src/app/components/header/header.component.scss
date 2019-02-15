@@ -108,19 +108,6 @@
     text-decoration: none;
   }
 
-  &::after {
-    background-color: var(--black);
-    bottom: 0;
-    content: ' ';
-    display: block;
-    height: 2px;
-    left: 50%;
-    opacity: 0;
-    position: absolute;
-    transform: translateX(-50%);
-    width: 100%;
-  }
-
   &:last-child {
     margin-right: 0;
   }
@@ -131,7 +118,6 @@
 
   &.ids-btn.ids-btn--link {
     color: #000;
-    -webkit-font-smoothing: auto;
     font-weight: 500;
     vertical-align: baseline;
   }
@@ -155,6 +141,7 @@
 .btn--nav--toggle {
   display: block;
   margin-left: auto;
+  margin-right: -32px;
 
   svg {
     height: 24px;
@@ -170,7 +157,7 @@
   background-color: var(--theme-color-brand-primary-contrast);
   border-bottom: 1px solid var(--graphite055-light);
   display: none;
-  padding: calc(var(--theme-number-spacing-base) * 2);
+  padding: calc(var(--theme-number-spacing-base) * 4);
   position: fixed;
   top: auto;
   width: 100%;
@@ -199,9 +186,10 @@
   font-size: 2.4rem;
   font-weight: 300;
   margin-bottom: calc(var(--theme-number-spacing-base) * 4);
+  text-decoration: none;
 
   &.main-nav--mobile--item--current {
-    text-decoration: underline;
+    color: $azure-base;
   }
 
   &.ids-btn {
@@ -220,10 +208,6 @@
     .ids-icon {
       transform: rotate(0);
     }
-  }
-
-  &:visited {
-    color: var(--link-color-custom-dark);
   }
 }
 
