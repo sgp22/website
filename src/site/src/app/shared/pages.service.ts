@@ -48,7 +48,9 @@ export class PagesService {
   createPage(route) {
     const url = route;
     const urlSegments = url.split('/');
-    const slug = urlSegments.slice(-1)[0] !== '' ? urlSegments.slice(-1)[0] : 'homepage';
+    const slugSegment = urlSegments.slice(-1)[0].replace(/#.*$/, '');
+    const slug = slugSegment !== '' ? slugSegment : 'homepage';
+    console.log(slug);
     const preview = url.match(/id=\d{1,10}/g);
     const previewSlug = slug.split('?');
 
