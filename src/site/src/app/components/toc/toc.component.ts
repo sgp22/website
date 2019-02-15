@@ -19,9 +19,7 @@ export class TocComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.currentSection);
-  }
+  ngOnInit() {}
 
   toggleToc() {
     this.showToc = !this.showToc;
