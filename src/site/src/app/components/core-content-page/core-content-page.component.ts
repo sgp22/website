@@ -42,22 +42,4 @@ export class CoreContentPageComponent implements OnInit {
       (<any>window).ga('send', 'pageview');
     });
   }
-
-  pageLoadToSection() {
-    const tree = this.router.parseUrl(this.router.url);
-    if (tree.fragment) {
-      this.scrollToSection(tree.fragment);
-    }
-  }
-
-  scrollToSection(fragment) {
-    const section = document.querySelector('#' + fragment);
-    if (section) {
-      section.scrollIntoView(true);
-      const scrolledY = window.scrollY;
-      if (scrolledY) {
-        window.scroll(0, scrolledY - 90);
-      }
-    }
-  }
 }

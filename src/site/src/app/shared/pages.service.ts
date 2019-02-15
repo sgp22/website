@@ -50,7 +50,6 @@ export class PagesService {
     const urlSegments = url.split('/');
     const slugSegment = urlSegments.slice(-1)[0].replace(/#.*$/, '');
     const slug = slugSegment !== '' ? slugSegment : 'homepage';
-    console.log(slug);
     const preview = url.match(/id=\d{1,10}/g);
     const previewSlug = slug.split('?');
 

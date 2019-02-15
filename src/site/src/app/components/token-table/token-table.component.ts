@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TokenService } from '../../shared/token.service';
 import { environment } from '../../../environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'token-table',
@@ -20,7 +20,7 @@ export class TokenTableComponent implements OnInit {
 
   constructor(
     private tokenService: TokenService,
-    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -40,6 +40,11 @@ export class TokenTableComponent implements OnInit {
           err => {
             console.log(`No tokens found: ${err}`);
             this.idsTokenProperties = [];
+          },
+          () => {
+            setTimeout(() => {
+              this.pageLoadToSection();
+            });
           }
         );
     } else {
@@ -54,8 +59,31 @@ export class TokenTableComponent implements OnInit {
           err => {
             console.log(`No tokens found: ${err}`);
             this.idsTokenProperties = [];
+          },
+          () => {
+            setTimeout(() => {
+              this.pageLoadToSection()
+            })
           }
         );
+    }
+  }
+
+  pageLoadToSection() {
+    const tree = this.router.parseUrl(this.router.url);
+    if (tree.fragment) {
+      this.scrollToSection(tree.fragment);
+    }
+  }
+
+  scrollToSection(fragment) {
+    const section = document.querySelector('#' + fragment);
+    if (section) {
+      section.scrollIntoView(true);
+      const scrolledY = window.scrollY;
+      if (scrolledY) {
+        window.scroll(0, scrolledY - 90);
+      }
     }
   }
 
