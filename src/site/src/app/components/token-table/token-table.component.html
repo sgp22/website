@@ -54,7 +54,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let key of objectKeys(idsTokenProperties)">
+        <tr *ngFor="let key of objectKeys(idsTokenProperties)" id="{{key.substring(1)}}">
           <td>
             <code>{{key}}</code>
           </td>

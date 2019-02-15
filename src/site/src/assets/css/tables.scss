@@ -67,6 +67,10 @@ table .table-header--description {
   text-align: center;
 }
 
+.table--wide tr:hover {
+  background-color: var(--theme-color-palette-graphite-10);
+}
+
 .table--wide td {
   white-space: nowrap;
 }
