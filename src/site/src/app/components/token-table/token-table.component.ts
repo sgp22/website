@@ -62,8 +62,8 @@ export class TokenTableComponent implements OnInit {
           },
           () => {
             setTimeout(() => {
-              this.pageLoadToSection()
-            })
+              this.pageLoadToSection();
+            });
           }
         );
     }
