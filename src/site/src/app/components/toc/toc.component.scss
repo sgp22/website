@@ -4,9 +4,11 @@
 .toc {
   background-color: var(--theme-color-palette-white);
   border-left: 1px solid $graphite-lightest;
-  font-size: 1.4rem;
+  font-size: var( --theme-size-font-xs);
   margin-top: calc(var(--theme-number-spacing-base) * 6);
+  max-height: 500px;
   max-width: 300px;
+  overflow-y: auto;
   position: fixed;
   right: 0;
   top: calc(var(--theme-number-spacing-base) * 6 + 56px);
@@ -26,8 +28,13 @@
 
   &.toc--mobile {
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+    display: none;
     right: 0;
     top: calc(var(--theme-number-spacing-base) * 6 + 120px);
+
+    @media screen and (min-width: $breakpoint-sm) {
+      display: block;
+    }
 
     @media screen and (min-width: $breakpoint-xl) {
       display: none;
@@ -41,12 +48,16 @@
   border-radius: var(--theme-number-border-radius-sm) 0 0 var(--theme-number-border-radius-sm);
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
   cursor: pointer;
-  display: block;
+  display: none;
   margin-top: calc(var(--theme-number-spacing-base) * 6);
   padding: calc(var(--theme-number-spacing-base) * 2);
   position: fixed;
   right: 0;
   top: calc(var(--theme-number-spacing-base) * 6 + 56px);
+
+  @media screen and (min-width: $breakpoint-sm) {
+    display: block;
+  }
 
   @media screen and (min-width: $breakpoint-xl) {
     display: none;
