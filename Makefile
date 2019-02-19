@@ -129,7 +129,7 @@ build_staging :
 	@ ./deploy/build.sh -e staging
 
 build_prod :
-	cd src/web && npm install && npm run build:prod
+	cd src/site && npm install && npm run build:prod
 	@ ./deploy/build.sh -e prod
 
 
