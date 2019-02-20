@@ -1,6 +1,7 @@
 <aside>
-  <nav class="sidebar-nav sidebar-nav-list">
+  <ng-content></ng-content>
 
+  <nav class="sidebar-nav sidebar-nav-list">
     <ul class="ids-list ids-list--hover">
       <li><a class="ids-list--item" [routerLink]="['.']" routerLinkActive="ids-list--item--selected"
           [routerLinkActiveOptions]="{exact: true}">{{sectionTitle}}</a></li>

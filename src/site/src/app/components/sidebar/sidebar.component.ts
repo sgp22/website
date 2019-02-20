@@ -8,7 +8,7 @@ import * as semver from 'semver';
 
 @Component({
   selector: 'sidebar-code',
-  templateUrl: './sidebar.component.html'
+  templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent implements OnInit, OnChanges {
   public sidebarPath: string;

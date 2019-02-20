@@ -1,12 +1,14 @@
-@media only screen and (min-width: 600px) {
-  .sidebar {
-    border-right: 1px solid #d9d9d9;
-    height: 100vh;
-    left: 0;
-    overflow-y: auto;
-    padding-bottom: 150px;
-    position: fixed;
-  }
+@import '../css/breakpoints.scss';
+
+.sidebar {
+  background-color: var(--theme-color-palette-white);
+  border-right: 1px solid #d9d9d9;
+  height: 100vh;
+  left: 0;
+  overflow-y: auto;
+  padding-bottom: 150px;
+  position: fixed;
+  z-index: 2;
 }
 
 .sidebar--code {
@@ -21,6 +23,31 @@
 
 .sidebar-nav {
   padding: 0 calc(var(--theme-number-spacing-base) * 2);
+}
+
+.btn--open-sidebar {
+  color: var(--theme-color-font-info);
+  display: block;
+  font-size: var(--theme-size-font-xs);
+  margin-top: calc(var(--theme-number-spacing-base) * 5);
+
+  span {
+    margin-left: var(--theme-number-spacing-base);
+  }
+
+  @media screen and (min-width: $breakpoint-sm) {
+    display: none;
+  }
+}
+
+.btn--close-sidebar {
+  display: block;
+  position: absolute;
+  right: 0;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    display: none;
+  }
 }
 
 .ids-list--expandable {
