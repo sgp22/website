@@ -1,10 +1,15 @@
 <input class="ids-form-control" [(ngModel)]="searchText" type="text" placeholder="Filter Icons">
 <div class="icon-group">
-  <div class="icon-card" *ngFor="let icon of icons | filter : searchText">
+  <div
+    class="icon-card"
+    *ngFor="let icon of icons | filter : searchText; let i = index"
+    (mouseenter)="downloadLinksVisible[i] = true"
+    (mouseleave)="downloadLinksVisible[i] = false"
+  >
     <svg focusable="false" aria-hidden="true" role="presentation">
       <use attr.xlink:href="#icon-{{icon}}"/>
     </svg>
     <span>{{icon}}</span>
-    <icon-download [iconCategory]="iconType" [iconLabel]="icon"></icon-download>
+    <icon-download *ngIf="downloadLinksVisible[i]" [iconCategory]="iconType" [iconLabel]="icon"></icon-download>
   </div>
 </div>
