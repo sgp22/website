@@ -1,6 +1,6 @@
 @media only screen and (min-width: 600px) {
   .sidebar {
-    border-right: 1px solid #d9d9d9;
+    border-right: 1px solid var(--list-color-divider-border);
     height: 100vh;
     left: 0;
     overflow-y: auto;
@@ -64,7 +64,7 @@
   }
 
   .ids-form-control {
-    background-color: var(--list-color-item-selected-background);
+    background-color: var(--theme-color-body-base);
     border-bottom: 1px solid var(--list-color-divider-border);
     border-left: none;
     border-radius: 0;
