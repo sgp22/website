@@ -4,6 +4,7 @@
     [lib]="library"
     [ver]="libVersion"
     [@slideInLeft]="sidebarOpen"
+    (closeSB)="closeSidebar()"
   >
     <button class="ids-btn ids-btn--link btn--close-sidebar" (click)="closeSidebar()">
       <svg class="ids-icon" focusable="false" aria-hidden="true" role="presentation">

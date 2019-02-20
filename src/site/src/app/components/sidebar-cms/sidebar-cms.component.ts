@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { HelpersService } from '../../shared/helpers.service';
@@ -16,6 +16,7 @@ export class SidebarCmsComponent implements OnInit {
   public loading: boolean;
   public expandedLevel1: any = [];
   public halp: any = [];
+  @Output() closeSB = new EventEmitter();
 
   constructor(
     private pagesService: PagesService,
@@ -80,6 +81,10 @@ export class SidebarCmsComponent implements OnInit {
       }
     );
 
+  }
+
+  closeSidebar() {
+    this.closeSB.emit('closed');
   }
 
 }

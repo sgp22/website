@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { slideInLeft } from 'src/app/animations';
+import { HelpersService } from '../../shared/helpers.service';
 
 @Component({
   selector: 'cms-page',
@@ -9,9 +10,15 @@ import { slideInLeft } from 'src/app/animations';
 export class CmsPageComponent implements OnInit {
   public sidebarOpen: string = 'open';
 
-  constructor() { }
+  constructor(
+    private h: HelpersService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.h.checkViewport('(min-width: 600px)')) {
+      this.sidebarOpen = 'closed';
+    }
+  }
 
   @HostListener('window:resize', ['$event'])
   windowResize(event) {
