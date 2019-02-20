@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
-export const slideInOut = trigger('slideInOut', [
+export const slideInRight = trigger('slideInRight', [
   transition(':enter', [
     style({ transform: 'translateX(100%)' }),
     animate('200ms ease', style({ transform: 'translateX(0%)' }))

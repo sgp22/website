@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { slideInOut } from '../../animations';
+import { slideInRight } from '../../animations';
 
 interface TocItems {
   label: string;
@@ -10,7 +10,7 @@ interface TocItems {
   selector: 'toc-items',
   templateUrl: './toc.component.html',
   styleUrls: ['./toc.component.scss'],
-  animations: [slideInOut]
+  animations: [slideInRight]
 })
 export class TocComponent implements OnInit {
   public landingPage;
