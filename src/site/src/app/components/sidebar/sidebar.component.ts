@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SidebarService } from './sidebar.service';
 import { LibraryService } from '../../shared/library.service';
@@ -8,7 +8,7 @@ import * as semver from 'semver';
 
 @Component({
   selector: 'sidebar-code',
-  templateUrl: './sidebar.component.html'
+  templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent implements OnInit, OnChanges {
   public sidebarPath: string;
@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   @Input() lib;
   @Input() ver;
   @ViewChild('searchText') searchText: NgForm;
+  @Output() closeSB = new EventEmitter();
 
   constructor(
     private sidebarService: SidebarService,
@@ -44,6 +45,10 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {}
+
+  closeSidebar() {
+    this.closeSB.emit('closed');
+  }
 
   updateNav(path, lib, version) {
     this.sidebarPath = path;

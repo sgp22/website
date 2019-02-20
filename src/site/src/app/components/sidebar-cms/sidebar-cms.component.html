@@ -1,9 +1,10 @@
 <aside>
-  <nav class="sidebar-nav sidebar-nav-list">
+  <ng-content></ng-content>
 
+  <nav class="sidebar-nav sidebar-nav-list">
     <ul class="ids-list ids-list--hover">
       <li><a class="ids-list--item" [routerLink]="['.']" routerLinkActive="ids-list--item--selected"
-          [routerLinkActiveOptions]="{exact: true}">{{sectionTitle}}</a></li>
+          [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar()">{{sectionTitle}}</a></li>
       <ng-container *ngFor="let child of sidebarNav; let i = index">
 
         <li>
@@ -17,13 +18,18 @@
           </span>
 
           <a *ngIf="child.children.length <= 0" class="ids-list--item" routerLink="{{child.slug}}"
-            routerLinkActive="ids-list--item--selected">{{child.title}}</a>
+            routerLinkActive="ids-list--item--selected" (click)="closeSidebar()">{{child.title}}</a>
 
           <ul class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
             <li *ngFor="let level_2 of child.children; let i = index">
 
-              <a *ngIf="level_2.children.length <= 0" class="ids-list--item" routerLinkActive="ids-list--item--selected"
-                routerLink="{{level_2.relative_url}}">
+              <a
+                *ngIf="level_2.children.length <= 0"
+                class="ids-list--item"
+                routerLinkActive="ids-list--item--selected"
+                routerLink="{{level_2.relative_url}}"
+                (click)="closeSidebar()"
+              >
                 {{level_2.title}}
               </a>
 
@@ -33,7 +39,12 @@
 
               <ul class="ids-list ids-list--expandable ids-list--expanded">
                 <li *ngFor="let level_3 of level_2.children">
-                  <a class="ids-list--item" routerLinkActive="ids-list--item--selected" routerLink="{{level_3.relative_url}}">{{level_3.title}}</a>
+                  <a
+                    class="ids-list--item"
+                    routerLinkActive="ids-list--item--selected"
+                    routerLink="{{level_3.relative_url}}"
+                    (click)="closeSidebar()"
+                  >{{level_3.title}}</a>
                 </li>
               </ul>
 
