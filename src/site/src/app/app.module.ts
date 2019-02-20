@@ -34,6 +34,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { IconLookupModule } from './components/icon-lookup/icon-lookup.module';
 import { FilterPipeModule } from './shared/filter.pipe.module';
 import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
+import { InputFocusDirective } from './shared/input-focus.directive';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { BackToTopComponent } from './components/back-to-top/back-to-top.compone
     HeaderComponent,
     FooterComponent,
     BackToTopComponent,
+    InputFocusDirective,
   ],
   imports: [
     BrowserModule,
