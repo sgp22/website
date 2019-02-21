@@ -47,7 +47,9 @@ export class SidebarComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   closeSidebar() {
-    this.closeSB.emit('closed');
+    if (this.helpers.checkViewport('(min-width: 600px)')) {
+      this.closeSB.emit('closed');
+    }
   }
 
   updateNav(path, lib, version) {

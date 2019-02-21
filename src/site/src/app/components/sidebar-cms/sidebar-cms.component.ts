@@ -84,7 +84,9 @@ export class SidebarCmsComponent implements OnInit {
   }
 
   closeSidebar() {
-    this.closeSB.emit('closed');
+    if (this.helpers.checkViewport('(min-width: 600px)')) {
+      this.closeSB.emit('closed');
+    }
   }
 
 }
