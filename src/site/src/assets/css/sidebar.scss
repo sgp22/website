@@ -74,12 +74,6 @@
       fill: var(--theme-color-font-base);
     }
   }
-
-  &.ids-list--heading-accordion--active {
-    .ids-icon {
-      transform: rotate(-180deg) translateY(-30%);
-    }
-  }
 }
 
 .library-select-group {
