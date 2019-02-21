@@ -8,7 +8,7 @@ import { HelpersService } from '../../shared/helpers.service';
   animations: [slideInLeft]
 })
 export class CmsPageComponent implements OnInit {
-  public sidebarOpen: string = 'open';
+  public sidebarOpen = 'open';
 
   constructor(
     private h: HelpersService
@@ -23,9 +23,9 @@ export class CmsPageComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   windowResize(event) {
     if (event.target.innerWidth <= 600) {
-      this.sidebarOpen = 'closed'
+      this.sidebarOpen = 'closed';
     } else {
-      this.sidebarOpen = 'open'
+      this.sidebarOpen = 'open';
     }
   }
 

@@ -12,7 +12,7 @@ import { HelpersService } from '../../shared/helpers.service';
 export class CodePageComponent implements OnInit {
   public library: string;
   public libVersion: string;
-  public sidebarOpen: string = 'open';
+  public sidebarOpen = 'open';
 
   constructor(
     private router: Router,
@@ -37,9 +37,9 @@ export class CodePageComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   windowResize(event) {
     if (event.target.innerWidth <= 600) {
-      this.sidebarOpen = 'closed'
+      this.sidebarOpen = 'closed';
     } else {
-      this.sidebarOpen = 'open'
+      this.sidebarOpen = 'open';
     }
   }
 

@@ -8,7 +8,7 @@ export const slideInRight = trigger('slideInRight', [
   transition(':leave', [
     animate('200ms ease', style({ transform: 'translateX(100%)' }))
   ])
-])
+]);
 
 export const slideInLeft = trigger('slideInLeft', [
   state('open', style({
@@ -20,7 +20,7 @@ export const slideInLeft = trigger('slideInLeft', [
     transform: 'translateX(-100%)'
   })),
   transition('open <=> closed', animate('100ms ease'))
-])
+]);
 
 export const fadeInOut = trigger('thankyouState', [
   state('false', style({
