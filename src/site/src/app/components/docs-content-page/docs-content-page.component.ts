@@ -30,7 +30,6 @@ export class DocsContentPageComponent implements OnInit {
   public showWarning: boolean;
   public currentSection: string;
   public scrollOffset = 150;
-  @ViewChild('scrollSpy') scrollSpy;
 
   constructor(
     private docsService: DocsService,
