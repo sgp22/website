@@ -281,21 +281,7 @@ export class DocsContentPageComponent implements OnInit {
     }
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onSectionChange() {
-    let currentSection: string;
-    const sections = this._el.nativeElement.querySelectorAll('h2');
-    const scrollTop = event.target['scrollingElement']['scrollTop'];
-
-    for (let i = 0; i < sections.length; i++) {
-      const element = sections[i];
-      if (element.offsetTop - this.scrollOffset <= scrollTop) {
-        currentSection = element.id;
-      }
-    }
-
-    if (currentSection !== this.currentSection) {
-      this.currentSection = currentSection;
-    }
+  onSectionChange(sectionId: string) {
+    this.currentSection = sectionId;
   }
 }
