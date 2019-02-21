@@ -65,6 +65,10 @@ restart_vm :
 	docker-machine restart
 
 
+# Site
+dev_site:
+	cd src/site && npm start
+
 # Nginx
 shell_nginx :
 	docker exec -ti $(NGINX_CONTAINER) /bin/bash
