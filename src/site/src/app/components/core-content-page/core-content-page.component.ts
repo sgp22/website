@@ -55,13 +55,17 @@ export class CoreContentPageComponent implements OnInit {
     });
   }
 
+  isMarkdownOrRichText(content) {
+    return content.type === 'markdown' || content.type === 'richText';
+  }
+
   buildToc() {
     this.tocItems = [];
     const titles = [];
     const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
-    const mdContent = this.pageContent.body.filter(c => c.type === 'markdown');
-    if (mdContent) {
-      this.sectionTitles = mdContent.filter(c => c.value.match(regex));
+    const content = this.pageContent.body.filter(this.isMarkdownOrRichText);
+    if (content) {
+      this.sectionTitles = content.filter(c => c.value.match(regex));
     }
     if (this.sectionTitles) {
       this.sectionTitles.map(title => {
