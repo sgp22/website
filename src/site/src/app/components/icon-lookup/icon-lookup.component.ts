@@ -20,8 +20,10 @@ export class IconLookupComponent implements OnInit {
   ngOnInit() {
     this.iconLookup.loadIcons(this.iconType)
       .subscribe(res => {
-        this.icons = res['categories'][0]['icons'];
+        const icons = res['categories'].map(icon => icon.icons);
+        const flattenedIconArr = [].concat.apply([], icons);
+        const sortedIcons = flattenedIconArr.sort((a, b) => a > b ? 1 : -1);
+        this.icons = sortedIcons;
       });
   }
-
 }
