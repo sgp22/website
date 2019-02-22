@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelpersService {
+
+  constructor(
+    private router: Router
+  ) {}
 
   public closeAccordionsMobile(sidebarNav) {
     const panels = sidebarNav.map(i => true);
@@ -32,5 +37,23 @@ export class HelpersService {
       label: label,
       id: id
     });
+  }
+
+  public pageLoadToSection() {
+    const tree = this.router.parseUrl(this.router.url);
+    if (tree.fragment) {
+      this.scrollToSection(tree.fragment);
+    }
+  }
+
+  public scrollToSection(fragment) {
+    const section = document.querySelector('#' + fragment);
+    if (section) {
+      section.scrollIntoView(true);
+      const scrolledY = window.scrollY;
+      if (scrolledY) {
+        window.scroll(0, scrolledY - 90);
+      }
+    }
   }
 }

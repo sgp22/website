@@ -116,7 +116,7 @@ export class DocsContentPageComponent implements OnInit {
 
           if (!this.loading) {
             setTimeout(() => {
-              this.pageLoadToSection();
+              this.h.pageLoadToSection();
             }, 200);
           }
 
@@ -239,24 +239,6 @@ export class DocsContentPageComponent implements OnInit {
     }
     if (this.bodyTitles) {
       this.bodyTitles.map(item => this.h.createTocItems(item, this.tocItems));
-    }
-  }
-
-  pageLoadToSection() {
-    const tree = this.router.parseUrl(this.router.url);
-    if (tree.fragment) {
-      this.scrollToSection(tree.fragment);
-    }
-  }
-
-  scrollToSection(fragment) {
-    const section = document.querySelector('#' + fragment);
-    if (section) {
-      section.scrollIntoView(true);
-      const scrolledY = window.scrollY;
-      if (scrolledY) {
-        window.scroll(0, scrolledY - 90);
-      }
     }
   }
 

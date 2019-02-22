@@ -40,7 +40,7 @@ export class CoreContentPageComponent implements OnInit {
 
             if (!this.loading) {
               setTimeout(() => {
-                this.pageLoadToSection();
+                this.h.pageLoadToSection();
               }, 200);
             }
           }
@@ -65,24 +65,6 @@ export class CoreContentPageComponent implements OnInit {
       titles.push(title.value);
     });
     titles.map(title => this.h.createTocItems(title, this.tocItems));
-  }
-
-  pageLoadToSection() {
-    const tree = this.router.parseUrl(this.router.url);
-    if (tree.fragment) {
-      this.scrollToSection(tree.fragment);
-    }
-  }
-
-  scrollToSection(fragment) {
-    const section = document.querySelector('#' + fragment);
-    if (section) {
-      section.scrollIntoView(true);
-      const scrolledY = window.scrollY;
-      if (scrolledY) {
-        window.scroll(0, scrolledY - 90);
-      }
-    }
   }
 
   onSectionChange(sectionId: string) {
