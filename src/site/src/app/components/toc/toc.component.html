@@ -3,7 +3,7 @@
 </button>
 <nav *ngIf="tocItems.length >= 3 && !landingPage" class="toc toc--desktop">
   <ul class="ids-list ids-list--hover">
-    <li *ngFor="let tocItem of tocItems1">
+    <li *ngFor="let tocItem of tocItems">
       <a [ngClass]="{'ids-list--item--selected': currentSection === tocItem.id}" class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
     </li>
   </ul>
