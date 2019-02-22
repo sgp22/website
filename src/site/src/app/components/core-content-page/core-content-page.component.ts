@@ -59,11 +59,15 @@ export class CoreContentPageComponent implements OnInit {
     this.tocItems = [];
     const titles = [];
     const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
-    const content = this.pageContent.body.filter(c => c.type === 'markdown');
-    this.sectionTitles = content.filter(c => c.value.match(regex));
-    this.sectionTitles.map(title => {
-      titles.push(title.value);
-    });
+    const mdContent = this.pageContent.body.filter(c => c.type === 'markdown');
+    if (mdContent) {
+      this.sectionTitles = mdContent.filter(c => c.value.match(regex));
+    }
+    if (this.sectionTitles) {
+      this.sectionTitles.map(title => {
+        titles.push(title.value);
+      });
+    }
     titles.map(title => this.h.createTocItems(title, this.tocItems));
   }
 
