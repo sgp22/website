@@ -1,7 +1,8 @@
-import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
+import { HelpersService } from '../../shared/helpers.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as semver from 'semver';
 
@@ -37,7 +38,7 @@ export class DocsContentPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private _el: ElementRef
+    private h: HelpersService
   ) { }
 
   ngOnInit() {
@@ -222,19 +223,6 @@ export class DocsContentPageComponent implements OnInit {
     return url;
   }
 
-  createTocItems(item) {
-    const regexId = new RegExp(/id=(?:'|")(.*?)(?:'|")/g);
-    const regexLabel = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
-    const ids = item.match(regexId);
-    const id = ids[0].replace(/id=(?:'|")/g, '').replace(/(?:'|")$/, '');
-    const labels = item.match(regexLabel);
-    const label = labels[0].replace(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>))/, '').replace(/<\/h2>/, '');
-    this.tocItems.push({
-      label: label,
-      id: id
-    });
-  }
-
   buildToc() {
     this.tocItems = [];
     const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
@@ -247,10 +235,10 @@ export class DocsContentPageComponent implements OnInit {
       this.apiTitles = null;
     }
     if (this.apiTitles) {
-      this.apiTitles.map(item => this.createTocItems(item));
+      this.apiTitles.map(item => this.h.createTocItems(item, this.tocItems));
     }
     if (this.bodyTitles) {
-      this.bodyTitles.map(item => this.createTocItems(item));
+      this.bodyTitles.map(item => this.h.createTocItems(item, this.tocItems));
     }
   }
 

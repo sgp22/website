@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { HelpersService } from '../../shared/helpers.service';
 
 @Component({
   selector: 'core-content-page',
@@ -18,7 +18,7 @@ export class CoreContentPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService,
-    private sanitizer: DomSanitizer,
+    private h: HelpersService
   ) { }
 
   ngOnInit() {
@@ -55,19 +55,6 @@ export class CoreContentPageComponent implements OnInit {
     });
   }
 
-  createTocItems(item) {
-    const regexId = new RegExp(/id=(?:'|")(.*?)(?:'|")/g);
-    const regexLabel = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
-    const ids = item.match(regexId);
-    const id = ids[0].replace(/id=(?:'|")/g, '').replace(/(?:'|")$/, '');
-    const labels = item.match(regexLabel);
-    const label = labels[0].replace(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>))/, '').replace(/<\/h2>/, '');
-    this.tocItems.push({
-      label: label,
-      id: id
-    });
-  }
-
   buildToc() {
     this.tocItems = [];
     const titles = [];
@@ -77,7 +64,7 @@ export class CoreContentPageComponent implements OnInit {
     this.sectionTitles.map(title => {
       titles.push(title.value);
     });
-    titles.map(title => this.createTocItems(title));
+    titles.map(title => this.h.createTocItems(title, this.tocItems));
   }
 
   pageLoadToSection() {
