@@ -89,6 +89,11 @@ def post(request):
                 root_path,
                 zipped_file.lower()))
             content = ContentFile(zipf.read(zipped_file))
+            try:
+                read_contents_bytes = content.read()
+                read_contents_str = read_contents_bytes.decode('utf-8')
+            except Exception as e:
+                print("type error: " + str(e))
 
             # Store file in AWS
             default_storage.save(path, content)
@@ -110,11 +115,9 @@ def post(request):
 
                 if ext in index_ext_types and dir_root in index_dirs:
                     try:
-                        read_contents_bytes = content.read()
-                        read_contents_str = read_contents_bytes.decode('utf-8')
                         content_obj = json.loads(read_contents_str)
-                    except:
-                        print("Couldn't parse json string")
+                    except Exception as e:
+                        print("type error: " + str(e))
                     try:
                         # @NOTE: if you add any data to be indexed here
                         # you also need to add it in `src/app/index_s3.py`
