@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SidebarService } from './sidebar.service';
 import { LibraryService } from '../../shared/library.service';
 import { HelpersService } from '../../shared/helpers.service';
+import { NgForm } from '@angular/forms';
 import * as semver from 'semver';
 
 @Component({
   selector: 'sidebar-code',
-  templateUrl: './sidebar.component.html'
+  templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent implements OnInit, OnChanges {
   public sidebarPath: string;
@@ -20,6 +21,8 @@ export class SidebarComponent implements OnInit, OnChanges {
   public urlSegments: any;
   @Input() lib;
   @Input() ver;
+  @ViewChild('searchText') searchText: NgForm;
+  @Output() closeSB = new EventEmitter();
 
   constructor(
     private sidebarService: SidebarService,
@@ -42,6 +45,12 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {}
+
+  closeSidebar() {
+    if (this.helpers.checkViewport('(min-width: 600px)')) {
+      this.closeSB.emit('closed');
+    }
+  }
 
   updateNav(path, lib, version) {
     this.sidebarPath = path;

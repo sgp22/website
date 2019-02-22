@@ -37,7 +37,7 @@
     <ng-container>
       <nav class="main-nav">
         <ng-container *ngFor="let navItem of navItems">
-          <a class="ids-btn ids-btn--link" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" routerLink="{{navItem.meta.slug}}">
+          <a class="main-nav__item" id="{{navItem.id}}" routerLinkActive="main-nav__item--current" routerLink="{{navItem.meta.slug}}">
             {{navItem.title}}
           </a>
         </ng-container>
@@ -49,8 +49,10 @@
         </a>
       </nav>
     </ng-container>
-    <button class="ids-btn ids-btn--primary btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'"
-      (click)="toggleNav()">Menu</button>
+    <button class="ids-btn ids-btn--link btn--nav--toggle" [ngClass]="navToggle && 'btn--custom--small--active'"
+      (click)="toggleNav()">
+      <svg><use xlink:href="#icon-menu" /></svg>
+    </button>
   </div>
 </header>
 

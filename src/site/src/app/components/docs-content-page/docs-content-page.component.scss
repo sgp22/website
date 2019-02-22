@@ -1,3 +1,4 @@
+@import '../../../assets/css/variables.scss';
 
 .inline-demo {
   margin: calc(3 * var(--theme-number-spacing-base)) 0;
@@ -19,5 +20,35 @@
 .inline-demo .inline-demo-links li {
   float: left;
   margin: 0;
-  padding: 0 4px;
+  padding: 0;
+}
+
+.example-list {
+  border-top: 1px solid var(--theme-color-palette-graphite-70);
+
+  li {
+    align-items: center;
+    border-bottom: 1px solid var(--theme-color-palette-graphite-20);
+    display: flex;
+    list-style-type: none;
+    margin-left: 0;
+    padding: calc(var(--theme-number-spacing-base) * 2) 0;
+  }
+}
+
+.demo-links {
+  margin-left: auto;
+}
+
+.demo-link {
+  margin-left: var(--theme-number-spacing-base);
+
+  svg {
+    color: $azure-base;
+    fill: $azure-base;
+  }
+}
+
+.iframe-wrapper {
+  border: 1px solid var(--theme-color-palette-graphite-20);
 }

@@ -1,15 +1,107 @@
 @import '../../../assets/css/breakpoints.scss';
+@import '../../../assets/css/variables.scss';
 
 .toc {
-  border-left: 1px solid var(--input-color-readonly-border);
-  display: none;
-  font-size: 1.4rem;
-  min-width: 200px;
+  background-color: var(--theme-color-palette-white);
+  font-size: var(--theme-size-font-xs);
+  margin-top: calc(var(--theme-number-spacing-base) * 6);
+  max-width: 300px;
   position: fixed;
-  right: calc(var(--theme-number-spacing-base) * 2);
+  right: 0;
+  top: calc(var(--theme-number-spacing-base) * 6 + 56px);
+  z-index: 10000;
+
+  .ids-list {
+    border-left: 1px solid $graphite-lightest;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  li {
+    margin-left: 0;
+  }
+
+  &.toc--desktop {
+    display: none;
+
+    @media screen and (min-width: $breakpoint-xl) {
+      display: block;
+    }
+  }
+
+  &.toc--mobile {
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+    display: none;
+    padding-bottom: calc(var(--theme-number-spacing-base) * 2);
+    padding-left: calc(var(--theme-number-spacing-base) * 2);
+    padding-top: calc(var(--theme-number-spacing-base) * 2);
+    right: 0;
+    top: calc(var(--theme-number-spacing-base) * 6 + 56px);
+
+    @media screen and (min-width: $breakpoint-sm) {
+      display: block;
+    }
+
+    @media screen and (min-width: $breakpoint-xl) {
+      display: none;
+    }
+  }
+}
+
+.toc-toggle--mobile {
+  background: var(--theme-color-palette-white);
+  border: none;
+  border-radius: var(--theme-number-border-radius-sm) 0 0 var(--theme-number-border-radius-sm);
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: none;
+  margin-top: calc(var(--theme-number-spacing-base) * 6);
+  padding: calc(var(--theme-number-spacing-base) * 2);
+  position: fixed;
+  right: 0;
   top: calc(var(--theme-number-spacing-base) * 6 + 56px);
 
-  @media screen and (min-width: $breakpoint-xl) {
+  @media screen and (min-width: $breakpoint-sm) {
     display: block;
+  }
+
+  @media screen and (min-width: $breakpoint-xl) {
+    display: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  svg {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.toc--mobile--close {
+  background-color: var(--theme-color-palette-white);
+  border: none;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  left: -54px;
+  padding: calc(var(--theme-number-spacing-base) * 2);
+  position: absolute;
+  top: 0;
+
+  &::after {
+    background-color: var(--theme-color-palette-white);
+    content: ' ';
+    display: block;
+    height: 100%;
+    position: absolute;
+    right: -5px;
+    top: 0;
+    width: 10px;
+  }
+
+  &:focus {
+    outline: none;
   }
 }

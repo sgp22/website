@@ -1,7 +1,25 @@
-<nav *ngIf="tocItems.length >= 3 && !landingPage" class="toc">
+<button class="toc-toggle--mobile" (click)="toggleToc()">
+  <svg><use xlink:href="#icon-bullet-list" /></svg>
+</button>
+<nav *ngIf="tocItems.length >= 3 && !landingPage" class="toc toc--desktop">
   <ul class="ids-list ids-list--hover">
     <li *ngFor="let tocItem of tocItems">
-      <a class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
+      <a [ngClass]="{'ids-list--item--selected': currentSection === tocItem.id}" class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
     </li>
   </ul>
+  <back-to-top></back-to-top>
+</nav>
+
+<nav *ngIf="showToc" [@slideInRight] class="toc toc--mobile">
+  <button class="toc--mobile--close" (click)="toggleToc()">
+    <svg class="ids-icon">
+      <use xlink:href="#icon-close" />
+    </svg>
+  </button>
+  <ul class="ids-list ids-list--hover">
+    <li *ngFor="let tocItem of tocItems">
+      <a [ngClass]="{'ids-list--item--selected': currentSection === tocItem.id}" class="ids-list--item" routerLink="." [fragment]="tocItem.id">{{tocItem.label}}</a>
+    </li>
+  </ul>
+  <back-to-top></back-to-top>
 </nav>

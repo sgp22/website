@@ -3,7 +3,7 @@
   <div class="site-footer--top">
 
     <div class="ids-row ids-container">
-      <div class="ids-row--col-sm-10 ids-row--offset-sm-1 ids-row--col-md-4 ids-row--offset-md-0 ids-row--col-lg-2 ids-row--offset-lg-1">
+      <div class="ids-row--col-5 ids-row--col-md-2">
         <h3>Tools</h3>
         <ul class="site-footer--nav">
           <li><a href="https://github.com/infor-design" target="_blank">GitHub</a></li>
@@ -11,18 +11,16 @@
           <li><a href="http://sohodeprecate.infor.com/" target="_blank">SoHo Xi Site</a></li>
         </ul>
       </div>
-      <div class="ids-row--col-sm-10 ids-row--offset-sm-1 ids-row--col-md-4 ids-row--col-lg-2">
+      <div class="ids-row--col-5 ids-row--col-md-2">
         <h3>Resources</h3>
         <ul class="site-footer--nav">
           <li><a routerLink="/blog">Blog</a></li>
           <li><a routerLink="/resources/faq">FAQ</a></li>
-          <li><a href="https://www.infor.com/about/legal" target="_blank">Terms</a></li>
-          <li><a routerLink="/resources/terms-conditions">Conditions</a></li>
         </ul>
       </div>
-      <div class="site-footer--newsletter-container ids-row--col-sm-10 ids-row--offset-sm-1 ids-row--col-md-4 ids-row--col-lg-3 ids-row--offset-lg-2">
+      <div class="ids-row--col-sm-10 ids-row--offset-md-4 ids-row--col-md-4">
 
-        <h3>Subscribe</h3>
+        <h3>Get Engaged</h3>
 
         <!-- Begin MailChimp Signup Form -->
         <div id="mc_embed_signup">
@@ -32,11 +30,11 @@
 
             <div id="mc_embed_signup_scroll ">
 
-              <div class="mc-field-group ids-form-group">
-                <label for="mce-EMAIL">Email Address<span class="asterisk">*</span></label>
-                <div class="ids-form-controls--horizontal">
-                  <input #mceEMAIL type="email" value="" name="EMAIL" class="required email ids-form-control" id="mce-EMAIL">
-                  <a class="ids-btn ids-btn--primary" target="_blank" href="https://infor.us18.list-manage.com/subscribe?u=50922b2a4dbfe95c954a9ebd6&amp;id=6ed131db92&amp;EMAIL={{mceEMAIL.value}}">Subscribe</a>
+              <div class="mc-field-group">
+                <label for="mce-EMAIL" class="ids-visuallyhidden">Email Address<span class="asterisk">*</span></label>
+                <div>
+                  <input #mceEMAIL type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Enter your email address">
+                  <a target="_blank" href="https://infor.us18.list-manage.com/subscribe?u=50922b2a4dbfe95c954a9ebd6&amp;id=6ed131db92&amp;EMAIL={{mceEMAIL.value}}"><svg class="ids-icon"><use xlink:href="#icon-caret-right" /></svg></a>
                 </div>
               </div>
 
@@ -62,7 +60,13 @@
 
   <div class="site-footer--btm">
 
-    <p class="site-footer--copy">Copyright &copy; Infor. All rights reserved.</p>
+    <img src="../../assets/svgs/logo-black.svg" alt="Infor">
+
+    <nav>
+      <a href="https://www.infor.com/about/legal" target="_blank">Terms</a>
+      <a routerLink="/resources/terms-conditions">Conditions</a>
+      <!-- <a href="#0">Cookies</a> -->
+    </nav>
 
   </div>
 

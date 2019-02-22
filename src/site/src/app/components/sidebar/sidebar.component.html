@@ -1,6 +1,11 @@
 <aside class="sidebar--code">
+
+  <ng-content></ng-content>
+
+  <h3 class="sidebar--title">Components</h3>
+
   <div class="ids-form-group library-select-group">
-    <label for="select-version">Version</label>
+    <label for="select-version">Version Number</label>
     <select #option (change)="onVersionChange(option.value)" id="select-version" class="ids-form-control">
       <option *ngFor="let version of versionPaths" value="/code/{{version.full}}{{element}}" [selected]="version.label == currentVersion">
         {{ version.label }}
@@ -11,7 +16,7 @@
   <nav class="sidebar-nav">
     <ul class="ids-list ids-list--hover">
       <li *ngFor="let section of sidebarNav; let i = index;">
-        <a *ngIf="!section.pages" class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{section.slug}}" routerLinkActive="ids-list--item--selected">{{section.name}}</a>
+        <a *ngIf="!section.pages" class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{section.slug}}" routerLinkActive="ids-list--item--selected" (click)="closeSidebar($event)">{{section.name}}</a>
         <span
           *ngIf="section.pages"
           class="ids-list--item ids-list--heading-accordion"
@@ -29,11 +34,11 @@
           [ngClass]="{ 'ids-list--expanded' : !expandedLevel1[i] }"
         >
           <li *ngFor="let child of section?.pages">
-            <a *ngIf="!child.pages" class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{child.slug}}" routerLinkActive="ids-list--item--selected">{{child.name}}</a>
+            <a *ngIf="!child.pages" class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{child.slug}}" routerLinkActive="ids-list--item--selected" (click)="closeSidebar($event)">{{child.name}}</a>
             <span *ngIf="child.pages" class="ids-list--item ids-list--heading">{{child.name}}</span>
             <ul *ngIf="child.pages" class="ids-list ids-list--expandable ids-list--expanded">
               <li *ngFor="let childLevel2 of child.pages">
-                <a class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{childLevel2.slug}}" routerLinkActive="ids-list--item--selected">{{childLevel2.name}}</a>
+                <a class="ids-list--item" routerLink="/code/{{sidebarPath}}/{{childLevel2.slug}}" routerLinkActive="ids-list--item--selected" (click)="closeSidebar($event)">{{childLevel2.name}}</a>
               </li>
             </ul>
           </li>

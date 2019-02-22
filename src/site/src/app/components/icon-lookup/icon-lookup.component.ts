@@ -11,6 +11,7 @@ export class IconLookupComponent implements OnInit {
   @Input() iconType: string;
   @ViewChild('searchText') searchText: NgForm;
   public icons: any;
+  public downloadLinksVisible = [];
 
   constructor(
     private iconLookup: IconLookupService

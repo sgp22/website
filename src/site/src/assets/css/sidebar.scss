@@ -1,16 +1,49 @@
-@media only screen and (min-width: 600px) {
-  .sidebar {
-    border-right: 1px solid #d9d9d9;
-    height: 100vh;
-    left: 0;
-    overflow-y: auto;
-    padding-bottom: 150px;
-    position: fixed;
+@import '../css/breakpoints.scss';
+
+.sidebar {
+  background-color: var(--theme-color-palette-white);
+  border-right: 1px solid var(--list-color-divider-border);
+  height: 100vh;
+  left: 0;
+  overflow-y: auto;
+  padding: calc(var(--theme-number-spacing-base) * 6) 0;
+  position: fixed;
+  z-index: 2;
+}
+
+.sidebar--title {
+  margin-bottom: calc(var(--theme-number-spacing-base) * 4);
+  margin-top: 0;
+  padding: 0 calc(var(--theme-number-spacing-base) * 4);
+}
+
+.sidebar-nav {
+  padding: 0 calc(var(--theme-number-spacing-base) * 2);
+}
+
+.btn--open-sidebar {
+  color: var(--theme-color-font-info);
+  display: block;
+  font-size: var(--theme-size-font-xs);
+  margin-top: calc(var(--theme-number-spacing-base) * 5);
+
+  span {
+    margin-left: var(--theme-number-spacing-base);
+  }
+
+  @media screen and (min-width: $breakpoint-sm) {
+    display: none;
   }
 }
 
-.sidebar--code {
-  padding: calc(var(--theme-number-spacing-base) * 6) 0;
+.btn--close-sidebar {
+  display: block;
+  position: absolute;
+  right: 0;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    display: none;
+  }
 }
 
 .ids-list--expandable {
@@ -18,16 +51,6 @@
 
   &.ids-list--expanded {
     display: block;
-  }
-}
-
-.ids-list {
-  li {
-    &:last-child {
-      .ids-list--heading-accordion {
-        border-bottom: 1px solid var(--input-color-readonly-background);
-      }
-    }
   }
 }
 
@@ -47,16 +70,23 @@
       fill: var(--theme-color-font-base);
     }
   }
-
-  &.ids-list--heading-accordion--active {
-    border-bottom: 1px solid var(--input-color-readonly-background);
-
-    .ids-icon {
-      transform: rotate(-180deg) translateY(-30%);
-    }
-  }
 }
 
 .library-select-group {
-  padding: 0 16px;
+  label {
+    color: var(--theme-color-font-base);
+    font-weight: var(--theme-number-font-weight-bold);
+    margin-bottom: calc(var(--theme-number-spacing-base) * 2);
+    padding: 0 calc(var(--theme-number-spacing-base) * 4);
+  }
+
+  .ids-form-control {
+    background-color: var(--theme-color-body-base);
+    border-bottom: 1px solid var(--list-color-divider-border);
+    border-left: none;
+    border-radius: 0;
+    border-right: none;
+    border-top: 1px solid var(--list-color-divider-border);
+    padding: calc(var(--theme-number-spacing-base) * 2) calc(var(--theme-number-spacing-base) * 4);
+  }
 }

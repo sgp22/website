@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as semver from 'semver';
+
+interface TocItems {
+  label: string;
+  id: string;
+}
 
 @Component({
   selector: 'docs-content-page',
@@ -18,18 +23,22 @@ export class DocsContentPageComponent implements OnInit {
   public component: string;
   public currentVersion: string;
   public versionPaths: any;
-  public tocItems: any;
+  public tocItems: TocItems[] = [];
   public bodyTitles: any;
   public apiTitles: any;
   public loading: boolean;
   public showWarning: boolean;
+  public currentSection: string;
+  public scrollOffset = 150;
+  @ViewChild('scrollSpy') scrollSpy;
 
   constructor(
     private docsService: DocsService,
     private libraryService: LibraryService,
     private route: ActivatedRoute,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private _el: ElementRef
   ) { }
 
   ngOnInit() {
@@ -79,8 +88,6 @@ export class DocsContentPageComponent implements OnInit {
         .subscribe(res => {
 
           this.docs = res;
-          this.handleRelativeLinks(this.docs);
-          this.buildToc();
 
           if (this.docs.api) {
             this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.docs.api);
@@ -103,6 +110,8 @@ export class DocsContentPageComponent implements OnInit {
             }
           }
 
+          this.handleRelativeLinks(this.docs);
+          this.buildToc();
           this.loading = false;
 
           if (!this.loading) {
@@ -235,6 +244,8 @@ export class DocsContentPageComponent implements OnInit {
     }
     if (this.docs.api) {
       this.apiTitles = this.docs.api.match(regex);
+    } else {
+      this.apiTitles = null;
     }
     if (this.apiTitles) {
       this.apiTitles.map(item => this.createTocItems(item));
@@ -267,6 +278,24 @@ export class DocsContentPageComponent implements OnInit {
       this.showWarning = true;
     } else {
       this.showWarning = false;
+    }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onSectionChange() {
+    let currentSection: string;
+    const sections = this._el.nativeElement.querySelectorAll('h2');
+    const scrollTop = event.target['scrollingElement']['scrollTop'];
+
+    for (let i = 0; i < sections.length; i++) {
+      const element = sections[i];
+      if (element.offsetTop - this.scrollOffset <= scrollTop) {
+        currentSection = element.id;
+      }
+    }
+
+    if (currentSection !== this.currentSection) {
+      this.currentSection = currentSection;
     }
   }
 }

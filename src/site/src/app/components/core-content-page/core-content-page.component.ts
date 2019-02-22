@@ -42,5 +42,4 @@ export class CoreContentPageComponent implements OnInit {
       (<any>window).ga('send', 'pageview');
     });
   }
-
 }
