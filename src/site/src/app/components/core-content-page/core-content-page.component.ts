@@ -63,11 +63,9 @@ export class CoreContentPageComponent implements OnInit {
     this.tocItems = [];
     const titles = [];
     const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
-    const findH2 = new RegExp(/(\<h2(.*?))\>(.*)(<\/h2>)/i);
     const content = this.pageContent.body.filter(this.isMarkdownOrRichText);
     if (content) {
       this.sectionTitles = content.filter(c => c.value.match(regex));
-      const test = content.filter(c => c.value.match(findH2));
     }
     if (this.sectionTitles) {
       this.sectionTitles.map(title => {
