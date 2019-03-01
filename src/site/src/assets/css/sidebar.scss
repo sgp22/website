@@ -6,13 +6,9 @@
   height: 100vh;
   left: 0;
   overflow-y: auto;
-  padding-bottom: 150px;
+  padding: calc(var(--theme-number-spacing-base) * 6) 0;
   position: fixed;
   z-index: 2;
-}
-
-.sidebar--code {
-  padding: calc(var(--theme-number-spacing-base) * 6) 0;
 }
 
 .sidebar--title {
@@ -72,12 +68,6 @@
   &:hover {
     .ids-icon {
       fill: var(--theme-color-font-base);
-    }
-  }
-
-  &.ids-list--heading-accordion--active {
-    .ids-icon {
-      transform: rotate(-180deg) translateY(-30%);
     }
   }
 }
