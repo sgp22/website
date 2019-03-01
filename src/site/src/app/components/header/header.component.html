@@ -1,6 +1,6 @@
 <header
   class="site-header"
-  [ngClass]="{'site-header--home--top' : !headerTop && isHome }"
+  [ngClass]="{'site-header--home--top' : !headerTop && isHome && !navToggle }"
   (scroll)="onWindowScroll($event)">
   <div class="side-header__inner">
     <a class="logo" routerLink="/">

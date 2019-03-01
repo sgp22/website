@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ElementRef, ViewChild, HostListener } from '@
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'site-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.checkFirstSection();
+    // this.checkFirstSection();
   }
 
   private checkFirstSection() {

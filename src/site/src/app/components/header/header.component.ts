@@ -1,7 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, HostListener } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { LibraryService } from '../../shared/library.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'site-header',

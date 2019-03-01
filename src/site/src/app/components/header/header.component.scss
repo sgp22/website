@@ -83,7 +83,15 @@
   .ids-icon {
     color: var(--theme-color-palette-white);
   }
+
+  .btn--nav--toggle {
+    svg {
+      color: var(--theme-color-palette-white);
+    }
+  }
 }
+
+
 
 /*
   Main Nav
@@ -185,7 +193,7 @@
   display: none;
   padding: calc(var(--theme-number-spacing-base) * 4);
   position: fixed;
-  top: auto;
+  top: $headerHeight;
   width: 100%;
   z-index: 3;
 
