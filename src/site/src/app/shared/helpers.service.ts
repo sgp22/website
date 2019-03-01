@@ -30,14 +30,14 @@ export class HelpersService {
     const regexId = new RegExp(/id=(?:'|")(.*?)(?:'|")/g);
     const regexLabel = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
     const ids = item.match(regexId);
-    const id = ids.map(id => id.replace(/id=(?:'|")/g, '').replace(/(?:'|")$/, ''));
+    const id = ids.map(i => i.replace(/id=(?:'|")/g, '').replace(/(?:'|")$/, ''));
     const labels = item.match(regexLabel);
-    const label = labels.map(label => label.replace(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>))/, '').replace(/<\/h2>/, ''));
+    const label = labels.map(lbl => lbl.replace(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>))/, '').replace(/<\/h2>/, ''));
     for (let i = 0; i < id.length; i++) {
       tocItems.push({
         label: label[i],
         id: id[i]
-      })
+      });
     }
   }
 
