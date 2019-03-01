@@ -29,6 +29,8 @@ urlpatterns = [
     # stats
     url(r'^api/stats/', include('stats.urls')),
 
+    url(r'^api/library-versions/', include('library_versions.urls')),
+
     # Wagtail pages.
     url(r'^', include(wagtail_urls)),
 ]

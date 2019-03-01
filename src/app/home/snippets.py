@@ -1,11 +1,10 @@
-from __future__ import absolute_import, unicode_literals
-
 from django.db import models
 
 from wagtail.snippets.models import register_snippet
 from wagtail.admin.edit_handlers import (
     PageChooserPanel
 )
+from wagtail.admin.edit_handlers import FieldPanel
 
 from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
@@ -23,7 +22,7 @@ class ElementDescriptor(ClusterableModel):
     name = models.CharField(max_length=255)
     descriptor_type = models.SmallIntegerField()
     description = models.TextField()
-    
+
     def __str__(self):
         return self.name
 
@@ -82,3 +81,12 @@ class Cornerstone(models.Model):
 
     def __str__(self):
         return self.name
+
+@register_snippet
+class LibraryVersion(models.Model):
+    name = models.CharField(max_length=255)
+    version = models.CharField(max_length=255)
+    isActive = models.BooleanField()
+
+    def __str__(self):
+        return self.name + '@' + self.version

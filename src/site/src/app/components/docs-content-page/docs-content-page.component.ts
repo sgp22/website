@@ -56,18 +56,13 @@ export class DocsContentPageComponent implements OnInit {
       }
 
       this.libraryService.loadAllLibraryVersions(this.library)
-        .subscribe(res => {
-          this.versionPaths = res['files']
-            .map(file => {
-              const versions = {};
-              versions['full'] = file.replace(/docs/, '');
-              versions['label'] = file.split('/').slice(-2, -1).join('');
-              return versions;
-            })
-            .sort((a, b) => {
-              return semver.compare(a.label, b.label);
-            })
-            .reverse();
+        .subscribe((res: []) => {
+          this.versionPaths = res.map(version => {
+            return {
+              full: `code/${this.library}/${version}`,
+              label: version
+            };
+          });
 
           this.versionPaths.unshift({
             full: `/${this.library}/latest/`,

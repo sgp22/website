@@ -12,7 +12,6 @@ import hashlib
 from html.parser import HTMLParser
 from bs4 import BeautifulSoup
 
-
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.conf import settings
@@ -22,6 +21,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from search.utils import DocsIndexer
+
+from home.snippets import LibraryVersion
 
 from . import matching_s3_objects
 
@@ -34,8 +35,8 @@ ES_HOST_URL = settings.ES_HOST_URL
 
 def strip_tags(input_html):
     soup = BeautifulSoup(input_html, 'html.parser')
-
     return soup.get_text()
+
 
 class UniqueDict(dict):
     def __setitem__(self, key, value):
@@ -44,32 +45,42 @@ class UniqueDict(dict):
         else:
             raise KeyError("Key already exists")
 
+
 def get_filtered_result(bucket_name, path):
     result = []
     filtered_result = set()
+    # Note that get_matching_s3_keys is a very expensive operation to loop through
+    # all AWS file pointers
     for item in matching_s3_objects.get_matching_s3_keys(bucket=bucket_name, prefix=path, suffix=('')):
-        result.append(item)
-
-    for item in result:
         regex = r"({}.*?/|{}.*)".format(path, path)
         patterns = re.compile(regex)
         match = patterns.search(item)
-
         filtered_result.add(match.group(1))
 
     return filtered_result
 
+
 def post(request):
     post_auth_key = request.POST.get('post_auth_key')
-    DOCS_API_KEY = os.getenv('DOCS_API_KEY', "")
+    docs_api_key = os.getenv('DOCS_API_KEY', '')
     es_index_prefix = settings.ES_INDEX_PREFIX
-
     root_path = request.POST.get('root_path', '').strip('/')
+    root_path_segs = root_path.split('/')
+
+    if (root_path is None or len(root_path_segs) != 2):
+        return Response({'root_path': 'ROOT_PATH is required'}, status=400)
+
+    obj, created = LibraryVersion.objects.get_or_create(
+        name = root_path_segs[0],
+        version = root_path_segs[1],
+        defaults={'isActive': True}
+    )
+
     uploaded_file = request.FILES.get('file')
 
     if post_auth_key is None:
         return Response({'post_auth_key': 'required. Use DOCS_API_KEY env var'}, status=400)
-    elif post_auth_key != DOCS_API_KEY:
+    elif post_auth_key != docs_api_key:
         return Response({'post_auth_key': 'DOCS_API_KEY required'}, status=401)
 
     if uploaded_file and uploaded_file.name.endswith('.zip'):
@@ -164,7 +175,6 @@ def get(request):
             'docs',
             library_name))
 
-
         s3_conf = {
             'aws_access_key_id': settings.AWS_ACCESS_KEY_ID,
             'aws_secret_access_key': settings.AWS_SECRET_ACCESS_KEY
@@ -172,12 +182,23 @@ def get(request):
 
         s3_resource = boto3.resource('s3', **s3_conf)
         bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-        bucket = s3_resource.Bucket(bucket_name)
 
         if version == 'latest':
-            all_versions_paths = get_filtered_result(bucket_name, library_path + "/")
-            all_versions = [s.lstrip(library_path).rstrip('/') for s in all_versions_paths]
-            latest_version = semver.rsort(all_versions, True)[0]
+            active_lib_versions = LibraryVersion.objects.all().filter(
+                name = library_name,
+                isActive = True
+            )
+
+            if not active_lib_versions:
+                return Response({
+                    'error': {
+                        'code': 404,
+                        'message': 'Error! 0 libraries documented.'
+                    }
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+            active_lib_semvers = [v.version for v in active_lib_versions]
+            latest_version = semver.rsort(active_lib_semvers, True)[0]
 
             latest_file_pointer = os.path.join(*(
                 library_path,

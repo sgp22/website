@@ -69,18 +69,13 @@ export class SidebarComponent implements OnInit, OnChanges {
     });
 
     this.libraryService.loadAllLibraryVersions(this.currentLibrary)
-      .subscribe(res => {
-        this.versionPaths = res['files']
-          .map(file => {
-            const versions = {};
-            versions['full'] = file.replace(/docs/, '');
-            versions['label'] = file.split('/').slice(-2, -1).join('');
-            return versions;
-          })
-          .sort((a, b) => {
-            return semver.compare(a.label, b.label);
-          })
-          .reverse();
+      .subscribe((res: []) => {
+        this.versionPaths = res.map(v => {
+          return {
+            full: `code/${this.currentLibrary}/${v}`,
+            label: v
+          };
+        });
 
         this.versionPaths.unshift({
           full: `/${this.currentLibrary}/latest/`,
@@ -92,5 +87,4 @@ export class SidebarComponent implements OnInit, OnChanges {
   onVersionChange(version) {
     this.router.navigate([version]);
   }
-
 }
