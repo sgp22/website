@@ -1,12 +1,11 @@
 # Each line is a file pattern followed by one or more owners.
 
 # Default owners for the repo:
-*       @jmacaluso711 @clepore
+*       @jmacaluso711 @clepore @nickwynja
 
 # Code owners for the docs directory
-.ebextensions/ @corpulent
-deploy-aws/    @corpulent
-deploy-pool/   @corpulent
-docker/        @corpulent
-src/app/config @corpulent
-docker-*.yml   @corpulent
+
+deploy/         @corpulent
+docker/         @corpulent
+src/app/config  @corpulent
+src/config      @corpulent
