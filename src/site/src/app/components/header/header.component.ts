@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { LibraryService } from '../../shared/library.service';
@@ -12,10 +12,12 @@ export class HeaderComponent implements OnInit {
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
   @ViewChild('trigger') trigger: ElementRef;
   @ViewChild('mobileTrigger') mobileTrigger: ElementRef;
+  @Input() isHome: boolean;
   public navItems: any;
   public navToggle = false;
   public popupmenuToggle = false;
   public libraries: any;
+  public headerTop = false;
 
   constructor(
     private pagesService: PagesService,
@@ -54,4 +56,14 @@ export class HeaderComponent implements OnInit {
     this.navToggle = false;
   }
 
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+    if (this.isHome) {
+      if (window.pageYOffset > 300) {
+        this.headerTop = true;
+      } else {
+        this.headerTop = false;
+      }
+    }
+  }
 }

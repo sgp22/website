@@ -12,6 +12,7 @@ declare let pendo;
 export class AppComponent implements OnInit {
   title = 'Infor Design System';
   public sohoModalVisible = false;
+  public isHome = false;
 
   public constructor(
     private router: Router,
@@ -30,8 +31,10 @@ export class AppComponent implements OnInit {
 
         if (url === '/') {
           this.titleService.setTitle(`Infor Design System`);
+          this.isHome = true;
         } else {
           this.titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
+          this.isHome = false;
         }
 
         // Initialize Pendo on page change

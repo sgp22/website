@@ -1,74 +1,40 @@
 @import '../../../assets/css/breakpoints.scss';
 
-.banner {
-  background: var(--theme-color-brand-primary-base);
-  color: var(--theme-color-brand-primary-contrast);
-  overflow: hidden;
-  padding: calc(85px - 24px) 0;
+.hero {
+  background: #8f17e6;
+  background:
+    -moz-linear-gradient(
+      top,
+      #8f17e6 0%,
+      #7714dc 70%,
+      #3d08a6 100%
+    );
+  background:
+    -webkit-linear-gradient(
+      top,
+      #8f17e6 0%,
+      #7714dc 70%,
+      #3d08a6 100%
+    );
+  background:
+    linear-gradient(
+      to bottom,
+      #8f17e6 0%,
+      #7714dc 70%,
+      #3d08a6 100%
+    );
+  height: 800px;
   position: relative;
-
-  h1,
-  p {
-    color: var(--theme-color-brand-primary-contrast);
-  }
-
-  h1 {
-    font-weight: var(--theme-number-font-weight-bold);
-    margin-bottom: calc(var(--theme-number-spacing-base) * 3);
-    margin-top: 0;
-  }
 }
 
-.banner--content {
-  padding-right: calc(var(--theme-number-spacing-base) * 15);
-
-  @media only screen and (min-width: $breakpoint-sm) {
-    padding-right: 0;
-  }
-}
-
-.banner--bg {
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100%;
-  overflow: visible;
+.hero-overlay {
+  background-image: url(../../../assets/img/grid-tile.png);
+  background-size: 45px 45px;
+  bottom: 0;
+  opacity: 0.08;
   position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30%;
-
-  @media only screen and (min-width: $breakpoint-md) {
-    width: 50%;
-  }
-
-  .white-dot-pattern {
-    height: 100%;
-    overflow: visible;
-    width: 100%;
-
-    path {
-      position: relative;
-      stroke: var(--theme-color-brand-primary-contrast);
-      transition: all 2.3s ease;
-    }
-
-    &.white-dot-pattern--settled {
-      .dot--pulse {
-        animation: pulse 1s ease alternate infinite;
-      }
-    }
-  }
-}
-
-@keyframes pulse {
-  from {
-    stroke-width: 1;
-  }
-
-  to {
-    stroke-width: 5;
-  }
+  top: 0;
+  width: 100%;
 }
 
 .col--border {

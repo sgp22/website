@@ -1,8 +1,8 @@
 from home import hooks
 
 from wagtail.contrib.modeladmin.options import (
-    ModelAdmin, 
-    ModelAdminGroup, 
+    ModelAdmin,
+    ModelAdminGroup,
     modeladmin_register
 )
 
