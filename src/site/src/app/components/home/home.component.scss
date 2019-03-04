@@ -58,6 +58,10 @@
   color: var(--theme-color-palette-slate-60);
 }
 
+.row--title {
+  font-weight: var(--theme-number-font-weight-light);
+}
+
 /*
   IDS Row
 */
@@ -151,7 +155,7 @@
 */
 .row--design-system {
   .row--blocks {
-    margin-top: calc(var(--theme-number-spacing-base) * 5)
+    margin-top: calc(var(--theme-number-spacing-base) * 5);
   }
 }
 
@@ -241,4 +245,82 @@
 
 .row--block--design-system--color {
   background-image: url(../../../assets//img/design-system-color.png);
+}
+
+/*
+  Components Row
+*/
+.row--components {
+  background-color: var(--body-color-primary-background);
+}
+
+.row--components--text {
+  a {
+    margin-top: calc(var(--theme-number-spacing-base) * 3);
+  }
+}
+
+.row--components--image--mobile {
+  display: block;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    display: none;
+  }
+}
+
+.row--components--image {
+  display: none;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    display: block;
+  }
+}
+
+/*
+  Resources Row
+*/
+.row--blocks--resources {
+  margin-top: calc(var(--theme-number-spacing-base) * 5);
+}
+
+.row--block--resources {
+  border: 1px solid var(--theme-color-palette-graphite-20);
+  width: calc(33.33% - calc(var(--theme-number-spacing-base) * 3));
+  margin-right: calc(var(--theme-number-spacing-base) * 3);
+  padding: 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.row--block--resources--link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  color: var(--body-color-primary-font);
+  text-decoration: none;
+}
+
+.row--block-resources--text {
+  padding: calc(var(--theme-number-spacing-base) * 3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  p {
+    margin-top: 0;
+  }
+
+  span {
+    color: var(--theme-color-font-info);
+    font-size: var(--theme-size-font-xs);
+    font-style: italic;
+    margin-bottom: calc(var(--theme-number-spacing-base) * 6);
+  }
 }

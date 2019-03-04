@@ -56,7 +56,7 @@
     <div class="ids-row row--design-tokens--top">
       <div class="ids-row--col-md-10 ids-row--offset-md-1">
         <span class="row--kicker">What's New in IDS</span>
-        <h1>Introducing Design Tokens</h1>
+        <h1 class="row--title">Introducing Design Tokens</h1>
       </div>
     </div>
     <div class="row--design-tokens--animation">Animation Placeholder</div>
@@ -74,7 +74,7 @@
     <div class="ids-row">
       <div class="ids-row--col-md-10 ids-row--offset-md-1">
         <span class="row--kicker">System Guidelines</span>
-        <h1>Elements of a Design System</h1>
+        <h1 class="row--title">Elements of a Design System</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices rutrum ipsum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus vitae condimentum velit. Proin erat orci.</p>
       </div>
     </div>
@@ -112,41 +112,62 @@
 
 <section class="row row--4 row--components">
   <div class="row--container">
-    <div>
-      <span class="row--kicker">Using Components</span>
-      <h1>Design with Code</h1>
-      <p>Component libraries are set-up to help you integrate UI patterns into your projects quickly. With built-in responsive features and patterns for many use cases, enterprise components can help you design new apps and features right in your browser.</p>
-      <a class="ids-btn ids-btn--primary" routerLink="/code/components">View Components</a>
-    </div>
-    <div>
-      Card Image
+    <div class="ids-row">
+      <div class="ids-row--col-sm-11 ids-row--offset-sm-1">
+        <div class="ids-row ids-row--gutter">
+          <div class="ids-row--col-sm-8 row--components--text">
+            <span class="row--kicker">Using Components</span>
+            <h1 class="row--title">Design with Code</h1>
+            <img class="row--components--image--mobile" src="../../../assets/img/components.png" alt="Components">
+            <p>Component libraries are set-up to help you integrate UI patterns into your projects quickly. With built-in responsive features and patterns for many use cases, enterprise components can help you design new apps and features right in your browser.</p>
+            <a class="ids-btn ids-btn--primary" routerLink="/code/components">View Components</a>
+          </div>
+          <div class="ids-row--col-sm-4 row--components--image">
+            <img src="../../../assets/img/components.png" alt="Components">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="row row--5 row--recources">
+<section class="row row--5 row--resources">
   <div class="row--container">
     <div class="ids-row">
       <div class="ids-row--col-md-10 ids-row--offset-md-1">
         <span class="row--kicker">Design & Development Resources</span>
-        <h1>Use Our Tools and Start Building</h1>
+        <h1 class="row--title">Use Our Tools and Start Building</h1>
       </div>
     </div>
-    <div class="row--blocks">
-      <div>
-        <div>Image</div>
-        <p>Follow us on GitHub to get the latest code, see updates, and contribute to the design system</p>
-        <a class="ids-btn ids-btn--primary" routerLink="/">View on GitHub</a>
+    <div class="row--blocks row--blocks--resources">
+      <div class="row--block row--block--resources">
+        <a class="row--block--resources--link" routerLink="/guidelines">
+          <div><img src="../../../assets/img/resources-github.jpg" alt="GitHub"></div>
+          <div class="row--block-resources--text">
+            <p>Follow us on GitHub to get the latest code, see updates, and contribute to the design system</p>
+            <button class="ids-btn ids-btn--primary">View on GitHub</button>
+          </div>
+        </a>
       </div>
-      <div>
-        <div>Image</div>
-        <p>Install our Sketch Library to start using our components and receive automatic updates</p>
-        <a class="ids-btn ids-btn--primary" routerLink="/">Sync Library </a>
+      <div class="row--block row--block--resources">
+        <a class="row--block--resources--link" routerLink="/guidelines">
+          <div><img src="../../../assets/img/resources-sketch-lib.jpg" alt="Sketch Library"></div>
+          <div class="row--block-resources--text">
+            <p>Install our Sketch Library to start using our components and receive automatic updates</p>
+            <span>Requires Sketch Version 53 or Newer</span>
+            <button class="ids-btn ids-btn--primary">Sync Library</button>
+          </div>
+        </a>
       </div>
-      <div>
-        <div>Image</div>
-        <p>If you’re unable to install our Sketch Library, dowload the latest version of our Sketch Toolkit</p>
-        <a class="ids-btn ids-btn--primary" routerLink="/">Download Toolkit</a>
+      <div class="row--block row--block--resources">
+        <a class="row--block--resources--link" routerLink="/guidelines">
+          <div><img src="../../../assets/img/resources-sketch-tool.jpg" alt="Sketch Tool"></div>
+          <div class="row--block-resources--text">
+            <p>If you’re unable to install our Sketch Library, dowload the latest version of our Sketch Toolkit</p>
+            <span>Requires Sketch Version 53 or Newer</span>
+            <button class="ids-btn ids-btn--primary">Download Toolkit</button>
+          </div>
+        </a>
       </div>
     </div>
   </div>
