@@ -37,7 +37,208 @@
   width: 100%;
 }
 
-.row-container {
-  max-width: 1440px;
+.row {
+  padding: calc(var(--theme-number-spacing-base) * 8) 0;
+}
+
+.row--container {
+  max-width: 1024px;
   margin: 0 auto;
+}
+
+.row--blocks {
+  display: flex;
+}
+
+.row--block {
+  padding: 0 calc(var(--theme-number-spacing-base) * 2);
+}
+
+.row--kicker {
+  color: var(--theme-color-palette-slate-60);
+}
+
+/*
+  IDS Row
+*/
+.row--ids--intro {
+  text-align: center;
+
+  p {
+    font-size: var(--theme-size-font-lg);
+    font-weight: var(--theme-number-font-weight-light);
+    line-height: var(--theme-number-font-line-height-lg);
+  }
+
+  a {
+    margin-top: calc(var(--theme-number-spacing-base) * 4);
+  }
+}
+
+.row--ids {
+  .row--blocks {
+    border-top: 1px solid var(--theme-color-palette-graphite-20);
+    margin-top: calc(var(--theme-number-spacing-base) * 8);
+    padding: calc(var(--theme-number-spacing-base) * 7) 0;
+  }
+
+  .row--block {
+    align-items: flex-start;
+    display: flex;
+
+    h3 {
+      margin-top: 0;
+      line-height: 1;
+    }
+
+    span {
+      margin-right: calc(var(--theme-number-spacing-base) * 2);
+    }
+
+    a {
+      color: var(--link-color-initial-font);
+      display: inline-block;
+      margin-top: calc(var(--theme-number-spacing-base) * 3);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--link-color-hover-font);
+      }
+
+      svg {
+        color: currentColor;
+        margin-left: var(--theme-number-spacing-base);
+      }
+    }
+  }
+}
+
+/*
+  Design Tokens Row
+*/
+.row--design-tokens {
+  color: var(--theme-color-palette-white);
+  background-color: var(--theme-color-brand-secondary-contrast);
+
+  .row--kicker {
+    color: currentColor;
+  }
+
+  h1 {
+    font-size: 6.0rem;
+    font-weight: var(--theme-number-font-weight-light);
+  }
+}
+
+.row--design-tokens--animation {
+  color: var(--theme-color-palette-graphite-60);
+  background-color: var(--theme-color-palette-graphite-20);
+  height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: calc(var(--theme-number-spacing-base) * 4) 0;
+}
+
+.row--design-tokens--btm {
+  a {
+    margin-top: calc(var(--theme-number-spacing-base) * 3);
+  }
+}
+
+/*
+  Design System Row
+*/
+.row--design-system {
+  .row--blocks {
+    margin-top: calc(var(--theme-number-spacing-base) * 5)
+  }
+}
+
+.row--block--design-system {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 150px;
+  width: calc(33.33% - calc(var(--theme-number-spacing-base) * 3));
+  margin-right: calc(var(--theme-number-spacing-base) * 3);
+  border-radius: 3px;
+  border: 1px solid var(--theme-color-palette-slate-40);
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  a {
+    position: relative;
+    color: var(--theme-color-palette-white);
+    display: block;
+    height: 116px;
+    text-decoration: none;
+    text-align: center;
+    z-index: 1;
+
+    @media screen and (min-width: $breakpoint-sm) {
+      height: 180px;
+    }
+
+    @media screen and (min-width: $breakpoint-md) {
+      height: 240px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    svg {
+      color: currentColor;
+    }
+  }
+
+  .row--block--design-system--content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    transition: all 0.3s ease;
+    width: 100%;
+    opacity: 0;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 117, 233, 0.5);
+    border-color: rgba(0, 117, 233, 0.5);
+
+    .row--block--design-system--content {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+
+    .row--block--design-system--overlay {
+      opacity: 0.8;
+    }
+  }
+
+  .row--block--design-system--overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--theme-color-brand-primary-base);
+    opacity: 0;
+    z-index: 0;
+    transition: all 0.3s ease;
+  }
+}
+
+.row--block--design-system--typography {
+  background-image: url(../../../assets//img/design-system-typography.png);
+}
+
+.row--block--design-system--iconography {
+  background-image: url(../../../assets//img/design-system-iconography.png);
+}
+
+.row--block--design-system--color {
+  background-image: url(../../../assets//img/design-system-color.png);
 }

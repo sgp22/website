@@ -3,80 +3,117 @@
 </header>
 
 <section class="row row--1 row--ids">
-  <p>Infor Design System is the central resource for development tools, best practices, and support documentation to help
-  everyone create consistent, quality experiences.</p>
-  <a class="ids-btn ids-btn--primary" routerLink="/code/ids-enterprise/latest">Get Started</a>
-  <div>
-    <div>
-      <span><svg class="ids-icon">
-          <use xlink:href="#icon-download"/></svg></span>
-      <div>
-        <h3>Guidelines</h3>
-        <p>View our principles and best practices for using type, colors, and components to creatre an optimal user
-          experience.</p>
-        <a routerLink="/guidelines">
-          View Design Guidelines
-          <svg class="ids-icon">
-            <use xlink:href="#icon-right-arrow"/></svg>
-        </a>
+  <div class="row--container">
+    <div class="ids-row">
+      <div class="row--ids--intro ids-row--col-md-8 ids-row--offset-md-2">
+        <p>Infor Design System is the central resource for development tools, best practices, and support documentation to help
+        everyone create consistent, quality experiences.</p>
+        <a class="ids-btn ids-btn--primary" routerLink="/code/ids-enterprise/latest">Get Started</a>
       </div>
     </div>
-    <div>
-      <span><svg class="ids-icon">
-          <use xlink:href="#icon-download"/></svg></span>
-      <div>
-        <h3>Components</h3>
-        <p>Our components library provides patterns and documentation for designing and building new products and
-          features.</p>
-        <a routerLink="/guidelines">
-          View Development Guidelines
-          <svg class="ids-icon">
-            <use xlink:href="#icon-right-arrow"/></svg>
-        </a>
+    <div class="row--blocks">
+      <div class="row--block">
+        <span><svg class="ids-icon"><use xlink:href="#icon-download"/></svg></span>
+        <div>
+          <h3>Guidelines</h3>
+          <p>View our principles and best practices for using type, colors, and components to creatre an optimal user
+            experience.</p>
+          <a routerLink="/guidelines">
+            View Design Guidelines
+            <svg class="ids-icon"><use xlink:href="#icon-right-arrow"/></svg>
+          </a>
+        </div>
       </div>
-    </div>
-    <div>
-      <span><svg class="ids-icon">
-          <use xlink:href="#icon-download"/></svg></span>
-      <div>
-        <h3>Resources</h3>
-        <p>Look through our documentation and tools to help you make the the most of the Infor Design System.</p>
-        <a routerLink="/guidelines">
-          View Our Resources
-          <svg class="ids-icon">
-            <use xlink:href="#icon-right-arrow"/></svg>
-        </a>
+      <div class="row--block">
+        <span><svg class="ids-icon"><use xlink:href="#icon-download"/></svg></span>
+        <div>
+          <h3>Components</h3>
+          <p>Our components library provides patterns and documentation for designing and building new products and
+            features.</p>
+          <a routerLink="/code/components">
+            View Development Guidelines
+            <svg class="ids-icon"><use xlink:href="#icon-right-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="row--block">
+        <span><svg class="ids-icon"><use xlink:href="#icon-download"/></svg></span>
+        <div>
+          <h3>Resources</h3>
+          <p>Look through our documentation and tools to help you make the the most of the Infor Design System.</p>
+          <a routerLink="/resources">
+            View Our Resources
+            <svg class="ids-icon"><use xlink:href="#icon-right-arrow"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="row row--2 row--design-tokens">
-  <div>
-    <span>What's New in IDS</span>
-    <h1>Introducing Design Tokens</h1>
-    <div class="animation-placeholder"></div>
-    <p>Design tokens are the single source of truth for style properties in IDS. Tokens are use to define values and attributes for UI elements in the design system. Implementing tokens enables you to update and customize the look of an application more easily.</p>
-    <a class="ids-btn ids-btn--primary" routerLink="/">Learn More</a>
+  <div class="row--container">
+    <div class="ids-row row--design-tokens--top">
+      <div class="ids-row--col-md-10 ids-row--offset-md-1">
+        <span class="row--kicker">What's New in IDS</span>
+        <h1>Introducing Design Tokens</h1>
+      </div>
+    </div>
+    <div class="row--design-tokens--animation">Animation Placeholder</div>
+    <div class="ids-row row--design-tokens--btm">
+      <div class="ids-row--col-md-10 ids-row--offset-md-1">
+        <p>Design tokens are the single source of truth for style properties in IDS. Tokens are use to define values and attributes for UI elements in the design system. Implementing tokens enables you to update and customize the look of an application more easily.</p>
+        <a class="ids-btn ids-btn--primary" routerLink="/">Learn More</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="row row--3 row--design-system">
-  <div>
-    <span>System Guidelines</span>
-    <h1>Elements of a Design System</h1>
-    <div>
-      <div><a routerLink="/">Image</a></div>
-      <div><a routerLink="/">Image</a></div>
-      <div><a routerLink="/">Image</a></div>
+  <div class="row--container">
+    <div class="ids-row">
+      <div class="ids-row--col-md-10 ids-row--offset-md-1">
+        <span class="row--kicker">System Guidelines</span>
+        <h1>Elements of a Design System</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices rutrum ipsum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus vitae condimentum velit. Proin erat orci.</p>
+      </div>
+    </div>
+    <div class="row--blocks">
+      <div class="row--block row--block--design-system row--block--design-system--typography">
+        <a routerLink="/guidelines/typography">
+          <div class="row--block--design-system--content">
+            <h2>Typography</h2>
+            <span>View Details <svg class="ids-icon"><use xlink:href="#icon-right-arrow "/></svg></span>
+          </div>
+        </a>
+        <div class="row--block--design-system--overlay"></div>
+      </div>
+      <div class="row--block row--block--design-system row--block--design-system--iconography">
+        <a routerLink="/guidelines/icons">
+          <div class="row--block--design-system--content">
+            <h2>Iconography</h2>
+            <span>View Details <svg class="ids-icon"><use xlink:href="#icon-right-arrow " /></svg></span>
+          </div>
+        </a>
+        <div class="row--block--design-system--overlay"></div>
+      </div>
+      <div class="row--block row--block--design-system row--block--design-system--color">
+        <a routerLink="/guidelines/colors">
+          <div class="row--block--design-system--content">
+            <h2>Color Palette </h2>
+            <span>View Details <svg class="ids-icon"><use xlink:href="#icon-right-arrow " /></svg></span>
+          </div>
+        </a>
+        <div class="row--block--design-system--overlay"></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="row row--4 row--components">
-  <div>
+  <div class="row--container">
     <div>
-    <span>Using Components</span>
+      <span class="row--kicker">Using Components</span>
       <h1>Design with Code</h1>
       <p>Component libraries are set-up to help you integrate UI patterns into your projects quickly. With built-in responsive features and patterns for many use cases, enterprise components can help you design new apps and features right in your browser.</p>
       <a class="ids-btn ids-btn--primary" routerLink="/code/components">View Components</a>
@@ -88,10 +125,14 @@
 </section>
 
 <section class="row row--5 row--recources">
-  <div>
-    <span>Design & Development Resources</span>
-    <h1>Use Our Tools and Start Building</h1>
-    <div>
+  <div class="row--container">
+    <div class="ids-row">
+      <div class="ids-row--col-md-10 ids-row--offset-md-1">
+        <span class="row--kicker">Design & Development Resources</span>
+        <h1>Use Our Tools and Start Building</h1>
+      </div>
+    </div>
+    <div class="row--blocks">
       <div>
         <div>Image</div>
         <p>Follow us on GitHub to get the latest code, see updates, and contribute to the design system</p>
@@ -112,7 +153,7 @@
 </section>
 
 <section class="row row--6 row--feedback ">
-  <div>
+  <div class="row--container">
     <h3>Give Us Your Feedback</h3>
     <p>We’re working to make our design system as robust and helpful as possible. Let us know if there is anything we can
     improve or if there is anything you couldn’t find.</p>
