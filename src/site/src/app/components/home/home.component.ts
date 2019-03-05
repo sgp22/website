@@ -34,11 +34,11 @@ export class HomeComponent implements OnInit {
       wrapAround: false,
       pageDots: false
     });
-    var cellsButtonGroup = document.querySelector('.hero-slider-nav');
-    var cellsButtons = Array.from(document.querySelectorAll('.hero-slider-nav__item'));
+    const cellsButtonGroup = document.querySelector('.hero-slider-nav');
+    const cellsButtons = Array.from(document.querySelectorAll('.hero-slider-nav__item'));
     heroFlkty.on('select', function() {
-      var previousSelectedButton = cellsButtonGroup.querySelector('.hero-slider-nav__item--selected');
-      var selectedButton = cellsButtons[heroFlkty.selectedIndex];
+      const previousSelectedButton = cellsButtonGroup.querySelector('.hero-slider-nav__item--selected');
+      const selectedButton = cellsButtons[heroFlkty.selectedIndex];
       previousSelectedButton.classList.remove('hero-slider-nav__item--selected');
       selectedButton.classList.add('hero-slider-nav__item--selected');
     })
@@ -50,6 +50,15 @@ export class HomeComponent implements OnInit {
       const index = cellsButtons.indexOf(el);
       heroFlkty.select(index);
     });
+    const imgs = Array.from(document.querySelectorAll('.hero-slider__image'));
+    heroFlkty.on('scroll', function(event, progress) {
+      heroFlkty.slides.forEach(function (slide, i) {
+        var img = imgs[i] as HTMLElement;
+        console.log(i);
+        var x = (slide.target + heroFlkty.x) * -1 / 3;
+        img.style.transform = 'translateX( ' + x + 'px)';
+      });
+    })
   }
 
   @HostListener('window:scroll', ['$event'])
