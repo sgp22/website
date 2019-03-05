@@ -54,7 +54,6 @@ export class HomeComponent implements OnInit {
     heroFlkty.on('scroll', function(event, progress) {
       heroFlkty.slides.forEach(function (slide, i) {
         var img = imgs[i] as HTMLElement;
-        console.log(i);
         var x = (slide.target + heroFlkty.x) * -1 / 3;
         img.style.transform = 'translateX( ' + x + 'px)';
       });
