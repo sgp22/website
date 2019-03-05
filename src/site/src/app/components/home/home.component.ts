@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, HostListener } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import Flickity from 'flickity';
 
 @Component({
   selector: 'site-home',
@@ -10,6 +11,8 @@ export class HomeComponent implements OnInit {
   @Input() page;
   @ViewChild('whiteDotPattern') whiteDotPattern: ElementRef;
   @ViewChild('section1') section1: ElementRef;
+  @ViewChild('heroSlider') heroSlider: ElementRef;
+  @ViewChild('heroSliderNav') heroSliderNav: ElementRef;
   public dotPatternPaths;
   public hpSections;
   public pageContent: any;
@@ -20,15 +23,33 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.checkFirstSection();
+    this.initHeroSlider();
   }
 
-  private checkFirstSection() {
-    const slideInAt = (window.innerHeight) - this.section1.nativeElement.offsetHeight / 20;
-    const isHalfShown = slideInAt > this.section1.nativeElement.offsetTop;
-    if (isHalfShown) {
-      this.section1.nativeElement.classList.add('section--visible');
-    }
+  initHeroSlider() {
+    const heroSlider = this.heroSlider.nativeElement;
+    const heroFlkty = new Flickity(heroSlider, {
+      cellAlign: 'center',
+      prevNextButtons: false,
+      wrapAround: false,
+      pageDots: false
+    });
+    var cellsButtonGroup = document.querySelector('.hero-slider-nav');
+    var cellsButtons = Array.from(document.querySelectorAll('.hero-slider-nav__item'));
+    heroFlkty.on('select', function() {
+      var previousSelectedButton = cellsButtonGroup.querySelector('.hero-slider-nav__item--selected');
+      var selectedButton = cellsButtons[heroFlkty.selectedIndex];
+      previousSelectedButton.classList.remove('hero-slider-nav__item--selected');
+      selectedButton.classList.add('hero-slider-nav__item--selected');
+    })
+    cellsButtonGroup.addEventListener('click', function (event) {
+      const el = event.target as HTMLElement;
+      if (!el.classList.contains('hero-slider-nav__item')) {
+        return;
+      }
+      const index = cellsButtons.indexOf(el);
+      heroFlkty.select(index);
+    });
   }
 
   @HostListener('window:scroll', ['$event'])
