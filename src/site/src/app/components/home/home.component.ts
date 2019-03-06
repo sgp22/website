@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
       wrapAround: false,
       pageDots: false
     });
+
     const cellsButtonGroup = document.querySelector('.hero-slider-nav');
     const cellsButtons = Array.from(document.querySelectorAll('.hero-slider-nav__item'));
     heroFlkty.on('select', function() {
@@ -41,7 +42,8 @@ export class HomeComponent implements OnInit {
       const selectedButton = cellsButtons[heroFlkty.selectedIndex];
       previousSelectedButton.classList.remove('hero-slider-nav__item--selected');
       selectedButton.classList.add('hero-slider-nav__item--selected');
-    })
+    });
+
     cellsButtonGroup.addEventListener('click', function (event) {
       const el = event.target as HTMLElement;
       if (!el.classList.contains('hero-slider-nav__item')) {
@@ -50,6 +52,7 @@ export class HomeComponent implements OnInit {
       const index = cellsButtons.indexOf(el);
       heroFlkty.select(index);
     });
+
     const imgs = Array.from(document.querySelectorAll('.hero-slider__image'));
     heroFlkty.on('scroll', function(event, progress) {
       heroFlkty.slides.forEach(function (slide, i) {
