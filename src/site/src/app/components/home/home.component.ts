@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
       cellAlign: 'center',
       prevNextButtons: false,
       wrapAround: false,
-      pageDots: false
+      pageDots: true
     });
 
     const cellsButtonGroup = document.querySelector('.hero-slider-nav');

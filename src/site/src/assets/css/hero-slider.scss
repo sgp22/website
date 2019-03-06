@@ -1,0 +1,18 @@
+.hero-slider {
+  .flickity-page-dots {
+    bottom: -65px;
+    display: flex;
+    justify-content: center;
+
+    @media screen and (min-width: $breakpoint-sm) {
+      display: none;
+    }
+
+    .dot {
+      background-color: var(--theme-color-palette-white);
+      border-radius: 0;
+      height: 8px;
+      width: 80px;
+    }
+  }
+}
