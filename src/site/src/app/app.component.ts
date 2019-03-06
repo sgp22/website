@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'Infor Design System';
   public sohoModalVisible = false;
   public isHome = false;
+  public headerTop = true;
 
   public constructor(
     private router: Router,
@@ -32,6 +33,9 @@ export class AppComponent implements OnInit {
         if (url === '/') {
           this.titleService.setTitle(`Infor Design System`);
           this.isHome = true;
+          if (window.pageYOffset < 300) {
+            this.headerTop = true;
+          }
         } else {
           this.titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
           this.isHome = false;
@@ -69,6 +73,7 @@ export class AppComponent implements OnInit {
           (<any>window).ga('set', { 'dimension7': `${clientID}` });
         }
       });
+
   }
 
   public capitalizeTitle(str) {
@@ -100,6 +105,17 @@ export class AppComponent implements OnInit {
 
   public closeSohoModal() {
     this.sohoModalVisible = false;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+    if (this.isHome) {
+      if (window.pageYOffset > 300) {
+        this.headerTop = false;
+      } else {
+        this.headerTop = true;
+      }
+    }
   }
 
 }

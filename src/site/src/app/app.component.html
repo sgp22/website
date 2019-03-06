@@ -1,5 +1,5 @@
 <div class="ids-visuallyhidden" [inlineSVG]="'/assets/svgs/ids-svg.svg'"></div>
 <div class="ids-visuallyhidden" [inlineSVG]="'/assets/svgs/ids-svg-empty.svg'"></div>
 <div class="ids-visuallyhidden" [inlineSVG]="'/assets/svgs/ids-svg-extended.svg'"></div>
-<site-header [isHome]="isHome"></site-header>
+<site-header (scroll)="onWindowScroll($event)" [isHome]="isHome" [headerTop]="headerTop"></site-header>
 <router-outlet></router-outlet>

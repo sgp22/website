@@ -20,11 +20,11 @@ export class HeaderComponent implements OnInit {
   @ViewChild('trigger') trigger: ElementRef;
   @ViewChild('mobileTrigger') mobileTrigger: ElementRef;
   @Input() isHome: boolean;
+  @Input() headerTop: boolean;
   public navItems: any;
   public navToggle = false;
   public popupmenuToggle = false;
   public libraries: any;
-  public headerTop = false;
 
   constructor(
     private pagesService: PagesService,
@@ -61,16 +61,5 @@ export class HeaderComponent implements OnInit {
 
   closeNav() {
     this.navToggle = false;
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  onWindowScroll(e) {
-    if (this.isHome) {
-      if (window.pageYOffset > 300) {
-        this.headerTop = true;
-      } else {
-        this.headerTop = false;
-      }
-    }
   }
 }
