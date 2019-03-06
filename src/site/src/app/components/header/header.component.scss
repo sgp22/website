@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 3;
+  z-index: 4;
 
   &.home {
     margin-bottom: 0;
@@ -192,7 +192,7 @@
   position: fixed;
   top: $headerHeight;
   width: 100%;
-  z-index: 3;
+  z-index: 4;
 
   &.main-nav--mobile--active {
     display: block;
@@ -258,7 +258,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
 }
 
 .main-nav__item--trigger {
