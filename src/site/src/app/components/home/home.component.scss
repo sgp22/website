@@ -40,12 +40,12 @@
 .hero-slider-container {
   align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 0 auto;
   max-width: 1024px;
-  width: 100%;
   padding: 0 calc(var(--theme-number-spacing-base) * 4);
-  flex-direction: column;
+  width: 100%;
 
   @media screen and (min-width: $breakpoint-sm) {
     flex-direction: row;
@@ -58,14 +58,14 @@
 }
 
 .hero-slider__kicker {
-  display: block;
-  position: absolute;
-  top: 120px;
-  text-transform: uppercase;
-  font-size: var(--theme-size-font-xs);
   color: var(--theme-color-palette-white);
-  opacity: 0.5;
+  display: block;
+  font-size: var(--theme-size-font-xs);
   font-weight: var(--theme-number-font-weight-bold);
+  opacity: 0.5;
+  position: absolute;
+  text-transform: uppercase;
+  top: 120px;
 
   @media screen and (min-width: $breakpoint-sm) {
     display: none;
@@ -78,8 +78,8 @@
   height: 300px;
   margin-right: calc(var(--theme-number-spacing-base) * 4);
   overflow: hidden;
-  width: 100%;
   padding: 0 10px;
+  width: 100%;
 
   @media screen and (min-width: $breakpoint-sm) {
     height: 500px;
@@ -87,20 +87,20 @@
 
   h1 {
     color: var(--theme-color-palette-white);
-    font-weight: var(--theme-number-font-weight-light);
     font-size: var(--theme-size-font-lg);
+    font-weight: var(--theme-number-font-weight-light);
+    line-height: 1.2;
     margin: 0;
     padding-left: 0;
-    text-align: center;
     position: absolute;
+    text-align: center;
     top: 50%;
     transform: translateY(-50%);
-    line-height: 1.2;
 
     @media screen and (min-width: $breakpoint-sm) {
       font-size: var(--theme-size-font-xl);
-      text-align: left;
       padding-left: calc(var(--theme-number-spacing-base) * 10);
+      text-align: left;
     }
 
     span {
