@@ -72,13 +72,13 @@ export class SidebarComponent implements OnInit, OnChanges {
       .subscribe((res: []) => {
         this.versionPaths = res.map(v => {
           return {
-            full: `code/${this.currentLibrary}/${v}`,
+            full: `${this.currentLibrary}/${v}`,
             label: v
           };
         });
 
         this.versionPaths.unshift({
-          full: `/${this.currentLibrary}/latest/`,
+          full: `${this.currentLibrary}/latest/`,
           label: `Latest (${this.versionPaths[0]['label']})`
         });
       });

@@ -59,13 +59,13 @@ export class DocsContentPageComponent implements OnInit {
         .subscribe((res: []) => {
           this.versionPaths = res.map(version => {
             return {
-              full: `code/${this.library}/${version}`,
+              full: `${this.library}/${version}`,
               label: version
             };
           });
 
           this.versionPaths.unshift({
-            full: `/${this.library}/latest/`,
+            full: `${this.library}/latest/`,
             label: `Latest (${this.versionPaths[0]['label']})`
           });
 
