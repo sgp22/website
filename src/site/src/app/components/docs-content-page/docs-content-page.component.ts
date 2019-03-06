@@ -4,7 +4,6 @@ import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
 import { HelpersService } from '../../shared/helpers.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import * as semver from 'semver';
 
 interface TocItems {
   label: string;
@@ -23,7 +22,6 @@ export class DocsContentPageComponent implements OnInit {
   public library: string;
   public component: string;
   public currentVersion: string;
-  public versionPaths: any;
   public tocItems: TocItems[] = [];
   public bodyTitles: any;
   public apiTitles: any;
@@ -57,28 +55,12 @@ export class DocsContentPageComponent implements OnInit {
 
       this.libraryService.loadAllLibraryVersions(this.library)
         .subscribe(res => {
-          this.versionPaths = res['files']
-            .map(file => {
-              const versions = {};
-              versions['full'] = file.replace(/docs/, '');
-              versions['label'] = file.split('/').slice(-2, -1).join('');
-              return versions;
-            })
-            .sort((a, b) => {
-              return semver.compare(a.label, b.label);
-            })
-            .reverse();
-
-          this.versionPaths.unshift({
-            full: `/${this.library}/latest/`,
-            label: `Latest (${this.versionPaths[0]['label']})`
-          });
-
-          const latestVersion = this.versionPaths[1]['label'];
+          let latestVersion = '';
+          if (res instanceof Array && res.length) {
+            latestVersion = res[0];
+          }
           if (this.currentVersion === 'latest') {
             this.currentVersion = latestVersion;
-          } else {
-            this.currentVersion = this.currentVersion;
           }
 
           this.versionShowWarning(this.currentVersion, latestVersion);

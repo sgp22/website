@@ -1,8 +1,8 @@
 from home import hooks
 
 from wagtail.contrib.modeladmin.options import (
-    ModelAdmin, 
-    ModelAdminGroup, 
+    ModelAdmin,
+    ModelAdminGroup,
     modeladmin_register
 )
 
@@ -10,7 +10,7 @@ from home.snippets import WhatItDoes
 from home.snippets import WhatUserCanDo
 from home.snippets import WhenToUseIt
 from home.snippets import Cornerstone
-
+from home.snippets import LibraryVersion
 
 class WhatItDoesAdmin(ModelAdmin):
     model = WhatItDoes
@@ -44,3 +44,11 @@ class CornerstoneAdmin(ModelAdmin):
     list_display = ('name', 'description')
 
 modeladmin_register(CornerstoneAdmin)
+
+class LibraryVersionAdmin(ModelAdmin):
+    model = LibraryVersion
+    menu_label = 'Library Versions'
+    menu_icon = 'snippet'
+    list_display = ('name', 'version', 'isActive')
+
+modeladmin_register(LibraryVersionAdmin)
