@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import Flickity from 'flickity';
 
 @Component({
@@ -8,19 +7,10 @@ import Flickity from 'flickity';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @Input() page;
-  @ViewChild('whiteDotPattern') whiteDotPattern: ElementRef;
-  @ViewChild('section1') section1: ElementRef;
   @ViewChild('heroSlider') heroSlider: ElementRef;
   @ViewChild('heroSliderNav') heroSliderNav: ElementRef;
-  public dotPatternPaths;
-  public hpSections;
-  public pageContent: any;
-  public loading = true;
 
-  constructor(
-    private router: Router
-  ) { }
+  constructor() {}
 
   ngOnInit() {
     this.initHeroSlider();
@@ -61,22 +51,6 @@ export class HomeComponent implements OnInit {
         img.style.transform = 'translateX( ' + x + 'px)';
       });
     })
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  private scrollAnimations() {
-    this.checkSection();
-  }
-
-  private checkSection() {
-    const sections = document.querySelectorAll('section');
-    [].slice.call(sections).forEach((section) => {
-      const slideInAt = (window.pageYOffset + window.innerHeight) - section.offsetHeight / 3;
-      const isThirdShown = slideInAt > section.offsetTop;
-      if (isThirdShown) {
-        section.classList.add('section--visible');
-      }
-    });
   }
 
   private getIEVersion() {
