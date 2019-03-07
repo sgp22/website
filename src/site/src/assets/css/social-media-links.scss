@@ -1,0 +1,27 @@
+.social-media-links {
+  display: flex;
+  margin-top: calc(var(--theme-number-spacing-base) * 5);
+}
+
+.social-media-link {
+  display: block;
+  margin-right: calc(var(--theme-number-spacing-base) * 2);
+
+  .background {
+    fill: var(--body-color-primary-background);
+  }
+
+  .emblem {
+    fill: var(--button-color-secondary-initial-icon);
+  }
+
+  &:hover {
+    .background {
+      fill: var(--list-color-item-hover-background);
+    }
+
+    .emblem {
+      fill: var(--theme-color-brand-primary-base);
+    }
+  }
+}
