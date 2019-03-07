@@ -315,8 +315,12 @@
   }
 
   h1 {
-    font-size: 6rem;
+    font-size: var(--theme-size-font-xl);
     font-weight: var(--theme-number-font-weight-light);
+
+    @media screen and (min-width: $breakpoint-md) {
+      font-size: 6rem;
+    }
   }
 }
 
