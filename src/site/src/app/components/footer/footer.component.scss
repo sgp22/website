@@ -20,7 +20,7 @@
 }
 
 .site-footer--btm {
-  align-items: flex-start;
+  align-items: center;
   background-color: $slate-lightest;
   color: $slate-darker;
   display: flex;
@@ -28,6 +28,7 @@
   padding: calc(var(--theme-number-spacing-base) * 4) calc(var(--theme-number-spacing-base) * 2);
 
   @media screen and (min-width: $breakpoint-sm) {
+    align-items: flex-start;
     padding: calc(var(--theme-number-spacing-base) * 4) calc(var(--theme-number-spacing-base) * 6);
   }
 
