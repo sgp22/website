@@ -620,6 +620,12 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 
+  .ids-icon {
+    color: var(--theme-color-palette-white);
+    margin-right: var(--theme-number-spacing-base);
+    margin-bottom: 0;
+  }
+
   @media screen and (min-width: $breakpoint-sm) {
     margin-bottom: 0;
     margin-right: calc(var(--theme-number-spacing-base) * 4);
