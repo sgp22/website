@@ -22,7 +22,8 @@ export class HomeComponent implements OnInit {
       cellAlign: 'center',
       prevNextButtons: false,
       wrapAround: false,
-      pageDots: true
+      pageDots: true,
+      selectedAttraction: 0.02,
     });
 
     const cellsButtonGroup = document.querySelector('.hero-slider-nav');
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit {
         var x = (slide.target + heroFlkty.x) * -1 / 3;
         img.style.transform = 'translateX( ' + x + 'px)';
       });
-    })
+    });
   }
 
   private getIEVersion() {

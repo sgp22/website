@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e) {
     if (this.isHome) {
-      if (window.pageYOffset > 300) {
+      if (window.pageYOffset > 10) {
         this.headerTop = false;
       } else {
         this.headerTop = true;
