@@ -22,7 +22,6 @@
 .site-footer--btm {
   align-items: flex-start;
   background-color: $slate-lightest;
-  border-top: 1px solid $graphite-lightest;
   color: $slate-darker;
   display: flex;
   flex-direction: column;
@@ -138,6 +137,8 @@
 
     &::placeholder {
       color: $slate-base;
+      font-family: var(--theme-font-family-base);
+      font-weight: var(--theme-number-font-weight-base);
     }
   }
 }
