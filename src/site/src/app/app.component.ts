@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 declare let pendo;
@@ -17,8 +17,11 @@ export class AppComponent implements OnInit {
 
   public constructor(
     private router: Router,
-    private titleService: Title
-  ) {}
+    private titleService: Title,
+    private meta: Meta
+  ) {
+    this.meta.addTag({ name: 'description', content: 'The Infor Design System provides developers and designers with the tools and guidance they need to create appealing and purposeful user experiences.'});
+  }
 
   ngOnInit() {
 
