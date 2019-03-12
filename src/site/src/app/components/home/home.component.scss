@@ -296,6 +296,11 @@
   .row--block {
     align-items: flex-start;
     display: flex;
+    width: 100%;
+
+    @media screen and (min-width: $breakpoint-sm) {
+      width: 33.33%;
+    }
 
     h3 {
       line-height: 1;
