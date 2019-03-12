@@ -20,7 +20,12 @@ export class AppComponent implements OnInit {
     private titleService: Title,
     private meta: Meta
   ) {
-    this.meta.addTag({ name: 'description', content: 'The Infor Design System provides developers and designers with the tools and guidance they need to create appealing and purposeful user experiences.'});
+    /* tslint:disable */
+    this.meta.addTag({
+      name: 'description',
+      content: 'The Infor Design System provides developers and designers with the tools and guidance they need to create appealing and purposeful user experiences.'
+    });
+    /* tslint:enable */
   }
 
   ngOnInit() {

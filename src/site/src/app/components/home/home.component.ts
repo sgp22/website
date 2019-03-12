@@ -48,8 +48,8 @@ export class HomeComponent implements OnInit {
     const h1s = Array.from(document.querySelectorAll('.hero-slider__slide h1'));
     heroFlkty.on('scroll', function(event, progress) {
       heroFlkty.slides.forEach(function (slide, i) {
-        var h1 = h1s[i] as HTMLElement;
-        var x = (slide.target + heroFlkty.x) * -1 / 20;
+        const h1 = h1s[i] as HTMLElement;
+        const x = (slide.target + heroFlkty.x) * -1 / 20;
         h1.style.transform = 'translateX( ' + x + 'px)';
       });
     });
