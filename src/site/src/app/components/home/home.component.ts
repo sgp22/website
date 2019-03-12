@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
-import Flickity from 'flickity';
+import Flickity from 'flickity-fade';
 
 @Component({
   selector: 'site-home',
@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
       wrapAround: false,
       pageDots: true,
       selectedAttraction: 0.02,
+      fade: true
     });
 
     const cellsButtonGroup = document.querySelector('.hero-slider-nav');
@@ -44,12 +45,12 @@ export class HomeComponent implements OnInit {
       heroFlkty.select(index);
     });
 
-    const imgs = Array.from(document.querySelectorAll('.hero-slider__image'));
+    const h1s = Array.from(document.querySelectorAll('.hero-slider__slide h1'));
     heroFlkty.on('scroll', function(event, progress) {
       heroFlkty.slides.forEach(function (slide, i) {
-        var img = imgs[i] as HTMLElement;
-        var x = (slide.target + heroFlkty.x) * -1 / 3;
-        img.style.transform = 'translateX( ' + x + 'px)';
+        var h1 = h1s[i] as HTMLElement;
+        var x = (slide.target + heroFlkty.x) * -1 / 20;
+        h1.style.transform = 'translateX( ' + x + 'px)';
       });
     });
   }

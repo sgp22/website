@@ -109,11 +109,6 @@
     height: 500px;
   }
 
-  // .hero-slider__image {
-  //   opacity: 0;
-  //   transition: opacity 0.3s ease;
-  // }
-
   h1 {
     color: var(--theme-color-palette-white);
     font-size: var(--theme-size-font-lg);
@@ -123,10 +118,6 @@
     padding-left: 0;
     position: absolute;
     text-align: center;
-    top: 50%;
-    transform: translateY(-50%);
-    // opacity: 0;
-    transition: opacity 0.3s ease;
 
     @media screen and (min-width: $breakpoint-sm) {
       font-size: var(--theme-size-font-xl);
@@ -149,13 +140,6 @@
       }
     }
   }
-
-  // &.is-selected {
-  //   h1,
-  //   .hero-slider__image {
-  //     opacity: 1;
-  //   }
-  // }
 }
 
 .hero-slider-nav {
