@@ -25,7 +25,6 @@
     "@angular/router": "~7.1.0",
     "core-js": "^2.5.4",
     "css-vars-ponyfill": "1.17.1",
-    "flickity": "2.2.0",
     "flickity-fade": "1.0.0",
     "ng-inline-svg": "8.3.0",
     "polyfill-array-includes": "2.0.0",

@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
       prevNextButtons: false,
       wrapAround: false,
       pageDots: true,
-      selectedAttraction: 0.02,
+      selectedAttraction: 0.015,
       fade: true
     });
 
