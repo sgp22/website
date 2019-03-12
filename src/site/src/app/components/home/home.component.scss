@@ -719,5 +719,10 @@
 
   a {
     width: 100%;
+
+    &:hover,
+    &:visited {
+      color: var(--theme-color-palette-white);
+    }
   }
 }
