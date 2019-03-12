@@ -266,6 +266,14 @@
 .row--ids--intro {
   text-align: center;
 
+  h1 {
+    margin-top: 0;
+
+    @media screen and (max-width: $breakpoint-sm) {
+      font-size: var(--theme-size-font-lg);
+    }
+  }
+
   p {
     font-size: var(--theme-size-font-sm);
     font-weight: var(--theme-number-font-weight-light);
