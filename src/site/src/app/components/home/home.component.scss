@@ -310,6 +310,13 @@
       width: 33.33%;
     }
 
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: 100%;
+    }
+
     h3 {
       line-height: 1;
       margin-top: 0;
@@ -332,12 +339,8 @@
     a {
       color: var(--link-color-initial-font);
       display: inline-block;
-      margin-top: 0;
+      margin-top: auto;
       text-decoration: none;
-
-      @media screen and (min-width: $breakpoint-sm) {
-        margin-top: calc(var(--theme-number-spacing-base) * 3);
-      }
 
       &:hover {
         color: var(--link-color-hover-font);
@@ -657,6 +660,22 @@
   .ids-btn {
     padding-left: 0;
     padding-right: 0;
+  }
+
+  .ids-btn--mobile {
+    display: block;
+
+    @media screen and (min-width: $breakpoint-sm) {
+      display: none;
+    }
+  }
+
+  .ids-btn--desktop {
+    display: none;
+
+    @media screen and (min-width: $breakpoint-sm) {
+      display: block;
+    }
   }
 }
 

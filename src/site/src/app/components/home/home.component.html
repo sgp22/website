@@ -195,32 +195,46 @@
     </div>
     <div class="row--blocks row--blocks--resources">
       <div class="row--block row--block--resources">
-        <a class="row--block--resources--link" href="https://github.com/infor-design" target="_blank">
+        <div class="row--block--resources--link">
           <div><img src="../../../assets/img/resources-github.jpg" alt="GitHub"></div>
           <div class="row--block-resources--text">
             <p>Submit requests and get the latest code and updates on GitHub.</p>
-            <button class="ids-btn ids-btn--primary"><span class="ids-icon ids-icon--uplift" [inlineSVG]="'../../assets/svgs/icon-launch.svg'"></span>View on GitHub</button>
+            <a
+              class="ids-btn ids-btn--primary"
+              href="https://github.com/infor-design"
+              target="_blank"
+              ><span class="ids-icon ids-icon--uplift" [inlineSVG]="'../../assets/svgs/icon-launch.svg'"></span>View on GitHub</a>
           </div>
-        </a>
+        </div>
       </div>
       <div class="row--block row--block--resources">
-        <a class="row--block--resources--link" href="sketch://add-library?url=https://design.infor.com/api/docs/ids-identity/latest/site/sketch-library.rss" target="_blank">
+        <div class="row--block--resources--link">
           <div><img src="../../../assets/img/resources-sketch-lib.jpg" alt="Sketch Library"></div>
           <div class="row--block-resources--text">
             <p>Install our Sketch Library to use our components and receive automatic updates.</p>
             <span>Requires Sketch Version 53 or Newer</span>
-            <button class="ids-btn ids-btn--primary ids-btn--sketch--desktop"><span class="ids-icon ids-icon--uplift" [inlineSVG]="'../../assets/svgs/icon-load.svg'"></span>Sync Library</button>
+            <a
+              class="ids-btn ids-btn--primary ids-btn--desktop"
+              href="sketch://add-library?url=https://design.infor.com/api/docs/ids-identity/latest/site/sketch-library.rss" target="_blank"
+            ><span class="ids-icon ids-icon--uplift" [inlineSVG]="'../../assets/svgs/icon-load.svg'"></span>Sync Library</a>
+            <a class="ids-btn ids-btn--primary ids-btn--mobile"
+              href="https://github.com/infor-design/design-system/tree/master/sketch"
+              target="_blank"><span class="ids-icon ids-icon--uplift" [inlineSVG]="'../../assets/svgs/icon-load.svg'"></span>View on GitHub</a>
           </div>
-        </a>
+        </div>
       </div>
       <div class="row--block row--block--resources">
-        <a class="row--block--resources--link" href="https://github.com/infor-design/design-system/releases/latest" target="_blank">
+        <div class="row--block--resources--link">
           <div><img src="../../../assets/img/resources-sketch-tool.jpg" alt="Sketch Tool"></div>
           <div class="row--block-resources--text">
             <p>Download the latest release of IDS assets, with an updated Sketch toolkit, fonts, icons and more.</p>
-            <button class="ids-btn ids-btn--primary"><span class="ids-icon ids-icon--uplift" [inlineSVG]="'../../assets/svgs/icon-download.svg'"></span>View on GitHub</button>
+            <a
+              class="ids-btn ids-btn--primary"
+              href="https://github.com/infor-design/design-system/releases/latest"
+              target="_blank"
+            ><span class="ids-icon ids-icon--uplift" [inlineSVG]="'../../assets/svgs/icon-download.svg'"></span>View on GitHub</a>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </div>
