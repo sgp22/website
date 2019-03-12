@@ -58,21 +58,6 @@
   z-index: 2;
 }
 
-.hero-slider__kicker {
-  color: var(--theme-color-palette-white);
-  display: block;
-  font-size: var(--theme-size-font-xs);
-  font-weight: var(--theme-number-font-weight-bold);
-  opacity: 0.5;
-  position: absolute;
-  text-transform: uppercase;
-  top: 30px;
-
-  @media screen and (min-width: $breakpoint-sm) {
-    display: none;
-  }
-}
-
 .hero-slider__link {
   bottom: 10px;
   color: var(--theme-color-palette-white);
@@ -147,6 +132,7 @@
   border-left: 1px solid rgba(255, 255, 255, 0.25);
   display: none;
   flex-direction: column;
+  position: relative;
   z-index: 2;
 
   @media screen and (min-width: $breakpoint-sm) {
@@ -154,12 +140,34 @@
   }
 }
 
+.hero-slider__kicker {
+  color: var(--theme-color-palette-white);
+  display: block;
+  font-size: var(--theme-size-font-xs);
+  font-weight: var(--theme-number-font-weight-bold);
+  opacity: 0.5;
+}
+
+.hero-slider__kicker--mobile {
+  position: absolute;
+  top: 30px;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    display: none;
+  }
+}
+
+.hero-slider__kicker--desktop {
+  position: absolute;
+  top: -50px;
+}
+
 .hero-slider-nav__item {
   background-color: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.25);
   cursor: pointer;
-  font-family: var( --theme-font-family-base);
+  font-family: var(--theme-font-family-base);
   font-size: var(--theme-size-font-md);
   font-weight: var(--theme-number-font-weight-light);
   line-height: 1;
@@ -313,8 +321,8 @@
     > div {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       height: 100%;
+      justify-content: flex-start;
     }
 
     h3 {
@@ -596,8 +604,8 @@
 
 .row--components--image--mobile {
   display: block;
-  max-width: 80%;
   margin: 0 auto;
+  max-width: 80%;
 
   @media screen and (min-width: $breakpoint-sm) {
     display: none;
@@ -637,8 +645,8 @@
 
   .ids-icon {
     color: var(--theme-color-palette-white);
-    margin-right: var(--theme-number-spacing-base);
     margin-bottom: 0;
+    margin-right: var(--theme-number-spacing-base);
   }
 
   @media screen and (min-width: $breakpoint-sm) {
