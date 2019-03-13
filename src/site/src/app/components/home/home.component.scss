@@ -149,6 +149,7 @@
 }
 
 .hero-slider__kicker--mobile {
+  font-size: var(--theme-size-font-xs);
   position: absolute;
   top: 30px;
 
@@ -158,6 +159,7 @@
 }
 
 .hero-slider__kicker--desktop {
+  font-size: var(--theme-size-font-base);
   position: absolute;
   top: -50px;
 }
