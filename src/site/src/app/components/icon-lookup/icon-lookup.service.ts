@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class IconLookupService {
-  baseUrl = `${environment.apiUrl}/api/docs/ids-identity/latest/theme-soho/icons`;
+  baseUrl = `${environment.apiUrl}/api/docs/ids-identity/latest/theme-uplift/icons`;
 
   constructor(
     private http: HttpClient
