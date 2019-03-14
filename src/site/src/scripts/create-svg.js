@@ -12,17 +12,12 @@ let IS_VERBOSE = false;
 
 const ICON_SETS = [
   {
-    src: `${ROOT_DIR}/node_modules/ids-identity/dist/theme-soho/icons/standard/svg/*.svg`,
+    src: `${ROOT_DIR}/node_modules/ids-identity/dist/theme-uplift/icons/standard/svg/*.svg`,
     dest: `${ROOT_DIR}/src/assets/svgs/ids-svg.svg`,
     class: 'svg-icons'
   },
   {
-    src: `${ROOT_DIR}/node_modules/ids-identity/dist/theme-soho/icons/extended/svg/*.svg`,
-    dest: `${ROOT_DIR}/src/assets/svgs/ids-svg-extended.svg`,
-    class: 'svg-icons-extended'
-  },
-  {
-    src: `${ROOT_DIR}/node_modules/ids-identity/dist/theme-soho/icons/empty/svg/*.svg`,
+    src: `${ROOT_DIR}/node_modules/ids-identity/dist/theme-uplift/icons/empty/svg/*.svg`,
     dest: `${ROOT_DIR}/src/assets/svgs/ids-svg-empty.svg`,
     class: 'svg-icons-empty'
   }

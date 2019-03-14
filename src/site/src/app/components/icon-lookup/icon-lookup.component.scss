@@ -14,12 +14,13 @@
   flex-direction: column;
   height: 120px;
   justify-content: center;
-  margin: 1rem;
+  margin: var(--theme-number-spacing-base);
   padding: var(--theme-number-spacing-base);
   position: relative;
   width: 120px;
 
   svg {
+    fill: transparent;
     height: 24px;
     width: 24px;
   }
