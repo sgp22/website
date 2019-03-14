@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { PagesService } from '../../shared/pages.service';
+import { LibraryService } from '../../shared/library.service';
 
 @Component({
   selector: 'site-header',
@@ -10,6 +11,8 @@ export class HeaderComponent implements OnInit {
   @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
   @ViewChild('trigger') trigger: ElementRef;
   @ViewChild('mobileTrigger') mobileTrigger: ElementRef;
+  @Input() isHome: boolean;
+  @Input() headerTop: boolean;
   public navItems: any;
   public navToggle = false;
   public popupmenuToggle = false;

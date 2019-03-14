@@ -2,10 +2,12 @@
 @import '../node_modules/ids-identity/dist/tokens/web/theme-uplift.custom-properties.css';
 @import '../node_modules/ids-css/dist/ids-reset.css';
 @import '../node_modules/ids-css/dist/ids-css.css';
+@import '../node_modules/flickity/dist/flickity.min.css';
 
 
 @import './assets/css/custom-properties.css';
 @import './assets/css/variables.scss';
+@import './assets/css/breakpoints.scss';
 @import './assets/css/base.scss';
 @import './assets/css/syntax-highlighting.scss';
 @import './assets/css/jsdocs.scss';
@@ -18,3 +20,5 @@
 @import './assets/css/page-content.scss';
 @import './assets/css/blog.scss';
 @import './assets/css/cookie-banner.scss';
+@import './assets/css/hero-slider.scss';
+@import './assets/css/social-media-links.scss';

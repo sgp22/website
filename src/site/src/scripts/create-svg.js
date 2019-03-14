@@ -76,6 +76,7 @@ const convertSvgMarkup = (id, contents) => {
  * @return {Promise} - Resolve array of icons
  */
 const createHTMLfile = (files, iconObj) => {
+  console.log(iconObj)
   let htmlIcons = [];
   const promises = files.map(f => {
     return new Promise((resolve, reject) => {
@@ -113,7 +114,7 @@ function createHtmlFiles() {
 
   return Promise.all(ICON_SETS.map(iconSet => {
     Object.assign(iconSet, {
-      header: `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-icons">`,
+      header: `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="${iconSet.class}">`,
       footer: '</svg>'
     });
 

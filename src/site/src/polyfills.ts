@@ -39,7 +39,7 @@ import 'core-js/es6/set';
  * Googlebot uses a renderer based on Chrome 41.
  * https://developers.google.com/search/docs/guides/rendering
  **/
-// import 'core-js/es6/array';
+import 'core-js/es6/array';
 
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
 // import 'classlist.js';  // Run `npm install --save classlist.js`.
@@ -78,3 +78,16 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+ /**
+  * Support css custom properties in IE11
+  */
+import cssVars from 'css-vars-ponyfill';
+cssVars({
+  shadowDOM: true
+});
+
+/**
+ * Support Array.includes in IE11
+ */
+import 'polyfill-array-includes';

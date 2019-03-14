@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 3;
+  z-index: 4;
 
   &.home {
     margin-bottom: 0;
@@ -18,12 +18,25 @@
   .side-header__inner {
     align-items: center;
     display: flex;
-    padding: calc(var(--theme-number-spacing-base) * 4) calc(var(--theme-number-spacing-base) * 4);
+    padding: calc(var(--theme-number-spacing-base) * 3);
+
+    @media screen and (min-width: $breakpoint-sm) {
+      padding: calc(var(--theme-number-spacing-base) * 4);
+    }
   }
 
   a.logo {
     text-decoration: none;
   }
+
+  &.site-header--home--top {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.site-header--pusher {
+  height: 104px;
 }
 
 .logo {
@@ -32,8 +45,12 @@
 
   span {
     color: var(--black);
-    font-size: 2.2rem;
+    font-size: var(--theme-size-font-sm);
     font-weight: var(--theme-number-font-weight-semibold);
+
+    @media screen and (min-width: $breakpoint-sm) {
+      font-size: var(--theme-size-font-md);
+    }
   }
 
   svg {
@@ -41,13 +58,54 @@
     flex-shrink: 0;
     margin-right: calc(var(--theme-number-spacing-base) * 2);
     width: 40px;
+
+    @media screen and (min-width: $breakpoint-md) {
+      width: 56px;
+    }
+  }
+
+  .a {
+    fill: var(--theme-color-palette-white);
+  }
+
+  .square {
+    fill: #c2252c;
+  }
+}
+
+.site-header--home--top {
+  .logo {
+    span {
+      color: var(--theme-color-palette-white);
+    }
+
+    .a {
+      fill: #8f17e6;
+    }
+
+    .square {
+      fill: var(--theme-color-palette-white);
+    }
+  }
+
+  .main-nav__item {
+    color: var(--theme-color-palette-white);
+  }
+
+  .ids-icon {
+    color: var(--theme-color-palette-white);
+  }
+
+  .btn--nav--toggle {
+    svg {
+      color: var(--theme-color-palette-white);
+    }
   }
 }
 
 /*
   Main Nav
 */
-
 .main-nav {
   display: none;
   margin-left: auto;
@@ -123,21 +181,6 @@
   }
 }
 
-.main-nav__search {
-  background-color: transparent;
-  border: none;
-  padding-left: calc(var(--theme-number-spacing-base) * 3);
-
-  svg {
-    height: 16px;
-    width: 16px;
-  }
-
-  g {
-    fill: var(--link-color-custom-dark);
-  }
-}
-
 .btn--nav--toggle {
   display: block;
   margin-left: auto;
@@ -159,9 +202,9 @@
   display: none;
   padding: calc(var(--theme-number-spacing-base) * 4);
   position: fixed;
-  top: auto;
+  top: $headerHeight;
   width: 100%;
-  z-index: 3;
+  z-index: 4;
 
   &.main-nav--mobile--active {
     display: block;
@@ -227,7 +270,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
 }
 
 .main-nav__item--trigger {

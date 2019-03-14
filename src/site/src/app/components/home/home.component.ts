@@ -1,84 +1,57 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, HostListener } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import Flickity from 'flickity-fade';
 
 @Component({
-  selector: 'app-home',
+  selector: 'site-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @Input() page;
-  @ViewChild('whiteDotPattern') whiteDotPattern: ElementRef;
-  @ViewChild('section1') section1: ElementRef;
-  public dotPatternPaths;
-  public hpSections;
-  public pageContent: any;
-  public loading = true;
+  @ViewChild('heroSlider') heroSlider: ElementRef;
+  @ViewChild('heroSliderNav') heroSliderNav: ElementRef;
 
-  constructor(
-    private router: Router
-  ) { }
+  constructor() {}
 
   ngOnInit() {
-    if (this.getIEVersion() === 0 && this.getIEVersion() !== 'edge') {
-      this.dotPatternPaths = this.whiteDotPattern.nativeElement.children[0].children;
-      this.animateDots(this.dotPatternPaths);
-    }
-    this.checkFirstSection();
+    this.initHeroSlider();
   }
 
-  private animateDots(pattern) {
+  initHeroSlider() {
+    const heroSlider = this.heroSlider.nativeElement;
+    const heroFlkty = new Flickity(heroSlider, {
+      cellAlign: 'center',
+      prevNextButtons: false,
+      wrapAround: false,
+      pageDots: true,
+      selectedAttraction: 0.015,
+      fade: true
+    });
 
-    for (let i = 0; i < pattern.length; i++) {
-      pattern[i].classList.add(`dot--${i}`);
-      pattern[i].style.transform = `translate(-${Math.floor(Math.random() * 100)}px, ${Math.floor(Math.random() * 100)}px)`;
-    }
+    const cellsButtonGroup = document.querySelector('.hero-slider-nav');
+    const cellsButtons = Array.from(document.querySelectorAll('.hero-slider-nav__item'));
+    heroFlkty.on('select', function() {
+      const previousSelectedButton = cellsButtonGroup.querySelector('.hero-slider-nav__item--selected');
+      const selectedButton = cellsButtons[heroFlkty.selectedIndex];
+      previousSelectedButton.classList.remove('hero-slider-nav__item--selected');
+      selectedButton.classList.add('hero-slider-nav__item--selected');
+    });
 
-    setTimeout(() => {
-      for (let i = 0; i < pattern.length; i++) {
-        pattern[i].style.transform = `translate(0px, 0px)`;
+    cellsButtonGroup.addEventListener('click', function (event) {
+      const el = event.target as HTMLElement;
+      if (!el.classList.contains('hero-slider-nav__item')) {
+        return;
       }
-    }, 100);
+      const index = cellsButtons.indexOf(el);
+      heroFlkty.select(index);
+    });
 
-    setTimeout(() => {
-      this.whiteDotPattern.nativeElement.classList.add('white-dot-pattern--settled');
-    }, 2300);
-
-    setInterval(() => {
-      setPulseClass();
-    }, 2000);
-
-    function setPulseClass() {
-      const numberOfDots = pattern.length;
-      const random = Math.floor((Math.random() * 279) + 1);
-      [].slice.call(pattern).forEach(el => {
-        el.classList.remove('dot--pulse');
+    const h1s = Array.from(document.querySelectorAll('.hero-slider__slide h1'));
+    heroFlkty.on('scroll', function(event, progress) {
+      heroFlkty.slides.forEach(function (slide, i) {
+        const h1 = h1s[i] as HTMLElement;
+        const x = (slide.target + heroFlkty.x) * -1 / 20;
+        h1.style.transform = 'translateX( ' + x + 'px)';
       });
-      pattern[random].classList.add('dot--pulse');
-    }
-  }
-
-  private checkFirstSection() {
-    const slideInAt = (window.innerHeight) - this.section1.nativeElement.offsetHeight / 20;
-    const isHalfShown = slideInAt > this.section1.nativeElement.offsetTop;
-    if (isHalfShown) {
-      this.section1.nativeElement.classList.add('section--visible');
-    }
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  private scrollAnimations() {
-    this.checkSection();
-  }
-
-  private checkSection() {
-    const sections = document.querySelectorAll('section');
-    [].slice.call(sections).forEach((section) => {
-      const slideInAt = (window.pageYOffset + window.innerHeight) - section.offsetHeight / 3;
-      const isThirdShown = slideInAt > section.offsetTop;
-      if (isThirdShown) {
-        section.classList.add('section--visible');
-      }
     });
   }
 

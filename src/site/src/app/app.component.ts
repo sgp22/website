@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 declare let pendo;
@@ -12,11 +12,21 @@ declare let pendo;
 export class AppComponent implements OnInit {
   title = 'Infor Design System';
   public sohoModalVisible = false;
+  public isHome = false;
+  public headerTop = true;
 
   public constructor(
     private router: Router,
-    private titleService: Title
-  ) {}
+    private titleService: Title,
+    private meta: Meta
+  ) {
+    /* tslint:disable */
+    this.meta.addTag({
+      name: 'description',
+      content: 'The Infor Design System provides developers and designers with the tools and guidance they need to create appealing and purposeful user experiences.'
+    });
+    /* tslint:enable */
+  }
 
   ngOnInit() {
 
@@ -30,8 +40,13 @@ export class AppComponent implements OnInit {
 
         if (url === '/') {
           this.titleService.setTitle(`Infor Design System`);
+          this.isHome = true;
+          if (window.pageYOffset < 300) {
+            this.headerTop = true;
+          }
         } else {
           this.titleService.setTitle(`${this.capitalizeTitle(title)} - Infor Design System`);
+          this.isHome = false;
         }
 
         // Initialize Pendo on page change
@@ -66,6 +81,7 @@ export class AppComponent implements OnInit {
           (<any>window).ga('set', { 'dimension7': `${clientID}` });
         }
       });
+
   }
 
   public capitalizeTitle(str) {
@@ -97,6 +113,17 @@ export class AppComponent implements OnInit {
 
   public closeSohoModal() {
     this.sohoModalVisible = false;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+    if (this.isHome) {
+      if (window.pageYOffset > 10) {
+        this.headerTop = false;
+      } else {
+        this.headerTop = true;
+      }
+    }
   }
 
 }

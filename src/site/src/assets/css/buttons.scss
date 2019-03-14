@@ -5,3 +5,12 @@
     background-color: var(--input-color-readonly-background);
   }
 }
+
+.ids-btn--outline--white {
+  border: 1px solid var(--theme-color-palette-white);
+  color: var(--theme-color-palette-white);
+
+  &:visited {
+    color: var(--theme-color-palette-white);
+  }
+}

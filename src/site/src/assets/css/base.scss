@@ -1,7 +1,6 @@
 body {
   background-color: var(--theme-color-brand-primary-contrast);
   margin: 0;
-  padding-top: 104px;
 }
 
 .ids-container {
@@ -69,5 +68,13 @@ ul {
     text-align: center;
     width: 100%;
     z-index: 4;
+  }
+}
+
+.ids-icon--uplift,
+.row--block--icon--mobile {
+  svg {
+    height: 24px;
+    width: 24px;
   }
 }
