@@ -1,5 +1,5 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
 import { environment } from '../../environments/environment';
@@ -31,7 +31,7 @@ describe('LibraryService', () => {
   });
 
   it('#getAllLibraries', () => {
-    const testUrl = `${environment.apiUrl}/static/libraries.json`;
+    const testUrl = `${environment.apiUrl}/api/library-versions`;
     const testData = { title: 'Test' };
 
     libraryService.loadAllLibraries()
@@ -47,7 +47,7 @@ describe('LibraryService', () => {
 
   it('#getAllLibraryVersionPaths', () => {
     const testLibrary = 'testlib';
-    const testUrl = `${environment.apiUrl}/api/docs/${testLibrary}/`;
+    const testUrl = `${environment.apiUrl}/api/library-versions/${testLibrary}/`;
     const testData = { title: 'Test' };
 
     libraryService.loadAllLibraryVersions(testLibrary)

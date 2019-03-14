@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { HelpersService } from '../../shared/helpers.service';
 
 @Component({
   selector: 'core-content-page',
@@ -9,11 +10,15 @@ import { PagesService } from '../../shared/pages.service';
 export class CoreContentPageComponent implements OnInit {
   public pageContent: any;
   public loading = true;
+  public tocItems = [];
+  public sectionTitles: any;
+  public currentSection: string;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private pagesService: PagesService,
+    private h: HelpersService
   ) { }
 
   ngOnInit() {
@@ -24,6 +29,7 @@ export class CoreContentPageComponent implements OnInit {
         .subscribe(
           res => {
             this.pageContent = res;
+            this.buildToc();
           },
           err => {
             console.error(err);
@@ -31,6 +37,12 @@ export class CoreContentPageComponent implements OnInit {
           },
           () => {
             this.loading = false;
+
+            if (!this.loading) {
+              setTimeout(() => {
+                this.h.pageLoadToSection();
+              }, 200);
+            }
           }
         );
 
@@ -41,5 +53,29 @@ export class CoreContentPageComponent implements OnInit {
       });
       (<any>window).ga('send', 'pageview');
     });
+  }
+
+  isMarkdownOrRichText(content) {
+    return content.type === 'markdown' || content.type === 'richText';
+  }
+
+  buildToc() {
+    this.tocItems = [];
+    const titles = [];
+    const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
+    const content = this.pageContent.body.filter(this.isMarkdownOrRichText);
+    if (content) {
+      this.sectionTitles = content.filter(c => c.value.match(regex));
+    }
+    if (this.sectionTitles) {
+      this.sectionTitles.map(title => {
+        titles.push(title.value);
+      });
+    }
+    titles.map(title => this.h.createTocItems(title, this.tocItems));
+  }
+
+  onSectionChange(sectionId: string) {
+    this.currentSection = sectionId;
   }
 }

@@ -4,7 +4,7 @@
 .site-footer--top {
   background-color: var(--theme-color-palette-white);
   border-top: 1px solid $graphite-lightest;
-  padding: calc(var(--theme-number-spacing-base) * 7) 0;
+  padding: calc(var(--theme-number-spacing-base) * 7) calc(var(--theme-number-spacing-base) * 2);
 
   @media screen and (min-width: $breakpoint-sm) {
     padding: calc(var(--theme-number-spacing-base) * 7) calc(var(--theme-number-spacing-base) * 3);
@@ -25,7 +25,7 @@
   color: $slate-darker;
   display: flex;
   flex-direction: column;
-  padding: calc(var(--theme-number-spacing-base) * 4) calc(var(--theme-number-spacing-base) * 2);
+  padding: calc(var(--theme-number-spacing-base) * 4) calc(var(--theme-number-spacing-base) * 4);
 
   @media screen and (min-width: $breakpoint-sm) {
     align-items: flex-start;

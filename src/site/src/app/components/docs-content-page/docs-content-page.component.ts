@@ -1,9 +1,9 @@
-import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
+import { HelpersService } from '../../shared/helpers.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import * as semver from 'semver';
 
 interface TocItems {
   label: string;
@@ -22,7 +22,6 @@ export class DocsContentPageComponent implements OnInit {
   public library: string;
   public component: string;
   public currentVersion: string;
-  public versionPaths: any;
   public tocItems: TocItems[] = [];
   public bodyTitles: any;
   public apiTitles: any;
@@ -30,7 +29,6 @@ export class DocsContentPageComponent implements OnInit {
   public showWarning: boolean;
   public currentSection: string;
   public scrollOffset = 150;
-  @ViewChild('scrollSpy') scrollSpy;
 
   constructor(
     private docsService: DocsService,
@@ -38,7 +36,7 @@ export class DocsContentPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private _el: ElementRef
+    private h: HelpersService
   ) { }
 
   ngOnInit() {
@@ -57,28 +55,12 @@ export class DocsContentPageComponent implements OnInit {
 
       this.libraryService.loadAllLibraryVersions(this.library)
         .subscribe(res => {
-          this.versionPaths = res['files']
-            .map(file => {
-              const versions = {};
-              versions['full'] = file.replace(/docs/, '');
-              versions['label'] = file.split('/').slice(-2, -1).join('');
-              return versions;
-            })
-            .sort((a, b) => {
-              return semver.compare(a.label, b.label);
-            })
-            .reverse();
-
-          this.versionPaths.unshift({
-            full: `/${this.library}/latest/`,
-            label: `Latest (${this.versionPaths[0]['label']})`
-          });
-
-          const latestVersion = this.versionPaths[1]['label'];
+          let latestVersion = '';
+          if (res instanceof Array && res.length) {
+            latestVersion = res[0];
+          }
           if (this.currentVersion === 'latest') {
             this.currentVersion = latestVersion;
-          } else {
-            this.currentVersion = this.currentVersion;
           }
 
           this.versionShowWarning(this.currentVersion, latestVersion);
@@ -116,7 +98,7 @@ export class DocsContentPageComponent implements OnInit {
 
           if (!this.loading) {
             setTimeout(() => {
-              this.pageLoadToSection();
+              this.h.pageLoadToSection();
             }, 200);
           }
 
@@ -223,19 +205,6 @@ export class DocsContentPageComponent implements OnInit {
     return url;
   }
 
-  createTocItems(item) {
-    const regexId = new RegExp(/id=(?:'|")(.*?)(?:'|")/g);
-    const regexLabel = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
-    const ids = item.match(regexId);
-    const id = ids[0].replace(/id=(?:'|")/g, '').replace(/(?:'|")$/, '');
-    const labels = item.match(regexLabel);
-    const label = labels[0].replace(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>))/, '').replace(/<\/h2>/, '');
-    this.tocItems.push({
-      label: label,
-      id: id
-    });
-  }
-
   buildToc() {
     this.tocItems = [];
     const regex = new RegExp(/(<\/?h2 id=(.[^(?:'|")]+(?:'|")>((.|\n)*?<\/h2>)))/, 'ig');
@@ -248,28 +217,10 @@ export class DocsContentPageComponent implements OnInit {
       this.apiTitles = null;
     }
     if (this.apiTitles) {
-      this.apiTitles.map(item => this.createTocItems(item));
+      this.apiTitles.map(item => this.h.createTocItems(item, this.tocItems));
     }
     if (this.bodyTitles) {
-      this.bodyTitles.map(item => this.createTocItems(item));
-    }
-  }
-
-  pageLoadToSection() {
-    const tree = this.router.parseUrl(this.router.url);
-    if (tree.fragment) {
-      this.scrollToSection(tree.fragment);
-    }
-  }
-
-  scrollToSection(fragment) {
-    const section = document.querySelector('#' + fragment);
-    if (section) {
-      section.scrollIntoView(true);
-      const scrolledY = window.scrollY;
-      if (scrolledY) {
-        window.scroll(0, scrolledY - 90);
-      }
+      this.bodyTitles.map(item => this.h.createTocItems(item, this.tocItems));
     }
   }
 
@@ -281,21 +232,7 @@ export class DocsContentPageComponent implements OnInit {
     }
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onSectionChange() {
-    let currentSection: string;
-    const sections = this._el.nativeElement.querySelectorAll('h2');
-    const scrollTop = event.target['scrollingElement']['scrollTop'];
-
-    for (let i = 0; i < sections.length; i++) {
-      const element = sections[i];
-      if (element.offsetTop - this.scrollOffset <= scrollTop) {
-        currentSection = element.id;
-      }
-    }
-
-    if (currentSection !== this.currentSection) {
-      this.currentSection = currentSection;
-    }
+  onSectionChange(sectionId: string) {
+    this.currentSection = sectionId;
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TokenService } from '../../shared/token.service';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { HelpersService } from '../../shared/helpers.service';
 
 @Component({
   selector: 'token-table',
@@ -20,7 +21,8 @@ export class TokenTableComponent implements OnInit {
 
   constructor(
     private tokenService: TokenService,
-    private router: Router
+    private router: Router,
+    private h: HelpersService
   ) { }
 
   ngOnInit() {
@@ -43,7 +45,7 @@ export class TokenTableComponent implements OnInit {
           },
           () => {
             setTimeout(() => {
-              this.pageLoadToSection();
+              this.h.pageLoadToSection();
             });
           }
         );
@@ -62,30 +64,11 @@ export class TokenTableComponent implements OnInit {
           },
           () => {
             setTimeout(() => {
-              this.pageLoadToSection();
+              this.h.pageLoadToSection();
             });
           }
         );
     }
   }
-
-  pageLoadToSection() {
-    const tree = this.router.parseUrl(this.router.url);
-    if (tree.fragment) {
-      this.scrollToSection(tree.fragment);
-    }
-  }
-
-  scrollToSection(fragment) {
-    const section = document.querySelector('#' + fragment);
-    if (section) {
-      section.scrollIntoView(true);
-      const scrolledY = window.scrollY;
-      if (scrolledY) {
-        window.scroll(0, scrolledY - 90);
-      }
-    }
-  }
-
 }
 

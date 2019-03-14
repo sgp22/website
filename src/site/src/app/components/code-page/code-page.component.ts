@@ -50,5 +50,4 @@ export class CodePageComponent implements OnInit {
   closeSidebar() {
     this.sidebarOpen = 'closed';
   }
-
 }

@@ -7,22 +7,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LibraryService {
   public apiUrl = environment.apiUrl;
-  public versionPaths: {
-    versions: any
-  };
 
   constructor(
     private http: HttpClient
   ) { }
 
   loadAllLibraries() {
-    return this.http.get(`${this.apiUrl}/static/libraries.json`);
+    return this.http.get(`${this.apiUrl}/api/library-versions`);
   }
 
   loadAllLibraryVersions(library: string) {
-    return this.http.get(`${this.apiUrl}/api/docs/${library}/`);
+    return this.http.get(`${this.apiUrl}/api/library-versions/${library}/`);
   }
 
+  /** ToDo - Refactor to use new routes */
   async getLatestLibraryVersions(libraries: any) {
     const promises = libraries.map(
       library => this.http.get(`${this.apiUrl}/api/docs/${library}/`)

@@ -1,4 +1,4 @@
-<div class="ids-container">
+<div scrollSpy (sectionChange)="onSectionChange($event)" class="ids-container">
   <div class="ids-container page-content page-section">
     <div class="ids-row--col-sm-10 ids-row--col-xl-7 ids-row--offset-sm-1">
       <div class="page-inner">
@@ -47,8 +47,8 @@
               </table>
             </div>
             <img *ngIf="streamfield.type === 'image'" src="{{streamfield?.value.file}}" alt="{{streamfield?.value.title}}">
-            <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value"></div>
-            <div *ngIf="streamfield.type === 'richText'" [innerHTML]="streamfield?.value"></div>
+            <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value | safeHtml"></div>
+            <div *ngIf="streamfield.type === 'richText'" [innerHTML]="streamfield?.value | safeHtml"></div>
             <ng-container *ngIf="streamfield.type === 'tokensCategory'">
               <token-table *ngIf="!loading" [tokensCategory]="streamfield?.value" [loading]="loading"></token-table>
             </ng-container>
@@ -62,6 +62,14 @@
       </div>
 
       <feedback-widget *ngIf="!loading"></feedback-widget>
+
+      <toc-items
+        *ngIf="!loading"
+        [component]="component"
+        [tocItems]="tocItems"
+        [currentSection]="currentSection"
+      >
+      </toc-items>
 
     </div>
   </div>
