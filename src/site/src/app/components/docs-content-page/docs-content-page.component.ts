@@ -209,9 +209,9 @@ export class DocsContentPageComponent implements OnInit {
   }
 
   createDemoUrl(slug: string, embeddedLayout: boolean = false) {
-    let url = `${this.absolutePath}/demo/components/${this.component}/${slug}?font=source-sans`;
+    let url = `${this.absolutePath}/demo/components/${this.component}/${slug}`;
     if (embeddedLayout) {
-      url += '&layout=embedded';
+      url += '?layout=embedded';
     }
     return url;
   }
