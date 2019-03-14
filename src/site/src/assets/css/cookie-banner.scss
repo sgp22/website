@@ -1,16 +1,47 @@
 /* stylelint-disable */
 .cookiebanner {
-  background-color: var( --theme-color-palette-graphite-90) !important;
-  padding: calc(var(--theme-number-spacing-base) * 2) !important;
+  display: flex;
+  color: inherit !important;
+  background-color: var( --theme-color-palette-white) !important;
+  padding: calc(var(--theme-number-spacing-base) * 3) !important;
+  flex-direction: row;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  left: auto !important;
+  right: 20px !important;
+  bottom: 20px !important;
+  text-align: left !important;
+  align-items: center;
+  border-radius: 6px;
+
+  @media screen and (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    left: 50% !important;
+    transform: translateX(-50%);
+    right: auto !important;
+    max-width: 100%;
+    width: 90%;
+  }
 }
 
 .cookiebanner-close {
+  color: var(--theme-color-palette-white);
+  font-weight: var(--theme-number-font-weight-bold) !important;
   background: var(--theme-color-palette-azure-60);
-  margin: 25px;
+  border-radius: 6px;
+  margin-left: 25px;
   padding: 7px 41px !important;
+  float: none !important;
+  order: 2;
+  text-align: center;
+  flex-shrink: 0;
+
+  @media screen and (max-width: $breakpoint-sm) {
+    margin-top: 15px;
+  }
 }
 
 .cookiebanner a {
-  display: none;
+  color: var(--theme-color-palette-azure-60) !important;
 }
 /* stylelint-enable */
