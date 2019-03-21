@@ -22,11 +22,13 @@ export class PagesService {
   }
 
   getCMSSidebarParent(section: string) {
-    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&limit=200&slug=${section}`).pipe(first());
+    const url = `${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&limit=200&slug=${section}`;
+    return this.cacheService.get(url, this.http.get(url).pipe(first()));
   }
 
   getCMSSidebarNav(id: number) {
-    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&limit=200&child_of=${id}&show_in_menus=true`).pipe(first());
+    const url = `${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&limit=200&child_of=${id}&show_in_menus=true`;
+    return this.cacheService.get(url, this.http.get(url).pipe(first()));
   }
 
   getAll() {
