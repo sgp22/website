@@ -18,7 +18,15 @@ export class PagesService {
   ) { }
 
   getGlobalNav() {
-    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&show_in_menus=true`).pipe(first());
+    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&type=home.LandingPage&show_in_menus=true`).pipe(first());
+  }
+
+  getCMSSidebarParent(section: string) {
+    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&limit=200&slug=${section}`).pipe(first());
+  }
+
+  getCMSSidebarNav(id: number) {
+    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&limit=200&child_of=${id}&show_in_menus=true`).pipe(first());
   }
 
   getAll() {

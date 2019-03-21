@@ -31,55 +31,73 @@ export class SidebarCmsComponent implements OnInit {
     preview ? this.section = previewSlug[0] : this.section = urlSegments[0].path;
 
     this.loading = true;
-    this.pagesService.getAll().subscribe(
-      (res) => {
-        res['items'].filter((item) => {
-          if (item.meta.slug === this.section) {
-            if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count === 0) {
-              this.level_2 = false;
-            }
-            this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
-              item.meta.children.children.map(child => {
-                child.children.length <= 0 ? this.level_2 = false : this.level_2 = true;
-                child.children.sort((thisGrandChild, nextGrandchild) => {
-                  if (thisGrandChild.menu_order === 0 && nextGrandchild.menu_order === 0) {
-                    return thisGrandChild.title.toLowerCase() > nextGrandchild.title.toLowerCase() ? 1 : -1;
-                  } else {
-                    return thisGrandChild.menu_order > nextGrandchild.menu_order ? 1 : -1;
-                  }
-                });
-                child.children
-                  .filter(child_level_3 => {
-                    if (child_level_3.children && child_level_3.children.length > 0) {
-                      child_level_3.children.sort((thisChild_level_3, nextChild_level_3) => {
-                        return thisChild_level_3.title > nextChild_level_3.title ? 1 : -1;
-                      });
-                    }
-                  });
-              });
-              this.sectionTitle = item.title;
-              if (thisChild.menu_order === 0 && nextChild.menu_order === 0) {
-                return thisChild.title.toLowerCase() > nextChild.title.toLowerCase() ? 1 : -1;
-              } else {
-                return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
-              }
-            });
-            if (this.helpers.checkViewport('(min-width: 600px)')) {
-              setTimeout(() => {
-                this.expandedLevel1 = this.helpers.closeAccordionsMobile(this.sidebarNav);
-              });
-            }
-          }
-        });
-      },
-      (err) => {
-        this.loading = false;
-        console.error(err);
-      },
-      () => {
-        this.loading = false;
-      }
-    );
+    this.sectionTitle = this.section;
+    this.pagesService.getCMSSidebarParent(this.section)
+      .subscribe(res => {
+        this.pagesService.getCMSSidebarNav(res['items'][0]['id'])
+          .subscribe(res => {
+            this.sidebarNav = res['items'];
+            console.log(this.sidebarNav);
+            // this.sidebarNav = res['items'].map(item => {
+            //   console.log(item);
+            //   this.sectionTitle = item.title;
+            //   //Not sure what this is checking.
+            //   if (item.meta.children.children_count === 0) {
+            //     this.level_2 = false;
+            //   }
+            // });
+            // console.log(this.sidebarNav);
+          })
+      })
+    // this.pagesService.getAll().subscribe(
+    //   (res) => {
+    //     res['items'].filter((item) => {
+    //       if (item.meta.slug === this.section) {
+    //         if (item.meta.children.children.length === 1 && item.meta.children.children[0].children_count === 0) {
+    //           this.level_2 = false;
+    //         }
+    //         this.sidebarNav = item.meta.children.children.sort((thisChild, nextChild) => {
+    //           item.meta.children.children.map(child => {
+    //             child.children.length <= 0 ? this.level_2 = false : this.level_2 = true;
+    //             child.children.sort((thisGrandChild, nextGrandchild) => {
+    //               if (thisGrandChild.menu_order === 0 && nextGrandchild.menu_order === 0) {
+    //                 return thisGrandChild.title.toLowerCase() > nextGrandchild.title.toLowerCase() ? 1 : -1;
+    //               } else {
+    //                 return thisGrandChild.menu_order > nextGrandchild.menu_order ? 1 : -1;
+    //               }
+    //             });
+    //             child.children
+    //               .filter(child_level_3 => {
+    //                 if (child_level_3.children && child_level_3.children.length > 0) {
+    //                   child_level_3.children.sort((thisChild_level_3, nextChild_level_3) => {
+    //                     return thisChild_level_3.title > nextChild_level_3.title ? 1 : -1;
+    //                   });
+    //                 }
+    //               });
+    //           });
+    //           this.sectionTitle = item.title;
+    //           if (thisChild.menu_order === 0 && nextChild.menu_order === 0) {
+    //             return thisChild.title.toLowerCase() > nextChild.title.toLowerCase() ? 1 : -1;
+    //           } else {
+    //             return thisChild.menu_order > nextChild.menu_order ? 1 : -1;
+    //           }
+    //         });
+    //         if (this.helpers.checkViewport('(min-width: 600px)')) {
+    //           setTimeout(() => {
+    //             this.expandedLevel1 = this.helpers.closeAccordionsMobile(this.sidebarNav);
+    //           });
+    //         }
+    //       }
+    //     });
+    //   },
+    //   (err) => {
+    //     this.loading = false;
+    //     console.error(err);
+    //   },
+    //   () => {
+    //     this.loading = false;
+    //   }
+    // );
 
   }
 
