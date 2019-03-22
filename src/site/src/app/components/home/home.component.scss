@@ -337,8 +337,8 @@
     }
 
     p {
-      margin-top: 0;
       margin-bottom: calc(var(--theme-number-spacing-base) * 4);
+      margin-top: 0;
 
       @media screen and (max-width: $breakpoint-sm) {
         font-size: var(--theme-size-font-xs);
@@ -408,17 +408,17 @@
 }
 
 .row--design-tokens--animation {
-  position: relative;
-	padding-bottom: 56.25%;
-	padding-top: 25px;
   height: 0;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  position: relative;
 
   video {
+    height: 100%;
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
   }
 }
 
