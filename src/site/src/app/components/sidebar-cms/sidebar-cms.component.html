@@ -6,7 +6,7 @@
       <li><a class="ids-list--item" [routerLink]="['.']" routerLinkActive="ids-list--item--selected"
           [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar()">{{sectionTitle}}</a></li>
 
-      <li *ngFor="let item of sidebarNav">
+      <li *ngFor="let item of sidebarNav | sort: 'title';">
         <span *ngIf="item.meta.children.children_count > 0" (click)="helpers.toggleAccordion(i, expandedLevel1)"
           class="ids-list--heading-accordion ids-list--heading-accordion--active"
           [class.ids-list--heading-accordion--active]="!expandedLevel1[i]">
@@ -20,7 +20,7 @@
           routerLinkActive="ids-list--item--selected" (click)="closeSidebar()">{{item.title}}</a>
 
         <ul class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
-          <li *ngFor="let level_2 of item.meta.children.children; let i = index">
+          <li *ngFor="let level_2 of item.meta.children.children | sort: 'title'; let i = index;">
 
             <a class="ids-list--item" routerLinkActive="ids-list--item--selected"
               routerLink="{{level_2.relative_url}}" (click)="closeSidebar()">
