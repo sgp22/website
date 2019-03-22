@@ -2,6 +2,9 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 import { HelpersService } from '../../shared/helpers.service';
+import { mergeMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'sidebar-cms',
@@ -10,8 +13,8 @@ import { HelpersService } from '../../shared/helpers.service';
 export class SidebarCmsComponent implements OnInit {
   @Input() sidebarData;
   @Input() section;
-  public sidebarNav: any;
-  public sectionTitle: any;
+  public sidebarNav: Observable<[]>;
+  public parentTitle: string;
   public level_2: boolean;
   public loading: boolean;
   public expandedLevel1: any = [];
@@ -31,29 +34,19 @@ export class SidebarCmsComponent implements OnInit {
     preview ? this.section = previewSlug[0] : this.section = urlSegments[0].path;
 
     this.loading = true;
-    this.sectionTitle = this.section;
-    this.pagesService.getCMSSidebarParent(this.section)
-      .subscribe(res => {
-        this.loading = true;
-        this.pagesService.getCMSSidebarNav(res['items'][0]['id'])
-          .subscribe(res => {
-            this.sidebarNav = res['items'];
-          },
-          (err) => {
-            this.loading = false;
-            console.error(err);
-          },
-          () => {
-            this.loading = false;
-          })
-      },
-      (err) => {
-        this.loading = false;
-        console.error(err);
-      },
-      () => {
-        this.loading = false;
-      })
+    this.parentTitle = this.section;
+    this.pagesService.getCMSSidebarParent(this.section).pipe(
+      mergeMap(parent => this.pagesService.getCMSSidebarNav(parent['items'][0]['id']))
+    ).subscribe(children => {
+      this.sidebarNav = children['items'];
+    },
+    (err) => {
+      this.loading = false;
+      console.error(err);
+    },
+    () => {
+      this.loading = false;
+    });
   }
 
   closeSidebar() {

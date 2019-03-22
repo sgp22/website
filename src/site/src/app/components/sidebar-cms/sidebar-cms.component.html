@@ -4,7 +4,7 @@
   <nav class="sidebar-nav sidebar-nav-list">
     <ul class="ids-list ids-list--hover">
       <li><a class="ids-list--item" [routerLink]="['.']" routerLinkActive="ids-list--item--selected"
-          [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar()">{{sectionTitle}}</a></li>
+          [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar()">{{parentTitle | titlecase}}</a></li>
 
       <li *ngFor="let item of sidebarNav | sort: 'title';">
         <span *ngIf="item.meta.children.children_count > 0" (click)="helpers.toggleAccordion(i, expandedLevel1)"
