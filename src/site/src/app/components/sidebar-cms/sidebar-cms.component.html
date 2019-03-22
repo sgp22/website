@@ -20,14 +20,16 @@
           routerLinkActive="ids-list--item--selected" (click)="closeSidebar()">{{item.title}}</a>
 
         <ul class="ids-list ids-list--expandable" [class.ids-list--expanded]="!expandedLevel1[i]">
-          <li *ngFor="let level_2 of item.meta.children.children | sort: 'title'; let i = index;">
+          <ng-container *ngFor="let level_2 of item.meta.children.children | sort: 'title'; let i = index;">
+            <li *ngIf="level_2.show_in_menus === true">
 
-            <a class="ids-list--item" routerLinkActive="ids-list--item--selected"
-              routerLink="{{level_2.relative_url}}" (click)="closeSidebar()">
-              {{level_2.title}}
-            </a>
+              <a class="ids-list--item" routerLinkActive="ids-list--item--selected"
+                routerLink="{{level_2.relative_url}}" (click)="closeSidebar()">
+                {{level_2.title}}
+              </a>
 
-          </li>
+            </li>
+          </ng-container>
         </ul>
       </li>
 

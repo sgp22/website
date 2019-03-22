@@ -52,6 +52,7 @@ def get_children_hirarchy(obj):
         ('children_count', children_count),
         ('children', children_list),
         ('menu_order', menu_order),
+        ('show_in_menus', obj.show_in_menus),
     ])
 
 
