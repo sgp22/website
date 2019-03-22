@@ -18,7 +18,8 @@ export class PagesService {
   ) { }
 
   getGlobalNav() {
-    return this.http.get(`${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&type=home.LandingPage&show_in_menus=true`).pipe(first());
+    const url = `${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&type=home.LandingPage&show_in_menus=true`;
+    return this.http.get(url).pipe(first());
   }
 
   getCMSSidebarParent(section: string) {
