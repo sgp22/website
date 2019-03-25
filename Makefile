@@ -139,7 +139,7 @@ build_prod :
 
 # Deploy
 deploy_staging: build_staging
-	@ ./deploy/deploy.sh -e staging-a
+	@ ./deploy/deploy.sh -e staging
 
 deploy_prod: build_prod
 	@ ./deploy/deploy.sh -e prod
