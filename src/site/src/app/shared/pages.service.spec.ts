@@ -67,10 +67,40 @@ describe('PagesService', () => {
   });
 
   it('#getGlobalNav should GET the data', () => {
-    const testUrl = `${environment.apiUrl}/api/${environment.domainVersion}/pages/?format=json&show_in_menus=true`;
+    const testUrl = `${environment.apiUrl}/api/${environment.domainVersion}/pages/?format=json&type=home.LandingPage&show_in_menus=true`;
     const testData = { title: 'Test' };
 
     pagesService.getGlobalNav()
+      .subscribe(data =>
+        expect(data).toEqual(testData)
+      );
+
+    const req = httpTestingController.expectOne(testUrl);
+    expect(req.request.method).toEqual('GET');
+    req.flush(testData);
+  });
+
+  it('#getCMSSidebarParent should GET the data', () => {
+    const section = 'testSection';
+    const testUrl = `${environment.apiUrl}/api/${environment.domainVersion}/pages/?format=json&limit=200&slug=${section}`;
+    const testData = { title: 'Test' };
+
+    pagesService.getCMSSidebarParent(section)
+      .subscribe(data =>
+        expect(data).toEqual(testData)
+      );
+
+    const req = httpTestingController.expectOne(testUrl);
+    expect(req.request.method).toEqual('GET');
+    req.flush(testData);
+  });
+
+  it('#getCMSSidebarNav should GET the data', () => {
+    const id = 1;
+    const testUrl = `${environment.apiUrl}/api/${environment.domainVersion}/pages/?format=json&limit=200&child_of=${id}&show_in_menus=true`;
+    const testData = { title: 'Test' };
+
+    pagesService.getCMSSidebarNav(id)
       .subscribe(data =>
         expect(data).toEqual(testData)
       );

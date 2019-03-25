@@ -22,7 +22,7 @@ while getopts "e:" opt; do
     esac
 done
 
-if ! [[ "$EB_ENV" =~ ^(staging-a|prod)$ ]]; then
+if ! [[ "$EB_ENV" =~ ^(staging|prod)$ ]]; then
     echo "${RED}ERROR: $EB_ENV is not a valid deployment environment!${RESET}"
 	exit 1
 fi
