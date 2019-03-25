@@ -21,7 +21,7 @@
         <section class="page-section" *ngIf="pageContent">
           <ng-container *ngFor="let streamfield of pageContent.body">
             <h2 *ngIf="streamfield.type === 'heading'">{{streamfield?.value}}</h2>
-            <div *ngIf="streamfield.type === 'table'">
+            <div class="table-container" *ngIf="streamfield.type === 'table'">
               <table>
                 <ng-container *ngIf="streamfield.value.first_row_is_table_header; then thBlock; else tdBlock;">
                 </ng-container>
