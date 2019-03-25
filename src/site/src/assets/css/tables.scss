@@ -90,3 +90,7 @@ table .table-header--description {
 .table--wide th.token-table--col-color {
   width: 5%;
 }
+
+.table-container {
+  overflow-x: auto;
+}
