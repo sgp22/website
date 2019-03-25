@@ -48,13 +48,14 @@ class CustomPageAPIEndpoint(PagesAPIEndpoint):
         'children',
         'parent',
         'menu_order',
+        'show_in_menus',
     ]
 
     # Leaving this just in case if somewhere in the app we still
     # use the "&has_children=false/true" url parameter.
     known_query_parameters = PagesAPIEndpoint.known_query_parameters.union([
         'preview',
-        'has_children'
+        'has_children',
     ])
 
     # Including all of the below just for reference,
