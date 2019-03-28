@@ -58,16 +58,28 @@ export class PagesService {
 
   createPage(route) {
     const url = route;
+    const params = {};
     const urlSegments = url.split('/');
     const slugSegment = urlSegments.slice(-1)[0].replace(/#.*$/, '');
     const slug = slugSegment !== '' ? slugSegment : 'homepage';
+    const query = slug.match(/[?]/g);
     const preview = url.match(/id=\d{1,10}/g);
-    const previewSlug = slug.split('?');
+    params['slug'] = query ? slugSegment.split('?')[0] : slugSegment;
+
+    if (query) {
+      const queryParams = slugSegment.split('?')[1].split('&');
+      queryParams.forEach(param => {
+        const paramArr = param.split('=');
+        if (paramArr) {
+          params[paramArr[0]] = paramArr[1];
+        }
+      });
+    }
 
     if (preview) {
-      return this.getCurrentPage(previewSlug[0], true);
+      return this.getCurrentPage(params['slug'], true);
     } else {
-      return this.getCurrentPage(slug);
+      return this.getCurrentPage(params['slug'], false);
     }
   }
 }
