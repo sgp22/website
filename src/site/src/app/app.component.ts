@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
         const url = this.router.routerState.snapshot.url;
         const title = url.replace(/^\//g, '').replace(/\//g, ' / ').replace(/-/g, ' ').replace(/\?.*/g, '');
 
-        if (url === '/') {
+        if (url === '/' || title === '') {
           this.titleService.setTitle(`Infor Design System`);
           this.isHome = true;
           if (window.pageYOffset < 300) {
