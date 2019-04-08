@@ -79,10 +79,12 @@ ul {
   }
 }
 
-.rich-text b {
-  font-weight: var(--theme-number-font-weight-bold);
-}
+.rich-text {
+  b {
+    font-weight: var(--theme-number-font-weight-bold);
+  }
 
-.rich-text i {
-  font-style: italic;
+  i {
+    font-style: italic;
+  }
 }
