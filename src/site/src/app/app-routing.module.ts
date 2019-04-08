@@ -36,7 +36,8 @@ const routes: Routes = [
       { path: 'identity/:slug', component: CoreContentPageComponent },
       { path: 'layout/:slug', component: CoreContentPageComponent },
       { path: 'patterns/:slug', component: CoreContentPageComponent },
-      { path: 'platforms/:slug', component: CoreContentPageComponent }
+      { path: 'platforms/:slug', component: CoreContentPageComponent },
+      { path: 'content/:slug', component: CoreContentPageComponent }
     ]
   },
   {

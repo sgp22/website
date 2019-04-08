@@ -37,6 +37,7 @@ import { BackToTopComponent } from './components/back-to-top/back-to-top.compone
 import { InputFocusDirective } from './shared/input-focus.directive';
 import { ScrollSpyDirective } from './shared/scroll-spy.directive';
 import { SortPipe } from './shared/sort.pipe';
+import { SortSidebarPipe } from './shared/sort-sidebar.pipe';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { SortPipe } from './shared/sort.pipe';
     InputFocusDirective,
     ScrollSpyDirective,
     SortPipe,
+    SortSidebarPipe,
   ],
   imports: [
     BrowserModule,
