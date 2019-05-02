@@ -44,7 +44,7 @@
   display: flex;
 
   span {
-    color: var(--black);
+    color: var(--theme-color-palette-black);
     font-size: var(--theme-size-font-sm);
     font-weight: var(--theme-number-font-weight-semibold);
 
@@ -308,7 +308,7 @@
   }
 
   a {
-    color: var(--black);
+    color: var(--theme-color-palette-black);
     display: block;
     font-size: 1.4rem;
     line-height: 32px;

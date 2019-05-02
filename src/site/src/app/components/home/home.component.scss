@@ -111,7 +111,7 @@
     }
 
     @media screen and (min-width: $breakpoint-md) {
-      font-size: 6rem;
+      font-size: var(--theme-size-font-xxl);
     }
 
     span {
@@ -402,7 +402,7 @@
     }
 
     @media screen and (min-width: $breakpoint-md) {
-      font-size: 6rem;
+      font-size: var(--theme-size-font-xxl);
     }
   }
 }

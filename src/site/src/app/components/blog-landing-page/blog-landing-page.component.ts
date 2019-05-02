@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
 
@@ -6,10 +6,12 @@ import { PagesService } from '../../shared/pages.service';
   selector: 'blog-landing-page',
   templateUrl: './blog-landing-page.component.html'
 })
-export class BlogLandingPageComponent implements OnInit {
+export class BlogLandingPageComponent implements OnInit, AfterViewInit {
   public pageContent: any;
   public loading = true;
-  public posts: any = [];
+  public posts = [];
+  public postsLatest = [];
+  public postss = [];
   @HostBinding('class.blog-landing-page') landing = true;
 
   constructor(
@@ -19,6 +21,9 @@ export class BlogLandingPageComponent implements OnInit {
 
   ngOnInit() {
     this.renderPage();
+  }
+
+  ngAfterViewInit() {
   }
 
   private renderPage() {
