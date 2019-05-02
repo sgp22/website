@@ -9,6 +9,7 @@ import { PagesService } from '../../shared/pages.service';
 export class BlogPostPageComponent implements OnInit {
   public pageContent: any;
   public loading = true;
+  public relatedPosts = [];
   @HostBinding('class.blog-post--container') blog = true;
 
   constructor(
@@ -24,7 +25,7 @@ export class BlogPostPageComponent implements OnInit {
         .subscribe(
           res => {
             this.pageContent = res;
-            console.log(this.pageContent);
+            this.getAllRelatedPosts(this.pageContent.id);
           },
           err => {
             this.loading = false;
@@ -34,6 +35,25 @@ export class BlogPostPageComponent implements OnInit {
           }
         );
     });
+
+  }
+
+  getAllRelatedPosts(currentPostId) {
+    this.relatedPosts = [];
+    this.pagesService.getAllBlogPosts()
+      .subscribe(res => {
+        res['items']
+          .filter(blogPost => blogPost.id !== currentPostId)
+          .map(item => {
+            this.pagesService.getPage(item.id)
+              .subscribe(post => {
+                this.relatedPosts.push(post);
+                this.relatedPosts.sort((a, b) => {
+                  return a.meta.first_published_at > b.meta.first_published_at ? -1 : 1;
+                });
+              })
+          });
+      });
   }
 
 }

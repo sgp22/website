@@ -63,5 +63,32 @@
 
   </div>
 
+  <section class="blog-post--related-posts">
+    <div class="blog-post--related-posts--inner">
+      <span class="blog-post--related-posts--eyebrow">More from the IDS Blog</span>
+      <h1 class="blog-post--related-posts--title">Continue Reading About Design at Infor</h1>
+      <div class="blog-post--related-posts--feed">
+        <article *ngFor="let post of relatedPosts.slice(0, 3); let i = index;" class="blog-post--preview">
+          <a class="blog-post--link" [routerLink]="['/blog', post.meta.slug]">
+
+            <header *ngIf="post.hero_image !== null" class="blog-post--header"
+              [ngStyle]="{'background-image': 'url(' + post.hero_image.meta.download_url + ')'}">
+            </header>
+
+            <div class="blog-post--content">
+              <span class="blog-post--meta">
+                <time class="blog-post--date">{{post.meta.first_published_at | date: 'MMMM d, yyyy'}}</time> |
+                <span *ngIf="post.author" class="blog-post--author">{{post.author}}</span>
+                <span *ngIf="!post.author" class="blog-post--author">IDS Team</span>
+              </span>
+              <h1 class="blog-post--title">{{post.title}}</h1>
+              <span class="blog-post--readmore">Read More</span>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
 </div>
 <site-footer></site-footer>

@@ -9,7 +9,7 @@
 
 <div class="ids-row ids-container blog-landing-page page-content">
 
-  <div class="blogs-posts--feed">
+  <div *ngIf="!loading" class="blogs-posts--feed">
 
     <article *ngFor="let post of posts; let i = index;" class="blog-post--preview">
       <a class="blog-post--link" routerLink="{{post.meta.slug}}">
