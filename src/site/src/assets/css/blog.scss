@@ -161,3 +161,21 @@
   color: var(--link-color-disabled-font);
   font-weight: var(--theme-number-font-weight-bold);
 }
+
+.blog-post--single--content {
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--input-color-disabled-font);
+  }
+
+  p {
+    max-width: 90%;
+  }
+
+  .richtext-image,
+  .blog-post--single--content--image {
+    margin: calc(var(--theme-number-spacing-base) * 4) 0;
+  }
+}

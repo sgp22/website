@@ -24,6 +24,7 @@ export class BlogPostPageComponent implements OnInit {
         .subscribe(
           res => {
             this.pageContent = res;
+            console.log(this.pageContent);
           },
           err => {
             this.loading = false;

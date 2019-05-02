@@ -27,6 +27,9 @@
           <ng-container *ngFor="let content of pageContent?.content">
             <div *ngIf="content.type === 'richText'" [innerHTML]="content?.value"></div>
             <div *ngIf="content.type === 'markdown'" [innerHTML]="content?.value"></div>
+            <div *ngIf="content.type === 'image'" class="blog-post--single--content--image">
+              <img src="{{content?.value.file}}" alt="{{content?.value.title}}">
+            </div>
             <ng-container *ngIf="content.type === 'table'">
               <table>
                 <ng-container *ngIf="content.value.first_row_is_table_header; then thBlock; else tdBlock;"></ng-container>
