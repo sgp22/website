@@ -7,11 +7,11 @@
   <div class="hero-overlay"></div>
 </div>
 
-<div class="ids-row ids-container blog-landing-page page-content">
+<div class="ids-row ids-container blog-landing-page blog-container page-content">
 
   <div *ngIf="!loading" class="blogs-posts--feed">
 
-    <article *ngFor="let post of posts; let i = index;" class="blog-post--preview">
+    <article *ngFor="let post of posts; let i = index;" class="blog-post--preview blog-post--preview--landing">
       <a class="blog-post--link" routerLink="{{post.meta.slug}}">
 
         <header
@@ -36,5 +36,12 @@
   </div>
 
 </div>
+
+<blog-related-posts
+  [eyebrow]="'Hook&Loop on Medium'"
+  [title]="'Read More About Design at Infor'"
+  [isExternal]="true">
+  <medium-posts [posts]="mediumPosts.slice(0,3)"></medium-posts>
+</blog-related-posts>
 
 <site-footer></site-footer>

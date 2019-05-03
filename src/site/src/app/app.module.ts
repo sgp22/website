@@ -38,6 +38,9 @@ import { InputFocusDirective } from './shared/input-focus.directive';
 import { ScrollSpyDirective } from './shared/scroll-spy.directive';
 import { SortPipe } from './shared/sort.pipe';
 import { SortSidebarPipe } from './shared/sort-sidebar.pipe';
+import { BlogRelatedPostsComponent } from './components/blog-related-posts/blog-related-posts.component';
+import { BlogPostsComponent } from './components/blog-related-posts/blog-posts.component';
+import { MediumPostsComponent } from './components/blog-related-posts/medium-posts.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import { SortSidebarPipe } from './shared/sort-sidebar.pipe';
     ScrollSpyDirective,
     SortPipe,
     SortSidebarPipe,
+    BlogRelatedPostsComponent,
+    BlogPostsComponent,
+    MediumPostsComponent,
   ],
   imports: [
     BrowserModule,

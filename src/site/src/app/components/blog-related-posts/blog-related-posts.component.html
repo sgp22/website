@@ -1,0 +1,10 @@
+<section class="blog-post--related-posts">
+  <div class="blog-post--related-posts--inner">
+    <span *ngIf="!isExternal" class="blog-post--related-posts--eyebrow">{{eyebrow}}</span>
+    <span *ngIf="isExternal" class="blog-post--related-posts--eyebrow"><a href="https://medium.com/@hookandloopnyc" target="_blank">{{eyebrow}}</a></span>
+    <h1 class="blog-post--related-posts--title">{{title}}</h1>
+    <div class="blog-post--related-posts--feed">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</section>

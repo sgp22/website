@@ -87,4 +87,9 @@ export class PagesService {
     const url = `${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&type=home.BlogPostPage`;
     return this.cacheService.get(url, this.http.get(url).pipe(first()));
   }
+
+  getMediumFeed() {
+    const url = `https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40hookandloopnyc`;
+    return this.cacheService.get(url, this.http.get(url));
+  }
 }

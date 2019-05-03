@@ -11,8 +11,7 @@ export class BlogLandingPageComponent implements OnInit, AfterViewInit {
   public loading = true;
   public posts = [];
   public postsLatest = [];
-  public postss = [];
-  @HostBinding('class.blog-landing-page') landing = true;
+  public mediumPosts = [];
 
   constructor(
     private router: Router,
@@ -21,6 +20,7 @@ export class BlogLandingPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.renderPage();
+    this.getMediumFeed();
   }
 
   ngAfterViewInit() {
@@ -54,6 +54,14 @@ export class BlogLandingPageComponent implements OnInit, AfterViewInit {
           this.loading = false;
         }
       );
+  }
+
+  getMediumFeed() {
+    this.pagesService.getMediumFeed()
+      .subscribe(res => {
+        console.log(res);
+        this.mediumPosts = res['items'];
+      });
   }
 
 }
