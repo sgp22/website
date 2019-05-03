@@ -18,7 +18,7 @@ import { Component, OnInit, Input } from '@angular/core';
               <span *ngIf="!post.author" class="blog-post--author">IDS Team</span>
             </span>
             <h1 class="blog-post--title">{{post.title}}</h1>
-            <span class="blog-post--readmore">Read More</span>
+            <span class="blog-post--readmore">Read More <svg class="ids-icon"><use xlink:href="#icon-drilldown"/></svg></span>
           </div>
         </a>
       </article>

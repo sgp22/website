@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'blog-landing-page',
@@ -15,7 +16,8 @@ export class BlogLandingPageComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    private pagesService: PagesService
+    private pagesService: PagesService,
+    private meta: Meta
     ) { }
 
   ngOnInit() {
@@ -59,7 +61,6 @@ export class BlogLandingPageComponent implements OnInit, AfterViewInit {
   getMediumFeed() {
     this.pagesService.getMediumFeed()
       .subscribe(res => {
-        console.log(res);
         this.mediumPosts = res['items'];
       });
   }

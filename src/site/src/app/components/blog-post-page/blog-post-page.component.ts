@@ -1,6 +1,8 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { Meta } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'blog-post-page',
@@ -10,17 +12,25 @@ export class BlogPostPageComponent implements OnInit {
   public pageContent: any;
   public loading = true;
   public relatedPosts = [];
+  public url: string;
+  public domain = environment.apiUrl;
   @HostBinding('class.blog-post--container') blog = true;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pagesService: PagesService
-  ) { }
+    private pagesService: PagesService,
+    private meta: Meta
+  ) {
+    this.meta.addTags([
+      { name: 'twitter:site', content: '@_hookandloop' }
+    ]);
+  }
 
   ngOnInit() {
     this.route.url.subscribe(urlSegment => {
       window.scroll(0, 0);
+      this.url = `${this.domain}${this.router.url}`;
       this.pagesService.createPage(this.router.url)
         .subscribe(
           res => {

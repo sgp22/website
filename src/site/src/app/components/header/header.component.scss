@@ -18,7 +18,7 @@
   .side-header__inner {
     align-items: center;
     display: flex;
-    padding: calc(var(--theme-number-spacing-base) * 3);
+    padding: var(--theme-number-spacing-base) calc(var(--theme-number-spacing-base) * 3);
 
     @media screen and (min-width: $breakpoint-sm) {
       padding: calc(var(--theme-number-spacing-base) * 4);
@@ -36,7 +36,11 @@
 }
 
 .site-header--pusher {
-  height: 104px;
+  height: $headerHeightMobile;
+
+  @media screen and (min-width: $breakpoint-sm) {
+    height: $headerHeight;
+  }
 }
 
 .logo {
@@ -206,6 +210,10 @@
   width: 100%;
   z-index: 4;
 
+  @media screen and (max-width: $breakpoint-sm) {
+    top: $headerHeightMobile;
+  }
+
   &.main-nav--mobile--active {
     display: block;
 
@@ -230,6 +238,10 @@
   font-weight: 300;
   margin-bottom: calc(var(--theme-number-spacing-base) * 4);
   text-decoration: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   &.main-nav--mobile--item--current {
     color: $azure-base;
