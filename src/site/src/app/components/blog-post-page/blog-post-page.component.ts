@@ -21,11 +21,7 @@ export class BlogPostPageComponent implements OnInit {
     private route: ActivatedRoute,
     private pagesService: PagesService,
     private meta: Meta
-  ) {
-    this.meta.addTags([
-      { name: 'twitter:site', content: '@_hookandloop' }
-    ]);
-  }
+  ) { }
 
   ngOnInit() {
     this.route.url.subscribe(urlSegment => {
@@ -61,7 +57,7 @@ export class BlogPostPageComponent implements OnInit {
                 this.relatedPosts.sort((a, b) => {
                   return a.meta.first_published_at > b.meta.first_published_at ? -1 : 1;
                 });
-              })
+              });
           });
       });
   }

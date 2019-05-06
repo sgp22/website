@@ -27,7 +27,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styles: [':host { width: 100% }']
 })
 export class BlogPostsComponent implements OnInit {
-  @Input('posts') posts: any;
+  @Input() posts: any;
 
   constructor() { }
 

@@ -6,9 +6,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./blog-related-posts.component.scss']
 })
 export class BlogRelatedPostsComponent implements OnInit {
-  @Input('title') title: string;
-  @Input('eyebrow') eyebrow: string;
-  @Input('isExternal') isExternal: boolean;
+  @Input() title: string;
+  @Input() eyebrow: string;
+  @Input() isExternal: boolean;
 
   constructor() { }
 

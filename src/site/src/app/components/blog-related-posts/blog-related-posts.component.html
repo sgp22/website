@@ -1,7 +1,8 @@
 <section class="blog-post--related-posts">
   <div class="blog-post--related-posts--inner">
     <span *ngIf="!isExternal" class="blog-post--related-posts--eyebrow">{{eyebrow}}</span>
-    <span *ngIf="isExternal" class="blog-post--related-posts--eyebrow"><a href="https://medium.com/@hookandloopnyc" target="_blank">{{eyebrow}}</a></span>
+    <span *ngIf="isExternal" class="blog-post--related-posts--eyebrow"><a href="https://medium.com/@hookandloopnyc" target="_blank">
+      <img class="blog-post--related-posts--eyebrow--icon" src="../../../assets/svgs/icon-medium-dark.svg">{{eyebrow}} <svg class="ids-icon"><use xlink:href="#icon-drilldown"/></svg></a></span>
     <h1 class="blog-post--related-posts--title">{{title}}</h1>
     <div class="blog-post--related-posts--feed">
       <ng-content></ng-content>

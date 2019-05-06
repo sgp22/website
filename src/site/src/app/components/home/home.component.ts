@@ -9,6 +9,7 @@ import Flickity from 'flickity-fade';
 export class HomeComponent implements OnInit {
   @ViewChild('heroSlider') heroSlider: ElementRef;
   @ViewChild('heroSliderNav') heroSliderNav: ElementRef;
+  public idsVersion: string;
 
   constructor() {}
 
@@ -68,6 +69,11 @@ export class HomeComponent implements OnInit {
     } else {
       return 0; // It is not IE
     }
+  }
+
+
+  displayIdsVersion(version) {
+    this.idsVersion = version;
   }
 
 }

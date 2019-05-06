@@ -279,15 +279,26 @@
 
 .blog-post--related-posts--eyebrow {
   color: var(--link-color-disabled-font);
+  display: inline-block;
   font-weight: var(--theme-number-font-weight-bold);
 
   a {
+    align-items: center;
     color: var(--link-color-disabled-font);
+    display: flex;
     text-decoration: none;
 
     &:hover {
       color: var(--theme-color-brand-primary-base);
     }
+  }
+
+  .blog-post--related-posts--eyebrow--icon {
+    margin-right: var(--theme-number-spacing-base);
+  }
+
+  .ids-icon {
+    color: currentColor;
   }
 }
 
