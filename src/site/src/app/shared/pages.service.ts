@@ -37,7 +37,7 @@ export class PagesService {
     return this.cacheService.get(url, this.http.get(url).pipe(share(), first()));
   }
 
-  getPage(id: string) {
+  getPage(id: any) {
     const url = `${this.apiUrl}/api/${this.domainVersion}/pages/${id}/`;
     return this.cacheService.get(url, this.http.get(url)
       .pipe(

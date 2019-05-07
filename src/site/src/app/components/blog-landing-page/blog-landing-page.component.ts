@@ -34,6 +34,8 @@ export class BlogLandingPageComponent implements OnInit, AfterViewInit {
       .subscribe(
         res => {
           this.pageContent = res;
+          this.meta.updateTag({ property: 'og:title', content: this.pageContent.title });
+          this.meta.updateTag({ property: 'og:image', content: '/assets/img/blog-og-image-2.jpg' });
           this.pageContent.meta.children.children.map((post) => {
             this.pagesService.getPage(post.id)
               .subscribe(

@@ -1,4 +1,4 @@
-<div class="blog-post--single--hero">
+<div *ngIf="pageContent?.hero_image" class="blog-post--single--hero">
   <div [ngStyle]="{'background-image': 'url(' + pageContent?.hero_image.meta.download_url + ')'}"></div>
 </div>
 

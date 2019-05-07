@@ -31,6 +31,8 @@ export class BlogPostPageComponent implements OnInit {
         .subscribe(
           res => {
             this.pageContent = res;
+            this.meta.updateTag({ property: 'og:title', content: this.pageContent.title });
+            this.meta.updateTag({ property: 'og:image', content: '/assets/img/blog-og-image.jpg'});
             this.getAllRelatedPosts(this.pageContent.id);
           },
           err => {
