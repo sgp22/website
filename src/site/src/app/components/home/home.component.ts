@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import Flickity from 'flickity-fade';
+import { PagesService } from '../../shared/pages.service';
 
 @Component({
   selector: 'site-home',
@@ -10,11 +11,15 @@ export class HomeComponent implements OnInit {
   @ViewChild('heroSlider') heroSlider: ElementRef;
   @ViewChild('heroSliderNav') heroSliderNav: ElementRef;
   public idsVersion: string;
+  public blogPosts: any;
 
-  constructor() {}
+  constructor(
+    private pagesService: PagesService
+  ) {}
 
   ngOnInit() {
     this.initHeroSlider();
+    this.getBlogPosts();
   }
 
   initHeroSlider() {
@@ -74,6 +79,23 @@ export class HomeComponent implements OnInit {
 
   displayIdsVersion(version) {
     this.idsVersion = version;
+  }
+
+  getBlogPosts() {
+    this.blogPosts = [];
+    this.pagesService.getAllBlogPosts()
+      .subscribe(res => {
+        res['items']
+          .map(item => {
+            this.pagesService.getPage(item.id)
+              .subscribe(post => {
+                this.blogPosts.push(post);
+                this.blogPosts.sort((a, b) => {
+                  return a.meta.first_published_at > b.meta.first_published_at ? -1 : 1;
+                });
+              });
+          });
+      });
   }
 
 }

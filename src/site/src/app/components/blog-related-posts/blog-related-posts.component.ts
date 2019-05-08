@@ -9,6 +9,8 @@ export class BlogRelatedPostsComponent implements OnInit {
   @Input() title: string;
   @Input() eyebrow: string;
   @Input() isExternal: boolean;
+  @Input() intro: string;
+  @Input() row: boolean;
 
   constructor() { }
 
