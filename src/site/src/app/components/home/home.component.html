@@ -256,6 +256,15 @@
   </div>
 </section>
 
+<blog-related-posts
+  [eyebrow]="'IDS Blog'"
+  [title]="'Design at Infor'"
+  [row]="true"
+  [intro]="'Get a closer look at our work and how we\&apos;re improving the Infor Design System to bring better experiences to the enterprise.'"
+>
+  <blog-posts [posts]="blogPosts.slice(0, 3)"></blog-posts>
+</blog-related-posts>
+
 <section class="row row--6 row--feedback">
   <div class="row--container">
     <div class="ids-row">
@@ -274,4 +283,4 @@
   </div>
 </section>
 
-<site-footer></site-footer >
+<site-footer (idsVersion)="displayIdsVersion($event)"></site-footer >

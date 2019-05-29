@@ -1,57 +1,79 @@
-<div class="ids-row ids-container blog-container page-content">
+<div *ngIf="pageContent?.hero_image" class="blog-post--single--hero">
+  <div [ngStyle]="{'background-image': 'url(' + pageContent?.hero_image.meta.download_url + ')'}"></div>
+</div>
 
-  <div *ngIf="!loading" class="ids-row--col-md-6 ids-row--offset-md-3 ids-row--col-sm-8 ids-row--offset-sm-2">
+<div class="ids-container">
 
-    <div class="page-inner">
+  <div class="ids-row ids-container blog-container page-content">
 
-      <article class="blog-post">
+    <div *ngIf="!loading" class="ids-row--col-md-6 ids-row--offset-md-3 ids-row--col-sm-10 ids-row--offset-sm-1">
 
-        <header class="blog-post--header">
-          <time class="blog-post--date">
-            {{pageContent?.meta.first_published_at | date : "MMMM d, yyyy"}}
-          </time>
-          <h1 class="blog-post--title">
-            {{pageContent?.title}}
-          </h1>
-          <span class="blog-post--author">By {{pageContent?.author}}</span>
-        </header>
+      <div class="page-inner">
 
-        <div class="blog-post--content">
-          <ng-container *ngFor="let content of pageContent?.content">
-            <div *ngIf="content.type === 'richText'" [innerHTML]="content?.value"></div>
-            <div *ngIf="content.type === 'markdown'" [innerHTML]="content?.value"></div>
-            <ng-container *ngIf="content.type === 'table'">
-              <table>
-                <ng-container *ngIf="content.value.first_row_is_table_header; then thBlock; else tdBlock;"></ng-container>
-                <ng-template #thBlock>
-                  <thead>
-                    <th *ngFor="let head of content?.value.data[0]" [innerHTML]="head"></th>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let row of content?.value.data; let first=first;">
-                      <ng-container *ngIf="!first">
+        <article class="blog-post--single">
+
+          <header class="blog-post--single--header">
+            <h1 class="blog-post--single--title">
+              {{pageContent?.title}}
+            </h1>
+            <div class="blog-post--single--meta">
+              <time class="blog-post--single--date">
+                {{pageContent?.meta.first_published_at | date : "MMMM d, yyyy"}}
+              </time> |
+              <span *ngIf="pageContent?.author" class="blog-post--single--author">{{pageContent?.author}}</span>
+              <span *ngIf="!pageContent?.author" class="blog-post--single--author">IDS Team</span>
+            </div>
+          </header>
+
+          <div class="blog-post--single--content">
+            <ng-container *ngFor="let content of pageContent?.content">
+              <div *ngIf="content.type === 'richText'" [innerHTML]="content?.value"></div>
+              <div *ngIf="content.type === 'markdown'" [innerHTML]="content?.value"></div>
+              <div *ngIf="content.type === 'image'" class="blog-post--single--content--image">
+                <img src="{{content?.value.file}}" alt="{{content?.value.title}}">
+              </div>
+              <ng-container *ngIf="content.type === 'table'">
+                <table>
+                  <ng-container *ngIf="content.value.first_row_is_table_header; then thBlock; else tdBlock;"></ng-container>
+                  <ng-template #thBlock>
+                    <thead>
+                      <th *ngFor="let head of content?.value.data[0]" [innerHTML]="head"></th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of content?.value.data; let first=first;">
+                        <ng-container *ngIf="!first">
+                          <td *ngFor="let data of row" [innerHTML]="data"></td>
+                        </ng-container>
+                      </tr>
+                    </tbody>
+                  </ng-template>
+                  <ng-template #tdBlock>
+                    <tbody>
+                      <tr *ngFor="let row of content?.value.data;">
                         <td *ngFor="let data of row" [innerHTML]="data"></td>
-                      </ng-container>
-                    </tr>
-                  </tbody>
-                </ng-template>
-                <ng-template #tdBlock>
-                  <tbody>
-                    <tr *ngFor="let row of content?.value.data;">
-                      <td *ngFor="let data of row" [innerHTML]="data"></td>
-                    </tr>
-                  </tbody>
-                </ng-template>
-              </table>
+                      </tr>
+                    </tbody>
+                  </ng-template>
+                </table>
+              </ng-container>
             </ng-container>
-          </ng-container>
-        </div>
+          </div>
 
-      </article>
+        </article>
+
+      </div>
 
     </div>
 
   </div>
 
 </div>
+
+<blog-related-posts
+  [eyebrow]="'More from the IDS Blog'"
+  [title]="'Continue Reading About Design at Infor'"
+>
+  <blog-posts [posts]="relatedPosts.slice(0, 3)"></blog-posts>
+</blog-related-posts>
+
 <site-footer></site-footer>

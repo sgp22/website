@@ -37,7 +37,7 @@ export class PagesService {
     return this.cacheService.get(url, this.http.get(url).pipe(share(), first()));
   }
 
-  getPage(id) {
+  getPage(id: any) {
     const url = `${this.apiUrl}/api/${this.domainVersion}/pages/${id}/`;
     return this.cacheService.get(url, this.http.get(url)
       .pipe(
@@ -46,7 +46,7 @@ export class PagesService {
       ));
   }
 
-  getCurrentPage(slug, preview = false) {
+  getCurrentPage(slug: string, preview = false) {
     return this.getAll()
       .pipe(
         map(res => {
@@ -56,7 +56,7 @@ export class PagesService {
       );
   }
 
-  createPage(route) {
+  createPage(route: string) {
     const url = route;
     const params = {};
     const urlSegments = url.split('/');
@@ -81,5 +81,15 @@ export class PagesService {
     } else {
       return this.getCurrentPage(params['slug'], false);
     }
+  }
+
+  getAllBlogPosts() {
+    const url = `${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&type=home.BlogPostPage`;
+    return this.cacheService.get(url, this.http.get(url).pipe(first()));
+  }
+
+  getMediumFeed() {
+    const url = `https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40hookandloopnyc`;
+    return this.cacheService.get(url, this.http.get(url));
   }
 }

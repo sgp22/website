@@ -1,24 +1,31 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagesService } from '../../shared/pages.service';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'blog-landing-page',
   templateUrl: './blog-landing-page.component.html'
 })
-export class BlogLandingPageComponent implements OnInit {
+export class BlogLandingPageComponent implements OnInit, AfterViewInit {
   public pageContent: any;
   public loading = true;
-  public posts: any = [];
-  @HostBinding('class.blog-landing-page') landing = true;
+  public posts = [];
+  public postsLatest = [];
+  public mediumPosts = [];
 
   constructor(
     private router: Router,
-    private pagesService: PagesService
+    private pagesService: PagesService,
+    private meta: Meta
     ) { }
 
   ngOnInit() {
     this.renderPage();
+    this.getMediumFeed();
+  }
+
+  ngAfterViewInit() {
   }
 
   private renderPage() {
@@ -27,6 +34,8 @@ export class BlogLandingPageComponent implements OnInit {
       .subscribe(
         res => {
           this.pageContent = res;
+          this.meta.updateTag({ property: 'og:title', content: this.pageContent.title });
+          this.meta.updateTag({ property: 'og:image', content: '/assets/img/blog-og-image-2.jpg' });
           this.pageContent.meta.children.children.map((post) => {
             this.pagesService.getPage(post.id)
               .subscribe(
@@ -49,6 +58,13 @@ export class BlogLandingPageComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  getMediumFeed() {
+    this.pagesService.getMediumFeed()
+      .subscribe(res => {
+        this.mediumPosts = res['items'];
+      });
   }
 
 }

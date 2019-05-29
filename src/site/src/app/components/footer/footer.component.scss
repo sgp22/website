@@ -19,6 +19,12 @@
   }
 }
 
+.site-footer--ids-logo {
+  flex-shrink: 0;
+  min-width: 125px;
+  width: 210px;
+}
+
 .site-footer--btm {
   align-items: center;
   background-color: $slate-lightest;

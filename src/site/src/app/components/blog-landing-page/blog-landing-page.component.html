@@ -1,32 +1,47 @@
-<div class="ids-row ids-container blog-container page-content">
+<div class="blog-landing-page--header">
+  <div class="blog-landing-page--header--content">
+    <h1>Design at Infor</h1>
+    <p>Get a closer look at our work and how we're improving the Infor Design System to bring better experiences to the
+    enterprise.</p>
+  </div>
+  <div class="hero-overlay"></div>
+</div>
 
-  <div class="blog-posts ids-row--col-md-6 ids-row--offset-md-3 ids-row--col-sm-8 ids-row--offset-sm-2">
+<div class="ids-row ids-container blog-landing-page blog-container page-content">
 
-    <div class="page-inner">
+  <div *ngIf="!loading" class="blogs-posts--feed">
 
-      <article *ngFor="let post of posts" class="blog-post">
+    <article *ngFor="let post of posts; let i = index;" class="blog-post--preview blog-post--preview--landing">
+      <a class="blog-post--link" routerLink="{{post.meta.slug}}">
 
-        <header class="blog-post--header">
-          <time class="blog-post--date">
-            {{post.meta.first_published_at | date: 'MMMM d, yyyy'}}
-          </time>
-          <h1 class="blog-post--title"><a routerLink="{{post.meta.slug}}">{{post.title}}</a></h1>
-          <span class="blog-post--author">By {{post.author}}</span>
+        <header
+          *ngIf="post.hero_image !== null"
+          class="blog-post--header"
+          [ngStyle]="{'background-image': 'url(' + post.hero_image.meta.download_url + ')'}"
+        >
         </header>
 
         <div class="blog-post--content">
-          <ng-container>
-            <div *ngIf="post.content[0].type === 'richText' || post.content[0].type === 'markdown'" [innerHTML]="post?.content[0].value.slice(0, post.content[0].value.indexOf('</p>'))"></div>
-            <a routerLink="{{post.meta.slug}}">Continue reading...</a>
-          </ng-container>
+          <span class="blog-post--meta">
+            <time class="blog-post--date">{{post.meta.first_published_at | date: 'MMMM d, yyyy'}}</time> |
+            <span *ngIf="post.author" class="blog-post--author">{{post.author}}</span>
+            <span *ngIf="!post.author" class="blog-post--author">IDS Team</span>
+          </span>
+          <h1 class="blog-post--title">{{post.title}}</h1>
+          <span class="blog-post--readmore">Read More <svg class="ids-icon"><use xlink:href="#icon-drilldown"/></svg></span>
         </div>
-
-      </article>
-
-    </div>
+      </a>
+    </article>
 
   </div>
 
 </div>
+
+<blog-related-posts
+  [eyebrow]="'Hook&Loop on Medium'"
+  [title]="'Read More About Design at Infor'"
+  [isExternal]="true">
+  <medium-posts [posts]="mediumPosts.slice(0,3)"></medium-posts>
+</blog-related-posts>
 
 <site-footer></site-footer>

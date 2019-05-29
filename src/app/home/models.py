@@ -601,7 +601,16 @@ class BlogPostPage(PageBase):
         blank=True,
     )
 
+    hero_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     content = StreamField([
+        ('image', APIImageChooserBlock()),
         ('markdown', APIMarkDownBlock()),
         ('richText', APIRichTextBlock()),
         ('table', TableBlock())
@@ -609,6 +618,7 @@ class BlogPostPage(PageBase):
 
     content_panels = Page.content_panels + [
         FieldPanel('author'),
+        ImageChooserPanel('hero_image'),
         StreamFieldPanel('content')
     ]
 
@@ -618,5 +628,6 @@ class BlogPostPage(PageBase):
 
     api_fields = [
         APIField('author'),
+        APIField('hero_image'),
         APIField('content')
     ]

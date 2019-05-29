@@ -1,0 +1,16 @@
+<section class="blog-post--related-posts">
+  <div class="blog-post--related-posts--inner">
+    <div class="blog-post--related-posts--header" [ngClass]="{'ids-row': row}">
+      <div [ngClass]="{'ids-row--col-md-10 ids-row--offset-md-1 row--design-system--top': row}">
+        <span *ngIf="!isExternal" class="blog-post--related-posts--eyebrow">{{eyebrow}}</span>
+        <span *ngIf="isExternal" class="blog-post--related-posts--eyebrow"><a href="https://medium.com/@hookandloopnyc" target="_blank">
+        <img class="blog-post--related-posts--eyebrow--icon" src="../../../assets/svgs/icon-medium-dark.svg">{{eyebrow}} <svg class="ids-icon"><use xlink:href="#icon-drilldown"/></svg></a></span>
+        <h1 class="blog-post--related-posts--title">{{title}}</h1>
+        <p *ngIf="intro">{{intro}}</p>
+      </div>
+    </div>
+    <div class="blog-post--related-posts--feed">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</section>
