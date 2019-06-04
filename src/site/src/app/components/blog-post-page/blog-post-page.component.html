@@ -2,6 +2,10 @@
   <div [ngStyle]="{'background-image': 'url(' + pageContent?.hero_image.meta.download_url + ')'}"></div>
 </div>
 
+<div *ngIf="!pageContent?.hero_image" class="blog-post--single--hero">
+  <div [ngStyle]="{'background-image': 'url(assets/img/placeholder-01.jpg)'}"></div>
+</div>
+
 <div class="ids-container">
 
   <div *ngIf="!loading" class="ids-row ids-container blog-container blog-container--single page-content">
