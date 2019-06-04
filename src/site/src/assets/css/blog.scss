@@ -185,6 +185,11 @@
   }
 }
 
+.blog-container--single {
+  max-width: var(--breakpoint-md);
+  margin: 0 auto;
+}
+
 .blog-post--single--hero {
   background-color: var(--theme-color-body-base);
   height: 400px;
@@ -203,7 +208,7 @@
     background-size: cover;
     height: 100%;
     margin: 0 auto;
-    max-width: 80%;
+    max-width: 1024px;
   }
 }
 
