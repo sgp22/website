@@ -258,6 +258,12 @@
     color: var(--input-color-disabled-font);
   }
 
+  h1 {
+    @media screen and (max-width: $breakpoint-sm) {
+      font-size: var(--theme-size-font-lg);
+    }
+  }
+
   p {
     max-width: 90%;
   }
