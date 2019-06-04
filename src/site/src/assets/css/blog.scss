@@ -73,6 +73,7 @@
   }
 
   .blog-post--header {
+    background-color: var(--theme-color-palette-white);
     background-size: cover;
     min-height: 160px;
   }
@@ -265,6 +266,7 @@
 }
 
 .blog-post--related-posts--feed--inner {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
 
