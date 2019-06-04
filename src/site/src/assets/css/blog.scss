@@ -111,6 +111,15 @@
       font-size: var(--theme-size-font-xl);
       font-weight: var(--theme-number-font-weight-light);
       line-height: var(--theme-number-font-line-height-xl);
+
+      @media screen and (max-width: $breakpoint-md) {
+        font-size: var(--theme-size-font-lg);
+      }
+
+      @media screen and (max-width: $breakpoint-sm) {
+        font-size: var(--theme-size-font-md);
+        font-weight: var(--theme-number-font-weight-base);
+      }
     }
   }
 }
@@ -225,6 +234,10 @@
 .blog-post--single--title {
   font-size: var(--theme-size-font-xxl);
   margin-top: 0;
+
+  @media screen and (max-width: $breakpoint-md) {
+    font-size: var(--theme-size-font-xl);
+  }
 
   @media screen and (max-width: $breakpoint-sm) {
     font-size: var(--theme-size-font-lg);
