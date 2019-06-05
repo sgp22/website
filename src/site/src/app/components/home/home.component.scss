@@ -67,7 +67,7 @@
   position: absolute;
   text-decoration: none;
   transform: translateX(-50%);
-  z-index: 3;
+  z-index: 2;
 
   @media screen and (min-width: $breakpoint-sm) {
     bottom: 50px;
