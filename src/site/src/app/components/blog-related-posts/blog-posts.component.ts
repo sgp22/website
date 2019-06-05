@@ -11,6 +11,10 @@ import { Component, OnInit, Input } from '@angular/core';
             [ngStyle]="{'background-image': 'url(' + post.hero_image.meta.download_url + ')'}">
           </header>
 
+          <header *ngIf="post.hero_image === null" class="blog-post--header"
+            [ngStyle]="{'background-image': 'url(assets/img/placeholder-01.jpg)'}">
+          </header>
+
           <div class="blog-post--content">
             <span class="blog-post--meta">
               <time class="blog-post--date">{{post.meta.first_published_at | date: 'MMMM d, yyyy'}}</time> |
