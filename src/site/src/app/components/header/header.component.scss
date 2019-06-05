@@ -49,12 +49,12 @@
   margin-right: calc(var(--theme-number-spacing-base) * 2);
 
   svg {
-    width: 170px;
     height: auto;
+    width: 170px;
 
     @media screen and (min-width: $breakpoint-sm) {
-      width: 202px;
       height: 56px;
+      width: 202px;
     }
   }
 
@@ -68,8 +68,6 @@
 
   .infor-square {
     fill: #c2252c;
-
-    @media screen and (min-width: $breakpoint-sm) {}
   }
 }
 
