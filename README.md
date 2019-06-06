@@ -2,29 +2,32 @@
 
 ## Basic local dev setup
 
-If you want to connect to S3 to same wagtail media, and uploaded docs, run the below exports.  Notice the `export S3_STORAGE=True`, if you want to upload to the local host, then set it to `False`.
+If you want to connect to S3 to save wagtail media, and uploaded docs, create an `.env` file in the 
+root of the project and add the below snippet to it.  This file in not version controlled and is always
+present so you do not need to constantly export vars.
+Notice the `export S3_STORAGE=True`, if you want to upload to the local host, then set it to `False`.
 
 ```bash
-export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
-export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
-export AWS_STORAGE_BUCKET_NAME=ids-com-dev
-export S3_STORAGE=True
-export ES_HOST=elasticsearch
-export ES_PASS=<ES_PASS>
-export ES_INDEX_PREFIX=dev
-export DOCS_API_KEY=<DOCS_API_KEY>
+AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
+AWS_STORAGE_BUCKET_NAME=ids-com-dev
+S3_STORAGE=True
+ES_HOST=elasticsearch
+ES_PASS=<ES_PASS>
+ES_INDEX_PREFIX=dev
+DOCS_API_KEY=<DOCS_API_KEY>
 ```
 
 then...
 
 ```bash
-. ./scripts/set_dev_vars.sh
+source $PWD/.env
 make up
 make syncdb
 make migrate
 make index_backend
 make index_s3
-make run_dev #for frontend dev
+make dev_site #for frontend dev
 make dev_backend #for backend dev
 ```
 
