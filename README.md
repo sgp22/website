@@ -7,6 +7,8 @@ root of the project and add the below snippet to it.  This file in not version c
 present so you do not need to constantly export vars.
 Notice the `export S3_STORAGE=True`, if you want to upload to the local host, then set it to `False`.
 
+**Security** You need to have your IP whitelisted to be able to sync your database for security reasons.
+
 ```bash
 AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
 AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
