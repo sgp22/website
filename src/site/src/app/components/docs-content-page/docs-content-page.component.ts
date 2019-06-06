@@ -81,9 +81,10 @@ export class DocsContentPageComponent implements OnInit {
         if (docData['demo']) {
           if (docData['demo'].pages) {
             docData['demo'].pages.forEach(page => {
-              if (page.slug)
-              page.githubUrl = this.createGithubUrl(page.slug);
-              page.url = this.createDemoUrl(page.slug);
+              if (page.slug) {
+                page.githubUrl = this.createGithubUrl(page.slug);
+                page.url = this.createDemoUrl(page.slug);
+              }
             });
           }
 
