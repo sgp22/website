@@ -1,9 +1,9 @@
 <div *ngIf="pageContent?.hero_image" class="blog-post--single--hero">
-  <div [ngStyle]="{'background-image': 'url(' + pageContent?.hero_image.meta.download_url + ')'}"></div>
+  <div *ngIf="!loading" [ngStyle]="{'background-image': 'url(' + pageContent?.hero_image.meta.download_url + ')'}"></div>
 </div>
 
 <div *ngIf="!pageContent?.hero_image" class="blog-post--single--hero">
-  <div [ngStyle]="{'background-image': 'url(assets/img/placeholder-01.jpg)'}"></div>
+  <div *ngIf="!loading" [ngStyle]="{'background-image': 'url(assets/img/placeholder-01.jpg)'}"></div>
 </div>
 
 <div class="ids-container">
@@ -70,6 +70,7 @@
 </div>
 
 <blog-related-posts
+  *ngIf="!loading"
   [eyebrow]="'More from the IDS Blog'"
   [row]="true"
   [title]="'Continue Reading About Design at Infor'"
@@ -77,4 +78,4 @@
   <blog-posts [posts]="relatedPosts.slice(0, 3)"></blog-posts>
 </blog-related-posts>
 
-<site-footer></site-footer>
+<site-footer *ngIf="!loading"></site-footer>
