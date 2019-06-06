@@ -4,6 +4,7 @@ import { DocsService } from './docs.service';
 import { LibraryService } from '../../shared/library.service';
 import { HelpersService } from '../../shared/helpers.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { zip } from 'rxjs';
 
 interface TocItems {
   label: string;
@@ -53,61 +54,65 @@ export class DocsContentPageComponent implements OnInit {
         this.params = `${params.library}/${params.version}/docs/index.json`;
       }
 
-      this.libraryService.loadAllLibraryVersions(this.library)
-        .subscribe(res => {
-          let latestVersion = '';
-          if (res instanceof Array && res.length) {
-            latestVersion = res[0];
-          }
-          if (this.currentVersion === 'latest') {
-            this.currentVersion = latestVersion;
-          }
+      const source$ = zip(
+        this.libraryService.loadAllLibraryVersions(this.library),
+        this.docsService.loadDocs(this.params)
+      );
 
-          this.versionShowWarning(this.currentVersion, latestVersion);
-        });
+      source$.subscribe( ([allLibraries, docData]) => {
 
-      this.docsService.loadDocs(this.params)
-        .subscribe(res => {
+        let latestVersion = '';
+        if (allLibraries instanceof Array && allLibraries.length) {
+          latestVersion = allLibraries[0];
+        }
 
-          this.docs = res;
+        if (this.currentVersion === 'latest') {
+          this.currentVersion = latestVersion;
+        }
 
-          if (this.docs.api) {
-            this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.docs.api);
-          }
+        this.versionShowWarning(this.currentVersion, latestVersion);
 
-          if (res['demo']) {
-            if (res['demo'].pages) {
-              res['demo'].pages.forEach(page => {
+        this.docs = docData;
+
+        if (this.docs.api) {
+          this.docs.apiTrustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.docs.api);
+        }
+
+        if (docData['demo']) {
+          if (docData['demo'].pages) {
+            docData['demo'].pages.forEach(page => {
+              if (page.slug) {
                 page.githubUrl = this.createGithubUrl(page.slug);
                 page.url = this.createDemoUrl(page.slug);
-              });
-            }
-
-            if (res['demo'].embedded) {
-              res['demo'].embedded.forEach(page => {
-                page.githubUrl = this.createGithubUrl(page.slug);
-                page.url = this.createDemoUrl(page.slug);
-                page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true));
-              });
-            }
+              }
+            });
           }
 
-          this.handleRelativeLinks(this.docs);
-          this.buildToc();
-          this.loading = false;
-
-          if (!this.loading) {
-            setTimeout(() => {
-              this.h.pageLoadToSection();
-            }, 200);
+          if (docData['demo'].embedded) {
+            docData['demo'].embedded.forEach(page => {
+              page.githubUrl = this.createGithubUrl(page.slug);
+              page.url = this.createDemoUrl(page.slug);
+              page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true));
+            });
           }
+        }
 
-        },
-        err => {
-          if (err.error.error.code === '404') {
-            this.router.navigate(['/404']);
-          }
-        });
+        this.handleRelativeLinks(this.docs);
+        this.buildToc();
+        this.loading = false;
+
+        if (!this.loading) {
+          setTimeout(() => {
+            this.h.pageLoadToSection();
+          }, 200);
+        }
+
+      },
+      err => {
+        if (err.error.error.code === '404') {
+          this.router.navigate(['/404']);
+        }
+      });
 
       (<any>window).ga('set', {
         'dimension2': (this.component ? this.component : 'n/a'),
