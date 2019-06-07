@@ -154,3 +154,8 @@ scripts/local_set_dev_vars.sh
 !src/config/elasticsearch/searchguard/ssl/
 src/config/elasticsearch/searchguard/ssl/*
 !src/config/elasticsearch/searchguard/ssl/etc/
+
+
+# SSLs
+src/config/nginx/certs/design_infor_com
+!src/config/nginx/certs/design_infor_com/.gitkeep
