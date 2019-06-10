@@ -21,11 +21,6 @@
 			"sourcePath": "/var/app/current/src/config"
 		}
 	}, {
-		"name": "nginx-letsencrypt",
-		"host": {
-		  "sourcePath": "/data/letsencrypt"
-		}
-	}, {
 		"name": "nginx-snippets",
 		"host": {
 		  "sourcePath": "/var/app/current/src/config/nginx/snippets"
@@ -111,9 +106,6 @@
 			"backend"
 		],
 		"mountPoints": [{
-			"sourceVolume": "nginx-letsencrypt",
-			"containerPath": "/etc/letsencrypt/"
-		}, {
 			"sourceVolume": "site",
 			"containerPath": "/home/site"
 		}, {
