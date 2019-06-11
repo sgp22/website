@@ -5,7 +5,7 @@
 If you want to connect to S3 to save wagtail media, and uploaded docs, create an `.env` file in the 
 root of the project and add the below snippet to it.  This file in not version controlled and is always
 present so you do not need to constantly export vars.
-Notice the `export S3_STORAGE=True`, if you want to upload to the local host, then set it to `False`.
+Notice the `S3_STORAGE=True`, if you want to upload to the local host, then set it to `False`.
 
 **Security** You need to have your IP whitelisted to be able to sync your database for security reasons.
 
@@ -23,7 +23,7 @@ DOCS_API_KEY=<DOCS_API_KEY>
 then...
 
 ```bash
-source $PWD/.env
+export $(cat .env | xargs)
 make up
 make syncdb
 make migrate
