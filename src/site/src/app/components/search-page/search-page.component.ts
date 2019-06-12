@@ -20,7 +20,7 @@ export class SearchPageComponent implements OnInit {
   public latestEp;
   public latestCSS;
   public latestPendo;
-  @ViewChild('searchForm') searchForm: NgForm;
+  @ViewChild('searchForm', { static: true }) searchForm: NgForm;
 
   constructor(
     private searchService: SearchService,

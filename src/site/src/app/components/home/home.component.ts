@@ -8,14 +8,14 @@ import { PagesService } from '../../shared/pages.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('heroSlider') heroSlider: ElementRef;
-  @ViewChild('heroSliderNav') heroSliderNav: ElementRef;
+  @ViewChild('heroSlider', { static: true }) heroSlider: ElementRef;
+  @ViewChild('heroSliderNav', { static: true }) heroSliderNav: ElementRef;
   public idsVersion: string;
   public blogPosts: any;
 
   constructor(
     private pagesService: PagesService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initHeroSlider();
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
 
     const cellsButtonGroup = document.querySelector('.hero-slider-nav');
     const cellsButtons = Array.from(document.querySelectorAll('.hero-slider-nav__item'));
-    heroFlkty.on('select', function() {
+    heroFlkty.on('select', function () {
       const previousSelectedButton = cellsButtonGroup.querySelector('.hero-slider-nav__item--selected');
       const selectedButton = cellsButtons[heroFlkty.selectedIndex];
       previousSelectedButton.classList.remove('hero-slider-nav__item--selected');
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
     });
 
     const h1s = Array.from(document.querySelectorAll('.hero-slider__slide h1'));
-    heroFlkty.on('scroll', function(event, progress) {
+    heroFlkty.on('scroll', function (event, progress) {
       heroFlkty.slides.forEach(function (slide, i) {
         const h1 = h1s[i] as HTMLElement;
         const x = (slide.target + heroFlkty.x) * -1 / 20;

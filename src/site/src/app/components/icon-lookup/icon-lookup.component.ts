@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
 })
 export class IconLookupComponent implements OnInit {
   @Input() iconType: string;
-  @ViewChild('searchText') searchText: NgForm;
+  @ViewChild('searchText', { static: true }) searchText: NgForm;
   public icons: any;
   public downloadLinksVisible = [];
 

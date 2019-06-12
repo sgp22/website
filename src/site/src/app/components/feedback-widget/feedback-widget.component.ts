@@ -14,9 +14,9 @@ interface FeedbackForm {
   styleUrls: ['./feedback-widget.component.scss']
 })
 export class FeedbackWidgetComponent implements OnInit {
-  @ViewChild('thumbsDown') thumbsDown: ElementRef;
-  @ViewChild('thumbsUp') thumbsUp: ElementRef;
-  @ViewChild('feedbackForm') feedbackForm: NgForm;
+  @ViewChild('thumbsDown', { static: true }) thumbsDown: ElementRef;
+  @ViewChild('thumbsUp', { static: true }) thumbsUp: ElementRef;
+  @ViewChild('feedbackForm', { static: true }) feedbackForm: NgForm;
   @Input() notFound;
   public widgetHovered = false;
   public thumbValue;
