@@ -23,7 +23,6 @@ DOCS_API_KEY=<DOCS_API_KEY>
 then...
 
 ```bash
-export $(cat .env | xargs)
 make up
 make syncdb
 make migrate
