@@ -31,7 +31,7 @@ export class RoleWidgetComponent implements AfterViewInit {
   public selectedRole;
   public roleSubmitted = JSON.parse(localStorage.getItem('roleSubmitted')) || false;
   public removeRoleThankyou = JSON.parse(localStorage.getItem('removeRoleThankyou')) || true;
-  @ViewChild('thankYou') thankYou;
+  @ViewChild('thankYou', { static: true }) thankYou;
 
   constructor() { }
 

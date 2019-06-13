@@ -8,9 +8,9 @@ import { LibraryService } from '../../shared/library.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('mainNavMobile') mobileNavItem: ElementRef;
-  @ViewChild('trigger') trigger: ElementRef;
-  @ViewChild('mobileTrigger') mobileTrigger: ElementRef;
+  @ViewChild('mainNavMobile', { static: true }) mobileNavItem: ElementRef;
+  @ViewChild('trigger', { static: true }) trigger: ElementRef;
+  @ViewChild('mobileTrigger', { static: true }) mobileTrigger: ElementRef;
   @Input() isHome: boolean;
   @Input() headerTop: boolean;
   public navItems: any;

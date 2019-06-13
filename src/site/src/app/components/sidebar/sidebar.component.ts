@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   public urlSegments: any;
   @Input() lib;
   @Input() ver;
-  @ViewChild('searchText') searchText: NgForm;
+  @ViewChild('searchText', { static: true }) searchText: NgForm;
   @Output() closeSB = new EventEmitter();
 
   constructor(
@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.updateNav(path, library, version);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   closeSidebar() {
     if (this.helpers.checkViewport('(min-width: 600px)')) {
