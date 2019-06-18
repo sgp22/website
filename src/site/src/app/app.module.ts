@@ -41,6 +41,8 @@ import { SortSidebarPipe } from './shared/sort-sidebar.pipe';
 import { BlogRelatedPostsComponent } from './components/blog-related-posts/blog-related-posts.component';
 import { BlogPostsComponent } from './components/blog-related-posts/blog-posts.component';
 import { MediumPostsComponent } from './components/blog-related-posts/medium-posts.component';
+import { PreviewLoaderComponent } from './components/preview-loader/preview-loader.component';
+import { PreviewLoaderDirective } from './components/preview-loader/preview-loader.directive';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,8 @@ import { MediumPostsComponent } from './components/blog-related-posts/medium-pos
     BlogRelatedPostsComponent,
     BlogPostsComponent,
     MediumPostsComponent,
+    PreviewLoaderComponent,
+    PreviewLoaderDirective,
   ],
   imports: [
     BrowserModule,
@@ -92,5 +96,5 @@ import { MediumPostsComponent } from './components/blog-related-posts/medium-pos
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {}
+  constructor() { }
 }

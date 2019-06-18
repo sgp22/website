@@ -10,6 +10,7 @@ import { CodePageComponent } from './components/code-page/code-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
+import { PreviewLoaderComponent } from './components/preview-loader/preview-loader.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,10 @@ const routes: Routes = [
   {
     path: 'blog/:slug',
     component: BlogPostPageComponent,
+  },
+  {
+    path: 'draft/admin/pages/:id/edit/preview',
+    component: PreviewLoaderComponent,
   },
   {
     path: '**',

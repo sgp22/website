@@ -83,6 +83,10 @@ export class PagesService {
     }
   }
 
+  getPreview(url) {
+    return this.cacheService.get(url, this.http.get(url).pipe(first()));
+  }
+
   getAllBlogPosts() {
     const url = `${this.apiUrl}/api/${this.domainVersion}/pages/?format=json&type=home.BlogPostPage`;
     return this.cacheService.get(url, this.http.get(url).pipe(first()));
