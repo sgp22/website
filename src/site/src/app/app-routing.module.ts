@@ -71,7 +71,7 @@ const routes: Routes = [
     component: BlogPostPageComponent,
   },
   {
-    path: 'draft/admin/pages/:id/edit/preview',
+    path: 'draft/pages/:id/edit/preview',
     component: PreviewLoaderComponent,
   },
   {

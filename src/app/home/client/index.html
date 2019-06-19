@@ -12,7 +12,7 @@
       });
 
       var apiUrl = 'http://localhost/api/v2/page_preview/1/?content_type=' + encodeURIComponent(params['content_type']) + '&token=' + encodeURIComponent(params['token']) + '&format=json';
-      console.log(apiUrl);
+      console.log(params['token']);
       fetch(apiUrl).then(function (response) {
         response.text().then(function (text) {
           document.body.innerHTML = `<pre>${text}</pre>`;

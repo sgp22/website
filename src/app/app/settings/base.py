@@ -110,7 +110,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 
 HEADLESS_PREVIEW_CLIENT_URLS = {
-    'default': 'http://localhost/draft/',
+    'default': 'http://localhost/',
+    'staging': 'https://staging.design.infor.com/',
+    'production': 'https://design.infor.com/'
 }
 
 

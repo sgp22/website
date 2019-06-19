@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import Flickity from 'flickity-fade';
 import { PagesService } from '../../shared/pages.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'site-home',
@@ -12,53 +13,73 @@ export class HomeComponent implements OnInit {
   @ViewChild('heroSliderNav', { static: true }) heroSliderNav: ElementRef;
   public idsVersion: string;
   public blogPosts: any;
+  public preview = false;
+  public previewParams = {};
 
   constructor(
-    private pagesService: PagesService
+    private pagesService: PagesService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    const previewstring: any = window.location.search.replace(/^\?/, '');
+    if (previewstring !== '') {
+      this.preview = true;
+      previewstring.replace(/([^=&]+)=([^&]*)/g, (m, key, value) => {
+        this.previewParams[decodeURIComponent(key)] = decodeURIComponent(value);
+      });
+      this.router.navigate(['draft/pages/:id/edit/preview'], {
+        queryParams: {
+          content_type: this.previewParams['content_type'],
+          token: this.previewParams['token']
+        }
+      });
+    } else {
+      this.preview = false;
+    }
     this.initHeroSlider();
     this.getBlogPosts();
   }
 
   initHeroSlider() {
-    const heroSlider = this.heroSlider.nativeElement;
-    const heroFlkty = new Flickity(heroSlider, {
-      cellAlign: 'center',
-      prevNextButtons: false,
-      wrapAround: false,
-      pageDots: true,
-      selectedAttraction: 0.015,
-      fade: true
-    });
-
-    const cellsButtonGroup = document.querySelector('.hero-slider-nav');
-    const cellsButtons = Array.from(document.querySelectorAll('.hero-slider-nav__item'));
-    heroFlkty.on('select', function () {
-      const previousSelectedButton = cellsButtonGroup.querySelector('.hero-slider-nav__item--selected');
-      const selectedButton = cellsButtons[heroFlkty.selectedIndex];
-      previousSelectedButton.classList.remove('hero-slider-nav__item--selected');
-      selectedButton.classList.add('hero-slider-nav__item--selected');
-    });
-
-    cellsButtonGroup.addEventListener('click', function (event) {
-      const el = event.target as HTMLElement;
-      if (!el.classList.contains('hero-slider-nav__item')) {
-        return;
-      }
-      const index = cellsButtons.indexOf(el);
-      heroFlkty.select(index);
-    });
-
-    const h1s = Array.from(document.querySelectorAll('.hero-slider__slide h1'));
-    heroFlkty.on('scroll', function (event, progress) {
-      heroFlkty.slides.forEach(function (slide, i) {
-        const h1 = h1s[i] as HTMLElement;
-        const x = (slide.target + heroFlkty.x) * -1 / 20;
-        h1.style.transform = 'translateX( ' + x + 'px)';
+    if (this.heroSlider) {
+      const heroSlider = this.heroSlider.nativeElement;
+      const heroFlkty = new Flickity(heroSlider, {
+        cellAlign: 'center',
+        prevNextButtons: false,
+        wrapAround: false,
+        pageDots: true,
+        selectedAttraction: 0.015,
+        fade: true
       });
-    });
+
+      const cellsButtonGroup = document.querySelector('.hero-slider-nav');
+      const cellsButtons = Array.from(document.querySelectorAll('.hero-slider-nav__item'));
+      heroFlkty.on('select', function () {
+        const previousSelectedButton = cellsButtonGroup.querySelector('.hero-slider-nav__item--selected');
+        const selectedButton = cellsButtons[heroFlkty.selectedIndex];
+        previousSelectedButton.classList.remove('hero-slider-nav__item--selected');
+        selectedButton.classList.add('hero-slider-nav__item--selected');
+      });
+
+      cellsButtonGroup.addEventListener('click', function (event) {
+        const el = event.target as HTMLElement;
+        if (!el.classList.contains('hero-slider-nav__item')) {
+          return;
+        }
+        const index = cellsButtons.indexOf(el);
+        heroFlkty.select(index);
+      });
+
+      const h1s = Array.from(document.querySelectorAll('.hero-slider__slide h1'));
+      heroFlkty.on('scroll', function (event, progress) {
+        heroFlkty.slides.forEach(function (slide, i) {
+          const h1 = h1s[i] as HTMLElement;
+          const x = (slide.target + heroFlkty.x) * -1 / 20;
+          h1.style.transform = 'translateX( ' + x + 'px)';
+        });
+      });
+    }
   }
 
   private getIEVersion() {
