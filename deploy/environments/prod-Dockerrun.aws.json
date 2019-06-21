@@ -63,7 +63,7 @@
 	}],
 	"containerDefinitions": [{
 		"name": "backend",
-		"image": "hookandloop/docs-backend:1.0.9",
+		"image": "hookandloop/docs-backend:1.1.1",
 		"essential": true,
 		"memory": 1024,
 		"portMappings": [{

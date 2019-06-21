@@ -13,6 +13,9 @@ SECRET_KEY = 'z4w6&+0zrxxx#6-8m9w8!s*ms1f#@0y%18+x!ct=w&s7lyn%v&'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+HEADLESS_PREVIEW_CLIENT_URLS = {
+    'default': 'http://localhost/'
+}
 
 try:
     from .local import *

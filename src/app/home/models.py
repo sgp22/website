@@ -34,6 +34,8 @@ from home.serializers import (
 import markdown
 from wagtailmarkdown.blocks import MarkdownBlock
 
+from wagtail_headless_preview.models import HeadlessPreviewMixin
+
 class APIImageChooserBlock(ImageChooserBlock):
     def get_api_representation(self, value, context=None):
         if value:
@@ -169,7 +171,7 @@ class PageBase(Page):
     ]
 
 
-class LandingPage(PageBase):
+class LandingPage(HeadlessPreviewMixin, PageBase):
     menu_order = models.IntegerField(default=0)
 
     page_hero = StreamField([
@@ -224,7 +226,7 @@ class LandingPage(PageBase):
     ]
 
 
-class CoreContentPage(PageBase):
+class CoreContentPage(HeadlessPreviewMixin, PageBase):
     menu_order = models.IntegerField(default=0)
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
@@ -281,7 +283,7 @@ class CoreContentPage(PageBase):
     ]
 
 
-class ElementsPage(PageBase):
+class ElementsPage(HeadlessPreviewMixin, PageBase):
     """Elements page type."""
     @property
     def description(self):
@@ -433,7 +435,7 @@ class ElementsPage(PageBase):
         index.SearchField('states'),
     ]
 
-class BlocksPage(PageBase):
+class BlocksPage(HeadlessPreviewMixin, PageBase):
     @property
     def description(self):
 
@@ -570,7 +572,7 @@ class BlocksPage(PageBase):
         index.SearchField('modifiers'),
     ]
 
-class BlogLandingPage(PageBase):
+class BlogLandingPage(HeadlessPreviewMixin, PageBase):
     menu_order = models.IntegerField(default=0)
 
     description = models.CharField(max_length=255)
@@ -594,7 +596,7 @@ class BlogLandingPage(PageBase):
         index.SearchField('content'),
     ]
 
-class BlogPostPage(PageBase):
+class BlogPostPage(HeadlessPreviewMixin, PageBase):
     author = models.CharField(
         verbose_name="Author",
         max_length=255,
