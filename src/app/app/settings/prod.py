@@ -20,6 +20,10 @@ DATABASES = {
     }
 }
 
+HEADLESS_PREVIEW_CLIENT_URLS = {
+    'default': 'https://design.infor.com/'
+}
+
 try:
     from .local import *
 except ImportError:

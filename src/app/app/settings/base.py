@@ -109,12 +109,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
-HEADLESS_PREVIEW_CLIENT_URLS = {
-    'default': 'http://localhost/',
-    'staging.design.infor.com': 'https://staging.design.infor.com/',
-    'design.infor.com': 'https://design.infor.com/'
-}
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
