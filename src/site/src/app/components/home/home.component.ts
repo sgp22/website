@@ -22,10 +22,10 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const previewstring: any = window.location.search.replace(/^\?/, '');
-    if (previewstring !== '') {
+    const windowLocation: any = window.location.search;
+    if (windowLocation.includes('content_type')) {
       this.preview = true;
-      previewstring.replace(/([^=&]+)=([^&]*)/g, (m, key, value) => {
+      windowLocation.replace(/^\?/, '').replace(/([^=&]+)=([^&]*)/g, (m, key, value) => {
         this.previewParams[decodeURIComponent(key)] = decodeURIComponent(value);
       });
       this.router.navigate(['draft/pages/:id/edit/preview'], {
