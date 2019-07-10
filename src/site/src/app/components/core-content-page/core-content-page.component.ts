@@ -29,7 +29,6 @@ export class CoreContentPageComponent implements OnInit {
         .subscribe(
           res => {
             this.pageContent = res;
-            console.log(this.pageContent);
             this.buildToc();
           },
           err => {

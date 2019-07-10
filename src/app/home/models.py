@@ -232,7 +232,24 @@ class CoreContentPage(HeadlessPreviewMixin, PageBase):
         ('heading', blocks.CharBlock(classname="full title")),
         ('image', APIImageChooserBlock()),
         ('image_gallery', blocks.StreamBlock([
-            ('image', APIImageChooserBlock())
+            ('image_1_col', blocks.StreamBlock([
+                ('image_group', blocks.StructBlock([
+                    ('image', APIImageChooserBlock()),
+                    ('image_label', blocks.CharBlock(required=False))
+                ]))
+            ])),
+            ('image_2_col', blocks.StreamBlock([
+                ('image_group', blocks.StructBlock([
+                    ('image', APIImageChooserBlock()),
+                    ('image_label', blocks.CharBlock(required=False))
+                ]))
+            ])),
+            ('image_3_col', blocks.StreamBlock([
+                ('image_group', blocks.StructBlock([
+                    ('image', APIImageChooserBlock()),
+                    ('image_label', blocks.CharBlock(required=False))
+                ]))
+            ])),
         ])),
         ('table', TableBlock()),
         ('markdown', APIMarkDownBlock()),

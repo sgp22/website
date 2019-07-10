@@ -302,6 +302,25 @@
 }
 
 .image-gallery--image {
-  margin-bottom: 2%;
-  width: 48%;
+  margin-bottom: calc(var(--theme-number-spacing-base) * 4);
+}
+
+.image-gallery--image--1-col {
+  width: 100%;
+}
+
+.image-gallery--image--2-col {
+  width: 100%;
+
+  @media screen and (min-width: $breakpoint-md) {
+    width: 48%;
+  }
+}
+
+.image-gallery--image--3-col {
+  width: 100%;
+
+  @media screen and (min-width: $breakpoint-md) {
+    width: 31%
+  }
 }
