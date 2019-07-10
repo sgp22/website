@@ -321,6 +321,13 @@
   width: 100%;
 
   @media screen and (min-width: $breakpoint-md) {
-    width: 31%
+    width: 31%;
   }
+}
+
+.image-gallery--image--label {
+  font-size: var(--theme-size-font-xs);
+  line-height: var(--theme-number-font-line-height-sm);
+  margin-top: var(--theme-number-spacing-base);
+  text-align: center;
 }
