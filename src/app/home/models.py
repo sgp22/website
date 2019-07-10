@@ -231,6 +231,9 @@ class CoreContentPage(HeadlessPreviewMixin, PageBase):
     body = StreamField([
         ('heading', blocks.CharBlock(classname="full title")),
         ('image', APIImageChooserBlock()),
+        ('image_gallery', blocks.StreamBlock([
+            ('image', APIImageChooserBlock())
+        ])),
         ('table', TableBlock()),
         ('markdown', APIMarkDownBlock()),
         ('richText', APIRichTextBlock()),
