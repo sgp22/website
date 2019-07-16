@@ -52,6 +52,21 @@
               alt="{{streamfield?.value.title}}">
             <div *ngIf="streamfield.type === 'markdown'" [innerHTML]="streamfield?.value | safeHtml"></div>
             <div *ngIf="streamfield.type === 'richText'" [innerHTML]="streamfield?.value | safeHtml"></div>
+            <ng-container *ngIf="streamfield.type === 'image_gallery'">
+              <div class="image-gallery" *ngFor="let imageGallery of streamfield?.value">
+                <div
+                  *ngFor="let image of imageGallery.value"
+                  class="image-gallery--image"
+                  [ngClass]="{
+                    'image-gallery--image--1-col' : imageGallery?.type === 'image_1_col',
+                    'image-gallery--image--2-col' : imageGallery?.type === 'image_2_col',
+                    'image-gallery--image--3-col' : imageGallery?.type === 'image_3_col'
+                  }">
+                  <img src="{{image.value.image.file}}" alt="{{image.value.image.title}}">
+                  <div *ngIf="image.value.image_label !== ''"class="image-gallery--image--label">{{image.value.image_label}}</div>
+                </div>
+              </div>
+            </ng-container>
             <ng-container *ngIf="streamfield.type === 'tokensCategory'">
               <token-table *ngIf="!loading" [tokensCategory]="streamfield?.value" [loading]="loading"></token-table>
             </ng-container>
