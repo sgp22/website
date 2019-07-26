@@ -18,13 +18,27 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
+            "extractCss": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",
               "src/site.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              {
+                "input": "src/styles-uplift-contrast.scss",
+                "bundleName": "theme-contrast",
+                "lazy": true
+              },
+              {
+                "input": "src/styles-uplift-dark.scss",
+                "bundleName": "theme-dark",
+                "lazy": true
+              },
+              {
+                "input": "src/styles.scss",
+                "bundleName": "theme-default"
+              }
             ],
             "scripts": []
           },

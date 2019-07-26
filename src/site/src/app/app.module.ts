@@ -43,6 +43,7 @@ import { BlogPostsComponent } from './components/blog-related-posts/blog-posts.c
 import { MediumPostsComponent } from './components/blog-related-posts/medium-posts.component';
 import { PreviewLoaderComponent } from './components/preview-loader/preview-loader.component';
 import { PreviewLoaderDirective } from './components/preview-loader/preview-loader.directive';
+import { ThemeSwitcherComponent } from './components/theme-switcher/theme-switcher.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { PreviewLoaderDirective } from './components/preview-loader/preview-load
     MediumPostsComponent,
     PreviewLoaderComponent,
     PreviewLoaderDirective,
+    ThemeSwitcherComponent,
   ],
   imports: [
     BrowserModule,

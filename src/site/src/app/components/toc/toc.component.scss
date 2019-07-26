@@ -2,7 +2,7 @@
 @import '../../../assets/css/variables.scss';
 
 .toc {
-  background-color: var(--theme-color-palette-white);
+  background-color: var(--body-color-primary-background);
   font-size: var(--theme-size-font-xs);
   margin-top: calc(var(--theme-number-spacing-base) * 6);
   max-width: 300px;
@@ -49,7 +49,7 @@
 }
 
 .toc-toggle--mobile {
-  background: var(--theme-color-palette-white);
+  background: var(--body-color-primary-background);
   border: none;
   border-radius: var(--theme-number-border-radius-sm) 0 0 var(--theme-number-border-radius-sm);
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
@@ -74,13 +74,14 @@
   }
 
   svg {
+    color: var(--body-color-primary-font);
     height: 16px;
     width: 16px;
   }
 }
 
 .toc--mobile--close {
-  background-color: var(--theme-color-palette-white);
+  background-color: var(--body-color-primary-background);
   border: none;
   border-radius: 2px 0 0 2px;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25);
@@ -91,7 +92,7 @@
   top: 0;
 
   &::after {
-    background-color: var(--theme-color-palette-white);
+    background-color: var(--body-color-primary-background);
     content: ' ';
     display: block;
     height: 100%;
@@ -99,6 +100,10 @@
     right: -5px;
     top: 0;
     width: 10px;
+  }
+
+  svg {
+    color: var(--body-color-primary-font);
   }
 
   &:focus {

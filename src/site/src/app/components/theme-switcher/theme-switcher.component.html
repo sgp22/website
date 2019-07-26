@@ -1,0 +1,26 @@
+<div class="ids-fab">
+  <input id="ids-fab--toggle" class="ids-fab--toggle" type="checkbox">
+  <label for="ids-fab--toggle" class="ids-btn ids-btn--fab-toggle">
+    <svg class="ids-icon">
+      <use xlink:href="#icon-add" />
+    </svg>
+  </label>
+
+  <div class="ids-fab--btns">
+    <button (click)="themeDefault()" class="ids-btn ids-btn--eclipse ids-btn--fab--1" data-theme="default">
+      <svg class="ids-icon">
+        <use xlink:href="#icon-tree-node" />
+      </svg>
+    </button>
+    <button (click)="themeDark()" class="ids-btn ids-btn--eclipse ids-btn--fab--2" data-theme="dark">
+      <svg class="ids-icon">
+        <use xlink:href="#icon-user-status-busy" />
+      </svg>
+    </button>
+    <button (click)="themeContrast()" class="ids-btn ids-btn--eclipse ids-btn--fab--3" data-theme="contrast">
+      <svg class="ids-icon">
+        <use xlink:href="#icon-filter-selected-notselected" />
+      </svg>
+    </button>
+  </div>
+</div>
