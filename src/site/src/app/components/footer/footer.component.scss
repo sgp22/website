@@ -2,8 +2,8 @@
 @import '../../../assets/css/variables.scss';
 
 .site-footer--top {
-  background-color: var(--theme-color-palette-white);
-  border-top: 1px solid $graphite-lightest;
+  background-color: var(--body-color-secondary-background);
+  border-top: 1px solid var(--input-color-initial-border);
   padding: calc(var(--theme-number-spacing-base) * 7) calc(var(--theme-number-spacing-base) * 2);
 
   @media screen and (min-width: $breakpoint-sm) {
@@ -62,12 +62,12 @@
     }
 
     a {
-      color: $slate-darker;
+      color: var(--list-color-item-initial-font);
       margin-right: calc(var(--theme-number-spacing-base) * 3);
       text-decoration: none;
 
       &:hover {
-        color: $azure-base;
+        color: var(--link-color-hover-font);
       }
 
       &:last-child {
@@ -90,14 +90,14 @@
   }
 
   a {
-    color: $slate-darker;
+    color: var(--list-color-item-initial-font);
     display: inline-block;
     font-size: var(--theme-size-font-sm);
     margin-right: calc(var(--theme-number-spacing-base) * 3);
     text-decoration: none;
 
     &:hover {
-      color: $azure-base;
+      color: var(--link-color-hover-font);
       text-decoration: underline;
     }
   }
@@ -124,26 +124,27 @@
   }
 
   .ids-icon {
-    color: $slate-base;
+    color: var(--input-color-initial-label);
   }
 
   .email {
-    border-bottom: 1px solid $slate-lighter;
+    background-color: var(--input-color-initial-background);
+    border-bottom: 1px solid var(--input-color-initial-border);
     border-left: none;
     border-right: none;
     border-top: none;
-    color: $slate-base;
+    color: var(--input-color-initial-label);
     font-size: 1.6rem;
     padding: calc(var(--theme-number-spacing-base) * 2) 0;
     width: 100%;
 
     &:focus {
-      border-bottom: 1px solid $azure-base;
+      border-bottom: 1px solid var(--input-color-focus-border);
       outline: none;
     }
 
     &::placeholder {
-      color: $slate-base;
+      color: var(--input-color-initial-label);
       font-family: var(--theme-font-family-base);
       font-weight: var(--theme-number-font-weight-base);
     }

@@ -11,8 +11,11 @@ export class HeaderComponent implements OnInit {
   @ViewChild('mainNavMobile', { static: true }) mobileNavItem: ElementRef;
   @ViewChild('trigger', { static: true }) trigger: ElementRef;
   @ViewChild('mobileTrigger', { static: true }) mobileTrigger: ElementRef;
+
   @Input() isHome: boolean;
   @Input() headerTop: boolean;
+  @Input() theme: string;
+
   public navItems: any;
   public navToggle = false;
   public popupmenuToggle = false;

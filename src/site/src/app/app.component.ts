@@ -10,10 +10,11 @@ declare let pendo;
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'Infor Design System';
+  public title = 'Infor Design System';
   public sohoModalVisible = false;
   public isHome = false;
   public headerTop = true;
+  public theme: string;
 
   public constructor(
     private router: Router,
@@ -113,6 +114,10 @@ export class AppComponent implements OnInit {
 
   public closeSohoModal() {
     this.sohoModalVisible = false;
+  }
+
+  getTheme(theme: string) {
+    this.theme = theme;
   }
 
   @HostListener('window:scroll', ['$event'])

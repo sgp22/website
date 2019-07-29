@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'theme-switcher',
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class ThemeSwitcherComponent implements OnInit {
   public stylesheetDark: any;
   public stylesheetContrast: any;
+
+  @Output() theme = new EventEmitter;
 
   constructor() { }
 
@@ -29,6 +31,8 @@ export class ThemeSwitcherComponent implements OnInit {
     if (document.head.contains(this.stylesheetDark)) {
       document.head.removeChild(this.stylesheetDark);
     }
+
+    this.setTheme('default');
   }
 
   themeDark() {
@@ -36,6 +40,7 @@ export class ThemeSwitcherComponent implements OnInit {
       document.head.removeChild(this.stylesheetContrast);
     }
     document.head.appendChild(this.stylesheetDark);
+    this.setTheme('dark');
   }
 
   themeContrast() {
@@ -43,5 +48,10 @@ export class ThemeSwitcherComponent implements OnInit {
       document.head.removeChild(this.stylesheetDark);
     }
     document.head.appendChild(this.stylesheetContrast);
+    this.setTheme('contrast');
+  }
+
+  setTheme(theme) {
+    this.theme.emit(theme);
   }
 }
