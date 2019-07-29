@@ -17,7 +17,8 @@ import { Component, OnInit, Input } from '@angular/core';
 
           <div class="blog-post--content">
             <span class="blog-post--meta">
-              <time class="blog-post--date">{{post.meta.first_published_at | date: 'MMMM d, yyyy'}}</time> |
+              <time class="blog-post--date">{{post.meta.first_published_at | date: 'MMMM d, yyyy'}}</time>
+              <span>|</span>
               <span *ngIf="post.author" class="blog-post--author">{{post.author}}</span>
               <span *ngIf="!post.author" class="blog-post--author">IDS Team</span>
             </span>

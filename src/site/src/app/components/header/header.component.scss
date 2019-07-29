@@ -188,8 +188,8 @@
 }
 
 .main-nav--mobile {
-  background-color: var(--theme-color-brand-primary-contrast);
-  border-bottom: 1px solid var(--graphite055-light);
+  background-color: var(--body-color-primary-background);
+  border-bottom: 1px solid var(--list-color-divider-border);
   display: none;
   padding: calc(var(--theme-number-spacing-base) * 4);
   position: fixed;
@@ -219,7 +219,7 @@
 }
 
 .main-nav--mobile--item {
-  color: var(--link-color-custom-dark);
+  color: var(--body-color-primary-font);
   display: block;
   font-size: 2.4rem;
   font-weight: 300;
@@ -231,7 +231,7 @@
   }
 
   &.main-nav--mobile--item--current {
-    color: $azure-base;
+    color: var(--button-color-primary-active-background);
   }
 
   &.ids-btn {

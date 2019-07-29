@@ -436,6 +436,8 @@
   Design System Row
 */
 .row--design-system {
+  background-color: var(--body-color-secondary-background);
+
   .row--blocks--scroll {
     overflow-x: scroll;
 
@@ -634,6 +636,10 @@
 /*
   Resources Row
 */
+.row--resources {
+  background-color: var(--body-color-secondary-background);
+}
+
 .row--blocks--resources {
   margin-top: calc(var(--theme-number-spacing-base) * 5);
 }
