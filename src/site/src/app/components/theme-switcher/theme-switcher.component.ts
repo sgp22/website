@@ -3,7 +3,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'theme-switcher',
   templateUrl: './theme-switcher.component.html',
-  styleUrls: ['./theme-switcher.component.scss']
 })
 export class ThemeSwitcherComponent implements OnInit {
   public stylesheetDark: any;
