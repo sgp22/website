@@ -106,4 +106,12 @@ export class PagesService {
   addThemeVariant(variant: string = 'light') {
     this.themeVariant.next(variant);
   }
+
+  public setThemeVariant(variant: string) {
+    localStorage.setItem('themeVariant', variant);
+  }
+
+  public getThemeVariant() {
+    return localStorage.getItem('themeVariant');
+  }
 }

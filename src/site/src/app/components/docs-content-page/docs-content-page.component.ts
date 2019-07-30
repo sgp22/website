@@ -31,7 +31,6 @@ export class DocsContentPageComponent implements OnInit {
   public showWarning: boolean;
   public currentSection: string;
   public scrollOffset = 150;
-  public themeVariant: string;
 
   constructor(
     private docsService: DocsService,
@@ -85,11 +84,11 @@ export class DocsContentPageComponent implements OnInit {
             docData['demo'].pages.forEach(page => {
               if (page.slug) {
                 page.githubUrl = this.createGithubUrl(page.slug);
-                page.url = this.createDemoUrl(page.slug);
+                page.url = this.createDemoUrl(page.slug, false, this.pagesService.getThemeVariant());
                 this.pagesService.themeVariant$
                   .subscribe(variant => {
-                    this.themeVariant = variant;
-                    this.createDemoUrl(page.slug, false, this.themeVariant);
+                    this.pagesService.setThemeVariant(variant);
+                    this.createDemoUrl(page.slug, false, this.pagesService.getThemeVariant());
                   });
               }
             });
@@ -99,11 +98,11 @@ export class DocsContentPageComponent implements OnInit {
             docData['demo'].embedded.forEach(page => {
               page.githubUrl = this.createGithubUrl(page.slug);
               page.url = this.createDemoUrl(page.slug);
-              page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true));
+              page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true, this.pagesService.getThemeVariant()));
               this.pagesService.themeVariant$
                 .subscribe(variant => {
-                  this.themeVariant = variant;
-                  page.url = this.createDemoUrl(page.slug, true, this.themeVariant);
+                  this.pagesService.setThemeVariant(variant);
+                  page.url = this.createDemoUrl(page.slug, true, this.pagesService.getThemeVariant());
                   page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true, variant));
                 });
             });
@@ -211,7 +210,7 @@ export class DocsContentPageComponent implements OnInit {
   createDemoUrl(slug: string, embeddedLayout: boolean = false, themeVariant = 'light') {
     let url = `${this.absolutePath}/demo/components/${this.component}/${slug}`;
     if (embeddedLayout) {
-      url += `?layout=nofrills&variant=${themeVariant}`;
+      url += `?layout=nofrills&variant=${themeVariant}&theme=uplift`;
     }
     return url;
   }
