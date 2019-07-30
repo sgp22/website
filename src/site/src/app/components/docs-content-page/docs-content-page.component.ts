@@ -48,6 +48,7 @@ export class DocsContentPageComponent implements OnInit {
       this.absolutePath = `code/${params.library}/${params.version}`;
       this.library = `${params.library}`;
       this.currentVersion = `${params.version}`;
+      this.pagesService.setThemeVariant('light');
 
       if (params.component) {
         this.params = `${params.library}/${params.version}/docs/${params.component}.json`;
