@@ -5,6 +5,7 @@ import { LibraryService } from '../../shared/library.service';
 import { HelpersService } from '../../shared/helpers.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { zip } from 'rxjs';
+import { PagesService } from 'src/app/shared/pages.service';
 
 interface TocItems {
   label: string;
@@ -30,8 +31,7 @@ export class DocsContentPageComponent implements OnInit {
   public showWarning: boolean;
   public currentSection: string;
   public scrollOffset = 150;
-
-  @Input() themeVariant: string;
+  public themeVariant: string;
 
   constructor(
     private docsService: DocsService,
@@ -39,7 +39,8 @@ export class DocsContentPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private h: HelpersService
+    private h: HelpersService,
+    private pagesService: PagesService
   ) { }
 
   ngOnInit() {
@@ -62,7 +63,6 @@ export class DocsContentPageComponent implements OnInit {
       );
 
       source$.subscribe( ([allLibraries, docData]) => {
-
         let latestVersion = '';
         if (allLibraries instanceof Array && allLibraries.length) {
           latestVersion = allLibraries[0];
@@ -86,6 +86,11 @@ export class DocsContentPageComponent implements OnInit {
               if (page.slug) {
                 page.githubUrl = this.createGithubUrl(page.slug);
                 page.url = this.createDemoUrl(page.slug);
+                this.pagesService.themeVariant$
+                  .subscribe(variant => {
+                    this.themeVariant = variant;
+                    this.createDemoUrl(page.slug, false, this.themeVariant);
+                  });
               }
             });
           }
@@ -95,6 +100,12 @@ export class DocsContentPageComponent implements OnInit {
               page.githubUrl = this.createGithubUrl(page.slug);
               page.url = this.createDemoUrl(page.slug);
               page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true));
+              this.pagesService.themeVariant$
+                .subscribe(variant => {
+                  this.themeVariant = variant;
+                  page.url = this.createDemoUrl(page.slug, true, this.themeVariant);
+                  page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true, variant));
+                });
             });
           }
         }
@@ -197,10 +208,10 @@ export class DocsContentPageComponent implements OnInit {
     }
   }
 
-  createDemoUrl(slug: string, embeddedLayout: boolean = false) {
+  createDemoUrl(slug: string, embeddedLayout: boolean = false, themeVariant = 'light') {
     let url = `${this.absolutePath}/demo/components/${this.component}/${slug}`;
     if (embeddedLayout) {
-      url += `?layout=nofrills&variant=dark`;
+      url += `?layout=nofrills&variant=${themeVariant}`;
     }
     return url;
   }

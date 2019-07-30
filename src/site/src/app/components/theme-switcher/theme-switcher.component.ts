@@ -31,7 +31,7 @@ export class ThemeSwitcherComponent implements OnInit {
       document.head.removeChild(this.stylesheetDark);
     }
 
-    this.setThemeVariant('default');
+    this.setThemeVariant('light');
   }
 
   themeVariantDark() {

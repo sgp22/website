@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { PagesService } from './shared/pages.service';
 declare let pendo;
 
 @Component({
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
   public constructor(
     private router: Router,
     private titleService: Title,
-    private meta: Meta
+    private meta: Meta,
+    private pagesService: PagesService
   ) {
     /* tslint:disable */
     this.meta.addTag({
@@ -118,6 +120,7 @@ export class AppComponent implements OnInit {
 
   getThemeVariant(variant: string) {
     this.themeVariant = variant;
+    this.pagesService.addThemeVariant(this.themeVariant);
   }
 
   @HostListener('window:scroll', ['$event'])

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CacheService } from './cache.service';
 import { environment } from '../../environments/environment';
 import { share, first, map, switchMap } from 'rxjs/operators';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class PagesService {
   apiUrl = environment.apiUrl;
   domainVersion = environment.domainVersion;
   page;
+  private themeVariant: Subject<string> = new Subject<string>();
 
   constructor(
     private http: HttpClient,
@@ -95,5 +97,13 @@ export class PagesService {
   getMediumFeed() {
     const url = `https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2Fhookandloop`;
     return this.cacheService.get(url, this.http.get(url));
+  }
+
+  get themeVariant$() {
+    return this.themeVariant.asObservable();
+  }
+
+  addThemeVariant(variant: string = 'light') {
+    this.themeVariant.next(variant);
   }
 }
