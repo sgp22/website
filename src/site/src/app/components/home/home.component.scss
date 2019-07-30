@@ -305,6 +305,8 @@
 }
 
 .row--ids {
+  background-color: var(--body-color-secondary-background);
+
   .row--blocks {
     border-top: 1px solid var(--theme-color-palette-graphite-20);
     margin-top: calc(var(--theme-number-spacing-base) * 8);
