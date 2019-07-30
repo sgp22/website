@@ -8,7 +8,7 @@ export class ThemeSwitcherComponent implements OnInit {
   public stylesheetDark: any;
   public stylesheetContrast: any;
 
-  @Output() theme = new EventEmitter;
+  @Output() themeVariant = new EventEmitter;
 
   constructor() { }
 
@@ -22,7 +22,7 @@ export class ThemeSwitcherComponent implements OnInit {
     this.stylesheetContrast.href = 'theme-contrast.css';
   }
 
-  themeDefault() {
+  themeVariantDefault() {
     if (document.head.contains(this.stylesheetContrast)) {
       document.head.removeChild(this.stylesheetContrast);
     }
@@ -31,26 +31,26 @@ export class ThemeSwitcherComponent implements OnInit {
       document.head.removeChild(this.stylesheetDark);
     }
 
-    this.setTheme('default');
+    this.setThemeVariant('default');
   }
 
-  themeDark() {
+  themeVariantDark() {
     if (document.head.contains(this.stylesheetContrast)) {
       document.head.removeChild(this.stylesheetContrast);
     }
     document.head.appendChild(this.stylesheetDark);
-    this.setTheme('dark');
+    this.setThemeVariant('dark');
   }
 
-  themeContrast() {
+  themeVariantContrast() {
     if (document.head.contains(this.stylesheetDark)) {
       document.head.removeChild(this.stylesheetDark);
     }
     document.head.appendChild(this.stylesheetContrast);
-    this.setTheme('contrast');
+    this.setThemeVariant('contrast');
   }
 
-  setTheme(theme) {
-    this.theme.emit(theme);
+  setThemeVariant(variant: String) {
+    this.themeVariant.emit(variant);
   }
 }

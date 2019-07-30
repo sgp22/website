@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   public sohoModalVisible = false;
   public isHome = false;
   public headerTop = true;
-  public theme: string;
+  public themeVariant: string;
 
   public constructor(
     private router: Router,
@@ -116,8 +116,8 @@ export class AppComponent implements OnInit {
     this.sohoModalVisible = false;
   }
 
-  getTheme(theme: string) {
-    this.theme = theme;
+  getThemeVariant(variant: string) {
+    this.themeVariant = variant;
   }
 
   @HostListener('window:scroll', ['$event'])

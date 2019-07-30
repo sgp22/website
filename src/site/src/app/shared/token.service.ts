@@ -50,7 +50,7 @@ export class TokenService {
 
   /**
    * Create custom object to display all tokens/themes in a table (only gets called if tokensCategory === *)
-   * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho-{theme}.simple.json
+   * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho-{variant}.simple.json
    */
   combineTokenData(tokenData: any) {
     const soho = tokenData[0];

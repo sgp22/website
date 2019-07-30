@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { PagesService } from '../../shared/pages.service';
-import { LibraryService } from '../../shared/library.service';
 
 @Component({
   selector: 'site-header',
@@ -14,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() isHome: boolean;
   @Input() headerTop: boolean;
-  @Input() theme: string;
+  @Input() themeVariant: string;
 
   public navItems: any;
   public navToggle = false;
