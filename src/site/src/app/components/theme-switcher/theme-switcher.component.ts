@@ -21,6 +21,8 @@ export class ThemeSwitcherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const darkMode = window.matchMedia('(prefers-color-scheme: dark)');
+
     this.stylesheetDark = document.createElement('link');
     this.stylesheetDark.rel = 'stylesheet';
     this.stylesheetDark.href = 'theme-dark.css';
@@ -28,6 +30,18 @@ export class ThemeSwitcherComponent implements OnInit {
     this.stylesheetContrast = document.createElement('link');
     this.stylesheetContrast.rel = 'stylesheet';
     this.stylesheetContrast.href = 'theme-contrast.css';
+
+    if (darkMode.matches === true) {
+      this.themeVariantDark();
+    }
+
+    darkMode.addListener((e) => {
+      if (e.matches === true) {
+        this.themeVariantDark();
+      } else {
+        this.themeVariantDefault();
+      }
+    });
 
     if (this.pagesService.getThemeVariant() === this.variants.light) {
       this.themeVariantDefault();
