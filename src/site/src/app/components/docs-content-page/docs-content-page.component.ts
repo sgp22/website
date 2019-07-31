@@ -48,7 +48,6 @@ export class DocsContentPageComponent implements OnInit {
       this.absolutePath = `code/${params.library}/${params.version}`;
       this.library = `${params.library}`;
       this.currentVersion = `${params.version}`;
-      this.pagesService.setThemeVariant('light');
 
       if (params.component) {
         this.params = `${params.library}/${params.version}/docs/${params.component}.json`;
@@ -84,8 +83,9 @@ export class DocsContentPageComponent implements OnInit {
           if (docData['demo'].pages) {
             docData['demo'].pages.forEach(page => {
               if (page.slug) {
+                const initialVariant = this.pagesService.getThemeVariant() === null ? 'light' : this.pagesService.getThemeVariant();
                 page.githubUrl = this.createGithubUrl(page.slug);
-                page.url = this.createDemoUrl(page.slug, false, this.pagesService.getThemeVariant());
+                page.url = this.createDemoUrl(page.slug, false, initialVariant);
                 this.pagesService.themeVariant$
                   .subscribe(variant => {
                     this.pagesService.setThemeVariant(variant);
@@ -97,9 +97,10 @@ export class DocsContentPageComponent implements OnInit {
 
           if (docData['demo'].embedded) {
             docData['demo'].embedded.forEach(page => {
+              const initialVariant = this.pagesService.getThemeVariant() === null ? 'light' : this.pagesService.getThemeVariant();
               page.githubUrl = this.createGithubUrl(page.slug);
               page.url = this.createDemoUrl(page.slug);
-              page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true, this.pagesService.getThemeVariant()));
+              page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true, initialVariant));
               this.pagesService.themeVariant$
                 .subscribe(variant => {
                   this.pagesService.setThemeVariant(variant);

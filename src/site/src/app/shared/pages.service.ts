@@ -107,11 +107,15 @@ export class PagesService {
     this.themeVariant.next(variant);
   }
 
-  public setThemeVariant(variant: string) {
+  public setThemeVariant(variant: string = 'light') {
     localStorage.setItem('themeVariant', variant);
   }
 
   public getThemeVariant() {
     return localStorage.getItem('themeVariant');
+  }
+
+  public removeThemeVariant() {
+    localStorage.removeItem('themeVariant');
   }
 }

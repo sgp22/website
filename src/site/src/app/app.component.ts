@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   public sohoModalVisible = false;
   public isHome = false;
   public headerTop = true;
-  public themeVariant: string;
+  public themeVariant = this.pagesService.getThemeVariant();
 
   public constructor(
     private router: Router,
