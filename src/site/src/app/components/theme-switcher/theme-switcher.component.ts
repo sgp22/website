@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { PagesService } from 'src/app/shared/pages.service';
 
 @Component({
   selector: 'theme-switcher',
   templateUrl: './theme-switcher.component.html',
 })
-export class ThemeSwitcherComponent implements OnInit {
+export class ThemeSwitcherComponent implements AfterViewInit {
   public stylesheetDark: any;
   public stylesheetContrast: any;
   public variants = {
@@ -13,6 +13,7 @@ export class ThemeSwitcherComponent implements OnInit {
     dark: 'dark',
     contrast: 'contrast'
   }
+  public userSelectedVariant = this.pagesService.getThemeVariant();
 
   @Output() themeVariant = new EventEmitter;
 
@@ -20,9 +21,7 @@ export class ThemeSwitcherComponent implements OnInit {
     private pagesService: PagesService
   ) { }
 
-  ngOnInit() {
-    const darkMode = window.matchMedia('(prefers-color-scheme: dark)');
-
+  ngAfterViewInit() {
     this.stylesheetDark = document.createElement('link');
     this.stylesheetDark.rel = 'stylesheet';
     this.stylesheetDark.href = 'theme-dark.css';
@@ -31,17 +30,23 @@ export class ThemeSwitcherComponent implements OnInit {
     this.stylesheetContrast.rel = 'stylesheet';
     this.stylesheetContrast.href = 'theme-contrast.css';
 
-    if (darkMode.matches === true) {
-      this.themeVariantDark();
+    const darkMode = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (this.userSelectedVariant === null) {
+      if (darkMode.matches === true) {
+        this.setTheme(this.stylesheetDark, this.variants.dark);
+      }
     }
 
     darkMode.addListener((e) => {
       if (e.matches === true) {
-        this.themeVariantDark();
+        this.setTheme(this.stylesheetDark, this.variants.dark);
       } else {
-        this.themeVariantDefault();
+        this.removeTheme(this.stylesheetDark);
+        this.setTheme(null, this.variants.light);
       }
     });
+
 
     if (this.pagesService.getThemeVariant() === this.variants.light) {
       this.themeVariantDefault();
@@ -55,34 +60,35 @@ export class ThemeSwitcherComponent implements OnInit {
   }
 
   themeVariantDefault() {
-    if (document.head.contains(this.stylesheetContrast)) {
-      document.head.removeChild(this.stylesheetContrast);
-    }
-
-    if (document.head.contains(this.stylesheetDark)) {
-      document.head.removeChild(this.stylesheetDark);
-    }
-
-    this.setThemeVariant(this.variants.light);
+    this.removeTheme(this.stylesheetContrast);
+    this.removeTheme(this.stylesheetDark);
+    this.setTheme(null, this.variants.light);
     this.pagesService.setThemeVariant(this.variants.light);
   }
 
   themeVariantDark() {
-    if (document.head.contains(this.stylesheetContrast)) {
-      document.head.removeChild(this.stylesheetContrast);
-    }
-    document.head.appendChild(this.stylesheetDark);
-    this.setThemeVariant(this.variants.dark);
+    this.removeTheme(this.stylesheetContrast);
+    this.setTheme(this.stylesheetDark, this.variants.dark);
     this.pagesService.setThemeVariant(this.variants.dark);
   }
 
   themeVariantContrast() {
-    if (document.head.contains(this.stylesheetDark)) {
-      document.head.removeChild(this.stylesheetDark);
-    }
-    document.head.appendChild(this.stylesheetContrast);
-    this.setThemeVariant(this.variants.contrast);
+    this.removeTheme(this.stylesheetDark);
+    this.setTheme(this.stylesheetContrast, this.variants.contrast);
     this.pagesService.setThemeVariant(this.variants.contrast);
+  }
+
+  removeTheme(stylesheet: any) {
+    if (document.head.contains(stylesheet)) {
+      document.head.removeChild(stylesheet);
+    }
+  }
+
+  setTheme(stylesheet: any, variant: string) {
+    if (stylesheet) {
+      document.head.appendChild(stylesheet);
+    }
+    this.setThemeVariant(variant);
   }
 
   setThemeVariant(variant: String) {

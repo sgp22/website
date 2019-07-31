@@ -31,6 +31,7 @@ export class DocsContentPageComponent implements OnInit {
   public showWarning: boolean;
   public currentSection: string;
   public scrollOffset = 150;
+  public darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
   constructor(
     private docsService: DocsService,
@@ -83,7 +84,14 @@ export class DocsContentPageComponent implements OnInit {
           if (docData['demo'].pages) {
             docData['demo'].pages.forEach(page => {
               if (page.slug) {
-                const initialVariant = this.pagesService.getThemeVariant() === null ? 'light' : this.pagesService.getThemeVariant();
+
+                let initialVariant: string;
+                if (this.darkMode) {
+                  initialVariant = this.pagesService.getThemeVariant() === null ? 'dark' : this.pagesService.getThemeVariant();
+                } else {
+                  initialVariant = this.pagesService.getThemeVariant() === null ? 'light' : this.pagesService.getThemeVariant();
+                }
+
                 page.githubUrl = this.createGithubUrl(page.slug);
                 page.url = this.createDemoUrl(page.slug, false, initialVariant);
                 this.pagesService.themeVariant$
@@ -97,7 +105,14 @@ export class DocsContentPageComponent implements OnInit {
 
           if (docData['demo'].embedded) {
             docData['demo'].embedded.forEach(page => {
-              const initialVariant = this.pagesService.getThemeVariant() === null ? 'light' : this.pagesService.getThemeVariant();
+
+              let initialVariant: string;
+              if (this.darkMode) {
+                initialVariant = this.pagesService.getThemeVariant() === null ? 'dark' : this.pagesService.getThemeVariant();
+              } else {
+                initialVariant = this.pagesService.getThemeVariant() === null ? 'light' : this.pagesService.getThemeVariant();
+              }
+
               page.githubUrl = this.createGithubUrl(page.slug);
               page.url = this.createDemoUrl(page.slug);
               page.trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.createDemoUrl(page.slug, true, initialVariant));

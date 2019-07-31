@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, AfterViewInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -10,7 +10,7 @@ declare let pendo;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   public title = 'Infor Design System';
   public sohoModalVisible = false;
   public isHome = false;
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     /* tslint:enable */
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
 
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -118,9 +118,11 @@ export class AppComponent implements OnInit {
     this.sohoModalVisible = false;
   }
 
-  getThemeVariant(variant: string) {
-    this.themeVariant = variant;
-    this.pagesService.addThemeVariant(this.themeVariant);
+  getCurrentThemeVariant(variant: string) {
+    setTimeout(() => {
+      this.themeVariant = variant;
+      this.pagesService.addThemeVariant(this.themeVariant);
+    });
   }
 
   @HostListener('window:scroll', ['$event'])
