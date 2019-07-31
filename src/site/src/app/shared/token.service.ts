@@ -15,7 +15,7 @@ export class TokenService {
   getTokenData(domain: string, library: string, version: string) {
     // Note that the following url route is for a dist file
     // and not referring to the ids-identity package in node_modules
-    const url = `${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.simple.json`;
+    const url = `${domain}/api/docs/${library}/${version}/theme-uplift/tokens/web/theme-uplift.simple.json`;
 
     return this.http.get(url)
       .pipe(
@@ -30,9 +30,9 @@ export class TokenService {
   }
 
   getAllTokenData(domain: string, library: string, version: string) {
-    const soho = this.http.get(`${domain}/api/docs/${library}/${version}/tokens/web/theme-soho.simple.json`);
-    const dark = this.http.get(`${domain}/api/docs/${library}/${version}/tokens/web/theme-soho-dark.simple.json`);
-    const contrast = this.http.get(`${domain}/api/docs/${library}/${version}/tokens/web/theme-soho-contrast.simple.json`);
+    const soho = this.http.get(`${domain}/api/docs/${library}/${version}/theme-uplift/tokens/web/theme-uplift.simple.json`);
+    const dark = this.http.get(`${domain}/api/docs/${library}/${version}/theme-uplift/tokens/web/theme-uplift-dark.simple.json`);
+    const contrast = this.http.get(`${domain}/api/docs/${library}/${version}/theme-uplift/tokens/web/theme-uplift-contrast.simple.json`);
     return forkJoin([soho, dark, contrast]);
   }
 
@@ -53,18 +53,18 @@ export class TokenService {
    * @param tokenData response from ${domain}/api/docs/${library}/${version}/tokens/web/theme-soho-{variant}.simple.json
    */
   combineTokenData(tokenData: any) {
-    const soho = tokenData[0];
+    const uplift = tokenData[0];
     const dark = tokenData[1];
     const contrast = tokenData[2];
-    const keys = soho.map(token => {
+    const keys = uplift.map(token => {
       return token.name.sass;
     });
     const tokens = keys.reduce((obj, value, index) => {
       if (!obj[value] && !value.startsWith('$theme-color-palette-')) {
         obj[value] = {
-          soho: {
-            value: soho[index].value,
-            type: soho[index].type
+          uplift: {
+            value: uplift[index].value,
+            type: uplift[index].type
           },
           dark: {
             value: dark[index].value,

@@ -61,11 +61,11 @@
               <code>{{key}}</code>
             </td>
             <td>
-              <div *ngIf="idsTokenProperties[key].soho.type === 'color'" class="site-spec--color" [ngStyle]="idsTokenProperties[key].soho.value && {'background-color': ''+ idsTokenProperties[key].soho.value +'' }"
-                title="{{idsTokenProperties[key].soho.value}}"></div>
+              <div *ngIf="idsTokenProperties[key].uplift.type === 'color'" class="site-spec--color" [ngStyle]="idsTokenProperties[key].uplift.value && {'background-color': ''+ idsTokenProperties[key].uplift.value +'' }"
+                title="{{idsTokenProperties[key].uplift.value}}"></div>
             </td>
             <td class="token-table--data-value">
-              <code>{{idsTokenProperties[key].soho.value}}</code>
+              <code>{{idsTokenProperties[key].uplift.value}}</code>
             </td>
             <td>
               <div *ngIf="idsTokenProperties[key].dark.type === 'color'" class="site-spec--color" [ngStyle]="idsTokenProperties[key].dark.value && {'background-color': ''+ idsTokenProperties[key].dark.value +'' }"
