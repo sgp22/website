@@ -1,11 +1,9 @@
 
 <div class="ids-visuallyhidden" [inlineSVG]="'/assets/svgs/ids-svg.svg'"></div>
-<div class="theme-wrapper">
-  <site-header
-    (scroll)="onWindowScroll($event)"
-    [isHome]="isHome"
-    [headerTop]="headerTop"
-    [themeVariant]="themeVariant"></site-header>
-  <router-outlet></router-outlet>
-</div>
+<site-header
+  (scroll)="onWindowScroll($event)"
+  [isHome]="isHome"
+  [headerTop]="headerTop"
+  [themeVariant]="themeVariant"></site-header>
+<router-outlet></router-outlet>
 <theme-switcher (themeVariant)="getCurrentThemeVariant($event)"></theme-switcher>
