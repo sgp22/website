@@ -26,7 +26,7 @@ describe('TokenService', () => {
     const testDomain = 'domain';
     const testLibrary = 'library';
     const testVersion = 'version';
-    const testUrl = `${testDomain}/api/docs/${testLibrary}/${testVersion}/tokens/web/theme-soho.simple.json`;
+    const testUrl = `${testDomain}/api/docs/${testLibrary}/${testVersion}/theme-uplift/tokens/web/theme-uplift.simple.json`;
     const testData = { title: 'Test' };
 
     beforeEach(() => {
