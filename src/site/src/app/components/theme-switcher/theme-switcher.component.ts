@@ -12,7 +12,7 @@ export class ThemeSwitcherComponent implements AfterViewInit {
     light: 'light',
     dark: 'dark',
     contrast: 'contrast'
-  }
+  };
   public userSelectedVariant = this.pagesService.getThemeVariant();
 
   @Output() themeVariant = new EventEmitter;
