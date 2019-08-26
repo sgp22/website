@@ -4,9 +4,6 @@
   "workbench.colorCustomizations": {
     "terminal.background": "#222222",
     "panel.background": "#222222",
-    "tab.activeBackground": "#222222",
-    "statusBar.background": "#b52e31",
-    "statusBarItem.hoverBackground": "#d04649",
-    "statusBar.foreground": "#e7e7e7"
+    "tab.activeBackground": "#222222"
   }
 }
