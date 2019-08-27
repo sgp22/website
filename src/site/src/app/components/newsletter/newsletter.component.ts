@@ -8,7 +8,7 @@ interface MailChimpResponse {
 }
 
 @Component({
-  selector: 'newsletter',
+  selector: 'newsletter-signup',
   templateUrl: './newsletter.component.html',
   styleUrls: ['./newsletter.component.scss']
 })
@@ -36,7 +36,7 @@ export class NewsletterComponent implements OnInit {
     designerControl: new FormControl(''),
     projectManagerControl: new FormControl(''),
     otherControl: new FormControl('')
-  })
+  });
 
   constructor(private http: HttpClient) { }
 
@@ -97,8 +97,7 @@ export class NewsletterComponent implements OnInit {
           this.submitted = true;
           this.success = response.msg;
           this.mailChimpForm.reset();
-        }
-        else {
+        } else {
           this.error = response.msg;
         }
       }, error => {
