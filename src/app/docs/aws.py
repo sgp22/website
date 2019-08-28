@@ -183,11 +183,15 @@ def get(request):
         s3_resource = boto3.resource('s3', **s3_conf)
         bucket_name = settings.AWS_STORAGE_BUCKET_NAME
 
+        logger.debug('Docs get version %s', version)
+
         if version == 'latest':
             active_lib_versions = LibraryVersion.objects.all().filter(
-                name = library_name,
-                isActive = True
+                name=library_name,
+                isActive=True
             )
+
+            logger.debug('Active library versions %s', active_lib_versions)
 
             if not active_lib_versions:
                 return Response({
@@ -205,6 +209,8 @@ def get(request):
                 latest_version,
                 file_path))
             path = latest_file_pointer
+
+            logger.debug('Docs get latest on path %s', path)
 
         if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,6}$', path):
             obj = s3_resource.Object(settings.AWS_STORAGE_BUCKET_NAME, path)
