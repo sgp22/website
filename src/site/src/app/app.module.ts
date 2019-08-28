@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { InlineSVGModule } from 'ng-inline-svg';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocsContentPageModule } from './components/docs-content-page/docs-content-page.module';
@@ -43,6 +43,8 @@ import { BlogPostsComponent } from './components/blog-related-posts/blog-posts.c
 import { MediumPostsComponent } from './components/blog-related-posts/medium-posts.component';
 import { PreviewLoaderComponent } from './components/preview-loader/preview-loader.component';
 import { PreviewLoaderDirective } from './components/preview-loader/preview-loader.directive';
+import { NewsletterComponent } from './components/newsletter/newsletter.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,7 @@ import { PreviewLoaderDirective } from './components/preview-loader/preview-load
     MediumPostsComponent,
     PreviewLoaderComponent,
     PreviewLoaderDirective,
+    NewsletterComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +93,9 @@ import { PreviewLoaderDirective } from './components/preview-loader/preview-load
     FormsModule,
     FeedbackWidgetModule,
     IconLookupModule,
-    FilterPipeModule.forRoot()
+    FilterPipeModule.forRoot(),
+    HttpClientJsonpModule,
+    ReactiveFormsModule
   ],
   providers: [CacheService],
   bootstrap: [AppComponent]

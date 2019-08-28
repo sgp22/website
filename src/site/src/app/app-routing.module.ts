@@ -11,6 +11,7 @@ import { SearchPageComponent } from './components/search-page/search-page.compon
 import { BlogLandingPageComponent } from './components/blog-landing-page/blog-landing-page.component';
 import { BlogPostPageComponent } from './components/blog-post-page/blog-post-page.component';
 import { PreviewLoaderComponent } from './components/preview-loader/preview-loader.component';
+import { NewsletterComponent } from './components/newsletter/newsletter.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path: 'draft/pages/:id/edit/preview',
     component: PreviewLoaderComponent,
+  },
+  {
+    path: 'newsletter',
+    component: NewsletterComponent
   },
   {
     path: '**',
