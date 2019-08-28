@@ -100,6 +100,8 @@ def get(request):
             'docs',
             library_name))
 
+        logger.debug('Docs get version %s', version)
+
         if version == 'latest':
             all_versions = next(os.walk(library_path))[1]
             latest_version = '0.0.0'
@@ -120,6 +122,8 @@ def get(request):
                 latest_version,
                 file_path))
             path = latest_file_pointer
+
+            logger.debug('Docs get latest on path %s', path)
 
         if re.match(r'[\w,\s\S]+\.[A-Za-z]{2,4}$', path):
             content = open(path, 'rb').read()
