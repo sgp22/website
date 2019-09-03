@@ -28,7 +28,7 @@
 	}, {
 		"name": "nginx-certs",
 		"host": {
-		  "sourcePath": "/tmp/certs/"
+		  "sourcePath": "/data/certs/"
 		}
 	}, {
 		"name": "config-nginx-nginx",
