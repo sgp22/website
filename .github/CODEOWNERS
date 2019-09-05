@@ -1,7 +1,7 @@
 # Each line is a file pattern followed by one or more owners.
 
 # Default owners for the repo:
-*       @jmacaluso711 @clepore @nickwynja
+*       @jmacaluso711
 
 # Code owners for the docs directory
 
