@@ -10,7 +10,6 @@ interface MailChimpResponse {
 @Component({
   selector: 'newsletter-signup',
   templateUrl: './newsletter.component.html',
-  styleUrls: ['./newsletter.component.scss']
 })
 export class NewsletterComponent implements OnInit {
   public submitted = false;
